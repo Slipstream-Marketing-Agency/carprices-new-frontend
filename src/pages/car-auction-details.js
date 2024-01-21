@@ -1014,7 +1014,7 @@ function CarAuctionDetailsPage() {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                           <svg width={35} height={21} viewBox="0 0 35 21" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1" strokeLinecap="round" />
@@ -1161,7 +1161,7 @@ function CarAuctionDetailsPage() {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                           <svg width={35} height={21} viewBox="0 0 35 21" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1" strokeLinecap="round" />
@@ -1308,7 +1308,7 @@ function CarAuctionDetailsPage() {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                           <svg width={35} height={21} viewBox="0 0 35 21" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1" strokeLinecap="round" />

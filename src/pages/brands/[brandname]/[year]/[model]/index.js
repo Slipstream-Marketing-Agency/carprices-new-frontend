@@ -1181,7 +1181,7 @@ function CarDeatilsPage({ model, trimList }) {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                             <svg
                               width={35}
@@ -1429,7 +1429,7 @@ function CarDeatilsPage({ model, trimList }) {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                             <svg
                               width={35}
@@ -1677,7 +1677,7 @@ function CarDeatilsPage({ model, trimList }) {
                         </div>
                       </div>
                       <div className="view-all-btn">
-                        <Link legacyBehavior href="/car-listing-left-sidebar">
+                        <Link legacyBehavior href="/">
                           <a className="primary-btn3 two">
                             <svg
                               width={35}

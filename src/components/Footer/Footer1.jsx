@@ -1821,7 +1821,7 @@ function Footer1() {
               <div className="menu-container">
                 <ul>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                       <a>
                         {t.usedCars}
                       <svg
@@ -1836,7 +1836,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                      <a>
                        {t.newCars}
                       <svg
@@ -1851,7 +1851,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                       <a>
                         {t.auctionCars}
                       <svg
@@ -2024,7 +2024,7 @@ function Footer1() {
               <div className="menu-container">
                 <ul>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                      <a>
                        Panama City
                       <svg
@@ -2039,7 +2039,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                      <a>
                        Sydne, AUS
                       <svg
@@ -2054,7 +2054,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                       <a>
                         New Delhi
                       <svg
@@ -2069,7 +2069,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                       <a>
                         Kualalumpur
                       <svg
@@ -2084,7 +2084,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                      <a>
                        Melbourne
                       <svg
@@ -2099,7 +2099,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="/car-listing-left-sidebar">
+                    <Link legacyBehavior href="/">
                       <a>
                         City of Abu-Dubi
                       <svg
@@ -2114,7 +2114,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="car-listing-left-sidebar">
+                    <Link legacyBehavior href="">
                       <a>
                         Menchester City
                       <svg
@@ -2129,7 +2129,7 @@ function Footer1() {
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href="car-listing-left-sidebar">
+                    <Link legacyBehavior href="">
                       <a>
                         Dhaka City
                       <svg

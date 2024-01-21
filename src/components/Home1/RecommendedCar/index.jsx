@@ -20,7 +20,7 @@ function index() {
           <div className="col-lg-4 d-flex align-items-lg-end justify-content-center">
             <div className="recommended-right wow fadeInUp" data-wow-delay="300ms">
               <p>A car that is dependable and has a low risk of breakdowns is highly desirable.</p>
-              <Link legacyBehavior href="/car-listing-left-sidebar"><a className="primary-btn2">Show Me Best Car</a></Link>
+              <Link legacyBehavior href="/"><a className="primary-btn2">Show Me Best Car</a></Link>
             </div>
           </div>
         </div>

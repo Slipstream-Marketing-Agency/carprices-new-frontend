@@ -983,14 +983,14 @@ export const breadcrumbData = [
   },
   {
     id: 6,
-    path: "/car-listing-left-sidebar",
+    path: "/",
     sub_title: "Car Grid System",
     title: "To Choose Dream Car",
     img_src: "assets/img/inner-page/inner-banner-img.png",
   },
   {
     id: 7,
-    path: "/car-listing-right-sidebar",
+    path: "",
     sub_title: "Car Grid System",
     title: "To Choose Dream Car",
     img_src: "assets/img/inner-page/inner-banner-img.png",

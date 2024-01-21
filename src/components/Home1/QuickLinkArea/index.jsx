@@ -5,7 +5,7 @@ function index() {
     <div className="quick-link-area">
       <ul className="wow fadeInUp" data-wow-delay="200ms">
         <li>
-          <Link legacyBehavior  href="/car-listing-left-sidebar">
+          <Link legacyBehavior  href="/">
             <a>
             <svg width={30} height={30} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_611_1863)">
@@ -25,7 +25,7 @@ function index() {
           </Link>
         </li>
         <li>
-          <Link legacyBehavior  href="/car-listing-left-sidebar">
+          <Link legacyBehavior  href="/">
             <a>
             <svg width={30} height={30} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_611_1886)">
@@ -41,7 +41,7 @@ function index() {
           </Link>
         </li>
         <li>
-          <Link legacyBehavior  href="/car-listing-left-sidebar">
+          <Link legacyBehavior  href="/">
             <a>
             <svg width={30} height={30} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_611_1895)">
@@ -55,7 +55,7 @@ function index() {
           </Link>
         </li>
         <li>
-          <Link legacyBehavior  href="/car-listing-left-sidebar">
+          <Link legacyBehavior  href="/">
             <a>
             <svg width={30} height={30} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_611_1876)">

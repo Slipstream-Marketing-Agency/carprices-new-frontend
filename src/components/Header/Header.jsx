@@ -215,8 +215,8 @@ function Header() {
                 <i className="d-lg-flex d-none bi bi-chevron-right dropdown-icon" />
                 <i  onClick={() => toggleSubMenu("submenu1")} className={`d-lg-none d-flex bi bi-${state.activeSubMenu ==="submenu1"?"dash":"plus"} dropdown-icon `} />
                 <ul className={`sub-menu ${state.activeSubMenu === "submenu1" ? "d-block" : ""}`}>
-                  <li><Link legacyBehavior href="/car-listing-left-sidebar"><a>Car Listing Left Sidebar</a></Link></li>
-                  <li><Link legacyBehavior href="/car-listing-right-sidebar"><a>Car Listing Right Sidebar</a></Link></li>
+                  <li><Link legacyBehavior href="/"><a>Car Listing Left Sidebar</a></Link></li>
+                  <li><Link legacyBehavior href=""><a>Car Listing Right Sidebar</a></Link></li>
                   <li><Link legacyBehavior href="/car-listing-no-sidebar"><a>Car Listing No Sidebar</a></Link></li>
                 </ul>
               </li>

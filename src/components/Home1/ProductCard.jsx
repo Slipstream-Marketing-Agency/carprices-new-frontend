@@ -195,7 +195,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                         </div>
                         <div className="product-content">
                           <div className="product-content-height">
-                            <h5 className="mobileFontCarName">
+                            <h6 className="mobileFontCarName mb-0">
                               <Link legacyBehavior href="/car-deatils">
                                 <span>
                                 {car?.attributes?.year}{" "}
@@ -205,10 +205,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
                                       ?.attributes?.name.slice(0.10) : car?.attributes?.car_brands?.data[0]
                                       ?.attributes?.name
                                   }{" "}
-                                  {car?.attributes?.name.length>3 ? `${car?.attributes?.name.slice(0,3)}...` : car?.attributes?.name}
+                                  {car?.attributes?.name}
                                 </span>
                               </Link>
-                            </h5>
+                            </h6>
                             <CarPriceRange car={car} />
                             {/* <div className="price-location">
                             <div className="price">
