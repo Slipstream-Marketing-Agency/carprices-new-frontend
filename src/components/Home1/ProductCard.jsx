@@ -257,12 +257,12 @@ function ProductCard({ subTitle, heading, carDetails }) {
                       </div>
                     </div>
                   ))}
-                  <div className="view-btn-area">
-                    {/* <p>There will be 100+ Upcoming Car</p> */}
+                  {/* <div className="view-btn-area">
+                    <p>There will be 100+ Upcoming Car</p>
                     <Link legacyBehavior href="/single-brand-category">
                       <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">{t.viewMore}</button>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

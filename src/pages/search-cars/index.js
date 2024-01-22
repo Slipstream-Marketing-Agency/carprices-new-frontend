@@ -285,28 +285,6 @@ export async function getServerSideProps(context) {
     queryParams.displacementRange = displacementRange;
   }
 
-  const queryString = require("querystring").stringify(queryParams);
-
-  const apiUrl = `${
-    process.env.NEXT_PUBLIC_API_URL
-  }car-trims/price-range-by-brands?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(
-    priceRange
-  )}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(
-    powerRange
-  )}&page=${page}&pageSize=${pageSize}`;
-
-  const totalpricerange = await axios.get(apiUrl);
-
   const filteredTrims = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}car-trims/filter?brands=${JSON.stringify(
       brandSlugs

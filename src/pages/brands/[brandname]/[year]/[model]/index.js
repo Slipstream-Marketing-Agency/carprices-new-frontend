@@ -430,7 +430,7 @@ function CarDeatilsPage({ model, trimList }) {
     <MainLayout>
       <Ad728x90 dataAdSlot="5962627056" />
 
-      <div className="car-details-area mt-15 mb-100">
+      <div className="car-details-area mt-15 ">
         <div className="container">
           <div className="row mb-50">
             <div className="col-lg-12 position-relative">
@@ -696,7 +696,7 @@ function CarDeatilsPage({ model, trimList }) {
               <ModelDescription model={trimList} hightTrim={trim} />
               <VariantsListing model={trimList} highTrim={trim} />
               <VehicleFaq model={trimList} highTrim={trim} />
-              <div
+              {/* <div
                 data-bs-spy="scroll"
                 data-bs-target="#navbar-example2"
                 data-bs-offset={0}
@@ -837,7 +837,7 @@ function CarDeatilsPage({ model, trimList }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="col-lg-4">
               <div className="car-details-sidebar">
@@ -864,7 +864,7 @@ function CarDeatilsPage({ model, trimList }) {
                 >
                   <Ad300x250 dataAdSlot="5772723668" />
                 </div>
-                <div className="inquiry-form mb-40">
+                {/* <div className="inquiry-form mb-40">
                   <div className="title">
                     <h4>To More inquiry </h4>
                     <p>If choose this car to contact easily with us.</p>
@@ -908,8 +908,8 @@ function CarDeatilsPage({ model, trimList }) {
                       </button>
                     </div>
                   </form>
-                </div>
-                <div className="recent-car-area">
+                </div> */}
+                {/* <div className="recent-car-area">
                   <div className="title mb-30">
                     <h5>Recent Used Car</h5>
                   </div>
@@ -1703,13 +1703,13 @@ function CarDeatilsPage({ model, trimList }) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="most-search-area style-2 pt-90 pb-90 mb-100">
+      {/* <div className="most-search-area style-2 pt-90 pb-90 mb-100">
         <div className="container">
           <div className="row mb-60 wow fadeInUp" data-wow-delay="200ms">
             <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
@@ -2960,8 +2960,8 @@ function CarDeatilsPage({ model, trimList }) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="customar-feedback-area mb-100">
+      </div> */}
+      {/* <div className="customar-feedback-area mb-100">
         <div className="container">
           <div className="row mb-60 wow fadeInUp" data-wow-delay="200ms">
             <div className="col-lg-12">
@@ -3374,10 +3374,10 @@ function CarDeatilsPage({ model, trimList }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <Ad728x90 dataAdSlot="5962627056" />
 
-      <div className="news-section two pt-90 pb-90">
+      {/* <div className="news-section two pt-90 pb-90">
         <div className="container">
           <div className="row mb-50 wow fadeInUp" data-wow-delay="200ms">
             <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
@@ -3633,7 +3633,7 @@ function CarDeatilsPage({ model, trimList }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </MainLayout>
   );
 }

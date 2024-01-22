@@ -251,9 +251,9 @@ function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }
                                 {/* <Link  legacyBehavior href={`/news/${newsItem?.attributes?.slug}`}><a className="postedDate">Posted on: {newsItem.attributes.createdAt.slice(0, 10)}</a></Link> */}
                               </div>
                             </div>
-                            <div className="text-center mt-2 ">
+                            {/* <div className="text-center mt-2 ">
                               <button className="readMoreBtn" onClick={()=>{router.push(`/reviews/${newsItem?.attributes?.slug}`)}}>Read More</button>
-                            </div>
+                            </div> */}
                             
                           </div>
                         </div>

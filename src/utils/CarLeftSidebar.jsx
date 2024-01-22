@@ -72,34 +72,6 @@ function CarLeftSidebar({
     }, {});
   }, [brandoptions]);
 
-  const fetchPriceRange = async () => {
-    if (selectedBrandIds.length === 0) {
-      setPriceRange(null);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}car-trims/price-range-by-brands?brandIds=[${selectedBrandIds}]`
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log(data, "responseresponse");
-      setPriceRange(data);
-    } catch (error) {
-      console.error("Error fetching price range:", error);
-    }
-  };
-
-  // useEffect to call fetchPriceRange when selectedBrandIds changes
-  useEffect(() => {
-    fetchPriceRange();
-  }, [selectedBrandIds]);
-
   useEffect(() => {
     const ids = selectedBrands
       .map((slug) => brandSlugToIdMap[slug])

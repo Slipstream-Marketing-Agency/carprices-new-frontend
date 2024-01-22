@@ -151,24 +151,20 @@ button:focus {
   overflow-y: scroll;
 }
 
-::-webkit-scrollbar-track
-{
-	background-color: #F5F5F5;
-	border-radius: 10px;
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar
-{
-	width: 5px;
-	background-color: #F5F5F5;
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
 }
 
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: var(--primary-color1);
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--primary-color1);
 }
-
 
 .checkbox-container {
   overflow: hidden;
@@ -191,7 +187,7 @@ button:focus {
   transform: rotate(180deg);
 }
 
-.cursor_pointer{
+.cursor_pointer {
   cursor: pointer;
 }
 
@@ -201,7 +197,7 @@ button:focus {
 }
 
 .key_spec img {
-width: 43px;
+  width: 43px;
 }
 
 .listed_image {
@@ -210,20 +206,19 @@ width: 43px;
   height: 50px !important;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
   color: var(--primary-color1);
   border-color: var(--primary-color1);
 }
 
-.btn-outline-primary:hover{
+.btn-outline-primary:hover {
   background-color: var(--light);
-  border-color:  var(--light);
+  border-color: var(--light);
 }
 
-small{
-font-size: 12px !important;
+small {
+  font-size: 12px !important;
 }
-
 
 /* news page style begins */
 
@@ -231,7 +226,7 @@ font-size: 12px !important;
   height: 250px; /* Adjust the height as needed */
 }
 
-.inputSearchContainer{
+.inputSearchContainer {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -242,28 +237,29 @@ font-size: 12px !important;
   border-radius: 6px;
   font-size: 19px;
 }
-@media(max-width:650px){
-  .inputSearchContainer{
+@media (max-width: 650px) {
+  .inputSearchContainer {
     width: 100%;
   }
 }
-.inputSearchContainer:hover,.inputSearchContainer:focus{
+.inputSearchContainer:hover,
+.inputSearchContainer:focus {
   border: 1px solid var(--light);
 }
 
-.newsInputSearch{
+.newsInputSearch {
   width: 100%;
   height: 100%;
 }
-.searchIcon{
- font-size: 20px;
+.searchIcon {
+  font-size: 20px;
 }
-.allBrandsTxt{
+.allBrandsTxt {
   font-weight: bolder;
   font-size: 18px;
 }
 
-.relatedDataList{
+.relatedDataList {
   width: 100%;
   height: 270px;
   overflow-y: scroll;
@@ -276,73 +272,71 @@ font-size: 12px !important;
   list-style: none;
   background-color: white;
 }
-.searchResultItem{
+.searchResultItem {
   width: 100%;
 }
-.searchResultItem:hover{
- 
+.searchResultItem:hover {
   background-color: rgb(244, 244, 244);
 }
-.imageContainer img{
+.imageContainer img {
   height: 210px !important;
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
 }
-.newsCard-body{
+.newsCard-body {
   box-shadow: 0 0 4px rgb(184, 184, 184);
   padding: 1rem 1rem;
   border-radius: 3px;
 }
 
-.news-card{
-  background: #FFFFFF;
-    border: 1px solid #EEEEEE;
-    border-radius: 5px;
-    padding: 10px;
+.news-card {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .sticky-sidebar {
   position: sticky;
   top: 60px; /* Adjust this value as needed */
 }
-@media(max-width:650px){
-
-  .hideOnMobile{
+@media (max-width: 650px) {
+  .hideOnMobile {
     display: none;
   }
 }
-.blogImage{
+.blogImage {
   width: 100%;
   height: 330px;
 }
-.recentBlogImage{
+.recentBlogImage {
   width: 100%;
   height: 150px;
 }
-.BlogCardHeadingTxt{
+.BlogCardHeadingTxt {
   font-size: 18px;
 }
-.authorName{
+.authorName {
   margin-top: 15px;
   padding: 0;
   margin: 0;
   font-size: 14px;
   font-weight: 500;
 }
-.postedDate{
+.postedDate {
   font-size: 14px;
 }
-.readMoreBtn{
+.readMoreBtn {
   padding: 4px 8px;
   font-weight: 500;
   border-radius: 10px;
   background-color: var(--primary-color1);
   color: white;
 }
-.readMoreBtn:hover{
+.readMoreBtn:hover {
   background-color: var(--light);
 }
-.displayNone{
+.displayNone {
   display: none;
 }
 
@@ -373,7 +367,7 @@ font-size: 12px !important;
   display: block;
   width: 2.375rem;
   height: 2.375rem;
-  border-radius:0% ;
+  border-radius: 0%;
   line-height: 2.375rem;
   text-align: center;
   padding-right: 8px;
@@ -381,7 +375,7 @@ font-size: 12px !important;
   color: #aaa;
 }
 
-.blogFont{
+.blogFont {
   font-size: 14px;
   font-weight: 500;
 }
@@ -404,61 +398,59 @@ font-size: 12px !important;
   object-fit: cover !important;
 }
 /* Mobile view begins */
-@media(max-width:767px){
-  .BlogCardHeadingTxt a{
+@media (max-width: 767px) {
+  .BlogCardHeadingTxt a {
     font-size: 13px;
   }
-  .BlogCardHeadingTxt{
-      line-height: 0.8;
+  .BlogCardHeadingTxt {
+    line-height: 0.8;
   }
-  .inputSearchContainer{
-    height:50px;
+  .inputSearchContainer {
+    height: 50px;
   }
-  p{
+  p {
     font-size: 12px;
   }
   .searchResultItem {
     font-size: 12px;
   }
-  .allBrandsTxt{
+  .allBrandsTxt {
     font-size: 12px;
   }
-  .readMoreBtn{
+  .readMoreBtn {
     font-size: 12px;
   }
-  .blog-details-page .post-title{
+  .blog-details-page .post-title {
     font-size: 20px;
   }
 
-.blog-details-page .author-area .author-content h6{
-    font-size:12px;
+  .blog-details-page .author-area .author-content h6 {
+    font-size: 12px;
   }
-  .blog-details-page .author-area .author-content span{
-    font-size:10px;
-
+  .blog-details-page .author-area .author-content span {
+    font-size: 10px;
   }
-  .blog-sidebar .single-widgets .recent-post-wraper .widget-cnt .wc h6{
+  .blog-sidebar .single-widgets .recent-post-wraper .widget-cnt .wc h6 {
     font-size: 13px;
   }
-  .blog-sidebar .single-widgets .widget-title h6{
+  .blog-sidebar .single-widgets .widget-title h6 {
     font-size: 15px;
   }
-  h3 strong{
+  h3 strong {
     font-size: 20px;
   }
-  .blog-details-page .blog-tag-social-area .social-area h6{
+  .blog-details-page .blog-tag-social-area .social-area h6 {
     font-size: 13px;
   }
 }
 
 /* Mobile view ends */
 
-
 /* Ad on right  */
-@media(max-width:876px){
-.hideOnSmallScreen{
-  display: none;
-}
+@media (max-width: 876px) {
+  .hideOnSmallScreen {
+    display: none;
+  }
 }
 .sticky_scroll {
   position: sticky !important;
@@ -476,18 +468,16 @@ font-size: 12px !important;
   top: 226px !important;
 }
 
-
 /* ad ends */
 
-.searchResultBox{
+.searchResultBox {
   z-index: 100;
   height: 270px;
 }
 
-
 /* loan period button begins */
 
-.loanBtn{
+.loanBtn {
   box-shadow: 0 0 2px black;
   display: inline-block;
   font-weight: 400;
@@ -505,44 +495,44 @@ font-size: 12px !important;
   padding: 0.375rem 0.85rem;
   font-size: 1rem;
   border-radius: 0.25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .loanBtn-primary {
-border-radius: 50%;
-color: black;
-background-color: transparent;
-border-color: #0d6efd;
+  border-radius: 50%;
+  color: black;
+  background-color: transparent;
+  border-color: #0d6efd;
 }
 .loanBtn-outline-primary {
-border-radius: 50%;
-color: var(--white-color);
-background-color: #0d6efd;
-border-color: #0d6efd;
+  border-radius: 50%;
+  color: var(--white-color);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
 }
-.calculateBtn{
-cursor: pointer;
-color: var(--white-color);
-background-color: #0d6efd;
-border-color: #0d6efd;
-border-radius: 6px;
+.calculateBtn {
+  cursor: pointer;
+  color: var(--white-color);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 6px;
 }
-.calculateBtn:hover{
-color: var(--white-color);
-background-color: #89b8ff;
-border-color: #0d6efd;
+.calculateBtn:hover {
+  color: var(--white-color);
+  background-color: #89b8ff;
+  border-color: #0d6efd;
 }
 /* loan period button ends */
 
-
 /* compare model begins*/
-.cursorPointer{
+.cursorPointer {
   cursor: pointer;
 }
 /* compare model ends*/
 
 /* share Btn begins */
-.shareBtn{
+.shareBtn {
   padding: 5px 10px;
   border-radius: 6px;
   font-family: var(--font-gilroy);
@@ -554,70 +544,68 @@ border-color: #0d6efd;
   align-items: center;
   gap: 2px;
 }
-.shareBtn svg{
+.shareBtn svg {
   color: var(--light);
 }
-.shareBtn:hover svg{
+.shareBtn:hover svg {
   color: var(--white-color);
 }
-.shareBtn:hover{
+.shareBtn:hover {
   background-color: var(--light);
   color: var(--white-color);
 }
 /* share Btn ends */
-.christmasOfferBtn{
-padding: 5px 10px;
-font-size: 15px;
-font-weight: 600  ;
-color: white;
-border-radius: 6px;
-background-color: var(--primary-color1);
+.christmasOfferBtn {
+  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  border-radius: 6px;
+  background-color: var(--primary-color1);
 }
-.dropdown{
-width: 250px;
+.dropdown {
+  width: 250px;
 }
-.dropDownBtn{
-background-color: transparent;
-border: 0.2px solid gray;
-padding: 5px 10px;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-radius: 3px;
-margin-top: 8px;
+.dropDownBtn {
+  background-color: transparent;
+  border: 0.2px solid gray;
+  padding: 5px 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3px;
+  margin-top: 8px;
 }
 
 /* car description part begins */
-.carFullDesc{
-padding: 0;
-margin: 0;
-font-family: var(--font-gilroy);
+.carFullDesc {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-gilroy);
 }
-.carDesc{
-margin: 0;
-padding: 0;
-font-family: var(--font-gilroy);
+.carDesc {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-gilroy);
 }
 /* car description part ends */
 
-
 /* new loan calculator begins  */
-.calculatorContainer{
-  
+.calculatorContainer {
   width: 100%;
   /* background-color: yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
   background-image: url(/assets/img/loanBgTest.png);
-  background: linear-gradient(180deg,#f4f4f4 50.14%,rgba(246,249,255,0));
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 100%;
+  background: linear-gradient(180deg, #f4f4f4 50.14%, rgba(246, 249, 255, 0));
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 100%;
 }
 
-.calculatorContent{
+.calculatorContent {
   width: 824px;
   border-radius: 16px;
   box-shadow: 0px 0 5px #cdcdcd;
@@ -629,36 +617,36 @@ font-family: var(--font-gilroy);
   display: flex;
 }
 
-.leftSection{
- width: 50%;
+.leftSection {
+  width: 50%;
   height: 100%;
   /* background-color: orange; */
   padding: 20px;
 }
-.monthlyIncomeContainer{
+.monthlyIncomeContainer {
   font-family: var(--font-gilroy);
   display: flex;
   margin-bottom: 10px;
   align-items: center;
   justify-content: space-between;
 }
-.monthlyIncomeTxt{
+.monthlyIncomeTxt {
   font-family: var(--font-gilroy);
   font-weight: 700;
   font-size: 17px;
 }
-.amountTxt{
+.amountTxt {
   font-family: var(--font-gilroy);
   font-weight: 600;
   font-size: 14px;
 }
-.bottomAmount{
+.bottomAmount {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
 
-.rightSection{
+.rightSection {
   overflow: hidden;
   position: relative;
   padding: 20px;
@@ -666,14 +654,14 @@ font-family: var(--font-gilroy);
   /* background-color: green; */
 }
 
-.totalAmountContainer{
+.totalAmountContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 140px;
 }
 
-.budgetBtn{
+.budgetBtn {
   width: 100%;
   height: 50px;
   border-radius: 10px;
@@ -683,36 +671,37 @@ font-family: var(--font-gilroy);
   font-size: 19px;
 }
 
-.budgetBtn:hover{
+.budgetBtn:hover {
   /* background-color: rgb(93, 93, 226); */
 }
-.totalAmoutTxt{
+.totalAmoutTxt {
   font-weight: 700;
 }
-.maxEmiTxt,.totalAmoutTxt{
+.maxEmiTxt,
+.totalAmoutTxt {
   color: var(--primary-color1);
 }
 
-.emiContent{
+.emiContent {
   position: relative;
 }
-.borderLine{
+.borderLine {
   position: absolute;
   right: -13px;
-  top:0;
+  top: 0;
   width: 2px;
   height: 70px;
   border-radius: 10px;
   background-color: rgb(211, 211, 211);
 }
-.viewBreakDownBtn{
+.viewBreakDownBtn {
   padding: 5px 8px;
   border-radius: 10px;
 }
-.viewBreakDownBtn:hover{
+.viewBreakDownBtn:hover {
   background-color: var(--light);
 }
-.ViewBreakBtnContainer{
+.ViewBreakBtnContainer {
   margin-left: 45px;
 }
 
@@ -734,23 +723,23 @@ font-family: var(--font-gilroy);
   font-weight: 400;
   line-height: 15px;
   color: #24272c;
-  opacity: .6;
+  opacity: 0.6;
 }
 
-.amountInputField{
+.amountInputField {
   font-size: 18px;
   width: 60px;
   font-weight: 600;
 }
-.interestInputTxt{
+.interestInputTxt {
   font-size: 20px;
   font-weight: 600;
   height: 35px;
 }
-.downPaymentInputTxt{
-  width: 130px; 
+.downPaymentInputTxt {
+  width: 130px;
   height: 35px;
-   font-size: 20px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -769,41 +758,42 @@ font-family: var(--font-gilroy);
     right: -100%; /* Initial position: move the image off-screen to the left */
   }
   100% {
-    right: calc( 10px); /* Final position: move the image off-screen to the right */
+    right: calc(
+      10px
+    ); /* Final position: move the image off-screen to the right */
   }
 }
 
-@media(max-width:680px){
-  .calculatorContent{
+@media (max-width: 680px) {
+  .calculatorContent {
     display: block;
   }
-  .leftSection{
-    width:100%;
+  .leftSection {
+    width: 100%;
   }
-  .rightSection{
+  .rightSection {
     width: 100%;
   }
 }
 /* new loan calculator ends  */
 
 /* about Page begins */
-.paragraph{
-  color:var(--text-color);
+.paragraph {
+  color: var(--text-color);
   font-family: var(--font-gilroy);
 }
 /* about Page ends */
 
-.underLine{
+.underLine {
   width: 101px;
   height: 3px;
   background: var(--primary-color1);
   border-radius: 30%;
 }
 
-
 /* contact form begins */
 
-.termsCheckBox{
+.termsCheckBox {
   border-radius: 5px;
   background: var(--white-color);
   color: var(--text-color);
@@ -828,14 +818,14 @@ font-family: var(--font-gilroy);
   flex-direction: column;
   padding: 24px 30px;
   border-radius: 5px;
-  color: #FFF;
+  color: #fff;
   z-index: 100;
   /* background: linear-gradient(0deg, var(--light) 0%, var(--primary-color1) 100%); */
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
 }
 .cookie-title {
-  color:black;
+  color: black;
   font-size: 21px;
   margin-bottom: 12px;
 }
@@ -865,31 +855,30 @@ font-family: var(--font-gilroy);
   margin-right: 10px;
   margin-bottom: 10px;
   font-size: 16px;
-  color: #FFF;
+  color: #fff;
   font-family: inherit;
   transition: 0.15s ease;
 }
 .cookie-btn:hover {
-  background-color: var(--light)
+  background-color: var(--light);
 }
-.cookieDeclineBtn{
+.cookieDeclineBtn {
   border: 2px solid var(--primary-color1);
   background-color: white;
   color: var(--primary-color1);
 }
-.cookieDeclineBtn:hover{
-
+.cookieDeclineBtn:hover {
   background-color: var(--primary-color1);
   color: var(--white);
 }
 
-@media(max-width:650px){
+@media (max-width: 650px) {
   .cookie-warning {
     width: 100%;
   }
 }
 
-.category-box-button{
+.category-box-button {
   width: 80px !important;
   height: 70px !important;
 }
@@ -898,7 +887,11 @@ font-family: var(--font-gilroy);
 
 /* search inputfield ends */
 
-
 .skiptranslate {
-  display:none !important;
+  display: none !important;
+}
+
+.product-sidebar {
+  height: 500px;
+  overflow-y: scroll;
 }
