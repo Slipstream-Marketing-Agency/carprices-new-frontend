@@ -17,6 +17,7 @@ export default function Document() {
           src="//translate.google.com/translate_a/element.js?cb=TranslateInit"
           strategy="afterInteractive"
         />
+        <meta name="robots" content="noindex,nofollow"></meta>
       </Head>
       <body>
         <Main />
