@@ -73,12 +73,7 @@ function CompareCarCard({ carData }) {
               />
             </div>
           </div>
-          {/* <div className="change-model">
-            <SelectComponent
-              options={modelOption}
-              placeholder="change car model"
-            />
-          </div> */}
+  
           <MultiStepCarSelection carData={carData?.mainSlug} mode={"update"}/>
         </div>
       </div>

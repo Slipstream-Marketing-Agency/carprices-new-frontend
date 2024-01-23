@@ -5,6 +5,7 @@ export default{
 
 
     //Home page
+    SelectAtleastOneSeatingOption:"Select atleast one seating option",
     blog:"BLOG",
     popularSearch:"بحث شعبي",
     uaeFastest:"UAE's Fastest Growing New Car Buyers' Guide.",
@@ -216,7 +217,7 @@ export default{
     ourSitemap:"Our Sitemap",
     //search car page
      explorepriceHead:"Explore the Price and Specifications of Brand New Cars in the UAE" ,
-    exploresubhead:"Be the first one to know about the new car launches in the UAE. Included on our website are latest car launches, price, technical specification, and variant details. Check out new launches in the UAE and get detailed road test and user review on all recent launches.",
+    exploresubhead:"Stay up-to-date with the latest news and updates on the UAE car industry, including new car launches, launch dates, car images, exposures and events, price updates, latest discounts, facelifts, recalls, and more. Get all the insights you need to know about the happenings in the UAE automotive industry.",
     pricesort:"Sorted By Price : Low to High",
     loadmorebutton:"Load More",
     //News and Reviews Page
@@ -225,11 +226,21 @@ export default{
     filternews:"Filter News",
     reviewHead:"Latest Car Reviews in UAE",
     reviewSubHead:"Stay up-to-date with the latest reviews and updates on the UAE car industry, including new car launches, launch dates, car images, expos and events, price updates, latest discounts, facelifts, recalls, and more. Get all the insights you need to know about the happenings in the UAE automotive industry.",
+    allBrands:"All Brands",
+    noResultFound:"No result found",
     tags:"Tags",
     brand:"brand",
-    searchByBrandOrTags:"Search By Brand or Tags",
+    searchByBrandOrTags:"Search By Brand or Tags..",
+
+    postedOn:"Posted on ",
+    share:"Share : ",
+    trending:"Trending",
+    recent:"Recent",
+    otherBrands:"Other Brands",
+
     //compare cars page
     compareCarHead:"Compare",
+    specs:"Specs",
     make:"Make",
     model:"Model",
     year:"Year",
@@ -242,6 +253,10 @@ export default{
     alreadySelected:"Already Selected",
     selectTrim:"Select trim",
     addCar:"Add Car",
+    yes:"Yes",
+    no:"No",
+    changeCar:"Change Car",
+    addToCompare:"Add To Compare",
 
     //load calculator page
     carLoanHead:"Car Loan EMI calculator in UAE",

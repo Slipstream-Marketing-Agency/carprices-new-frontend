@@ -290,10 +290,11 @@ export default function VehicleFaq({ model, highTrim }) {
       <div className="faq-area">
         <div className="title mb-25">
           <h5>
-            {highTrim?.year} {highTrim?.year}{" "}
+            {highTrim?.year} {" "}
             {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
             {highTrim?.car_models?.data[0]?.attributes?.name} FAQs
           </h5>
+          <div className="faq-wrap">
           {faq.map((item, index) => (
             <AccordionFaq
               question={item.question}
@@ -301,6 +302,7 @@ export default function VehicleFaq({ model, highTrim }) {
               condition={item?.condition}
             />
           ))}
+          </div>
         </div>
       </div>
     </div>

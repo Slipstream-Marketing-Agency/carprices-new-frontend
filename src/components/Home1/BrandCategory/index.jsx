@@ -33,10 +33,8 @@ function index({ brandDetails }) {
                         alt="brand-icons"
                       />
                     </div>
-                    <h6>{item?.attributes?.name}</h6>
-                    {/* <div className="brand-car">
-                      <img src={image} alt="brand-car image" />
-                    </div> */}
+                    <h6 className="text-dark">{item?.attributes?.name}</h6>
+              
                   </a>
                 </Link>
               </div>

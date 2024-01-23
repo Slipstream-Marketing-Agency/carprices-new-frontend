@@ -33,12 +33,26 @@ import moment from "moment/moment";
 import Error from "../../error";
 import BlogRecent from "@/src/components/BlogRecent";
 import BlogRelated from "@/src/components/BlogRelated";
+import TabNavigation from "@/src/components/TabNavigation";
+import MoreBrands from "@/src/components/MoreBrands";
+import SocialButtons from "@/src/components/common/SocialButtons";
+import useTranslate from "@/src/utils/useTranslate";
 
 const adCode = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>'
 
-function BlogDetailsPage({ detailData, recentBlog, fullURL, recentReviews }) {
+function BlogDetailsPage({ detailData, recentBlog, fullURL, recentReviews, popularBrands }) {
+
+
+  const [activeTab, setActiveTab] = useState('tab1');
+
+  const handleTabChange = (selectedTab) => {
+    setActiveTab(selectedTab);
+  };
 
   const router = useRouter();
+  const t = useTranslate();
+  let isRtl = router.locale === 'ar';
+
   const [isMobile, setIsMobile] = useState(false);
 
   const [dynamicHTML, setDynamicHTML] = useState('');
@@ -102,14 +116,22 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentReviews }) {
         .replace(
           /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
           `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        );
+        )
+        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, '')
       if (!isMobile) {
 
         modifiedHTML = modifiedHTML.replace(
           /&lt;GoogleAd&gt;/g,
-          `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}' }}</div></div>`
-        );
+          `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+        )
       }
+      else {
+        modifiedHTML = modifiedHTML.replace(
+          /&lt;GoogleAd&gt;/g,
+          ``
+        )
+      }
+
       setDynamicHTML(modifiedHTML);
       setIsModified(true); // Set the flag to true to avoid further modification
     }
@@ -166,198 +188,61 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentReviews }) {
                     </div> */}
               </div>
               <h5 className="post-title">{detailData?.title}</h5>
-              <div className="author-area justify-content-between">
-                <div className="d-flex align-items-center gap-3">
-                  <div className="author-img">
-                    {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
-                    <span className="border rounded-circle px-2 py-1">C</span>
-                  </div>
-                  <div className="author-content">
-                    <h6>{detailData?.author?.data?.attributes?.name}</h6>
-                    <span>Posted on -  {moment(detailData?.author?.data?.attributes?.createdAt).format("MMMM Do YYYY")}</span>
-                  </div>
-                </div>
-                <div className="social-area d-flex align-items-center ">
-                  <h6>Share:</h6>
-                  <ul className="ps-2 social-link d-flex align-items-center gap-1">
-                    <FacebookShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <FacebookIcon size={26} round />
-                    </FacebookShareButton>
-                    <WhatsappShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <WhatsappIcon size={26} round />
-                    </WhatsappShareButton>
-                    <LinkedinShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <LinkedinIcon size={26} round />
-                    </LinkedinShareButton>
+              {/* <div className="author-area"> */}
+              <div className="row mb-3">
+                <div className="col-xl-6">
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="author-img">
+                      {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
+                      <span className="border rounded-circle px-2 py-1">C</span>
+                    </div>
 
-                    <TwitterShareButton
-                      url={fullURL}
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                    >
-                      <TwitterIcon size={26} round />
-                    </TwitterShareButton>
-                    <TelegramShareButton
-                      url={fullURL}
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                    >
-                      <TelegramIcon size={26} round />
-                    </TelegramShareButton>
-                  </ul>
+                    <div className="author-content">
+                      <h6 className="mt-0">{detailData?.author?.data?.attributes?.name}</h6>
+                      <div className={isRtl && 'd-flex flex-row-reverse gap-2'}> <span className="postedOnStyle">{isRtl && ' - '}{t.postedOn}{!isRtl && ' - '}</span> <span className="postedOnStyle">{moment(detailData?.author?.data?.attributes?.createdAt).format("MMMM Do YYYY")}</span></div>
+                    </div>
+                  </div>
                 </div>
+                <div className="col-xl-6 m-auto mt-2 mt-md-0">
+                  <div className="d-flex justify-content-md-end align-items-center"> <SocialButtons fullURL={fullURL} /> </div>
+                </div>
+                {/* </div> */}
               </div>
+
               <p>{detailData?.summary}</p>
               {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
               <div dangerouslySetInnerHTML={{ __html: dynamicHTML }} />
-              {/* <blockquote> 
-                    <div className="quoat-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={27} height={18} viewBox="0 0 27 18">
-                        <path d="M21.6832 6.05443L21.4534 6.62147L22.0549 6.73371C24.6453 7.21714 26.5 9.46982 26.5 12.0337C26.5 13.573 25.8343 15.0529 24.6667 16.09C23.4982 17.1192 21.9207 17.6286 20.3329 17.4722C17.4907 17.1844 15.2846 14.6588 15.3404 11.7032C15.4201 7.67759 16.8945 5.07458 18.6289 3.38578C20.3761 1.68459 22.4158 0.884497 23.6452 0.531618L23.6591 0.527628L23.6728 0.52284C23.7152 0.507954 23.7704 0.5 23.8713 0.5C24.1425 0.5 24.3799 0.624329 24.5265 0.85037L24.5277 0.852289C24.7128 1.13485 24.6857 1.4981 24.4524 1.75822L24.4523 1.75827C23.2163 3.13698 22.2806 4.57999 21.6832 6.05443Z" />
-                        <path d="M7.84136 6.05442L7.61159 6.62147L8.21303 6.73371C10.8035 7.21714 12.6582 9.46983 12.6582 12.0337C12.6582 13.573 11.9925 15.0529 10.8249 16.09C9.65615 17.1194 8.07865 17.6285 6.50008 17.4722C3.67976 17.1842 1.49865 14.7207 1.49865 11.8126V11.6985C1.57946 7.67556 3.05336 5.07393 4.7871 3.38579C6.53424 1.6846 8.574 0.884504 9.8034 0.531628L9.81731 0.527636L9.83096 0.522848C9.8734 0.507959 9.92859 0.500008 10.0294 0.500008C10.3007 0.500008 10.5381 0.624359 10.6846 0.850338L10.6859 0.852327C10.871 1.13488 10.8439 1.49811 10.6106 1.75823L10.6105 1.75828C9.37446 3.13698 8.43881 4.57999 7.84136 6.05442Z" />
-                        </svg>
-                    </div>
-                    <svg className="vector" xmlns="http://www.w3.org/2000/svg" height={95} viewBox="0 0 15 95">
-                        <path d="M0 26.0484V21.4517L15 36.7742V41.3709L0 26.0484Z" />
-                        <path d="M0 36.774V32.1772L15 47.4998V52.0965L0 36.774Z" />
-                        <path d="M0 4.59676V0L15 15.3225V19.9193L0 4.59676Z" />
-                        <path d="M0 15.3223V10.7256L15 26.0481V30.6449L0 15.3223Z" />
-                        <path d="M0 47.5001V42.9033L15 58.2258V62.8226L0 47.5001Z" />
-                        <path d="M0 58.2247V53.6279L15 68.9504V73.5472L0 58.2247Z" />
-                        <path d="M0 68.9512V64.3545L15 79.677V84.2738L0 68.9512Z" />
-                        <path d="M0 79.6773V75.0806L15 90.4031V94.9998L0 79.6773Z" />
-                    </svg>
-                    <p>We denounce with righteous indignation and dislike men who are so great  demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot . <span>Rakhab Uddin</span></p>
-                    </blockquote> */}
 
-              <div className="blog-tag-social-area">
-                <div className="bolg-tag">
-                  {/* <h6>Tag:</h6>
-                        <ul>
-                        <li>Brand Car,</li>
-                        <li>Driving,</li>
-                        <li>Car Service,</li>
-                        <li>Car Advice</li>
-                        </ul> */}
-                </div>
-                <div className="social-area">
-                  <h6>Share:</h6>
-                  <ul className="social-link d-flex align-items-center">
-                  <FacebookShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <FacebookIcon size={26} round />
-                    </FacebookShareButton>
-                    <WhatsappShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <WhatsappIcon size={26} round />
-                    </WhatsappShareButton>
-                    <LinkedinShareButton
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                      url={fullURL} >
-                      <LinkedinIcon size={26} round />
-                    </LinkedinShareButton>
 
-                    <TwitterShareButton
-                      url={fullURL}
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                    >
-                      <TwitterIcon size={26} round />
-                    </TwitterShareButton>
-                    <TelegramShareButton
-                      url={fullURL}
-                      title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                    >
-                      <TelegramIcon size={26} round />
-                    </TelegramShareButton>
 
-                  </ul>
-                </div>
+              <div className="d-flex justify-content-md-end align-items-center">
+                <SocialButtons fullURL={fullURL} />
               </div>
+
+
 
 
 
             </div>
-            <div className="col-lg-4">
-              <div className="blog-sidebar mb-50" style={{ position: 'sticky', top: '-1155px' }}>
+            <div className="col-lg-4 mt-md-2 mt-0">
+              <div className="blog-sidebar mb-50" style={{ position: 'sticky', top: '-780px' }}>
+
+                <div className="boxShadows rounded mt-3 pt-2">
+                  <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} tab1={"Trending"} tab2={"Recent"}/>
 
 
-                <BlogRelated blogs={detailData?.article_categories?.data} heading={'Related News'} />
-
-                <div>
-                  <BlogRecent blogs={recentBlog} heading={'Recent News'} />
-                  <BlogRecent blogs={recentReviews} heading={'Recent Reviews'} />
-
-                  {/* <!-- Tabs navs --> */}
-                  {/* <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <a
-                                                data-mdb-tab-init
-                                                class="nav-link active"
-                                                id="ex1-tab-1"
-                                                href="#ex1-tabs-1"
-                                                role="tab"
-                                                aria-controls="ex1-tabs-1"
-                                                aria-selected="true"
-                                            >Tab 1</a
-                                            >
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a
-                                                data-mdb-tab-init
-                                                class="nav-link"
-                                                id="ex1-tab-2"
-                                                href="#ex1-tabs-2"
-                                                role="tab"
-                                                aria-controls="ex1-tabs-2"
-                                                aria-selected="false"
-                                            >Tab 2</a
-                                            >
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a
-                                                data-mdb-tab-init
-                                                class="nav-link"
-                                                id="ex1-tab-3"
-                                                href="#ex1-tabs-3"
-                                                role="tab"
-                                                aria-controls="ex1-tabs-3"
-                                                aria-selected="false"
-                                            >Tab 3</a
-                                            >
-                                        </li>
-                                    </ul> */}
-                  {/* <!-- Tabs content --> */}
-
-                  {/* <div class="tab-content" id="ex1-content">
-                                        <div
-                                            class="tab-pane fade show active"
-                                            id="ex1-tabs-1"
-                                            role="tabpanel"
-                                            aria-labelledby="ex1-tab-1"
-                                        >
-                                            Tab 1 content
-                                        </div>
-                                        <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                                            Tab 2 content
-                                        </div>
-                                        <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                                            Tab 3 content
-                                        </div>
-                                    </div> */}
-                  {/* <!-- Tabs content --> */}
+                  {activeTab === 'tab1' && <div> <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentReviews} heading={'Related News'} disableHeading={true} /></div>}
+                  {activeTab === 'tab2' && <div>   <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentBlog} heading={'Recent News'} disableHeading={true} /></div>}
                 </div>
 
+                <div className="boxShadows rounded mt-3 pt-2">
+                  <BlogRelated disableMarginTop={true} disableBorder={true} blogs={detailData?.article_categories?.data} heading={'Related News'} tab1={"Trending"} tab2={"Recent"}/>
+                </div>
+
+                {/* <div className="mt-4"><MoreBrands /></div> */}
                 <div className="single-widgets widget_egns_tag hideOnMobile">
                   <div className="sticky-sidebar">
                     <div className="ad">
-                      {/* Add your skyscraper advertisement component or content here */}
-                      {/* For example: */}
                       <Ad160x600 />
                     </div>
                   </div>
@@ -542,12 +427,14 @@ export async function getServerSideProps(context) {
             `
     });
 
+
     return {
       props: {
         detailData: data?.articles?.data[0]?.attributes || null,
         recentBlog: recentBlog?.data?.articles?.data,
         fullURL,
         recentReviews: recentReviewsData?.data?.articles?.data,
+
       },
     };
   }

@@ -13,16 +13,20 @@ import Ad160x600 from "@/src/components/ads/Ad160x600";
 import Script from 'next/script'
 
 import {
-    FacebookShareButton,
-    FacebookIcon,
-    PinterestShareButton,
-    PinterestIcon,
-    RedditShareButton,
-    RedditIcon,
-    WhatsappShareButton,
-    WhatsappIcon,
-    LinkedinShareButton,
-    LinkedinIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  RedditShareButton,
+  RedditIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterIcon,
+  TwitterShareButton,
+  TelegramShareButton,
+  TelegramIcon,
 } from 'next-share';
 import moment, { isMoment } from "moment/moment";
 import Ad970x250 from "@/src/components/ads/Ad970x250";
@@ -30,6 +34,9 @@ import { useRouter } from "next/router";
 import Error from "../../error";
 import BlogRelated from "@/src/components/BlogRelated";
 import BlogRecent from "@/src/components/BlogRecent";
+import TabNavigation from "@/src/components/TabNavigation";
+import MoreBrands from "@/src/components/MoreBrands";
+import SocialButtons from "@/src/components/common/SocialButtons";
 
 const adCode = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>'
 const myAdCode = <Ad728x90 dataAdSlot="5962627056" />
@@ -38,119 +45,170 @@ const myAdCode = <Ad728x90 dataAdSlot="5962627056" />
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
-    const router = useRouter()
-    const [initialScreening, setInitialScreening] = useState(true)
+  const [activeTab, setActiveTab] = useState('tab1');
+  const [isMobile, setIsMobile] = useState(false);
 
-    if (!detailData) {
-        return <div>
-            <Error />
-        </div>;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+
+    handleResize();
+
+
+    window.addEventListener('resize', handleResize);
+
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleTabChange = (selectedTab) => {
+    setActiveTab(selectedTab);
+  };
+
+  const router = useRouter()
+  const [initialScreening, setInitialScreening] = useState(true)
+
+  if (!detailData) {
+    return <div>
+      <Error />
+    </div>;
+  }
+
+  // console.log("detailData ",detailData.article_categories.data);
+  const [dynamicHTML, setDynamicHTML] = useState('');
+  const [isModified, setIsModified] = useState(false);
+
+  // Assume detailData.content contains the provided HTML content
+  // This is your initial state
+  const initialHTML = detailData.content;
+
+
+
+  useEffect(() => {
+    setDynamicHTML(initialHTML);
+  }, [initialHTML]);
+
+  useEffect(() => {
+    if (dynamicHTML && !isModified) {
+      let modifiedHTML = dynamicHTML
+        .replace(/<h1([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
+        .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
+        .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
+        .replace(/<img([^>]*)>/g, '<img$1 style="width: 100%;border-radius: 10px;">')
+        .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
+        .replace(/<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g, '<h3$1>$3</h3>')
+
+        .replace(
+          /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+          'https://www.youtube.com/watch?v=$1'
+        )
+        .replace(
+          /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
+          '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
+        )
+
+
+        .replace(
+          /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+          `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        )
+        .replace(/<p>&nbsp;\s*\/?<\/p>/g, '<p$1 style="margin-top: 20px;">')
+        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, '')
+
+      if (!isMobile) {
+
+        modifiedHTML = modifiedHTML.replace(
+          /&lt;GoogleAd&gt;/g,
+          `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+        )
+      }
+      else {
+        modifiedHTML = modifiedHTML.replace(
+          /&lt;GoogleAd&gt;/g,
+          ``
+        )
+      }
+
+      setDynamicHTML(modifiedHTML);
+      setIsModified(true); // Set the flag to true to avoid further modification
     }
+  }, [dynamicHTML, isModified]);
 
-    // console.log("detailData ",detailData.article_categories.data);
-    const [dynamicHTML, setDynamicHTML] = useState('');
-    const [isModified, setIsModified] = useState(false);
+  console.log(detailData);
+  const settings = useMemo(() => {
+    return {
+      speed: 1500,
+      spaceBetween: 24,
+      autoplay: {
+        delay: 2500, // Autoplay duration in milliseconds
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".next-51",
+        prevEl: ".prev-51",
+      },
+    }
+  })
+  return (
+    <MainLayout pageMeta={{
+      title: `${detailData?.metaTitle}`,
+      description: ``,
+      type: "Car review Website",
+    }}>
 
-    // Assume detailData.content contains the provided HTML content
-    // This is your initial state
-    const initialHTML = detailData.content;
-
-
-
-    useEffect(() => {
-        setDynamicHTML(initialHTML);
-    }, [initialHTML]);
-
-    useEffect(() => {
-        if (dynamicHTML && !isModified) {
-            const modifiedHTML = dynamicHTML
-                .replace(/<h1([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
-                .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
-                .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
-                .replace(/<img([^>]*)>/g, '<img$1 style="width: 100%;border-radius: 10px;">')
-                .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
-                .replace(
-                    /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-                    'https://www.youtube.com/watch?v=$1'
-                )
-                .replace(
-                    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
-                    '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
-                )
-                .replace(/&lt;GoogleAd&gt;/g, `<div class="w-100  my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}</h2></div>`)
-
-                .replace(
-                    /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-                    `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-                )
-                .replace(/<p>&nbsp;\s*\/?<\/p>/g, '<p$1 style="margin-top: 20px;">')
-
-            setDynamicHTML(modifiedHTML);
-            setIsModified(true); // Set the flag to true to avoid further modification
-        }
-    }, [dynamicHTML, isModified]);
-
-    console.log(detailData);
-    const settings = useMemo(() => {
-        return {
-            speed: 1500,
-            spaceBetween: 24,
-            autoplay: {
-                delay: 2500, // Autoplay duration in milliseconds
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".next-51",
-                prevEl: ".prev-51",
-            },
-        }
-    })
-    return (
-        <MainLayout pageMeta={{
-            title: `${detailData?.metaTitle}`,
-            description: ``,
-            type: "Car review Website",
-        }}>
-
-            <br />
-            <Ad728x90 dataAdSlot="5962627056" />
+      <br />
+      <Ad728x90 dataAdSlot="5962627056" />
 
 
-            <div className="blog-details-page pt-5 mb-100">
-                <div className="container">
-                    <div className="row g-lg-4 gy-5">
-                        <div className="col-lg-8">
-                            <div className="post-thumb">
-                                {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
-                                <div className="position-relative ">
-                                    <Image
-                                        src={detailData?.coverImage?.data?.attributes?.url ? detailData.coverImage.data?.attributes.url : altImage}
-                                        alt="blog image"
-                                        layout="responsive"
-                                        width={300}
-                                        height={205}
-                                        objectFit="cover"
-                                        className="blogImage"
-                                    />
-                                </div>
-                                {/* <div className="date">
+      <div className="blog-details-page pt-5 mb-100">
+        <div className="container">
+          <div className="row g-lg-4 gy-5">
+            <div className="col-lg-8">
+              <div className="post-thumb">
+                {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
+                <div className="position-relative ">
+                  <Image
+                    src={detailData?.coverImage?.data?.attributes?.url ? detailData.coverImage.data?.attributes.url : altImage}
+                    alt="blog image"
+                    layout="responsive"
+                    width={300}
+                    height={205}
+                    objectFit="cover"
+                    className="blogImage"
+                  />
+                </div>
+                {/* <div className="date">
                             <span className="text-white p-1">Buying Advice</span>
                         </div> */}
-                            </div>
-                            <h5 className="post-title">{detailData?.title}</h5>
-                            <div className="author-area">
-                                <div className="author-img">
-                                    {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
-                                    <span className="border rounded-circle px-2 py-1">C</span>
-                                </div>
-                                <div className="author-content">
-                                    <h6>{detailData?.author?.data?.attributes?.name}</h6>
-                                    <span>Posted on -  {moment(detailData?.author?.data?.attributes?.createdAt).format("MMMM Do YYYY")}</span>
-                                </div>
-                            </div>
-                            <p>{detailData?.summary}</p>
-                            <div dangerouslySetInnerHTML={{ __html: dynamicHTML }} />
-                            {/* <blockquote> 
+              </div>
+              <h5 className="post-title">{detailData?.title}</h5>
+              <div className="row mb-3">
+                <div className="col-xl-6">
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="author-img">
+                      {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
+                      <span className="border rounded-circle px-2 py-1">C</span>
+                    </div>
+
+                    <div className="author-content">
+                      <h6 className="mt-0">{detailData?.author?.data?.attributes?.name}</h6>
+                      <span className="postedOnStyle">Posted on -  {moment(detailData?.author?.data?.attributes?.createdAt).format("MMMM Do YYYY")}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-6 m-auto mt-2 mt-md-0">
+                  <div className="d-flex justify-content-md-end align-items-center"> <SocialButtons fullURL={fullURL} /> </div>
+                </div>
+                {/* </div> */}
+              </div>
+
+              <p>{detailData?.summary}</p>
+              <div dangerouslySetInnerHTML={{ __html: dynamicHTML }} />
+              {/* <blockquote> 
                     <div className="quoat-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width={27} height={18} viewBox="0 0 27 18">
                         <path d="M21.6832 6.05443L21.4534 6.62147L22.0549 6.73371C24.6453 7.21714 26.5 9.46982 26.5 12.0337C26.5 13.573 25.8343 15.0529 24.6667 16.09C23.4982 17.1192 21.9207 17.6286 20.3329 17.4722C17.4907 17.1844 15.2846 14.6588 15.3404 11.7032C15.4201 7.67759 16.8945 5.07458 18.6289 3.38578C20.3761 1.68459 22.4158 0.884497 23.6452 0.531618L23.6591 0.527628L23.6728 0.52284C23.7152 0.507954 23.7704 0.5 23.8713 0.5C24.1425 0.5 24.3799 0.624329 24.5265 0.85037L24.5277 0.852289C24.7128 1.13485 24.6857 1.4981 24.4524 1.75822L24.4523 1.75827C23.2163 3.13698 22.2806 4.57999 21.6832 6.05443Z" />
@@ -170,60 +228,43 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                     <p>We denounce with righteous indignation and dislike men who are so great  demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot . <span>Rakhab Uddin</span></p>
                     </blockquote> */}
 
-                            <div className="blog-tag-social-area">
-                                <div className="bolg-tag">
-                                    {/* <h6>Tag:</h6>
-                        <ul>
-                        <li>Brand Car,</li>
-                        <li>Driving,</li>
-                        <li>Car Service,</li>
-                        <li>Car Advice</li>
-                        </ul> */}
-                                </div>
-                                <div className="social-area">
-                                    <h6>Share:</h6>
-                                    <ul className="social-link d-flex align-items-center">
-                                        <FacebookShareButton
-                                            url={fullURL} >
-                                            <FacebookIcon size={26} round />
-                                        </FacebookShareButton>
-                                        <WhatsappShareButton
-                                            url={fullURL} >
-                                            <WhatsappIcon size={26} round />
-                                        </WhatsappShareButton>
+                
+<div className="d-flex justify-content-md-end align-items-center">
+                  <SocialButtons fullURL={fullURL} />
+                </div>
 
-                                        <LinkedinShareButton
-                                            url={fullURL} >
-                                            <LinkedinIcon size={26} round />
-                                        </LinkedinShareButton>
+          
+            </div>
+            <div className="col-lg-4 mt-md-2 mt-0">
+              <div className="blog-sidebar mb-50" style={{ position: 'sticky', top: '-1155px' }}>
 
-                                    </ul>
-                                </div>
+                <div className="boxShadows rounded mt-3 pt-2">
+                  <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} tab1={"Trending"} tab2={"Recent"}/>
+                  {/* Your page content based on the selected tab */}
 
-                            </div>
-                        </div>
-                        <div className="col-lg-4">
-                            <div className="blog-sidebar mb-50" style={{ position: 'sticky', top: '-1155px' }}>
+                  {activeTab === 'tab1' && <div> <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentNews} heading={'Related News'} disableHeading={true} /></div>}
+                  {activeTab === 'tab2' && <div>   <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentBlog} heading={'Recent News'} disableHeading={true} /></div>}
+                </div>
 
-                                <BlogRelated blogs={detailData?.article_categories?.data} heading={'Related News'} />
-                                <BlogRecent blogs={recentNews} heading={'Recent News'} />
-                                <BlogRecent blogs={recentBlog} heading={'Recent Reviews'} />
+                <div className="boxShadows rounded mt-3 pt-2">
+                  <BlogRelated disableMarginTop={true} disableBorder={true} blogs={detailData?.article_categories?.data} heading={'Related Reviews'} />
+                </div>
+
+                {/* <div className="mt-4"><MoreBrands /></div> */}
 
 
 
+                <div className="single-widgets widget_egns_tag hideOnMobile">
+                  <div className="sticky-sidebar">
+                    <div className="ad">
 
-                                <div className="single-widgets widget_egns_tag hideOnMobile">
-                                    <div className="sticky-sidebar">
-                                        <div className="ad">
-                                            {/* Add your skyscraper advertisement component or content here */}
-                                            {/* For example: */}
-                                            <Ad160x600 />
-                                        </div>
-                                    </div>
+                      <Ad160x600 />
+                    </div>
+                  </div>
 
-                                </div>
-                            </div>
-                            {/* <div className="single-widgets sidebar-banner">
+                </div>
+              </div>
+              {/* <div className="single-widgets sidebar-banner">
                                 <div className="product-content">
                                     <div className="text">
                                     <h4><a href="#">Mercedes-Benz <span>( Model-S13)</span></a></h4>
@@ -238,34 +279,34 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                                     <img src="assets/img/inner-page/sb-banner-img.png" alt="" />
                                 </div>
                                 </div> */}
-                        </div>
-                    </div>
-                </div>
             </div>
-            <Ad728x90 dataAdSlot="5962627056" />
+          </div>
+        </div>
+      </div>
+      <Ad728x90 dataAdSlot="5962627056" />
 
-        </MainLayout>
-    )
+    </MainLayout>
+  )
 }
 
 
 export async function getServerSideProps(context) {
-    const { slug } = context.params; // Access the slug parameter from context.params
+  const { slug } = context.params; // Access the slug parameter from context.params
 
-    const { req } = context;
-    const protocol = req.headers['x-forwarded-proto'] || 'http';
-    const host = req.headers['x-forwarded-host'] || req.headers.host;
-    const fullURL = `${protocol}://${host}${req.url}`;
+  const { req } = context;
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const fullURL = `${protocol}://${host}${req.url}`;
 
-    const apolloClient = createApolloClient();
-    // Fetch data based on the slug (e.g., from a database)
-    // console.log(newsData, "my slug"); // Log the slug value
+  const apolloClient = createApolloClient();
+  // Fetch data based on the slug (e.g., from a database)
+  // console.log(newsData, "my slug"); // Log the slug value
 
 
-    try {
+  try {
 
-        const { data } = await apolloClient.query({
-            query: gql`
+    const { data } = await apolloClient.query({
+      query: gql`
           query{
             articles(filters:{slug:{eq:"${slug}"}}){
               meta{
@@ -330,9 +371,9 @@ export async function getServerSideProps(context) {
             }
     }
           `
-        });
-        const recentBlog = await apolloClient.query({
-            query: gql`
+    });
+    const recentBlog = await apolloClient.query({
+      query: gql`
             query{
                 articles(filters:{article_type:{type:{eq:"Review"}}},pagination:{limit:6},sort:"createdAt:desc"){
                   data{
@@ -364,10 +405,10 @@ export async function getServerSideProps(context) {
                 }
               }
             `
-        });
+    });
 
-        const recentNewsData = await apolloClient.query({
-            query: gql`
+    const recentNewsData = await apolloClient.query({
+      query: gql`
             query{
                 articles(filters:{article_type:{type:{eq:"News"}}},pagination:{limit:6},sort:"createdAt:desc"){
                   data{
@@ -399,26 +440,26 @@ export async function getServerSideProps(context) {
                 }
               }
             `
-        });
+    });
 
-        return {
-            props: {
-                detailData: data?.articles?.data[0]?.attributes || null,
-                recentBlog: recentBlog?.data?.articles?.data,
-                fullURL,
-                recentNews: recentNewsData?.data?.articles?.data,
+    return {
+      props: {
+        detailData: data?.articles?.data[0]?.attributes || null,
+        recentBlog: recentBlog?.data?.articles?.data,
+        fullURL,
+        recentNews: recentNewsData?.data?.articles?.data,
 
-            },
-        };
-    }
-    catch (error) {
-        console.error("Server-side Data Fetching Error:", error.message);
-        return {
-            props: {
-                error: true,
-                errorMessage: error.message,
-            },
-        };
-    }
+      },
+    };
+  }
+  catch (error) {
+    console.error("Server-side Data Fetching Error:", error.message);
+    return {
+      props: {
+        error: true,
+        errorMessage: error.message,
+      },
+    };
+  }
 }
 export default BlogDetailsPage
