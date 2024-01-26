@@ -12,6 +12,7 @@ import { gql } from "@apollo/client";
 import Ad160x600 from "@/src/components/ads/Ad160x600";
 import Image from "next/image";
 import altImage from '../../../public/assets/images/blog-alt-image.png'
+import BlogDropDown from "@/src/components/BlogDropDown";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -22,142 +23,7 @@ function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }
   const router = useRouter()
 
   const [brandInput, setBrandInput] = useState('');
-  const [brandOptions, setBrandOptions] = useState([]);
-  const [tagOptions, setTagOptions] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false)
-  const [inputFieldTouched, setInputFieldTouched] = useState(false)
-  const [initialScreening, setInitialScreening] = useState(true)
-
-  console.log(news);
-  console.log(fullData);
-
-  const fetchBrands = async (brandInput) => {
-    try {
-      const { data } = await client.query({
-        query: gql`
-        query {
-          carBrands(filters:{name:{containsi:"${brandInput}"}}) {
-            data {
-              attributes {
-                name
-                slug
-              }
-            }
-          }
-        }
-        `,
-      });
-
-
-      const brands = data.carBrands.data;
-      setBrandOptions(brands)
-
-    } catch (error) {
-      console.error('Error fetching brands:', error);
-    }
-    setSearchLoading(false)
-  }
-  const fetchTags = async (tagInput) => {
-    try {
-      const { data } = await client.query({
-        query: gql`
-        query{
-          articleCategories(filters:{name:{containsi:"${tagInput}"}}){
-            data{
-              attributes{
-                name
-                slug
-                articles{
-                  data{
-                    attributes{
-                      title
-                      slug
-                      
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        `,
-      });
-      const tags = data.articleCategories.data.map((brand) => brand.attributes);
-      setTagOptions(tags)
-
-      console.log("tags", tags);
-    } catch (error) {
-      console.error('Error fetching brands:', error);
-    }
-
-    setSearchLoading(false)
-  }
-
-  const fetchAllBrands = async () => {
-
-    try {
-      const { data } = await client.query({
-        query: gql`
-        query SearchBrands {
-          carBrands(pagination: { limit:-1 },sort:"name:asc") {
-            data {
-              attributes {
-                name
-                slug
-              }
-            }
-          }
-        }
-        `,
-      });
-
-      setBrandOptions(data.carBrands.data);
-      // console.log("all brands",data);
-    } catch (error) {
-      console.error('Error fetching brands:', error);
-    }
-    setSearchLoading(false)
-  }
-
-
-  const InputFieldClicked = () => {
-    setInputFieldTouched(true)
-    setSearchLoading(true)
-
-
-
-    if (!brandInput) {
-      fetchAllBrands()
-    }
-    else {
-      setSearchLoading(false)
-
-    }
-  }
-
-  const handleInputFieldBlur = () => {
-    setInputFieldTouched(false)
-  }
-
-  useEffect(() => {
-    inputRef.current.focus();
-
-  }, [])
-
-  useEffect(() => {
-    setInputFieldTouched(true)
-    if (brandInput.trim() === '') {
-      fetchAllBrands()
-    }
-
-    if (brandInput.trim() === '') {
-      return;
-    }
-
-    fetchBrands(brandInput)
-    fetchTags(brandInput)
-    setInputFieldTouched(true)
-  }, [brandInput]);
+  
 
   const settings = useMemo(() => {
     return {
@@ -183,38 +49,7 @@ function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }
       <div className="container mb-4">
         <h1 className="my-4">Latest Car News</h1>
         <p>Get the latest news, updates, and insights on the UAE car industry, covering new launches, events, price updates, discounts, recalls, and more for a comprehensive understanding of the automotive scene.</p>
-        <div className="inputSearchContainer mt-4 position-relative">
-          <i class="bi bi-search searchIcon"></i>
-          <input type="text"
-            ref={inputRef}
-            className="newsInputSearch"
-            placeholder="Search by brand name..."
-            autocomplete="off"
-            value={brandInput}
-            onClick={InputFieldClicked}
-            onChange={(e) => setBrandInput(e.target.value)}
-
-          />
-
-          {((brandOptions.length > 0 || tagOptions.length > 0) && inputFieldTouched) && <ul className="relatedDataList">
-            {(inputFieldTouched && brandInput == '') && <li className="allBrandsTxt p-2">All brands</li>}
-            {(inputFieldTouched && brandOptions.length > 0 && brandInput != '') && <li className="allBrandsTxt p-2">Brand(s)</li>}
-            {brandOptions?.map((brand, index) => (
-              <Link legacyBehavior href={`/news/brand/${brand?.attributes?.slug}`}><li className="border-bottom p-2 searchResultItem cursor_pointer" key={index}  >{brand?.attributes?.name}</li></Link>
-            ))}
-            {(inputFieldTouched && tagOptions.length > 0 && brandInput != '') && <li className="allBrandsTxt p-2">Tag(s)</li>}
-            {tagOptions?.map((tag, index) => (
-              <Link legacyBehavior href={`/news/tag/${tagOptions[index]?.slug}`}><li className="border-bottom p-2 searchResultItem cursor_pointer" key={index}  >{tag?.name}</li></Link>
-            ))}
-            {/* {(inputFieldTouched && brandOptions.length==0) && <li className="allBrandsTxt p-2">No result found</li>} */}
-
-          </ul>}
-
-
-
-          {(inputFieldTouched && !searchLoading) && <span aria-hidden="true" className="fs-2 cursor_pointer" onClick={() => { setBrandInput(''); setInputFieldTouched(false) }}>&times;</span>}
-          {(searchLoading) && <div className="spinnerItem"></div>}
-        </div>
+        <BlogDropDown initialFocus={true} news={true}/>
 
 
         <div className="row g-4 mt-3">
@@ -222,7 +57,7 @@ function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }
             <div className="row g-4 ">
               {news?.map((newsItem, index) => (
                 <>
-                  <div key={`news-${index}`} className="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="200ms">
+                  <div key={`news-${index}`} className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
                     <div className="news-card">
                       <div className="news-img">
                         <Link legacyBehavior href={`/news/${newsItem?.attributes?.slug}`}><a>

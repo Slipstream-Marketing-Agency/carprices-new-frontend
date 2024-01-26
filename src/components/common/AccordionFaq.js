@@ -10,7 +10,7 @@ export default function AccordionFaq({ question, answer, condition, id }) {
   return (
     <>
       {condition && (
-        <div className="faq-wrap">
+     
           <div className="accordion-item">
             <h5 className="accordion-header">
               <button
@@ -30,7 +30,7 @@ export default function AccordionFaq({ question, answer, condition, id }) {
               </div>
             )}
           </div>
-        </div>
+
       )}
     </>
   );

@@ -10,9 +10,7 @@ function Footer1() {
     <footer>
       <div className="container-fluid">
         <div className="footer-top">
-          {/* <div className="footerHeadingContainer">
-            <span className="footerVehiclesHeading">{t.popularVehicles}</span>
-          </div> */}
+       
 
           
           <div className="mt-2 row row-cols-xl-12 row-cols-lg-12 row-cols-md-12 row-cols-sm-12 row-cols-1 justify-content-center g-lg-4 gy-5 ">
@@ -107,8 +105,8 @@ function Footer1() {
             
           </div>
         </div>
-        <div className="footer-center mt-5 ">
-          <div className="footer-logo">
+        <div className="footer-center mt-3 ">
+          <div className="footer-logo text-white">
             <Link legacyBehavior href="/">
               <a>
                 <img
@@ -120,8 +118,7 @@ function Footer1() {
               </a>
             </Link>
           </div>
-          <div className="contact-area">
-            <div className="hotline-area">
+          <div className="hotline-area text-white">
               <div className="icon">
                 <svg
                   width={32}
@@ -141,7 +138,7 @@ function Footer1() {
                 </h6>
               </div>
             </div>
-            <div className="hotline-area">
+            <div className="hotline-area text-white">
               <div className="icon">
                 <svg
                   width={32}
@@ -163,7 +160,7 @@ function Footer1() {
                 </h6>
               </div>
             </div>
-          </div>
+         
           <div className="footer-btm-menu">
             <ul>
               {/* <li>
@@ -185,6 +182,11 @@ function Footer1() {
           <div className="social-area">
             <h6>Follow Car Prices:</h6>
             <ul>
+              <li>
+                <a href="https://www.youtube.com/@carpricesuae">
+                <i className="bx bxl-youtube" />
+                </a>
+              </li>
               <li>
                 <a href="https://www.facebook.com/carprices.ae/">
                   <i className="bx bxl-facebook" />

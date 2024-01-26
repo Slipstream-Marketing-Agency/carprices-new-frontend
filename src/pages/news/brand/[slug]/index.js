@@ -9,163 +9,13 @@ import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import altImage from '../../../../../public/assets/images/blog-alt-image.png'
 import { useRouter } from 'next/router';
+import BlogDropDown from '@/src/components/BlogDropDown';
+import BlogHeader from '@/src/components/BlogHeader';
 
 function index({news,fullData,totalNews,totalPages,currentPage,searchSlug}) {
-  const inputRef = useRef(null);
     const client = createApolloClient();
   const router=useRouter()
 
-  const [brandInput, setBrandInput] = useState('');
-  const [brandOptions, setBrandOptions] = useState([]);
-  const [tagOptions, setTagOptions] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false)
-  const [inputFieldTouched, setInputFieldTouched] = useState(false)
-  const [initialScreening,setInitialScreening]=useState(true)
-    console.log(news);
-    console.log(fullData);
-  
-    const fetchBrands = async (brandInput)=>{
-      try {
-        const { data } = await client.query({
-          query: gql`
-          query {
-            carBrands(filters:{name:{containsi:"${brandInput}"}}) {
-              data {
-                attributes {
-                  name
-                  slug
-                }
-              }
-            }
-          }
-          `,
-        });
-  
-        
-        const brands = data.carBrands.data;
-        setBrandOptions(brands)
-    
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-      setSearchLoading(false)
-    }
-    const fetchTags= async (tagInput)=>{
-      try {
-        const { data } = await client.query({
-          query: gql`
-          query{
-            articleCategories(filters:{name:{containsi:"${tagInput}"}}){
-              data{
-                attributes{
-                  name
-                  slug
-                  articles{
-                    data{
-                      attributes{
-                        title
-                        slug
-                        
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          `,
-        });
-        const tags = data.articleCategories.data.map((brand) => brand.attributes);
-        setTagOptions(tags)
-    
-        console.log("tags",tags);
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-    
-      setSearchLoading(false)
-    }
-  
-    const fetchAllBrands = async () => {
-      
-      try {
-        const { data } = await client.query({
-          query: gql`
-          query SearchBrands {
-            carBrands(pagination: { limit:-1 },sort:"name:asc") {
-              data {
-                attributes {
-                  name
-                  slug
-                }
-              }
-            }
-          }
-          `,
-        });
-  
-        setBrandOptions(data.carBrands.data);
-        // console.log("all brands",data);
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-      setSearchLoading(false)
-    }
-  
-  
-    const InputFieldClicked = () => {
-      setInputFieldTouched(true)
-      setSearchLoading(true)
-  
-  
-  
-      if (!brandInput) {
-        fetchAllBrands()
-      }
-      else{
-      setSearchLoading(false)
-  
-      }
-    }
-    
-    const inputFieldReset=()=>{
-      setBrandInput('');setInputFieldTouched(false);setInitialScreening(true)
-    }
-
-    const handleInputFieldBlur = () => {
-      setInputFieldTouched(false)
-    }
-  
-    useEffect(()=>{
-      if(initialScreening){
-          setInputFieldTouched(false)
-      }
-      if(searchSlug){
-        setBrandInput(searchSlug)
-      }
-  },[])
-  
-  useEffect(() => {
-    setInputFieldTouched(true)
-    if (brandInput.trim() === '') {
-      fetchAllBrands()
-    }
-
-    if (brandInput.trim() === '' ) {
-      return;
-    }
-
-    if(!initialScreening){
-      
-      fetchBrands(brandInput)
-      fetchTags(brandInput)
-      }else{
-          setInputFieldTouched(false)
-      }
-      setInitialScreening(false)
-  
-  }, [brandInput]);
-  
 
 
     const settings = useMemo(() => {
@@ -192,38 +42,8 @@ function index({news,fullData,totalNews,totalPages,currentPage,searchSlug}) {
       }}>
         <Ad728x90 dataAdSlot="5962627056" />
         <div className="container mb-4">
-          <h1 className="my-4">Latest Car News</h1>
-          <p>Get the latest news, updates, and insights on the UAE car industry, covering new launches, events, price updates, discounts, recalls, and more for a comprehensive understanding of the automotive scene.</p>
-          <div className="inputSearchContainer mt-4 position-relative">
-            <i class="bi bi-search searchIcon"></i>
-            <input type="text"
-              className="newsInputSearch"
-              placeholder="Enter brand name..."
-              value={brandInput}
-              onClick={InputFieldClicked}
-              onChange={(e) => setBrandInput(e.target.value)}
-
-          />    
-
-{((brandOptions.length > 0 || tagOptions.length>0) && inputFieldTouched) && <ul className="relatedDataList">
-                {(inputFieldTouched && brandInput == '') && <li className="allBrandsTxt p-2">All brands</li>}
-                {(inputFieldTouched && brandOptions.length>0 && brandInput != '') && <li className="allBrandsTxt p-2">Brand(s)</li>}
-                {brandOptions?.map((brand, index) => (
-                  <Link legacyBehavior href={`/news/brand/${brand?.attributes?.slug}`}><li  className="border-bottom p-2 searchResultItem cursor_pointer" key={index}  onClick={()=>{ setBrandInput(brand?.attributes?.name);setInitialScreening(true);setInputFieldTouched(false)}}>{brand?.attributes?.name}</li></Link>
-                ))}
-                {(inputFieldTouched && tagOptions.length>0 && brandInput != '') && <li className="allBrandsTxt p-2">Tag(s)</li>}
-                {tagOptions?.map((tag, index) => (
-                  <Link legacyBehavior href={`/news/tag/${tagOptions[index]?.slug}`}><li className="border-bottom p-2 searchResultItem cursor_pointer" key={index} >{tag?.name}</li></Link>
-                ))}
-                {/* {(inputFieldTouched && brandOptions.length==0) && <li className="allBrandsTxt p-2">No result found</li>} */}
-    
-              </ul>}
-              
-    
-    
-              {(inputFieldTouched && !searchLoading ) && <span aria-hidden="true" className="fs-2 cursor_pointer" onClick={() => {inputFieldReset()}}>&times;</span>}
-             {(searchLoading) && <div className="spinnerItem"></div>}
-            </div>
+          <BlogHeader news={true} />
+          <BlogDropDown searchSlug={searchSlug} news={true}/>
   
   
   

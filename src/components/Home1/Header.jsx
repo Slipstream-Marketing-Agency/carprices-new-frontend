@@ -205,11 +205,11 @@ function Header() {
               
             </ul>
           </li>
-          <li>
+          {/* <li>
             <Link legacyBehavior href="/loan-calculator">
               <a className="drop-down">{t.Loancalculator}</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
         {/* <div className="topbar-right d-lg-none d-block">
           <a href="#">

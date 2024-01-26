@@ -220,46 +220,60 @@ small {
   font-size: 12px !important;
 }
 
-/* news page style begins */
 
+
+/* news page style begins */
+.postedOnStyle{
+  font-family: var(--font-gilroy);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--text-color);
+}
 .newsCard {
   height: 250px; /* Adjust the height as needed */
 }
 
-.inputSearchContainer {
+.inputSearchContainer{
   display: flex;
   align-items: center;
   gap: 15px;
   border: 1px solid rgb(219, 219, 219);
-  width: 360px;
+  width: 370px;
   height: 60px;
   padding: 0 20px;
   border-radius: 6px;
   font-size: 19px;
 }
-@media (max-width: 650px) {
-  .inputSearchContainer {
+@media(max-width:650px){
+  .inputSearchContainer{
     width: 100%;
   }
 }
-.inputSearchContainer:hover,
-.inputSearchContainer:focus {
+
+.inputSearchContainer:hover,.inputSearchContainer:focus{
   border: 1px solid var(--light);
 }
 
-.newsInputSearch {
+.newsInputSearch{
   width: 100%;
   height: 100%;
 }
-.searchIcon {
-  font-size: 20px;
+.newsInputSearch::placeholder{
+  font-size: 16px;
 }
-.allBrandsTxt {
+.inputFieldPlaceholderTxtRight::placeholder{
+text-align: end;
+}
+.searchIcon{
+ font-size: 20px;
+}
+.allBrandsTxt{
   font-weight: bolder;
   font-size: 18px;
 }
 
-.relatedDataList {
+.relatedDataList{
   width: 100%;
   height: 270px;
   overflow-y: scroll;
@@ -272,71 +286,73 @@ small {
   list-style: none;
   background-color: white;
 }
-.searchResultItem {
+.searchResultItem{
   width: 100%;
 }
-.searchResultItem:hover {
+.searchResultItem:hover{
+ 
   background-color: rgb(244, 244, 244);
 }
-.imageContainer img {
+.imageContainer img{
   height: 210px !important;
-  width: 100%;
-  object-fit: cover;
+    width: 100%;
+    object-fit: cover;
 }
-.newsCard-body {
+.newsCard-body{
   box-shadow: 0 0 4px rgb(184, 184, 184);
   padding: 1rem 1rem;
   border-radius: 3px;
 }
 
-.news-card {
-  background: #ffffff;
-  border: 1px solid #eeeeee;
-  border-radius: 5px;
-  padding: 10px;
+.news-card{
+  background: #FFFFFF;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .sticky-sidebar {
   position: sticky;
   top: 60px; /* Adjust this value as needed */
 }
-@media (max-width: 650px) {
-  .hideOnMobile {
+@media(max-width:650px){
+
+  .hideOnMobile{
     display: none;
   }
 }
-.blogImage {
+.blogImage{
   width: 100%;
   height: 330px;
 }
-.recentBlogImage {
+.recentBlogImage{
   width: 100%;
   height: 150px;
 }
-.BlogCardHeadingTxt {
+.BlogCardHeadingTxt{
   font-size: 18px;
 }
-.authorName {
+.authorName{
   margin-top: 15px;
   padding: 0;
   margin: 0;
   font-size: 14px;
   font-weight: 500;
 }
-.postedDate {
+.postedDate{
   font-size: 14px;
 }
-.readMoreBtn {
+.readMoreBtn{
   padding: 4px 8px;
   font-weight: 500;
   border-radius: 10px;
   background-color: var(--primary-color1);
   color: white;
 }
-.readMoreBtn:hover {
+.readMoreBtn:hover{
   background-color: var(--light);
 }
-.displayNone {
+.displayNone{
   display: none;
 }
 
@@ -367,7 +383,7 @@ small {
   display: block;
   width: 2.375rem;
   height: 2.375rem;
-  border-radius: 0%;
+  border-radius:0% ;
   line-height: 2.375rem;
   text-align: center;
   padding-right: 8px;
@@ -375,7 +391,7 @@ small {
   color: #aaa;
 }
 
-.blogFont {
+.blogFont{
   font-size: 14px;
   font-weight: 500;
 }
@@ -398,50 +414,57 @@ small {
   object-fit: cover !important;
 }
 /* Mobile view begins */
-@media (max-width: 767px) {
-  .BlogCardHeadingTxt a {
+@media(max-width:767px){
+  .BlogCardHeadingTxt a{
     font-size: 13px;
   }
-  .BlogCardHeadingTxt {
-    line-height: 0.8;
+  .BlogCardHeadingTxt{
+      line-height: 0.8;
   }
-  .inputSearchContainer {
-    height: 50px;
+  .inputSearchContainer{
+    height:50px;
   }
-  p {
+  .searchIcon{
+    font-size: 16px;
+  }
+  p{
     font-size: 12px;
   }
   .searchResultItem {
     font-size: 12px;
   }
-  .allBrandsTxt {
+  .allBrandsTxt{
     font-size: 12px;
   }
-  .readMoreBtn {
+  .readMoreBtn{
     font-size: 12px;
   }
-  .blog-details-page .post-title {
+  .blog-details-page .post-title{
     font-size: 20px;
   }
 
-  .blog-details-page .author-area .author-content h6 {
-    font-size: 12px;
+.blog-details-page .author-area .author-content h6{
+    font-size:12px;
   }
-  .blog-details-page .author-area .author-content span {
-    font-size: 10px;
+  .blog-details-page .author-area .author-content span{
+    font-size:10px;
+
   }
-  .blog-sidebar .single-widgets .recent-post-wraper .widget-cnt .wc h6 {
+  .blog-sidebar .single-widgets .recent-post-wraper .widget-cnt .wc h6{
     font-size: 13px;
   }
-  .blog-sidebar .single-widgets .widget-title h6 {
+  .blog-sidebar .single-widgets .widget-title h6{
     font-size: 15px;
   }
-  h3 strong {
+  h3 strong{
     font-size: 20px;
   }
-  .blog-details-page .blog-tag-social-area .social-area h6 {
+  .blog-details-page .blog-tag-social-area .social-area h6{
     font-size: 13px;
   }
+.shareTxt{
+  font-size: 12px;
+}
 }
 
 /* Mobile view ends */
@@ -895,3 +918,72 @@ small {
   height: 500px;
   overflow-y: scroll;
 }
+
+
+/* blog page tab nav begins */
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+
+  margin:11px 15px
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: var(--primary-color1);
+  background-color: #fff;
+  /* border-color: #dee2e6 #dee2e6 #fff; */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid var(--primary-color1);
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  /* border-color: #e9ecef #e9ecef #dee2e6; */
+  /* isolation: isolate; */
+  /* border-bottom: 3px solid var(--light); */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.fontWeight500{
+  color: var(--light);
+  font-weight: 500;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 3rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  font-weight: 500;
+  background: 0 0;
+  border:none;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+/* blog page tab nav ends */
+
+/* Blog page More brands section begin */
+.viewAllbrandTxt{
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--primary-color1);
+}
+
+.boxShadows{
+  box-shadow: 0px 0px 10px rgba(168, 168, 168, 0.331);
+}
+/* Blog page More brands section ends */
+
+
+/* car brands page begins */
+.accordion-header{
+  width: 100%;
+}
+.positionStickyAd{
+  position: sticky;
+  top: 140px;
+}
+/* car brands page ends */
+
