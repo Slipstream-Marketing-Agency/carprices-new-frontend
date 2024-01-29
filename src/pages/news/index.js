@@ -49,7 +49,7 @@ function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }
       <div className="container mb-4">
         <h1 className="my-4">Latest Car News</h1>
         <p>Get the latest news, updates, and insights on the UAE car industry, covering new launches, events, price updates, discounts, recalls, and more for a comprehensive understanding of the automotive scene.</p>
-        <BlogDropDown initialFocus={true} news={true}/>
+        {/* <BlogDropDown initialFocus={true} news={true}/> */}
 
 
         <div className="row g-4 mt-3">

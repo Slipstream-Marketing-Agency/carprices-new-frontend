@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 function ProductCard({ subTitle, heading, carDetails }) {
   const router = useRouter();
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
+  let isRtl = router.locale === "ar";
   console.log(carDetails, "carDetails");
 
   const CarPriceRange = ({ car }) => {
@@ -36,13 +36,21 @@ function ProductCard({ subTitle, heading, carDetails }) {
         priceInfo = `${t.aed} ${formatPrice(minPrice)}*`;
       } else {
         // Display price range
-        priceInfo = `${t.aed} ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
+        priceInfo = `${t.aed} ${formatPrice(minPrice)}* - ${formatPrice(
+          maxPrice
+        )}*`;
       }
 
-      return <span className="text-danger fw-bold MobilepriceTextSize">{priceInfo}</span>;
+      return (
+        <span className="text-danger fw-bold MobilepriceTextSize">
+          {priceInfo}
+        </span>
+      );
     } else {
       // If no valid prices are available, display "TBD"
-      return <span className="text-danger fw-bold MobilepriceTextSize ">TBD</span>;
+      return (
+        <span className="text-danger fw-bold MobilepriceTextSize ">TBD</span>
+      );
     }
   };
 
@@ -87,7 +95,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
               {/* <span>{subTitle}</span> */}
-              <h1 className={`${isRtl && 'text-end'} w-100`}>{heading}</h1>
+              <h1 className={`${isRtl && "text-end"} w-100`}>{heading}</h1>
             </div>
             {/* <ul className="nav nav-tabs" id="myTab6" role="tablist">
               <li className="nav-item" role="presentation">
@@ -153,7 +161,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
           <div className="col-lg-12">
             <div className="tab-content" id="myTabContent6">
               <div
-                className="tab-pane fade show active"
+                className="tab-pane fade show active cursor-pointer"
                 id="popular-car1"
                 role="tabpanel"
                 aria-labelledby="popular-car1-tab"
@@ -165,9 +173,13 @@ function ProductCard({ subTitle, heading, carDetails }) {
                       className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6 wow fadeInUp"
                       data-wow-delay="200ms"
                     >
-                      <div className="product-card">
-                        <div className="product-img">
-                          {/* <a href="#" className="fav">
+                      <Link
+                        legacyBehavior
+                        href={`/brands/${car?.attributes?.car_brands?.data[0]?.attributes?.slug}/${car?.attributes?.year}/${car?.attributes?.slug}`}
+                      >
+                        <div className="product-card">
+                          <div className="product-img">
+                            {/* <a href="#" className="fav">
                             <svg
                               width={14}
                               height={13}
@@ -177,40 +189,41 @@ function ProductCard({ subTitle, heading, carDetails }) {
                               <path d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z"></path>
                             </svg>
                           </a> */}
-                          <div className="swiper product-img-slider">
-                            <div className="swiper-wrapper">
-                              <div className="swiper-slide">
-                                <img
-                                  src={
-                                    car?.attributes?.car_trims?.data.find(
-                                      (trim) => trim.attributes.highTrim
-                                    )?.attributes?.featuredImage?.data
-                                      ?.attributes?.url
-                                  }
-                                  alt={`${car?.attributes?.car_brands?.data[0]?.attributes?.name} ${car?.attributes?.name}`}
-                                />
+                            <div className="swiper product-img-slider">
+                              <div className="swiper-wrapper">
+                                <div className="swiper-slide">
+                                  <img
+                                    src={
+                                      car?.attributes?.car_trims?.data.find(
+                                        (trim) => trim.attributes.highTrim
+                                      )?.attributes?.featuredImage?.data
+                                        ?.attributes?.url
+                                    }
+                                    alt={`${car?.attributes?.car_brands?.data[0]?.attributes?.name} ${car?.attributes?.name}`}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="product-content">
-                          <div className="product-content-height">
-                            <h6 className="mobileFontCarName mb-0">
-                              <Link legacyBehavior href="/car-deatils">
-                                <span>
-                                {car?.attributes?.year}{" "}
-                                  {
-                                    car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.name.length>10 ? car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.name.slice(0.10) : car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.name
-                                  }{" "}
-                                  {car?.attributes?.name}
-                                </span>
-                              </Link>
-                            </h6>
-                            <CarPriceRange car={car} />
-                            {/* <div className="price-location">
+                          <div className="product-content">
+                            <div className="product-content-height">
+                              <h6 className="mobileFontCarName mb-0">
+                                <Link legacyBehavior href="/car-deatils">
+                                  <span>
+                                    {car?.attributes?.year}{" "}
+                                    {car?.attributes?.car_brands?.data[0]
+                                      ?.attributes?.name.length > 10
+                                      ? car?.attributes?.car_brands?.data[0]?.attributes?.name.slice(
+                                          0.1
+                                        )
+                                      : car?.attributes?.car_brands?.data[0]
+                                          ?.attributes?.name}{" "}
+                                    {car?.attributes?.name}
+                                  </span>
+                                </Link>
+                              </h6>
+                              <CarPriceRange car={car} />
+                              {/* <div className="price-location">
                             <div className="price">
                               <strong>{car.carPrice}</strong>
                             </div>
@@ -221,40 +234,42 @@ function ProductCard({ subTitle, heading, carDetails }) {
                             </div>
                           </div> */}
 
-                            <ul className="features">
-                              <li className="mobileFontEmi">
-                                {t.emistart} <CarEMIDisplay car={car} />
-                              </li>
-                            </ul>
-                          </div>
+                              <ul className="features">
+                                <li className="mobileFontEmi">
+                                  {t.emistart} <CarEMIDisplay car={car} />
+                                </li>
+                              </ul>
+                            </div>
 
-                          {/* d-flexed to view details at center  */}
-                          <div className={`content-btm ${isRtl && 'flex-row-reverse'} `}>
-                            <Link legacyBehavior href={`/brands/${car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.slug}/${car?.attributes?.year}/${car?.attributes?.slug}`}>
-                              <a className="view-btn2">
+                            {/* d-flexed to view details at center  */}
+                            <div
+                              className={`content-btm ${
+                                isRtl && "flex-row-reverse"
+                              } `}
+                            >
+                              <span className="view-btn2">
                                 {t.viewDetails}
                                 <i class="bi bi-chevron-double-right"></i>
-                              </a>
-                            </Link>
-                            <div className="brand ">
-                              <Link
-                                legacyBehavior
-                                href="/single-brand-category"
-                              >
-                                <img
-                                  src={
-                                    car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.brandLogo?.data?.attributes
-                                      ?.url
-                                  }
-                                  alt="image"
-                                />
-                              </Link>
+                              </span>
+                              <div className="brand ">
+                                <Link
+                                  legacyBehavior
+                                  href="/single-brand-category"
+                                >
+                                  <img
+                                    src={
+                                      car?.attributes?.car_brands?.data[0]
+                                        ?.attributes?.brandLogo?.data
+                                        ?.attributes?.url
+                                    }
+                                    alt="image"
+                                  />
+                                </Link>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   ))}
                   {/* <div className="view-btn-area">

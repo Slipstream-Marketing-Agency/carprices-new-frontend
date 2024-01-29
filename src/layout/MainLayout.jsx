@@ -12,7 +12,7 @@ function MainLayout({ children }) {
       <Modals />
       <Header />
       {/* <Breadcrumb /> */}
-      {children}
+      <main className="body-height"> {children}</main>
       <Footer1 />
     </>
   );

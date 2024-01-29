@@ -15,13 +15,12 @@ import useTranslate from "@/src/utils/useTranslate";
 export default function FilterLayout() {
   const router = useRouter();
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
+  let isRtl = router.locale === "ar";
   const [filterData, setFilterData] = useState({
     preferences: [],
     budget: [25000, 55000],
     seating: [],
   });
-
 
   const [specificVehicleFilter, setSpecificVehicleFilter] = useState({
     image: null,
@@ -54,6 +53,8 @@ export default function FilterLayout() {
   };
 
   useEffect(() => {
+
+    
     const fetchData = () => {
       let query = `${filterOptions.haveMusic === 1 ? "haveMusic=1" : ""}`;
       query += filterOptions.isLuxury === 1 ? "&isLuxury=1" : "";
@@ -69,32 +70,36 @@ export default function FilterLayout() {
       query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
       query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
       query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+      
 
-      // axios
-      //   .get(
-      //     process.env.NEXT_PUBLIC_API_URL + "filter/get-min-max" + "?" + query
-      //   )
-      //   .then((response) => {
-      //     setFilterData((prevState) => ({
-      //       ...prevState,
-      //       budget: [
-      //         response.data.min !== null ? response?.data?.min : null,
-      //         response.data.max !== null ? response?.data?.max : null,
-      //       ],
-      //     }));
+      
+      axios
+        .get(
+          process.env.NEXT_PUBLIC_API_URL + "car-trims/priceRange" + "?" + query
+        )
+        .then((response) => {
 
-      //     // setMinMaxData(response.data);
-      //     // setIsLoading(false);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error", error);
-      //     // setIsLoading(false);
-      //     // setError(error);
-      //   });
+          console.log(response,"ksjhkhdakjsd");
+          setFilterData((prevState) => ({
+            ...prevState,
+            budget: [
+              response.data.price.min !== null ? response?.data?.price.min : null,
+              response.data.price.max !== null ? response?.data?.price.max : null,
+            ],
+          }));
+
+          // setMinMaxData(response.data);
+          // setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error", error);
+          // setIsLoading(false);
+          // setError(error);
+        });
     };
 
     fetchData();
-  }, [filterData.preferences, filterData.seating]);
+  }, [filterData.preferences,filterData.seating]);
 
   const steps = [
     {
@@ -176,8 +181,7 @@ export default function FilterLayout() {
     const url =
       `/find-your-car?` +
       query +
-      `&min=${filterData?.budget[0]}` +
-      `&max=${filterData?.budget[1]}`;
+      `&price=${filterData?.budget[0]}-${filterData?.budget[1]}`;
 
     router.push(url);
     // } else {

@@ -19,13 +19,47 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
+import axios from "axios";
+import Price from "@/src/utils/Price";
+import KeySpec from "@/src/components/trim-details/KeySpec";
+import TrimDescription from "@/src/components/trim-details/TrimDescription";
+import DetailedSpecification from "@/src/components/trim-details/DetailedSpecification";
+import VehicleGallery from "@/src/components/trim-details/VehicleGallery";
+import VehicleReview from "@/src/components/trim-details/VehicleReview";
+import VehicleFaq from "@/src/components/trim-details/VehicleFaq";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function CarDeatilsPage({ model, trimList }) {
-  const currentURL = typeof window !== 'undefined' ? window.location.href : '';
-  
+function CarDeatilsPage({ model, trimList, trimData }) {
+  console.log(trimData, "trimData");
+  const currentURL = typeof window !== "undefined" ? window.location.href : "";
+
   const [isSticky, setIsSticky] = useState(false);
+  const [price, setPrice] = useState(trimData.price ? trimData.price : "");
+  const [years, setYears] = useState("5");
+  const [interestRate, setInterestRate] = useState(2.5);
+  const [downPayment, setDownPayment] = useState(20);
+  const [downPaymentResult, setDownPaymentResult] = useState(0);
+  const [totalCostResult, setTotalCostResult] = useState(0);
+  const [monthlyRepaymentResult, setMonthlyRepaymentResult] = useState(0);
+
+  const calculateEMI = () => {
+    const p =
+      parseFloat(price) - (parseFloat(downPayment) / 100) * parseFloat(price);
+    const r = parseFloat(interestRate) / 100 / 12; // monthly interest rate
+    const n = parseFloat(years) * 12; // loan tenure in months
+
+    const emi = (
+      (p * r * Math.pow(1 + r, n)) /
+      (Math.pow(1 + r, n) - 1)
+    ).toFixed(2);
+    setMonthlyRepaymentResult(emi);
+
+    const totalCost = (emi * n).toFixed(2);
+    setTotalCostResult(totalCost);
+    const totalInterestPayment = (totalCost - p).toFixed(2);
+    setDownPaymentResult(totalInterestPayment);
+  };
   const router = useRouter();
   const t = useTranslate();
 
@@ -36,44 +70,7 @@ function CarDeatilsPage({ model, trimList }) {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);
-    alert('Link copied to clipboard!');
-  };
-
-  const CarPriceRange = ({ car }) => {
-    // Extracting and filtering prices (excluding zeros) from car trims
-    const prices = car
-      ?.map((trim) => trim.attributes.price)
-      .filter((price) => price > 0);
-
-    // Format price for display
-    const formatPrice = (price) => {
-      return price.toLocaleString("en-AE", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      });
-    };
-
-    // Check if there are valid prices available
-    if (prices.length > 0) {
-      // Finding minimum and maximum prices
-      const minPrice = Math.min(...prices);
-      const maxPrice = Math.max(...prices);
-
-      // Determine how to display the price information
-      let priceInfo;
-      if (minPrice === maxPrice) {
-        // If min and max prices are the same, display only one price
-        priceInfo = `AED ${formatPrice(minPrice)}*`;
-      } else {
-        // Display price range
-        priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
-      }
-
-      return priceInfo;
-    } else {
-      // If no valid prices are available, display "TBD"
-      return TBD;
-    }
+    alert("Link copied to clipboard!");
   };
 
   const CarEMIDisplay = ({ car }) => {
@@ -313,135 +310,27 @@ function CarDeatilsPage({ model, trimList }) {
     }
   };
 
-  const engineText = trimList
-    ?.map((engine) => {
-      const engineParts = engine?.attributes?.engine?.split(" ");
-      const size = engineParts && engineParts[0];
-      const type = engineParts && engineParts[1];
-
-      return `${size}`;
-    })
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
-  function TransmissionList(props) {
-    const transmissions = Array.from(
-      new Set(props?.map((transmission) => transmission?.attributes?.gearBox))
-    )
-      .filter((transmission) => transmission !== undefined)
-      .map((transmission) => {
-        let type;
-        let speed;
-
-        if (transmission?.includes("A")) {
-          type = "Automatic";
-          speed = `${type}`;
-        } else if (transmission?.includes("M")) {
-          type = "Manual";
-          speed = `${type}`;
-        } else {
-          type = "CVT";
-          speed = `${type}`;
-        }
-
-        return `${speed}`;
-      });
-
-    if (transmissions.length === 1) {
-      return <>{transmissions[0]}</>;
-    } else if (transmissions.length === 2) {
-      if (transmissions[0] === transmissions[1]) {
-        return <>{transmissions[0]}</>;
-      } else {
-        return (
-          <>
-            {transmissions[0]} or {transmissions[1]}
-          </>
-        );
-      }
-    } else {
-      const last = transmissions.pop();
-      const joined = transmissions.join(", ");
-      const hasDuplicates = transmissions.includes(last);
-
-      if (hasDuplicates) {
-        return <p>{joined}</p>;
-      } else {
-        return (
-          <p>
-            {joined} or {last}
-          </p>
-        );
-      }
-    }
-  }
-
-  const fuelType = trimList
-    ?.map((item) => item?.attributes?.fuelType)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
-    console.log(fuelType,"ttttttt");
-
-  const motorTypes = trimList
-    ?.map((item) => item?.attributes?.motor)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
-    const cylinderList = [...new Set(trimList?.map((item) => item?.attributes?.cylinders))];
-    const seatList = [...new Set(trimList?.map((item) => Number(item?.attributes?.seatingCapacity?.replace("Seater", ""))))].sort((a, b) => a - b);
-  
-
-    const powers = trimList.map(car => car.attributes.power);
-    const minPower = Math.min(...powers);
-    const maxPower = Math.max(...powers);
-
-    const torques = trimList.map(car => car.attributes.torque);
-    const minTorque = Math.min(...torques);
-    const maxTorque = Math.max(...torques);
-
-    console.log(minPower,maxPower,"fjfjfj");
   return (
     <MainLayout>
       <Ad728x90 dataAdSlot="5962627056" />
 
       <div className="car-details-area mt-15 mb-100">
         <div className="container">
-          <div className="row mb-50">
+          {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
                 <CarDetailsNav />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row ">
             <div className="col-lg-6 pe-3">
               <div className="single-item mb-50" id="car-img">
                 <div className="car-img-area">
-                  <div className="tab-content mb-30" id="myTab5Content">
+                  <div
+                    className="tab-content mb-30 trim-content"
+                    id="myTab5Content"
+                  >
                     <div
                       className="tab-pane fade show active"
                       id="exterior"
@@ -451,7 +340,6 @@ function CarDeatilsPage({ model, trimList }) {
                       <div className="product-img">
                         <div className="slider-btn-group">
                           <div className="product-stand-next swiper-arrow pb-1">
-                   
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -461,7 +349,6 @@ function CarDeatilsPage({ model, trimList }) {
                             </svg>
                           </div>
                           <div className="product-stand-prev swiper-arrow pb-1">
-                
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="18"
@@ -476,15 +363,17 @@ function CarDeatilsPage({ model, trimList }) {
                           className="swiper product-img-slider"
                         >
                           <div className="swiper-wrapper">
-                            <SwiperSlide className="swiper-slide">
-                              <Image
-                                src={trim?.featuredImage?.data?.attributes?.url}
-                                width={400}
-                                height={300}
-                                alt="product image"
-                                className="object-contain"
-                              />
-                            </SwiperSlide>
+                            {trimData?.galleryImages?.map((item, idx) => (
+                              <SwiperSlide className="swiper-slide">
+                                <Image
+                                  src={item}
+                                  width={400}
+                                  height={300}
+                                  alt="product image"
+                                  className="object-cover"
+                                />
+                              </SwiperSlide>
+                            ))}
                           </div>
                         </Swiper>
                       </div>
@@ -496,30 +385,29 @@ function CarDeatilsPage({ model, trimList }) {
             <div className="col-lg-6">
               <div className="d-flex justify-content-between align-items-center">
                 <h1>
-                  {model?.year} {brand?.name} {model?.name}
+                  {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
+                  {trimData?.name}
                 </h1>{" "}
-               
-                  <div className="shareBtn" onClick={handleCopyLink}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.06-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.03 8.81C6.49 8.31 5.78 8 5 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.78 0 1.49-.31 2.03-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-                      />
-                    </svg>
-                    <span>Share</span>
-                  </div>
-               
+                <div className="shareBtn" onClick={handleCopyLink}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.06-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.03 8.81C6.49 8.31 5.78 8 5 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.78 0 1.49-.31 2.03-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+                    />
+                  </svg>
+                  <span>Share</span>
+                </div>
               </div>
               <h4 className="mt-1">
-                <CarPriceRange car={trimList} />
+                <Price data={trimData.price} />
               </h4>
 
-              <div className="d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
+              <div className="d-flex gap-2 align-items-center w-50 border py-1 rounded justify-content-start">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -535,140 +423,239 @@ function CarDeatilsPage({ model, trimList }) {
                   <path fill="currentColor" d="M6 14.5h12v2H6z" />
                   <path fill="currentColor" d="M6 10.5h12v2H6z" />
                 </svg>
-                <h6 className="p-0 m-0">
-                  Monthly EMI starting from <CarEMIDisplay car={trimList} />
-                </h6>
-              </div>
-              <div className="mt-3 d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M21.5 9.5l-2-6H4.5l-2 6H1v2h1.7l.9 2.7c.1.3.4.5.8.5h14.1c.4 0 .7-.2.8-.5l.9-2.7H23v-2h-1.5zM4.78 8H19.22l1-3H3.78zM6 16v-5h12v5H6zm12-7h-4V4h4v5z"
+                <h6 className="p-0 m-0 ">
+                  Monthly EMI starting from{" "}
+                  <Price
+                    data={Math.round(
+                      ((trimData.price - trimData.price * (downPayment / 100)) *
+                        (interestRate / 100 / 12) *
+                        Math.pow(1 + interestRate / 100 / 12, years * 12)) /
+                        (Math.pow(1 + interestRate / 100 / 12, years * 12) - 1)
+                    )}
                   />
-                </svg>
-
-                <h6 className="p-0 m-0">
-                  Available Variants : {trimList.length}
                 </h6>
               </div>
 
               <div className="mt-2 key_spec">
-                <p className="fw-bold">{t.keySpecification}</p>
+                {/* <p className="fw-bold">{t.keySpecification}</p> */}
                 <div className="row px-2">
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image p-2"
-                        src="/assets/images/specs/Cylinder.png"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bold">
-                          {engineText.includes("Electric")
-                            ? "Motor Type"
-                            : t.NoOfCylinders}
-                        </small>
-                        <div className="d-flex flex-wrap mt-1">
-                          <small>
-                            {engineText.includes("Electric")
-                              ? motorTypes.split(" ")[0]
-                              : cylinderList.length > 1
-                              ? cylinderList.join(", ")
-                              : cylinderList[0]}
-                          </small>
+                  {trimData.price === null ? (
+                    ""
+                  ) : (
+                    <div className="calculator mt-2">
+                      <div className="calculator-body">
+                        <div>
+                          <div className="form-group model_insure_btn mb-1">
+                            <small>Loan Years</small>
+                            <div
+                              className="btn-group btn-group-toggle"
+                              data-toggle="buttons"
+                            >
+                              <label
+                                className={
+                                  years === "1"
+                                    ? "btn btn-outline-primary pt-2 px-1"
+                                    : "btn btn-primary pt-2 px-1"
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  name="loan-years"
+                                  id="loan-years-1"
+                                  autoComplete="off"
+                                  value="1"
+                                  checked={years === "1"}
+                                  onChange={(e) => setYears(e?.target?.value)}
+                                />
+                                1 Year
+                              </label>
+                              <label
+                                className={
+                                  years === "2"
+                                    ? "btn btn-outline-primary pt-2 px-1"
+                                    : "btn btn-primary pt-2 px-1"
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  name="loan-years"
+                                  id="loan-years-2"
+                                  autoComplete="off"
+                                  value="2"
+                                  checked={years === "2"}
+                                  onChange={(e) => setYears(e?.target?.value)}
+                                />{" "}
+                                2 Years
+                              </label>
+                              <label
+                                className={
+                                  years === "3"
+                                    ? "btn btn-outline-primary pt-2 px-1"
+                                    : "btn btn-primary pt-2 px-1"
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  name="loan-years"
+                                  id="loan-years-3"
+                                  autoComplete="off"
+                                  value="3"
+                                  checked={years === "3"}
+                                  onChange={(e) => setYears(e?.target?.value)}
+                                />{" "}
+                                3 Years
+                              </label>
+                              <label
+                                className={
+                                  years === "4"
+                                    ? "btn btn-outline-primary pt-2 px-1"
+                                    : "btn btn-primary pt-2 px-1"
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  name="loan-years"
+                                  id="loan-years-4"
+                                  autoComplete="off"
+                                  value="4"
+                                  checked={years === "4"}
+                                  onChange={(e) => setYears(e?.target?.value)}
+                                />{" "}
+                                4 Years
+                              </label>
+                              <label
+                                className={
+                                  years === "5"
+                                    ? "btn btn-outline-primary pt-2 px-1"
+                                    : "btn btn-primary pt-2 px-1"
+                                }
+                              >
+                                <input
+                                  type="radio"
+                                  name="loan-years"
+                                  id="loan-years-5"
+                                  autoComplete="off"
+                                  value="5"
+                                  checked={years === "5"}
+                                  onChange={(e) => setYears(e?.target?.value)}
+                                />{" "}
+                                5 Years
+                              </label>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                        <div className="d-flex align-items-center">
+                          <div className="w-60">
+                            <div className="form-group w-100">
+                              <small htmlFor="interest-rate">
+                                Interest Rate (%)
+                              </small>
+                              <input
+                                type="range"
+                                id="interest-rate"
+                                className="form-control-range"
+                                defaultValue={interestRate}
+                                min={2.0}
+                                max={8.0}
+                                step="0.1"
+                                onChange={(e) => {
+                                  setInterestRate(e?.target?.value);
+                                  document.getElementById(
+                                    "interest-rate-value"
+                                  ).innerHTML = e?.target?.value + "%";
+                                }}
+                              />
+                              <div className="d-flex justify-content-between">
+                                <small>1.99%</small>
+                                <small id="interest-rate-value">
+                                  {interestRate}%
+                                </small>
+                                <small>8%</small>
+                              </div>
+                            </div>
 
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image p-2"
-                        src="/assets/images/specs/Transmission.png"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bold">{t.transmission}</small>
-                        <div className="d-flex flex-wrap">
-                          <small>{TransmissionList(trimList)}</small>
+                            <div className="form-group w-100">
+                              <small htmlFor="down-payment">
+                                Down Payment (AED)
+                              </small>
+                              <input
+                                type="range"
+                                id="down-payment"
+                                className="form-control-range"
+                                defaultValue={downPayment}
+                                min={20}
+                                max={80}
+                                step={1}
+                                onChange={(e) => {
+                                  setDownPayment(e?.target?.value);
+                                  document.getElementById(
+                                    "down-payment-value"
+                                  ).innerHTML = e?.target?.value + "%";
+                                }}
+                              />
+                              <div className="d-flex justify-content-between">
+                                <small>20%</small>
+                                <small id="down-payment-value">
+                                  {downPayment}%
+                                </small>
+                                <small>80%</small>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="form-group w-40 px-4">
+                            <div
+                              type="button"
+                              className="calulate_btn font_small py-3 fw-bold"
+                              onClick={calculateEMI}
+                            >
+                              Calculate
+                            </div>
+                          </div>
                         </div>
+                        {monthlyRepaymentResult !== 0 &&
+                          downPaymentResult !== 0 &&
+                          totalCostResult !== 0 && (
+                            <div>
+                              <div className=" mt-1 ">
+                                <div className="white_bg_wrapper py-1 px-2 mt-1">
+                                  <span className="fw-bold font_small me-1">
+                                    Monthly Repayment (EMI) : AED
+                                  </span>
+                                  <span
+                                    className="fw-bold font_small"
+                                    id="monthly-repayment-result"
+                                  >
+                                    <Price data={monthlyRepaymentResult} />
+                                  </span>
+                                </div>
+                                <div className="white_bg_wrapper py-0 px-2 mt-1">
+                                  <span className="fw-bold font_small me-1">
+                                    Total Interest Payment : AED
+                                  </span>
+                                  <span
+                                    className="fw-bold font_small"
+                                    id="down-payment-result"
+                                  >
+                                    <Price data={downPaymentResult} />
+                                  </span>
+                                </div>
+                                <div className="white_bg_wrapper py-0 px-2 mt-1">
+                                  <span className="fw-bold font_small me-1">
+                                    Total Amount to Pay : AED
+                                  </span>
+                                  <span
+                                    className="fw-bold font_small"
+                                    id="total-cost-result"
+                                  >
+                                    <Price data={totalCostResult} />
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                       </div>
                     </div>
-                  </div>
-
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image"
-                        src="/assets/images/specs/KM.svg"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bolder">{t.power} (HP)</small>
-                        <small>
-                         {minPower === maxPower
-                            ? minPower
-                            : `${minPower} to ${maxPower}`}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image p-2"
-                        src="/assets/images/specs/Torque.png"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bolder">{t.torque} (Nm)</small>
-                        <small>
-                          {minTorque === maxTorque
-                            ? minTorque
-                            : `${minTorque} to ${maxTorque}`}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image p-2"
-                        src="/assets/images/specs/Seats.png"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bold">{t.seats}</small>
-                        <small>
-                          {seatList.length > 1
-                            ? seatList.join(", ")
-                            : seatList[0]}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-4 mt-1 ps-0">
-                    <div className="d-flex d-flex align-items-center justify-content-start">
-                      <img
-                        className="spec_image p-2"
-                        src="/assets/images/specs/FuelType.png"
-                        alt=""
-                      />
-                      <div className="d-flex flex-column">
-                        <small className="fw-bold">{t.fuelType}</small>
-                        <small>{fuelType}</small>
-                      </div>
-                    </div>
-                  </div>
-                  
+                  )}
                 </div>
               </div>
             </div>
@@ -682,64 +669,10 @@ function CarDeatilsPage({ model, trimList }) {
                 className="scrollspy-example"
                 tabIndex={0}
               >
-                <div className="single-item mb-50" id="car-info">
-                  <div className="car-info">
-                    <div className="title mb-20">
-                      <h5>Car Info</h5>
-                    </div>
-                    <ul>
-                      <li>
-                        <div className="icon">
-                          <img
-                            src="/assets/img/inner-page/icon/mileage.svg"
-                            alt=""
-                          />
-                        </div>
-                        <div className="content">
-                          <h6>25,100 miles</h6>
-                          <span>Mileage</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="icon">
-                          <img
-                            src="/assets/img/inner-page/icon/engine.svg"
-                            alt=""
-                          />
-                        </div>
-                        <div className="content">
-                          <h6>22,231 cc</h6>
-                          <span>Engine</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="icon">
-                          <img
-                            src="/assets/img/inner-page/icon/fuel.svg"
-                            alt=""
-                          />
-                        </div>
-                        <div className="content">
-                          <h6>Petrol + Gas</h6>
-                          <span>Fuel Type</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="icon">
-                          <img
-                            src="/assets/img/inner-page/icon/condition.svg"
-                            alt=""
-                          />
-                        </div>
-                        <div className="content">
-                          <h6>Used Car</h6>
-                          <span>Condition</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                <div className="single-item" id="car-info">
+                  <KeySpec trim={trimData} />
                 </div>
-                <div className="single-item mb-50" id="kye-features">
+                {/* <div className="single-item mb-50" id="kye-features">
                   <div className="kye-features">
                     <div className="title mb-20">
                       <h5>Key Features</h5>
@@ -757,249 +690,29 @@ function CarDeatilsPage({ model, trimList }) {
                         </svg>{" "}
                         Premium Wheel
                       </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Moonroof
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Premium Audio
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Navigation
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Front Heated Seats
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Premium Seat Material
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Bluetooth
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Premium Seat Material
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Front Heated Seats
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Remote Engine Start
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Blind Spot System
-                      </li>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Multi-Zone Climate Control
-                      </li>
+                      
                     </ul>
                   </div>
-                </div>
-                <div className="single-item mb-50" id="overview">
-                  <div className="overview">
-                    <div className="title mb-25">
-                      <h5>Overviews</h5>
-                    </div>
-                    <div className="overview-content">
-                      <ul>
-                        <li>
-                          <span>Make</span> lamborghini
-                        </li>
-                        <li>
-                          <span>Model</span> lamborghini ave11
-                        </li>
-                        <li>
-                          <span>Year/Month</span> 2023
-                        </li>
-                        <li>
-                          <span>Mileage</span> 25,100 miles
-                        </li>
-                        <li>
-                          <span>Door’s</span> 4 doors
-                        </li>
-                        <li>
-                          <span>Engine</span> 22,231 cc
-                        </li>
-                        <li>
-                          <span>Color’s</span> sky blue
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <span>Repaire</span> no
-                        </li>
-                        <li>
-                          <span>Steering</span> right
-                        </li>
-                        <li>
-                          <span>Steating Catacity</span> 08
-                        </li>
-                        <li>
-                          <span>Fuel Type</span> petrol+gas
-                        </li>
-                        <li>
-                          <span>No. of Cylinder</span> 03
-                        </li>
-                        <li>
-                          <span>Transmission</span> Manual
-                        </li>
-                        <li>
-                          <span>Wheel’s</span> 04
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="single-item mb-50" id="performance">
-                  <div className="engine-performance">
-                    <div className="title mb-25">
-                      <h5>Engine Performance</h5>
-                    </div>
-                    <div className="overview-content">
-                      <ul>
-                        <li>
-                          <span>Engine Size</span> 3.5 L
-                        </li>
-                        <li>
-                          <span>Induction</span> Aspirated
-                        </li>
-                        <li>
-                          <span>Cylinders</span> 6 cyl
-                        </li>
-                        <li>
-                          <span>Engine Config</span> In-line
-                        </li>
-                      </ul>
-                      <ul>
-                        <li>
-                          <span>Valve Gear</span> DOHC with VVT
-                        </li>
-                        <li>
-                          <span>Fuel Injection</span> Direct Injection
-                        </li>
-                        <li>
-                          <span>Power</span> 140 kw 7000 rpm
-                        </li>
-                        <li>
-                          <span>Engine Location</span> front
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-           
-       
-            
+                </div> */}
+
+                <TrimDescription trim={trimData} />
+
+                <DetailedSpecification trim={trimData} />
+                <VehicleGallery trim={trimData.galleryImages} />
+                <VehicleReview trim={trimData} />
+                <VehicleFaq trim={trimData} />
               </div>
             </div>
             <div className="col-lg-4  ">
-                  <div className="positionStickyAd"><Ad300x600 /></div>
+              <div className="positionStickyAd">
+                <Ad300x600 />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
-  
-      <Ad728x90 dataAdSlot="5962627056" />
 
-     
+      <Ad728x90 dataAdSlot="5962627056" />
     </MainLayout>
   );
 }
@@ -1010,360 +723,17 @@ export async function getServerSideProps(context) {
   const year = context.params.year;
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
+  const trimSlug = context.params.trim;
 
-  console.log(context, "contextcontext");
+  const trim = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim?year=${year}&slug=${trimSlug}`
+  );
 
-  const client = new ApolloClient({
-    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-    cache: new InMemoryCache(),
-  });
+  console.log(trim, "trimtrimtrimtrimtrim");
+
   try {
-    const models = await client.query({
-      query: gql`
-        query carModels($modelSlug: String!) {
-          carModels(
-            filters: {
-              slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: 2023 } }
-            }
-          ) {
-            data {
-              id
-              attributes {
-                name
-                year
-                slug
-                car_brands {
-                  data {
-                    id
-                    attributes {
-                      name
-                      slug
-                      brandLogo {
-                        data {
-                          id
-                          attributes {
-                            name
-                            url
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                isFeatured
-                isElectric
-                featuredImage {
-                  data {
-                    id
-                    attributes {
-                      name
-                      url
-                    }
-                  }
-                }
-                car_trims(
-                  filters: { highTrim: { eq: true }, year: { eq: 2023 } }
-                ) {
-                  data {
-                    id
-                    attributes {
-                      name
-                      metaTitle
-                      mainSlug
-                      description
-                      car_brands {
-                        data {
-                          id
-                          attributes {
-                            name
-                            brandLogo {
-                              data {
-                                id
-                                attributes {
-                                  url
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                      car_models {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      year
-                      price
-                      featuredImage {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-                      gallery_images {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-                      engine
-                      displacement
-                      power
-                      torque
-                      transmission
-                      gearBox
-                      drive
-                      fuelType
-                      motor
-                      motorType
-                      batteryCapacity
-                      chargingTime
-                      batteryWarranty
-                      range
-                      zeroToHundred
-                      topSpeed
-                      fuelConsumption
-                      cylinders
-                      haveABS
-                      haveFrontAirbags
-                      haveSideAirbags
-                      haveRearAirbags
-                      haveFrontParkAssist
-                      haveRearParkAssist
-                      haveRearParkingCamera
-                      have360ParkingCamera
-                      haveCruiseControl
-                      haveAdaptiveCruiseControl
-                      haveLaneChangeAssist
-                      car_body_types {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      airbags
-                      doors
-                      frontBrakes
-                      rearBrakes
-                      length
-                      width
-                      height
-                      wheelbase
-                      weight
-                      wheels
-                      tyresFront
-                      tyresRear
-                      seatingCapacity
-                      haveLeatherInterior
-                      haveFabricInterior
-                      haveAppleCarPlay
-                      haveAndroidAuto
-                      haveRearSeatEntertainment
-                      haveCooledSeats
-                      haveClimateControl
-                      isLuxury
-                      isPremiumLuxury
-                      isSafety
-                      isFuelEfficient
-                      isOffRoad
-                      haveMusic
-                      haveTechnology
-                      havePerformance
-                      isSpacious
-                      isElectric
-                      isDiscontinued
-                      slug
-                      fuelTankSize
-                      cargoSpace
-                      highTrim
-                    }
-                  }
-                }
-              }
-            }
-            meta {
-              pagination {
-                page
-                pageSize
-                pageCount
-                total
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        modelSlug,
-      },
-    });
-
-    const trimList = await client.query({
-      query: gql`
-        query carModels($modelSlug: String!) {
-          carModels(
-            filters: {
-              slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: 2023 } }
-            }
-          ) {
-            data {
-              id
-              attributes {
-                name
-                year
-                slug
-                car_brands {
-                  data {
-                    id
-                    attributes {
-                      name
-                      slug
-                    }
-                  }
-                }
-
-                car_trims(filters: { year: { eq: 2023 } }) {
-                  data {
-                    id
-                    attributes {
-                      name
-                      car_brands {
-                        data {
-                          id
-                          attributes {
-                            name
-                            slug
-                          }
-                        }
-                      }
-                      car_models {
-                        data {
-                          id
-                          attributes {
-                            name
-                            slug
-                          }
-                        }
-                      }
-                      year
-                      price
-                      featuredImage {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-
-                      engine
-                      displacement
-                      power
-                      torque
-                      transmission
-                      gearBox
-                      drive
-                      fuelType
-                      motor
-                      motorType
-                      batteryCapacity
-                      chargingTime
-                      batteryWarranty
-                      range
-                      zeroToHundred
-                      topSpeed
-                      fuelConsumption
-                      cylinders
-                      haveABS
-                      haveFrontAirbags
-                      haveSideAirbags
-                      haveRearAirbags
-                      haveFrontParkAssist
-                      haveRearParkAssist
-                      haveRearParkingCamera
-                      have360ParkingCamera
-                      haveCruiseControl
-                      haveAdaptiveCruiseControl
-                      haveLaneChangeAssist
-                      car_body_types {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      airbags
-                      doors
-                      frontBrakes
-                      rearBrakes
-                      length
-                      width
-                      height
-                      wheelbase
-                      weight
-                      wheels
-                      tyresFront
-                      tyresRear
-                      seatingCapacity
-                      haveLeatherInterior
-                      haveFabricInterior
-                      haveAppleCarPlay
-                      haveAndroidAuto
-                      haveRearSeatEntertainment
-                      haveCooledSeats
-                      haveClimateControl
-                      isLuxury
-                      isPremiumLuxury
-                      isSafety
-                      isFuelEfficient
-                      isOffRoad
-                      haveMusic
-                      haveTechnology
-                      havePerformance
-                      isSpacious
-                      isElectric
-                      isDiscontinued
-                      slug
-                      fuelTankSize
-                      cargoSpace
-                      highTrim
-                    }
-                  }
-                }
-              }
-            }
-            meta {
-              pagination {
-                page
-                pageSize
-                pageCount
-                total
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        modelSlug,
-      },
-    });
-
-    console.log(models, "models");
-
     return {
-      props: {
-        model: models?.data?.carModels?.data[0]?.attributes,
-        trimList:
-          trimList?.data?.carModels?.data[0]?.attributes?.car_trims?.data,
-      },
+      props: { trimData: trim?.data?.data },
     };
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);

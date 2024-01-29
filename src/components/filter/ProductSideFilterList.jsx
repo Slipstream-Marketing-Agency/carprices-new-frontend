@@ -62,7 +62,6 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
         <Link
           legacyBehavior
           href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
-       
         >
           <div
             className="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item cursor_pointer"
@@ -129,7 +128,10 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
                     </a>
                   </Link>
                   <div className="brand">
-                    <Link legacyBehavior href="/single-brand-category">
+                    <Link
+                      legacyBehavior
+                      href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
+                    >
                       <img src={car?.brand?.logo} alt="image" />
                     </Link>
                   </div>

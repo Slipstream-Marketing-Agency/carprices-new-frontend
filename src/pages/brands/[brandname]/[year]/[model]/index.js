@@ -21,10 +21,12 @@ import useTranslate from "@/src/utils/useTranslate";
 import ModelDescription from "@/src/components/details/ModelDescription";
 import VariantsListing from "@/src/components/details/VariantsListing";
 import VehicleFaq from "@/src/components/details/VehicleFaq";
+import OldModel from "@/src/components/details/OldModel";
+import axios from "axios";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function CarDeatilsPage({ model, trimList }) {
+function CarDeatilsPage({ model, trimList, oldModel }) {
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
   const t = useTranslate();
@@ -32,14 +34,14 @@ function CarDeatilsPage({ model, trimList }) {
   const brand = model?.car_brands?.data[0]?.attributes;
   const trim = model?.car_trims?.data[0]?.attributes;
 
-  console.log(model, "model");
+  console.log(model, "trimListtrimList");
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);
-    alert('Link copied to clipboard!');
+    alert("Link copied to clipboard!");
   };
 
-  const currentURL = typeof window !== 'undefined' ? window.location.href : '';
+  const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const CarPriceRange = ({ car }) => {
     // Extracting and filtering prices (excluding zeros) from car trims
     const prices = car
@@ -423,29 +425,28 @@ function CarDeatilsPage({ model, trimList }) {
     ),
   ].sort((a, b) => a - b);
 
-  const powers = trimList.map((car) => car.attributes.power);
-  const minPower = Math.min(...powers);
-  const maxPower = Math.max(...powers);
+  const powers = trimList?.map((car) => car?.attributes?.power);
+  const minPower = Math?.min(...powers);
+  const maxPower = Math?.max(...powers);
 
-  const torques = trimList.map((car) => car.attributes.torque);
-  const minTorque = Math.min(...torques);
-  const maxTorque = Math.max(...torques);
+  const torques = trimList?.map((car) => car?.attributes?.torque);
+  const minTorque = Math?.min(...torques);
+  const maxTorque = Math?.max(...torques);
 
-  console.log(minPower, maxPower, "fjfjfj");
   return (
     <MainLayout>
       <Ad728x90 dataAdSlot="5962627056" />
 
       <div className="car-details-area mt-15 ">
         <div className="container">
-          <div className="row mb-50">
+          {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
                 <CarDetailsNav />
               </div>
             </div>
-          </div>
-          <div className="row ">
+          </div> */}
+          <div className="row trim-content">
             <div className="col-lg-6 pe-3">
               <div className="single-item mb-50" id="car-img">
                 <div className="car-img-area">
@@ -459,7 +460,6 @@ function CarDeatilsPage({ model, trimList }) {
                       <div className="product-img">
                         <div className="slider-btn-group">
                           <div className="product-stand-next swiper-arrow pb-1">
-                      
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -469,7 +469,6 @@ function CarDeatilsPage({ model, trimList }) {
                             </svg>
                           </div>
                           <div className="product-stand-prev swiper-arrow pb-1">
-                  
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="18"
@@ -487,8 +486,7 @@ function CarDeatilsPage({ model, trimList }) {
                             <SwiperSlide className="swiper-slide">
                               <Image
                                 src={trim?.featuredImage?.data?.attributes?.url}
-                                width={400}
-                                height={300}
+                                fill
                                 alt="product image"
                                 className="object-contain"
                               />
@@ -504,24 +502,22 @@ function CarDeatilsPage({ model, trimList }) {
             <div className="col-lg-6">
               <div className="d-flex justify-content-between align-items-center">
                 <h1>
-                  {model?.year} {brand?.name} {model?.name}
+                  {trim?.year} {brand?.name} {model?.name}
                 </h1>{" "}
-           
-                  <div className="shareBtn" onClick={handleCopyLink}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.06-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.03 8.81C6.49 8.31 5.78 8 5 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.78 0 1.49-.31 2.03-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-                      />
-                    </svg>
-                    <span>Share</span>
-                  </div>
-      
+                <div className="shareBtn" onClick={handleCopyLink}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.06-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.03 8.81C6.49 8.31 5.78 8 5 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.78 0 1.49-.31 2.03-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+                    />
+                  </svg>
+                  <span>Share</span>
+                </div>
               </div>
               <h4 className="mt-1">
                 <CarPriceRange car={trimList} />
@@ -676,7 +672,6 @@ function CarDeatilsPage({ model, trimList }) {
                       </div>
                     </div>
                   </div>
-               
                 </div>
               </div>
             </div>
@@ -685,25 +680,27 @@ function CarDeatilsPage({ model, trimList }) {
             <div className="col-lg-8">
               <ModelDescription model={trimList} hightTrim={trim} />
               <VariantsListing model={trimList} highTrim={trim} />
-              <VehicleFaq model={trimList} highTrim={trim} />
 
+              <OldModel model={oldModel} />
+              {/* <VehicleGallery model={data} /> */}
+              <Ad728x90 dataAdSlot="7369694604" />
+
+              <VehicleFaq model={trimList} highTrim={trim} CarPriceRange={CarPriceRange}/>
             </div>
             <div className="col-lg-4">
               <div className="car-details-sidebar positionStickyAd">
-              
                 <div
                   className="contact-info mb-50"
                   style={{ backgroundColor: "rosybrown" }}
                 >
                   <Ad300x250 dataAdSlot="5772723668" />
                 </div>
-                </div>
-                </div>
-               </div>
-               </div>
-               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Ad728x90 dataAdSlot="5962627056" />
-
     </MainLayout>
   );
 }
@@ -711,11 +708,12 @@ function CarDeatilsPage({ model, trimList }) {
 export default CarDeatilsPage;
 
 export async function getServerSideProps(context) {
-  const year = context.params.year;
+  let year = context.params.year;
+  year = parseInt(year, 10);
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
 
-  console.log(context, "contextcontext");
+  console.log(isNaN(year), "ssssssssssssss");
 
   const client = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
@@ -728,7 +726,7 @@ export async function getServerSideProps(context) {
           carModels(
             filters: {
               slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: 2023 } }
+              car_trims: { highTrim: { eq: true }, year: { eq: ${year} } }
             }
           ) {
             data {
@@ -767,7 +765,7 @@ export async function getServerSideProps(context) {
                   }
                 }
                 car_trims(
-                  filters: { highTrim: { eq: true }, year: { eq: 2023 } }
+                  filters: { highTrim: { eq: true }, year: { eq: ${year} } }
                 ) {
                   data {
                     id
@@ -915,7 +913,7 @@ export async function getServerSideProps(context) {
           carModels(
             filters: {
               slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: 2023 } }
+              car_trims: { highTrim: { eq: true }, year: { eq: ${year} } }
             }
           ) {
             data {
@@ -934,7 +932,7 @@ export async function getServerSideProps(context) {
                   }
                 }
 
-                car_trims(filters: { year: { eq: 2023 } }) {
+                car_trims(filters: { year: { eq: ${year} } }) {
                   data {
                     id
                     attributes {
@@ -1060,13 +1058,18 @@ export async function getServerSideProps(context) {
       },
     });
 
-    console.log(models, "models");
+    const oldModels = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}car-models/find-model/${modelSlug}`
+    );
+
+    console.log(oldModels, "oldModels");
 
     return {
       props: {
         model: models?.data?.carModels?.data[0]?.attributes,
         trimList:
           trimList?.data?.carModels?.data[0]?.attributes?.car_trims?.data,
+        oldModel: oldModels?.data?.data,
       },
     };
   } catch (error) {

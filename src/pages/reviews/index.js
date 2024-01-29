@@ -14,134 +14,167 @@ import Pagination from "@/src/utils/Pagination";
 import BlogDropDown from "@/src/components/BlogDropDown";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-
-function BlogStandardPage({ news, totalNews, currentPage, totalPages, fullData }) {
-  const inputRef = useRef(null); 
+function BlogStandardPage({
+  news,
+  totalNews,
+  currentPage,
+  totalPages,
+  fullData,
+}) {
+  const inputRef = useRef(null);
   const client = createApolloClient();
-    const router=useRouter()
-    const [brandInput, setBrandInput] = useState('');
-   
+  const router = useRouter();
+  const [brandInput, setBrandInput] = useState("");
 
-    const settings = useMemo(()=>{
-        return {
-            speed: 1500,
-            spaceBetween: 24,
-            autoplay: {
-                delay: 2500, // Autoplay duration in milliseconds
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".next-51",
-                prevEl: ".prev-51",
-            },
-        }
-    })
-    return (
-        <MainLayout pageMeta={{
-          title: "Expert Car Reviews: Unbiased Analysis, Ratings, and Insights - Carprices.ae",
-          description: "Discover honest and unbiased car reviews. Read detailed reviews on the latest car models, performance, features, and more. Make informed decisions with our comprehensive car reviews.",
-          type: "Car Review Website",
-        }}>
-          <Ad728x90 dataAdSlot="5962627056" />
-          <div className="container mb-4">
-            <h1 className="my-4">Latest Car Reviews</h1>
-            <p>Stay up-to-date with the latest reviews and updates on the UAE car
-                    industry, including new car launches, launch dates, car images,
-                    expos and events, price updates, latest discounts, facelifts,
-                    recalls, and more. Get all the insights you need to know about
-                    the happenings in the UAE automotive industry.</p>
-                    <BlogDropDown initialFocus={true} />
+  const settings = useMemo(() => {
+    return {
+      speed: 1500,
+      spaceBetween: 24,
+      autoplay: {
+        delay: 2500, // Autoplay duration in milliseconds
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".next-51",
+        prevEl: ".prev-51",
+      },
+    };
+  });
+  return (
+    <MainLayout
+      pageMeta={{
+        title:
+          "Expert Car Reviews: Unbiased Analysis, Ratings, and Insights - Carprices.ae",
+        description:
+          "Discover honest and unbiased car reviews. Read detailed reviews on the latest car models, performance, features, and more. Make informed decisions with our comprehensive car reviews.",
+        type: "Car Review Website",
+      }}
+    >
+      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="container mb-4">
+        <h1 className="my-4">Latest Car Reviews</h1>
+        <p>
+          Stay up-to-date with the latest reviews and updates on the UAE car
+          industry, including new car launches, launch dates, car images, expos
+          and events, price updates, latest discounts, facelifts, recalls, and
+          more. Get all the insights you need to know about the happenings in
+          the UAE automotive industry.
+        </p>
+        {/* <BlogDropDown initialFocus={true} /> */}
 
-    
-              
-            <div className="row g-4 mt-3">
-              <div className="col-lg-10">
-                <div className="row g-4 ">
-                  {news?.map((newsItem, index) => (
-                    <>
-                      <div key={`news-${index}`} className="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="200ms">
-                        <div className="news-card">
-                          <div className="news-img">
-                            <Link legacyBehavior href={`/reviews/${newsItem?.attributes?.slug}`}><a>
-                              <div className="position-relative imageContainer">
-                                <Image
-                                
-                                  src={newsItem?.attributes?.coverImage?.data?.attributes?.url ? newsItem.attributes.coverImage.data?.attributes.url : altImage}
-                                  alt="Car"
-                                  layout="responsive"
-                                  width={300}
-                                  height={205}
-                                  objectFit="cover"
-                                />
-                              </div>
-                            </a></Link>
-                            <div className="date">
-                              <Link legacyBehavior href={`/reviews/${newsItem?.attributes?.slug}`}><a></a></Link>
+        <div className="row g-4 mt-3">
+          <div className="col-lg-10">
+            <div className="row g-4 ">
+              {news?.map((newsItem, index) => (
+                <>
+                  <div
+                    key={`news-${index}`}
+                    className="col-lg-4 col-md-4 wow fadeInUp"
+                    data-wow-delay="200ms"
+                  >
+                    <div className="news-card">
+                      <div className="news-img">
+                        <Link
+                          legacyBehavior
+                          href={`/reviews/${newsItem?.attributes?.slug}`}
+                        >
+                          <a>
+                            <div className="position-relative imageContainer">
+                              <Image
+                                src={
+                                  newsItem?.attributes?.coverImage?.data
+                                    ?.attributes?.url
+                                    ? newsItem.attributes.coverImage.data
+                                        ?.attributes.url
+                                    : altImage
+                                }
+                                alt="Car"
+                                layout="responsive"
+                                width={300}
+                                height={205}
+                                objectFit="cover"
+                              />
                             </div>
-                          </div>
-                          <div className="content ">
-                            <h5 className="mt-3 BlogCardHeadingTxt">
-                              <Link legacyBehavior href={`/reviews/${newsItem?.attributes?.slug}`}><a>{`${newsItem.attributes.title.length > 40 ? `${newsItem.attributes.title.slice(0, 55)} ...` : `${newsItem.attributes.title}`}  `}</a></Link>
-                            </h5>
-                            <div className="author-area">
-                              <div className="author-content d-flex justify-content-end align-items-center">
-                                {/* <h6 className="authorName">{newsItem.attributes.author.data.attributes.name}</h6> */}
-                                {/* <Link  legacyBehavior href={`/news/${newsItem?.attributes?.slug}`}><a className="postedDate">Posted on: {newsItem.attributes.createdAt.slice(0, 10)}</a></Link> */}
-                              </div>
-                            </div>
-                            {/* <div className="text-center mt-2 ">
-                              <button className="readMoreBtn" onClick={()=>{router.push(`/reviews/${newsItem?.attributes?.slug}`)}}>Read More</button>
-                            </div> */}
-                            
-                          </div>
+                          </a>
+                        </Link>
+                        <div className="date">
+                          <Link
+                            legacyBehavior
+                            href={`/reviews/${newsItem?.attributes?.slug}`}
+                          >
+                            <a></a>
+                          </Link>
                         </div>
                       </div>
-                      {(index + 1) % 6 === 0 && index !== news.length - 1 && (
-                        <div className="col-lg-12 ad-container" key={`ad-${index}`}>
-                          {/* Add your advertisement component or content here */}
-                          {/* For example: */}
-                          <Ad728x90 dataAdSlot="5962627056" />
+                      <div className="content ">
+                        <h5 className="mt-3 BlogCardHeadingTxt">
+                          <Link
+                            legacyBehavior
+                            href={`/reviews/${newsItem?.attributes?.slug}`}
+                          >
+                            <a>{`${
+                              newsItem.attributes.title.length > 40
+                                ? `${newsItem.attributes.title.slice(
+                                    0,
+                                    55
+                                  )} ...`
+                                : `${newsItem.attributes.title}`
+                            }  `}</a>
+                          </Link>
+                        </h5>
+                        <div className="author-area">
+                          <div className="author-content d-flex justify-content-end align-items-center">
+                            {/* <h6 className="authorName">{newsItem.attributes.author.data.attributes.name}</h6> */}
+                            {/* <Link  legacyBehavior href={`/news/${newsItem?.attributes?.slug}`}><a className="postedDate">Posted on: {newsItem.attributes.createdAt.slice(0, 10)}</a></Link> */}
+                          </div>
                         </div>
-    
-                      )}
-    
-                    </>
-                  ))}
-                </div>
-    
-    
-              </div>
-              <div className="col-lg-2 hideOnMobile">
-                <div className="sticky-sidebar">
-                  <div className="ad-container">
-                    {/* Add your skyscraper advertisement component or content here */}
-                    {/* For example: */}
-                    <Ad160x600 />
+                        {/* <div className="text-center mt-2 ">
+                              <button className="readMoreBtn" onClick={()=>{router.push(`/reviews/${newsItem?.attributes?.slug}`)}}>Read More</button>
+                            </div> */}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  {(index + 1) % 6 === 0 && index !== news.length - 1 && (
+                    <div className="col-lg-12 ad-container" key={`ad-${index}`}>
+                      {/* Add your advertisement component or content here */}
+                      {/* For example: */}
+                      <Ad728x90 dataAdSlot="5962627056" />
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
+          </div>
+          <div className="col-lg-2 hideOnMobile">
+            <div className="sticky-sidebar">
+              <div className="ad-container">
+                {/* Add your skyscraper advertisement component or content here */}
+                {/* For example: */}
+                <Ad160x600 />
               </div>
             </div>
           </div>
-          <br />
-          <Ad728x90 dataAdSlot="5962627056" />
-          <br />
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
-          <br />
-          <br />
-        </MainLayout>
-      )
+        </div>
+      </div>
+      <br />
+      <Ad728x90 dataAdSlot="5962627056" />
+      <br />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <br />
+      <br />
+    </MainLayout>
+  );
 }
 
 export async function getServerSideProps(context) {
-    const apolloClient = createApolloClient();
-  
-    const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
-    const pageSize = 24; // Set the number of items per page
-  
-    try {
-  
-      const { data } = await apolloClient.query({
-        query: gql`
+  const apolloClient = createApolloClient();
+
+  const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
+  const pageSize = 24; // Set the number of items per page
+
+  try {
+    const { data } = await apolloClient.query({
+      query: gql`
         query{
           articles(filters:{article_type:{type:{eq:"Review"}}},pagination:{page:${page},pageSize: ${pageSize}},sort:"createdAt:desc"){
             meta{
@@ -182,27 +215,26 @@ export async function getServerSideProps(context) {
           }
         }
         `,
-        variables: { page, pageSize },
-      });
-  
-      return {
-        props: {
-          news: data.articles.data || {},
-          fullData: data,
-          totalNews: data.articles.meta.pagination.total,
-          totalPages: data.articles.meta.pagination.pageCount,
-          currentPage: page,
-        },
-      };
-    }
-    catch (error) {
-      console.error("Server-side Data Fetching Error:", error.message);
-      return {
-        props: {
-          error: true,
-          errorMessage: error.message,
-        },
-      };
-    }
+      variables: { page, pageSize },
+    });
+
+    return {
+      props: {
+        news: data.articles.data || {},
+        fullData: data,
+        totalNews: data.articles.meta.pagination.total,
+        totalPages: data.articles.meta.pagination.pageCount,
+        currentPage: page,
+      },
+    };
+  } catch (error) {
+    console.error("Server-side Data Fetching Error:", error.message);
+    return {
+      props: {
+        error: true,
+        errorMessage: error.message,
+      },
+    };
   }
-export default BlogStandardPage
+}
+export default BlogStandardPage;

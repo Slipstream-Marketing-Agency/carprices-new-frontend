@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import AccordionFaq from "../common/AccordionFaq";
 
 export default function VehicleFaq({ model, highTrim }) {
+  console.log(model, "modelmodelmodel");
   const getTransmissionType = (transmissions) => {
     const hasAutomatic = model.some(
       (t) => t?.attributes?.transmission === "Automatic"
@@ -134,32 +135,26 @@ export default function VehicleFaq({ model, highTrim }) {
         <>
           The {highTrim?.year} {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
           {highTrim?.car_models?.data[0]?.attributes?.name}{" "}
-          {model?.model?.minPrice === model?.model?.maxPrice &&
-          model?.model?.minPrice !== null &&
-          model?.model?.minPrice !== null ? (
+          {minPrice === maxPrice && minPrice !== null && minPrice !== null ? (
             <>
               {" "}
-              is priced at AED <Price data={model?.model?.minPrice} />
+              is priced at <Price data={minPrice} />
             </>
           ) : (
             ""
           )}
-          {model?.model?.minPrice !== model?.model?.maxPrice &&
-          model?.model?.minPrice !== null &&
-          model?.model?.minPrice !== null ? (
+          {minPrice !== maxPrice && minPrice !== null && minPrice !== null ? (
             <>
-              is priced within the range of AED{" "}
-              <Price data={model?.model?.minPrice} /> - AED{" "}
-              <Price data={model?.model?.maxPrice} />
+              is priced within the range of <Price data={minPrice} /> - AED{" "}
+              <Price data={maxPrice} />
             </>
           ) : (
             ""
           )}
-          {model?.model?.minPrice === null &&
-          model?.model?.maxPrice === null ? (
+          {minPrice === null && maxPrice === null ? (
             <>
               {" "}
-              is priced at AED <Price data={model?.model?.minPrice} />
+              is priced at <Price data={minPrice} />
             </>
           ) : (
             ""
@@ -186,8 +181,8 @@ export default function VehicleFaq({ model, highTrim }) {
       }km.`,
       id: 3,
       condition:
-        model?.model?.mainTrim?.fuelType === "Electric" ||
-        model?.model?.mainTrim?.fuelType === "Hybrid",
+        highTrim?.fuelType === "Electric" ||
+        highTrim?.fuelType === "Hybrid",
     },
     {
       question: `What is the fuel efficiency of the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
@@ -200,9 +195,9 @@ export default function VehicleFaq({ model, highTrim }) {
       }.`,
       id: 11,
       condition:
-        model?.model?.mainTrim?.fuelType === "Hybrid" ||
-        model?.model?.mainTrim?.fuelType === "Petrol" ||
-        model?.model?.mainTrim?.fuelType === "Diesel",
+        highTrim?.fuelType === "Hybrid" ||
+        highTrim?.fuelType === "Petrol" ||
+        highTrim?.fuelType === "Diesel",
     },
     {
       question: `What type of engine and transmission does the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} have?`,
@@ -215,17 +210,17 @@ export default function VehicleFaq({ model, highTrim }) {
       } engine and is paired with ${getTransmissionType()} transmission.`,
       id: 4,
       condition:
-        model?.model?.mainTrim?.fuelType === "Hybrid" ||
-        model?.model?.mainTrim?.fuelType === "Petrol" ||
-        model?.model?.mainTrim?.fuelType === "Diesel",
+        highTrim?.fuelType === "Hybrid" ||
+        highTrim?.fuelType === "Petrol" ||
+        highTrim?.fuelType === "Diesel",
     },
     {
       question: `What type of motor the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} has?`,
       answer: `The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} is equipped with a ${motorTypes}.`,
       id: 12,
       condition:
-        model?.model?.mainTrim?.fuelType === "Electric" ||
-        model?.model?.mainTrim?.fuelType === "Hybrid",
+        highTrim?.fuelType === "Electric" ||
+        highTrim?.fuelType === "Hybrid",
     },
     {
       question: `What safety features are included in the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
@@ -286,22 +281,21 @@ export default function VehicleFaq({ model, highTrim }) {
     },
   ];
   return (
-    <div className="single-item mb-50" id="faqs">
+    <div className="single-item mb-50 mt-5" id="faqs">
       <div className="faq-area">
-        <div className="title mb-25">
-          <h5>
-            {highTrim?.year} {" "}
-            {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
+        <div className="title ">
+          <h4>
+            {highTrim?.year} {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
             {highTrim?.car_models?.data[0]?.attributes?.name} FAQs
-          </h5>
+          </h4>
           <div className="faq-wrap">
-          {faq.map((item, index) => (
-            <AccordionFaq
-              question={item.question}
-              answer={item.answer}
-              condition={item?.condition}
-            />
-          ))}
+            {faq.map((item, index) => (
+              <AccordionFaq
+                question={item.question}
+                answer={item.answer}
+                condition={item?.condition}
+              />
+            ))}
           </div>
         </div>
       </div>

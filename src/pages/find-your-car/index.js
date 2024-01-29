@@ -222,12 +222,10 @@ function CarListingLeftSidebar({
 export default CarListingLeftSidebar;
 
 export async function getServerSideProps(context) {
-
-  console.log(context,"contextcontextcontext");
   const { query } = context;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
-  const brandSlugs = [query.brandname ? query.brandname: []];
+  const brandSlugs = query.brand ? query.brand.split(",") : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
@@ -236,6 +234,30 @@ export async function getServerSideProps(context) {
     ? query.transmission.split(",")
     : [];
 
+  const additionalQueryParams = {
+    haveMusic: query.haveMusic,
+    isLuxury: query.isLuxury,
+    isPremiumLuxury: query.isPremiumLuxury,
+    haveTechnology: query.haveTechnology,
+    havePerformance: query.havePerformance,
+    isSpacious: query.isSpacious,
+    isElectric: query.isElectric,
+    isFuelEfficient: query.isFuelEfficient,
+    isOffRoad: query.isOffRoad,
+    isTwoSeat: query.isTwoSeat,
+    isTwoPlusTwo: query.isTwoPlusTwo,
+    isFourToFive: query.isFourToFive,
+    isFiveToSeven: query.isFiveToSeven,
+    isSevenToNine: query.isSevenToNine,
+  };
+
+  const additionalQueryString = Object.keys(additionalQueryParams)
+  .filter(key => additionalQueryParams[key] !== undefined)
+  .map(key => `${key}=${additionalQueryParams[key]}`)
+  .join('&');
+
+
+  console.log(additionalQueryString,"additionalQueryString");
   const queryParams = {};
 
   if (brandSlugs.length > 0) {
@@ -288,7 +310,9 @@ export async function getServerSideProps(context) {
   }
 
   const filteredTrims = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-trims/filter?brands=${JSON.stringify(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/homefilter?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
       fuelTypeSlugs
@@ -302,7 +326,7 @@ export async function getServerSideProps(context) {
       displacementRange
     )}&powerRanges=${JSON.stringify(
       powerRange
-    )}&page=${page}&pageSize=${pageSize}`
+    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
   );
 
   const fullFilter = await axios.get(
@@ -322,7 +346,7 @@ export async function getServerSideProps(context) {
       displacementRange
     )}&powerRanges=${JSON.stringify(
       powerRange
-    )}&page=${page}&pageSize=${pageSize}`
+    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
   );
 
   let fuelTypeListres,
@@ -351,7 +375,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     fuelTypeListres = fuelTypeList;
   }
@@ -374,7 +398,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     cylinderListres = cylinderList;
   }
@@ -395,7 +419,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     transmissionListres = transmissionSlugs;
   }
@@ -418,7 +442,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     driveListres = driveSlugs;
   }
@@ -439,7 +463,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     pricerangesres = priceranges;
   }
@@ -458,7 +482,7 @@ export async function getServerSideProps(context) {
         transmissionSlugs
       )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     totaldisplacementrangeres = totaldisplacementrange;
   }
@@ -479,7 +503,7 @@ export async function getServerSideProps(context) {
         priceRange
       )}&displacementRanges=${JSON.stringify(
         displacementRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     totalpowerrangeres = totalpowerrange;
   }
@@ -500,7 +524,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     brandListres = brandList;
   }
@@ -521,7 +545,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&page=${page}&pageSize=${pageSize}`
+      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
     );
     bodyTypeListres = bodyTypeList;
   }

@@ -25,7 +25,7 @@ function index({ brandDetails }) {
           {brandDetails.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">
-                <Link legacyBehavior href="/single-brand-category" key={idx}>
+                <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`} key={idx}>
                   <a className="single-category1">
                     <div className="brand-icon w-50">
                       <img

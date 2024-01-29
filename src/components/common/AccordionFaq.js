@@ -12,9 +12,9 @@ export default function AccordionFaq({ question, answer, condition, id }) {
       {condition && (
      
           <div className="accordion-item">
-            <h5 className="accordion-header">
+            <h5 className="accordion-header fw-bold">
               <button
-                className={`accordion-button ${!isOpen ? 'collapsed' : ''}`}
+                className={`fw-bold accordion-button ${!isOpen ? 'collapsed' : ''}`}
                 type="button"
                 onClick={handleClick}
                 aria-expanded={isOpen}
