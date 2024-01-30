@@ -13091,6 +13091,9 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   .banner-section1 .car-filter-area {
     max-width: 450px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
   }
 }
 @media (max-width: 500px) {
@@ -16226,7 +16229,7 @@ footer .footer-top {
 }
 @media (max-width: 991px) {
   footer .footer-top {
-    padding: 70px 2%;
+    padding: 10px 2%;
   }
 }
 footer .footer-widget .widget-title {
@@ -16317,7 +16320,7 @@ footer .footer-center {
 }
 @media (max-width: 991px) {
   footer .footer-center {
-    padding: 0px 2% 35px;
+    padding: 0px 2% 0px;
   }
 }
 footer .footer-center .contact-area {
@@ -23920,9 +23923,9 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   color: var(--white-color);
 }
 
-button {
+/* button {
   white-space: nowrap;
-}
+} */
 
 .faq-wrap .accordion .accordion-item {
   border-radius: 5px;

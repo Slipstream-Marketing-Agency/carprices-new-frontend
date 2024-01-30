@@ -21,8 +21,7 @@ export default function AdBlog(props) {
   return (
     <>
       <div className="">
-        {process.env.NEXT_PUBLIC_MODE == "production" ? (
-
+       
           <ins className="adsbygoogle"
             style={{ display: "block", textAlign:"center"}}
             data-ad-layout="in-article"
@@ -31,7 +30,6 @@ export default function AdBlog(props) {
             data-ad-slot={props?.dataAdSlot}
           >
           </ins>
-        ) : ""}
       </div>
     </>
   )

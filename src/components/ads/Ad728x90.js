@@ -20,7 +20,6 @@ export default function Ad728x90(props) {
     <>
 
       <div className="Ad728x90">
-        {process.env.NEXT_PUBLIC_MODE == "production" ? (
 
           <ins className="adsbygoogle responsive_leaderboard_horizontal"
             style={{ display: "block" }}
@@ -28,7 +27,6 @@ export default function Ad728x90(props) {
             data-ad-slot={props?.dataAdSlot}
           >
           </ins>
-        ) : ""}
       </div>
     </>
 

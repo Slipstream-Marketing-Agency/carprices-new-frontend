@@ -17,14 +17,12 @@ export default function Ad300x250(props) {
   }, [router.query]);
   return (
     <div className="Ad300x250">
-      {process.env.NEXT_PUBLIC_MODE == "production" ? (
-
         <ins className="adsbygoogle responsive_desktop_square_300x250"
           style={{ display: "block" }}
           data-ad-client="ca-pub-4857144107996534"
           data-ad-slot={props?.dataAdSlot}
         >
-        </ins>) : ""}
+        </ins>
     </div>
   )
 }

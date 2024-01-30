@@ -20,7 +20,7 @@ function Footer1() {
                 <h5>{t.aboutCompany}</h5>
               </div> */}
                   <div className="menu-container">
-                    <ul className="d-flex ">
+                    <ul className="d-flex flex-wrap justify-content-center">
                       <li>
                         <Link legacyBehavior href="/about">
                           <a>
@@ -116,7 +116,7 @@ function Footer1() {
                 </a>
               </Link>
             </div>
-            <div className="hotline-area text-white">
+            <div className="hotline-area text-white md:d-block d-none">
               <div className="icon">
                 <svg
                   width={32}
@@ -136,7 +136,7 @@ function Footer1() {
                 </h6>
               </div>
             </div>
-            <div className="hotline-area text-white">
+            <div className="hotline-area text-white md:d-block d-none">
               <div className="icon">
                 <svg
                   width={32}

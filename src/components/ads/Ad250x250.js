@@ -15,13 +15,12 @@ export default function Ad250x250(props) {
   }, [router.query]);
   return (
     <div className="Ad250x250">
-      {process.env.NEXT_PUBLIC_MODE == "production" ? (
         <ins className="adsbygoogle responsive_footer_mobile_square"
           style={{ display: "block" }}
           data-ad-client="ca-pub-4857144107996534"
           data-ad-slot={props?.dataAdSlot}
         >
-        </ins>) : ""}
+        </ins>
     </div>
   )
 }

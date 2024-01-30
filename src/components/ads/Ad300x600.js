@@ -17,7 +17,6 @@ export default function Ad300x600(props) {
 
   return (
     <div className="Ad300x600">
-      {process.env.NEXT_PUBLIC_MODE == "production" ? (
 
         <ins className="adsbygoogle responsive_vertical_ad_desktop"
           style={{ display: "block" }}
@@ -25,7 +24,6 @@ export default function Ad300x600(props) {
           data-ad-slot={props?.dataAdSlot}
         >
         </ins>
-      ) : ""}
     </div>
   )
 }

@@ -20,7 +20,6 @@ export default function Ad970x180(props) {
     <>
 
       <div className="Ad970x180">
-        {process.env.NEXT_PUBLIC_MODE == "production" ? (
 
           <ins className="adsbygoogle fixed_top_banner_bill_board"
             style={{ display: "block" }}
@@ -28,7 +27,7 @@ export default function Ad970x180(props) {
             data-ad-slot={props?.dataAdSlot}
           >
           </ins>
-        ) : ""}
+       
       </div>
     </>
 
