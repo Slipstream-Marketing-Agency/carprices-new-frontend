@@ -163,13 +163,9 @@ const LiveSearch = ({
 
 
 
-                <div class="input-group form-group has-search">
+                {/* <div class="input-group form-group has-search">
                     <i class="bi bi-search form-control-feedback"></i>
-                    {/* {(loading) && <div  className=" spinnerItem form-control-feedback"></div>} */}
-
-                    {/* <input autocomplete="off" class="form-control border-end-0 border rounded-pill"    placeholder="Search by brand or tags ..." type="search" value={defaultValue}
-                        onChange={handleChange} id="example-search-input" /> */}
-
+                   
                     <div className="form-inner">
                         <input type="text" placeholder={t.searchForBrandandCars} autocomplete="off" class="SearchInputField   rounded " value={defaultValue}
                             onChange={handleChange} id="example-search-input" onClick={(e)=>{handleInputClick(e.target.value)}}/>
@@ -177,7 +173,7 @@ const LiveSearch = ({
                             <i className="bi bi-search" />
                         </button>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Search Results Container */}
                 {(showResults || showPopularSearch) && (

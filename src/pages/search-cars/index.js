@@ -26,7 +26,7 @@ function CarListingLeftSidebar({
   transmissionList,
   driveList,
 }) {
-  console.log(fuelTypeList, "fuelTypeList");
+  console.log(bodyTypeList, "bodyTypeList");
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const router = useRouter();
   console.log(brandList, "brandList");
@@ -48,6 +48,7 @@ function CarListingLeftSidebar({
   const bodyoptions = bodyTypeList?.map((body) => ({
     label: body.name,
     value: body.slug,
+    image: body.image.url,
   }));
 
   console.log(bodyTypeList, "bodyTypeList");
@@ -88,7 +89,9 @@ function CarListingLeftSidebar({
   console.log(brandoptions, "brandoptions");
   return (
     <MainLayout>
-      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="mt-2">
+        <Ad728x90 dataAdSlot="5962627056" />
+      </div>
 
       <div className="product-page mt-15 mb-100">
         <div className="container">
@@ -214,7 +217,6 @@ function CarListingLeftSidebar({
           </div>
         </div>
       </div>
-      <Ad728x90 dataAdSlot="5962627056" />
     </MainLayout>
   );
 }

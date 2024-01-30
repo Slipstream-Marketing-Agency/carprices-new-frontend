@@ -14,6 +14,7 @@ function CarLeftSidebar({
   driveList,
 }) {
   const router = useRouter();
+
   const [isSticky, setIsSticky] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,6 +39,20 @@ function CarLeftSidebar({
   const togglePowerDropdown = () => setShowPowerDropdown(!showPowerDropdown);
   const toggleDisplacementDropdown = () =>
     setShowDisplacementDropdown(!showDisplacementDropdown);
+
+  const [showFuelTypeDropdown, setShowFuelTypeDropdown] = useState(true);
+  const [showCylindersDropdown, setShowCylindersDropdown] = useState(true);
+  const [showTransmissionsDropdown, setShowTransmissionsDropdown] =
+    useState(true);
+  const [showDriveDropdown, setShowDriveDropdown] = useState(true);
+
+  const toggleFuelTypeDropdown = () =>
+    setShowFuelTypeDropdown(!showFuelTypeDropdown);
+  const toggleCylindersDropdown = () =>
+    setShowCylindersDropdown(!showCylindersDropdown);
+  const toggleTransmissionsDropdown = () =>
+    setShowTransmissionsDropdown(!showTransmissionsDropdown);
+  const toggleDriveDropdown = () => setShowDriveDropdown(!showDriveDropdown);
 
   console.log(router, "rooooooooooooter");
 
@@ -577,7 +592,7 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
               onClick={togglePriceDropdown}
             >
@@ -587,7 +602,7 @@ function CarLeftSidebar({
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
                 showPriceDropdown ? "show" : "hide"
@@ -614,7 +629,7 @@ function CarLeftSidebar({
         {router.pathname !== "/brands/[brandname]" && (
           <div className="product-widget mb-1">
             <div className="check-box-item">
-              <h6
+              <h3
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleBrandDropdown}
               >
@@ -625,7 +640,7 @@ function CarLeftSidebar({
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
-              </h6>
+              </h3>
               <div
                 className={`checkbox-container ${
                   showBrandDropdown ? "show" : "hide"
@@ -659,45 +674,47 @@ function CarLeftSidebar({
           </div>
         )}
 
-        <div className="product-widget mb-20">
-          <div className="check-box-item">
-            <h6
-              className="product-widget-title mb-20 cursor-pointer"
-              onClick={toggleBodyDropdown}
-            >
-              Body Type
-            </h6>
-            <div className={`${showBodyDropdown ? "show" : "hide"}`}>
-              <div className="row g-xl-2 gy-2 ">
-                {bodyoptions.map((item, idx) => (
-                  <div className="col-xl-4 ">
-                    <button
-                      key={idx}
-                      className={`category-box-button d-flex flex-column  align-items-center p-2 shadow-sm rounded ${
-                        selectedBody.includes(item.value)
-                          ? "text-secondary fw-bold bg-white border border-2"
-                          : "bg-white border border-2 border-white"
-                      }`}
-                      onClick={() => handleBodyChange(item.value)}
-                    >
-                      <img
-                        src={`/assets/icons/trim-categories/Coupe.jpg`}
-                        alt={item.label}
-                        className="w-6 h-6 object-contain mb-2"
-                      />
-                      <small>{item.label}</small>
-                    </button>
-                  </div>
-                ))}
+        {router.pathname !== "/category/[categoryname]" && (
+          <div className="product-widget mb-20">
+            <div className="check-box-item">
+              <h3
+                className="product-widget-title mb-20 cursor-pointer"
+                onClick={toggleBodyDropdown}
+              >
+                Body Type
+              </h3>
+              <div className={`${showBodyDropdown ? "show" : "hide"}`}>
+                <div className="row g-xl-2 gy-2 ">
+                  {bodyoptions.map((item, idx) => (
+                    <div className="col-xl-4 ">
+                      <button
+                        key={idx}
+                        className={`category-box-button d-flex flex-column  align-items-center p-2 shadow-sm rounded ${
+                          selectedBody.includes(item.value)
+                            ? "text-secondary fw-bold bg-white border border-2"
+                            : "bg-white border border-2 border-white"
+                        }`}
+                        onClick={() => handleBodyChange(item.value)}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.label}
+                          className="w-6 h-6 object-contain mb-2"
+                        />
+                        <small>{item.label}</small>
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Power filter UI */}
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
               onClick={togglePowerDropdown}
             >
@@ -707,7 +724,7 @@ function CarLeftSidebar({
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
                 showPowerDropdown ? "show" : "hide"
@@ -736,7 +753,7 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
               onClick={toggleDisplacementDropdown}
             >
@@ -748,7 +765,7 @@ function CarLeftSidebar({
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
                 showDisplacementDropdown ? "show" : "hide"
@@ -775,22 +792,22 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDisplacementDropdown}
+              onClick={toggleFuelTypeDropdown}
             >
               Fuel Type
               <span
                 className={`dropdown-icon ${
-                  showDisplacementDropdown ? "open" : ""
+                  showFuelTypeDropdown ? "open" : ""
                 }`}
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
-                showDisplacementDropdown ? "show" : "hide"
+                showFuelTypeDropdown ? "show" : "hide"
               }`}
             >
               <ul className="pt-2 pb-4">
@@ -814,22 +831,22 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDisplacementDropdown}
+              onClick={toggleCylindersDropdown}
             >
               Cylinders
               <span
                 className={`dropdown-icon ${
-                  showDisplacementDropdown ? "open" : ""
+                  showCylindersDropdown ? "open" : ""
                 }`}
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
-                showDisplacementDropdown ? "show" : "hide"
+                showCylindersDropdown ? "show" : "hide"
               }`}
             >
               <ul className="pt-2 pb-4">
@@ -842,7 +859,7 @@ function CarLeftSidebar({
                         onChange={() => handleCylindersChange(option)}
                       />
                       <span className="checkmark" />
-                      <span className="text">{option}</span>
+                      <span className="text">{option} Cylinder</span>
                     </label>
                   </li>
                 ))}
@@ -853,22 +870,22 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDisplacementDropdown}
+              onClick={toggleTransmissionsDropdown}
             >
               Transmissions
               <span
                 className={`dropdown-icon ${
-                  showDisplacementDropdown ? "open" : ""
+                  showTransmissionsDropdown ? "open" : ""
                 }`}
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
-                showDisplacementDropdown ? "show" : "hide"
+                showTransmissionsDropdown ? "show" : "hide"
               }`}
             >
               <ul className="pt-2 pb-4">
@@ -892,22 +909,20 @@ function CarLeftSidebar({
 
         <div className="product-widget mb-20">
           <div className="check-box-item">
-            <h6
+            <h3
               className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDisplacementDropdown}
+              onClick={toggleDriveDropdown}
             >
               Drive
               <span
-                className={`dropdown-icon ${
-                  showDisplacementDropdown ? "open" : ""
-                }`}
+                className={`dropdown-icon ${showDriveDropdown ? "open" : ""}`}
               >
                 <i class="bi bi-chevron-down" />
               </span>
-            </h6>
+            </h3>
             <div
               className={`checkbox-container ${
-                showDisplacementDropdown ? "show" : "hide"
+                showDriveDropdown ? "show" : "hide"
               }`}
             >
               <ul className="pt-2 pb-4">

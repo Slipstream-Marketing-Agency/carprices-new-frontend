@@ -240,7 +240,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
       slidesPerView: "auto",
       speed: 1500,
       spaceBetween: 25,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 2500, // Autoplay duration in milliseconds
       },
@@ -486,8 +486,8 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                             <SwiperSlide className="swiper-slide">
                               <Image
                                 src={trim?.featuredImage?.data?.attributes?.url}
-                                fill
                                 alt="product image"
+                                fill
                                 className="object-contain"
                               />
                             </SwiperSlide>
@@ -685,7 +685,11 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
               {/* <VehicleGallery model={data} /> */}
               <Ad728x90 dataAdSlot="7369694604" />
 
-              <VehicleFaq model={trimList} highTrim={trim} CarPriceRange={CarPriceRange}/>
+              <VehicleFaq
+                model={trimList}
+                highTrim={trim}
+                CarPriceRange={CarPriceRange}
+              />
             </div>
             <div className="col-lg-4">
               <div className="car-details-sidebar positionStickyAd">

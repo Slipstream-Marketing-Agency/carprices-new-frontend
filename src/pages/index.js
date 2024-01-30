@@ -16,6 +16,7 @@ import Ad300x600 from "../components/ads/Ad300x600";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import BodyTypes from "../components/Home1/BodyTypes";
 
 const BannerLazy = dynamic(() => import("../components/Home1/Banner/index"), {
   loading: () => <p>Loading banner...</p>, // Optional loading placeholder
@@ -63,8 +64,11 @@ export default function Home({
   compare,
   news,
   reviews,
+  bodyTypeList
 }) {
   const router = useRouter();
+
+  console.log(bodyTypeList,"bodyTypeList");
 
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -100,9 +104,10 @@ export default function Home({
       <Modals />
       <Topbar />
       <Header />
+      <Ad728x90 dataAdSlot="5962627056" />
       <BannerLazy homeData={homeData} />
       {/* <QuickLinkArea /> */}
-      <Ad728x90 dataAdSlot="5962627056" />
+      <Ad728x90 dataAdSlot="6306241985" />
       {/* <ProductCard
         subTitle={"Most Popular"}
         heading={"Most Popular New Cars"}
@@ -116,17 +121,19 @@ export default function Home({
               heading={t.PopularNewCars}
               carDetails={popularcars}
             />
-            <Ad728x90 dataAdSlot="5962627056" />
+            <Ad728x90 dataAdSlot="4367254600" />
             <ProductCard2Lazy
               subTitle={"Most Popular"}
               heading={t.featuredcar}
               carDetails={featuredcars}
             />
+            <Ad728x90 dataAdSlot="3054172934" />
             <ProductCard3Lazy
               subTitle={"Most Popular"}
               heading={t.carElectric}
               carDetails={electriccars}
             />
+            <Ad728x90 dataAdSlot="7427751965" />
           </div>
           <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
             <div className="sticky_scroll">
@@ -147,20 +154,25 @@ export default function Home({
         carDetails={popularcars}/> */}
       {/* <RecomandationCar /> */}
       {/* <TopRateUsedCars /> */}
-      <Ad728x90 dataAdSlot="5962627056" />
+
       <div ref={compareCarRef}>
         {loadCompareCar && <CompareCarLazy compare={compare} />}
       </div>
+      <Ad728x90 dataAdSlot="5962627056" />
+
       {/* <WhyChoose /> */}
       {/* <ShopCard /> */}
       {/* <Testimonial /> */}
       <BrandCategory brandDetails={popularBrands} />
+      <BodyTypes bodyTypeList={bodyTypeList} />
+      <Ad728x90 dataAdSlot="3488506956" />
       <Blog
         heading={t.Carnews}
         btnTitle={t.viewnews}
         blogApiData={news}
         isNews={true}
       />
+      <Ad728x90 dataAdSlot="8972714021" />
       <Blog
         heading={t.reviews}
         btnTitle={t.viewreview}
@@ -541,6 +553,10 @@ export async function getServerSideProps() {
       `${process.env.NEXT_PUBLIC_API_URL}pages/1?populate[0]=Sections,Sections.image`
     );
 
+    const bodyTypeList = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList`
+    );
+
     return {
       props: {
         homeData: axiosResponse?.data?.data?.attributes?.Sections[0], // Assuming axiosResponse is defined and fetched elsewhere
@@ -559,6 +575,7 @@ export async function getServerSideProps() {
         compare: compareResponse?.data?.compareCars?.data,
         news: newsData?.data?.articles?.data || {},
         reviews: reviewsData?.data?.articles?.data || {},
+        bodyTypeList:bodyTypeList?.data?.bodyTypes
       },
     };
   } catch (error) {

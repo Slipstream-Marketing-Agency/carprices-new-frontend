@@ -249,9 +249,9 @@ export default function FilterLayout() {
                     {currentStep === 2 ? `${t.submit}` : `${t.next}`}
                   </button>
                 </div>
-                <div className="find_specific ">
+                {/* <div className="find_specific ">
                   <p onClick={handleFilterSwitch}>{t.findcar}</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

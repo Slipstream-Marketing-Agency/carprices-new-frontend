@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function ProductSideFilterList({ carDetails, filteredTrims }) {
   console.log(filteredTrims, "filteredTrims");
@@ -56,6 +57,8 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
     return <span>{emiString}</span>;
   };
 
+  const router = useRouter();
+
   return (
     <>
       {filteredTrims?.map((car, index) => (
@@ -64,7 +67,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
           href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
         >
           <div
-            className="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item cursor_pointer"
+            className={`${router.pathname === "/category/[categoryname]" ? "col-lg-3 col-md-3 col-sm-6 wow fadeInUp item cursor_pointer" : "col-lg-4 col-md-4 col-sm-6 wow fadeInUp item cursor_pointer"}`}
             data-wow-delay="300ms"
           >
             <div className="product-card">

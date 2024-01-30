@@ -11,9 +11,9 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
   const t = useTranslate();
   let isRtl = router.locale === "ar";
   return (
-    <div className="news-section pb-90 mt-4">
+    <div className="news-section  mt-4">
       <div className="container  ">
-        <div className="row mb-60 wow fadeInUp" data-wow-delay="200ms">
+        <div className="row mb-30 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12  d-flex align-items-end justify-content-between flex-wrap gap-2">
             <div className="section-title1 w-100">
               {/* <span>Best Trending</span>  */}

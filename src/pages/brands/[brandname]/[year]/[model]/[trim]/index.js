@@ -234,7 +234,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
       slidesPerView: "auto",
       speed: 1500,
       spaceBetween: 25,
-      loop: true,
+      loop: false,
       autoplay: {
         delay: 2500, // Autoplay duration in milliseconds
       },
@@ -260,55 +260,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const phoneInputField = useRef(null);
-
-  useEffect(() => {
-    if (phoneInputField.current) {
-      window.intlTelInput(phoneInputField.current, {
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-      });
-    }
-  }, []);
-
-  const [contactData, setContactData] = useState({
-    phoneNumber: "+990737621432",
-    email: "info@gmail.com",
-    whatsapp: "+990737621432",
-  });
-
-  const handleClick = (type) => {
-    let hrefValue = "";
-    let newText = "";
-
-    switch (type) {
-      case "phoneNumber":
-        hrefValue = `tel:${contactData.phoneNumber}`;
-        newText = contactData.phoneNumber;
-        break;
-      case "emailAdress":
-        hrefValue = `mailto:${contactData.email}`;
-        newText = contactData.email;
-        break;
-      case "emailAdresss":
-        hrefValue = contactData.whatsapp
-          ? `https://api.whatsapp.com/send?phone=${contactData.whatsapp}&text=Hello this is the starting message`
-          : "";
-        newText = contactData.whatsapp || "Whatsapp";
-        break;
-      default:
-        break;
-    }
-
-    // Set the href attribute and update the text for the clicked element
-    const element = document.getElementById(type);
-    if (element) {
-      const link = element.querySelector("a");
-      link.setAttribute("href", hrefValue);
-      link.textContent = `${newText}`;
-    }
-  };
 
   return (
     <MainLayout>
@@ -363,14 +314,21 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                           className="swiper product-img-slider"
                         >
                           <div className="swiper-wrapper">
+                            <SwiperSlide className="swiper-slide">
+                              <Image
+                                src={trimData?.featuredImage}
+                                alt="product image"
+                                fill
+                                className="object-contain"
+                              />
+                            </SwiperSlide>
                             {trimData?.galleryImages?.map((item, idx) => (
                               <SwiperSlide className="swiper-slide">
                                 <Image
                                   src={item}
-                                  width={400}
-                                  height={300}
                                   alt="product image"
-                                  className="object-cover"
+                                  fill
+                                  className="object-contain"
                                 />
                               </SwiperSlide>
                             ))}

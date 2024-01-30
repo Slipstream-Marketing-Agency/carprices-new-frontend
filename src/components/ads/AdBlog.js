@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
 
-export default function Ad728x90(props) {
+export default function AdBlog(props) {
   const router = useRouter()
 
   useEffect(() => {
@@ -16,14 +16,17 @@ export default function Ad728x90(props) {
 
   }, [router.query]);
 
+  
+
   return (
     <>
-
-      <div className="Ad728x90">
+      <div className="">
         {process.env.NEXT_PUBLIC_MODE == "production" ? (
 
-          <ins className="adsbygoogle responsive_leaderboard_horizontal"
-            style={{ display: "block" }}
+          <ins className="adsbygoogle"
+            style={{ display: "block", textAlign:"center"}}
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
             data-ad-client="ca-pub-4857144107996534"
             data-ad-slot={props?.dataAdSlot}
           >
@@ -31,6 +34,5 @@ export default function Ad728x90(props) {
         ) : ""}
       </div>
     </>
-
-  );
+  )
 }

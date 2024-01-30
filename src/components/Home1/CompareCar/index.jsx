@@ -20,7 +20,7 @@ function index({ heading, carDetails, compare }) {
       slidesPerView: "auto",
       speed: 1500,
       spaceBetween: 25,
-      loop: true,
+      loop: false,
       // autoplay: {
       // 	delay: 2500, // Autoplay duration in milliseconds
       // },

@@ -130,7 +130,10 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
 
   return (
     <MainLayout>
-      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="mt-3">
+        <Ad728x90 dataAdSlot="5962627056" />
+      </div>
+
       <div className="compare-page pt-30 mb-100">
         <div className="container">
           <div className="row g-4 mb-50">

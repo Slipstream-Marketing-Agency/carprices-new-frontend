@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import SwiperCore, { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
+import SwiperCore, {
+  Autoplay,
+  EffectFade,
+  Navigation,
+  Pagination,
+} from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MainLayout from "@/src/layout/MainLayout";
 import Ad728x90 from "@/src/components/ads/Ad728x90";
@@ -8,9 +13,9 @@ import Ad300x250 from "@/src/components/ads/Ad300x250";
 import { createApolloClient } from "@/src/lib/apolloClient";
 import { gql } from "@apollo/client";
 import Image from "next/image";
-import altImage from '../../../../public/assets/images/blog-alt-image.png'
+import altImage from "../../../../public/assets/images/blog-alt-image.png";
 import Ad160x600 from "@/src/components/ads/Ad160x600";
-import Script from 'next/script'
+import Script from "next/script";
 
 import {
   FacebookShareButton,
@@ -27,7 +32,7 @@ import {
   TwitterShareButton,
   TelegramShareButton,
   TelegramIcon,
-} from 'next-share';
+} from "next-share";
 import moment, { isMoment } from "moment/moment";
 import Ad970x250 from "@/src/components/ads/Ad970x250";
 import { useRouter } from "next/router";
@@ -38,14 +43,15 @@ import TabNavigation from "@/src/components/TabNavigation";
 import MoreBrands from "@/src/components/MoreBrands";
 import SocialButtons from "@/src/components/common/SocialButtons";
 
-const adCode = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>'
-const myAdCode = <Ad728x90 dataAdSlot="5962627056" />
+const adCode =
+  '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+const myAdCode = <Ad728x90 dataAdSlot="5962627056" />;
 // Assume this is the function that modifies the dynamicHTML
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
-  const [activeTab, setActiveTab] = useState('tab1');
+  const [activeTab, setActiveTab] = useState("tab1");
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -53,15 +59,12 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
       setIsMobile(window.innerWidth <= 767);
     };
 
-
     handleResize();
 
-
-    window.addEventListener('resize', handleResize);
-
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -69,24 +72,24 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
     setActiveTab(selectedTab);
   };
 
-  const router = useRouter()
-  const [initialScreening, setInitialScreening] = useState(true)
+  const router = useRouter();
+  const [initialScreening, setInitialScreening] = useState(true);
 
   if (!detailData) {
-    return <div>
-      <Error />
-    </div>;
+    return (
+      <div>
+        <Error />
+      </div>
+    );
   }
 
   // console.log("detailData ",detailData.article_categories.data);
-  const [dynamicHTML, setDynamicHTML] = useState('');
+  const [dynamicHTML, setDynamicHTML] = useState("");
   const [isModified, setIsModified] = useState(false);
 
   // Assume detailData.content contains the provided HTML content
   // This is your initial state
   const initialHTML = detailData.content;
-
-
 
   useEffect(() => {
     setDynamicHTML(initialHTML);
@@ -98,39 +101,39 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
         .replace(/<h1([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
         .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
         .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
-        .replace(/<img([^>]*)>/g, '<img$1 style="width: 100%;border-radius: 10px;">')
+        .replace(
+          /<img([^>]*)>/g,
+          '<img$1 style="width: 100%;border-radius: 10px;">'
+        )
         .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
-        .replace(/<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g, '<h3$1>$3</h3>')
+        .replace(
+          /<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g,
+          "<h3$1>$3</h3>"
+        )
 
         .replace(
           /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-          'https://www.youtube.com/watch?v=$1'
+          "https://www.youtube.com/watch?v=$1"
         )
         .replace(
           /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
           '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
         )
 
-
         .replace(
           /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
           `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
         )
         .replace(/<p>&nbsp;\s*\/?<\/p>/g, '<p$1 style="margin-top: 20px;">')
-        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, '')
+        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, "");
 
       if (!isMobile) {
-
         modifiedHTML = modifiedHTML.replace(
           /&lt;GoogleAd&gt;/g,
           `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
-        )
-      }
-      else {
-        modifiedHTML = modifiedHTML.replace(
-          /&lt;GoogleAd&gt;/g,
-          ``
-        )
+        );
+      } else {
+        modifiedHTML = modifiedHTML.replace(/&lt;GoogleAd&gt;/g, ``);
       }
 
       setDynamicHTML(modifiedHTML);
@@ -151,18 +154,18 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
         nextEl: ".next-51",
         prevEl: ".prev-51",
       },
-    }
-  })
+    };
+  });
   return (
-    <MainLayout pageMeta={{
-      title: `${detailData?.metaTitle}`,
-      description: ``,
-      type: "Car review Website",
-    }}>
-
+    <MainLayout
+      pageMeta={{
+        title: `${detailData?.metaTitle}`,
+        description: ``,
+        type: "Car review Website",
+      }}
+    >
       <br />
       <Ad728x90 dataAdSlot="5962627056" />
-
 
       <div className="blog-details-page pt-5 mb-100">
         <div className="container">
@@ -172,7 +175,11 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                 {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
                 <div className="position-relative ">
                   <Image
-                    src={detailData?.coverImage?.data?.attributes?.url ? detailData.coverImage.data?.attributes.url : altImage}
+                    src={
+                      detailData?.coverImage?.data?.attributes?.url
+                        ? detailData.coverImage.data?.attributes.url
+                        : altImage
+                    }
                     alt="blog image"
                     layout="responsive"
                     width={300}
@@ -195,13 +202,23 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                     </div>
 
                     <div className="author-content">
-                      <h6 className="mt-0">{detailData?.author?.data?.attributes?.name}</h6>
-                      <span className="postedOnStyle">Posted on -  {moment(detailData?.author?.data?.attributes?.createdAt).format("MMMM Do YYYY")}</span>
+                      <h6 className="mt-0">
+                        {detailData?.author?.data?.attributes?.name}
+                      </h6>
+                      <span className="postedOnStyle">
+                        Posted on -{" "}
+                        {moment(
+                          detailData?.author?.data?.attributes?.createdAt
+                        ).format("MMMM Do YYYY")}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-6 m-auto mt-2 mt-md-0">
-                  <div className="d-flex justify-content-md-end align-items-center"> <SocialButtons fullURL={fullURL} /> </div>
+                  <div className="d-flex justify-content-md-end align-items-center">
+                    {" "}
+                    <SocialButtons fullURL={fullURL} />{" "}
+                  </div>
                 </div>
                 {/* </div> */}
               </div>
@@ -228,41 +245,68 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                     <p>We denounce with righteous indignation and dislike men who are so great  demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot . <span>Rakhab Uddin</span></p>
                     </blockquote> */}
 
-                
-<div className="d-flex justify-content-md-end align-items-center">
-                  <SocialButtons fullURL={fullURL} />
-                </div>
-
-          
+              <div className="d-flex justify-content-md-end align-items-center">
+                <SocialButtons fullURL={fullURL} />
+              </div>
             </div>
             <div className="col-lg-4 mt-md-2 mt-0">
-              <div className="blog-sidebar mb-50" style={{ position: 'sticky', top: '-1155px' }}>
-
+              <div
+                className="blog-sidebar mb-50"
+                style={{ position: "sticky", top: "-1155px" }}
+              >
                 <div className="boxShadows rounded mt-3 pt-2">
-                  <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} tab1={"Trending"} tab2={"Recent"}/>
+                  <TabNavigation
+                    activeTab={activeTab}
+                    onTabChange={handleTabChange}
+                    tab1={"Trending"}
+                    tab2={"Recent"}
+                  />
                   {/* Your page content based on the selected tab */}
 
-                  {activeTab === 'tab1' && <div> <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentNews} heading={'Related News'} disableHeading={true} /></div>}
-                  {activeTab === 'tab2' && <div>   <BlogRecent disableMarginTop={true} disableBorder={true} blogs={recentBlog} heading={'Recent News'} disableHeading={true} /></div>}
+                  {activeTab === "tab1" && (
+                    <div>
+                      {" "}
+                      <BlogRecent
+                        disableMarginTop={true}
+                        disableBorder={true}
+                        blogs={recentNews}
+                        heading={"Related News"}
+                        disableHeading={true}
+                      />
+                    </div>
+                  )}
+                  {activeTab === "tab2" && (
+                    <div>
+                      {" "}
+                      <BlogRecent
+                        disableMarginTop={true}
+                        disableBorder={true}
+                        blogs={recentBlog}
+                        heading={"Recent News"}
+                        disableHeading={true}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="boxShadows rounded mt-3 pt-2">
-                  <BlogRelated disableMarginTop={true} disableBorder={true} blogs={detailData?.article_categories?.data} heading={'Related Reviews'} />
+                  <BlogRelated
+                    disableMarginTop={true}
+                    disableBorder={true}
+                    blogs={detailData?.article_categories?.data}
+                    heading={"Related Reviews"}
+                  />
                 </div>
 
                 {/* <div className="mt-4"><MoreBrands /></div> */}
 
-
-
-                <div className="single-widgets widget_egns_tag hideOnMobile">
+                {/* <div className="single-widgets widget_egns_tag hideOnMobile">
                   <div className="sticky-sidebar">
                     <div className="ad">
-
                       <Ad160x600 />
                     </div>
                   </div>
-
-                </div>
+                </div> */}
               </div>
               {/* <div className="single-widgets sidebar-banner">
                                 <div className="product-content">
@@ -283,28 +327,23 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
           </div>
         </div>
       </div>
-      <Ad728x90 dataAdSlot="5962627056" />
-
     </MainLayout>
-  )
+  );
 }
-
 
 export async function getServerSideProps(context) {
   const { slug } = context.params; // Access the slug parameter from context.params
 
   const { req } = context;
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
   const fullURL = `${protocol}://${host}${req.url}`;
 
   const apolloClient = createApolloClient();
   // Fetch data based on the slug (e.g., from a database)
   // console.log(newsData, "my slug"); // Log the slug value
 
-
   try {
-
     const { data } = await apolloClient.query({
       query: gql`
           query{
@@ -370,76 +409,82 @@ export async function getServerSideProps(context) {
               }
             }
     }
-          `
+          `,
     });
     const recentBlog = await apolloClient.query({
       query: gql`
-            query{
-                articles(filters:{article_type:{type:{eq:"Review"}}},pagination:{limit:6},sort:"createdAt:desc"){
-                  data{
-                    attributes{
-                      title
-                      slug
-                      content
-                      createdAt
-                      author{
-                        data{
-                          attributes{
-                            name
-                            publishedAt
-                          }
-                        }
-                      }
-                      coverImage{
-                        data{
-                          attributes{
-                            url
-                            width
-                            height
-                          }
-                        }
-                      }
-                    
+        query {
+          articles(
+            filters: { article_type: { type: { eq: "Review" } } }
+            pagination: { limit: 6 }
+            sort: "createdAt:desc"
+          ) {
+            data {
+              attributes {
+                title
+                slug
+                content
+                createdAt
+                author {
+                  data {
+                    attributes {
+                      name
+                      publishedAt
+                    }
+                  }
+                }
+                coverImage {
+                  data {
+                    attributes {
+                      url
+                      width
+                      height
                     }
                   }
                 }
               }
-            `
+            }
+          }
+        }
+      `,
     });
 
     const recentNewsData = await apolloClient.query({
       query: gql`
-            query{
-                articles(filters:{article_type:{type:{eq:"News"}}},pagination:{limit:6},sort:"createdAt:desc"){
-                  data{
-                    attributes{
-                      title
-                      slug
-                      content
-                      createdAt
-                      author{
-                        data{
-                          attributes{
-                            name
-                            publishedAt
-                          }
-                        }
-                      }
-                      coverImage{
-                        data{
-                          attributes{
-                            url
-                            width
-                            height
-                          }
-                        }
-                      }
-                    
+        query {
+          articles(
+            filters: { article_type: { type: { eq: "News" } } }
+            pagination: { limit: 6 }
+            sort: "createdAt:desc"
+          ) {
+            data {
+              attributes {
+                title
+                slug
+                content
+                createdAt
+                author {
+                  data {
+                    attributes {
+                      name
+                      publishedAt
+                    }
+                  }
+                }
+                coverImage {
+                  data {
+                    attributes {
+                      url
+                      width
+                      height
                     }
                   }
                 }
               }
-            `
+            }
+          }
+        }
+      `,
     });
 
     return {
@@ -448,11 +493,9 @@ export async function getServerSideProps(context) {
         recentBlog: recentBlog?.data?.articles?.data,
         fullURL,
         recentNews: recentNewsData?.data?.articles?.data,
-
       },
     };
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
     return {
       props: {
@@ -462,4 +505,4 @@ export async function getServerSideProps(context) {
     };
   }
 }
-export default BlogDetailsPage
+export default BlogDetailsPage;

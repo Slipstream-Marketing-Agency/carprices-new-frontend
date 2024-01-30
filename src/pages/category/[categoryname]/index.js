@@ -26,7 +26,7 @@ function CarListingLeftSidebar({
   transmissionList,
   driveList,
 }) {
-  console.log(fuelTypeList, "fuelTypeList");
+  console.log(bodyTypeList, "bodyTypeList");
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const router = useRouter();
   console.log(brandList, "brandList");
@@ -86,7 +86,7 @@ function CarListingLeftSidebar({
     };
   }, []);
 
-  console.log(brandoptions, "brandoptions");
+  console.log(router, "routerrouterrouter");
   return (
     <MainLayout>
       <Ad728x90 dataAdSlot="5962627056" />
@@ -94,7 +94,7 @@ function CarListingLeftSidebar({
       <div className="product-page mt-15 mb-100">
         <div className="container">
           <div className="row g-xl-4 gy-5">
-            <CarLeftSidebar
+            {/* <CarLeftSidebar
               brandoptions={brandoptions}
               bodyoptions={bodyoptions}
               totalpricerange={totalpricerange}
@@ -104,8 +104,8 @@ function CarListingLeftSidebar({
               cylinderList={cylinderList}
               transmissionList={transmissionList}
               driveList={driveList}
-            />
-            <div className="col-xl-9 order-xl-2 order-1">
+            /> */}
+            <div className="col-xl-12 order-xl-2 order-1">
               <div className="row mb-40">
                 <div className="col-lg-12">
                   <div className="show-item-and-filte">
@@ -227,7 +227,7 @@ export async function getServerSideProps(context) {
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
   const brandSlugs = query.brand ? query.brand.split(",") : [];
-  const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
+  const bodyTypeSlugs = [query.categoryname ? query.categoryname: []];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
   const driveSlugs = query.drive ? query.drive.split(",") : [];
@@ -235,30 +235,6 @@ export async function getServerSideProps(context) {
     ? query.transmission.split(",")
     : [];
 
-  const additionalQueryParams = {
-    haveMusic: query.haveMusic,
-    isLuxury: query.isLuxury,
-    isPremiumLuxury: query.isPremiumLuxury,
-    haveTechnology: query.haveTechnology,
-    havePerformance: query.havePerformance,
-    isSpacious: query.isSpacious,
-    isElectric: query.isElectric,
-    isFuelEfficient: query.isFuelEfficient,
-    isOffRoad: query.isOffRoad,
-    isTwoSeat: query.isTwoSeat,
-    isTwoPlusTwo: query.isTwoPlusTwo,
-    isFourToFive: query.isFourToFive,
-    isFiveToSeven: query.isFiveToSeven,
-    isSevenToNine: query.isSevenToNine,
-  };
-
-  const additionalQueryString = Object.keys(additionalQueryParams)
-  .filter(key => additionalQueryParams[key] !== undefined)
-  .map(key => `${key}=${additionalQueryParams[key]}`)
-  .join('&');
-
-
-  console.log(additionalQueryString,"additionalQueryString");
   const queryParams = {};
 
   if (brandSlugs.length > 0) {
@@ -311,9 +287,7 @@ export async function getServerSideProps(context) {
   }
 
   const filteredTrims = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
-    }car-trims/homefilter?brands=${JSON.stringify(
+    `${process.env.NEXT_PUBLIC_API_URL}car-trims/filter?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
       fuelTypeSlugs
@@ -327,7 +301,7 @@ export async function getServerSideProps(context) {
       displacementRange
     )}&powerRanges=${JSON.stringify(
       powerRange
-    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+    )}&page=${page}&pageSize=${pageSize}`
   );
 
   const fullFilter = await axios.get(
@@ -347,7 +321,7 @@ export async function getServerSideProps(context) {
       displacementRange
     )}&powerRanges=${JSON.stringify(
       powerRange
-    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+    )}&page=${page}&pageSize=${pageSize}`
   );
 
   let fuelTypeListres,
@@ -376,7 +350,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     fuelTypeListres = fuelTypeList;
   }
@@ -399,7 +373,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     cylinderListres = cylinderList;
   }
@@ -420,7 +394,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     transmissionListres = transmissionSlugs;
   }
@@ -443,7 +417,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     driveListres = driveSlugs;
   }
@@ -464,7 +438,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     pricerangesres = priceranges;
   }
@@ -483,7 +457,7 @@ export async function getServerSideProps(context) {
         transmissionSlugs
       )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     totaldisplacementrangeres = totaldisplacementrange;
   }
@@ -504,7 +478,7 @@ export async function getServerSideProps(context) {
         priceRange
       )}&displacementRanges=${JSON.stringify(
         displacementRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     totalpowerrangeres = totalpowerrange;
   }
@@ -525,7 +499,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     brandListres = brandList;
   }
@@ -546,7 +520,7 @@ export async function getServerSideProps(context) {
         displacementRange
       )}&powerRanges=${JSON.stringify(
         powerRange
-      )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+      )}&page=${page}&pageSize=${pageSize}`
     );
     bodyTypeListres = bodyTypeList;
   }

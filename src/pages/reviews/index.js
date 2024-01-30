@@ -12,6 +12,7 @@ import Image from "next/image";
 import Ad160x600 from "@/src/components/ads/Ad160x600";
 import Pagination from "@/src/utils/Pagination";
 import BlogDropDown from "@/src/components/BlogDropDown";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function BlogStandardPage({
@@ -52,8 +53,8 @@ function BlogStandardPage({
     >
       <Ad728x90 dataAdSlot="5962627056" />
       <div className="container mb-4">
-        <h1 className="my-4">Latest Car Reviews</h1>
-        <p>
+        <h1 className="fw-bold mt-2">Latest Car Reviews in UAE</h1>
+        <p className="my-2">
           Stay up-to-date with the latest reviews and updates on the UAE car
           industry, including new car launches, launch dates, car images, expos
           and events, price updates, latest discounts, facelifts, recalls, and
@@ -63,7 +64,7 @@ function BlogStandardPage({
         {/* <BlogDropDown initialFocus={true} /> */}
 
         <div className="row g-4 mt-3">
-          <div className="col-lg-10">
+          <div className="col-lg-8">
             <div className="row g-4 ">
               {news?.map((newsItem, index) => (
                 <>
@@ -145,19 +146,19 @@ function BlogStandardPage({
               ))}
             </div>
           </div>
-          <div className="col-lg-2 hideOnMobile">
+          <div className="col-lg-4 hideOnMobile">
             <div className="sticky-sidebar">
               <div className="ad-container">
                 {/* Add your skyscraper advertisement component or content here */}
                 {/* For example: */}
-                <Ad160x600 />
+                <Ad300x600 dataAdSlot="8615289670" />
               </div>
             </div>
           </div>
         </div>
       </div>
       <br />
-      <Ad728x90 dataAdSlot="5962627056" />
+      {/* <Ad728x90 dataAdSlot="5962627056" /> */}
       <br />
       <Pagination currentPage={currentPage} totalPages={totalPages} />
       <br />

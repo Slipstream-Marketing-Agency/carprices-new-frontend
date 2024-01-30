@@ -12850,6 +12850,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   background-repeat: no-repeat;
   padding: 8px 0;
   padding-bottom: 30px;
+  background-position: 50% 86%;
 }
 @media (max-width: 1200px) {
   .transCar {
@@ -23480,11 +23481,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   height: 100%;
   border-radius: 5px;
   z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0) 50.27%
-  );
   transition: 0.35s;
 }
 .car-details-area .car-img-area .tab-content .product-img img {

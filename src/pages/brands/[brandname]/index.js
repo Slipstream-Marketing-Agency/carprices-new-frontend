@@ -48,6 +48,7 @@ function CarListingLeftSidebar({
   const bodyoptions = bodyTypeList?.map((body) => ({
     label: body.name,
     value: body.slug,
+    image:body.image.url
   }));
 
   console.log(bodyTypeList, "bodyTypeList");

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-export default function Ad728x90(props) {
+export default function Ad970x180(props) {
   const router = useRouter()
 
   useEffect(() => {
@@ -19,10 +19,10 @@ export default function Ad728x90(props) {
   return (
     <>
 
-      <div className="Ad728x90">
+      <div className="Ad970x180">
         {process.env.NEXT_PUBLIC_MODE == "production" ? (
 
-          <ins className="adsbygoogle responsive_leaderboard_horizontal"
+          <ins className="adsbygoogle fixed_top_banner_bill_board"
             style={{ display: "block" }}
             data-ad-client="ca-pub-4857144107996534"
             data-ad-slot={props?.dataAdSlot}

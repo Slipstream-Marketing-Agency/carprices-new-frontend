@@ -31,11 +31,11 @@ function index({ homeData }) {
       <AdvanceFilterModal />
       <div
         className="banner-section1"
-        // style={{
-        //   backgroundImage: `url(${homeData?.image?.data?.attributes?.formats?.large?.url})`,
-        // }}
+        style={{
+          backgroundImage: `url(${homeData?.image?.data?.attributes?.url})`,
+        }}
       >
-        <div className="container d-flex justify-content-center">
+        <div className="container">
           <div className="row g-xl-4 gy-4">
             <div
               className="col-xxl-4 col-xl-4 wow zoomIn"
