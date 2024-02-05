@@ -208,7 +208,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                           <div className="product-content">
                             <div className="product-content-height">
                               <h6 className="mobileFontCarName mb-0">
-                                <Link legacyBehavior href="/car-deatils">
+                                <Link legacyBehavior href="">
                                   <span>
                                     {car?.attributes?.year}{" "}
                                     {car?.attributes?.car_brands?.data[0]
@@ -254,7 +254,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                               <div className="brand ">
                                 <Link
                                   legacyBehavior
-                                  href="/single-brand-category"
+                                  href=""
                                 >
                                   <img
                                     src={
