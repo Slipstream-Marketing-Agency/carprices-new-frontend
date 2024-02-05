@@ -1,16 +1,17 @@
-import Ad728x90 from '@/src/components/ads/Ad728x90'
-import MainLayout from '@/src/layout/MainLayout'
-import React, { useEffect, useState } from 'react'
+import Ad728x90 from "@/src/components/ads/Ad728x90";
+import MainLayout from "@/src/layout/MainLayout";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import Slider from "rc-slider";
-import Price from '@/src/components/common/Price';
-import FeaturedImage from '@/src/components/featuredImage';
-import StarRating from '@/src/components/common/StarRating';
-import Image from 'next/image';
+import Price from "@/src/components/common/Price";
+import FeaturedImage from "@/src/components/featuredImage";
+import StarRating from "@/src/components/common/StarRating";
+import Image from "next/image";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
+import axios from "axios";
 function loanCalculator() {
-
   // const [loanFilter, setLoanFilter] = useState({
   //   make: null,
   //   model: null,
@@ -21,81 +22,33 @@ function loanCalculator() {
 
   const [showCarAnimImage, setShowCarAnimImage] = useState(false);
   const [loanFilter, setLoanFilter] = useState({
-    make: 'Toyota',
-    model: 'Camry',
-    year: 2022,
-    trim: { value: 25000 },// Example trim value object
-    image: 'https://example.com/car-image.jpg', // Example image URL
+    make: "",
+    model: "",
+    year: "",
+    trim: "", // Example trim value object
+    image: "", // Example image URL
   });
 
+  console.log(loanFilter, "loanFilter");
 
   const [brandsList, setBrandsList] = useState([]);
 
-  const brandListOptions = [
-    { value: 'toyota', label: 'Toyota' },
-    { value: 'honda', label: 'Honda' },
-    { value: 'ford', label: 'Ford' },
-    // Other brand options...
-  ];
-
-
-  // let brandListOptions = brandsList.map((carBrand) => ({
-  //   value: carBrand.id,
-  //   label: carBrand.name,
-  // }));
-
   const [modelsList, setModelsList] = useState([]);
-
-  // const modelsListOptions = modelsList.map((model) => ({
-  //   value: model.id,
-  //   label: model.name,
-  // }));
-  const modelsListOptions = [
-    { value: 'camry', label: 'Camry' },
-    { value: 'accord', label: 'Accord' },
-    { value: 'mustang', label: 'Mustang' },
-    // Add more model options as needed
-  ];
 
   const [yearList, setYearList] = useState([]);
 
-  // const yearListOptions = yearList.map((year) => ({
-  //   value: year.year,
-  //   label: year.year,
-  // }));
-  const yearListOptions = [
-    { value: 2020, label: '2020' },
-    { value: 2021, label: '2021' },
-    { value: 2022, label: '2022' },
-    // Add more year options as needed
-  ];
-
   const [trimList, setTrimList] = useState([]);
-  // const trimsListOptions = trimList.map((trim) => ({
-  //   value: trim.price,
-  //   label: trim.name,
-  //   image: trim.featuredImage
-  // }));
-  const trimsListOptions = [
-    { value: 'lx', label: 'LX' },
-    { value: 'ex', label: 'EX' },
-    { value: 'touring', label: 'Touring' },
-    // Add more trim options as needed
-  ];
 
-
-  const [imageList, setImageList] = useState([]);
+  console.log(trimList, "trimListtrimListtrimList");
 
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedTrim, setSelectedTrim] = useState(null);
 
-
   // const [loanAmount, setLoanAmount] = useState(
   //   loanFilter?.trim?.value ? loanFilter?.trim?.value : 0
-  // );  
-  const [interestRate, setInterestRate] = useState(1.9);
-
+  // );
+  const [interestRate, setInterestRate] = useState(2.5);
 
   const [downPayment, setDownPayment] = useState("");
   const [loanTenure, setLoanTenure] = useState(60);
@@ -109,18 +62,37 @@ function loanCalculator() {
   const [modelId, setModelId] = useState();
 
   useEffect(() => {
-    if (loanFilter?.trim?.value === undefined) {
+    if (loanFilter?.trim === "") {
       setLoanAmount(0);
       setDownPayment(0);
     } else {
-      setLoanAmount(loanFilter?.trim?.value);
-      setDownPayment((parseFloat(loanFilter?.trim?.value) * 0.2));
-      setInitialDownPayment(
-        (parseFloat(loanFilter?.trim?.value) * 0.2)
-      );
+      setLoanAmount(loanFilter?.trim);
+      setDownPayment(parseFloat(loanFilter?.trim) * 0.2);
+      setInitialDownPayment(parseFloat(loanFilter?.trim) * 0.2);
     }
-    setShowCarAnimImage(true)
-  }, [loanFilter?.trim?.value]);
+  }, [loanFilter?.trim]);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        // Update the URL to match your API endpoint and environment
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_API_URL + "car-brands/names"
+        );
+        const brandsData = response.data.map((brand) => ({
+          value: brand.id,
+          label: brand.attributes.name,
+        }));
+        setBrandsList(brandsData);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+        // Handle error appropriately in your UI
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
   const handleMakeChange = (selectedOption) => {
     setSelectedYear(null);
     setSelectedTrim(null);
@@ -132,34 +104,92 @@ function loanCalculator() {
       trim: null,
       year: null,
     });
+
+    // Fetch models for the selected brand
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
+      )
+      .then((response) => {
+        console.log(response, "responseresponseresponseresponseresponse");
+        const data = response.data.attributes.models.map((item) => ({
+          value: item.id,
+          label: item.name,
+        }));
+        setModelsList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching models:", error);
+        toast.error("Failed to load models.");
+      });
   };
+
   const handleModelChange = (selectedOption) => {
     setSelectedYear(null);
     setSelectedTrim(null);
-    setSelectedModel(selectedOption)
+    setSelectedModel(selectedOption);
     setLoanFilter({
       ...loanFilter,
       model: selectedOption,
       trim: null,
       year: null,
     });
+
+    // Fetch years for the selected model
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-models/${selectedOption.value}/years-under-trims`
+      )
+      .then((response) => {
+        const data = response.data.map((item) => ({
+          value: item,
+          label: item,
+        }));
+        setYearList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching years:", error);
+        toast.error("Failed to load years.");
+      });
   };
 
   const handleYearChange = (selectedOption) => {
     setSelectedTrim(null);
-    setSelectedYear(selectedOption)
+    setSelectedYear(selectedOption);
     setLoanFilter({
       ...loanFilter,
       year: selectedOption,
-      trim: null
+      trim: null,
     });
+
+    // Fetch trims for the selected model and year
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-models/${loanFilter.model.value}/trims/${selectedOption.value}`
+      )
+      .then((response) => {
+        const data = response.data.data.trims.map((item) => ({
+          value: item.name,
+          label: item.name,
+          price: item.price,
+          image: item.featuredImage,
+        }));
+        setTrimList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching trims:", error);
+        toast.error("Failed to load trims.");
+      });
   };
 
   const handleTrimChange = (selectedOption) => {
-    setSelectedTrim(selectedOption)
+    console.log(selectedOption, "selectedOptionselectedOption");
+    setSelectedTrim(selectedOption);
+    setLoanAmount(selectedOption.price);
     setLoanFilter({
       ...loanFilter,
-      trim: selectedOption,
+      trim: selectedOption.price,
+      image: selectedOption.image,
     });
   };
 
@@ -226,36 +256,29 @@ function loanCalculator() {
     }),
   };
 
-
-
-
   const calculateEMI = () => {
     const p = parseFloat(loanAmount) - parseFloat(downPayment);
     const r = parseFloat(interestRate) / 1200; // monthly interest rate
     const n = parseFloat(loanTenure); // loan tenure in months
 
-    const emi = (
-      (p * r * Math.pow(1 + r, n)) /
-      (Math.pow(1 + r, n) - 1)
-    );
+    const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     setMonthlyInstallment(emi);
 
-    const totalInterest = (emi * n - p);
+    const totalInterest = emi * n - p;
     setTotalInterest(totalInterest);
 
-    const totalAmount = (emi * n);
+    const totalAmount = emi * n;
     setTotalAmount(totalAmount);
   };
 
   const handleDownPaymentChange = (value) => {
     setDownPayment(value);
-  }
+  };
 
   const handleInputDownPaymentChange = (e) => {
     if (e.target.value > parseFloat(loanAmount)) {
-      alert(`Loan Amount Cannot be greater than Showroom Price`)
-    }
-    else {
+      alert(`Loan Amount Cannot be greater than Showroom Price`);
+    } else {
       setDownPayment(parseFloat(e.target.value)); // Update the interestRate state
     }
   };
@@ -265,40 +288,124 @@ function loanCalculator() {
   };
   const handleInputInterestRateChange = (e) => {
     if (e.target.value > 8) {
-      alert("Interest rate cannot be more than 8%")
-    }
-    else {
+      alert("Interest rate cannot be more than 8%");
+    } else {
       setInterestRate(parseFloat(e.target.value)); // Update the interestRate state
     }
   };
 
-
   const handleloanTenureChange = (months) => {
     setLoanTenure(months);
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     calculateEMI();
   };
 
+  const faq = [
+    {
+      question: <>Can I get a car loan in the UAE if I'm not a UAE national?</>,
+      answer: (
+        <>
+          Yes, many banks offer car loans to expatriates, but eligibility
+          criteria may differ based on your visa type.
+        </>
+      ),
+      id: 1,
+      condition: true,
+    },
+    {
+      question: (
+        <>What interest rates can I expect for a car loan in the UAE?</>
+      ),
+      answer: (
+        <>
+          Interest rates vary between banks and can depend on factors like loan
+          amount, tenure, and your creditworthiness.
+        </>
+      ),
+      id: 2,
+      condition: true,
+    },
+    {
+      question: (
+        <> Is it possible to finance a used luxury car with a car loan?</>
+      ),
+      answer: (
+        <>
+          Yes, some banks in the UAE offer financing options for used luxury
+          cars.
+        </>
+      ),
+      id: 3,
+      condition: true,
+    },
+    {
+      question: <>Can I apply for a car loan without a UAE residence visa?</>,
+      answer: (
+        <>
+          It's challenging, but some lenders offer car loans to individuals with
+          certain visa types, such as employment or investor visas.
+        </>
+      ),
+      id: 4,
+      condition: true,
+    },
+    {
+      question: <>What happens if I miss an EMI payment?</>,
+      answer: (
+        <>
+          Missing an EMI payment can result in late payment fees and negatively
+          impact your credit score. It's essential to make payments on time.
+        </>
+      ),
+      id: 5,
+      condition: true,
+    },
+    {
+      question: (
+        <>What banks can be loan providers for a Car loan in the UAE?</>
+      ),
+      answer: (
+        <>
+          Emirates NBD, Dubai Islamic Bank, First Abu Dhabi Bank etc. offer a
+          wide range of car loan options, including competitive interest rates
+          and flexible repayment terms. Their customer-centric approach makes
+          them a top choice for many residents.
+        </>
+      ),
+      id: 6,
+      condition: true,
+    },
+  ];
 
+  console.log(modelsList, "modelsListmodelsList");
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title:
+          "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
+        description:
+          "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
+        type: "Car Review Website",
+      }}
+    >
       <Ad728x90 dataAdSlot="5962627056" />
 
-
       <div className="container mt-5">
-        <h4 className="mb-4">Select Make, Model, Year & Variant to check the EMI</h4>
+        <h1 className="fw-bold mb-3">Car Loan EMI calculator in UAE</h1>
+        <h4 className="mb-4">
+          Select Make, Model, Year & Variant to check the EMI
+        </h4>
         <div className="row gx-3">
           <div className="col-md-3 mb-3">
             <Select
-              id="long-value-select"
-              instanceId="long-value-select"
+              id="brand-select"
+              instanceId="brand-select"
               value={loanFilter.make}
-              options={brandListOptions}
+              options={brandsList} // Use the state that contains the fetched brands
               onChange={handleMakeChange}
               placeholder="Select make"
               styles={customStyles}
@@ -309,7 +416,7 @@ function loanCalculator() {
               id="long-value-select"
               instanceId="long-value-select"
               value={selectedModel}
-              options={_.sortBy(modelsListOptions, 'label')}
+              options={modelsList}
               onChange={handleModelChange}
               isDisabled={!loanFilter.make}
               placeholder="Select model"
@@ -321,7 +428,7 @@ function loanCalculator() {
               id="long-value-select"
               instanceId="long-value-select"
               value={selectedYear}
-              options={yearListOptions}
+              options={yearList}
               onChange={handleYearChange}
               isDisabled={!loanFilter.model}
               placeholder="Select year"
@@ -333,7 +440,7 @@ function loanCalculator() {
               id="long-value-select"
               instanceId="long-value-select"
               value={selectedTrim}
-              options={_.sortBy(trimsListOptions, 'label')}
+              options={trimList}
               onChange={handleTrimChange}
               isDisabled={!loanFilter.year}
               placeholder="Select trim"
@@ -342,402 +449,340 @@ function loanCalculator() {
           </div>
         </div>
       </div>
-      {selectedTrim && <div className="calculatorContainer">
-        <div className="headerImage">
-        </div>
-        <div className="calculatorContent">
-          <div className="leftSection">
-            <div>
-              <div className="monthlyIncomeContainer">
-                <label className='monthlyIncomeTxt'>Down Payment </label>
-                <div className="amountContainer">
-                  <input
-                    type="number"
-                    className="form-control downPaymentInputTxt"
+      {selectedTrim && (
+        <div className="d-flex justify-content-center">
+          <div className="calculatorContent ">
+            <div className="d-flex justify-content-center">
+              <div className="leftSection">
+                <div>
+                  <div className="monthlyIncomeContainer">
+                    <label className="monthlyIncomeTxt">Down Payment </label>
+                    <div className="amountContainer">
+                      <input
+                        type="number"
+                        className="form-control downPaymentInputTxt"
+                        value={parseFloat(downPayment)}
+                        onChange={handleInputDownPaymentChange}
+                        min={parseFloat(initialDownPayment)} // Set the minimum value
+                        max={parseFloat(loanAmount)} // Set the maximum value
+                        step={1}
+                      />
+                    </div>
+                  </div>
+                  <Slider
+                    range
+                    min={parseFloat(initialDownPayment)}
+                    max={parseFloat(loanAmount)}
+                    // marks={marks}
+                    step={0.01}
                     value={parseFloat(downPayment)}
-                    onChange={handleInputDownPaymentChange}
-                    min={parseFloat(initialDownPayment)} // Set the minimum value
-                    max={parseFloat(loanAmount)} // Set the maximum value
-                    step={1}
+                    onChange={handleDownPaymentChange}
+                    trackStyle={[trackStyle]}
+                    railStyle={railStyle}
+                    handleStyle={[handleStyle, handleStyle]}
+                    dotStyle={dotStyle}
+                    allowCross={false}
                   />
+                  <div className="bottomAmount">
+                    <span>{parseFloat(initialDownPayment)}</span>
+                    <span>{parseFloat(loanAmount)}</span>
+                  </div>
                 </div>
-              </div>
-              <Slider
-                range
-                min={parseFloat(initialDownPayment)}
-                max={parseFloat(loanAmount)}
-                // marks={marks}
-                step={0.01}
-                value={parseFloat(downPayment)}
-                onChange={handleDownPaymentChange}
-                trackStyle={[trackStyle]}
-                railStyle={railStyle}
-                handleStyle={[handleStyle, handleStyle]}
-                dotStyle={dotStyle}
-                allowCross={false}
-              />
-              <div className="bottomAmount">
-                <span >{parseFloat(initialDownPayment)}</span>
-                <span>{parseFloat(loanAmount)}</span>
-              </div>
-            </div>
-            <div className='mt-2'>
-              <div className="monthlyIncomeContainer">
-                <label className='monthlyIncomeTxt'>Interest Rate</label>
-                <div className="amountContainer">
-                  <input
-                    type="number"
-                    className="form-control interestInputTxt"
-                    value={interestRate}
-                    onChange={handleInputInterestRateChange}
+                <div className="mt-2">
+                  <div className="monthlyIncomeContainer">
+                    <label className="monthlyIncomeTxt">Interest Rate</label>
+                    <div className="amountContainer">
+                      <input
+                        type="number"
+                        className="form-control interestInputTxt"
+                        value={interestRate}
+                        onChange={handleInputInterestRateChange}
+                        min={1.9}
+                        max={8}
+                        step={0.1}
+                        style={{ width: "90px" }}
+                      />
+                    </div>
+                  </div>
+                  <Slider
+                    range
                     min={1.9}
                     max={8}
+                    // marks={marks}
                     step={0.1}
-                    style={{width:"90px"}}
+                    defaultValue={interestRate}
+                    // defaultValue={interestRate}
+                    onChange={handleInterestRateChange}
+                    trackStyle={[trackStyle]}
+                    railStyle={railStyle}
+                    handleStyle={[handleStyle, handleStyle]}
+                    dotStyle={dotStyle}
+                    allowCross={false}
                   />
+                  <div className="bottomAmount">
+                    <span>1.9%</span>
+                    <span>8%</span>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <h3 className="mt-3 monthlyIncomeTxt">Loan Period* (year)</h3>
+                  <div className="d-flex my-2 mt-3">
+                    <div
+                      className={
+                        loanTenure === 12
+                          ? "loanBtn loanBtn-outline-primary me-2"
+                          : "loanBtn loanBtn-primary me-2"
+                      }
+                      onClick={() => handleloanTenureChange(12)}
+                    >
+                      1
+                    </div>
+                    <div
+                      className={
+                        loanTenure === 24
+                          ? "loanBtn loanBtn-outline-primary me-2"
+                          : "loanBtn loanBtn-primary me-2"
+                      }
+                      onClick={() => handleloanTenureChange(24)}
+                    >
+                      2
+                    </div>
+                    <div
+                      className={
+                        loanTenure === 36
+                          ? "loanBtn loanBtn-outline-primary me-2"
+                          : "loanBtn loanBtn-primary me-2"
+                      }
+                      onClick={() => handleloanTenureChange(36)}
+                    >
+                      3
+                    </div>
+                    <div
+                      className={
+                        loanTenure === 48
+                          ? "loanBtn loanBtn-outline-primary me-2"
+                          : "loanBtn loanBtn-primary me-2"
+                      }
+                      onClick={() => handleloanTenureChange(48)}
+                    >
+                      4
+                    </div>
+                    <div
+                      className={
+                        loanTenure === 60
+                          ? "loanBtn loanBtn-outline-primary me-2"
+                          : "loanBtn loanBtn-primary me-2"
+                      }
+                      onClick={() => handleloanTenureChange(60)}
+                    >
+                      5
+                    </div>
+                  </div>
                 </div>
               </div>
-              <Slider
-                range
-                min={1.9}
-                max={8}
-                // marks={marks}
-                step={0.1}
-                defaultValue={interestRate}
-                // defaultValue={interestRate}
-                onChange={handleInterestRateChange}
-                trackStyle={[trackStyle]}
-                railStyle={railStyle}
-                handleStyle={[handleStyle, handleStyle]}
-                dotStyle={dotStyle}
-                allowCross={false}
-              />
-              <div className="bottomAmount">
-                <span >1.9%</span>
-                <span>8%</span>
+              <div className="rightSection">
+                <div className="totalAmountContainer">
+                  <img
+                    title=""
+                    alt=""
+                    className="carImage "
+                    width="300"
+                    height="300"
+                    decoding="async"
+                    data-nimg="1"
+                    style={{ color: "transparent" }}
+                    src={
+                      loanFilter.image !== ""
+                        ? loanFilter.image
+                        : "/assets/img/car-placeholder.png"
+                    }
+                  />
+                  <h5 className="totalAmoutTxt">
+                    AED <Price data={loanFilter.trim} />
+                  </h5>
+                  {/* <h6 className='maxEmiTxt'>Max EMI</h6> */}
+                  <button
+                    className="btn btn-primary py-2 px-5 mt-2 mb-3"
+                    onClick={handleSubmit}
+                    disabled={loanAmount === 0 ? true : false}
+                  >
+                    Calculate
+                  </button>
+                </div>
               </div>
             </div>
-            <div className='mt-2'>
-              <h3 className="mt-3 monthlyIncomeTxt">Loan Period* (year)</h3>
-              <div className="d-flex my-2 mt-3">
-                <div
-                  className={
-                    loanTenure === 12
-                      ? "loanBtn loanBtn-outline-primary me-2"
-                      : "loanBtn loanBtn-primary me-2"
-                  }
-                  onClick={() => handleloanTenureChange(12)}
-                >
-                  1
-                </div>
-                <div
-                  className={
-                    loanTenure === 24
-                      ? "loanBtn loanBtn-outline-primary me-2"
-                      : "loanBtn loanBtn-primary me-2"
-                  }
-                  onClick={() => handleloanTenureChange(24)}
-                >
-                  2
-                </div>
-                <div
-                  className={
-                    loanTenure === 36
-                      ? "loanBtn loanBtn-outline-primary me-2"
-                      : "loanBtn loanBtn-primary me-2"
-                  }
-                  onClick={() => handleloanTenureChange(36)}
-                >
-                  3
-                </div>
-                <div
-                  className={
-                    loanTenure === 48
-                      ? "loanBtn loanBtn-outline-primary me-2"
-                      : "loanBtn loanBtn-primary me-2"
-                  }
-                  onClick={() => handleloanTenureChange(48)}
-                >
-                  4
-                </div>
-                <div
-                  className={
-                    loanTenure === 60
-                      ? "loanBtn loanBtn-outline-primary me-2"
-                      : "loanBtn loanBtn-primary me-2"
-                  }
-                  onClick={() => handleloanTenureChange(60)}
-                >
-                  5
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="rightSection">
-            <div className='totalAmountContainer'>
-              {showCarAnimImage && <img title="" alt="" className='carImage ' width="300" height="300" decoding="async" data-nimg="1" style={{ color: "transparent" }} src="/assets/img/car-placeholder.png" />}
-              <h5 className='totalAmoutTxt'>AED 22446*</h5>
-              {/* <h6 className='maxEmiTxt'>Max EMI</h6> */}
-              <button onClick={handleSubmit} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className='budgetBtn mt-3 '>Calculate EMI</button>
-            </div >
-          </div>
-        </div>
-        {/* viewbreakup modal*/}
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Loan Breakup</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body ">
-                <div class="emi-InfoBox">
-                  {/* <div class="emi-Head"> Your monthly EMI</div>
-                  <div class="emi-Price">AED <span class="emi_div">5,932</span></div> */}
-                  <div class="emi-Interest">Rate of interest @ <span class="interestRate">{interestRate}</span>%* for <span class="tenure_value">{loanTenure / 12}</span> year(s)</div>
-                  <div class="row  g-2">
-                    <div class=" col-sm-6 col-12">
-                      <div class="card">
-                        <div class="card-content">
-                          <div class="card-body">
-                            <div class="media d-flex justify-content-start align-items-center">
-                              <div class="align-self-center">
-                                <i class="bi bi-bank2 primary fs-2 float-left"></i>
-                              </div>
-                              <div class="media-body text-right ms-4">
-                                <h6 className="fw-bold">
-                                  Monthly Payment <small>(AED)</small>
-                                </h6>
-                                <h3 className="fw-bold">
-                                  <Price data={monthlyInstallment} />
-                                </h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+            {monthlyInstallment && (
+              <div className="d-flex justify-content-center">
+                <div class="row resultContainer">
+                  <div class=" col-sm-4 col-12">
+                    <div class="media d-flex justify-content-start align-items-center">
+                      <div class="align-self-center">
+                        <i class="bi bi-bank2 primary fs-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-right ms-4">
+                        <h6 className="fw-bold">
+                          Monthly Payment <small>(AED)</small>
+                        </h6>
+                        <h3 className="fw-bold">
+                          <Price data={monthlyInstallment} />
+                        </h3>
                       </div>
                     </div>
-                    <div class=" col-sm-6 col-12">
-                      <div class="card">
-                        <div class="card-content">
-                          <div class="card-body">
-                            <div class="media d-flex justify-content-start align-items-center">
-                              <div class="align-self-center">
-                                <i class="bi bi-bank2 primary fs-2 float-left"></i>
-                              </div>
-                              <div class="media-body text-right ms-4">
-                                <h6 className="fw-bold">
-                                  Total Interest Payment <small>(AED)</small>
-                                </h6>
-                                <h3 className="fw-bold"><Price data={totalInterest} /></h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  </div>
+                  <div class=" col-sm-4 col-12">
+                    <div class="media d-flex justify-content-start align-items-center">
+                      <div class="align-self-center">
+                        <i class="bi bi-bank2 primary fs-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-right ms-4">
+                        <h6 className="fw-bold">
+                          Total Interest Payment <small>(AED)</small>
+                        </h6>
+                        <h3 className="fw-bold">
+                          <Price data={totalInterest} />
+                        </h3>
                       </div>
                     </div>
-                    <div class=" col-sm-6 col-12">
-                      <div class="card">
-                        <div class="card-content">
-                          <div class="card-body">
-                            <div class="media d-flex justify-content-start align-items-center">
-                              <div class="align-self-center">
-                                <i class="bi bi-bank2 primary fs-3 float-left"></i>
-                              </div>
-                              <div class="media-body text-right ms-4">
-                                <h6 className="fw-bold">
-                                  Total Amount to Pay <small>(AED)</small>
-                                </h6>
-                                <h3 className="fw-bold"><Price data={totalAmount} /></h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  </div>
+                  <div class=" col-sm-4 col-12">
+                    <div class="media d-flex justify-content-start align-items-center">
+                      <div class="align-self-center">
+                        <i class="bi bi-bank2 primary fs-3 float-left"></i>
+                      </div>
+                      <div class="media-body text-right ms-4">
+                        <h6 className="fw-bold">
+                          Total Amount to Pay <small>(AED)</small>
+                        </h6>
+                        <h3 className="fw-bold">
+                          <Price data={totalAmount} />
+                        </h3>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                {/* <button type="button" class="btn btn-primary">Understood</button> */}
-              </div>
-            </div>
+            )}
           </div>
         </div>
-      </div>}
-
-
+      )}
 
       <div className="faq-page-wrap pt-100 mb-100">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-lg-4 d-lg-flex d-none">
-              <div className="faq-img">
-                <img src="assets/img/inner-page/faq-img.png" alt="" />
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
+              <div className="sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
               </div>
             </div>
             <div className="col-lg-8">
               <div className="faq-area">
-                <div className="section-title-and-filter mb-40">
+                <div>
+                  <p className="mt-4">
+                    When it comes to financing your dream car in the UAE,
+                    securing a car loan is a common route taken by many
+                    residents and expatriates alike. Car ownership is a symbol
+                    of status and convenience in the Emirates, and obtaining the
+                    right car loan can make it easily attainable. The allure of
+                    owning a car in the UAE, with its well-maintained roads and
+                    world-class infrastructure, is a dream shared by many
+                    residents and expatriates alike. However, the reality is
+                    that purchasing a car in the UAE often requires a
+                    substantial financial commitment, and that's where a car
+                    loan can make all the difference.
+                  </p>
+                  <h2 className="mt-4 fw-bold">Car Loan EMI and Downpayment</h2>
+                  <h4 className="mt-4 fw-bold">
+                    Interest Rate and Monthly Installment
+                  </h4>
+                  <p className="mt-2">
+                    Interest rates play a pivotal role in determining the cost
+                    of your car loan. Typically, car loan interest rates in the
+                    UAE can vary depending on the lender and the prevailing
+                    market conditions. Therefore, it's essential to compare
+                    interest rates across different financial institutions to
+                    secure the most favorable deal. Lower interest rates
+                    translate to reduced monthly installments, which means less
+                    financial strain over the loan tenure. By doing your
+                    research and finding the best interest rate, you can
+                    optimize your car loan for affordability.
+                  </p>
+                  <h4 className="mt-4 fw-bold">
+                    Loan Installment and Downpayment Variability on Car Finance
+                  </h4>
+                  <p className="mt-2">
+                    Car loan providers in the UAE offer various loan tenures and
+                    down payment options, allowing you to choose the one that
+                    aligns with your financial goals. Whether you prefer a
+                    shorter loan tenure with higher EMI instalments or a longer
+                    tenure with lower monthly payments, the flexibility offered
+                    by car loan providers ensures you can adapt the loan
+                    structure to suit your unique financial situation. Moreover,
+                    the down payment amount can also vary, giving you the
+                    freedom to decide how much you can contribute upfront.
+                  </p>
+                  <h4 className="mt-4 fw-bold">
+                    Monthly Budgeting with Car Loans
+                  </h4>
+                  <p className="mt-2">
+                    A significant advantage of opting for a car loan in the UAE
+                    is the ability to plan your monthly budget effectively. With
+                    a fixed EMI amount, you can confidently allocate your
+                    resources and manage your finances without unexpected
+                    surprises. This predictability allows you to strike a
+                    balance between fulfilling your car ownership dreams and
+                    maintaining financial stability.
+                  </p>
+                </div>
+                <div className="section-title-and-filter mt-4">
                   <div className="section-title">
-                    <h4>FAQ’s &amp; Latest Answer</h4>
+                    <h2 className="fw-bold mb-4">
+                      FAQs (Frequently Asked Questions) on car loan in UAE
+                    </h2>
                   </div>
                 </div>
+
                 <div className="faq-wrap">
-                  <div className="accordion accordion-flush" id="accordionFlushExample">
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingOne">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                          How often should I get my car serviced?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseOne" className="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">
-                          Follow your car's owner's manual for recommended service intervals based on mileage and time. Consider driving conditions and habits for adjustments. Address warning signs promptly.</div>
+                  {faq.map((item, index) => (
+                    <div
+                      className="accordion accordion-flush"
+                      id="accordionFlushExample"
+                      key={index}
+                    >
+                      <div className="accordion-item">
+                        <h5
+                          className="accordion-header"
+                          id={`flush-heading${index}`}
+                        >
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#flush-collapse${index}`}
+                            aria-expanded="false"
+                            aria-controls={`flush-collapse${index}`}
+                          >
+                            {item.question}
+                          </button>
+                        </h5>
+                        <div
+                          id={`flush-collapse${index}`}
+                          className="accordion-collapse collapse show"
+                          aria-labelledby={`flush-heading${index}`}
+                          data-bs-parent="#accordionFlushExample"
+                        >
+                          <div className="accordion-body">{item.answer}</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingTwo">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                          How often should I change my car's oil?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingThree">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                          What type of fuel should I use for my car?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingFour">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                          What is the recommended tire pressure for my car?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingFive">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                          Can I trade in my old car at a dealership?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingSix">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                          Can I test drive a vehicle before purchasing it?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                    <div className="accordion-item">
-                      <h5 className="accordion-header" id="flush-headingSeven">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-                          Can I negotiate the price of a car at a dealership?
-                        </button>
-                      </h5>
-                      <div id="flush-collapseSeven" className="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
-                        <div className="accordion-body">It's always a good idea to research and read
-                          reviews specific to the dealership you're interested in, as
-                          experiences can vary even within the same dealership chain.</div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="faq-inquiery-form pt-80 pb-80">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="section-title mb-20">
-                <h4>If Any Inquirey, To Do Ask Somethings </h4>
-              </div>
-              <form>
-                <div className="row">
-                  <div className="col-md-6 mb-30">
-                    <div className="form-inner">
-                      <label>Your Name* :</label>
-                      <input type="text" placeholder="Jackson Mile" />
-                    </div>
-                  </div>
-                  <div className="col-md-6 mb-30">
-                    <div className="form-inner">
-                      <label>Your Email* :</label>
-                      <input type="text" placeholder="example@gamil.com" />
-                    </div>
-                  </div>
-                  <div className="col-md-12 mb-30">
-                    <div className="select-category">
-                      <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                          Used Car
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" defaultChecked />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
-                          New Car
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" defaultChecked />
-                        <label className="form-check-label" htmlFor="flexRadioDefault3">
-                          Auction Car
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-12 mb-30">
-                    <div className="form-inner">
-                      <label>Type Your Question*</label>
-                      <textarea placeholder="Type Your Question*" defaultValue={""} />
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="form-inner">
-                      <button type="submit" className="primary-btn3">Submit</button>
-                    </div>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }
 
-export default loanCalculator
+export default loanCalculator;

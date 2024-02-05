@@ -12,6 +12,7 @@ function CarLeftSidebar({
   cylinderList,
   transmissionList,
   driveList,
+  displaynone
 }) {
   const router = useRouter();
 
@@ -182,6 +183,8 @@ function CarLeftSidebar({
 
     if (router.pathname === "/brands/[brandname]" && !isInitialRender) {
       router.push(`/brands/${router?.query?.brandname}?${queryString}`);
+    } else if (router.pathname === "/category/[categoryname]" && !isInitialRender) {
+      router.push(`/category/${router?.query?.categoryname}?${queryString}`);
     } else if (router.pathname === "/search-cars" && !isInitialRender) {
       router.push(`/search-cars?${queryString}`);
     } else {
@@ -545,7 +548,7 @@ function CarLeftSidebar({
   };
 
   return (
-    <div className="col-xl-3 order-xl-1 order-2">
+    <div className={`col-xl-3 order-xl-1 order-2 ${displaynone && "d-md-block d-none"}`}>
       {/* <div className="filter-area mb-3">
         <div className="title-and-close-btn mb-20">
           {areFiltersActive() && (
@@ -686,7 +689,7 @@ function CarLeftSidebar({
               <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                 <div className="row g-xl-2 gy-2 ">
                   {bodyoptions.map((item, idx) => (
-                    <div className="col-xl-4 ">
+                    <div className="col-xl-4 col-4">
                       <button
                         key={idx}
                         className={`category-box-button d-flex flex-column  align-items-center p-2 shadow-sm rounded ${

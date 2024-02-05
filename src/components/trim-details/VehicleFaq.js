@@ -146,9 +146,9 @@ export default function VehicleFaq({trim}) {
   return (
     <div id="faq" className="my-3">
       <div className="white_bg_wrapper mt-3">
-        <h4 className="fw-bold">
+        <h2 className="fw-bold">
           {trim?.year} {trim?.brand} {trim?.model} {trim?.name} FAQs
-        </h4>
+        </h2>
         {faq.map((item, index) => (
           <div key={index}>
             <AccordionFaq

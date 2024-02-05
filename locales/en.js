@@ -52,7 +52,7 @@ export default{
     newCars:"NEW CARS  ",
   usedCars:"USED CARS",
   pages:"PAGES",
-  contactUS:"CONTACT US",
+  contactUS:"Contact Us",
     Vs:"vs",
     viewMore:"View More",
     viewDetails:"View Details",

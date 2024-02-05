@@ -48,7 +48,7 @@ function CarListingLeftSidebar({
   const bodyoptions = bodyTypeList?.map((body) => ({
     label: body.name,
     value: body.slug,
-    image:body.image.url
+    image: body.image.url,
   }));
 
   console.log(bodyTypeList, "bodyTypeList");
@@ -87,6 +87,11 @@ function CarListingLeftSidebar({
   }, []);
 
   console.log(brandoptions, "brandoptions");
+  console.log(totalpricerange, "totalpricerange");
+
+  const [showFilter, setShowFilter] = useState(false); // State to toggle filter visibility
+
+  const toggleFilter = () => setShowFilter(!showFilter);
   return (
     <MainLayout>
       <Ad728x90 dataAdSlot="5962627056" />
@@ -104,7 +109,29 @@ function CarListingLeftSidebar({
               cylinderList={cylinderList}
               transmissionList={transmissionList}
               driveList={driveList}
+              displaynone={true}
             />
+            <div
+              className={` filter-modal ${!showFilter ? "hidden" : ""}`}
+              onClick={toggleFilter}
+            >
+              <div
+                className="filter-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <CarLeftSidebar
+                  brandoptions={brandoptions}
+                  bodyoptions={bodyoptions}
+                  totalpricerange={totalpricerange}
+                  totaldisplacementrange={totaldisplacementrange}
+                  totalpowerrange={totalpowerrange}
+                  fuelTypeList={fuelTypeList}
+                  cylinderList={cylinderList}
+                  transmissionList={transmissionList}
+                  driveList={driveList}
+                />
+              </div>
+            </div>
             <div className="col-xl-9 order-xl-2 order-1">
               <div className="row mb-40">
                 <div className="col-lg-12">
@@ -253,12 +280,11 @@ export async function getServerSideProps(context) {
   };
 
   const additionalQueryString = Object.keys(additionalQueryParams)
-  .filter(key => additionalQueryParams[key] !== undefined)
-  .map(key => `${key}=${additionalQueryParams[key]}`)
-  .join('&');
+    .filter((key) => additionalQueryParams[key] !== undefined)
+    .map((key) => `${key}=${additionalQueryParams[key]}`)
+    .join("&");
 
-
-  console.log(additionalQueryString,"additionalQueryString");
+  console.log(additionalQueryString, "additionalQueryString");
   const queryParams = {};
 
   if (brandSlugs.length > 0) {

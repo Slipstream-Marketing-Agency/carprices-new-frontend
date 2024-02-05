@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import _ from "lodash";
-// import TrimsPopup from "../TrimsPopup";
+// import TrimsPopup from "../TrimsPopup"; // Uncomment or adjust according to your project structure
 import { toast } from "react-toastify";
 import { useRouter } from "next/dist/client/router";
-import Price from "@/src/utils/Price";
-import useTranslate from "@/src/utils/useTranslate";
-import FeaturedImage from "../common/FeaturedImage";
+import Price from "@/src/utils/Price"; // Adjust the path based on your project structure
+import useTranslate from "@/src/utils/useTranslate"; // Adjust the path based on your project structure
+import FeaturedImage from "../common/FeaturedImage"; // Adjust the path based on your project structure
 
 export default function VariantsListing({ model, highTrim }) {
   const availableTrim = _.orderBy(
@@ -24,8 +24,6 @@ export default function VariantsListing({ model, highTrim }) {
   const router = useRouter();
   const t = useTranslate();
   const isRtl = router.locale === "ar";
-
-  console.log(availableTrim, "availableTrim");
 
   return (
     <div className="my-3" id="variant_listing">
@@ -51,24 +49,23 @@ export default function VariantsListing({ model, highTrim }) {
             </thead>
             <tbody>
               {availableTrim?.map((item, index) => (
-                <>
-                  <tr>
-                    <td className="col-2 py-4 w-10">
-                      <div className="listed_image">
-                        <FeaturedImage
-                          width={100}
-                          height={100}
-                          src={
-                            item.attributes?.featuredImage?.data?.attributes
-                              ?.url
-                          }
-                        />
-                      </div>
-                    </td>
-                    <td className="col-4 py-4">
-                      <Link
-                        href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
-                      >
+                <tr key={index}>
+                  <td data-label="Image" className="col-2 py-4 w-10">
+                    <div className="listed_image">
+                      <FeaturedImage
+                        width={100}
+                        height={100}
+                        src={
+                          item.attributes?.featuredImage?.data?.attributes?.url
+                        }
+                      />
+                    </div>
+                  </td>
+                  <td data-label="Variant" className="col-4 py-4">
+                    <Link
+                      href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
+                    >
+                      <span>
                         <p>
                           <span>
                             {item.attributes?.year}{" "}
@@ -83,7 +80,6 @@ export default function VariantsListing({ model, highTrim }) {
                             {item.attributes?.name}
                           </span>
                         </p>
-
                         <small className="text-grey">
                           <span>{item.attributes?.transmission}</span>,{" "}
                           <span> {item.attributes?.seatingCapacity}</span>,{" "}
@@ -101,69 +97,25 @@ export default function VariantsListing({ model, highTrim }) {
                           , <span> {item.attributes?.torque}Nm</span>,{" "}
                           <span> {item.attributes?.power}hp</span>
                         </small>
-                      </Link>
-                    </td>
-                    <td className="col-3">
-                      <p>
-                        {item.attributes?.price === null ? (
-                          <>
-                            <Price data={item.attributes?.price} />
-                          </>
-                        ) : (
-                          <>
-                            {" "}
-                            {t.aed} <Price data={item.attributes?.price} />
-                          </>
-                        )}
-                      </p>
-                    </td>
-                    <td className="col-3">
-                      <Link
-                        href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
-                      >
-                        <div className="btn btn-outline-primary w-75">
-                          {t.view} {t.variant}
-                        </div>
-                      </Link>
-                    </td>
-                    {/* <td className="col-1 text-center">
-                        <button
-                          className="btn btn-outline-primary"
-                          onClick={() => {
-                            if (selectedVariants.length === 4) {
-                              toast.info("Cannot add more than 4");
-                            } else {
-                              if (selectedVariants.includes(item)) {
-                                setSelectedVariants(
-                                  selectedVariants.filter((v) => v !== item)
-                                );
-                              } else {
-                                setSelectedVariants([...selectedVariants, item]);
-                              }
-                            }
-
-                            setIsOpen(true);
-                          }}
-                        >
-                          {selectedVariants.includes(item) ? t.added : t.add}
-                        </button>
-                      </td> */}
-                  </tr>
-                </>
+                      </span>
+                    </Link>
+                  </td>
+                  <td data-label="Price" className="col-3">
+                    <Price data={item.attributes?.price} />
+                  </td>
+                  <td data-label="Action" className="col-3">
+                    <Link
+                      href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
+                    >
+                      <span className="btn btn-outline-primary w-75">
+                        {t.view} {t.variant}
+                      </span>
+                    </Link>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
-          {/* {availableTrim?.map((item, index) => (
-            <TrimsPopup
-              variants={selectedVariants}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              brandName={model?.brand?.name}
-              modelName={model?.name}
-              setVariants={setSelectedVariants}
-              item={item}
-            />
-          ))} */}
         </div>
       </div>
     </div>

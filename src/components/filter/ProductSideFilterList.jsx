@@ -7,22 +7,31 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
   const CarPriceRange = ({ car }) => {
     // Format price for display
     const formatPrice = (price) => {
-      return price.toLocaleString("en-AE", {
+      if (price === null) {
+        return "TBD";
+      }
+      return price?.toLocaleString("en-AE", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
       });
     };
-    if (car?.minPrice === car?.maxPrice) {
-      // If min and max prices are the same, display only one price
-      const priceInfo = `AED ${formatPrice(car?.minPrice)}*`;
-      return <small className="text-danger fw-bold fs-6 ">{priceInfo}</small>;
+
+    let priceInfo;
+
+    if (car?.minPrice === null && car?.maxPrice === null) {
+      // If both minPrice and maxPrice are undefined, display TBD*
+      priceInfo = "TBD*";
+    } else if (car?.minPrice === car?.maxPrice || car?.maxPrice === undefined) {
+      // If min and max prices are the same or maxPrice is undefined, display only one price
+      priceInfo = `AED ${formatPrice(car?.minPrice)}*`;
     } else {
       // Display price range
-      const priceInfo = `AED ${formatPrice(car?.minPrice)}* - ${formatPrice(
+      priceInfo = `AED ${formatPrice(car?.minPrice)}* - ${formatPrice(
         car?.maxPrice
       )}*`;
-      return <small className="text-danger fw-bold fs-6 ">{priceInfo}</small>;
     }
+
+    return <small className="text-danger fw-bold ">{priceInfo}</small>;
   };
 
   const CarEMIDisplay = ({ car }) => {
@@ -67,7 +76,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
           href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
         >
           <div
-            className={`${router.pathname === "/category/[categoryname]" ? "col-lg-3 col-md-3 col-sm-6 wow fadeInUp item cursor_pointer" : "col-lg-4 col-md-4 col-sm-6 wow fadeInUp item cursor_pointer"}`}
+            className="col-lg-4 col-md-4 col-6 wow fadeInUp item cursor_pointer"
             data-wow-delay="300ms"
           >
             <div className="product-card">
@@ -86,7 +95,14 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
                 <div className="swiper product-img-slider">
                   <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                      <img src={car?.featuredImage} alt="" />
+                      <img
+                        src={
+                          car?.featuredImage
+                            ? car?.featuredImage
+                            : "/assets/img/car-placeholder.png"
+                        }
+                        alt=""
+                      />
                     </div>
                   </div>
                 </div>
@@ -94,7 +110,10 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
               <div className="product-content">
                 <div className="product-content-height">
                   <h5>
-                    <Link legacyBehavior href="/car-deatils">
+                    <Link
+                      legacyBehavior
+                      href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
+                    >
                       <span>
                         {car?.year} {car?.brand?.name} {car?.model?.name}
                       </span>

@@ -222,7 +222,7 @@ function BlogDetailsPage({
                         </span>{" "}
                         <span className="postedOnStyle">
                           {moment(
-                            detailData?.author?.data?.attributes?.createdAt
+                            detailData?.createdAt
                           ).format("MMMM Do YYYY")}
                         </span>
                       </div>

@@ -160,7 +160,7 @@ function Header() {
             </ul>
           </li> */}
            <li>
-            <Link legacyBehavior href="/search-cars">
+            <Link legacyBehavior href="/search-cars?page=1">
               <a className="drop-down">{t.SearchCars}</a>
             </Link>
           </li>
@@ -205,11 +205,11 @@ function Header() {
               
             </ul>
           </li>
-          {/* <li>
+          <li>
             <Link legacyBehavior href="/loan-calculator">
               <a className="drop-down">{t.Loancalculator}</a>
             </Link>
-          </li> */}
+          </li>
         </ul>
         {/* <div className="topbar-right d-lg-none d-block">
           <a href="#">

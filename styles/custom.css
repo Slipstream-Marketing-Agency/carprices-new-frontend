@@ -16,7 +16,7 @@ span.current.placeholder {
   justify-content: center;
 }
 
-.swiper-slide img{
+.swiper-slide img {
   object-fit: contain !important;
 }
 .brand {
@@ -45,8 +45,6 @@ a:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
-
 
 h1 {
   font-size: 1.8rem !important;
@@ -361,7 +359,7 @@ small {
   background-color: rgb(244, 244, 244);
 }
 .imageContainer img {
-  height: 210px !important;
+  height: 160px !important;
   width: 100%;
   object-fit: cover;
 }
@@ -542,7 +540,7 @@ small {
 }
 .sticky_scroll {
   position: sticky !important;
-  top: 93px !important;
+  top: 40px !important;
 }
 
 .sticky_filter_scroll {
@@ -561,6 +559,7 @@ small {
 .searchResultBox {
   z-index: 100;
   height: 270px;
+  left: 0px !important;
 }
 
 /* loan period button begins */
@@ -694,15 +693,20 @@ small {
 }
 
 .calculatorContent {
-  width: 824px;
+  max-width: 824px;
+  width: 100%;
   border-radius: 16px;
   box-shadow: 0px 0 5px #cdcdcd;
   position: relative;
   /* background-color: red; */
   padding: 5px 20px;
-  margin-top: 80px;
+  margin-top: 30px;
   background-color: white;
-  display: flex;
+}
+
+.resultContainer {
+  max-width: 824px;
+  width: 100%;
 }
 
 .leftSection {
@@ -746,7 +750,7 @@ small {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 140px;
+  margin-top: 200px;
 }
 
 .budgetBtn {
@@ -1501,3 +1505,195 @@ input[type="color"]:focus,
     margin: auto;
   }
 }
+
+.product-card .swiper-slide {
+  text-align: center !important;
+}
+
+.body-category-area {
+  position: relative;
+}
+.body-category-area .single-category1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background-color: white;
+  box-shadow: 1px 1px 6px #d9d9d9, 1px 2px 2px #e7e7e7;
+  border-radius: 10px;
+  padding: 30px 20px;
+  z-index: 1;
+  transition: all ease 0.35s;
+}
+.body-category-area .single-category1 .brand-icon {
+  margin-bottom: 5px;
+}
+.body-category-area .single-category1::after {
+  content: "";
+  /* background-image: url(../img/home1/category1-bg.png); */
+  background-color: var(--light);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  z-index: -1;
+  transition: all ease 0.35s;
+  opacity: 0;
+}
+
+.head_truncate {
+  overflow: hidden;
+  max-height: 4rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+@media (max-width: 728px) {
+  .product-card .product-img img {
+    height: 90px !important;
+  }
+  .body-category-area .single-category1{
+    padding: 9px 19px;
+  }
+  .trim-content .swiper {
+    height: 150px !important;
+  }
+
+  .calculator {
+    width: 100%;
+    max-width: 600px;
+}
+  
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  cursor: pointer;
+  background-color: #007bff; /* Primary color */
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-btn svg{
+ position: absolute;
+}
+
+
+.filter-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  z-index: 99;
+  overflow-y:scroll;
+}
+
+.filter-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 100%;
+}
+
+/* Hide the modal by default */
+.filter-modal.hidden {
+  display: none;
+}
+
+
+/* Webstory Listing */
+
+.storyList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .storyList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+  }
+  .old-model-tab img{
+    height: 150px !important;
+  }
+}
+
+.storyList .webstoryCard {
+  position: relative;
+  padding-bottom: 88px;
+  height: 100%;
+}
+
+.storyList .webstoryCard a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.storyList .webstoryCard a img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.storyList .storyDetail {
+  position: absolute;
+  bottom: 0;
+  padding: 0px 15px 10px 15px;
+  left: 0;
+  right: 0;
+}
+
+.storyList .storyDetail .heading {
+  font-weight: 600;
+  font-size: 15px !important;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.storyList .storyDetail .date {
+  color: #fff;
+  z-index: 1;
+  position: relative;
+  font-size: 12px !important;
+}
+
+.storyList .storyDetail::after {
+  position: absolute;
+  background: linear-gradient(180deg, #030214 53.45%, rgba(3, 2, 20, 0) 100%);
+  border-radius: 8px;
+  transform: rotate(-180deg);
+  content: "";
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 175px;
+}
+

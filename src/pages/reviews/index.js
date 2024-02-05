@@ -13,6 +13,7 @@ import Ad160x600 from "@/src/components/ads/Ad160x600";
 import Pagination from "@/src/utils/Pagination";
 import BlogDropDown from "@/src/components/BlogDropDown";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
+import Ad970x250 from "@/src/components/ads/Ad970x250";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function BlogStandardPage({
@@ -51,7 +52,9 @@ function BlogStandardPage({
         type: "Car Review Website",
       }}
     >
-      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="my-1">
+        <Ad970x250 dataAdSlot="8815612950" />
+      </div>
       <div className="container mb-4">
         <h1 className="fw-bold mt-2">Latest Car Reviews in UAE</h1>
         <p className="my-2">

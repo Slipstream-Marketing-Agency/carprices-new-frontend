@@ -346,7 +346,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                   {trimData?.name}
                 </h1>{" "}
-                <div className="shareBtn" onClick={handleCopyLink}>
+                {/* <div className="shareBtn" onClick={handleCopyLink}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -359,7 +359,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     />
                   </svg>
                   <span>Share</span>
-                </div>
+                </div> */}
               </div>
               <h4 className="mt-1">
                 <Price data={trimData.price} />
@@ -652,12 +652,16 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     </ul>
                   </div>
                 </div> */}
+                <Ad728x90 dataAdSlot="5962627056" />
 
                 <TrimDescription trim={trimData} />
-
+                <Ad728x90 dataAdSlot="5962627056" />
                 <DetailedSpecification trim={trimData} />
+                <Ad728x90 dataAdSlot="5962627056" />
                 <VehicleGallery trim={trimData.galleryImages} />
+                <Ad728x90 dataAdSlot="5962627056" />
                 <VehicleReview trim={trimData} />
+                <Ad728x90 dataAdSlot="5962627056" />
                 <VehicleFaq trim={trimData} />
               </div>
             </div>
@@ -670,7 +674,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
         </div>
       </div>
 
-      <Ad728x90 dataAdSlot="5962627056" />
+      
     </MainLayout>
   );
 }

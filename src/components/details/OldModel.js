@@ -6,12 +6,12 @@ import Image from "next/image";
 export default function OldModel({ model }) {
   const router = useRouter();
 
-  const allYearMainTrims = model.trims;
+  const allYearMainTrims = model?.trims;
   // const currentYear = 2023
   const currentDate = new Date();
-  const currentRealYear = currentDate.getFullYear();
+  const currentRealYear = currentDate?.getFullYear();
 
-  const currentYear = Number(router.query.year);
+  const currentYear = Number(router?.query?.year);
   const [initialActiveTab, setInitialActiveTab] = useState(
     currentRealYear === currentYear ? currentYear - 1 : currentYear
   );
@@ -27,36 +27,36 @@ export default function OldModel({ model }) {
   }, [Number(router.query.year)]);
 
   const sortedYears = allYearMainTrims
-    .sort((a, b) => b.year - a.year)
+    .sort((a, b) => b?.year - a?.year)
     .filter((trim) =>
       Number(router.query.year) === currentRealYear
         ? trim.year !== currentRealYear
         : trim.year
     );
 
-  const tabButtons = sortedYears.map((car) => (
+  const tabButtons = sortedYears?.map((car) => (
     <input
       type="radio"
-      id={`radio-${car.year}`}
-      key={car.year}
+      id={`radio-${car?.year}`}
+      key={car?.year}
       name="tabs"
-      checked={activeTab === car.year}
-      onChange={() => handleTabChange(car.year)}
+      checked={activeTab === car?.year}
+      onChange={() => handleTabChange(car?.year)}
     />
   ));
 
   // const sortedYears = allYearMainTrims.filter(
-  //   (car) => car.year === currentYear
+  //   (car) => car?.year === currentYear
   // );
 
-  const tabs = sortedYears.map((car) => (
+  const tabs = sortedYears?.map((car) => (
     <div
-      className={`old-model-tab tab-pane fade ${activeTab === car.year ? "show active" : ""}`}
-      key={car.year}
+      className={`old-model-tab tab-pane fade ${activeTab === car?.year ? "show active" : ""}`}
+      key={car?.year}
     >
       <Link href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
         <div className="old_model_container d-flex justify-content-center align-items-center w-50 mx-auto">
-          <Image width={500} height={500} src={car.featuredImage} alt="" />
+          <Image width={500} height={500} src={car?.featuredImage === null ? "":car?.featuredImage} alt="" />
 
           <button className="btn btn-link link-button">
             <span className="icon-arrow"></span>
@@ -65,14 +65,14 @@ export default function OldModel({ model }) {
       </Link>
       <Link href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
         <h5 className="d-flex justify-content-center align-items-center w-50 mx-auto fw-bold">
-          {car.year} {model.brand.name} {model.name}
+          {car?.year} {model.brand.name} {model.name}
         </h5>
       </Link>
     </div>
   ));
 
   useEffect(() => {
-    const gliderIndex = sortedYears.findIndex((car) => car.year === activeTab);
+    const gliderIndex = sortedYears.findIndex((car) => car?.year === activeTab);
     setGliderPosition(gliderIndex * 100);
   }, [activeTab, sortedYears, router.query.year]);
 
@@ -82,7 +82,7 @@ export default function OldModel({ model }) {
 
   return (
     <>
-      {sortedYears.length === 0 ? null : (
+      {sortedYears?.length === 0 ? null : (
         <div className="my-2">
           <div className="card_wrapper position-relative">
             <h3 className="fw-bold">
@@ -95,15 +95,15 @@ export default function OldModel({ model }) {
               <div className="container">
                 <div className="tabs">
                   {tabButtons}
-                  {sortedYears.map((car) => (
+                  {sortedYears?.map((car) => (
                     <label
                       className={`tab ${
-                        activeTab === car.year ? "active" : ""
+                        activeTab === car?.year ? "active" : ""
                       }`}
-                      htmlFor={`radio-${car.year}`}
-                      key={car.year}
+                      htmlFor={`radio-${car?.year}`}
+                      key={car?.year}
                     >
-                      {car.year}
+                      {car?.year}
                     </label>
                   ))}
                   <span

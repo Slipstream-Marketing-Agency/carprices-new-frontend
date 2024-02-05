@@ -128,7 +128,15 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
   );
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title:
+          "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae",
+        description:
+          "Find your perfect car match. Compare side by side, explore detailed specs, features, and pricing options. Make informed decisions with our easy car comparison tool.",
+        type: "Car Review Website",
+      }}
+    >
       <div className="mt-3">
         <Ad728x90 dataAdSlot="5962627056" />
       </div>

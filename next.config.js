@@ -1,3 +1,7 @@
+const TemporaryRedirects = require('./redirects/temporaryRedirects.json');
+const PermanentRedirects = require('./redirects/permanentRedirects.json');
+
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -15,6 +19,21 @@ const nextConfig = {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
+  },
+  async redirects() {
+    const temporaryRedirects = TemporaryRedirects.map((redirect) => ({
+      source: redirect.From,
+      destination: redirect.To,
+      permanent: false,
+    }));
+
+    const permanentRedirects = PermanentRedirects.map((redirect) => ({
+      source: redirect.From,
+      destination: redirect.To,
+      permanent: true,
+    }));
+
+    return [...temporaryRedirects, ...permanentRedirects];
   },
 };
 

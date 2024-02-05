@@ -14,6 +14,7 @@ import Image from "next/image";
 import altImage from "../../../public/assets/images/blog-alt-image.png";
 import BlogDropDown from "@/src/components/BlogDropDown";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
+import Ad970x250 from "@/src/components/ads/Ad970x250";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -54,7 +55,9 @@ function BlogStandardPage({
         type: "Car Review Website",
       }}
     >
-      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="my-1">
+        <Ad970x250 dataAdSlot="8815612950" />
+      </div>
       <div className="container mb-4">
         <h1 className="fw-bold mt-2">Latest Car News in UAE</h1>
         <p className="my-2">
@@ -67,7 +70,7 @@ function BlogStandardPage({
         {/* <BlogDropDown initialFocus={true} news={true}/> */}
 
         <div className="row g-4 mt-3">
-          <div className="col-lg-8">
+          <div className="col-lg-9">
             <div className="row g-4 ">
               {news?.map((newsItem, index) => (
                 <>
@@ -116,14 +119,7 @@ function BlogStandardPage({
                             legacyBehavior
                             href={`/news/${newsItem?.attributes?.slug}`}
                           >
-                            <a>{`${
-                              newsItem.attributes.title.length > 40
-                                ? `${newsItem.attributes.title.slice(
-                                    0,
-                                    55
-                                  )} ...`
-                                : `${newsItem.attributes.title}`
-                            }  `}</a>
+                            <a>{newsItem.attributes.title}</a>
                           </Link>
                         </h5>
                         <div className="author-area">
@@ -149,11 +145,9 @@ function BlogStandardPage({
               ))}
             </div>
           </div>
-          <div className="col-lg-4 hideOnMobile">
+          <div className="col-lg-3 hideOnMobile">
             <div className="sticky-sidebar">
               <div className="ad-container">
-                {/* Add your skyscraper advertisement component or content here */}
-                {/* For example: */}
                 <Ad300x600 dataAdSlot="8451638145" />
               </div>
             </div>

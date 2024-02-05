@@ -12,13 +12,19 @@ function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
   console.log(brands, "ldjdh");
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title: "Explore the Top Car Brands in the UAE - Carprices",
+        description:
+          "Stay informed on the best car brands available in the UAE market with comprehensive reviews and insights from Carprices. Find the top brands and make an informed decision.",
+        type: "Car Review Website",
+      }}
+    >
       <Ad728x90 dataAdSlot="5962627056" />
 
       <ProductCategory brands={brands} />
       <Pagination currentPage={currentPage} totalPages={totalPages} />
       <Ad728x90 dataAdSlot="5962627056" />
-     
     </MainLayout>
   );
 }
@@ -26,8 +32,7 @@ function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
 export default BrandCategoryPage;
 
 export async function getServerSideProps(context) {
-
-    console.log(context,"jhgf");
+  console.log(context, "jhgf");
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
   const pageSize = 24; // Set the number of items per page
 
@@ -79,7 +84,7 @@ export async function getServerSideProps(context) {
           }
         }
       `,
-      variables: {page, pageSize},
+      variables: { page, pageSize },
     });
 
     return {

@@ -48,7 +48,7 @@ function CarListingLeftSidebar({
   const bodyoptions = bodyTypeList?.map((body) => ({
     label: body.name,
     value: body.slug,
-    image:body.image.url
+    image: body.image.url,
   }));
 
   console.log(bodyTypeList, "bodyTypeList");
@@ -86,15 +86,27 @@ function CarListingLeftSidebar({
     };
   }, []);
 
-  console.log(router, "routerrouterrouter");
+  const [showFilter, setShowFilter] = useState(false); // State to toggle filter visibility
+
+  const toggleFilter = () => setShowFilter(!showFilter);
   return (
-    <MainLayout>
-      <Ad728x90 dataAdSlot="5962627056" />
+    <MainLayout
+      pageMeta={{
+        title:
+          "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
+        description:
+          "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
+        type: "Car Review Website",
+      }}
+    >
+      <div className="mt-2">
+        <Ad728x90 dataAdSlot="5962627056" />
+      </div>
 
       <div className="product-page mt-15 mb-100">
         <div className="container">
           <div className="row g-xl-4 gy-5">
-            {/* <CarLeftSidebar
+          <CarLeftSidebar
               brandoptions={brandoptions}
               bodyoptions={bodyoptions}
               totalpricerange={totalpricerange}
@@ -104,8 +116,30 @@ function CarListingLeftSidebar({
               cylinderList={cylinderList}
               transmissionList={transmissionList}
               driveList={driveList}
-            /> */}
-            <div className="col-xl-12 order-xl-2 order-1">
+              displaynone={true}
+            />
+            <div
+              className={` filter-modal ${!showFilter ? "hidden" : ""}`}
+              onClick={toggleFilter}
+            >
+              <div
+                className="filter-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <CarLeftSidebar
+                  brandoptions={brandoptions}
+                  bodyoptions={bodyoptions}
+                  totalpricerange={totalpricerange}
+                  totaldisplacementrange={totaldisplacementrange}
+                  totalpowerrange={totalpowerrange}
+                  fuelTypeList={fuelTypeList}
+                  cylinderList={cylinderList}
+                  transmissionList={transmissionList}
+                  driveList={driveList}
+                />
+              </div>
+            </div>
+            <div className="col-xl-9 order-xl-2 order-1">
               <div className="row mb-40">
                 <div className="col-lg-12">
                   <div className="show-item-and-filte">
@@ -215,7 +249,6 @@ function CarListingLeftSidebar({
           </div>
         </div>
       </div>
-      <Ad728x90 dataAdSlot="5962627056" />
     </MainLayout>
   );
 }
@@ -227,7 +260,7 @@ export async function getServerSideProps(context) {
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
   const brandSlugs = query.brand ? query.brand.split(",") : [];
-  const bodyTypeSlugs = [query.categoryname ? query.categoryname: []];
+  const bodyTypeSlugs = [query.categoryname ? query.categoryname : []];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
   const driveSlugs = query.drive ? query.drive.split(",") : [];

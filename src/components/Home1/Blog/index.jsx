@@ -50,7 +50,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                           width={300}
                           height={205}
                           objectFit="fill"
-                          style={{ objectFit: "fill" }}
+                          className="object-contain"
                         />
                       </div>
                     </a>
@@ -67,7 +67,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                   </div>
                 </div>
                 <div className="content">
-                  <h6>
+                  <h6 className="head_truncate">
                     <Link
                       legacyBehavior
                       href={`${isNews ? "/news/" : "/reviews/"}${
@@ -76,7 +76,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                     >
                       <a>{`${
                         news.attributes.title.length > 40
-                          ? `${news.attributes.title.slice(0, 50)} ...`
+                          ? `${news.attributes.title}`
                           : news.attributes.title
                       }`}</a>
                     </Link>

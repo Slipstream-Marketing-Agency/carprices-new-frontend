@@ -1,223 +1,121 @@
-import Ad728x90 from '@/src/components/ads/Ad728x90'
-import MainLayout from '@/src/layout/MainLayout'
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+import moment from "moment";
+import Link from "next/link";
+import MainLayout from "@/src/layout/MainLayout";
 
-function CustomerReview() {
+import Image from "next/image";
+import Ad970x250 from "@/src/components/ads/Ad970x250";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
+import FeaturedImage from "@/src/utils/FeaturedImage";
+
+export default function WebstoriesListing() {
+  const [webStories, setWebStories] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setWebStories(null);
+        const page = router.query.page || 1;
+        setCurrentPage(Number(page));
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL_OLD}webstory`
+        );
+
+        setWebStories(response.data.webstories);
+        setTotalPages(response.data.totalPage);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(webStories, "respsss");
+
+  const handlePageChange = (newPage) => {
+    router.push(`?page=${newPage}`);
+  };
+
   return (
-    <MainLayout>
-          <Ad728x90 dataAdSlot="5962627056" />
-
-        <div className="customer-feedback-pages pt-100 pb-100">
-          <div className="container">
-            <div className="row mb-40 g-4">
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <img src="assets/img/home1/icon/trustpilot-star.svg" alt="" />
-                      <span>Trusted Company</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/trustpilot-log3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Jhon Abraham,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
+    <MainLayout
+      pageMeta={{
+        title:
+          "Latest Car News UAE: New Models, Launches, and Industry Insights - Carprices.ae",
+        description:
+          "Stay informed with the latest car news in UAE. Explore upcoming car model prices, specifications, and features. Get the inside scoop on the automotive industry and stay ahead of the curve.",
+        type: "Car Review Website",
+      }}
+    >
+      <div className="container">
+        <div className="my-1">
+          <Ad970x250 dataAdSlot="1524950296" />
+        </div>
+        <div className="row mt-2 mb-4">
+          <div className="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-12">
+            <div>
+              <h1 className="fw-bold mt-2">Web Stories</h1>
+              <div className="row mt-3 mb-3 p-0 m-0">
+                <ul className="storyList marginBottom20">
+                  {webStories &&
+                    webStories.map((item, index) => (
+                      <li key={index}>
+                        <div className="webstoryCard">
+                          <Link
+                            href={`/web-stories/${item.slug}`}
+                            target="_blank"
+                            title={item?.title}
+                            rel="noopener"
+                          >
+                            <FeaturedImage
+                              width={250}
+                              height={250}
+                              src={item?.slides[0].image1}
+                              alt={item?.title}
+                              title={item?.title}
+                              setIsLoading={setIsLoading}
+                            />
+                            <div className="storyDetail">
+                              <h3 className="heading ">{item?.mainTitle}</h3>
+                              <div className="date">
+                                Carprices |{" "}
+                                {moment(item.publishedAt).format(
+                                  "MMM DD, YYYY"
+                                )}
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
               </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <div className="star">
-                        <ul>
-                          <li className="active"><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li className><i className="bi bi-star-half" /></li>
-                        </ul>
-                      </div>
-                      <span>Great Services!</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/google3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Franqkly Jui,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <img src="assets/img/home1/icon/trustpilot-star.svg" alt="" />
-                      <span>Trusted Company</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/trustpilot-log3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Robert Smith,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <div className="star">
-                        <ul>
-                          <li className="active"><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li className><i className="bi bi-star-half" /></li>
-                        </ul>
-                      </div>
-                      <span>Great Services!</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/google3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Mannu Moris,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <img src="assets/img/home1/icon/trustpilot-star.svg" alt="" />
-                      <span>Trusted Company</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/trustpilot-log3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Rakhab Uddin,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <div className="star">
-                        <ul>
-                          <li className="active"><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li className><i className="bi bi-star-half" /></li>
-                        </ul>
-                      </div>
-                      <span>Great Services!</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/google3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Daniel Scoot,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <img src="assets/img/home1/icon/trustpilot-star.svg" alt="" />
-                      <span>Trusted Company</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/trustpilot-log3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Willium Jhon,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <div className="star">
-                        <ul>
-                          <li className="active"><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li><i className="bi bi-star-fill" /></li>
-                          <li className><i className="bi bi-star-half" /></li>
-                        </ul>
-                      </div>
-                      <span>Great Services!</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/google3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Jacoline Harry,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="feedback-card">
-                  <div className="feedback-top">
-                    <div className="stat-area">
-                      <img src="assets/img/home1/icon/trustpilot-star.svg" alt="" />
-                      <span>Trusted Company</span>
-                    </div>
-                    <div className="logo">
-                      <img src="assets/img/home1/icon/trustpilot-log3.svg" alt="" />
-                    </div>
-                  </div>
-                  <p>Drivco-Agency, to the actively encourage customers to leave reviews to the help promote their products and services.”</p>
-                  <div className="author-name">
-                    <h6>Smith Jonson,</h6>
-                    <span>25 minutes ago</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12 d-flex justify-content-center">
-                <div className="load-more-btn">
-                  <a href="#" className="primary-btn3">Load More</a>
-                </div>
+              <div className="my-3 d-flex justify-content-center">
+                {/* <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                  router={router}
+                /> */}
               </div>
             </div>
           </div>
+          <div className="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 right_section hide_mobile">
+            <div className="d-flex flex-column mt-5 sticky_scroll">
+              <Ad300x600 dataAdSlot="3530552137" />
+            </div>
+          </div>
         </div>
-        <Ad728x90 dataAdSlot="5962627056" />
-
+      </div>
     </MainLayout>
-  )
+  );
 }
-
-export default CustomerReview

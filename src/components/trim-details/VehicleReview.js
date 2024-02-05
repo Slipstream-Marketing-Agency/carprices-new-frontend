@@ -26,7 +26,7 @@ export default function VehicleReview({ trim }) {
     <div id="review" className="my-3">
       <div className="white_bg_wrapper">
         <h2 className="fw-bold">
-          {trim?.year} {trim?.name} {trim?.model}{" "}
+          {trim?.year} {trim?.brand} {trim?.model}{" "}
           {trim?.name}
           <span> Review</span>
         </h2>
@@ -81,14 +81,14 @@ export default function VehicleReview({ trim }) {
           <div className="accordion-item">
             <h2 className="accordion-header">
               <button
-                className="accordion-button"
+                className="accordion-button fw-bold"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseOne"
                 aria-expanded="true"
                 aria-controls="panelsStayOpen-collapseOne"
               >
-                {trim?.name} {trim?.model}{" "}
+                {trim?.brand} {trim?.model}{" "}
                 {trim?.name} Exterior
               </button>
             </h2>
@@ -98,18 +98,18 @@ export default function VehicleReview({ trim }) {
             >
               <div className="accordion-body">
                 <b>Body Type:</b> The {trim?.year}{" "}
-                {trim?.name} {trim?.model}{" "}
+                {trim?.brand} {trim?.model}{" "}
                 {trim?.name} is a {trim?.bodyType}.
                 <br />
                 <b>Dimensions:</b> The {trim?.year}{" "}
-                {trim?.name} {trim?.model} {""}is{" "}
+                {trim?.brand} {trim?.model} {""}is{" "}
                 {trim?.length ? trim?.length : "-"}mm in length,{" "}
                 {trim?.width}mm in width, and {trim?.height}mm in height,
                 the {trim?.year} {trim?.name}{" "}
                 {trim?.model} {trim?.name}.
                 <br />
                 <b>Wheelbase:</b> The {trim?.year}{" "}
-                {trim?.name} {trim?.model}{" "}
+                {trim?.brand} {trim?.model}{" "}
                 {trim?.name} features a {trim?.wheelbase}mm wheelbase. <br />
               </div>
             </div>
@@ -117,14 +117,14 @@ export default function VehicleReview({ trim }) {
           <div className="accordion-item">
             <h2 className="accordion-header">
               <button
-                className="accordion-button collapsed"
+                className="accordion-button collapsed fw-bold"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseTwo"
                 aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseTwo"
               >
-                {trim?.name} {trim?.model}{" "}
+                {trim?.brand} {trim?.model}{" "}
                 {trim?.name} Interior
               </button>
             </h2>
@@ -134,7 +134,7 @@ export default function VehicleReview({ trim }) {
             >
               <div className="accordion-body">
                 <b>Seating Capacity:</b> The {trim?.year}{" "}
-                {trim?.name} {trim?.model}{" "}
+                {trim?.brand} {trim?.model}{" "}
                 {trim?.name} has seating for up to{" "}
                 {trim?.seatingCapacity && trim?.seatingCapacity?.split(" ")[0]} passengers. <br />
                 <b>Upholstery:</b> The interior is finished in {" "}
@@ -162,7 +162,7 @@ export default function VehicleReview({ trim }) {
                   ? <><b>Entertainment:</b> Enjoy the convenience of rear seat entertainment.<br /></>
                   : ""}
                 {trim?.haveCooledSeats || trim?.haveClimateControl ? <>
-                  <b>Comfort:</b> The {trim?.year} {trim?.name} {trim?.model}{" "}
+                  <b>Comfort:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
                   {trim?.name} offers comfort features such as
                   {trim?.haveCooledSeats ? " ventilated seats " : ""}
                   {trim?.haveCooledSeats && trim?.haveClimateControl? " and" :""}

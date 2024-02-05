@@ -23,6 +23,7 @@ import VariantsListing from "@/src/components/details/VariantsListing";
 import VehicleFaq from "@/src/components/details/VehicleFaq";
 import OldModel from "@/src/components/details/OldModel";
 import axios from "axios";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -34,7 +35,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
   const brand = model?.car_brands?.data[0]?.attributes;
   const trim = model?.car_trims?.data[0]?.attributes;
 
-  console.log(model, "trimListtrimList");
+  console.log(oldModel, "oldModeloldModel");
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);
@@ -45,7 +46,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
   const CarPriceRange = ({ car }) => {
     // Extracting and filtering prices (excluding zeros) from car trims
     const prices = car
-      ?.map((trim) => trim.attributes.price)
+      ?.map((trim) => trim?.attributes?.price)
       .filter((price) => price > 0);
 
     // Format price for display
@@ -97,8 +98,8 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
 
     // Extract all non-zero prices, calculate EMI for each, and find the minimum EMI
     const emis = car
-      ?.filter((trim) => trim.attributes.price > 0)
-      .map((trim) => calculateEMI(trim.attributes.price));
+      ?.filter((trim) => trim?.attributes?.price > 0)
+      .map((trim) => calculateEMI(trim?.attributes?.price));
 
     const minEMI = Math.min(...emis);
 
@@ -277,44 +278,6 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
       });
     }
   }, []);
-
-  const [contactData, setContactData] = useState({
-    phoneNumber: "+990737621432",
-    email: "info@gmail.com",
-    whatsapp: "+990737621432",
-  });
-
-  const handleClick = (type) => {
-    let hrefValue = "";
-    let newText = "";
-
-    switch (type) {
-      case "phoneNumber":
-        hrefValue = `tel:${contactData.phoneNumber}`;
-        newText = contactData.phoneNumber;
-        break;
-      case "emailAdress":
-        hrefValue = `mailto:${contactData.email}`;
-        newText = contactData.email;
-        break;
-      case "emailAdresss":
-        hrefValue = contactData.whatsapp
-          ? `https://api.whatsapp.com/send?phone=${contactData.whatsapp}&text=Hello this is the starting message`
-          : "";
-        newText = contactData.whatsapp || "Whatsapp";
-        break;
-      default:
-        break;
-    }
-
-    // Set the href attribute and update the text for the clicked element
-    const element = document.getElementById(type);
-    if (element) {
-      const link = element.querySelector("a");
-      link.setAttribute("href", hrefValue);
-      link.textContent = `${newText}`;
-    }
-  };
 
   const engineText = trimList
     ?.map((engine) => {
@@ -504,7 +467,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                 <h1>
                   {trim?.year} {brand?.name} {model?.name}
                 </h1>{" "}
-                <div className="shareBtn" onClick={handleCopyLink}>
+                {/* <div className="shareBtn" onClick={handleCopyLink}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -517,7 +480,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                     />
                   </svg>
                   <span>Share</span>
-                </div>
+                </div> */}
               </div>
               <h4 className="mt-1">
                 <CarPriceRange car={trimList} />
@@ -557,7 +520,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                 </svg>
 
                 <h6 className="p-0 m-0">
-                  Available Variants : {trimList.length}
+                  Available Variants : {trimList?.length}
                 </h6>
               </div>
 
@@ -573,15 +536,15 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       />
                       <div className="d-flex flex-column">
                         <small className="fw-bold">
-                          {engineText.includes("Electric")
+                          {engineText?.includes("Electric")
                             ? "Motor Type"
                             : t.NoOfCylinders}
                         </small>
                         <div className="d-flex flex-wrap mt-1">
                           <small>
-                            {engineText.includes("Electric")
-                              ? motorTypes.split(" ")[0]
-                              : cylinderList.length > 1
+                            {engineText?.includes("Electric")
+                              ? motorTypes?.split(" ")[0]
+                              : cylinderList?.length > 1
                               ? cylinderList.join(", ")
                               : cylinderList[0]}
                           </small>
@@ -651,7 +614,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       <div className="d-flex flex-column">
                         <small className="fw-bold">{t.seats}</small>
                         <small>
-                          {seatList.length > 1
+                          {seatList?.length > 1
                             ? seatList.join(", ")
                             : seatList[0]}
                         </small>
@@ -677,10 +640,12 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
             </div>
           </div>
           <div className="row mt-5">
-            <div className="col-lg-8">
+            <div className="col-lg-9">
+              <Ad728x90 dataAdSlot="7369694604" />
               <ModelDescription model={trimList} hightTrim={trim} />
+              <Ad728x90 dataAdSlot="7369694604" />
               <VariantsListing model={trimList} highTrim={trim} />
-
+              <Ad728x90 dataAdSlot="7369694604" />
               <OldModel model={oldModel} />
               {/* <VehicleGallery model={data} /> */}
               <Ad728x90 dataAdSlot="7369694604" />
@@ -691,13 +656,12 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                 CarPriceRange={CarPriceRange}
               />
             </div>
-            <div className="col-lg-4">
+            <div className="col-lg-3">
               <div className="car-details-sidebar positionStickyAd">
                 <div
                   className="contact-info mb-50"
-                  style={{ backgroundColor: "rosybrown" }}
                 >
-                  <Ad300x250 dataAdSlot="5772723668" />
+                    <Ad300x600 dataAdSlot="3792539533" />
                 </div>
               </div>
             </div>

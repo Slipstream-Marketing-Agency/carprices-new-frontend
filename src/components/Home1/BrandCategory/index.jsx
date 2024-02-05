@@ -21,7 +21,7 @@ function index({ brandDetails }) {
             </div>
           </div>
         </div>
-        <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-2 g-4 justify-content-center mb-40">
+        <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-3 g-4 justify-content-center mb-40">
           {brandDetails.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">

@@ -62,7 +62,7 @@ export default function TrimDescription({ trim }) {
     <div id="description" className="my-3">
       <div className=" my-3">
         <h2 className="fw-bold">
-          {trim?.year} {trim?.brand?.name} {trim?.model?.name}{" "}
+          {trim?.year} {trim?.brand} {trim?.model}{" "}
           {trim?.name}
         </h2>
         <div className="car_description mt-3">

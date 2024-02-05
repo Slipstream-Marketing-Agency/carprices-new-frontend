@@ -64,11 +64,11 @@ export default function Home({
   compare,
   news,
   reviews,
-  bodyTypeList
+  bodyTypeList,
 }) {
   const router = useRouter();
 
-  console.log(bodyTypeList,"bodyTypeList");
+  console.log(bodyTypeList, "bodyTypeList");
 
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -155,15 +155,15 @@ export default function Home({
       {/* <RecomandationCar /> */}
       {/* <TopRateUsedCars /> */}
 
-      <div ref={compareCarRef}>
-        {loadCompareCar && <CompareCarLazy compare={compare} />}
-      </div>
+      <CompareCarLazy compare={compare} />
+
       <Ad728x90 dataAdSlot="5962627056" />
 
       {/* <WhyChoose /> */}
       {/* <ShopCard /> */}
       {/* <Testimonial /> */}
       <BrandCategory brandDetails={popularBrands} />
+      <Ad728x90 dataAdSlot="5962627056" />
       <BodyTypes bodyTypeList={bodyTypeList} />
       <Ad728x90 dataAdSlot="3488506956" />
       <Blog
@@ -180,7 +180,6 @@ export default function Home({
         isNews={false}
       />
 
-      <Ad728x90 dataAdSlot="5962627056" />
       <Footer1 />
       <GoToTopButton />
     </>
@@ -575,7 +574,7 @@ export async function getServerSideProps() {
         compare: compareResponse?.data?.compareCars?.data,
         news: newsData?.data?.articles?.data || {},
         reviews: reviewsData?.data?.articles?.data || {},
-        bodyTypeList:bodyTypeList?.data?.bodyTypes
+        bodyTypeList: bodyTypeList?.data?.bodyTypes,
       },
     };
   } catch (error) {
