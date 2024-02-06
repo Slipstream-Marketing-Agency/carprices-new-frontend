@@ -97,7 +97,7 @@ function ContactPage() {
   return (
     <MainLayout
       pageMeta={{
-        title: "Contact Us - Carprices.ae",
+        title: "Contact Us - Carprices.ae", 
         description:
           "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.",
         type: "Car Review Website",

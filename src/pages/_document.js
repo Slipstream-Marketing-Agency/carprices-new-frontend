@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -18,35 +18,22 @@ export default function Document() {
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
           crossorigin="anonymous"
-        ></script>
-
-        <Script
-          src="/assets/scripts/lang-config.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="/assets/scripts/translation.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="//translate.google.com/translate_a/element.js?cb=TranslateInit"
-          strategy="afterInteractive"
-        />
+        ></script> */}
         <link
           rel="stylesheet"
           href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css"
         />
-        <meta name="robots" content="noindex,nofollow"> </meta>
+        {/* <meta name="robots" content="noindex,nofollow"> </meta> */}
       </Head>
       <body>
-        <noscript>
+        {/* <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-W564HNC"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
-        </noscript>
+        </noscript> */}
         <Main />
         <NextScript />
       </body>
