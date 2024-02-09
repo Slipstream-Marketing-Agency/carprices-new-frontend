@@ -32,6 +32,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
   console.log(currentmodel, "currentmodel");
 
   const mainTrim = currentmodel?.highTrim[0];
+
+  console.log(mainTrim,"mainTrimmainTrim");
   const allTrims = currentmodel?.trims;
   const minPower = currentmodel?.power?.min;
   const maxPower = currentmodel?.power?.max;
@@ -94,18 +96,23 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
         maximumFractionDigits: 2,
       });
     };
-
+  
     let priceInfo;
-    if (minPrice === maxPrice) {
+    if (minPrice === null || maxPrice === null) {
+      // If either min or max price is null, display TBD
+      priceInfo = "TBD*";
+    } else if (minPrice === maxPrice) {
       // If min and max prices are the same, display only one price
       priceInfo = `AED ${formatPrice(minPrice)}*`;
     } else {
       // Display price range
       priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
     }
-
+  
     return priceInfo;
   };
+  
+  
 
   const CarEMIDisplay = () => {
     const tenureInMonths = 60; // Loan tenure in months
