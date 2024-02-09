@@ -76,7 +76,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
           href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
         >
           <div
-            className="col-lg-4 col-md-4 col-6 wow fadeInUp item cursor_pointer"
+            className="col-lg-3 col-md-3 col-6 wow fadeInUp item cursor_pointer"
             data-wow-delay="300ms"
           >
             <div className="product-card">

@@ -2,14 +2,27 @@ import Price from "@/src/utils/Price";
 import React, { useEffect, useState } from "react";
 import AccordionFaq from "../common/AccordionFaq";
 
-export default function VehicleFaq({ model, highTrim }) {
-  console.log(model, "modelmodelmodel");
-  const getTransmissionType = (transmissions) => {
-    const hasAutomatic = model.some(
-      (t) => t?.attributes?.transmission === "Automatic"
+export default function VehicleFaq({
+  year,
+  brand,
+  model,
+  minPrice,
+  maxPrice,
+  minFuelConsumption,
+  maxFuelConsumption,
+  mainTrimFuelType,
+  engineTypes,
+  transmissionList,
+  motorTypes,
+  allTrims,
+  mainTrim,
+}) {
+  const getTransmissionType = () => {
+    const hasAutomatic = allTrims.some(
+      (t) => t?.transmission === "Automatic"
     );
-    const hasManual = model.some(
-      (t) => t?.attributes?.transmission === "Manual"
+    const hasManual = allTrims.some(
+      (t) => t?.transmission === "Manual"
     );
 
     if (hasAutomatic && hasManual) {
@@ -23,69 +36,22 @@ export default function VehicleFaq({ model, highTrim }) {
     }
   };
 
-  const [minPrice, setMinPrice] = useState(null);
-  const [maxPrice, setMaxPrice] = useState(null);
 
-  // Calculate min and max prices whenever prices state changes
-  useEffect(() => {
-    let newMinPrice = null;
-    let newMaxPrice = null;
-
-    // Extracting and filtering prices (excluding zeros and negative values) from available trims
-    const filteredPrices = model
-      ?.map((trim) => trim.attributes.price)
-      .filter((price) => price > 0);
-
-    if (filteredPrices.length > 0) {
-      // Finding the minimum and maximum prices from the filtered list
-      newMinPrice = Math.min(...filteredPrices);
-      newMaxPrice = Math.max(...filteredPrices);
-    }
-
-    // Format price for display (assuming setMinPrice and setMaxPrice accept formatted strings)
-    const formatPrice = (price) => {
-      return price?.toLocaleString("en-AE", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      });
-    };
-
-    // Update the state with formatted prices
-    if (newMinPrice !== null) {
-      setMinPrice(formatPrice(newMinPrice));
-    }
-    if (newMaxPrice !== null) {
-      setMaxPrice(formatPrice(newMaxPrice));
-    }
-  }, [model]);
-
-  const motorTypes = model
-    ?.map((item) => item.attributes?.motor)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
 
   const features = [
-    highTrim?.haveAppleCarPlay && "Apple CarPlay",
-    highTrim?.haveAndroidAuto && "Android Auto",
-    highTrim?.haveCruiseControl && "cruise control",
-    highTrim?.haveClimateControl && "climate control",
+    mainTrim?.haveAppleCarPlay && "Apple CarPlay",
+    mainTrim?.haveAndroidAuto && "Android Auto",
+    mainTrim?.haveCruiseControl && "cruise control",
+    mainTrim?.haveClimateControl && "climate control",
   ].filter(Boolean);
 
   const safetyFeatures = [
-    highTrim?.haveABS && "ABS",
-    highTrim?.haveFrontParkAssist && "front park assist",
+    mainTrim?.haveABS && "ABS",
+    mainTrim?.haveFrontParkAssist && "front park assist",
   ].filter(Boolean);
 
-  const range = model
-    ?.map((item) => item.attributes?.range)
+  const range = allTrims
+    ?.map((item) => item.range)
     .filter((value, index, self) => self.indexOf(value) === index)
     .sort((a, b) => a - b);
 
@@ -93,10 +59,10 @@ export default function VehicleFaq({ model, highTrim }) {
   const maxRange = range[range.length - 1];
 
   let connectivity = "";
-  if (highTrim?.haveAppleCarPlay) {
+  if (mainTrim?.haveAppleCarPlay) {
     connectivity += "Apple CarPlay, ";
   }
-  if (highTrim?.haveAndroidAuto) {
+  if (mainTrim?.haveAndroidAuto) {
     connectivity += "Android Auto, ";
   }
 
@@ -104,21 +70,21 @@ export default function VehicleFaq({ model, highTrim }) {
     connectivity ? connectivity.slice(0, -2) : ""
   } compatibility for seamless connectivity`;
 
-  const rearSeatEntertainment = highTrim?.haveRearSeatEntertainment
+  const rearSeatEntertainment = mainTrim?.haveRearSeatEntertainment
     ? "and rear seat entertainment"
     : "";
 
   const outputString = `${seamlessConnectivity} ${rearSeatEntertainment}`;
 
   let cruiseControl = "";
-  if (highTrim?.haveAdaptiveCuriseControl) {
+  if (mainTrim?.haveAdaptiveCuriseControl) {
     cruiseControl += "cruise control, ";
   }
-  if (highTrim?.haveAdaptiveCuriseControl) {
+  if (mainTrim?.haveAdaptiveCuriseControl) {
     cruiseControl += "adaptive cruise control, ";
   }
 
-  const laneChangeAssist = highTrim?.haveLaneChangeAssist
+  const laneChangeAssist = mainTrim?.haveLaneChangeAssist
     ? "lane change assist"
     : "";
 
@@ -130,11 +96,10 @@ export default function VehicleFaq({ model, highTrim }) {
 
   const faq = [
     {
-      question: `What is the price range of the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
+      question: `What is the price range of the ${year} ${brand.name} ${model.name}?`,
       answer: (
         <>
-          The {highTrim?.year} {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
-          {highTrim?.car_models?.data[0]?.attributes?.name}{" "}
+          The {year} {brand.name} {model.name}{" "}
           {minPrice === maxPrice && minPrice !== null && minPrice !== null ? (
             <>
               {" "}
@@ -165,117 +130,105 @@ export default function VehicleFaq({ model, highTrim }) {
       condition: true,
     },
     {
-      question: `How does the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} perform in terms of acceleration and top speed?`,
-      answer: `The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} reaches 0 to 100km/h in ${highTrim?.zeroToHundred}seconds and has a top speed of ${highTrim?.topSpeed}km/h.`,
+      question: `How does the ${year} ${brand.name} ${model.name} perform in terms of acceleration and top speed?`,
+      answer: `The ${year} ${brand.name} ${model.name} reaches 0 to 100km/h in ${mainTrim?.zeroToHundred}seconds and has a top speed of ${mainTrim?.topSpeed}km/h.`,
       id: 2,
       condition: true,
     },
     {
-      question: `What is the range of the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
-      answer: `The ${highTrim?.year} ${
-        highTrim?.car_brands?.data[0]?.attributes?.name
-      } ${
-        highTrim?.car_models?.data[0]?.attributes?.name
-      } has a claimed range of ${
+      question: `What is the range of the ${year} ${brand.name} ${model.name}?`,
+      answer: `The ${year} ${brand.name} ${model.name} has a claimed range of ${
         minRange === maxRange ? minRange : minRange + "km - " + maxRange
       }km.`,
       id: 3,
       condition:
-        highTrim?.fuelType === "Electric" ||
-        highTrim?.fuelType === "Hybrid",
+        mainTrim?.fuelType === "Electric" || mainTrim?.fuelType === "Hybrid",
     },
     {
-      question: `What is the fuel efficiency of the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
-      answer: `The ${highTrim?.year} ${
-        highTrim?.car_brands?.data[0]?.attributes?.name
-      } ${
-        highTrim?.car_models?.data[0]?.attributes?.name
-      } has a claimed fuel efficiency of ${highTrim?.fuelConsumption} kmpl${
-        highTrim?.range ? " and a range of " + highTrim?.range + " km" : ""
+      question: `What is the fuel efficiency of the ${year} ${brand.name} ${model.name}?`,
+      answer: `The ${year} ${brand.name} ${
+        model.name
+      } has a claimed fuel efficiency of ${mainTrim?.fuelConsumption} kmpl${
+        mainTrim?.range ? " and a range of " + mainTrim?.range + " km" : ""
       }.`,
       id: 11,
       condition:
-        highTrim?.fuelType === "Hybrid" ||
-        highTrim?.fuelType === "Petrol" ||
-        highTrim?.fuelType === "Diesel",
+        mainTrim?.fuelType === "Hybrid" ||
+        mainTrim?.fuelType === "Petrol" ||
+        mainTrim?.fuelType === "Diesel",
     },
     {
-      question: `What type of engine and transmission does the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} have?`,
-      answer: `The ${highTrim?.year} ${
-        highTrim?.car_brands?.data[0]?.attributes?.name
-      } ${
-        highTrim?.car_models?.data[0]?.attributes?.name
-      } is equipped with a ${(highTrim?.displacement / 1000).toFixed(1)}L ${
-        highTrim?.engine
+      question: `What type of engine and transmission does the ${year} ${brand.name} ${model.name} have?`,
+      answer: `The ${year} ${brand.name} ${model.name} is equipped with a ${(
+        mainTrim?.displacement / 1000
+      ).toFixed(1)}L ${
+        mainTrim?.engine
       } engine and is paired with ${getTransmissionType()} transmission.`,
       id: 4,
       condition:
-        highTrim?.fuelType === "Hybrid" ||
-        highTrim?.fuelType === "Petrol" ||
-        highTrim?.fuelType === "Diesel",
+        mainTrim?.fuelType === "Hybrid" ||
+        mainTrim?.fuelType === "Petrol" ||
+        mainTrim?.fuelType === "Diesel",
     },
     {
-      question: `What type of motor the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} has?`,
-      answer: `The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} is equipped with a ${motorTypes}.`,
+      question: `What type of motor the ${year} ${brand.name} ${model.name} has?`,
+      answer: `The ${year} ${brand.name} ${model.name} is equipped with a ${motorTypes}.`,
       id: 12,
       condition:
-        highTrim?.fuelType === "Electric" ||
-        highTrim?.fuelType === "Hybrid",
+        mainTrim?.fuelType === "Electric" || mainTrim?.fuelType === "Hybrid",
     },
     {
-      question: `What safety features are included in the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?`,
-      answer: `Safety components of the ${highTrim?.year} ${
-        highTrim?.car_brands?.data[0]?.attributes?.name
-      } ${highTrim?.car_models?.data[0]?.attributes?.name} include ${
-        highTrim?.airbags ? highTrim?.airbags + " airbags, " : ""
-      }ABS, ${highTrim?.haveFrontParkAssist ? "front park assist, " : ""}${
-        highTrim?.haveRearParkAssist ? "rear park assist, " : ""
-      }${highTrim?.have360ParkingCamera ? "360° parking camera, " : ""}${
-        highTrim?.haveAdaptiveCuriseControl ? "adaptive cruise control, " : ""
-      }${highTrim?.haveLaneChangeAssist ? "lane change assist" : ""}.`,
+      question: `What safety features are included in the ${year} ${brand.name} ${model.name}?`,
+      answer: `Safety components of the ${year} ${brand.name} ${
+        model.name
+      } include ${
+        mainTrim?.airbags ? mainTrim?.airbags + " airbags, " : ""
+      }ABS, ${mainTrim?.haveFrontParkAssist ? "front park assist, " : ""}${
+        mainTrim?.haveRearParkAssist ? "rear park assist, " : ""
+      }${mainTrim?.have360ParkingCamera ? "360° parking camera, " : ""}${
+        mainTrim?.haveAdaptiveCuriseControl ? "adaptive cruise control, " : ""
+      }${mainTrim?.haveLaneChangeAssist ? "lane change assist" : ""}.`,
       id: 5,
       condition: true,
     },
     {
-      question: `How many passengers can the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} accommodate?
+      question: `How many passengers can the ${year} ${brand.name} ${model.name} accommodate?
       `,
-      answer: `The ${highTrim?.year} ${
-        highTrim?.car_brands?.data[0]?.attributes?.name
-      } ${
-        highTrim?.car_models?.data[0]?.attributes?.name
+      answer: `The ${year} ${brand.name} ${
+        model.name
       } has a seating capacity of ${
-        highTrim?.seatingCapacity && highTrim?.seatingCapacity.split(" ")[0]
+        mainTrim?.seatingCapacity && mainTrim?.seatingCapacity.split(" ")[0]
       } passengers.
       `,
       id: 6,
       condition: true,
     },
     {
-      question: ` What are the exterior dimensions of the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?
+      question: ` What are the exterior dimensions of the ${year} ${brand.name} ${model.name}?
       `,
-      answer: `The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} has dimensions of ${highTrim?.length}mm length, ${highTrim?.width}mm width, and ${highTrim?.height}mm height.
+      answer: `The ${year} ${brand.name} ${model.name} has dimensions of ${mainTrim?.length}mm length, ${mainTrim?.width}mm width, and ${mainTrim?.height}mm height.
       `,
       id: 7,
       condition: true,
     },
     {
-      question: `What is the cargo space available in the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?
+      question: `What is the cargo space available in the ${year} ${brand.name} ${model.name}?
       `,
-      answer: `The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} has ${highTrim?.cargoSpace}L of cargo space.`,
+      answer: `The ${year} ${brand.name} ${model.name} has ${mainTrim?.cargoSpace}L of cargo space.`,
       id: 8,
       condition: true,
     },
     {
-      question: `Does the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} come with any driver assistance features?
+      question: `Does the ${year} ${brand.name} ${model.name} come with any driver assistance features?
       `,
-      answer: `Yes, the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} offers driver assistance features such as ${outputSafetyString} to enhance the driving experience.`,
+      answer: `Yes, the ${year} ${brand.name} ${model.name} offers driver assistance features such as ${outputSafetyString} to enhance the driving experience.`,
       id: 9,
       condition: true,
     },
     {
-      question: `What kind of connectivity and entertainment features are included in the ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name}?
+      question: `What kind of connectivity and entertainment features are included in the ${year} ${brand.name} ${model.name}?
       `,
-      answer: ` The ${highTrim?.year} ${highTrim?.car_brands?.data[0]?.attributes?.name} ${highTrim?.car_models?.data[0]?.attributes?.name} comes with ${outputString}.`,
+      answer: ` The ${year} ${brand.name} ${model.name} comes with ${outputString}.`,
       id: 10,
       condition: true,
     },
@@ -285,8 +238,7 @@ export default function VehicleFaq({ model, highTrim }) {
       <div className="faq-area">
         <div className="title ">
           <h4>
-            {highTrim?.year} {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
-            {highTrim?.car_models?.data[0]?.attributes?.name} FAQs
+            {year} {brand.name} {model.name} FAQs
           </h4>
           <div className="faq-wrap">
             {faq.map((item, index) => (

@@ -24,63 +24,90 @@ import VehicleFaq from "@/src/components/details/VehicleFaq";
 import OldModel from "@/src/components/details/OldModel";
 import axios from "axios";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
+import ModelVehicleGallery from "@/src/components/trim-details/ModelVehicleGallery";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function CarDeatilsPage({ model, trimList, oldModel }) {
+function CarDeatilsPage({ oldModel, currentmodel }) {
+  console.log(currentmodel, "currentmodel");
+
+  const mainTrim = currentmodel?.highTrim[0];
+  const allTrims = currentmodel?.trims;
+  const minPower = currentmodel?.power?.min;
+  const maxPower = currentmodel?.power?.max;
+  const minPrice = currentmodel?.price?.min;
+  const maxPrice = currentmodel?.price?.max;
+  const minTorque = currentmodel?.torque?.min;
+  const maxTorque = currentmodel?.torque?.max;
+  const minFuelConsumption = currentmodel?.fuelConsumption?.min;
+  const maxFuelConsumption = currentmodel?.fuelConsumption?.max;
+
+  const engines = currentmodel?.engines;
+  const brand = currentmodel?.brand;
+  const model = { name: currentmodel?.name, slug: currentmodel?.slug };
+  const year = currentmodel?.highTrim[0]?.year;
+  const mainTrimFuelType = mainTrim?.fuelType;
+  const motorTypes = currentmodel?.motors
+    ?.join(", ")
+    .replace(/,([^,]*)$/, " or$1");
+  const engineTypes = engines?.join(", ").replace(/,([^,]*)$/, " or$1");
+  const cylinderList = currentmodel?.cylinders.join(", ");
+  const transmissionList = currentmodel?.transmissionList
+    .join(", ")
+    .replace(/,([^,]*)$/, " or$1");
+  const seatList = currentmodel?.seats.join(", ");
+
+  console.log(
+    "Minimum power:",
+    minPower,
+    "Maximum power:",
+    maxPower,
+    "Minimum price:",
+    minPrice,
+    "Maximum price:",
+    maxPrice,
+    "Minimum torque:",
+    minTorque,
+    "Maximum torque:",
+    maxTorque,
+    "Minimum fuel consumption:",
+    minFuelConsumption,
+    "Maximum fuel consumption:",
+    maxFuelConsumption
+  );
+
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
   const t = useTranslate();
-
-  const brand = model?.car_brands?.data[0]?.attributes;
-  const trim = model?.car_trims?.data[0]?.attributes;
-
-  console.log(oldModel, "oldModeloldModel");
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);
     alert("Link copied to clipboard!");
   };
 
-  const currentURL = typeof window !== "undefined" ? window.location.href : "";
-  const CarPriceRange = ({ car }) => {
-    // Extracting and filtering prices (excluding zeros) from car trims
-    const prices = car
-      ?.map((trim) => trim?.attributes?.price)
-      .filter((price) => price > 0);
-
+  // const currentURL = typeof window !== "undefined" ? window.location.href : "";
+  const CarPriceRange = () => {
     // Format price for display
     const formatPrice = (price) => {
-      return price.toLocaleString("en-AE", {
+      return price?.toLocaleString("en-AE", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
       });
     };
 
-    // Check if there are valid prices available
-    if (prices.length > 0) {
-      // Finding minimum and maximum prices
-      const minPrice = Math.min(...prices);
-      const maxPrice = Math.max(...prices);
-
-      // Determine how to display the price information
-      let priceInfo;
-      if (minPrice === maxPrice) {
-        // If min and max prices are the same, display only one price
-        priceInfo = `AED ${formatPrice(minPrice)}*`;
-      } else {
-        // Display price range
-        priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
-      }
-
-      return priceInfo;
+    let priceInfo;
+    if (minPrice === maxPrice) {
+      // If min and max prices are the same, display only one price
+      priceInfo = `AED ${formatPrice(minPrice)}*`;
     } else {
-      // If no valid prices are available, display "TBD"
-      return TBD;
+      // Display price range
+      priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
     }
+
+    return priceInfo;
   };
 
-  const CarEMIDisplay = ({ car }) => {
+  const CarEMIDisplay = () => {
     const tenureInMonths = 60; // Loan tenure in months
 
     const calculateEMI = (principal) => {
@@ -96,12 +123,8 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
       return Math.round(emi);
     };
 
-    // Extract all non-zero prices, calculate EMI for each, and find the minimum EMI
-    const emis = car
-      ?.filter((trim) => trim?.attributes?.price > 0)
-      .map((trim) => calculateEMI(trim?.attributes?.price));
-
-    const minEMI = Math.min(...emis);
+    // Calculate EMI using the minimum price
+    const minEMI = calculateEMI(minPrice);
 
     // Format the minimum EMI for display
     const emiString = minEMI
@@ -252,149 +275,88 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
     };
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY >= 600) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY >= 600) {
+  //       setIsSticky(true);
+  //     } else {
+  //       setIsSticky(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
-  const phoneInputField = useRef(null);
+  // function TransmissionList(props) {
+  //   const transmissions = Array.from(
+  //     new Set(props?.map((transmission) => transmission?.attributes?.gearBox))
+  //   )
+  //     .filter((transmission) => transmission !== undefined)
+  //     .map((transmission) => {
+  //       let type;
+  //       let speed;
 
-  useEffect(() => {
-    if (phoneInputField.current) {
-      window.intlTelInput(phoneInputField.current, {
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-      });
-    }
-  }, []);
+  //       if (transmission?.includes("A")) {
+  //         type = "Automatic";
+  //         speed = `${type}`;
+  //       } else if (transmission?.includes("M")) {
+  //         type = "Manual";
+  //         speed = `${type}`;
+  //       } else {
+  //         type = "CVT";
+  //         speed = `${type}`;
+  //       }
 
-  const engineText = trimList
-    ?.map((engine) => {
-      const engineParts = engine?.attributes?.engine?.split(" ");
-      const size = engineParts && engineParts[0];
-      const type = engineParts && engineParts[1];
+  //       return `${speed}`;
+  //     });
 
-      return `${size}`;
-    })
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
+  //   if (transmissions.length === 1) {
+  //     return <>{transmissions[0]}</>;
+  //   } else if (transmissions.length === 2) {
+  //     if (transmissions[0] === transmissions[1]) {
+  //       return <>{transmissions[0]}</>;
+  //     } else {
+  //       return (
+  //         <>
+  //           {transmissions[0]} or {transmissions[1]}
+  //         </>
+  //       );
+  //     }
+  //   } else {
+  //     const last = transmissions.pop();
+  //     const joined = transmissions.join(", ");
+  //     const hasDuplicates = transmissions.includes(last);
 
-  function TransmissionList(props) {
-    const transmissions = Array.from(
-      new Set(props?.map((transmission) => transmission?.attributes?.gearBox))
-    )
-      .filter((transmission) => transmission !== undefined)
-      .map((transmission) => {
-        let type;
-        let speed;
+  //     if (hasDuplicates) {
+  //       return <p>{joined}</p>;
+  //     } else {
+  //       return (
+  //         <p>
+  //           {joined} or {last}
+  //         </p>
+  //       );
+  //     }
+  //   }
+  // }
 
-        if (transmission?.includes("A")) {
-          type = "Automatic";
-          speed = `${type}`;
-        } else if (transmission?.includes("M")) {
-          type = "Manual";
-          speed = `${type}`;
-        } else {
-          type = "CVT";
-          speed = `${type}`;
-        }
+  // const fuelType = trimList
+  //   ?.map((item) => item?.attributes?.fuelType)
+  //   .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
+  //   .reduce((acc, cur, idx, arr) => {
+  //     if (arr.length === 1) {
+  //       return cur;
+  //     } else if (idx === arr.length - 1) {
+  //       return `${acc} or ${cur}`;
+  //     } else {
+  //       return `${acc && acc + ","} ${cur}`;
+  //     }
+  //   }, "");
 
-        return `${speed}`;
-      });
-
-    if (transmissions.length === 1) {
-      return <>{transmissions[0]}</>;
-    } else if (transmissions.length === 2) {
-      if (transmissions[0] === transmissions[1]) {
-        return <>{transmissions[0]}</>;
-      } else {
-        return (
-          <>
-            {transmissions[0]} or {transmissions[1]}
-          </>
-        );
-      }
-    } else {
-      const last = transmissions.pop();
-      const joined = transmissions.join(", ");
-      const hasDuplicates = transmissions.includes(last);
-
-      if (hasDuplicates) {
-        return <p>{joined}</p>;
-      } else {
-        return (
-          <p>
-            {joined} or {last}
-          </p>
-        );
-      }
-    }
-  }
-
-  const fuelType = trimList
-    ?.map((item) => item?.attributes?.fuelType)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
-  console.log(fuelType, "ttttttt");
-
-  const motorTypes = trimList
-    ?.map((item) => item?.attributes?.motor)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
-  const cylinderList = [
-    ...new Set(trimList?.map((item) => item?.attributes?.cylinders)),
-  ];
-  const seatList = [
-    ...new Set(
-      trimList?.map((item) =>
-        Number(item?.attributes?.seatingCapacity?.replace("Seater", ""))
-      )
-    ),
-  ].sort((a, b) => a - b);
-
-  const powers = trimList?.map((car) => car?.attributes?.power);
-  const minPower = Math?.min(...powers);
-  const maxPower = Math?.max(...powers);
-
-  const torques = trimList?.map((car) => car?.attributes?.torque);
-  const minTorque = Math?.min(...torques);
-  const maxTorque = Math?.max(...torques);
+  // console.log(fuelType, "ttttttt");
 
   return (
     <MainLayout>
@@ -402,13 +364,13 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
 
       <div className="car-details-area mt-15 ">
         <div className="container">
-          {/* <div className="row mb-50">
+          <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
                 <CarDetailsNav />
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="row trim-content">
             <div className="col-lg-6 pe-3">
               <div className="single-item mb-50" id="car-img">
@@ -448,7 +410,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                           <div className="swiper-wrapper">
                             <SwiperSlide className="swiper-slide">
                               <Image
-                                src={trim?.featuredImage?.data?.attributes?.url}
+                                src={mainTrim?.featuredImage}
                                 alt="product image"
                                 fill
                                 className="object-contain"
@@ -465,9 +427,9 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
             <div className="col-lg-6">
               <div className="d-flex justify-content-between align-items-center">
                 <h1>
-                  {trim?.year} {brand?.name} {model?.name}
+                  {mainTrim?.year} {brand?.name} {model?.name}
                 </h1>{" "}
-                {/* <div className="shareBtn" onClick={handleCopyLink}>
+                <div className="shareBtn" onClick={handleCopyLink}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -480,10 +442,10 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                     />
                   </svg>
                   <span>Share</span>
-                </div> */}
+                </div>
               </div>
               <h4 className="mt-1">
-                <CarPriceRange car={trimList} />
+                <CarPriceRange />
               </h4>
 
               <div className="d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
@@ -503,7 +465,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                   <path fill="currentColor" d="M6 10.5h12v2H6z" />
                 </svg>
                 <h6 className="p-0 m-0">
-                  Monthly EMI starting from <CarEMIDisplay car={trimList} />
+                  Monthly EMI starting from <CarEMIDisplay />
                 </h6>
               </div>
               <div className="mt-3 d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
@@ -520,7 +482,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                 </svg>
 
                 <h6 className="p-0 m-0">
-                  Available Variants : {trimList?.length}
+                  Available Variants : {allTrims?.length}
                 </h6>
               </div>
 
@@ -536,17 +498,15 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       />
                       <div className="d-flex flex-column">
                         <small className="fw-bold">
-                          {engineText?.includes("Electric")
+                          {mainTrimFuelType === "Electric"
                             ? "Motor Type"
                             : t.NoOfCylinders}
                         </small>
                         <div className="d-flex flex-wrap mt-1">
                           <small>
-                            {engineText?.includes("Electric")
-                              ? motorTypes?.split(" ")[0]
-                              : cylinderList?.length > 1
-                              ? cylinderList.join(", ")
-                              : cylinderList[0]}
+                            {mainTrimFuelType === "Electric"
+                              ? motorTypes
+                              : cylinderList}
                           </small>
                         </div>
                       </div>
@@ -563,7 +523,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       <div className="d-flex flex-column">
                         <small className="fw-bold">{t.transmission}</small>
                         <div className="d-flex flex-wrap">
-                          <small>{TransmissionList(trimList)}</small>
+                          <small>{transmissionList}</small>
                         </div>
                       </div>
                     </div>
@@ -613,11 +573,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       />
                       <div className="d-flex flex-column">
                         <small className="fw-bold">{t.seats}</small>
-                        <small>
-                          {seatList?.length > 1
-                            ? seatList.join(", ")
-                            : seatList[0]}
-                        </small>
+                        <small>{seatList}</small>
                       </div>
                     </div>
                   </div>
@@ -631,7 +587,7 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
                       />
                       <div className="d-flex flex-column">
                         <small className="fw-bold">{t.fuelType}</small>
-                        <small>{fuelType}</small>
+                        <small>{mainTrimFuelType}</small>
                       </div>
                     </div>
                   </div>
@@ -642,26 +598,77 @@ function CarDeatilsPage({ model, trimList, oldModel }) {
           <div className="row mt-5">
             <div className="col-lg-9">
               <Ad728x90 dataAdSlot="7369694604" />
-              <ModelDescription model={trimList} hightTrim={trim} />
+              <ModelDescription
+                year={year}
+                brand={brand}
+                model={model}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                minFuelConsumption={minFuelConsumption}
+                maxFuelConsumption={maxFuelConsumption}
+                engineTypes={engineTypes}
+                transmissionList={transmissionList}
+                motorTypes={motorTypes}
+                mainTrimFuelType={mainTrimFuelType}
+                allTrims={allTrims}
+                mainTrim={mainTrim}
+              />
               <Ad728x90 dataAdSlot="7369694604" />
-              <VariantsListing model={trimList} highTrim={trim} />
+              <VariantsListing
+                year={year}
+                brand={brand}
+                model={model}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                minFuelConsumption={minFuelConsumption}
+                maxFuelConsumption={maxFuelConsumption}
+                engineTypes={engineTypes}
+                transmissionList={transmissionList}
+                motorTypes={motorTypes}
+                mainTrimFuelType={mainTrimFuelType}
+                allTrims={allTrims}
+                mainTrim={mainTrim}
+              />
               <Ad728x90 dataAdSlot="7369694604" />
               <OldModel model={oldModel} />
-              {/* <VehicleGallery model={data} /> */}
+              <ModelVehicleGallery
+                year={year}
+                brand={brand}
+                model={model}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                minFuelConsumption={minFuelConsumption}
+                maxFuelConsumption={maxFuelConsumption}
+                engineTypes={engineTypes}
+                transmissionList={transmissionList}
+                motorTypes={motorTypes}
+                mainTrimFuelType={mainTrimFuelType}
+                allTrims={allTrims}
+                mainTrim={mainTrim}
+              />
               <Ad728x90 dataAdSlot="7369694604" />
 
               <VehicleFaq
-                model={trimList}
-                highTrim={trim}
+                 year={year}
+                 brand={brand}
+                 model={model}
+                 minPrice={minPrice}
+                 maxPrice={maxPrice}
+                 minFuelConsumption={minFuelConsumption}
+                 maxFuelConsumption={maxFuelConsumption}
+                 engineTypes={engineTypes}
+                 transmissionList={transmissionList}
+                 motorTypes={motorTypes}
+                 mainTrimFuelType={mainTrimFuelType}
+                 allTrims={allTrims}
+                 mainTrim={mainTrim}
                 CarPriceRange={CarPriceRange}
               />
             </div>
             <div className="col-lg-3">
               <div className="car-details-sidebar positionStickyAd">
-                <div
-                  className="contact-info mb-50"
-                >
-                    <Ad300x600 dataAdSlot="3792539533" />
+                <div className="contact-info mb-50">
+                  <Ad300x600 dataAdSlot="3792539533" />
                 </div>
               </div>
             </div>
@@ -681,363 +688,23 @@ export async function getServerSideProps(context) {
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
 
-  console.log(isNaN(year), "ssssssssssssss");
+  console.log(typeof year, "year");
 
-  const client = new ApolloClient({
-    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-    cache: new InMemoryCache(),
-  });
   try {
-    const models = await client.query({
-      query: gql`
-        query carModels($modelSlug: String!) {
-          carModels(
-            filters: {
-              slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: ${year} } }
-            }
-          ) {
-            data {
-              id
-              attributes {
-                name
-                year
-                slug
-                car_brands {
-                  data {
-                    id
-                    attributes {
-                      name
-                      slug
-                      brandLogo {
-                        data {
-                          id
-                          attributes {
-                            name
-                            url
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                isFeatured
-                isElectric
-                featuredImage {
-                  data {
-                    id
-                    attributes {
-                      name
-                      url
-                    }
-                  }
-                }
-                car_trims(
-                  filters: { highTrim: { eq: true }, year: { eq: ${year} } }
-                ) {
-                  data {
-                    id
-                    attributes {
-                      name
-                      metaTitle
-                      mainSlug
-                      description
-                      car_brands {
-                        data {
-                          id
-                          attributes {
-                            name
-                            brandLogo {
-                              data {
-                                id
-                                attributes {
-                                  url
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                      car_models {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      year
-                      price
-                      featuredImage {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-                      gallery_images {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-                      engine
-                      displacement
-                      power
-                      torque
-                      transmission
-                      gearBox
-                      drive
-                      fuelType
-                      motor
-                      motorType
-                      batteryCapacity
-                      chargingTime
-                      batteryWarranty
-                      range
-                      zeroToHundred
-                      topSpeed
-                      fuelConsumption
-                      cylinders
-                      haveABS
-                      haveFrontAirbags
-                      haveSideAirbags
-                      haveRearAirbags
-                      haveFrontParkAssist
-                      haveRearParkAssist
-                      haveRearParkingCamera
-                      have360ParkingCamera
-                      haveCruiseControl
-                      haveAdaptiveCruiseControl
-                      haveLaneChangeAssist
-                      car_body_types {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      airbags
-                      doors
-                      frontBrakes
-                      rearBrakes
-                      length
-                      width
-                      height
-                      wheelbase
-                      weight
-                      wheels
-                      tyresFront
-                      tyresRear
-                      seatingCapacity
-                      haveLeatherInterior
-                      haveFabricInterior
-                      haveAppleCarPlay
-                      haveAndroidAuto
-                      haveRearSeatEntertainment
-                      haveCooledSeats
-                      haveClimateControl
-                      isLuxury
-                      isPremiumLuxury
-                      isSafety
-                      isFuelEfficient
-                      isOffRoad
-                      haveMusic
-                      haveTechnology
-                      havePerformance
-                      isSpacious
-                      isElectric
-                      isDiscontinued
-                      slug
-                      fuelTankSize
-                      cargoSpace
-                      highTrim
-                    }
-                  }
-                }
-              }
-            }
-            meta {
-              pagination {
-                page
-                pageSize
-                pageCount
-                total
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        modelSlug,
-      },
-    });
-
-    const trimList = await client.query({
-      query: gql`
-        query carModels($modelSlug: String!) {
-          carModels(
-            filters: {
-              slug: { eq: $modelSlug }
-              car_trims: { highTrim: { eq: true }, year: { eq: ${year} } }
-            }
-          ) {
-            data {
-              id
-              attributes {
-                name
-                year
-                slug
-                car_brands {
-                  data {
-                    id
-                    attributes {
-                      name
-                      slug
-                    }
-                  }
-                }
-
-                car_trims(filters: { year: { eq: ${year} } }) {
-                  data {
-                    id
-                    attributes {
-                      name
-                      car_brands {
-                        data {
-                          id
-                          attributes {
-                            name
-                            slug
-                          }
-                        }
-                      }
-                      car_models {
-                        data {
-                          id
-                          attributes {
-                            name
-                            slug
-                          }
-                        }
-                      }
-                      year
-                      price
-                      featuredImage {
-                        data {
-                          attributes {
-                            url
-                          }
-                        }
-                      }
-
-                      engine
-                      displacement
-                      power
-                      torque
-                      transmission
-                      gearBox
-                      drive
-                      fuelType
-                      motor
-                      motorType
-                      batteryCapacity
-                      chargingTime
-                      batteryWarranty
-                      range
-                      zeroToHundred
-                      topSpeed
-                      fuelConsumption
-                      cylinders
-                      haveABS
-                      haveFrontAirbags
-                      haveSideAirbags
-                      haveRearAirbags
-                      haveFrontParkAssist
-                      haveRearParkAssist
-                      haveRearParkingCamera
-                      have360ParkingCamera
-                      haveCruiseControl
-                      haveAdaptiveCruiseControl
-                      haveLaneChangeAssist
-                      car_body_types {
-                        data {
-                          id
-                          attributes {
-                            name
-                          }
-                        }
-                      }
-                      airbags
-                      doors
-                      frontBrakes
-                      rearBrakes
-                      length
-                      width
-                      height
-                      wheelbase
-                      weight
-                      wheels
-                      tyresFront
-                      tyresRear
-                      seatingCapacity
-                      haveLeatherInterior
-                      haveFabricInterior
-                      haveAppleCarPlay
-                      haveAndroidAuto
-                      haveRearSeatEntertainment
-                      haveCooledSeats
-                      haveClimateControl
-                      isLuxury
-                      isPremiumLuxury
-                      isSafety
-                      isFuelEfficient
-                      isOffRoad
-                      haveMusic
-                      haveTechnology
-                      havePerformance
-                      isSpacious
-                      isElectric
-                      isDiscontinued
-                      slug
-                      fuelTankSize
-                      cargoSpace
-                      highTrim
-                    }
-                  }
-                }
-              }
-            }
-            meta {
-              pagination {
-                page
-                pageSize
-                pageCount
-                total
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        modelSlug,
-      },
-    });
-
     const oldModels = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-model/${modelSlug}`
     );
 
-    console.log(oldModels, "oldModels");
+    const currentmodel = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
+    );
+
+    console.log(currentmodel, "currentmodel");
 
     return {
       props: {
-        model: models?.data?.carModels?.data[0]?.attributes,
-        trimList:
-          trimList?.data?.carModels?.data[0]?.attributes?.car_trims?.data,
         oldModel: oldModels?.data?.data,
+        currentmodel: currentmodel?.data?.data?.model,
       },
     };
   } catch (error) {

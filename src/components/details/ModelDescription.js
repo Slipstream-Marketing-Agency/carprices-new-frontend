@@ -4,7 +4,21 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
-export default function ModelDescription({ model,hightTrim }) {
+export default function ModelDescription({
+  year,
+  brand,
+  model,
+  minPrice,
+  maxPrice,
+  minFuelConsumption,
+  maxFuelConsumption,
+  mainTrimFuelType,
+  engineTypes,
+  transmissionList,
+  motorTypes,
+  allTrims,
+  mainTrim,
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const t = useTranslate();
@@ -14,131 +28,10 @@ export default function ModelDescription({ model,hightTrim }) {
     setIsExpanded(!isExpanded);
   };
 
-  const availableTrim = model;
-
-  const [minPrice, setMinPrice] = useState(null);
-  const [maxPrice, setMaxPrice] = useState(null);
-
-  // Calculate min and max prices whenever prices state changes
-  useEffect(() => {
-    let newMinPrice = null;
-    let newMaxPrice = null;
-  
-    // Extracting and filtering prices (excluding zeros and negative values) from available trims
-    const filteredPrices = availableTrim
-      ?.map((trim) => trim.attributes.price)
-      .filter((price) => price > 0);
-  
-    if (filteredPrices.length > 0) {
-      // Finding the minimum and maximum prices from the filtered list
-      newMinPrice = Math.min(...filteredPrices);
-      newMaxPrice = Math.max(...filteredPrices);
-    }
-  
-    // Format price for display (assuming setMinPrice and setMaxPrice accept formatted strings)
-    const formatPrice = (price) => {
-      return price?.toLocaleString("en-AE", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      });
-    };
-  
-    // Update the state with formatted prices
-    if (newMinPrice !== null) {
-      setMinPrice(formatPrice(newMinPrice));
-    }
-    if (newMaxPrice !== null) {
-      setMaxPrice(formatPrice(newMaxPrice));
-    }
-  
-  }, [availableTrim]);
-
-  const engineText = availableTrim
-    .map((item) => (item?.attributes?.displacement / 1000).toFixed(1) + "L " + item?.attributes?.engine)
-    .filter((value, index, self) => self.indexOf(value) === index) // Remove duplicate items
-    .reduce((accumulator, currentValue, index, array) => {
-      if (array.length === 1) {
-        return currentValue; // Return the single item as is
-      } else if (index === array.length - 1) {
-        return accumulator + " or " + currentValue; // Append "or" for the last item
-      } else if (index === array.length - 2) {
-        return accumulator + currentValue; // Skip comma for the second to last item
-      } else {
-        return accumulator ? accumulator + ", " + currentValue : currentValue; // Append comma for other items, considering if accumulator is empty
-      }
-    }, "");
-  const engineTypes = engineText?.split(", ");
-  const engineTypesOr = engineText?.split("or");
-
-  function TransmissionList(props) {
-    const transmissions = Array.from(
-      new Set(props.map((transmission) => transmission?.attributes?.gearBox))
-    )
-      .filter((transmission) => transmission !== undefined)
-      .map((transmission) => {
-        let type;
-        let speed;
-
-        if (transmission?.includes("A")) {
-          type = "automatic";
-          speed = `${transmission?.slice(0, -1)}-speed ${type}`;
-        } else if (transmission?.includes("M")) {
-          type = "manual";
-          speed = `${transmission?.slice(0, -1)}-speed ${type}`;
-        } else {
-          type = "CVT";
-          speed = transmission;
-        }
-
-        return `${speed}`;
-      });
-
-    if (transmissions.length === 1) {
-      return <>{transmissions[0]}</>;
-    } else if (transmissions.length === 2) {
-      if (transmissions[0] === transmissions[1]) {
-        return <>{transmissions[0]}</>;
-      } else {
-        return (
-          <>
-            {transmissions[0]} or {transmissions[1]}
-          </>
-        );
-      }
-    } else {
-      const last = transmissions.pop();
-      const joined = transmissions.join(", ");
-      const hasDuplicates = transmissions.includes(last);
-
-      if (hasDuplicates) {
-        return <p>{joined}</p>;
-      } else {
-        return (
-          <p>
-            {joined} or {last}
-          </p>
-        );
-      }
-    }
-  }
-
-  const motorTypes = availableTrim
-    ?.map((item) => item?.attributes?.motor)
-    .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-    .reduce((acc, cur, idx, arr) => {
-      if (arr.length === 1) {
-        return cur;
-      } else if (idx === arr.length - 1) {
-        return `${acc} or ${cur}`;
-      } else {
-        return `${acc && acc + ","} ${cur}`;
-      }
-    }, "");
-
   const motorTypeCount = motorTypes?.split(",").length;
   const motorTypeCountOr = motorTypes?.split("or").length;
 
-  const range = availableTrim
+  const range = allTrims
     ?.map((item) => item?.attributes?.range)
     .filter((value, index, self) => self.indexOf(value) === index)
     .sort((a, b) => a - b);
@@ -146,7 +39,7 @@ export default function ModelDescription({ model,hightTrim }) {
   const minRange = range[0];
   const maxRange = range[range.length - 1];
 
-  const batteryCapacity = availableTrim
+  const batteryCapacity = allTrims
     ?.map((item) => item?.attributes?.batteryCapacity)
     .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
     .reduce((acc, cur, idx, arr) => {
@@ -160,15 +53,15 @@ export default function ModelDescription({ model,hightTrim }) {
     }, "");
 
   const features = [
-    hightTrim?.haveAppleCarPlay && "Apple CarPlay",
-    hightTrim?.haveAndroidAuto && "Android Auto",
-    hightTrim?.haveCruiseControl && "cruise control",
-    hightTrim?.haveClimateControl && "climate control",
+    mainTrim?.haveAppleCarPlay && "Apple CarPlay",
+    mainTrim?.haveAndroidAuto && "Android Auto",
+    mainTrim?.haveCruiseControl && "cruise control",
+    mainTrim?.haveClimateControl && "climate control",
   ].filter(Boolean);
 
   const safetyFeatures = [
-    hightTrim?.haveABS && "ABS",
-    hightTrim?.haveFrontParkAssist && "front park assist",
+    mainTrim?.haveABS && "ABS",
+    mainTrim?.haveFrontParkAssist && "front park assist",
   ].filter(Boolean);
 
   const numAirbags = [
@@ -179,9 +72,9 @@ export default function ModelDescription({ model,hightTrim }) {
     .filter(Boolean)
     .reduce((acc, val) => acc + val, 0);
 
-  const airbags = hightTrim?.airbags;
-  const hasABS = hightTrim?.haveABS;
-  const hasFrontParkAssist = hightTrim?.haveFrontParkAssist;
+  const airbags = mainTrim?.airbags;
+  const hasABS = mainTrim?.haveABS;
+  const hasFrontParkAssist = mainTrim?.haveFrontParkAssist;
 
   let safetyFeature = "";
 
@@ -207,195 +100,142 @@ export default function ModelDescription({ model,hightTrim }) {
 
   const outputString = `${safetyFeature}`;
 
-  const variableText = availableTrim
-    .map((trim) => (
+  console.log(allTrims, "allTrims");
+
+  const variableText = allTrims
+    .map((trim, index) => (
       <Link
-        href={`/brands/${model?.brand?.slug}/${trim?.year}/${model?.slug}/${trim?.slug}`}
+        href={`/brands/${brand?.slug}/${trim.year}/${model?.slug}/${trim.slug}`}
         key={trim.id}
       >
         <b>{trim.name}</b>
       </Link>
     ))
-    .filter(
-      (value, index, self) =>
-        self.findIndex((item) => item?.attributes?.key === value.key) === index
-    ) // Remove duplicate items
-    .reduce((accumulator, currentValue, index, array) => {
-      if (array.length === 1) {
-        return currentValue; // Return the single item as is
+    .reduce((acc, curr, index, array) => {
+      if (index === 0) {
+        // If it's the first item, just return it
+        return curr;
       } else if (index === array.length - 1) {
+        // If it's the last item, prepend with 'and ' if there are more than one items
         return (
           <>
-            {accumulator} and {currentValue}
+            {acc} and {curr}
           </>
-        ); // Append "and" for the last item
-      } else if (index === 0) {
-        return currentValue; // Return the first item as is
-      } else if (index === array.length - 2) {
-        return (
-          <>
-            {accumulator}, {currentValue}
-          </>
-        ); // Append comma for the second-to-last item
+        );
       } else {
+        // For all other items, append with ', '
         return (
           <>
-            {accumulator}, {currentValue}
+            {acc}, {curr}
           </>
-        ); // Append comma for other items
+        );
       }
-    }, null);
+    });
 
-  const fuelConsumption = availableTrim.map(car => car.attributes.fuelConsumption);
-  const minfuelConsumption = Math.min(...fuelConsumption);
-  const maxfuelConsumption = Math.max(...fuelConsumption);
+  const getTransmissionType = () => {
+    const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
+    const hasManual = allTrims.some((t) => t?.transmission === "Manual");
+
+    if (hasAutomatic && hasManual) {
+      return "Automatic/Manual";
+    } else if (hasAutomatic) {
+      return "an Automatic";
+    } else if (hasManual) {
+      return "a Manual";
+    } else {
+      return "a CVT";
+    }
+  };
 
   return (
     <div id="description" className={`mb-3 ${isRtl && "text-end"}`}>
       <div className="white_bg_wrapper mb-3">
         <h4 className="fw-bold">
-          {hightTrim?.year} {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name}
+          {year} {brand?.name} {model?.name}
         </h4>
         <div className="car_description mt-3">
-          {minPrice !== maxPrice ? (
-            <p>
-              {!isRtl ? (
-                <>
-                  <b>{t.price}: </b> The {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name} is
-                  priced between{" "}
-                  <b>
-                    {" "}
-                    {minPrice === maxPrice &&
-                    minPrice !== null &&
-                    minPrice !== null ? (
-                      <>
-                         <Price data={minPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {minPrice !== maxPrice &&
-                    minPrice !== null &&
-                    minPrice !== null ? (
-                      <>
-                         <Price data={minPrice} /> - {" "}
-                        <Price data={maxPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {minPrice === null && maxPrice === null ? (
-                      <>
-                        <Price data={minPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}{" "}
-                  </b>{" "}
-                  based on the variant.
-                </>
-              ) : (
-                <>
-                  سعر {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name} <b>{t.price}:</b>{" "}
-                  يتراوح بين{" "}
-                  <b>
-                    {hightTrim?.minPrice === hightTrim?.maxPrice &&
-                    hightTrim?.minPrice !== null &&
-                    hightTrim?.minPrice !== null ? (
-                      <>
-                        د.إ <Price data={hightTrim?.minPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {hightTrim?.minPrice !== hightTrim?.maxPrice &&
-                    hightTrim?.minPrice !== null &&
-                    hightTrim?.minPrice !== null ? (
-                      <>
-                        د.إ <Price data={hightTrim?.minPrice} /> - د.إ{" "}
-                        <Price data={hightTrim?.maxPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}
-                    {hightTrim?.minPrice === null && hightTrim?.maxPrice === null ? (
-                      <>
-                        <Price data={hightTrim?.minPrice} />
-                      </>
-                    ) : (
-                      ""
-                    )}{" "}
-                  </b>{" "}
-                  اعتمادًا على الطراز
-                </>
-              )}
-            </p>
-          ) : (
-            <p>
-              {isRtl ? (
-                <>
-                  <b>{t.price}: </b> سعر {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name} هو{" "}
-                  <b>
-                    {minPrice === null ? (
-                      <>
-                        <Price data={minPrice} />
-                      </>
-                    ) : (
-                      <>
-                        {t.aed} <Price data={minPrice} />
-                      </>
-                    )}
-                  </b>
-                  .
-                </>
-              ) : (
-                <>
-                  <b>{t.price}: </b> The {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name} is
-                  priced at{" "}
-                  <b>
-                    {minPrice === null ? (
-                      <>
-                        <Price data={minPrice} />
-                      </>
-                    ) : (
-                      <>
-                        {t.aed} <Price data={minPrice} />
-                      </>
-                    )}
-                  </b>
-                  .
-                </>
-              )}
-            </p>
-          )}
+          <p>
+            {isRtl ? (
+              <>
+                <b>{t.price}: </b>
+                {brand?.name} {model?.name}{" "}
+                {minPrice === null ? "" : `${t.aed} `}
+                <b>
+                  {minPrice !== null ? (
+                    <>
+                      <Price data={minPrice} />
+                      {minPrice !== maxPrice && maxPrice !== null ? (
+                        <>
+                          {" "}
+                          - د.إ <Price data={maxPrice} />
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ) : (
+                    "TBD*" // Assuming you want to display a message when the price is not available
+                  )}
+                </b>
+                {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
+                  ? " اعتمادًا على الطراز"
+                  : "."}
+              </>
+            ) : (
+              <>
+                <b>{t.price}: </b>The {brand?.name} {model?.name} is priced
+                {minPrice === null ? "" : ` at `}
+                <b>
+                  {minPrice !== null ? (
+                    <>
+                      <Price data={minPrice} />
+                      {minPrice !== maxPrice && maxPrice !== null ? (
+                        <>
+                          {" "}
+                          - <Price data={maxPrice} />
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ) : (
+                    "TBD*" // Assuming you want to display a message when the price is not available
+                  )}
+                </b>
+                {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
+                  ? " based on the variant."
+                  : "."}
+              </>
+            )}
+          </p>
 
           {isRtl ? (
-            availableTrim?.length === 1 ? (
+            allTrims?.length === 1 ? (
               <p>
                 <b>{t.variants}: </b>هو متوفر في طراز واحد فقط:{" "}
-                <b>{availableTrim.map((trim) => trim.name)}</b>.
+                <b>{allTrims.map((trim) => trim.name)}</b>.
               </p>
             ) : (
               <p>
-                <b>{t.variants}: </b>متوفر بـ<b>{availableTrim?.length}</b>{" "}
-                طرازات: {variableText}.
+                <b>{t.variants}: </b>متوفر بـ<b>{allTrims?.length}</b> طرازات:{" "}
+                {variableText}.
               </p>
             )
-          ) : availableTrim?.length === 1 ? (
+          ) : allTrims?.length === 1 ? (
             <p>
               <b>{t.variants}: </b>It is only available in one variant :{" "}
-              <b>{availableTrim.map((trim) => trim.name)}</b>.
+              <b>{allTrims.map((trim) => trim.name)}</b>.
             </p>
           ) : (
             <p>
-              <b>{t.variants}: </b>It is available in{" "}
-              <b>{availableTrim?.length}</b> variants: {variableText}.
+              <b>{t.variants}: </b>It is available in <b>{allTrims?.length}</b>{" "}
+              variants: {variableText}.
             </p>
           )}
 
           {/* Engine and Motor */}
 
-          {hightTrim?.mainTrim?.fuelType === "Electric" ? (
+          {mainTrimFuelType === "Electric" ? (
             motorTypeCount?.length <= 1 || motorTypeCountOr?.length <= 1 ? (
               <p>
                 <b>Motor:</b> It comes with a <b>{motorTypes}</b>.
@@ -406,16 +246,16 @@ export default function ModelDescription({ model,hightTrim }) {
                 based on the variant.
               </p>
             )
-          ) : hightTrim?.mainTrim?.fuelType === "Hybrid" ? (
+          ) : mainTrimFuelType === "Hybrid" ? (
             <>
               {engineTypes?.length > 1 || engineTypesOr?.length > 1 ? (
                 <p>
                   <b>{t.engine}:</b> It can be equipped with a{" "}
-                  <b>{engineText}</b> engine based on the variant.
+                  <b>{engineTypes}</b> engine based on the variant.
                 </p>
               ) : (
                 <p>
-                  <b>{t.engine}:</b> It is equipped with a <b>{engineText}</b>{" "}
+                  <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
                   engine.
                 </p>
               )}
@@ -431,38 +271,37 @@ export default function ModelDescription({ model,hightTrim }) {
                 </p>
               )}
             </>
-          ) : engineTypes?.length > 1 || engineTypesOr?.length > 1 ? (
+          ) : engineTypes?.length > 1 ? (
             <p>
-              <b>{t.engine}:</b> It can be equipped with a <b>{engineText}</b>{" "}
+              <b>{t.engine}:</b> It can be equipped with a <b>{engineTypes}</b>{" "}
               engine based on the variant.
             </p>
           ) : (
             <p>
-              <b>{t.engine}:</b> It is equipped with a <b>{engineText}</b>{" "}
+              <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
               engine.
             </p>
           )}
 
           {/* Transmission */}
 
-          {hightTrim?.mainTrim?.fuelType === "Electric" ||
-          TransmissionList(availableTrim).props.children === "" ? (
+          {mainTrimFuelType === "Electric" || transmissionList === null ? (
             ""
           ) : (
             <p>
               <b>{t.transmission}: </b>
-              It comes with a <b>{TransmissionList(availableTrim)}</b> gearbox.
+              It comes with a <b>{getTransmissionType()}</b> gearbox.
             </p>
           )}
 
-          {hightTrim?.mainTrim?.fuelType === "Electric" ? (
+          {mainTrimFuelType === "Electric" ? (
             ""
-          ) : hightTrim?.minfuelConsumption !== hightTrim?.maxfuelConsumption &&
-            hightTrim?.minfuelConsumption !== "" ? (
+          ) : minFuelConsumption !== maxFuelConsumption &&
+            minFuelConsumption !== "" ? (
             <p>
               <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
               <b>
-                {hightTrim?.minfuelConsumption}kmpl - {hightTrim?.maxfuelConsumption}
+                {minFuelConsumption}kmpl - {maxFuelConsumption}
                 kmpl
               </b>{" "}
               depending on the variant.
@@ -471,9 +310,9 @@ export default function ModelDescription({ model,hightTrim }) {
             <p>
               <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
               <b>
-                {hightTrim?.minfuelConsumption !== ""
-                  ? hightTrim?.minfuelConsumption
-                  : hightTrim?.maxfuelConsumption}
+                {minFuelConsumption !== ""
+                  ? minFuelConsumption
+                  : maxFuelConsumption}
                 kmpl
               </b>
               .
@@ -482,8 +321,8 @@ export default function ModelDescription({ model,hightTrim }) {
 
           {/* Range */}
 
-          {hightTrim?.mainTrim?.fuelType === "Electric" ||
-          (hightTrim?.mainTrim?.fuelType === "Hybrid" &&
+          {mainTrimFuelType === "Electric" ||
+          (mainTrimFuelType === "Hybrid" &&
             minRange !== "" &&
             minRange !== null) ? (
             minRange === maxRange ? (
@@ -502,19 +341,17 @@ export default function ModelDescription({ model,hightTrim }) {
             )
           ) : null}
 
-          {hightTrim?.mainTrim?.fuelType === "Electric" ||
-          (hightTrim?.mainTrim?.fuelType === "Hybrid" &&
-            batteryCapacity !== "" &&
-            batteryCapacity !== null) ? (
-            availableTrim.length <= 1 ? (
+          {mainTrimFuelType === "Electric" ||
+          (mainTrimFuelType === "Hybrid" && batteryCapacity !== "") ? (
+            allTrims.length <= 1 ? (
               <p>
                 <b>{t.batteryCapacity}: </b>It comes with a{" "}
-                <b>{t.batteryCapacity}</b> battery.
+                <b>{mainTrim.batteryCapacity}</b> battery.
               </p>
             ) : (
               <p>
                 <b>{t.batteryCapacity}: </b>It comes with a{" "}
-                <b>{t.batteryCapacity}</b> battery based on the variant.
+                <b>{mainTrim.batteryCapacity}</b> battery based on the variant.
               </p>
             )
           ) : (
@@ -539,11 +376,11 @@ export default function ModelDescription({ model,hightTrim }) {
             <b>{t.safety}:</b> Safety components consist of{" "}
             <b>{outputString}</b> ensuring a secure driving experience.
           </p>
-          {/* {hightTrim?.cargoSpace === "" ? null : (
+          {/* {mainTrim?.cargoSpace === "" ? null : (
             <p>
               <b>Boot Space: </b>
-              The {hightTrim?.car_brands?.data[0]?.attributes?.name} {hightTrim?.car_models?.data[0]?.attributes?.name} offers{" "}
-              <b>{hightTrim?.cargoSpace} L</b> of cargo space.
+              The {brand?.name} {model?.name} offers{" "}
+              <b>{mainTrim?.cargoSpace} L</b> of cargo space.
             </p>
           )} */}
         </div>

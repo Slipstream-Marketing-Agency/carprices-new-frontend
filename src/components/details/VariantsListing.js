@@ -8,12 +8,26 @@ import Price from "@/src/utils/Price"; // Adjust the path based on your project 
 import useTranslate from "@/src/utils/useTranslate"; // Adjust the path based on your project structure
 import FeaturedImage from "../common/FeaturedImage"; // Adjust the path based on your project structure
 
-export default function VariantsListing({ model, highTrim }) {
+export default function VariantsListing({
+  year,
+  brand,
+  model,
+  minPrice,
+  maxPrice,
+  minFuelConsumption,
+  maxFuelConsumption,
+  mainTrimFuelType,
+  engineTypes,
+  transmissionList,
+  motorTypes,
+  allTrims,
+  mainTrim,
+}) {
   const availableTrim = _.orderBy(
     model,
     [
       (trim) => {
-        return trim.attributes.price === 0 ? Infinity : trim.attributes.price;
+        return trim.price === 0 ? Infinity : trim.price;
       },
     ],
     ["asc"]
@@ -30,8 +44,7 @@ export default function VariantsListing({ model, highTrim }) {
       <div className="white_bg_wrapper">
         <h4 className="fw-bold">
           <span>
-            {highTrim?.year} {highTrim?.car_brands?.data[0]?.attributes?.name}{" "}
-            {highTrim?.car_models?.data[0]?.attributes?.name}
+            {year} {brand.name} {model.name}
           </span>{" "}
           {t.variants} {t.and} <span>{t.priceList}</span>
         </h4>
@@ -48,64 +61,50 @@ export default function VariantsListing({ model, highTrim }) {
               </tr>
             </thead>
             <tbody>
-              {availableTrim?.map((item, index) => (
+              {allTrims?.map((item, index) => (
                 <tr key={index}>
                   <td data-label="Image" className="col-2 py-4 w-10">
                     <div className="listed_image">
                       <FeaturedImage
                         width={100}
                         height={100}
-                        src={
-                          item.attributes?.featuredImage?.data?.attributes?.url
-                        }
+                        src={item.featuredImage}
                       />
                     </div>
                   </td>
                   <td data-label="Variant" className="col-4 py-4">
                     <Link
-                      href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
+                      href={`/brands/${brand?.slug}/${item?.year}/${model?.slug}/${item.slug}`}
                     >
                       <span>
                         <p>
                           <span>
-                            {item.attributes?.year}{" "}
-                            {
-                              item.attributes?.car_brands?.data[0]?.attributes
-                                ?.name
-                            }{" "}
-                            {
-                              item.attributes?.car_models?.data[0]?.attributes
-                                ?.name
-                            }{" "}
-                            {item.attributes?.name}
+                            {year} {brand.name} {model.name} {item?.name}
                           </span>
                         </p>
                         <small className="text-grey">
-                          <span>{item.attributes?.transmission}</span>,{" "}
-                          <span> {item.attributes?.seatingCapacity}</span>,{" "}
+                          <span>{item?.transmission}</span>,{" "}
+                          <span> {item?.seatingCapacity}</span>,{" "}
                           {item?.fuelType === "Electric" ? (
-                            item.attributes?.motor
+                            item?.motor
                           ) : (
                             <span>
-                              {(item.attributes?.displacement / 1000).toFixed(
-                                1
-                              )}
-                              L {item.attributes?.engine}{" "}
-                              {item.attributes?.drive}{" "}
+                              {(item?.displacement / 1000).toFixed(1)}L{" "}
+                              {item?.engine} {item?.drive}{" "}
                             </span>
                           )}
-                          , <span> {item.attributes?.torque}Nm</span>,{" "}
-                          <span> {item.attributes?.power}hp</span>
+                          , <span> {item?.torque}Nm</span>,{" "}
+                          <span> {item?.power}hp</span>
                         </small>
                       </span>
                     </Link>
                   </td>
                   <td data-label="Price" className="col-3">
-                    <Price data={item.attributes?.price} />
+                    <Price data={item?.price} />
                   </td>
                   <td data-label="Action" className="col-3">
                     <Link
-                      href={`/brands/${item.attributes?.car_brands?.data[0]?.attributes?.slug}/${item.attributes?.year}/${item.attributes?.car_models?.data[0]?.attributes?.slug}/${item.attributes?.slug}`}
+                      href={`/brands/${brand?.slug}/${item?.year}/${model?.slug}/${item.slug}`}
                     >
                       <span className="btn btn-outline-primary w-75">
                         {t.view} {t.variant}
