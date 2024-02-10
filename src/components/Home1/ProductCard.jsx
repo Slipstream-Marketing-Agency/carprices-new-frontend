@@ -42,9 +42,9 @@ function ProductCard({ subTitle, heading, carDetails }) {
       }
 
       return (
-        <span className="text-danger fw-bold MobilepriceTextSize">
+        <h6 className="text-danger fw-bold MobilepriceTextSize">
           {priceInfo}
-        </span>
+        </h6>
       );
     } else {
       // If no valid prices are available, display "TBD"
@@ -85,7 +85,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
         })}*`
       : "Not Available";
 
-    return <span>{emiString}</span>;
+    return emiString
   };
 
   return (

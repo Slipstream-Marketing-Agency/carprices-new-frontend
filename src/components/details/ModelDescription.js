@@ -19,6 +19,7 @@ export default function ModelDescription({
   allTrims,
   mainTrim,
 }) {
+  console.log(minFuelConsumption, maxFuelConsumption, "mainTrimfsdfsdf");
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const t = useTranslate();
@@ -137,13 +138,24 @@ export default function ModelDescription({
     const hasManual = allTrims.some((t) => t?.transmission === "Manual");
 
     if (hasAutomatic && hasManual) {
-      return "Automatic/Manual";
+      return <b>Automatic/Manual</b>;
     } else if (hasAutomatic) {
-      return "an Automatic";
+      return;
+      <>
+        an <b>Automatic</b>
+      </>;
     } else if (hasManual) {
-      return "a Manual";
+      return (
+        <>
+          a <b>Manual</b>
+        </>
+      );
     } else {
-      return "a CVT";
+      return (
+        <>
+          a <b>CVT</b>
+        </>
+      );
     }
   };
 
@@ -174,7 +186,7 @@ export default function ModelDescription({
                       )}
                     </>
                   ) : (
-                    "TBD*" // Assuming you want to display a message when the price is not available
+                    " TBD*" // Assuming you want to display a message when the price is not available
                   )}
                 </b>
                 {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
@@ -183,7 +195,11 @@ export default function ModelDescription({
               </>
             ) : (
               <>
-                <b>{t.price}: </b>The {brand?.name} {model?.name} is priced
+                <b>{t.price}: </b>The{" "}
+                <b>
+                  {brand?.name} {model?.name}
+                </b>{" "}
+                is priced
                 {minPrice === null ? "" : ` at `}
                 <b>
                   {minPrice !== null ? (
@@ -199,7 +215,7 @@ export default function ModelDescription({
                       )}
                     </>
                   ) : (
-                    "TBD*" // Assuming you want to display a message when the price is not available
+                    " TBD*" // Assuming you want to display a message when the price is not available
                   )}
                 </b>
                 {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
@@ -248,7 +264,7 @@ export default function ModelDescription({
             )
           ) : mainTrimFuelType === "Hybrid" ? (
             <>
-              {engineTypes?.length > 1 || engineTypesOr?.length > 1 ? (
+              {engineTypes?.length > 1 ? (
                 <p>
                   <b>{t.engine}:</b> It can be equipped with a{" "}
                   <b>{engineTypes}</b> engine based on the variant.
@@ -290,11 +306,12 @@ export default function ModelDescription({
           ) : (
             <p>
               <b>{t.transmission}: </b>
-              It comes with a <b>{getTransmissionType()}</b> gearbox.
+              It comes with {getTransmissionType()} gearbox.
             </p>
           )}
 
-          {mainTrimFuelType === "Electric" ? (
+          {mainTrimFuelType === "Electric" ||
+          (minFuelConsumption === 0 && maxFuelConsumption === 0) ? (
             ""
           ) : minFuelConsumption !== maxFuelConsumption &&
             minFuelConsumption !== "" ? (

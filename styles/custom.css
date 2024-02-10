@@ -1,3 +1,8 @@
+body{
+  background-color: #fafafa;
+}
+
+
 .body-height {
   min-height: 100vh;
 }
@@ -1054,7 +1059,7 @@ small {
 }
 .positionStickyAd {
   position: sticky;
-  top: 140px;
+  top: 35px;
 }
 /* car brands page ends */
 
@@ -1181,7 +1186,7 @@ small {
 }
 
 .trim-content .swiper {
-  height: 350px !important;
+  height: 300px !important;
 }
 
 .calculator {
@@ -1322,9 +1327,9 @@ input[type="color"]:focus,
 
 .white_bg_wrapper {
   background-color: var(--white);
-  border-radius: 5px;
+  border-radius: 0px;
   box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);
-  padding: 10px;
+  padding: 20px;
   position: relative;
 }
 
@@ -1383,42 +1388,49 @@ input[type="color"]:focus,
     width: 728px;
     height: 90px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .AdBlog {
     width: 728px;
     height: 90px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad300x250 {
     width: 300px;
     height: 250px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad970x180 {
     width: 970px;
     height: 180px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad300x600 {
     width: 300px;
     height: 600px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad970x250 {
     width: 970px;
     height: 250px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad160x600 {
     width: 160px;
     height: 600px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad250x250 {
