@@ -20,13 +20,17 @@ function CompareCarCard({ carData }) {
     const currentPath = router.asPath;
     const basePath = currentPath.split("/compare-cars/")[0];
     let comparisonSlugs = currentPath.split("/compare-cars/")[1];
+    console.log("comparison slug :",comparisonSlugs);
 
     if (comparisonSlugs) {
+      console.log("comparison slugs true");
       let slugArray = comparisonSlugs.split("-vs-");
+      console.log("slug Array : ",slugArray);
       slugArray = slugArray.filter(slug => slug !== carData.mainSlug);
-
+      console.log("slugArray sorted : ",slugArray);
       if (slugArray.length > 0) {
         const updatedPath = `${basePath}/compare-cars/${slugArray.join("-vs-")}`;
+        console.log("Updated path : ",updatedPath);
         router.push(updatedPath);
       } else {
         // Redirect to a default route such as the home page
@@ -36,7 +40,7 @@ function CompareCarCard({ carData }) {
   };
 
   return (
-    <div className="col-md-3">
+    <div className="col-6 col-md-3">
       <div className="product-card style-2 compare">
         <div className="close-btn" onClick={handleRemoveCar}>
           <i className="bi bi-x" />

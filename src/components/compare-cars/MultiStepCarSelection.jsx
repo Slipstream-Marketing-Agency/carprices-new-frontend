@@ -11,6 +11,7 @@ const client = new ApolloClient({
 
 const MultiStepCarSelection = ({ carData, mode }) => {
   const router = useRouter();
+
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState("brand");
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -121,6 +122,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
           );
           setYear(uniqueYears.sort((a, b) => a - b)); // Set and sort the years
           setCurrentStep("year");
+        
         })
         .catch((error) => {
           console.error("Error fetching model years:", error);
@@ -171,16 +173,21 @@ const MultiStepCarSelection = ({ carData, mode }) => {
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
     setCurrentStep("model");
+    setSearchTerm('')
   };
 
   const handleModelSelect = (model) => {
     setSelectedModel(model);
     setCurrentStep("year");
+    setSearchTerm('')
+
   };
 
   const handleYearSelect = (year) => {
     setSelectedYear(year);
     setCurrentStep("variant");
+    setSearchTerm('')
+
   };
 
   const handleVariantSelect = (newVariantMainSlug) => {
@@ -219,6 +226,8 @@ const MultiStepCarSelection = ({ carData, mode }) => {
     }
 
     const updatedPath = `${basePath}/${slugArray.join("-vs-")}`;
+    console.log("selected slug ",newVariantMainSlug);
+    console.log("Updated path : ",updatedPath);
     router.push(updatedPath);
 
     // Close modal and reset states
@@ -292,7 +301,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
           className="col-lg-12 cursor_pointer"
           onClick={() => setShowModal(true)}
         >
-          <div className="product-upload-area text-center">
+          <div className="product-upload-area text-center " >
             <div className="upload-area">
               <i className="bi bi-plus" />
             </div>
@@ -308,86 +317,90 @@ const MultiStepCarSelection = ({ carData, mode }) => {
           </div>
         </div>
       ) : (
-        <button className="btn mb-0 mb-md-0 btn-round btn-outline btn-block" onClick={() => setShowModal(true)}>
-          <>Change Car <i class="bi bi-pencil"></i> </>
-        </button>
+       <div className="w-100 d-flex ">
+          <button className="btn mb-0 mb-md-0 btn-round btn-outline btn-block changeCarBtn" onClick={() => setShowModal(true)}>
+            <>Change Car <i class="bi bi-pencil"></i> </>
+          </button>
+       </div>
       )}
 
       {/* Bootstrap Modal */}
       <div
-        className={`modal fade ${showModal ? "show modal-overlay" : ""}`}
-        style={{ display: showModal ? "block" : "none" }}
+        className={`modal compareModalMainContainer  ${showModal ? "show modal-overlay " : ""}`}
+        style={{ display: showModal ? "block " : "none " }}
         tabIndex="-1"
       >
-        <div className="modal-dialog modal-dialog-centered modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Select Your Car For Compare</h5>
+        <div className={`modal-dialog modal-dialog-centered modal-lg compareModalWidth  ${showModal ? 'showCompareModal' : 'hideCompareModal'}`}  >
+          <div className="modal-content compareModelContainer">
+            <div className="modal-header border-0 mx-md-4  mt-3 mb-0">
+              <h5 className="modal-title fw-bold"> Select Your Car For Compare</h5>
               <button
                 type="button"
-                className="btn-close"
+                className="btn-close compareModalCloseBtn cursor-pointer"
                 onClick={handleCloseModal}
               ></button>
             </div>
-            <div className="sticky-tab mx-3 mt-4">
-              <ul className="nav nav-tabs">
-                <li className="nav-item">
+            <div className="mx-md-5 mx-3">
+              <input
+                type="search"
+                className="modalSearchInputField mt-0 mb-3 "
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </div>
+            <div className="sticky-tab mx-md-5 mx-3 ">
+              <ul className="nav nav-tabs modalNavTab">
+                <li className="nav-item compareModelNav">
                   <a
-                    className={`nav-link ${
-                      currentStep === "brand" ? "active" : ""
+                    className={`nav-link compareModelNavLink ${
+                      currentStep === "brand" ? "active compareModelNavLinkActive" : ""
                     }`}
                     href="#brand"
-                    onClick={() => setCurrentStep("brand")}
+                    onClick={() => {setCurrentStep("brand") ; setSearchTerm('')}}
                   >
                     Brand
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item compareModelNav">
                   <a
-                    className={`nav-link ${
-                      currentStep === "model" ? "active" : ""
+                    className={`nav-link compareModelNavLink ${
+                      currentStep === "model" ? "active compareModelNavLinkActive" : ""
                     } ${!selectedBrand ? "disabled" : ""}`}
                     href="#model"
-                    onClick={() => selectedBrand && setCurrentStep("model")}
+                    onClick={() => {selectedBrand && setCurrentStep("model"),setSearchTerm('')}}
                   >
                     Model
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item compareModelNav">
                   <a
-                    className={`nav-link ${
-                      currentStep === "year" ? "active" : ""
+                    className={`nav-link compareModelNavLink ${
+                      currentStep === "year" ? "active compareModelNavLinkActive" : ""
                     } ${!selectedModel ? "disabled" : ""}`}
                     href="#year"
-                    onClick={() => selectedModel && setCurrentStep("year")}
+                    onClick={() => {selectedModel && setCurrentStep("year") ,setSearchTerm('')}}
                   >
                     Year
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item compareModelNav">
                   <a
-                    className={`nav-link ${
-                      currentStep === "variant" ? "active" : ""
+                    className={`nav-link compareModelNavLink ${
+                      currentStep === "variant" ? "active compareModelNavLinkActive" : ""
                     } ${!selectedYear ? "disabled" : ""}`}
                     href="#variant"
-                    onClick={() => selectedYear && setCurrentStep("variant")}
+                    onClick={() => {selectedYear && setCurrentStep("variant"),setSearchTerm('') }}
                   >
                     Variant
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="mx-3">
-              <input
-                type="search"
-                className="form-control my-3 "
-                placeholder="Search..."
-                onChange={handleSearchChange}
-              />
-            </div>
+           
 
             <div
-              className="modal-body"
+              className="modal-body mt-3 mx-md-4 mx-0 " 
               style={{ maxHeight: "400px", overflowY: "auto" }}
             >
               {currentStep === "brand" && (
@@ -396,7 +409,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     {filterBrands().map((brand) => (
                       <button
                         key={brand.id}
-                        className="list-group-item list-group-item-action"
+                        className="list-group-item list-group-item-action border-0  modalCompareTxt"
                         onClick={() => handleBrandSelect(brand.attributes.slug)}
                       >
                         {brand.attributes.name}
@@ -411,7 +424,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                   {filterModels().map((model) => (
                     <button
                       key={model.slug}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item list-group-item-action border-0 modalCompareTxt" 
                       onClick={() => {
                         setSelectedModel(model.slug);
                         setCurrentStep("year");
@@ -427,7 +440,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                   {filterYears().map((year) => (
                     <button
                       key={year}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item list-group-item-action border-0 modalCompareTxt"
                       onClick={() => handleYearSelect(year)}
                     >
                       {year}
@@ -440,7 +453,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                   {filterVariants().map((variant) => (
                     <button
                       key={variant.mainSlug}
-                      className="list-group-item list-group-item-action"
+                      className="list-group-item list-group-item-action border-0 modalCompareTxt"
                       onClick={() => handleVariantSelect(variant.mainSlug)}
                     >
                       {variant.name}

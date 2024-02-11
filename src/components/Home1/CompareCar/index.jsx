@@ -73,7 +73,7 @@ function index({ heading, carDetails, compare }) {
         </div>
 
         <div className="row mb-40 wow fadeInUp" data-wow-delay="300ms">
-          <div className="col-lg-12 col-md-12 col-md-12 col-12">
+          <div className="col-lg-12 col-md-12 col-md-12 col-12 zindexMinusOne">
             <Swiper {...slideSettings} className="swiper compare-car-slider">
               <div className="swiper-wrapper">
                 {compare?.map((comparison, idx) => (

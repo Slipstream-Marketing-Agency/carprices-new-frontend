@@ -53,7 +53,7 @@ SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
   const [activeTab, setActiveTab] = useState("tab1");
   const [isMobile, setIsMobile] = useState(false);
-
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 767);
@@ -217,7 +217,7 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                 <div className="col-xl-6 m-auto mt-2 mt-md-0">
                   <div className="d-flex justify-content-md-end align-items-center">
                     {" "}
-                    <SocialButtons fullURL={fullURL} />{" "}
+                    <SocialButtons fullURL={currentUrl} />{" "}
                   </div>
                 </div>
                 {/* </div> */}
@@ -246,7 +246,7 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                     </blockquote> */}
 
               <div className="d-flex justify-content-md-end align-items-center">
-                <SocialButtons fullURL={fullURL} />
+                <SocialButtons fullURL={currentUrl} />
               </div>
             </div>
             <div className="col-lg-4 mt-md-2 mt-0">

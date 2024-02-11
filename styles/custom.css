@@ -1697,3 +1697,227 @@ input[type="color"]:focus,
   height: 175px;
 }
 
+/* social media share begins */
+.socialHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.socialMediaContainer{
+  background-color: var(--white);
+  padding: 10px;
+  border-radius: 10px;
+  position:absolute;
+  top:0;
+ right: -1000px;
+ transition: 0.5s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.731);
+  width: 210px;
+}
+.showMediaBtn{
+  right: 0;
+}
+.hideMediaBtn{
+  right: -1000;
+}
+.socialBtns{  gap: 3px;
+  margin-top: 5px;
+  display: flex;
+}
+/* social media share ends */
+
+/* compare car search modal begins */
+.modalSearchInputField{
+  width: 100% !important;
+  background: var(--bs-gray-200);
+  padding: 10px 10px 10px 20px;
+  border-radius: 2px;
+}
+.compareModelNav{
+  background: var(--light) !important;
+  border-radius: 10px;
+  border-radius: 10px 10px 0 0!important;
+  margin-right:5px;
+}
+.modalNavTab{
+  margin:5px 0;
+}
+@media(max-width:660px){
+  .modalNavTab{
+    margin:unset !important;
+  }
+}
+
+  @media (min-width: 992px){
+  .compareModalWidth{
+    --bs-modal-width: 580px !important;
+  }
+}
+
+/* .compareModelNav:focus{
+  background: var(--primary) !important;
+
+}
+.compareModelNav:active{
+  background: var(--primary) !important;
+
+} */
+.compareModelNavLink{
+  background: var(--light) !important;
+  color: white !important;
+}
+.compareModelNavLink:focus{
+  background: var(--primary) !important;
+}
+.compareModelNavLink:active{
+  background: var(--primary) !important;
+}
+.compareModelNavLinkActive{
+  background: var(--primary) !important;
+
+}
+.compareModalCloseBtn{
+  font-size: 13px;
+}
+.compareModelContainer{
+  /* top:-1000px; */
+}
+/* .compareModalMainContainer{
+  position: relative !important;
+  transition: 1s  !important;
+}
+.hideCompareModal{
+
+  display: none;
+  top:-1000px !important;
+}
+.showCompareModal{
+  display: block;
+
+  top:0px !important;
+  
+} */
+
+.modalCompareTxt{
+  font-size: 15px;
+  font-weight:500;
+}
+/* compare car search modal ends */
+
+/* compare cards begins */
+.changeCarBtn{
+  font-size: 12px !important;
+}
+
+/* compare cards ends */
+
+/* compare table begins */
+.tableHeading{
+  background: transparent !important;
+  border: none;
+}
+
+.compareTableRow td{
+  border:none !important;
+}
+.compareTableRow th{
+  border:none !important;
+
+}
+.headingRow th{
+  border:none !important;
+}
+.headingRow td{
+  border:none !important;
+}
+.headingRow th:first-child{
+  font-weight: 700 !important;
+}
+
+.table-wrapper table  tbody tr td:nth-child(even) td{
+  background-color: var(--bs-gray-100) !important; 
+}
+.table-wrapper table  tbody tr th:nth-child(even) td{
+  background-color: var(--bs-gray-100) !important; 
+}
+.table-wrapper table  tbody tr:nth-child(even) td{
+  background-color: var(--bs-gray-100) !important; 
+}
+.table-wrapper table  tbody tr:nth-child(even) th{
+  background-color: var(--bs-gray-100) !important; 
+}
+.greyBg{
+  background-color: var(--bs-gray-100) !important; 
+
+}
+.headingRow td:nth-child(2){
+  font-weight: 700 !important;
+  text-align: center;
+}
+.headingRow td:nth-child(3){
+  font-weight: 700 !important;
+  text-align: center;
+}
+.headingRow td:nth-child(4){
+  font-weight: 700 !important;
+  text-align: center;
+}
+.headingRow td:nth-child(5){
+  font-weight: 700 !important;
+  text-align: center;
+}
+.compareTableRow th:first-child{
+  border-right: 1px solid rgba(36, 39, 44, 0.275) !important;
+}
+.compareTableRow td:nth-child(2){
+  text-align: center;
+}
+.compareTableRow td:nth-child(3){
+  text-align: center;
+}
+.single-compare{
+  padding: 10px ;
+  box-shadow: 0 1px 3px rgba(36, 39, 44, 0.289);
+}
+
+
+.compareTableRow th:nth-child(1){
+  font-weight: 300 !important;
+}
+
+
+.compareTableRowtd:nth-child(1){
+  font-weight: 500 !important;
+}
+.compareTableRow td:nth-child(2){
+  font-weight: 500 !important;
+}
+.compareTableRow td:nth-child(3){
+  font-weight: 500 !important;
+}
+.compareTableRow td:nth-child(4){
+  font-weight: 500 !important;
+  text-align: center;
+}
+.compareTableRow td:nth-child(5){
+  font-weight: 500 !important;
+  text-align: center;
+}
+
+.compare-page .single-compare .section-title h5{
+
+  font-size: 1.3rem !important;
+}
+@media(max-width:600px){
+  
+  .compare-page .product-upload-area {
+  padding: 25px 20px 16px !important;
+  }
+}
+.zindexMinusOne{
+  z-index: -1;
+}
+/* Mobile styles */
+
+
+/* compare table ends */

@@ -4,6 +4,22 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 export default function CarComparisonTable({ tableData }) {
   console.log(tableData, "tableData");
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,84 +41,122 @@ export default function CarComparisonTable({ tableData }) {
   return (
     <>
       <div className="single-compare mb-50" id="car-info">
-        <div className="section-title mb-20">
-          <h5>Engine</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="2" x2="12" y2="6" />
+            <line x1="12" y1="18" x2="12" y2="22" />
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+            <line x1="2" y1="12" x2="6" y2="12" />
+            <line x1="18" y1="12" x2="22" y2="12" />
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+          </svg>
+          <h5 className="ps-2">Engine</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
-            <thead className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
-              <tr>
-                <th style={{ width: columnWidth }}>Specs</th>
-                {tableData.map((item, idx) => (
-                  <>
-                    <th style={{ width: columnWidth }}>{item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}</th>
-                  </>
-                ))}
-              </tr>
-            </thead>
+          <table className="table ">
+          {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">No. Of Cylinders</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>No. Of Cylinders</td>
+              {/* <tr className={`headingRow ${isSticky ? "sticky" : ""}`} >
+                <th className="col-md-2 col-4">Specs</th>
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.cylinders ? item.cylinders : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Displacement (cc)</td>
-                {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.displacement ? item.displacement : "-"}
+                  <td key={idx} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Power (hp)</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>No. Of Cylinders</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.power ? item.power : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.cylinders ? item.cylinders : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Peak Torque (Nm)</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Displacement (cc)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Displacement (cc)</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.torque ? item.torque : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.displacement ? item.displacement : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Fuel Type</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Power (hp)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Power (hp)</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.fuelType ? item.fuelType : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.power ? item.power : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Peak Torque (Nm)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Peak Torque (Nm)</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.torque ? item.torque : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Fuel Type</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Fuel Type</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.fuelType ? item.fuelType : "-"}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
       <div className="single-compare mb-50" id="engine">
-        <div className="section-title mb-20">
-          <h5>Transmission</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+          <img width={25} height={25} src="/assets/images/specs/Transmission.png" alt="transmission icon" />
+          <h5 className="ps-2 ">Transmission</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table ">
+          {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Drive</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Drive</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4">Specs</th>
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.drive ? item.drive : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Transmission Type</td>
-                {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.transmission ? item.transmission : "-"}
+                  <td key={idx} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>No. of Gears</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Drive</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {" "}
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.drive ? item.drive : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Transmission Type</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Transmission Type</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.transmission ? item.transmission : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">No. of Gears</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>No. of Gears</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">
                     {item?.gearBox && item?.gearBox !== ""
                       ? item?.gearBox === "CVT"
                         ? "-"
@@ -115,348 +169,612 @@ export default function CarComparisonTable({ tableData }) {
           </table>
         </div>
       </div>
+
       <div className="single-compare mb-50" id="performance">
-        <div className="section-title mb-20">
-          <h5>Fuel Efficiency</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+          <img width={30} height={30} src="/assets/img/homepage-filter-icons/fuel-efficiency-black.png" alt="transmission icon" />
+
+
+          <h5 className="ps-2">Fuel Efficiency</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table ">
+        {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Fuel Tank Size (L)</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Fuel Tank Size (L)</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4">Specs</th>
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.fuelTankSize ? item.fuelTankSize : "-"}
+                  <td key={idx} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Fuel Consumption (kmpl)</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Fuel Tank Size (L)</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.fuelConsumption ? item.fuelConsumption : "-"}
-                  </td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.fuelTankSize ? item.fuelTankSize : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Fuel Consumption (kmpl)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Fuel Consumption (kmpl)</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.fuelConsumption ? item.fuelConsumption : "-"}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
       <div className="single-compare mb-50" id="comfort">
-        <div className="section-title mb-20">
-          <h5>Performance</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+          <img width={30} height={30} src="/assets/img/homepage-filter-icons/performance-black.png" alt="performance icon" />
+
+          <h5 className="ps-2">Performance</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table ">
+        {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">0 to 100 (s)</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>0 to 100 (s)</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4">Specs</th>
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.zeroToHundred ? item.zeroToHundred : "-"}
+                  <td key={idx} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Top Speed (km/h)</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>0 to 100 (s)</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.topSpeed ? item.topSpeed : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.zeroToHundred ? item.zeroToHundred : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Top Speed (km/h)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Top Speed (km/h)</td>}       
+                {tableData.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.topSpeed ? item.topSpeed : "-"}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
       <div className="single-compare mb-50" id="safety">
-        <div className="section-title mb-20">
-          <h5>Electric/Alternative Fuel</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+
+          <img width={25} height={25} src="/assets/images/specs/FuelType.png" alt="performance icon" />
+
+          <h5 className="ps-2">Electric/Alternative Fuel</h5>
         </div>
+        {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Motor Type</p>
+              </td>}
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table ">
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Motor Type</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4">Specs</th>
                 {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.motorType ? item.motorType : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>No. of Motors</td>
-                {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.motor ? item.motor : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Battery Capacity (kWh)</td>
-                {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.batteryCapacity ? item.batteryCapacity : "-"}
+                  <td key={idx} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Charging Time</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Motor Type</td>}       
                 {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.chargingTime ? item.chargingTime : "-"}
-                  </td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.motorType ? item.motorType : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Battery Warranty</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">No. of Motors</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>No. of Motors</td>}       
                 {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>
-                    {item?.batteryWarranty ? item.batteryWarranty : "-"}
-                  </td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.motor ? item.motor : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Range (km)</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Battery Capacity (kWh)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Battery Capacity (kWh)</td>}       
                 {tableData?.map((item, idx) => (
-                  <td key={idx} style={{ width: columnWidth }}>{item?.range ? item.range : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.batteryCapacity ? item.batteryCapacity : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Charging Time</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Charging Time</td>}       
+                {tableData?.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.chargingTime ? item.chargingTime : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Battery Warranty</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Battery Warranty</td>}       
+                {tableData?.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.batteryWarranty ? item.batteryWarranty : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Range (km)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Range (km)</td>}       
+                {tableData?.map((item, idx) => (
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.range ? item.range : "-"}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
       <div className="single-compare mb-50" id="comfort">
-        <div className="section-title mb-20">
-          <h5>Safety</h5>
+        <div className="section-title mb-20 align-items-center mt-3 zindexMinusOne">
+
+          <img width={30} height={30} src="/assets/img/homepage-filter-icons/safety-black.png" alt="performance icon" />
+
+          <h5 className="ps-2">Safety</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table ">
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+             <p className="text-center w-100 mb-0 py-2 greyBg">Front Brake</p>
+           </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Front Brake</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4 ">Specs</th>
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.frontBrakes ? item.frontBrakes : "-"}
+                  <td key={index} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Brake</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Front Brake</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.rearBrakes ? item.rearBrakes : "-"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.frontBrakes ? item.frontBrakes : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Front Airbags</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Brake</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Brake</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveFrontAirbags ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.rearBrakes ? item.rearBrakes : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Airbags</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Front Airbags</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Front Airbags</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveRearAirbags ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveFrontAirbags ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Side Airbags</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Airbags</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Airbags</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveSideAirbags ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveRearAirbags ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Front Park Assist</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Side Airbags</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Side Airbags</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveFrontParkAssist ? "Yes" : "No"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveSideAirbags ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Park Assist</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Front Park Assist</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Front Park Assist</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveRearParkAssist ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveFrontParkAssist ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Parking Camera</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Park Assist</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Park Assist</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveRearParkingCamera ? "Yes" : "No"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveRearParkAssist ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>360 Parking Camera</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Parking Camera</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Parking Camera</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.have360ParkingCamera ? "Yes" : "No"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveRearParkingCamera ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Cruise Control</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">360 Parking Camera</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>360 Parking Camera</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveCruiseControl ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.have360ParkingCamera ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Adaptive Cruise Control</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Cruise Control</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Cruise Control</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveAdaptiveCruiseControl ? "Yes" : "No"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveCruiseControl ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Lane Change Assist</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Adaptive Cruise Control</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Adaptive Cruise Control</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveLaneChangeAssist ? "Yes" : "No"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveAdaptiveCruiseControl ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Lane Change Assist</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Lane Change Assist</td>}       
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.haveLaneChangeAssist ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                  </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                  </svg>}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+
       <div className="single-compare mb-50" id="safety">
-        <div className="section-title mb-20">
-          <h5>Dimensions</h5>
+        <div className="section-title mb-20 mt-3 zindexMinusOne">
+          <h5>Dimension</h5>
         </div>
         <div className="table-wrapper">
-          <table className="eg-table compare-table">
+          <table className="table">
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Body Type</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Body Type</td>
+              {/* <tr className="headingRow">
+                <th className="col-md-2 col-4 ">Specs</th>
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.bodyType ? item.bodyType : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>No. Of Doors</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.doors ? item.doors : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Length (mm)</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.length ? item.length : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Width (mm)</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.width ? item.width : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Height (mm)</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.height ? item.height : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Wheelbase (mm)</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.wheelbase ? item.wheelbase : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Weight (kg)</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.weight ? item.weight : "-"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Front Tyres</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.tyresFront ? item.tyresFront : "-"}
+                  <td key={index} className="col-md-2 col-4">
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
                   </td>
                 ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Tyres</td>
+              </tr> */}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Body Type</td>}
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.tyresRear ? item.tyresRear : "-"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.bodyType ? item.bodyType : "-"}</td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Cargo Space (L)</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">No. Of Doors</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>No. Of Doors</td>}
+                
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.cargoSpace ? item.cargoSpace : "-"}
-                  </td>
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.doors ? item.doors : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Length (mm)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Length (mm)</td>}       
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.length ? item.length : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Width (mm)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Width (mm)</td>}       
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.width ? item.width : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Height (mm)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Height (mm)</td>}       
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.height ? item.height : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Wheelbase (mm)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Wheelbase (mm)</td>}      
+                               {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.wheelbase ? item.wheelbase : "-"}</td>
+                ))}
+              </tr>
+
+              
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Weight (kg)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Weight (kg)</td>}                 
+                    {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.weight ? item.weight : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Front Tyres</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Front Tyres</td>}               
+                      {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.tyresFront ? item.tyresFront : "-"}</td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Tyres</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Tyres</td>}     
+                                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.tyresRear ? item.tyresRear : "-"}</td>
+                ))}
+              </tr>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Cargo Space (L)</p>
+              </td>}
+              <tr className="compareTableRow">
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Cargo Space (L)</td>}          
+                           {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">{item?.cargoSpace ? item.cargoSpace : "-"}</td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div className="single-compare mb-50" id="safety">
-        <div className="section-title mb-20">
+
+      <div className="single-compare mb-50" id="interior">
+        <div className="section-title mb-20 mt-3 zindexMinusOne">
           <h5>Interior</h5>
         </div>
-        <div className="table-wrapper">
-          <table className="eg-table compare-table">
+            
+        <div className="table-wrapper ">
+          <table className="table ">
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 py-2 greyBg">Leather  Interior</p>
+              </td>}
             <tbody>
-              <tr>
-                <td style={{ width: columnWidth }}>Leather Interior</td>
+              {/* <tr className="headingRow">
+                <th style={{ width: isMobile ? '100%' : columnWidth }}>Specs</th>
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveLeatherInterior ? "Yes" : "No"}
+                  <td key={index} style={{ width: isMobile ? '100%' : columnWidth }}>
+                    {item?.car_brands?.data[0]?.attributes?.name} {item?.car_models?.data[0]?.attributes?.name} {item?.name}
+                  </td>
+                ))}
+              </tr> */}
+              <tr className={`compareTableRow '}`} >
+                
+                {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Leather Interior</td>}
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveLeatherInterior ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
                   </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Fabric Interior</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 greyBg">Fabric Interior</p>
+              </td>}
+              <tr className={`compareTableRow '}`} >
+                {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Fabric Interior</td>}
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveFabricInterior ? "Yes" : "No"}</td>
-                ))}
-              </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Rear Seat Entertainment</td>
-                {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
-                    {item?.haveRearSeatEntertainment ? "Yes" : "No"}
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveFabricInterior ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
                   </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Seat Cooling</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Rear Seat Entertainment</p>
+              </td>}
+              <tr className={`compareTableRow '}`}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Rear Seat Entertainment</td>}
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveCooledSeats ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveRearSeatEntertainment ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
+                  </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Climate Control</td>
+
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Seat Cooling</p>
+              </td>}
+              <tr className={`compareTableRow '}`}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Seat Cooling</td>}
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveClimateControl ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveCooledSeats ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
+                  </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Seating Capacity</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Climate Control</p>
+              </td>}
+              <tr className={`compareTableRow '}`}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Climate Control</td>}
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveClimateControl ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
+                  </td>
+                ))}
+              </tr>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Seating Capacity</p>
+              </td>}
+              <tr className={`compareTableRow '}`}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Seating Capacity</td>}       
+                {tableData?.map((item, index) => (
+                  <td key={index} className="col-md-2 col-4 text-center">
                     {item?.seatingCapacity ? item.seatingCapacity : "-"}
                   </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Apple CarPlay</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Apple CarPlay</p>
+              </td>}
+              <tr className={`compareTableRow `}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Apple CarPlay</td>}       
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveAppleCarPlay ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveAppleCarPlay ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
+                  </td>
                 ))}
               </tr>
-              <tr>
-                <td style={{ width: columnWidth }}>Android Auto</td>
+              {isMobile && <td colSpan={tableData.length + 1} className="text-center" style={{ width: '100%' }}>
+                <p className="text-center w-100 mb-0 py-2 greyBg">Android Auto</p>
+              </td>}
+              <tr className={`compareTableRow '}`}>
+              {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Android Auto</td>}
+
                 {tableData?.map((item, index) => (
-                  <td key={index} style={{ width: columnWidth }}>{item?.haveAndroidAuto ? "Yes" : "No"}</td>
+                  <td key={index} className="col-md-2 col-4 text-center">
+                    {item?.haveAndroidAuto ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check2" viewBox="0 0 16 16">
+                      <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
+                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
+                    </svg>}
+                  </td>
                 ))}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+
+
     </>
   );
 }

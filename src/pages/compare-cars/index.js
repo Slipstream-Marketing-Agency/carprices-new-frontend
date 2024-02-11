@@ -13,19 +13,51 @@ import axios from "axios";
 import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
-function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
+import dynamic from "next/dynamic";
+
+const CompareCarLazy = dynamic(
+  () => import("../../components/Home1/CompareCar/index"),
+  {
+    loading: () => <p>Loading comparison...</p>, // Optional loading placeholder
+    ssr: true, // Set to false if this component is not critical for SEO
+  }
+);
+function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
   const [isSticky, setIsSticky] = useState(false);
 
+
+  const [childData, setChildData] = useState('');
+
+  const handleChildData = (data) => {
+    setChildData(data);
+  };
   const router = useRouter();
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
-  const canAddMoreCars = cars && cars.length < 4;
+
 
   const carDataArray = [car1Data, car2Data, car3Data, car4Data];
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Determine the number of cars already selected
   const numberOfSelectedCars = carDataArray.filter((car) => car).length;
-  const numberOfSlotsToFill = 4 - numberOfSelectedCars;
+  const numberOfSlotsToFill = isMobile ? 2 : 4
+
+
 
   const compateCareSettingsSlide = useMemo(() => {
     return {
@@ -127,7 +159,9 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  useEffect(()=>{
+    console.log(childData);
+  },[childData])
   return (
     <MainLayout
       pageMeta={{
@@ -148,27 +182,28 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
             <div className="col-lg-12">
               <div className="uploded-product-group">
                 <div className="row g-4">
-                  {carDataArray.map(
-                    (car, index) =>
-                      car && <CompareCarCard key={index} carData={car} />
-                  )}
+                  
                   {Array.from({ length: numberOfSlotsToFill }, (_, index) => (
-                    <div key={index} className="col-md-3">
+                    <div key={index} className="col-6 col-md-3">
                       <div className="product-card style-2 compare">
                         <div className="product-upload-area">
                           <div className="comparea-content">
-                            <MultiStepCarSelection mode="add" />
+                            <MultiStepCarSelection mode="add"  onChildData={handleChildData} />
                           </div>
                         </div>
                       </div>
                     </div>
                   ))}
+
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <CompareCarLazy compare={compare} />
     </MainLayout>
   );
 }
@@ -178,14 +213,69 @@ export default ComparePage;
 export async function getServerSideProps(context) {
   const slug = context.query.slug;
   let car1Data, car2Data, car3Data, car4Data;
+  const client = new ApolloClient({
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+  const compareResponse = await client.query({
+    query: gql`
+    query CompareCars {
+      compareCars {
+        data {
+          id
+          attributes {
+            comparison
+            car_models {
+              data {
+                id
+                attributes {
+                  name
+                  car_brands {
+                    data {
+                      id
+                      attributes {
+                        name
+                        slug
+                      }
+                    }
+                  }
+                  car_trims(
+                    filters: {
+                      year: { eq: 2023 }
+                      highTrim: { eq: true }
+                    }
+                  ) {
+                    data {
+                      id
+                      attributes {
+                        name
+                        slug
+                        mainSlug
+                        featuredImage {
+                          data {
+                            id
+                            attributes {
+                              url
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  });
 
   if (slug) {
     const [mainSlug1, mainSlug2, mainSlug3, mainSlug4] = slug.split("-vs-");
 
-    const client = new ApolloClient({
-      uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-      cache: new InMemoryCache(),
-    });
+
 
     const CAR_TRIMS_QUERY = gql`
       query carTrims($mainSlug: String!) {
@@ -314,7 +404,7 @@ export async function getServerSideProps(context) {
         }
       }
     `;
-
+  
     try {
       const responses = await Promise.allSettled([
         client.query({
@@ -355,6 +445,7 @@ export async function getServerSideProps(context) {
       console.error("Server-side Data Fetching Error:", error.message);
       return {
         props: {
+          compare: compareResponse?.data?.compareCars?.data,
           error: true,
           errorMessage: error.message,
         },
@@ -364,6 +455,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      compare: compareResponse?.data?.compareCars?.data,
+   
       car1Data: car1Data || null,
       car2Data: car2Data || null,
       car3Data: car3Data || null,

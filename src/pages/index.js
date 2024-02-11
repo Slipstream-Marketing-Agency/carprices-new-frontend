@@ -548,6 +548,8 @@ export async function getServerSideProps() {
       }), // compare cars query
     ]);
 
+    
+
     const axiosResponse = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}pages/1?populate[0]=Sections,Sections.image`
     );
@@ -577,6 +579,8 @@ export async function getServerSideProps() {
         bodyTypeList: bodyTypeList?.data?.bodyTypes,
       },
     };
+
+    
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
     return {
