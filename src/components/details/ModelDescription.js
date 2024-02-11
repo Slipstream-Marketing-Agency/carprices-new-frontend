@@ -18,6 +18,7 @@ export default function ModelDescription({
   motorTypes,
   allTrims,
   mainTrim,
+  getTransmissionType
 }) {
   console.log(minFuelConsumption, maxFuelConsumption, "mainTrimfsdfsdf");
   const [isExpanded, setIsExpanded] = useState(false);

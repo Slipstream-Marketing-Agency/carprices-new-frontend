@@ -58,7 +58,7 @@ function ProductCategory({ brands }) {
                 {brands?.map((item, idx) => (
                   <div className="col-md-3 col-6">
                     <div className="category-card text-center">
-                      <Link legacyBehavior href="/single-brand-category">
+                      <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`}>
                         <a className="category-img">
                           <div className="icon">
                             <img
