@@ -16,27 +16,8 @@ export default function VehicleFaq({
   motorTypes,
   allTrims,
   mainTrim,
+  getTransmissionType
 }) {
-  const getTransmissionType = () => {
-    const hasAutomatic = allTrims.some(
-      (t) => t?.transmission === "Automatic"
-    );
-    const hasManual = allTrims.some(
-      (t) => t?.transmission === "Manual"
-    );
-
-    if (hasAutomatic && hasManual) {
-      return "Automatic/Manual";
-    } else if (hasAutomatic) {
-      return "an Automatic";
-    } else if (hasManual) {
-      return "a Manual";
-    } else {
-      return "a CVT";
-    }
-  };
-
-
 
   const features = [
     mainTrim?.haveAppleCarPlay && "Apple CarPlay",
@@ -110,7 +91,7 @@ export default function VehicleFaq({
           )}
           {minPrice !== maxPrice && minPrice !== null && minPrice !== null ? (
             <>
-              is priced within the range of <Price data={minPrice} /> - AED{" "}
+              is priced within the range of <Price data={minPrice} /> -{" "}
               <Price data={maxPrice} />
             </>
           ) : (
@@ -234,13 +215,13 @@ export default function VehicleFaq({
     },
   ];
   return (
-    <div className="single-item mb-50 mt-5" id="faqs">
+    <div className="single-item white_bg_wrapper mb-50 mt-5" id="faqs">
       <div className="faq-area">
         <div className="title ">
-          <h4>
+          <h3>
             {year} {brand.name} {model.name} FAQs
-          </h4>
-          <div className="faq-wrap">
+          </h3>
+          <div className="">
             {faq.map((item, index) => (
               <AccordionFaq
                 question={item.question}

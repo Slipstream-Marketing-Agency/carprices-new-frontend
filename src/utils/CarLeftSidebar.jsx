@@ -12,7 +12,7 @@ function CarLeftSidebar({
   cylinderList,
   transmissionList,
   driveList,
-  displaynone
+  displaynone,
 }) {
   const router = useRouter();
 
@@ -176,17 +176,22 @@ function CarLeftSidebar({
       cylindersQuery,
       driveQuery,
       transmissionQuery,
-      `page=${currentPage}`,
+      `${currentPage === 1 ? "" : `page=${currentPage}`}`,
     ]
       .filter(Boolean)
       .join("&");
 
+      console.log(queryString.length,"queryStringqueryString");
+
     if (router.pathname === "/brands/[brandname]" && !isInitialRender) {
-      router.push(`/brands/${router?.query?.brandname}?${queryString}`);
-    } else if (router.pathname === "/category/[categoryname]" && !isInitialRender) {
-      router.push(`/category/${router?.query?.categoryname}?${queryString}`);
+      router.push(`/brands/${router?.query?.brandname}${queryString.length > 0 ? "?" : ""}${queryString}`);
+    } else if (
+      router.pathname === "/category/[categoryname]" &&
+      !isInitialRender
+    ) {
+      router.push(`/category/${router?.query?.categoryname}${queryString.length > 0 ? "?" : ""}${queryString}`);
     } else if (router.pathname === "/search-cars" && !isInitialRender) {
-      router.push(`/search-cars?${queryString}`);
+      router.push(`/search-cars${queryString.length > 0 ? "?" : ""}${queryString}`);
     } else {
       setIsInitialRender(false);
     }
@@ -548,7 +553,11 @@ function CarLeftSidebar({
   };
 
   return (
-    <div className={`col-xl-3 order-xl-1 order-2 ${displaynone && "d-md-block d-none"}`}>
+    <div
+      className={`col-xl-3 order-xl-1 order-2 ${
+        displaynone && "d-md-block d-none"
+      }`}
+    >
       {/* <div className="filter-area mb-3">
         <div className="title-and-close-btn mb-20">
           {areFiltersActive() && (

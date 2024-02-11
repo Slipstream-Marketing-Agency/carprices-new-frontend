@@ -59,6 +59,35 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     .replace(/,([^,]*)$/, " or$1");
   const seatList = currentmodel?.seats.join(", ");
 
+  const gallery = mainTrim?.galleryImages > 0;
+
+  const getTransmissionType = () => {
+    const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
+    const hasManual = allTrims.some((t) => t?.transmission === "Manual");
+
+    if (hasAutomatic && hasManual) {
+      return <b>Automatic/Manual</b>;
+    } else if (hasAutomatic) {
+      return (
+        <>
+          an <b>Automatic</b>
+        </>
+      );
+    } else if (hasManual) {
+      return (
+        <>
+          a <b>Manual</b>
+        </>
+      );
+    } else {
+      return (
+        <>
+          a <b>CVT</b>
+        </>
+      );
+    }
+  };
+
   console.log(
     "Minimum power:",
     minPower,
@@ -78,7 +107,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     maxFuelConsumption
   );
 
-  console.log(mainTrim.engine, "enginesengines");
+  // console.log(mainTrim.engine, "enginesengines");
 
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
@@ -418,7 +447,11 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                               <div className="swiper-wrapper">
                                 <SwiperSlide className="swiper-slide">
                                   <Image
-                                    src={mainTrim?.featuredImage}
+                                    src={
+                                      mainTrim?.featuredImage === null
+                                        ? "/assets/img/car-placeholder.png"
+                                        : mainTrim?.featuredImage
+                                    }
                                     alt="product image"
                                     fill
                                     className="object-contain"
@@ -618,6 +651,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                 mainTrimFuelType={mainTrimFuelType}
                 allTrims={allTrims}
                 mainTrim={mainTrim}
+                getTransmissionType={getTransmissionType}
               />
               <Ad728x90 dataAdSlot="7369694604" />
               <VariantsListing
@@ -637,23 +671,29 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               />
               <Ad728x90 dataAdSlot="7369694604" />
               <OldModel model={oldModel} />
-              <Ad728x90 dataAdSlot="7369694604" />
 
-              <ModelVehicleGallery
-                year={year}
-                brand={brand}
-                model={model}
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                minFuelConsumption={minFuelConsumption}
-                maxFuelConsumption={maxFuelConsumption}
-                engineTypes={engineTypes}
-                transmissionList={transmissionList}
-                motorTypes={motorTypes}
-                mainTrimFuelType={mainTrimFuelType}
-                allTrims={allTrims}
-                mainTrim={mainTrim}
-              />
+              {gallery && (
+                <>
+                  <Ad728x90 dataAdSlot="7369694604" />
+
+                  <ModelVehicleGallery
+                    year={year}
+                    brand={brand}
+                    model={model}
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    minFuelConsumption={minFuelConsumption}
+                    maxFuelConsumption={maxFuelConsumption}
+                    engineTypes={engineTypes}
+                    transmissionList={transmissionList}
+                    motorTypes={motorTypes}
+                    mainTrimFuelType={mainTrimFuelType}
+                    allTrims={allTrims}
+                    mainTrim={mainTrim}
+                  />
+                </>
+              )}
+
               <Ad728x90 dataAdSlot="7369694604" />
 
               <VehicleFaq
@@ -671,6 +711,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                 allTrims={allTrims}
                 mainTrim={mainTrim}
                 CarPriceRange={CarPriceRange}
+                getTransmissionType={getTransmissionType}
               />
             </div>
             <div className="col-3">

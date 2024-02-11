@@ -12,6 +12,8 @@ export default function FeaturedImage({ src, alt, title, id, width, height }) {
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
+  console.log(imageUrl,"imageUrlimageUrl");
   
 
   return (
@@ -21,7 +23,7 @@ export default function FeaturedImage({ src, alt, title, id, width, height }) {
 
         <Image
           // className={imageLoaded ? "" : "opacity-0"}
-          src={imageUrl}
+          src={imageUrl === null ? "/assets/img/car-placeholder.png" : imageUrl}
           width={width}
           height={height}
           // key={id}

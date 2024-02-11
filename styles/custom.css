@@ -276,6 +276,7 @@ button:focus {
   display: flex;
   align-items: center;
   height: 50px !important;
+  position: relative;
 }
 
 .btn-outline-primary {
@@ -1709,3 +1710,8 @@ input[type="color"]:focus,
   height: 175px;
 }
 
+
+.accordion-button:not(.collapsed){
+  color: var(--primary);
+  background-color:white;
+}

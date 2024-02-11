@@ -133,31 +133,7 @@ export default function ModelDescription({
       }
     });
 
-  const getTransmissionType = () => {
-    const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
-    const hasManual = allTrims.some((t) => t?.transmission === "Manual");
-
-    if (hasAutomatic && hasManual) {
-      return <b>Automatic/Manual</b>;
-    } else if (hasAutomatic) {
-      return;
-      <>
-        an <b>Automatic</b>
-      </>;
-    } else if (hasManual) {
-      return (
-        <>
-          a <b>Manual</b>
-        </>
-      );
-    } else {
-      return (
-        <>
-          a <b>CVT</b>
-        </>
-      );
-    }
-  };
+  
 
   return (
     <div id="description" className={`mb-3 ${isRtl && "text-end"}`}>

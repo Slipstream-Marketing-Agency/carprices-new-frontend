@@ -22,6 +22,7 @@ export default function VariantsListing({
   motorTypes,
   allTrims,
   mainTrim,
+  getTransmissionType
 }) {
   const availableTrim = _.orderBy(
     model,
@@ -68,7 +69,7 @@ export default function VariantsListing({
                       <FeaturedImage
                         width={100}
                         height={100}
-                        src={item.featuredImage}
+                        src={item?.featuredImage}
                       />
                     </div>
                   </td>
