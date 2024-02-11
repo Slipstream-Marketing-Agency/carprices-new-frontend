@@ -263,9 +263,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
   return (
     <MainLayout>
-      <Ad728x90 dataAdSlot="5962627056" />
-
-      <div className="car-details-area mt-15 mb-100">
+      <div className="car-details-area mt-15 mb-15">
         <div className="container">
           {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
@@ -275,78 +273,81 @@ function CarDeatilsPage({ model, trimList, trimData }) {
             </div>
           </div> */}
           <div className="row ">
-            <div className="col-lg-6 pe-3">
-              <div className="single-item mb-50" id="car-img">
-                <div className="car-img-area">
-                  <div
-                    className="tab-content mb-30 trim-content"
-                    id="myTab5Content"
-                  >
-                    <div
-                      className="tab-pane fade show active"
-                      id="exterior"
-                      role="tabpanel"
-                      aria-labelledby="exterior-tab"
-                    >
-                      <div className="product-img">
-                        <div className="slider-btn-group">
-                          <div className="product-stand-next swiper-arrow pb-1">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="20"
+            <div className="col-lg-9">
+              <Ad728x90 dataAdSlot="5962627056" />
+              <div className="row trim-content  white_bg_wrapper">
+                <div className="col-lg-6 pe-3">
+                  <div className="single-item mb-50" id="car-img">
+                    <div className="car-img-area">
+                      <div
+                        className="tab-content mb-30 trim-content"
+                        id="myTab5Content"
+                      >
+                        <div
+                          className="tab-pane fade show active"
+                          id="exterior"
+                          role="tabpanel"
+                          aria-labelledby="exterior-tab"
+                        >
+                          <div className="product-img">
+                            <div className="slider-btn-group">
+                              <div className="product-stand-next swiper-arrow pb-1">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="20"
+                                >
+                                  <path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z" />
+                                </svg>
+                              </div>
+                              <div className="product-stand-prev swiper-arrow pb-1">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="20"
+                                >
+                                  <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
+                                </svg>
+                              </div>
+                            </div>
+                            <Swiper
+                              {...slideSetting}
+                              className="swiper product-img-slider"
                             >
-                              <path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z" />
-                            </svg>
-                          </div>
-                          <div className="product-stand-prev swiper-arrow pb-1">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="18"
-                              height="20"
-                            >
-                              <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
-                            </svg>
+                              <div className="swiper-wrapper">
+                                <SwiperSlide className="swiper-slide">
+                                  <Image
+                                    src={trimData?.featuredImage}
+                                    alt="product image"
+                                    fill
+                                    className="object-contain"
+                                  />
+                                </SwiperSlide>
+                                {trimData?.galleryImages?.map((item, idx) => (
+                                  <SwiperSlide className="swiper-slide">
+                                    <Image
+                                      src={item}
+                                      alt="product image"
+                                      fill
+                                      className="object-contain"
+                                    />
+                                  </SwiperSlide>
+                                ))}
+                              </div>
+                            </Swiper>
                           </div>
                         </div>
-                        <Swiper
-                          {...slideSetting}
-                          className="swiper product-img-slider"
-                        >
-                          <div className="swiper-wrapper">
-                            <SwiperSlide className="swiper-slide">
-                              <Image
-                                src={trimData?.featuredImage}
-                                alt="product image"
-                                fill
-                                className="object-contain"
-                              />
-                            </SwiperSlide>
-                            {trimData?.galleryImages?.map((item, idx) => (
-                              <SwiperSlide className="swiper-slide">
-                                <Image
-                                  src={item}
-                                  alt="product image"
-                                  fill
-                                  className="object-contain"
-                                />
-                              </SwiperSlide>
-                            ))}
-                          </div>
-                        </Swiper>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="d-flex justify-content-between align-items-center">
-                <h1>
-                  {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
-                  {trimData?.name}
-                </h1>{" "}
-                {/* <div className="shareBtn" onClick={handleCopyLink}>
+                <div className="col-lg-6">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h1>
+                      {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
+                      {trimData?.name}
+                    </h1>{" "}
+                    {/* <div className="shareBtn" onClick={handleCopyLink}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -360,266 +361,276 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   </svg>
                   <span>Share</span>
                 </div> */}
-              </div>
-              <h4 className="mt-1">
-                <Price data={trimData.price} />
-              </h4>
+                  </div>
+                  <h4 className="mt-1">
+                    <Price data={trimData.price} />
+                  </h4>
 
-              <div className="d-flex gap-2 align-items-center w-50 border py-1 rounded justify-content-start">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M21.5 13.3v7.2H2.5v-8.7l9-6.8 9 6.8zm-2 5.8V8.5l-8-6-8 6v10.6h16z"
-                  />
-                  <path fill="currentColor" d="M6 18.5h5v2H6z" />
-                  <path fill="currentColor" d="M14 18.5h4v2h-4z" />
-                  <path fill="currentColor" d="M6 14.5h12v2H6z" />
-                  <path fill="currentColor" d="M6 10.5h12v2H6z" />
-                </svg>
-                <h6 className="p-0 m-0 ">
-                  Monthly EMI starting from{" "}
-                  <Price
-                    data={Math.round(
-                      ((trimData.price - trimData.price * (downPayment / 100)) *
-                        (interestRate / 100 / 12) *
-                        Math.pow(1 + interestRate / 100 / 12, years * 12)) /
-                        (Math.pow(1 + interestRate / 100 / 12, years * 12) - 1)
-                    )}
-                  />
-                </h6>
-              </div>
+                  <div className="d-flex gap-2 align-items-center w-100 border py-1 rounded justify-content-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M21.5 13.3v7.2H2.5v-8.7l9-6.8 9 6.8zm-2 5.8V8.5l-8-6-8 6v10.6h16z"
+                      />
+                      <path fill="currentColor" d="M6 18.5h5v2H6z" />
+                      <path fill="currentColor" d="M14 18.5h4v2h-4z" />
+                      <path fill="currentColor" d="M6 14.5h12v2H6z" />
+                      <path fill="currentColor" d="M6 10.5h12v2H6z" />
+                    </svg>
+                    <h6 className="p-0 m-0 ">
+                      Monthly EMI starting from{" "}
+                      <Price
+                        data={Math.round(
+                          ((trimData.price -
+                            trimData.price * (downPayment / 100)) *
+                            (interestRate / 100 / 12) *
+                            Math.pow(1 + interestRate / 100 / 12, years * 12)) /
+                            (Math.pow(1 + interestRate / 100 / 12, years * 12) -
+                              1)
+                        )}
+                      />
+                    </h6>
+                  </div>
 
-              <div className="mt-2 key_spec">
-                {/* <p className="fw-bold">{t.keySpecification}</p> */}
-                <div className="row px-2">
-                  {trimData.price === null ? (
-                    ""
-                  ) : (
-                    <div className="calculator mt-2">
-                      <div className="calculator-body">
-                        <div>
-                          <div className="form-group model_insure_btn mb-1">
-                            <small>Loan Years</small>
-                            <div
-                              className="btn-group btn-group-toggle"
-                              data-toggle="buttons"
-                            >
-                              <label
-                                className={
-                                  years === "1"
-                                    ? "btn btn-outline-primary pt-2 px-1"
-                                    : "btn btn-primary pt-2 px-1"
-                                }
-                              >
-                                <input
-                                  type="radio"
-                                  name="loan-years"
-                                  id="loan-years-1"
-                                  autoComplete="off"
-                                  value="1"
-                                  checked={years === "1"}
-                                  onChange={(e) => setYears(e?.target?.value)}
-                                />
-                                1 Year
-                              </label>
-                              <label
-                                className={
-                                  years === "2"
-                                    ? "btn btn-outline-primary pt-2 px-1"
-                                    : "btn btn-primary pt-2 px-1"
-                                }
-                              >
-                                <input
-                                  type="radio"
-                                  name="loan-years"
-                                  id="loan-years-2"
-                                  autoComplete="off"
-                                  value="2"
-                                  checked={years === "2"}
-                                  onChange={(e) => setYears(e?.target?.value)}
-                                />{" "}
-                                2 Years
-                              </label>
-                              <label
-                                className={
-                                  years === "3"
-                                    ? "btn btn-outline-primary pt-2 px-1"
-                                    : "btn btn-primary pt-2 px-1"
-                                }
-                              >
-                                <input
-                                  type="radio"
-                                  name="loan-years"
-                                  id="loan-years-3"
-                                  autoComplete="off"
-                                  value="3"
-                                  checked={years === "3"}
-                                  onChange={(e) => setYears(e?.target?.value)}
-                                />{" "}
-                                3 Years
-                              </label>
-                              <label
-                                className={
-                                  years === "4"
-                                    ? "btn btn-outline-primary pt-2 px-1"
-                                    : "btn btn-primary pt-2 px-1"
-                                }
-                              >
-                                <input
-                                  type="radio"
-                                  name="loan-years"
-                                  id="loan-years-4"
-                                  autoComplete="off"
-                                  value="4"
-                                  checked={years === "4"}
-                                  onChange={(e) => setYears(e?.target?.value)}
-                                />{" "}
-                                4 Years
-                              </label>
-                              <label
-                                className={
-                                  years === "5"
-                                    ? "btn btn-outline-primary pt-2 px-1"
-                                    : "btn btn-primary pt-2 px-1"
-                                }
-                              >
-                                <input
-                                  type="radio"
-                                  name="loan-years"
-                                  id="loan-years-5"
-                                  autoComplete="off"
-                                  value="5"
-                                  checked={years === "5"}
-                                  onChange={(e) => setYears(e?.target?.value)}
-                                />{" "}
-                                5 Years
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="w-60">
-                            <div className="form-group w-100">
-                              <small htmlFor="interest-rate">
-                                Interest Rate (%)
-                              </small>
-                              <input
-                                type="range"
-                                id="interest-rate"
-                                className="form-control-range"
-                                defaultValue={interestRate}
-                                min={2.0}
-                                max={8.0}
-                                step="0.1"
-                                onChange={(e) => {
-                                  setInterestRate(e?.target?.value);
-                                  document.getElementById(
-                                    "interest-rate-value"
-                                  ).innerHTML = e?.target?.value + "%";
-                                }}
-                              />
-                              <div className="d-flex justify-content-between">
-                                <small>1.99%</small>
-                                <small id="interest-rate-value">
-                                  {interestRate}%
-                                </small>
-                                <small>8%</small>
-                              </div>
-                            </div>
-
-                            <div className="form-group w-100">
-                              <small htmlFor="down-payment">
-                                Down Payment (AED)
-                              </small>
-                              <input
-                                type="range"
-                                id="down-payment"
-                                className="form-control-range"
-                                defaultValue={downPayment}
-                                min={20}
-                                max={80}
-                                step={1}
-                                onChange={(e) => {
-                                  setDownPayment(e?.target?.value);
-                                  document.getElementById(
-                                    "down-payment-value"
-                                  ).innerHTML = e?.target?.value + "%";
-                                }}
-                              />
-                              <div className="d-flex justify-content-between">
-                                <small>20%</small>
-                                <small id="down-payment-value">
-                                  {downPayment}%
-                                </small>
-                                <small>80%</small>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="form-group w-40 px-4">
-                            <div
-                              type="button"
-                              className="calulate_btn font_small py-3 fw-bold"
-                              onClick={calculateEMI}
-                            >
-                              Calculate
-                            </div>
-                          </div>
-                        </div>
-                        {monthlyRepaymentResult !== 0 &&
-                          downPaymentResult !== 0 &&
-                          totalCostResult !== 0 && (
+                  <div className="mt-2 key_spec">
+                    {/* <p className="fw-bold">{t.keySpecification}</p> */}
+                    <div className="row px-2">
+                      {trimData.price === null ? (
+                        ""
+                      ) : (
+                        <div className="calculator mt-2">
+                          <div className="calculator-body">
                             <div>
-                              <div className=" mt-1 ">
-                                <div className="white_bg_wrapper py-1 px-2 mt-1">
-                                  <span className="fw-bold font_small me-1">
-                                    Monthly Repayment (EMI) : AED
-                                  </span>
-                                  <span
-                                    className="fw-bold font_small"
-                                    id="monthly-repayment-result"
+                              <div className="form-group model_insure_btn mb-1">
+                                <small>Loan Years</small>
+                                <div
+                                  className="btn-group btn-group-toggle"
+                                  data-toggle="buttons"
+                                >
+                                  <label
+                                    className={
+                                      years === "1"
+                                        ? "btn btn-outline-primary pt-2 px-1"
+                                        : "btn btn-primary pt-2 px-1"
+                                    }
                                   >
-                                    <Price data={monthlyRepaymentResult} />
-                                  </span>
-                                </div>
-                                <div className="white_bg_wrapper py-0 px-2 mt-1">
-                                  <span className="fw-bold font_small me-1">
-                                    Total Interest Payment : AED
-                                  </span>
-                                  <span
-                                    className="fw-bold font_small"
-                                    id="down-payment-result"
+                                    <input
+                                      type="radio"
+                                      name="loan-years"
+                                      id="loan-years-1"
+                                      autoComplete="off"
+                                      value="1"
+                                      checked={years === "1"}
+                                      onChange={(e) =>
+                                        setYears(e?.target?.value)
+                                      }
+                                    />
+                                    1 Year
+                                  </label>
+                                  <label
+                                    className={
+                                      years === "2"
+                                        ? "btn btn-outline-primary pt-2 px-1"
+                                        : "btn btn-primary pt-2 px-1"
+                                    }
                                   >
-                                    <Price data={downPaymentResult} />
-                                  </span>
-                                </div>
-                                <div className="white_bg_wrapper py-0 px-2 mt-1">
-                                  <span className="fw-bold font_small me-1">
-                                    Total Amount to Pay : AED
-                                  </span>
-                                  <span
-                                    className="fw-bold font_small"
-                                    id="total-cost-result"
+                                    <input
+                                      type="radio"
+                                      name="loan-years"
+                                      id="loan-years-2"
+                                      autoComplete="off"
+                                      value="2"
+                                      checked={years === "2"}
+                                      onChange={(e) =>
+                                        setYears(e?.target?.value)
+                                      }
+                                    />{" "}
+                                    2 Years
+                                  </label>
+                                  <label
+                                    className={
+                                      years === "3"
+                                        ? "btn btn-outline-primary pt-2 px-1"
+                                        : "btn btn-primary pt-2 px-1"
+                                    }
                                   >
-                                    <Price data={totalCostResult} />
-                                  </span>
+                                    <input
+                                      type="radio"
+                                      name="loan-years"
+                                      id="loan-years-3"
+                                      autoComplete="off"
+                                      value="3"
+                                      checked={years === "3"}
+                                      onChange={(e) =>
+                                        setYears(e?.target?.value)
+                                      }
+                                    />{" "}
+                                    3 Years
+                                  </label>
+                                  <label
+                                    className={
+                                      years === "4"
+                                        ? "btn btn-outline-primary pt-2 px-1"
+                                        : "btn btn-primary pt-2 px-1"
+                                    }
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="loan-years"
+                                      id="loan-years-4"
+                                      autoComplete="off"
+                                      value="4"
+                                      checked={years === "4"}
+                                      onChange={(e) =>
+                                        setYears(e?.target?.value)
+                                      }
+                                    />{" "}
+                                    4 Years
+                                  </label>
+                                  <label
+                                    className={
+                                      years === "5"
+                                        ? "btn btn-outline-primary pt-2 px-1"
+                                        : "btn btn-primary pt-2 px-1"
+                                    }
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="loan-years"
+                                      id="loan-years-5"
+                                      autoComplete="off"
+                                      value="5"
+                                      checked={years === "5"}
+                                      onChange={(e) =>
+                                        setYears(e?.target?.value)
+                                      }
+                                    />{" "}
+                                    5 Years
+                                  </label>
                                 </div>
                               </div>
                             </div>
-                          )}
-                      </div>
+                            <div className="d-flex align-items-center">
+                              <div className="w-60">
+                                <div className="form-group w-100">
+                                  <small htmlFor="interest-rate">
+                                    Interest Rate (%)
+                                  </small>
+                                  <input
+                                    type="range"
+                                    id="interest-rate"
+                                    className="form-control-range"
+                                    defaultValue={interestRate}
+                                    min={2.0}
+                                    max={8.0}
+                                    step="0.1"
+                                    onChange={(e) => {
+                                      setInterestRate(e?.target?.value);
+                                      document.getElementById(
+                                        "interest-rate-value"
+                                      ).innerHTML = e?.target?.value + "%";
+                                    }}
+                                  />
+                                  <div className="d-flex justify-content-between">
+                                    <small>1.99%</small>
+                                    <small id="interest-rate-value">
+                                      {interestRate}%
+                                    </small>
+                                    <small>8%</small>
+                                  </div>
+                                </div>
+
+                                <div className="form-group w-100">
+                                  <small htmlFor="down-payment">
+                                    Down Payment (AED)
+                                  </small>
+                                  <input
+                                    type="range"
+                                    id="down-payment"
+                                    className="form-control-range"
+                                    defaultValue={downPayment}
+                                    min={20}
+                                    max={80}
+                                    step={1}
+                                    onChange={(e) => {
+                                      setDownPayment(e?.target?.value);
+                                      document.getElementById(
+                                        "down-payment-value"
+                                      ).innerHTML = e?.target?.value + "%";
+                                    }}
+                                  />
+                                  <div className="d-flex justify-content-between">
+                                    <small>20%</small>
+                                    <small id="down-payment-value">
+                                      {downPayment}%
+                                    </small>
+                                    <small>80%</small>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="form-group w-40 px-4">
+                                <div
+                                  type="button"
+                                  className="calulate_btn font_small py-3 fw-bold"
+                                  onClick={calculateEMI}
+                                >
+                                  Calculate
+                                </div>
+                              </div>
+                            </div>
+                            {monthlyRepaymentResult !== 0 &&
+                              downPaymentResult !== 0 &&
+                              totalCostResult !== 0 && (
+                                <div>
+                                  <div className=" mt-1 ">
+                                    <div className="white_bg_wrapper py-1 px-2 mt-1">
+                                      <span className="fw-bold font_small me-1">
+                                        Monthly Repayment (EMI) : AED
+                                      </span>
+                                      <span
+                                        className="fw-bold font_small"
+                                        id="monthly-repayment-result"
+                                      >
+                                        <Price data={monthlyRepaymentResult} />
+                                      </span>
+                                    </div>
+                                    <div className="white_bg_wrapper py-0 px-2 mt-1">
+                                      <span className="fw-bold font_small me-1">
+                                        Total Interest Payment : AED
+                                      </span>
+                                      <span
+                                        className="fw-bold font_small"
+                                        id="down-payment-result"
+                                      >
+                                        <Price data={downPaymentResult} />
+                                      </span>
+                                    </div>
+                                    <div className="white_bg_wrapper py-0 px-2 mt-1">
+                                      <span className="fw-bold font_small me-1">
+                                        Total Amount to Pay : AED
+                                      </span>
+                                      <span
+                                        className="fw-bold font_small"
+                                        id="total-cost-result"
+                                      >
+                                        <Price data={totalCostResult} />
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="row mt-5">
-            <div className="col-lg-8">
               <div
                 data-bs-spy="scroll"
                 data-bs-target="#navbar-example2"
@@ -657,15 +668,21 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                 <TrimDescription trim={trimData} />
                 <Ad728x90 dataAdSlot="5962627056" />
                 <DetailedSpecification trim={trimData} />
-                <Ad728x90 dataAdSlot="5962627056" />
-                <VehicleGallery trim={trimData.galleryImages} />
+                {trimData.galleryImages.length > 0 && (
+                  <>
+                    {" "}
+                    <Ad728x90 dataAdSlot="5962627056" />
+                    <VehicleGallery trim={trimData.galleryImages} />
+                  </>
+                )}
+
                 <Ad728x90 dataAdSlot="5962627056" />
                 <VehicleReview trim={trimData} />
                 <Ad728x90 dataAdSlot="5962627056" />
                 <VehicleFaq trim={trimData} />
               </div>
             </div>
-            <div className="col-lg-4  ">
+            <div className="col-lg-3  ">
               <div className="positionStickyAd">
                 <Ad300x600 />
               </div>
@@ -673,8 +690,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
           </div>
         </div>
       </div>
-
-      
     </MainLayout>
   );
 }
@@ -688,7 +703,7 @@ export async function getServerSideProps(context) {
   const trimSlug = context.params.trim;
 
   const trim = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim?year=${year}&slug=${trimSlug}`
+    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${trimSlug}/${year}`
   );
 
   console.log(trim, "trimtrimtrimtrimtrim");

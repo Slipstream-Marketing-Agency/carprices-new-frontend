@@ -457,6 +457,20 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                                     className="object-contain"
                                   />
                                 </SwiperSlide>
+                                {mainTrim?.galleryImages?.map((item, index) => (
+                                  <SwiperSlide className="swiper-slide">
+                                    <Image
+                                      src={
+                                        item === null
+                                          ? "/assets/img/car-placeholder.png"
+                                          : item
+                                      }
+                                      alt="product image"
+                                      fill
+                                      className="object-contain"
+                                    />
+                                  </SwiperSlide>
+                                ))}
                               </div>
                             </Swiper>
                           </div>

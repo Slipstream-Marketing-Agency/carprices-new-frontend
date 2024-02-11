@@ -3,7 +3,7 @@ import React from "react";
 export default function DetailedSpecification({ trim }) {
   return (
     <div id="specifications" className="my-3">
-      <div className=" mt-3">
+      <div className="white_bg_wrapper">
         <h2 className="fw-bold mb-3">
           Specifications of{" "}
           <span>

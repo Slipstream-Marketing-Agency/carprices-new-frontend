@@ -59,8 +59,8 @@ export default function TrimDescription({ trim }) {
     return `${speed}`;
   }
   return (
-    <div id="description" className="my-3">
-      <div className=" my-3">
+    <div id="description" className="my-3 ">
+      <div className="white_bg_wrapper">
         <h2 className="fw-bold">
           {trim?.year} {trim?.brand} {trim?.model}{" "}
           {trim?.name}
