@@ -1,3 +1,8 @@
+body{
+  background-color: #fafafa;
+}
+
+
 .body-height {
   min-height: 100vh;
 }
@@ -271,6 +276,7 @@ button:focus {
   display: flex;
   align-items: center;
   height: 50px !important;
+  position: relative;
 }
 
 .btn-outline-primary {
@@ -1054,7 +1060,7 @@ small {
 }
 .positionStickyAd {
   position: sticky;
-  top: 140px;
+  top: 35px;
 }
 /* car brands page ends */
 
@@ -1181,11 +1187,11 @@ small {
 }
 
 .trim-content .swiper {
-  height: 350px !important;
+  height: 300px !important;
 }
 
 .calculator {
-  width: 70%;
+  width: 100%;
   max-width: 600px;
   /* margin: 0 auto; */
   border: 1px solid #ccc;
@@ -1322,9 +1328,9 @@ input[type="color"]:focus,
 
 .white_bg_wrapper {
   background-color: var(--white);
-  border-radius: 5px;
+  border-radius: 0px;
   box-shadow: 0 1px 3px rgba(36, 39, 44, 0.15);
-  padding: 10px;
+  padding: 20px;
   position: relative;
 }
 
@@ -1383,42 +1389,49 @@ input[type="color"]:focus,
     width: 728px;
     height: 90px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .AdBlog {
     width: 728px;
     height: 90px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad300x250 {
     width: 300px;
     height: 250px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad970x180 {
     width: 970px;
     height: 180px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad300x600 {
     width: 300px;
     height: 600px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad970x250 {
     width: 970px;
     height: 250px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad160x600 {
     width: 160px;
     height: 600px;
     margin: auto;
+    background-color: #aaa !important;
   }
 
   .Ad250x250 {
@@ -1697,6 +1710,7 @@ input[type="color"]:focus,
   height: 175px;
 }
 
+<<<<<<< HEAD
 /* social media share begins */
 .socialHeader{
   display: flex;
@@ -1921,3 +1935,202 @@ input[type="color"]:focus,
 
 
 /* compare table ends */
+=======
+
+.accordion-button:not(.collapsed){
+  color: var(--primary);
+  background-color:white;
+}
+
+
+
+
+/* Not Found Style */
+
+#notfound {
+  position: relative;
+  height: 50vh;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#notfound .notfound-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#notfound .notfound-bg > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #eee;
+}
+
+#notfound .notfound-bg > div:nth-child(1) {
+  left: 20%;
+}
+
+#notfound .notfound-bg > div:nth-child(2) {
+  left: 40%;
+}
+
+#notfound .notfound-bg > div:nth-child(3) {
+  left: 60%;
+}
+
+#notfound .notfound-bg > div:nth-child(4) {
+  left: 80%;
+}
+
+#notfound .notfound-bg > div:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -0.5px;
+  -webkit-transform: translateY(-160px);
+  -ms-transform: translateY(-160px);
+  transform: translateY(-160px);
+  height: 160px;
+  width: 2px;
+  background-color: var(--light);
+}
+
+@-webkit-keyframes drop {
+  90% {
+    height: 20px;
+  }
+
+  100% {
+    height: 160px;
+    -webkit-transform: translateY(calc(100vh + 160px));
+    transform: translateY(calc(100vh + 160px));
+  }
+}
+
+@keyframes drop {
+  90% {
+    height: 20px;
+  }
+
+  100% {
+    height: 160px;
+    -webkit-transform: translateY(calc(100vh + 160px));
+    transform: translateY(calc(100vh + 160px));
+  }
+}
+
+#notfound .notfound-bg > div:nth-child(1):after {
+  -webkit-animation: drop 3s infinite linear;
+  animation: drop 3s infinite linear;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+#notfound .notfound-bg > div:nth-child(2):after {
+  -webkit-animation: drop 2s infinite linear;
+  animation: drop 2s infinite linear;
+  -webkit-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+#notfound .notfound-bg > div:nth-child(3):after {
+  -webkit-animation: drop 3s infinite linear;
+  animation: drop 3s infinite linear;
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+
+#notfound .notfound-bg > div:nth-child(4):after {
+  -webkit-animation: drop 2s infinite linear;
+  animation: drop 2s infinite linear;
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+.notfound {
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.notfound .notfound-404 h1 {
+  font-size: 4em !important;
+  font-weight: 700;
+  margin: 0px;
+  text-shadow: 4px 4px 0px var(--light);
+}
+
+.notfound h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+}
+
+.notfound p {
+  color: #000;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.notfound a {
+  padding: 10px 30px;
+  display: inline-block;
+  color: #000;
+  font-weight: 400;
+  text-transform: uppercase;
+  -webkit-box-shadow: 0px 0px 0px 2px #000, 2px 2px 0px 2px var(--light);
+  box-shadow: 0px 0px 0px 2px #000, 2px 2px 0px 2px var(--light);
+  text-decoration: none;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.notfound a:hover {
+  background-color: var(--light);
+  -webkit-box-shadow: 0px 0px 0px 0px #000, 0px 0px 0px 2px var(--light);
+  box-shadow: 0px 0px 0px 0px #000, 0px 0px 0px 2px var(--light);
+}
+
+.notfound-social {
+  margin-top: 35px;
+}
+
+.notfound-social > a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px;
+  margin: 0px 5px;
+}
+
+.notfound-social > a:hover {
+  background-color: var(--light);
+  -webkit-box-shadow: 0px 0px 0px 0px #000, 0px 0px 0px 2px var(--light);
+  box-shadow: 0px 0px 0px 0px #000, 0px 0px 0px 2px var(--light);
+}
+
+@media only screen and (max-width: 480px) {
+  .notfound .notfound-404 h1 {
+    font-size: 2em !important;
+  }
+
+  .notfound h2 {
+    font-size: 26px;
+  }
+}
+>>>>>>> 8c868bb5aa4ba53ba3923bb4c5de0be4057e6fa4

@@ -56,7 +56,7 @@ export default function OldModel({ model }) {
     >
       <Link href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
         <div className="old_model_container d-flex justify-content-center align-items-center w-50 mx-auto">
-          <Image width={500} height={500} src={car?.featuredImage === null ? "":car?.featuredImage} alt="" />
+          <Image width={500} height={500} src={car?.featuredImage === null ? "/assets/img/car-placeholder.png":car?.featuredImage} alt="" />
 
           <button className="btn btn-link link-button">
             <span className="icon-arrow"></span>
@@ -83,8 +83,8 @@ export default function OldModel({ model }) {
   return (
     <>
       {sortedYears?.length === 0 ? null : (
-        <div className="my-2">
-          <div className="card_wrapper position-relative">
+        <div className="my-3">
+          <div className="white_bg_wrapper position-relative">
             <h3 className="fw-bold">
               Looking for an older {model?.brand?.name} {model?.name}?
             </h3>

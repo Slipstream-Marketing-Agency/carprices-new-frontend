@@ -259,7 +259,7 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
-  const brandSlugs = query.brand ? query.brand.split(",") : [];
+  const brandSlugs = [query.brandname ? query.brandname : []];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];

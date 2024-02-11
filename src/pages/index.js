@@ -545,7 +545,7 @@ export async function getServerSideProps() {
             }
           }
         `,
-      }), // compare cars query
+      }),
     ]);
 
     
@@ -560,7 +560,7 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        homeData: axiosResponse?.data?.data?.attributes?.Sections[0], // Assuming axiosResponse is defined and fetched elsewhere
+        homeData: axiosResponse?.data?.data?.attributes?.Sections[0],
         popularcars:
           popularCarsResponse?.data?.carSections?.data[0]?.attributes
             ?.car_models?.data,

@@ -9,12 +9,12 @@ export default function KeySpec({ trim }) {
 
   return (
     <div id="keyspec" className="my-3">
-      <div className="">
+      <div className="white_bg_wrapper">
         <h2 className="fw-bold">
           Key Specs of the {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
         </h2>
-        <div className="row py-4 text-center">
-          <div className="col-md-2 col-3">
+        <div className="row py-2 text-center">
+          <div className="col-md-2 col-3 ">
             <div className="d-flex flex-column align-items-center">
               <div className="spec-img">
                 <Image
@@ -24,10 +24,10 @@ export default function KeySpec({ trim }) {
                   alt=""
                 />
               </div>
-              <h6 className="fw-bold">
+              <h6 className="fw-bold mb-1">
                 {size === "Electric" ? "Motor Type" : "Engine Type"}
               </h6>
-              <small className="fw-bold">
+              <small className="">
                 {size === "Electric"
                   ? trim?.motor.split(" ")[0]
                   : `${(trim?.displacement / 1000).toFixed(1)}L ${
@@ -47,8 +47,8 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold">Power (HP)</h6>
-                <small className="fw-bold">{trim?.power}</small>
+                <h6 className="fw-bold mb-1">Power (HP)</h6>
+                <small className="">{trim?.power}</small>
               </div>
             </div>
           ) : null}
@@ -63,8 +63,8 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold">Torque (Nm)</h6>
-                <small className="fw-bold">
+                <h6 className="fw-bold mb-1">Torque (Nm)</h6>
+                <small className="">
                   {trim?.torque === "" ? "-" : trim?.torque}
                 </small>
               </div>
@@ -82,10 +82,10 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold">
+                <h6 className="fw-bold mb-1">
                   {size === "Electric" ? "Range" : "Fuel Efficiency"}
                 </h6>
-                <small className="fw-bold">
+                <small className="">
                   {size === "Electric" &&
                   trim?.fuelConsumption === null &&
                   trim?.range !== null
@@ -105,8 +105,8 @@ export default function KeySpec({ trim }) {
                   alt=""
                 />
               </div>
-              <h6 className="fw-bold">Transmission</h6>
-              <small className="fw-bold">{trim?.transmission}</small>
+              <h6 className="fw-bold mb-1">Transmission</h6>
+              <small className="">{trim?.transmission}</small>
             </div>
           </div>
           {trim?.seatingCapacity !== null ? (
@@ -120,8 +120,8 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold">Seats</h6>
-                <small className="fw-bold">
+                <h6 className="fw-bold mb-1">Seats</h6>
+                <small className=" ">
                   {trim?.seatingCapacity?.replace("Seater", "")}
                 </small>
               </div>
