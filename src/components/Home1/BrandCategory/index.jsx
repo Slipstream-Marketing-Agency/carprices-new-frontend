@@ -11,9 +11,9 @@ function index({ brandDetails }) {
   let isRtl = router.locale === 'ar';
   console.log(brandDetails, "brandDetails");
   return (
-    <div className="brand-category-area  pt-4 mb-20">
-      <div className="container">
-        <div className="row mt-4 mb-30 wow fadeInUp" data-wow-delay="200ms">
+    <div className="brand-category-area  pt-4 mb-20 ">
+      <div className="container white_bg_wrapper">
+        <div className="row mb-30 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
               {/* <span>Available Brand Car</span> */}
@@ -25,15 +25,15 @@ function index({ brandDetails }) {
           {brandDetails.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">
-                <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`} key={idx}>
+                <Link legacyBehavior href={`/brands/${item?.slug}`} key={idx}>
                   <a className="single-category1">
-                    <div className="brand-icon w-50">
+                    <div className="brand-icon w-25">
                       <img
-                        src={item?.attributes?.brandLogo?.data?.attributes?.url}
+                        src={item?.logo}
                         alt="brand-icons"
                       />
                     </div>
-                    <h6 className="text-dark">{item?.attributes?.name}</h6>
+                    <h6 className="text-dark">{item?.name}</h6>
               
                   </a>
                 </Link>

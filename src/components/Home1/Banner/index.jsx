@@ -6,33 +6,19 @@ import Image from "next/image";
 import useTranslate from "@/src/utils/useTranslate";
 import { useRouter } from "next/router";
 
-function index({ homeData }) {
-
+function index({ bannerImage, bannerText }) {
   const router = useRouter();
 
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
+  let isRtl = router.locale === "ar";
 
-  const options = [
-    "1 - 5 lakh",
-    " 5 - 10 lakh",
-    "10 - 15 lakh",
-    "15 - 20 lakh",
-  ];
-  const optionsBudget = [
-    "Sedan",
-    " Town Car",
-    "Luxury Car",
-    "Executive Ca",
-    "Sports Car",
-  ];
   return (
     <>
       <AdvanceFilterModal />
       <div
         className="banner-section1"
         style={{
-          backgroundImage: `url(${homeData?.image?.data?.attributes?.url})`,
+          backgroundImage: `url(${bannerImage})`,
         }}
       >
         <div className="container">
@@ -59,15 +45,13 @@ function index({ homeData }) {
                   </svg>
                 </span> */}
 
-                <h1 className="text-black text-center">
-                  {t.uaeFastest} 
-                </h1>
-                
+                {/* <h1 className="text-black text-center">{t.uaeFastest}</h1> */}
+                <h1 className="text-black text-center">{bannerText}</h1>
+
                 {/* <p>
                   Car dealerships may sell new cars from one or several
                   manufacturers, as well as used cars from a variety of sources.
                 </p> */}
-                
               </div>
             </div>
           </div>

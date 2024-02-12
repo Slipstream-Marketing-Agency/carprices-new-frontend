@@ -13594,7 +13594,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   position: relative;
   background-color: rgba(246, 243, 249, 0.6);
   border-radius: 10px;
-  padding: 30px 20px;
+  padding: 10px 5px;
   z-index: 1;
   transition: all ease 0.35s;
 }
@@ -13621,7 +13621,6 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   opacity: 0.5;
 }
 .brand-category-area .view-btn-area {
-  background-color: var(--white-color);
   max-width: 500px;
   margin: 0 auto;
 }
@@ -15981,16 +15980,17 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   transition: 0.35s;
 }
 .news-section .news-card .content {
-  padding-top: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
 }
 .news-section .news-card .content > h6 {
   margin-bottom: 0;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  height: 64px;
 }
 .news-section .news-card .content > h6 a {
   font-family: var(--font-gilroy);

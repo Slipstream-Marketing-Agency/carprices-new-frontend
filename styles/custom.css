@@ -33,7 +33,7 @@ a {
 }
 
 .product-content-height {
-  min-height: 80px;
+  min-height: 75px;
 }
 
 a {
@@ -365,7 +365,7 @@ small {
   background-color: rgb(244, 244, 244);
 }
 .imageContainer img {
-  height: 160px !important;
+  height: 220px !important;
   width: 100%;
   object-fit: cover;
 }
@@ -1535,7 +1535,7 @@ input[type="color"]:focus,
   background-color: white;
   box-shadow: 1px 1px 6px #d9d9d9, 1px 2px 2px #e7e7e7;
   border-radius: 10px;
-  padding: 30px 20px;
+  padding: 10px 5px;
   z-index: 1;
   transition: all ease 0.35s;
 }

@@ -11,9 +11,9 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
   const t = useTranslate();
   let isRtl = router.locale === "ar";
   return (
-    <div className="news-section  mt-4">
-      <div className="container  ">
-        <div className="row mb-30 wow fadeInUp" data-wow-delay="200ms">
+    <div className="news-section ">
+      <div className="container  white_bg_wrapper">
+        <div className="row mb-2 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12  d-flex align-items-end justify-content-between flex-wrap gap-2">
             <div className="section-title1 w-100">
               {/* <span>Best Trending</span>  */}
@@ -39,12 +39,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                       {/* <img src={news.attributes.coverImage.data?.attributes.url} alt="" /> */}
                       <div className="position-relative imageContainer">
                         <Image
-                          src={
-                            news?.attributes?.coverImage?.data?.attributes?.url
-                              ? news?.attributes?.coverImage?.data?.attributes
-                                  ?.url
-                              : altImage
-                          }
+                          src={news?.coverImage ? news?.coverImage : altImage}
                           alt="Car"
                           layout="responsive"
                           width={300}
@@ -55,58 +50,37 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                       </div>
                     </a>
                   </Link>
-                  <div className="date">
+                  {/* <div className="date">
                     <Link
                       legacyBehavior
-                      href={`${isNews ? "/news/" : "/reviews/"}${
-                        news?.attributes?.slug
-                      }`}
+                      href={`${isNews ? "/news/" : "/reviews/"}${news?.slug}`}
                     >
                       <a>{t.trending}</a>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="content">
                   <h6 className="head_truncate">
                     <Link
                       legacyBehavior
-                      href={`${isNews ? "/news/" : "/reviews/"}${
-                        news?.attributes?.slug
-                      }`}
+                      href={`${isNews ? "/news/" : "/reviews/"}${news?.slug}`}
                     >
-                      <a>{`${
-                        news.attributes.title.length > 40
-                          ? `${news.attributes.title}`
-                          : news.attributes.title
-                      }`}</a>
+                      <a>{`${news.title}`}</a>
                     </Link>
                   </h6>
                   <div className="news-btm">
                     <div className="author-area">
-                      <div className="author-img">
-                        {/* <img src="assets/img/home1/author-01.png" alt="" /> */}
-                        <span className="border rounded-circle px-2 py-1">
-                          C
-                        </span>
-                      </div>
-                      <div className="author-content">
+                      <div className="author-content d-flex">
                         <h6>
-                          {news?.attributes?.author?.data?.attributes?.name}
+                          {news?.author}
+                          {" -"}
                         </h6>
-                        <Link
-                          className=""
-                          legacyBehavior
-                          href={`${isNews ? "/news/" : "/reviews/"}${
-                            news?.attributes?.slug
-                          }`}
-                        >
-                          <a>
-                            {t.postedOn} -{" "}
-                            {moment(news.attributes.createdAt).format(
-                              "MMMM Do YYYY"
-                            )}
-                          </a>
-                        </Link>
+
+                        <small>
+                          {" "}
+                          {/* {t.postedOn} -{" "} */}
+                          {moment(news.publishedAt).format("MMMM Do YYYY")}
+                        </small>
                       </div>
                     </div>
                   </div>
@@ -115,7 +89,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
             </div>
           ))}
         </div>
-        <div className="view-btn-area mt-5">
+        <div className="view-btn-area mt-3">
           {/* custom button begins */}
           <Link legacyBehavior href={`${isNews ? "/news/" : "/reviews/"}`}>
             <div className="buttons">
@@ -129,7 +103,6 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                   </div>
                 </div>
               </div>
-              <br />
             </div>
           </Link>
           {/* custom button ends */}

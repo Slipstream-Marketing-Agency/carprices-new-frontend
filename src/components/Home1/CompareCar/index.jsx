@@ -14,7 +14,7 @@ function index({ heading, carDetails, compare }) {
   const router = useRouter();
 
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
+  let isRtl = router.locale === "ar";
   const slideSettings = useMemo(() => {
     return {
       slidesPerView: "auto",
@@ -61,13 +61,13 @@ function index({ heading, carDetails, compare }) {
 
   console.log(compare, "eeeeeeee");
   return (
-    <div className="compare-car-section mt-5 mb-20">
-      <div className="container pb-4 container-fluid ">
+    <div className="compare-car-section mt-5 mb-20 ">
+      <div className="container pb-4 container-fluid white_bg_wrapper ">
         <div className="row mb-20 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12">
             <div className="section-title1">
               {/* <span>Best Car Collection</span> */}
-              <h1 className={`${isRtl && 'text-end'} me-5`}>{t.comaprecars}</h1>
+              <h1 className={`${isRtl && "text-end"} me-5`}>{t.comaprecars}</h1>
             </div>
           </div>
         </div>
@@ -80,69 +80,47 @@ function index({ heading, carDetails, compare }) {
                   <SwiperSlide className="swiper-slide">
                     <div className="single-compare-card">
                       <div className="compare-top">
-                        {comparison.attributes.car_models.data.map(
-                          (car, carIdx) => (
-                            <>
-                              <div className="single-car">
-                                <div className="car-img">
-                                  <img
-                                    src={
-                                      car.attributes.car_trims.data[0]
-                                        .attributes.featuredImage.data
-                                        .attributes.url
-                                    }
-                                    alt={car.attributes.name}
-                                    className="compare-img"
-                                  />
-                                </div>
-                                <div className="content text-center">
-                                  <span>
-                                    (
-                                    {
-                                      car.attributes?.car_brands?.data[0]
-                                        ?.attributes?.name
-                                    }
-                                    )
-                                  </span>
-                                  <h6 className="title">
-                                    <a href="#">{car.attributes.name}</a>
-                                  </h6>
-                                  <h6 className="price">{t.aed} 68, 219.000</h6>
-                                </div>
+                        {comparison.carModels.map((car, carIdx) => (
+                          <>
+                            <div className="single-car">
+                              <div className="car-img">
+                                <img
+                                  src={car.highTrim.featuredImage}
+                                  // alt={car.attributes.name}
+                                  className="compare-img"
+                                />
                               </div>
-                              {carIdx === 0 && (
-                                <div className="vs">
-                                  <span>VS</span>
-                                </div>
-                              )}
-                            </>
-                          )
-                        )}
+                              <div className="content text-center">
+                                <span>({car.brand?.name})</span>
+                                <h6 className="title">
+                                  <a href="#">{car.name}</a>
+                                </h6>
+                                <h6 className="price">
+                                  {t.aed} {car.minPrice}{" "}
+                                </h6>
+                              </div>
+                            </div>
+                            {carIdx === 0 && (
+                              <div className="vs">
+                                <span>VS</span>
+                              </div>
+                            )}
+                          </>
+                        ))}
                       </div>
                       <div className="compare-btm">
-                        <Link legacyBehavior href={`/compare-cars/${ comparison?.attributes?.car_models?.data[0]
-                                ?.attributes?.car_trims?.data[0]?.attributes
-                                ?.mainSlug}-vs-${comparison?.attributes?.car_models?.data[1]
-                                  ?.attributes?.car_trims?.data[0]?.attributes
-                                  ?.mainSlug}`}>
+                        <Link
+                          legacyBehavior
+                          href={`/compare-cars/${comparison?.carModels[0]?.mainSlug}-vs-${comparison?.carModels[1]?.mainSlug}`}
+                        >
                           <button
                             type="button"
                             className="primary-btn2"
                             // data-bs-toggle="modal"
                             // data-bs-target="#compareModal01"
                           >
-                            {t.compare}{" "}
-                            {
-                              comparison?.attributes?.car_models?.data[0]
-                                ?.attributes?.car_brands?.data[0]?.attributes
-                                ?.name
-                            }{" "}
-                            &amp;{" "}
-                            {
-                              comparison?.attributes?.car_models?.data[1]
-                                ?.attributes?.car_brands?.data[0]?.attributes
-                                ?.name
-                            }
+                            {t.compare} {comparison?.carModels[0]?.brand?.name} &amp;{" "}
+                            {comparison?.carModels[1]?.brand?.name}
                           </button>
                         </Link>
                       </div>
@@ -165,7 +143,7 @@ function index({ heading, carDetails, compare }) {
                 {/* <p>There will be 100+ Upcoming Car</p> */}
                 <Link legacyBehavior href="/compare-cars">
                   <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
-                  {t.comparebutton}
+                    {t.comparebutton}
                   </button>
                 </Link>
               </div>

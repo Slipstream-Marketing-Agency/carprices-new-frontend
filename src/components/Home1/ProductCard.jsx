@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import useTranslate from "@/src/utils/useTranslate";
 import { useRouter } from "next/router";
+import FeaturedImage from "../common/FeaturedImage";
 
 function ProductCard({ subTitle, heading, carDetails }) {
   const router = useRouter();
@@ -9,13 +10,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
   let isRtl = router.locale === "ar";
   console.log(carDetails, "carDetails");
 
-  const CarPriceRange = ({ car }) => {
-    // Extracting and filtering prices (excluding zeros) from car trims
-    const prices = car?.attributes?.car_trims?.data
-      .map((trim) => trim.attributes.price)
-      .filter((price) => price > 0);
-
-    // Format price for display
+  const CarPriceRange = ({ minPrice, maxPrice }) => {
     const formatPrice = (price) => {
       return price.toLocaleString("en-AE", {
         minimumFractionDigits: 0,
@@ -23,38 +18,24 @@ function ProductCard({ subTitle, heading, carDetails }) {
       });
     };
 
-    // Check if there are valid prices available
-    if (prices.length > 0) {
-      // Finding minimum and maximum prices
-      const minPrice = Math.min(...prices);
-      const maxPrice = Math.max(...prices);
-
-      // Determine how to display the price information
-      let priceInfo;
-      if (minPrice === maxPrice) {
-        // If min and max prices are the same, display only one price
-        priceInfo = `${t.aed} ${formatPrice(minPrice)}*`;
-      } else {
-        // Display price range
-        priceInfo = `${t.aed} ${formatPrice(minPrice)}* - ${formatPrice(
-          maxPrice
-        )}*`;
-      }
-
-      return (
-        <h6 className="text-danger fw-bold MobilepriceTextSize">
-          {priceInfo}
-        </h6>
-      );
+    let priceInfo;
+    if (minPrice === null || maxPrice === null) {
+      // If either min or max price is null, display TBD
+      priceInfo = "TBD*";
+    } else if (minPrice === maxPrice) {
+      // If min and max prices are the same, display only one price
+      priceInfo = `AED ${formatPrice(minPrice)}*`;
     } else {
-      // If no valid prices are available, display "TBD"
-      return (
-        <span className="text-danger fw-bold MobilepriceTextSize ">TBD</span>
-      );
+      // Display price range
+      priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
     }
+
+    return (
+      <h6 className="text-danger fw-bold MobilepriceTextSize">{priceInfo}</h6>
+    );
   };
 
-  const CarEMIDisplay = ({ car }) => {
+  const CarEMIDisplay = ({ minPrice }) => {
     const tenureInMonths = 60; // Loan tenure in months
 
     const calculateEMI = (principal) => {
@@ -70,12 +51,8 @@ function ProductCard({ subTitle, heading, carDetails }) {
       return Math.round(emi);
     };
 
-    // Extract all non-zero prices, calculate EMI for each, and find the minimum EMI
-    const emis = car?.attributes?.car_trims?.data
-      .filter((trim) => trim.attributes.price > 0)
-      .map((trim) => calculateEMI(trim.attributes.price));
-
-    const minEMI = Math.min(...emis);
+    // Calculate EMI using the minimum price
+    const minEMI = calculateEMI(minPrice);
 
     // Format the minimum EMI for display
     const emiString = minEMI
@@ -85,12 +62,12 @@ function ProductCard({ subTitle, heading, carDetails }) {
         })}*`
       : "Not Available";
 
-    return emiString
+    return <span>{emiString}</span>;
   };
 
   return (
-    <div className="recent-product-section mb-20 mt-5">
-      <div className="">
+    <div className="recent-product-section mb-20 mt-5 ">
+      <div className="white_bg_wrapper">
         <div className="row mb-20 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
@@ -157,7 +134,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
             </ul> */}
           </div>
         </div>
-        <div className="row">
+        <div className="row ">
           <div className="col-lg-12">
             <div className="tab-content" id="myTabContent6">
               <div
@@ -175,7 +152,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                     >
                       <Link
                         legacyBehavior
-                        href={`/brands/${car?.attributes?.car_brands?.data[0]?.attributes?.slug}/${car?.attributes?.year}/${car?.attributes?.slug}`}
+                        href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                       >
                         <div className="product-card">
                           <div className="product-img">
@@ -192,14 +169,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
                             <div className="swiper product-img-slider">
                               <div className="swiper-wrapper">
                                 <div className="swiper-slide">
-                                  <img
-                                    src={
-                                      car?.attributes?.car_trims?.data.find(
-                                        (trim) => trim.attributes.highTrim
-                                      )?.attributes?.featuredImage?.data
-                                        ?.attributes?.url
-                                    }
-                                    alt={`${car?.attributes?.car_brands?.data[0]?.attributes?.name} ${car?.attributes?.name}`}
+                                  <FeaturedImage
+                                    width={300}
+                                    height={300}
+                                    src={car?.highTrim?.featuredImage}
                                   />
                                 </div>
                               </div>
@@ -210,38 +183,24 @@ function ProductCard({ subTitle, heading, carDetails }) {
                               <h6 className="mobileFontCarName mb-0">
                                 <Link legacyBehavior href="">
                                   <span>
-                                    {car?.attributes?.year}{" "}
-                                    {car?.attributes?.car_brands?.data[0]
-                                      ?.attributes?.name.length > 10
-                                      ? car?.attributes?.car_brands?.data[0]?.attributes?.name.slice(
-                                          0.1
-                                        )
-                                      : car?.attributes?.car_brands?.data[0]
-                                          ?.attributes?.name}{" "}
-                                    {car?.attributes?.name}
+                                    {car?.highTrim?.year} {car?.brand?.name}{" "}
+                                    {car?.name}
                                   </span>
                                 </Link>
                               </h6>
-                              <CarPriceRange car={car} />
-                              {/* <div className="price-location">
-                            <div className="price">
-                              <strong>{car.carPrice}</strong>
-                            </div>
-                            <div className="location">
-                              <Link href="#">
-                                <i className="bi bi-geo-alt" /> Panama City
-                              </Link>
-                            </div>
-                          </div> */}
+                              <CarPriceRange
+                                minPrice={car?.minPrice}
+                                maxPrice={car?.maxPrice}
+                              />
 
                               <ul className="features">
                                 <li className="mobileFontEmi">
-                                  {t.emistart} <CarEMIDisplay car={car} />
+                                  {t.emistart}{" "}
+                                  <CarEMIDisplay minPrice={car?.minPrice} />
                                 </li>
                               </ul>
                             </div>
 
-                            {/* d-flexed to view details at center  */}
                             <div
                               className={`content-btm ${
                                 isRtl && "flex-row-reverse"
@@ -252,17 +211,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
                                 <i class="bi bi-chevron-double-right"></i>
                               </span>
                               <div className="brand ">
-                                <Link
-                                  legacyBehavior
-                                  href=""
-                                >
+                                <Link legacyBehavior href="">
                                   <img
-                                    src={
-                                      car?.attributes?.car_brands?.data[0]
-                                        ?.attributes?.brandLogo?.data
-                                        ?.attributes?.url
-                                    }
-                                    alt="image"
+                                    src={car?.brand?.logo}
+                                    alt="brandLogo"
                                   />
                                 </Link>
                               </div>
@@ -275,7 +227,9 @@ function ProductCard({ subTitle, heading, carDetails }) {
                   {/* <div className="view-btn-area">
                     <p>There will be 100+ Upcoming Car</p>
                     <Link legacyBehavior href="/single-brand-category">
-                      <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">{t.viewMore}</button>
+                      <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
+                        {t.viewMore}
+                      </button>
                     </Link>
                   </div> */}
                 </div>
