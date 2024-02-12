@@ -15,7 +15,7 @@ export default function Ad970x250(props) {
 
   }, [router.query]);
   return (
-    <div className="Ad970x250">
+    <div className="Ad970x250 my-2">
      
         <ins className="adsbygoogle responsive_footer_ad_horizontal"
           style={{ display: "block" }}

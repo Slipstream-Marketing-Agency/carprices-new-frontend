@@ -42,6 +42,9 @@ import TabNavigation from "@/src/components/TabNavigation";
 import MoreBrands from "@/src/components/MoreBrands";
 import SocialButtons from "@/src/components/common/SocialButtons";
 import useTranslate from "@/src/utils/useTranslate";
+import Ad970x250 from "@/src/components/ads/Ad970x250";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
+import Ad300x250 from "@/src/components/ads/Ad300x250";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -171,13 +174,28 @@ function BlogDetailsPage({
         type: "Car news Website",
       }}
     >
-      <br />
-      <Ad728x90 dataAdSlot="5962627056" />
+      <Ad970x250 dataAdSlot="5962627056" />
 
-      <div className="blog-details-page pt-5 mb-100">
+      <div className="blog-details-page mt-3">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-lg-8">
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
+              <div className="hads mb-4">
+                <div className="sticky_scroll">
+                  <Ad300x600 dataAdSlot="3792539533" />
+                </div>
+              </div>
+              <div className="hads mb-4">
+                <div className="sticky_scroll">
+                  <Ad300x250 dataAdSlot="3792539533" />
+                </div>
+              </div>
+              <div className="sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <h1 className="post-title mb-3">{detailData?.title}</h1>
               <div className="post-thumb">
                 {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
                 <div className="position-relative ">
@@ -199,33 +217,27 @@ function BlogDetailsPage({
                         <span className="text-white p-1">Buying Advice</span>
                     </div> */}
               </div>
-              <h1 className="post-title mb-3">{detailData?.title}</h1>
+
               {/* <div className="author-area"> */}
               <div className="row mb-3">
                 <div className="col-xl-6">
                   <div className="d-flex align-items-center gap-3">
-                    <div className="author-img">
-                      {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
+                    {/* <div className="author-img">
                       <span className="border rounded-circle px-2 py-1">C</span>
-                    </div>
+                    </div> */}
 
                     <div className="author-content">
                       <h6 className="mt-0">
-                        {detailData?.author?.data?.attributes?.name}
-                      </h6>
-                      <div className={isRtl && "d-flex flex-row-reverse gap-2"}>
-                        {" "}
+                        {detailData?.author?.data?.attributes?.name}{" "}/ {" "}
                         <span className="postedOnStyle">
                           {isRtl && " - "}
                           {t.postedOn}
                           {!isRtl && " - "}
                         </span>{" "}
                         <span className="postedOnStyle">
-                          {moment(
-                            detailData?.createdAt
-                          ).format("MMMM Do YYYY")}
+                          {moment(detailData?.createdAt).format("MMMM Do YYYY")}
                         </span>
-                      </div>
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -240,37 +252,35 @@ function BlogDetailsPage({
 
               <p>{detailData?.summary}</p>
               {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
-              <div dangerouslySetInnerHTML={{ __html: dynamicHTML }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: dynamicHTML }}
+                className="article-content"
+              />
 
               <div className="d-flex justify-content-md-end align-items-center">
                 <SocialButtons fullURL={fullURL} />
               </div>
             </div>
-            <div className="col-lg-4 mt-md-2 mt-0">
+            <div className="col-lg-3 mt-md-2 mt-0">
               <div
                 className="blog-sidebar mb-50"
                 style={{ position: "sticky", top: "-780px" }}
               >
-                <div className="boxShadows rounded mt-3 pt-2">
-                  <TabNavigation
-                    activeTab={activeTab}
-                    onTabChange={handleTabChange}
-                    tab1={"Trending"}
-                    tab2={"Recent"}
-                  />
+                <div className="white_bg_wrapper mt-3 px-1 py-3">
+                  <h4 className="px-2">
+                    Latest News <hr className="my-2" />
+                  </h4>
 
-                  {activeTab === "tab1" && (
-                    <div>
-                      {" "}
-                      <BlogRecent
-                        disableMarginTop={true}
-                        disableBorder={true}
-                        blogs={recentReviews}
-                        heading={"Related News"}
-                        disableHeading={true}
-                      />
-                    </div>
-                  )}
+                  <div>
+                    {" "}
+                    <BlogRecent
+                      disableMarginTop={true}
+                      disableBorder={true}
+                      blogs={recentReviews}
+                      heading={"Related News"}
+                      disableHeading={true}
+                    />
+                  </div>
                   {activeTab === "tab2" && (
                     <div>
                       {" "}
@@ -295,16 +305,14 @@ function BlogDetailsPage({
                     tab2={"Recent"}
                   />
                 </div>
+                <div className="my-3">
+                  <Ad300x600 dataAdSlot="3792539533" />
+                </div>
 
-                {/* <div className="mt-4"><MoreBrands /></div> */}
-                {/* <div className="single-widgets widget_egns_tag hideOnMobile">
-                  <div className="sticky-sidebar">
-                    <div className="ad">
-                      <Ad160x600 />
-                    </div>
-                  </div>
-
-                </div> */}
+                <MoreBrands />
+                <div className="my-3">
+                  <Ad300x250 dataAdSlot="3792539533" />
+                </div>
               </div>
               {/* <div className="single-widgets sidebar-banner">
                                 <div className="product-content">

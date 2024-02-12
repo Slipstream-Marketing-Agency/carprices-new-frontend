@@ -11,7 +11,7 @@ function index({ brandDetails }) {
   let isRtl = router.locale === 'ar';
   console.log(brandDetails, "brandDetails");
   return (
-    <div className="brand-category-area  pt-4 mb-20 ">
+    <div className="brand-category-area mt-3 mb-3">
       <div className="container white_bg_wrapper">
         <div className="row mb-30 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">

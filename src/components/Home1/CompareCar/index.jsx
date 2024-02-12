@@ -61,7 +61,7 @@ function index({ heading, carDetails, compare }) {
 
   console.log(compare, "eeeeeeee");
   return (
-    <div className="compare-car-section mt-5 mb-20 ">
+    <div className="compare-car-section mt-3 mb-3 ">
       <div className="container pb-4 container-fluid white_bg_wrapper ">
         <div className="row mb-20 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12">
@@ -82,24 +82,29 @@ function index({ heading, carDetails, compare }) {
                       <div className="compare-top">
                         {comparison.carModels.map((car, carIdx) => (
                           <>
-                            <div className="single-car">
-                              <div className="car-img">
-                                <img
-                                  src={car.highTrim.featuredImage}
-                                  // alt={car.attributes.name}
-                                  className="compare-img"
-                                />
+                            <Link
+                              legacyBehavior
+                              href={`/compare-cars/${car?.higTrim?.mainSlug}`}
+                            >
+                              <div className="single-car">
+                                <div className="car-img">
+                                  <img
+                                    src={car.highTrim.featuredImage}
+                                    // alt={car.attributes.name}
+                                    className="compare-img"
+                                  />
+                                </div>
+                                <div className="content text-center">
+                                  <span>({car.brand?.name})</span>
+                                  <h6 className="title">
+                                    <a href="#">{car.name}</a>
+                                  </h6>
+                                  <h6 className="price">
+                                    {t.aed} {car.minPrice}{" "}
+                                  </h6>
+                                </div>
                               </div>
-                              <div className="content text-center">
-                                <span>({car.brand?.name})</span>
-                                <h6 className="title">
-                                  <a href="#">{car.name}</a>
-                                </h6>
-                                <h6 className="price">
-                                  {t.aed} {car.minPrice}{" "}
-                                </h6>
-                              </div>
-                            </div>
+                            </Link>
                             {carIdx === 0 && (
                               <div className="vs">
                                 <span>VS</span>
@@ -119,8 +124,8 @@ function index({ heading, carDetails, compare }) {
                             // data-bs-toggle="modal"
                             // data-bs-target="#compareModal01"
                           >
-                            {t.compare} {comparison?.carModels[0]?.brand?.name} &amp;{" "}
-                            {comparison?.carModels[1]?.brand?.name}
+                            {t.compare} {comparison?.carModels[0]?.brand?.name}{" "}
+                            &amp; {comparison?.carModels[1]?.brand?.name}
                           </button>
                         </Link>
                       </div>

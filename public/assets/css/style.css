@@ -21,7 +21,7 @@
   --secondary: #24272c;
   --light: #77cdf2;
   --rating: #ffa236;
-  --grey: #80818b;
+  --grey: #f5f5f5;
   --bg-color: #f7f7f7;
   --black: #000;
   --white: #fff;
@@ -26447,14 +26447,13 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   color: var(--title-color);
   font-family: var(--font-gilroy);
   font-size: 28px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-weight: 800;
+
 }
 .blog-details-page .post-title a {
   color: var(--text-color);
   font-size: 18px;
   font-weight: 500;
-  line-height: 1;
   transition: 0.35s;
 }
 .blog-details-page .post-title a:hover {

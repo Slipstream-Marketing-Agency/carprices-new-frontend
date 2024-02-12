@@ -10,7 +10,7 @@ function BodyTypes({ bodyTypeList }) {
   let isRtl = router.locale === "ar";
   console.log(bodyTypeList, "bodyTypeList");
   return (
-    <div className="body-category-area  pt-4 mb-20">
+    <div className="body-category-area mt-3 mb-3">
       <div className="container white_bg_wrapper">
         <div className="row mb-4 wow fadeInUp " data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-start justify-content-start flex-wrap gap-4">

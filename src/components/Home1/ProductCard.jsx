@@ -66,7 +66,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
   };
 
   return (
-    <div className="recent-product-section mb-20 mt-5 ">
+    <div className="recent-product-section mt-3 mb-3 ">
       <div className="white_bg_wrapper">
         <div className="row mb-20 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
