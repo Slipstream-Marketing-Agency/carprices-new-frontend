@@ -14,13 +14,36 @@ import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
 import CarComparisonTable from "@/src/components/compare-cars/CarComparisonTable";
-function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
+import dynamic from "next/dynamic";
+const CompareCarLazy = dynamic(
+  () => import("../../../components/Home1/CompareCar/index"),
+  {
+    loading: () => <p>Loading comparison...</p>, // Optional loading placeholder
+    ssr: true, // Set to false if this component is not critical for SEO
+  }
+);
+function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const router = useRouter();
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
-  const canAddMoreCars = cars && cars.length < 4;
+  const canAddMoreCars = cars && cars.length < (isMobile ? 2 : 4);
+
 
   const compateCareSettingsSlide = useMemo(() => {
     return {
@@ -141,34 +164,40 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
         <Ad728x90 dataAdSlot="5962627056" />
       </div>
 
-      <div className="compare-page pt-30 mb-100">
+      <div className="compare-page pt-30 mb-100" >
         <div className="container">
-          <div className="row g-4 mb-50">
+          <div  className={`row g-4 mb-50` } style={{position:  "sticky",
+    top:isMobile ? "-160px" : "-190px",background:"white"}} >
+          <div  className={`row g-4 mb-50` }  >
             <div className="col-lg-12">
               <div className="uploded-product-group">
                 <div className="row g-4">
+                  {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
                   <CompareCarCard carData={car1Data} />
                   <CompareCarCard carData={car2Data} />
                   <CompareCarCard carData={car3Data} />
                   <CompareCarCard carData={car4Data} />
-                  {canAddMoreCars && (
-                    <div className="col-lg-3">
-                      <div className="product-card style-2 compare">
-                        <div className="product-upload-area">
-                          {/* <div className="upload-area">
-                        <i className="bi bi-plus" />
-                      </div> */}
-                          <div className="comparea-content">
-                            {/* <h6>Add to Compare</h6> */}
-                            <MultiStepCarSelection mode="add" />
+                    {(canAddMoreCars  ) && (
+                      
+                      <div className={` ${!isMobile && isSticky ? 'col-2 ' : 'col-6 col-lg-3' }`} style={{position:(!isMobile && isSticky) && 'fixed' , bottom:!isMobile && '20px',right:!isMobile && '0px'}}>
+                        <div className="product-card style-2 compare" style={{background:(!isMobile && isSticky) && 'unset' , boxShadow:(!isMobile && isSticky) && 'unset', border:(!isMobile && isSticky) && 'none' }}>
+                        <div className="product-upload-area" style={{
+    padding: !isMobile && isSticky  && ' 0px 20px 0px' }} >
+                            {/* <div className="upload-area">
+                          <i className="bi bi-plus" />
+                        </div> */}
+                            <div className="comparea-content">
+                              {/* <h6>Add to Compare</h6> */}
+                              <MultiStepCarSelection mode="add" />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
               </div>
             </div>
+          </div>
           </div>
           {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
@@ -229,13 +258,14 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
                 className="scrollspy-example"
                 tabIndex={0}
               >
-                <CarComparisonTable tableData={tableData} />
+               {(car1Data && car2Data ) && <CarComparisonTable tableData={tableData} />}
                 <Ad728x90 dataAdSlot="5962627056" />
               </div>
             </div>
           </div>
         </div>
       </div>
+      {/* <CompareCarLazy compare={compare} /> */}
     </MainLayout>
   );
 }
@@ -250,6 +280,60 @@ export async function getServerSideProps(context) {
     uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
   });
+  const compareResponse = await client.query({
+    query: gql`
+    query CompareCars {
+      compareCars {
+        data {
+          id
+          attributes {
+            comparison
+            car_models {
+              data {
+                id
+                attributes {
+                  name
+                  car_brands {
+                    data {
+                      id
+                      attributes {
+                        name
+                        slug
+                      }
+                    }
+                  }
+                  car_trims(
+                    filters: {
+                      year: { eq: 2023 }
+                      highTrim: { eq: true }
+                    }
+                  ) {
+                    data {
+                      id
+                      attributes {
+                        name
+                        slug
+                        mainSlug
+                        featuredImage {
+                          data {
+                            id
+                            attributes {
+                              url
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  })
 
   const CAR_TRIMS_QUERY = gql`
     query carTrims($mainSlug: String!) {
@@ -400,7 +484,9 @@ export async function getServerSideProps(context) {
     ]);
 
     return {
+      
       props: {
+        compare: compareResponse?.data?.compareCars?.data,
         car1Data:
           responses[0].status === "fulfilled"
             ? responses[0].value.data.carTrims.data[0]?.attributes
@@ -423,6 +509,7 @@ export async function getServerSideProps(context) {
     console.error("Server-side Data Fetching Error:", error.message);
     return {
       props: {
+      
         error: true,
         errorMessage: error.message,
       },

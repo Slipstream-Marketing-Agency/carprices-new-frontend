@@ -58,6 +58,7 @@ function BlogDetailsPage({
   popularBrands,
 }) {
   const [activeTab, setActiveTab] = useState("tab1");
+  const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
   const handleTabChange = (selectedTab) => {
     setActiveTab(selectedTab);
@@ -336,7 +337,7 @@ function BlogDetailsPage({
                 <div className="col-xl-6 m-auto mt-2 mt-md-0">
                   <div className="d-flex justify-content-md-end align-items-center">
                     {" "}
-                    <SocialButtons fullURL={fullURL} />{" "}
+                    <SocialButtons fullURL={currentURL} />{" "}
                   </div>
                 </div>
                 {/* </div> */}

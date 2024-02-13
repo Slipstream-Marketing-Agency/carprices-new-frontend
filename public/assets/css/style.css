@@ -1174,7 +1174,7 @@ p {
   transition: 0.5s;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  z-index: -1;
 }
 .top-bar .search-area form .form-inner button i {
   color: var(--white-color);
@@ -2137,7 +2137,7 @@ p {
 header.style-1 {
   position: relative;
   width: 100%;
-  z-index: 99;
+  z-index: -1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14133,6 +14133,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 .product-card.style-2.compare {
   border-radius: 10px;
+  box-shadow:4px 4px 10px var(--bs-gray-200);
   border: 1px solid rgba(238, 238, 238, 0.93);
   background: #fff;
   position: relative;
@@ -15033,7 +15034,6 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   svg {
   fill: var(--title-color);
 }
-
 /*=====================================
      13. Shop Car Parts Section
 ========================================*/
@@ -27195,7 +27195,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 10px;
-  padding: 25px 20px 30px;
+  padding: 31px 21px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27214,15 +27214,15 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   margin-bottom: 25px;
 }
 .compare-page .product-upload-area .upload-area i {
-  font-size: 30px;
-  color: var(--title-color);
+  font-size: 42px;
+  color: var(--primary);
 }
 .compare-page .product-upload-area .upload-area::after {
   content: "";
   height: 130px;
   width: 130px;
   border-radius: 50%;
-  border: 1px dashed #13141a;
+  border: 2px dashed #275ba791;
   position: absolute;
   left: 50%;
   top: 50%;
