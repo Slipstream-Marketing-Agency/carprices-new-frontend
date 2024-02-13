@@ -160,7 +160,7 @@ function Header() {
             </ul>
           </li> */}
            <li>
-            <Link legacyBehavior href="/search-cars?page=1">
+            <Link legacyBehavior href="/search-cars">
               <a className="drop-down">{t.SearchCars}</a>
             </Link>
           </li>

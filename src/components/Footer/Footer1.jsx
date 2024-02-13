@@ -3,13 +3,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import Ad970x250 from "../ads/Ad970x250";
+import Ad300x250 from "../ads/Ad300x250";
 function Footer1() {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
   return (
     <>
-      <Ad970x250 dataAdSlot="6082880703" />{" "}
+      <div className="hidemobile">
+        <Ad970x250 dataAdSlot="6082880703" />{" "}
+      </div>
+      <div className="hidedesktop">
+        <Ad300x250 dataAdSlot="9351332409" />
+      </div>
       <footer>
         <div className="container-fluid">
           <div className="footer-top">

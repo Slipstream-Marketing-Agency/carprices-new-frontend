@@ -45,6 +45,7 @@ import useTranslate from "@/src/utils/useTranslate";
 import Ad970x250 from "@/src/components/ads/Ad970x250";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import Ad300x250 from "@/src/components/ads/Ad300x250";
+import AdBlog from "@/src/components/ads/AdBlog";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -66,88 +67,177 @@ function BlogDetailsPage({
   const t = useTranslate();
   let isRtl = router.locale === "ar";
 
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
-  const [dynamicHTML, setDynamicHTML] = useState("");
-  const [isModified, setIsModified] = useState(false);
+  // const [dynamicHTML, setDynamicHTML] = useState("");
+  // const [isModified, setIsModified] = useState(false);
 
-  if (!detailData) {
-    return (
-      <div>
-        <Error />
-      </div>
-    );
-  }
+  // if (!detailData) {
+  //   return (
+  //     <div>
+  //       <Error />
+  //     </div>
+  //   );
+  // }
 
-  // Assume detailData.content contains the provided HTML content
-  // This is your initial state
-  const initialHTML = detailData?.content;
+  // // Assume detailData.content contains the provided HTML content
+  // // This is your initial state
+  // const initialHTML = detailData?.content;
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 767);
+  //   };
+
+  //   handleResize();
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   // Fetch dynamic HTML content when component mounts
+  //   setDynamicHTML(initialHTML);
+  // }, [initialHTML]);
+
+  // useEffect(() => {
+  //   if (dynamicHTML && !isModified) {
+  //     let modifiedHTML = dynamicHTML
+  //       .replace(/<h1([^>]*)>/g, '<h2   $1 style="margin-top: 20px;">')
+  //       .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
+  //       .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
+  //       .replace(
+  //         /<img([^>]*)>/g,
+  //         '<img$1 style="width: 100%;border-radius: 10px;">'
+  //       )
+
+  //       .replace(
+  //         /<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g,
+  //         "<h3$1>$3</h3>"
+  //       )
+
+  //       .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
+
+  //       .replace(
+  //         /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+  //         "https://www.youtube.com/watch?v=$1"
+  //       )
+  //       .replace(
+  //         /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
+  //         '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
+  //       )
+  //       //  .replace(/&lt;GoogleAd&gt;/g, `<div class="w-100  my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}</h2></div>`)
+
+  //       .replace(
+  //         /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+  //         `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  //       )
+  //       .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, "");
+  //     if (!isMobile) {
+  //       modifiedHTML = modifiedHTML.replace(
+  //         /&lt;GoogleAd&gt;/g,
+  //         `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+  //       );
+  //     } else {
+  //       modifiedHTML = modifiedHTML.replace(/&lt;GoogleAd&gt;/g, ``);
+  //     }
+
+  //     setDynamicHTML(modifiedHTML);
+  //     setIsModified(true); // Set the flag to true to avoid further modification
+  //   }
+  // }, [dynamicHTML, isModified]);
+
+  // const [metaDescription, setMetaDescription] = useState("");
+  // const paragraphContent = news?.blog?.content;
+
+  const [metaDescription, setMetaDescription] = useState("");
+  const paragraphContent = detailData.content;
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
+    if (paragraphContent) {
+      const parser = new DOMParser();
+      const parsedHtml = parser.parseFromString(paragraphContent, "text/html");
+      const text = parsedHtml.documentElement.textContent;
+      setMetaDescription(text.substring(0, 160));
+    }
+  }, [paragraphContent]);
 
-    handleResize();
+  const truncatedMetaDescription =
+    metaDescription.length > 160
+      ? metaDescription.substring(0, 160) + "..."
+      : metaDescription;
 
-    window.addEventListener("resize", handleResize);
+  const renderContent = () => {
+    const router = useRouter();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    const currentUrl = router.pathname; // Get the current URL of the website
 
-  useEffect(() => {
-    // Fetch dynamic HTML content when component mounts
-    setDynamicHTML(initialHTML);
-  }, [initialHTML]);
+    const content = detailData.content
+      .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
+      .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
+      .replace(/<div>\s*<br\s*\/?>/, "<div>");
 
-  useEffect(() => {
-    if (dynamicHTML && !isModified) {
-      let modifiedHTML = dynamicHTML
-        .replace(/<h1([^>]*)>/g, '<h2   $1 style="margin-top: 20px;">')
-        .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
-        .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
-        .replace(
-          /<img([^>]*)>/g,
-          '<img$1 style="width: 100%;border-radius: 10px;">'
-        )
+    if (!content) return null;
 
-        .replace(
-          /<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g,
-          "<h3$1>$3</h3>"
-        )
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    const paragraphs = content.split("<br>");
 
-        .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
+    const renderedContent = [];
 
-        .replace(
-          /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-          "https://www.youtube.com/watch?v=$1"
-        )
-        .replace(
-          /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
-          '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
-        )
-        //  .replace(/&lt;GoogleAd&gt;/g, `<div class="w-100  my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}</h2></div>`)
+    paragraphs.forEach((paragraph, index) => {
+      if (youtubeRegex.test(paragraph)) {
+        const videoId = extractYouTubeVideoId(paragraph);
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
-        .replace(
-          /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-          `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        )
-        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, "");
-      if (!isMobile) {
-        modifiedHTML = modifiedHTML.replace(
-          /&lt;GoogleAd&gt;/g,
-          `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+        renderedContent.push(
+          <div key={index}>
+            <iframe
+              width="100%"
+              height="315"
+              src={embedUrl}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         );
-      } else {
-        modifiedHTML = modifiedHTML.replace(/&lt;GoogleAd&gt;/g, ``);
       }
 
-      setDynamicHTML(modifiedHTML);
-      setIsModified(true); // Set the flag to true to avoid further modification
+      renderedContent.push(
+        <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
+      );
+      if (
+        index === 1 ||
+        index === 4 ||
+        index === 7 ||
+        index === 10 ||
+        index === 13 ||
+        index === 15 ||
+        index === 18
+      ) {
+        renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
+      }
+    });
+    return renderedContent;
+  };
+
+  const extractYouTubeVideoId = (url) => {
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/(.+)$/;
+    const match = url.match(youtubeRegex);
+
+    if (match) {
+      const videoId = match[4];
+
+      return videoId;
     }
-  }, [dynamicHTML, isModified]);
+    return null;
+  };
 
   console.log(detailData);
   // console.log(recentBlog);
@@ -228,14 +318,16 @@ function BlogDetailsPage({
 
                     <div className="author-content">
                       <h6 className="mt-0">
-                        {detailData?.author?.data?.attributes?.name}{" "}/ {" "}
+                        {detailData?.author?.data?.attributes?.name} /{" "}
                         <span className="postedOnStyle">
                           {isRtl && " - "}
                           {t.postedOn}
                           {!isRtl && " - "}
                         </span>{" "}
                         <span className="postedOnStyle">
-                          {moment(detailData?.createdAt).format("MMMM Do YYYY")}
+                          {moment(detailData?.publishedAt).format(
+                            "MMMM Do YYYY"
+                          )}
                         </span>
                       </h6>
                     </div>
@@ -253,9 +345,12 @@ function BlogDetailsPage({
               <p>{detailData?.summary}</p>
               {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
               <div
-                dangerouslySetInnerHTML={{ __html: dynamicHTML }}
+                // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
                 className="article-content"
-              />
+              >
+                {" "}
+                {renderContent()}
+              </div>
 
               <div className="d-flex justify-content-md-end align-items-center">
                 <SocialButtons fullURL={fullURL} />
@@ -276,12 +371,12 @@ function BlogDetailsPage({
                     <BlogRecent
                       disableMarginTop={true}
                       disableBorder={true}
-                      blogs={recentReviews}
+                      blogs={recentBlog}
                       heading={"Related News"}
                       disableHeading={true}
                     />
                   </div>
-                  {activeTab === "tab2" && (
+                  {/* {activeTab === "tab2" && (
                     <div>
                       {" "}
                       <BlogRecent
@@ -292,26 +387,30 @@ function BlogDetailsPage({
                         disableHeading={true}
                       />
                     </div>
-                  )}
+                  )} */}
+                </div>
+                <div className="white_bg_wrapper mt-3 px-1 py-3">
+                  <h4 className="px-2">
+                    Related News <hr className="my-2" />
+                  </h4>
+                  <div>
+                    <BlogRelated
+                      disableMarginTop={true}
+                      disableBorder={true}
+                      blogs={detailData?.article_categories?.data}
+                      heading={"Related News"}
+                      tab1={"Trending"}
+                      tab2={"Recent"}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <BlogRelated
-                    disableMarginTop={true}
-                    disableBorder={true}
-                    blogs={detailData?.article_categories?.data}
-                    heading={"Related News"}
-                    tab1={"Trending"}
-                    tab2={"Recent"}
-                  />
+                {/* <MoreBrands /> */}
+                <div className="my-3">
+                  <Ad300x250 dataAdSlot="3792539533" />
                 </div>
                 <div className="my-3">
                   <Ad300x600 dataAdSlot="3792539533" />
-                </div>
-
-                <MoreBrands />
-                <div className="my-3">
-                  <Ad300x250 dataAdSlot="3792539533" />
                 </div>
               </div>
               {/* <div className="single-widgets sidebar-banner">
@@ -493,6 +592,8 @@ export async function getServerSideProps(context) {
         }
       `,
     });
+
+   
 
     return {
       props: {

@@ -8,15 +8,14 @@ import SwiperCore, {
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MainLayout from "@/src/layout/MainLayout";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
-import Ad300x250 from "@/src/components/ads/Ad300x250";
-import { createApolloClient } from "@/src/lib/apolloClient";
 import { gql } from "@apollo/client";
+import { createApolloClient } from "@/src/lib/apolloClient";
+import { useRouter } from "next/router";
 import Image from "next/image";
+import Ad728x90 from "@/src/components/ads/Ad728x90";
+SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 import altImage from "../../../../public/assets/images/blog-alt-image.png";
 import Ad160x600 from "@/src/components/ads/Ad160x600";
-import Script from "next/script";
-
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -28,120 +27,221 @@ import {
   WhatsappIcon,
   LinkedinShareButton,
   LinkedinIcon,
-  TwitterIcon,
   TwitterShareButton,
+  TwitterIcon,
+  InstagramShareButton,
+  InstagramIcon,
   TelegramShareButton,
   TelegramIcon,
 } from "next-share";
-import moment, { isMoment } from "moment/moment";
-import Ad970x250 from "@/src/components/ads/Ad970x250";
-import { useRouter } from "next/router";
+import moment from "moment/moment";
 import Error from "../../error";
-import BlogRelated from "@/src/components/BlogRelated";
 import BlogRecent from "@/src/components/BlogRecent";
+import BlogRelated from "@/src/components/BlogRelated";
 import TabNavigation from "@/src/components/TabNavigation";
 import MoreBrands from "@/src/components/MoreBrands";
 import SocialButtons from "@/src/components/common/SocialButtons";
+import useTranslate from "@/src/utils/useTranslate";
+import Ad970x250 from "@/src/components/ads/Ad970x250";
+import Ad300x600 from "@/src/components/ads/Ad300x600";
+import Ad300x250 from "@/src/components/ads/Ad300x250";
+import AdBlog from "@/src/components/ads/AdBlog";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
-const myAdCode = <Ad728x90 dataAdSlot="5962627056" />;
-// Assume this is the function that modifies the dynamicHTML
 
-SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
-
-function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
+function BlogDetailsPage({
+  detailData,
+  recentBlog,
+  fullURL,
+  recentReviews,
+  popularBrands,
+}) {
   const [activeTab, setActiveTab] = useState("tab1");
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const handleTabChange = (selectedTab) => {
     setActiveTab(selectedTab);
   };
 
   const router = useRouter();
-  const [initialScreening, setInitialScreening] = useState(true);
+  const t = useTranslate();
+  let isRtl = router.locale === "ar";
 
-  if (!detailData) {
-    return (
-      <div>
-        <Error />
-      </div>
-    );
-  }
+  // const [isMobile, setIsMobile] = useState(false);
 
-  // console.log("detailData ",detailData.article_categories.data);
-  const [dynamicHTML, setDynamicHTML] = useState("");
-  const [isModified, setIsModified] = useState(false);
+  // const [dynamicHTML, setDynamicHTML] = useState("");
+  // const [isModified, setIsModified] = useState(false);
 
-  // Assume detailData.content contains the provided HTML content
-  // This is your initial state
-  const initialHTML = detailData.content;
+  // if (!detailData) {
+  //   return (
+  //     <div>
+  //       <Error />
+  //     </div>
+  //   );
+  // }
+
+  // // Assume detailData.content contains the provided HTML content
+  // // This is your initial state
+  // const initialHTML = detailData?.content;
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 767);
+  //   };
+
+  //   handleResize();
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   // Fetch dynamic HTML content when component mounts
+  //   setDynamicHTML(initialHTML);
+  // }, [initialHTML]);
+
+  // useEffect(() => {
+  //   if (dynamicHTML && !isModified) {
+  //     let modifiedHTML = dynamicHTML
+  //       .replace(/<h1([^>]*)>/g, '<h2   $1 style="margin-top: 20px;">')
+  //       .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
+  //       .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
+  //       .replace(
+  //         /<img([^>]*)>/g,
+  //         '<img$1 style="width: 100%;border-radius: 10px;">'
+  //       )
+
+  //       .replace(
+  //         /<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g,
+  //         "<h3$1>$3</h3>"
+  //       )
+
+  //       .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
+
+  //       .replace(
+  //         /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+  //         "https://www.youtube.com/watch?v=$1"
+  //       )
+  //       .replace(
+  //         /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
+  //         '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
+  //       )
+  //       //  .replace(/&lt;GoogleAd&gt;/g, `<div class="w-100  my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}</h2></div>`)
+
+  //       .replace(
+  //         /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
+  //         `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  //       )
+  //       .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, "");
+  //     if (!isMobile) {
+  //       modifiedHTML = modifiedHTML.replace(
+  //         /&lt;GoogleAd&gt;/g,
+  //         `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+  //       );
+  //     } else {
+  //       modifiedHTML = modifiedHTML.replace(/&lt;GoogleAd&gt;/g, ``);
+  //     }
+
+  //     setDynamicHTML(modifiedHTML);
+  //     setIsModified(true); // Set the flag to true to avoid further modification
+  //   }
+  // }, [dynamicHTML, isModified]);
+
+  // const [metaDescription, setMetaDescription] = useState("");
+  // const paragraphContent = news?.blog?.content;
+
+  const [metaDescription, setMetaDescription] = useState("");
+  const paragraphContent = detailData.content;
 
   useEffect(() => {
-    setDynamicHTML(initialHTML);
-  }, [initialHTML]);
+    if (paragraphContent) {
+      const parser = new DOMParser();
+      const parsedHtml = parser.parseFromString(paragraphContent, "text/html");
+      const text = parsedHtml.documentElement.textContent;
+      setMetaDescription(text.substring(0, 160));
+    }
+  }, [paragraphContent]);
 
-  useEffect(() => {
-    if (dynamicHTML && !isModified) {
-      let modifiedHTML = dynamicHTML
-        .replace(/<h1([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
-        .replace(/<h2([^>]*)>/g, '<h2$1 style="margin-top: 20px;">')
-        .replace(/<p><br\s*\/?><\/p>/g, '<p$1 style="margin-top: 30px;">')
-        .replace(
-          /<img([^>]*)>/g,
-          '<img$1 style="width: 100%;border-radius: 10px;">'
-        )
-        .replace(/<p>&nbsp;<\/p>/g, '<p style="margin-top: 30px;"></p>')
-        .replace(
-          /<h3([^>]*)>\s*<strong([^>]*)>(.*?)<\/strong>\s*<\/h3>/g,
-          "<h3$1>$3</h3>"
-        )
+  const truncatedMetaDescription =
+    metaDescription.length > 160
+      ? metaDescription.substring(0, 160) + "..."
+      : metaDescription;
 
-        .replace(
-          /<a href="(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-          "https://www.youtube.com/watch?v=$1"
-        )
-        .replace(
-          /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/g,
-          '<a href="https://www.youtube.com/watch?v=$1">https://www.youtube.com/watch?v=$1</a>'
-        )
+  const renderContent = () => {
+    const router = useRouter();
 
-        .replace(
-          /<a href="(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/(?:[^\/\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|\.be\/)([^"&?\/\s]{11})[^<]*<\/a>/g,
-          `<iframe class="my-3" width="100%" height="315" src="https://www.youtube.com/embed/$1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        )
-        .replace(/<p>&nbsp;\s*\/?<\/p>/g, '<p$1 style="margin-top: 20px;">')
-        .replace(/<p>\s*<br\s*\/?>\s*&nbsp;\s*<\/p>/g, "");
+    const currentUrl = router.pathname; // Get the current URL of the website
 
-      if (!isMobile) {
-        modifiedHTML = modifiedHTML.replace(
-          /&lt;GoogleAd&gt;/g,
-          `<div class="w-100 my-2"><div dangerouslySetInnerHTML={{ __html: '${adCode}'</div></div>`
+    const content = detailData.content
+      .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
+      .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
+      .replace(/<div>\s*<br\s*\/?>/, "<div>");
+
+    if (!content) return null;
+
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    const paragraphs = content.split("<br>");
+
+    const renderedContent = [];
+
+    paragraphs.forEach((paragraph, index) => {
+      if (youtubeRegex.test(paragraph)) {
+        const videoId = extractYouTubeVideoId(paragraph);
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+        renderedContent.push(
+          <div key={index}>
+            <iframe
+              width="100%"
+              height="315"
+              src={embedUrl}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         );
-      } else {
-        modifiedHTML = modifiedHTML.replace(/&lt;GoogleAd&gt;/g, ``);
       }
 
-      setDynamicHTML(modifiedHTML);
-      setIsModified(true); // Set the flag to true to avoid further modification
+      renderedContent.push(
+        <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
+      );
+      if (
+        index === 1 ||
+        index === 4 ||
+        index === 7 ||
+        index === 10 ||
+        index === 13 ||
+        index === 15 ||
+        index === 18
+      ) {
+        renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
+      }
+    });
+    return renderedContent;
+  };
+
+  const extractYouTubeVideoId = (url) => {
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/(.+)$/;
+    const match = url.match(youtubeRegex);
+
+    if (match) {
+      const videoId = match[4];
+
+      return videoId;
     }
-  }, [dynamicHTML, isModified]);
+    return null;
+  };
 
   console.log(detailData);
+  // console.log(recentBlog);
+
   const settings = useMemo(() => {
     return {
       speed: 1500,
@@ -161,23 +261,38 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
       pageMeta={{
         title: `${detailData?.metaTitle}`,
         description: ``,
-        type: "Car review Website",
+        type: "Car news Website",
       }}
     >
-      <br />
-      <Ad728x90 dataAdSlot="5962627056" />
+      <Ad970x250 dataAdSlot="5962627056" />
 
-      <div className="blog-details-page pt-5 mb-100">
+      <div className="blog-details-page mt-3">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-lg-8">
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
+              <div className="hads mb-4">
+                <div className="sticky_scroll">
+                  <Ad300x600 dataAdSlot="3792539533" />
+                </div>
+              </div>
+              <div className="hads mb-4">
+                <div className="sticky_scroll">
+                  <Ad300x250 dataAdSlot="3792539533" />
+                </div>
+              </div>
+              <div className="sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <h1 className="post-title mb-3">{detailData?.title}</h1>
               <div className="post-thumb">
                 {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
                 <div className="position-relative ">
                   <Image
                     src={
                       detailData?.coverImage?.data?.attributes?.url
-                        ? detailData.coverImage.data?.attributes.url
+                        ? detailData?.coverImage.data?.attributes?.url
                         : altImage
                     }
                     alt="blog image"
@@ -189,28 +304,32 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                   />
                 </div>
                 {/* <div className="date">
-                            <span className="text-white p-1">Buying Advice</span>
-                        </div> */}
+                        <span className="text-white p-1">Buying Advice</span>
+                    </div> */}
               </div>
-              <h5 className="post-title">{detailData?.title}</h5>
+
+              {/* <div className="author-area"> */}
               <div className="row mb-3">
                 <div className="col-xl-6">
                   <div className="d-flex align-items-center gap-3">
-                    <div className="author-img">
-                      {/* <img src={detailData.coverImage.data.attributes.url} alt="blog image" /> */}
+                    {/* <div className="author-img">
                       <span className="border rounded-circle px-2 py-1">C</span>
-                    </div>
+                    </div> */}
 
                     <div className="author-content">
                       <h6 className="mt-0">
-                        {detailData?.author?.data?.attributes?.name}
+                        {detailData?.author?.data?.attributes?.name} /{" "}
+                        <span className="postedOnStyle">
+                          {isRtl && " - "}
+                          {t.postedOn}
+                          {!isRtl && " - "}
+                        </span>{" "}
+                        <span className="postedOnStyle">
+                          {moment(detailData?.publishedAt).format(
+                            "MMMM Do YYYY"
+                          )}
+                        </span>
                       </h6>
-                      <span className="postedOnStyle">
-                        Posted on -{" "}
-                        {moment(
-                          detailData?.author?.data?.attributes?.createdAt
-                        ).format("MMMM Do YYYY")}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -224,58 +343,40 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
               </div>
 
               <p>{detailData?.summary}</p>
-              <div dangerouslySetInnerHTML={{ __html: dynamicHTML }} />
-              {/* <blockquote> 
-                    <div className="quoat-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={27} height={18} viewBox="0 0 27 18">
-                        <path d="M21.6832 6.05443L21.4534 6.62147L22.0549 6.73371C24.6453 7.21714 26.5 9.46982 26.5 12.0337C26.5 13.573 25.8343 15.0529 24.6667 16.09C23.4982 17.1192 21.9207 17.6286 20.3329 17.4722C17.4907 17.1844 15.2846 14.6588 15.3404 11.7032C15.4201 7.67759 16.8945 5.07458 18.6289 3.38578C20.3761 1.68459 22.4158 0.884497 23.6452 0.531618L23.6591 0.527628L23.6728 0.52284C23.7152 0.507954 23.7704 0.5 23.8713 0.5C24.1425 0.5 24.3799 0.624329 24.5265 0.85037L24.5277 0.852289C24.7128 1.13485 24.6857 1.4981 24.4524 1.75822L24.4523 1.75827C23.2163 3.13698 22.2806 4.57999 21.6832 6.05443Z" />
-                        <path d="M7.84136 6.05442L7.61159 6.62147L8.21303 6.73371C10.8035 7.21714 12.6582 9.46983 12.6582 12.0337C12.6582 13.573 11.9925 15.0529 10.8249 16.09C9.65615 17.1194 8.07865 17.6285 6.50008 17.4722C3.67976 17.1842 1.49865 14.7207 1.49865 11.8126V11.6985C1.57946 7.67556 3.05336 5.07393 4.7871 3.38579C6.53424 1.6846 8.574 0.884504 9.8034 0.531628L9.81731 0.527636L9.83096 0.522848C9.8734 0.507959 9.92859 0.500008 10.0294 0.500008C10.3007 0.500008 10.5381 0.624359 10.6846 0.850338L10.6859 0.852327C10.871 1.13488 10.8439 1.49811 10.6106 1.75823L10.6105 1.75828C9.37446 3.13698 8.43881 4.57999 7.84136 6.05442Z" />
-                        </svg>
-                    </div>
-                    <svg className="vector" xmlns="http://www.w3.org/2000/svg" height={95} viewBox="0 0 15 95">
-                        <path d="M0 26.0484V21.4517L15 36.7742V41.3709L0 26.0484Z" />
-                        <path d="M0 36.774V32.1772L15 47.4998V52.0965L0 36.774Z" />
-                        <path d="M0 4.59676V0L15 15.3225V19.9193L0 4.59676Z" />
-                        <path d="M0 15.3223V10.7256L15 26.0481V30.6449L0 15.3223Z" />
-                        <path d="M0 47.5001V42.9033L15 58.2258V62.8226L0 47.5001Z" />
-                        <path d="M0 58.2247V53.6279L15 68.9504V73.5472L0 58.2247Z" />
-                        <path d="M0 68.9512V64.3545L15 79.677V84.2738L0 68.9512Z" />
-                        <path d="M0 79.6773V75.0806L15 90.4031V94.9998L0 79.6773Z" />
-                    </svg>
-                    <p>We denounce with righteous indignation and dislike men who are so great  demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot . <span>Rakhab Uddin</span></p>
-                    </blockquote> */}
+              {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
+              <div
+                // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
+                className="article-content"
+              >
+                {" "}
+                {renderContent()}
+              </div>
 
               <div className="d-flex justify-content-md-end align-items-center">
                 <SocialButtons fullURL={fullURL} />
               </div>
             </div>
-            <div className="col-lg-4 mt-md-2 mt-0">
+            <div className="col-lg-3 mt-md-2 mt-0">
               <div
                 className="blog-sidebar mb-50"
-                style={{ position: "sticky", top: "-1155px" }}
+                style={{ position: "sticky", top: "-780px" }}
               >
-                <div className="boxShadows rounded mt-3 pt-2">
-                  <TabNavigation
-                    activeTab={activeTab}
-                    onTabChange={handleTabChange}
-                    tab1={"Trending"}
-                    tab2={"Recent"}
-                  />
-                  {/* Your page content based on the selected tab */}
+                <div className="white_bg_wrapper mt-3 px-1 py-3">
+                  <h4 className="px-2">
+                    Latest News <hr className="my-2" />
+                  </h4>
 
-                  {activeTab === "tab1" && (
-                    <div>
-                      {" "}
-                      <BlogRecent
-                        disableMarginTop={true}
-                        disableBorder={true}
-                        blogs={recentNews}
-                        heading={"Related News"}
-                        disableHeading={true}
-                      />
-                    </div>
-                  )}
-                  {activeTab === "tab2" && (
+                  <div>
+                    {" "}
+                    <BlogRecent
+                      disableMarginTop={true}
+                      disableBorder={true}
+                      blogs={recentBlog}
+                      heading={"Related News"}
+                      disableHeading={true}
+                    />
+                  </div>
+                  {/* {activeTab === "tab2" && (
                     <div>
                       {" "}
                       <BlogRecent
@@ -286,27 +387,31 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
                         disableHeading={true}
                       />
                     </div>
-                  )}
+                  )} */}
                 </div>
-
-                <div className="boxShadows rounded mt-3 pt-2">
-                  <BlogRelated
-                    disableMarginTop={true}
-                    disableBorder={true}
-                    blogs={detailData?.article_categories?.data}
-                    heading={"Related Reviews"}
-                  />
-                </div>
-
-                {/* <div className="mt-4"><MoreBrands /></div> */}
-
-                {/* <div className="single-widgets widget_egns_tag hideOnMobile">
-                  <div className="sticky-sidebar">
-                    <div className="ad">
-                      <Ad160x600 />
-                    </div>
+                <div className="white_bg_wrapper mt-3 px-1 py-3">
+                  <h4 className="px-2">
+                    Related News <hr className="my-2" />
+                  </h4>
+                  <div>
+                    <BlogRelated
+                      disableMarginTop={true}
+                      disableBorder={true}
+                      blogs={detailData?.article_categories?.data}
+                      heading={"Related News"}
+                      tab1={"Trending"}
+                      tab2={"Recent"}
+                    />
                   </div>
-                </div> */}
+                </div>
+
+                {/* <MoreBrands /> */}
+                <div className="my-3">
+                  <Ad300x250 dataAdSlot="3792539533" />
+                </div>
+                <div className="my-3">
+                  <Ad300x600 dataAdSlot="3792539533" />
+                </div>
               </div>
               {/* <div className="single-widgets sidebar-banner">
                                 <div className="product-content">
@@ -327,6 +432,7 @@ function BlogDetailsPage({ detailData, recentBlog, fullURL, recentNews }) {
           </div>
         </div>
       </div>
+      {/* <Ad728x90 dataAdSlot="5962627056" /> */}
     </MainLayout>
   );
 }
@@ -342,114 +448,77 @@ export async function getServerSideProps(context) {
   const apolloClient = createApolloClient();
   // Fetch data based on the slug (e.g., from a database)
   // console.log(newsData, "my slug"); // Log the slug value
+  console.log("jh");
 
   try {
     const { data } = await apolloClient.query({
       query: gql`
-          query{
-            articles(filters:{slug:{eq:"${slug}"}}){
-              meta{
-                pagination{
-                  total
-                  page
-                  pageSize
-                  pageCount
-                }
-              }
-              data{
-                attributes{
-                    article_categories{
-                        data{
-                          attributes{
-                            
-                            name
-                            slug
-                            articles{
-                              data{
-                                attributes{
-                                    title
-                                    slug
-                                  coverImage{
-                                    data{
-                                      attributes{
-                                        url
+            query{
+                articles(filters:{slug:{eq:"${slug}"}}){
+                  meta{
+                    pagination{
+                      total
+                      page
+                      pageSize
+                      pageCount
+                    }
+                  }
+                  data{
+                    attributes{
+                        article_categories{
+                            data{
+                              attributes{
+                                name
+                                slug
+                                articles{
+                                  data{
+                                    attributes{
+                                        title
+                                        slug
+                                      coverImage{
+                                        data{
+                                          attributes{
+                                            url
+                                          }
+                                        }
                                       }
                                     }
                                   }
                                 }
                               }
                             }
+                        }
+                      title
+                      slug
+                      metaTitle
+                      content
+                      summary
+                      createdAt
+                      author{
+                        data{
+                          attributes{
+                            name
+                            createdAt
                           }
                         }
-                    }
-                  title
-                  slug
-                  metaTitle
-                  content
-                  summary
-                  createdAt
-                  author{
-                    data{
-                      attributes{
-                        name
-                        createdAt
                       }
-                    }
-                  }
-                  coverImage{
-                    data{
-                      attributes{
-                        url
-                        width
-                        height
+                      coverImage{
+                        data{
+                          attributes{
+                            url
+                            width
+                            height
+                          }
+                        }
                       }
                     }
                   }
                 }
-              }
-            }
-    }
+        }
           `,
     });
-    const recentBlog = await apolloClient.query({
-      query: gql`
-        query {
-          articles(
-            filters: { article_type: { type: { eq: "Review" } } }
-            pagination: { limit: 6 }
-            sort: "createdAt:desc"
-          ) {
-            data {
-              attributes {
-                title
-                slug
-                content
-                createdAt
-                author {
-                  data {
-                    attributes {
-                      name
-                      publishedAt
-                    }
-                  }
-                }
-                coverImage {
-                  data {
-                    attributes {
-                      url
-                      width
-                      height
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-    });
 
-    const recentNewsData = await apolloClient.query({
+    const recentBlog = await apolloClient.query({
       query: gql`
         query {
           articles(
@@ -486,13 +555,51 @@ export async function getServerSideProps(context) {
         }
       `,
     });
+    const recentReviewsData = await apolloClient.query({
+      query: gql`
+        query {
+          articles(
+            filters: { article_type: { type: { eq: "Review" } } }
+            pagination: { limit: 6 }
+            sort: "createdAt:desc"
+          ) {
+            data {
+              attributes {
+                title
+                slug
+                content
+                createdAt
+                author {
+                  data {
+                    attributes {
+                      name
+                      publishedAt
+                    }
+                  }
+                }
+                coverImage {
+                  data {
+                    attributes {
+                      url
+                      width
+                      height
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+    
 
     return {
       props: {
         detailData: data?.articles?.data[0]?.attributes || null,
         recentBlog: recentBlog?.data?.articles?.data,
         fullURL,
-        recentNews: recentNewsData?.data?.articles?.data,
+        recentReviews: recentReviewsData?.data?.articles?.data,
       },
     };
   } catch (error) {

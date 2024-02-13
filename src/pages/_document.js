@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -18,24 +18,24 @@ export default function Document() {
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
           crossorigin="anonymous"
-        ></script> */}
+        ></script>
         <link
           rel="stylesheet"
           as="font"
           href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css"
           crossOrigin="anonymous"
         />
-        <meta name="robots" content="noindex,nofollow"/>
+        <meta name="robots" content="noindex,nofollow" />
       </Head>
       <body>
-        {/* <noscript>
+        <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-W564HNC"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
-        </noscript> */}
+        </noscript>
         <Main />
         <NextScript />
       </body>

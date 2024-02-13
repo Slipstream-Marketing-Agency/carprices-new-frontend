@@ -311,91 +311,14 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     };
   });
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY >= 600) {
-  //       setIsSticky(true);
-  //     } else {
-  //       setIsSticky(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
-  // function TransmissionList(props) {
-  //   const transmissions = Array.from(
-  //     new Set(props?.map((transmission) => transmission?.attributes?.gearBox))
-  //   )
-  //     .filter((transmission) => transmission !== undefined)
-  //     .map((transmission) => {
-  //       let type;
-  //       let speed;
-
-  //       if (transmission?.includes("A")) {
-  //         type = "Automatic";
-  //         speed = `${type}`;
-  //       } else if (transmission?.includes("M")) {
-  //         type = "Manual";
-  //         speed = `${type}`;
-  //       } else {
-  //         type = "CVT";
-  //         speed = `${type}`;
-  //       }
-
-  //       return `${speed}`;
-  //     });
-
-  //   if (transmissions.length === 1) {
-  //     return <>{transmissions[0]}</>;
-  //   } else if (transmissions.length === 2) {
-  //     if (transmissions[0] === transmissions[1]) {
-  //       return <>{transmissions[0]}</>;
-  //     } else {
-  //       return (
-  //         <>
-  //           {transmissions[0]} or {transmissions[1]}
-  //         </>
-  //       );
-  //     }
-  //   } else {
-  //     const last = transmissions.pop();
-  //     const joined = transmissions.join(", ");
-  //     const hasDuplicates = transmissions.includes(last);
-
-  //     if (hasDuplicates) {
-  //       return <p>{joined}</p>;
-  //     } else {
-  //       return (
-  //         <p>
-  //           {joined} or {last}
-  //         </p>
-  //       );
-  //     }
-  //   }
-  // }
-
-  // const fuelType = trimList
-  //   ?.map((item) => item?.attributes?.fuelType)
-  //   .filter((value, index, self) => self.indexOf(value) === index) // add this line to filter duplicates
-  //   .reduce((acc, cur, idx, arr) => {
-  //     if (arr.length === 1) {
-  //       return cur;
-  //     } else if (idx === arr.length - 1) {
-  //       return `${acc} or ${cur}`;
-  //     } else {
-  //       return `${acc && acc + ","} ${cur}`;
-  //     }
-  //   }, "");
-
-  // console.log(fuelType, "ttttttt");
-
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title: `${year} ${brand?.name} ${model?.name} Car Prices, Specification, Variants & Features in UAE - CarPrices.ae`,
+        description: `Explore the ${model?.year} ${brand?.name} ${model?.name} in UAE. Discover its features, specifications, reviews, and compare models. Find your perfect car and make an informed decision. `,
+        type: "Car Review Website",
+      }}
+    >
       <div className="car-details-area mt-15 ">
         <div className="container">
           {/* <div className="row mb-50">
@@ -770,12 +693,29 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    console.error("Server-side Data Fetching Error:", error.message);
-    return {
-      props: {
-        error: true,
-        errorMessage: error.message,
-      },
-    };
+    if (error) {
+      try {
+        let redirectModel = await axios.get(
+          process.env.NEXT_PUBLIC_API_URL_OLD + "model/old-slug/" + modelSlug
+        );
+        return {
+          redirect: {
+            permanent: true,
+            destination: `/brands/${brandname}/${year}/${redirectModel.data.model.slug}`,
+          },
+          props: {},
+        };
+      } catch (error) {
+        if (error.response && error.response.status !== 200) {
+          return {
+            notFound: true, // Treat non-200 responses as 404 errors
+          };
+        }
+      }
+    } else {
+      return {
+        notFound: true, // Treat non-200 responses as 404 errors
+      };
+    }
   }
 }

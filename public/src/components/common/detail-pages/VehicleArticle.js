@@ -1,0 +1,52 @@
+import React from "react";
+import ViewAllButton from "../ViewAllButton";
+import Link from "next/link";
+import FeaturedImage from "../FeaturedImage";
+import moment from "moment";
+
+export default function VehicleArticle({ article, model }) {
+  
+  return (
+    <div id="news" className="my-3">
+      <div className="white_bg_wrapper pb-3 ">
+
+        <h4 className="fw-bold">
+          {model?.brand?.name} {model?.name} In The News
+        </h4>
+
+
+        <div className="row mt-2">
+          {article?.blogs?.map((item, index) => (
+            <div className="col-md-3 col-sm-6 col-6 px-2 mt-2">
+              <div className="white_bg_wrapper news_listing_image h-100">
+                <Link href={`/${item?.type}/${item?.slug}`}>
+                  <FeaturedImage width={100} height={100} src={item.coverImage} />
+                </Link>
+                <Link href={`/news/${item.slug}`}>
+                  <h5 className="fw-bold head_truncate mt-2">
+                    {item?.title}
+                  </h5>
+                </Link>
+                <div className="d-flex align-items-center mt-3">
+                  <div
+                    className="rounded-circle border d-flex justify-content-center align-items-center p-3"
+                    style={{ width: 30, height: 30 }}
+                  >
+                    {/* {`${item?.author?.firstName}`.charAt(0)} */}
+                    C
+                  </div>
+                  <div className="d-flex flex-column ms-2">
+                    {/* <small className="fw-bold">{item?.author?.firstName}</small> */}
+                    <small className="fw-bold">By Carprices Team</small>
+                    <small> {moment(item.publishedAt).format("MMMM Do YYYY")}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <ViewAllButton text={"View All Latest News"} link={"/news"} />
+      </div>
+    </div>
+  );
+}

@@ -106,7 +106,7 @@ function CarListingLeftSidebar({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="w-6 h-6"
+          className="w-3 h-3"
         >
           <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
         </svg>
@@ -171,7 +171,6 @@ function CarListingLeftSidebar({
                           </div>
                         </form>
                       </div> */}
-                      
                     </div>
                   </div>
                 </div>
@@ -200,7 +199,7 @@ export default CarListingLeftSidebar;
 export async function getServerSideProps(context) {
   const { query } = context;
   const page = parseInt(query.page) || 1;
-  const pageSize = 12;
+  const pageSize = 20;
   const brandSlugs = query.brand ? query.brand.split(",") : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
@@ -500,10 +499,21 @@ export async function getServerSideProps(context) {
     bodyTypeListres = bodyTypeList;
   }
 
+  const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
+
+  const articles = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}articles/home`
+  );
+
+  const compare = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}compare-car/home`
+  );
+
   try {
     return {
       props: {
         // brands: brandsData?.data?.carModels?.data,
+
         totalBrands: filteredTrims?.data?.data?.pagination?.total,
         totalPages: filteredTrims?.data?.data?.pagination?.pageCount,
         currentPage: page,

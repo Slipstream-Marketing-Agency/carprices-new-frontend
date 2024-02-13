@@ -262,7 +262,13 @@ function CarDeatilsPage({ model, trimList, trimData }) {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title: `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices, Specification, Variants & Features in UAE - CarPrices.ae`,
+        description: `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} in UAE. Discover its features, specifications, reviews, and compare models. Find your perfect car and make an informed decision. `,
+        type: "Car Review Website",
+      }}
+    >
       <div className="car-details-area mt-15 mb-15">
         <div className="container">
           {/* <div className="row mb-50">
@@ -713,12 +719,32 @@ export async function getServerSideProps(context) {
       props: { trimData: trim?.data?.data },
     };
   } catch (error) {
-    console.error("Server-side Data Fetching Error:", error.message);
-    return {
-      props: {
-        error: true,
-        errorMessage: error.message,
-      },
-    };
+    if (error.response.status === 404) {
+      try {
+        let redirectTrim = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL_OLD + "trim/redirect",
+          {
+            oldPath: `${brandname}/${year}/${modelSlug}/${trimSlug}/`,
+          }
+        );
+        return {
+          redirect: {
+            permanent: true,
+            destination: `/brands/${redirectTrim.data.trim.brand.slug}/${redirectTrim.data.trim.year}/${redirectTrim.data.trim.model.slug}/${redirectTrim.data.trim.slug}`,
+          },
+          props: {},
+        };
+      } catch (error) {
+        if (error.response && error.response.status !== 200) {
+          return {
+            notFound: true, // Treat non-200 responses as 404 errors
+          };
+        }
+      }
+    } else {
+      return {
+        notFound: true, // Treat non-200 responses as 404 errors
+      };
+    }
   }
 }

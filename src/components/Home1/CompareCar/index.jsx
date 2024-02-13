@@ -72,7 +72,7 @@ function index({ heading, carDetails, compare }) {
           </div>
         </div>
 
-        <div className="row mb-40 wow fadeInUp" data-wow-delay="300ms">
+        <div className="row  wow fadeInUp" data-wow-delay="300ms">
           <div className="col-lg-12 col-md-12 col-md-12 col-12">
             <Swiper {...slideSettings} className="swiper compare-car-slider">
               <div className="swiper-wrapper">
@@ -136,7 +136,7 @@ function index({ heading, carDetails, compare }) {
             </Swiper>
           </div>
         </div>
-        <div className="row ">
+        {/* <div className="row ">
           <div className="col-lg-12 divider">
             <div className="slider-btn-group style-2 justify-content-md-between justify-content-center">
               <div className="slider-btn prev-3 d-md-flex d-none pb-1">
@@ -145,7 +145,6 @@ function index({ heading, carDetails, compare }) {
                 </svg>
               </div>
               <div className="view-btn-area">
-                {/* <p>There will be 100+ Upcoming Car</p> */}
                 <Link legacyBehavior href="/compare-cars">
                   <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
                     {t.comparebutton}
@@ -159,7 +158,7 @@ function index({ heading, carDetails, compare }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

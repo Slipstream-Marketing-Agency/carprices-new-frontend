@@ -62,11 +62,7 @@ export default function Home({
   popularcars,
   featuredcars,
   electriccars,
-
-  // popularBrands,
   compare,
-  news,
-  reviews,
   articles,
   error,
   errorMessage,

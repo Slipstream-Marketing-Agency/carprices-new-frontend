@@ -15,16 +15,19 @@ import altImage from "../../../public/assets/images/blog-alt-image.png";
 import BlogDropDown from "@/src/components/BlogDropDown";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import Ad970x250 from "@/src/components/ads/Ad970x250";
+import axios from "axios";
+import moment from "moment";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function BlogStandardPage({
-  news,
-  totalNews,
+  articles,
   currentPage,
   totalPages,
-  fullData,
+  articlesThisWeek,
+  articleTags,
 }) {
+  console.log(articlesThisWeek, "articlesThisWeek");
   const inputRef = useRef(null);
   const client = createApolloClient();
   const router = useRouter();
@@ -71,81 +74,149 @@ function BlogStandardPage({
 
         <div className="row g-4 mt-3">
           <div className="col-lg-9">
-            <div className="row g-4 ">
-              {news?.map((newsItem, index) => (
-                <>
-                  <div
-                    key={`news-${index}`}
-                    className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="200ms"
-                  >
-                    <div className="news-card">
-                      <div className="news-img">
-                        <Link
-                          legacyBehavior
-                          href={`/news/${newsItem?.attributes?.slug}`}
-                        >
-                          <a>
-                            <div className="position-relative imageContainer">
-                              <Image
-                                src={
-                                  newsItem?.attributes?.coverImage?.data
-                                    ?.attributes?.url
-                                    ? newsItem.attributes.coverImage.data
-                                        ?.attributes.url
-                                    : altImage
-                                }
-                                alt="Car"
-                                layout="responsive"
-                                width={300}
-                                height={205}
-                                objectFit="cover"
-                              />
-                            </div>
-                          </a>
-                        </Link>
-                        <div className="date">
-                          <Link
-                            legacyBehavior
-                            href={`/news/${newsItem?.attributes?.slug}`}
-                          >
-                            <a></a>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className="content ">
-                        <h5 className="mt-3 BlogCardHeadingTxt">
-                          <Link
-                            legacyBehavior
-                            href={`/news/${newsItem?.attributes?.slug}`}
-                          >
-                            <a>{newsItem.attributes.title}</a>
-                          </Link>
-                        </h5>
-                        <div className="author-area">
-                          <div className="author-content d-flex justify-content-end align-items-center">
-                            {/* <h6 className="authorName">{newsItem.attributes.author.data.attributes.name}</h6> */}
-                            {/* <Link  legacyBehavior href={`/news/${newsItem?.attributes?.slug}`}><a className="postedDate">Posted on: {newsItem.attributes.createdAt.slice(0, 10)}</a></Link> */}
+            {/* Display the first article separately */}
+            {articles && articles.length > 0 && (
+              <div className="featured-article pb-4">
+                <div className="news-card">
+                  <div className="news-img mainarticle">
+                    <Link legacyBehavior href={`/news/${articles[0].slug}`}>
+                      <a>
+                        <div className="position-relative imageContainer ">
+                          <Image
+                            src={
+                              articles[0].coverImage
+                                ? articles[0].coverImage
+                                : altImage
+                            }
+                            alt="Featured Article Image"
+                            layout="responsive"
+                            width={600} // Adjusted for a larger display
+                            height={400}
+                            objectFit="cover"
+                          />
+                          <div className="content">
+                            <h2 className="featured-article-title ">
+                              {articles[0].title}
+                            </h2>
+                            {/* You can add more details like date, author, etc., here */}
                           </div>
                         </div>
-                        {/* <div className="text-center mt-2 ">
-                          <button className="readMoreBtn" onClick={() => { router.push(`/news/${newsItem?.attributes?.slug}`) }}>Read More</button>
-                        </div> */}
+                      </a>
+                    </Link>
+                    {/* Additional content for the featured article */}
+                  </div>
+                </div>
+                <Ad728x90 dataAdSlot="5962627056" />
+              </div>
+            )}
+
+            {/* Grid layout for the rest of the articles */}
+            <div className="row g-4">
+              {articles?.slice(1).map((newsItem, index) => {
+                // Adjust index to account for the first item displayed separately
+                const adjustedIndex = index + 1;
+
+                return (
+                  <React.Fragment key={`news-${adjustedIndex}`}>
+                    <div
+                      className="col-xl-4 col-lg-6 col-md-6 col-6 wow fadeInUp mt-0 mb-2"
+                      data-wow-delay="200ms"
+                    >
+                      <div className="news-card">
+                        <div className="news-img list-article">
+                          <Link legacyBehavior href={`/news/${newsItem.slug}`}>
+                            <a>
+                              <div className="position-relative imageContainer">
+                                <Image
+                                  src={
+                                    newsItem.coverImage
+                                      ? newsItem.coverImage
+                                      : altImage
+                                  }
+                                  alt="Article Image"
+                                  layout="responsive"
+                                  width={300}
+                                  height={205}
+                                  objectFit="cover"
+                                />
+                              </div>
+                            </a>
+                          </Link>
+                        </div>
+                        <div className="content">
+                          <h5 className="mt-3 BlogCardHeadingTxt head_truncate">
+                            {newsItem.title}
+                          </h5>
+                          {/* Similar details for rest of the articles */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {(index + 1) % 6 === 0 && index !== news.length - 1 && (
-                    <div className="col-lg-12 ad-container" key={`ad-${index}`}>
-                      {/* Add your advertisement component or content here */}
-                      {/* For example: */}
-                      <Ad728x90 dataAdSlot="5962627056" />
-                    </div>
-                  )}
-                </>
-              ))}
+                    {/* Display advertisement after the sixth article in the grid (seventh overall) */}
+                    {adjustedIndex % 6 === 0 && (
+                      <div
+                        className="col-lg-12  mt-0"
+                        key={`ad-${adjustedIndex}`}
+                      >
+                        <Ad728x90 dataAdSlot="5962627056" />
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </div>
           </div>
-          <div className="col-lg-3 hideOnMobile">
+          <div className="col-lg-3 hideOnMobile ">
+            {articlesThisWeek.length > 0 && (
+              <div className="">
+                <div className="ad-container">
+                  <Ad300x600 dataAdSlot="8451638145" />
+                </div>
+              </div>
+            )}
+            {articleTags.length > 0 && (
+              <div className="white_bg_wrapper my-3">
+                <h4>TAGS</h4>
+                <div className="cursorPointer">
+                  {articleTags?.map((tag) => (
+                    <Link
+                      className="cursorPointer fs-6 py-1 d-flex "
+                      legacyBehavior
+                      href={`/news/tag/${tag?.slug}`}
+                      key={tag?.id}
+                    >
+                      <p className="badge badge-pill badge-secondary text-primary bg-light ms-1 my-2">{`${tag?.title}`}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            <Ad300x250 dataAdSlot="8451638145" />
+
+            {articlesThisWeek.length > 0 && (
+              <div className="white_bg_wrapper my-3">
+                <h4>FROM LAST TWO WEEK</h4>
+                <div className="cursorPointer">
+                  {articlesThisWeek?.map((blog) => (
+                    <Link
+                      className="cursorPointer"
+                      legacyBehavior
+                      href={`/news/${blog?.slug}`}
+                      key={blog?.id}
+                    >
+                      <div className="fs-6 py-1">
+                        <div className="">
+                          <h5 className="text-bold blogFont fw-bold mb-0">{`${blog?.title}`}</h5>
+                          <span className="postedOnStyle">
+                            {moment(blog?.publishedAt).format("MMMM Do YYYY")}
+                          </span>
+                        </div>
+                        <hr className="my-2" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="sticky-sidebar">
               <div className="ad-container">
                 <Ad300x600 dataAdSlot="8451638145" />
@@ -164,65 +235,34 @@ function BlogStandardPage({
   );
 }
 
-export async function getServerSideProps(context) {
-  const apolloClient = createApolloClient();
+export async function getServerSideProps(context, query) {
+  console.log(context.query, "sssssssssssssssss");
 
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
-  const pageSize = 24; // Set the number of items per page
+  const pageSize = 25; // Set the number of items per page
 
   try {
-    const { data } = await apolloClient.query({
-      query: gql`
-        query{
-          articles(filters:{article_type:{type:{eq:"News"}}},pagination:{page:${page},pageSize: ${pageSize}},sort:"createdAt:desc"){
-            meta{
-              pagination{
-                total
-                page
-                pageSize
-                pageCount
-              }
-            }
-            data{
-              attributes{
-                title
-                slug
-                createdAt
-                metaTitle
-                content
-                summary
-                author{
-                  data{
-                    attributes{
-                      name
-                      createdAt
-                    }
-                  }
-                }
-                coverImage{
-                  data{
-                    attributes{
-                      url
-                      width
-                      height
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        `,
-      variables: { page, pageSize },
-    });
+    const articles = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/list?slug=news&page=${page}&pageSize=${pageSize}`
+    );
 
-    return {
+    const articlesThisWeek = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/listlasttwoweeks?slug=news`
+    );
+
+    const articleTags = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articletags/list`
+    );
+
+    //localhost:1337/api
+
+    http: return {
       props: {
-        news: data.articles.data || {},
-        fullData: data,
-        totalNews: data.articles.meta.pagination.total,
-        totalPages: data.articles.meta.pagination.pageCount,
+        articles: articles.data.data,
+        articlesThisWeek: articlesThisWeek.data.data,
+        totalPages: articles.data.pagination.pageCount,
         currentPage: page,
+        articleTags: articleTags.data,
       },
     };
   } catch (error) {

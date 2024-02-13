@@ -41,7 +41,7 @@ export default function BlogRecent({
                         className="h-100 img-no-max-width"
                       />
                     </div>
-                    <small className="text-bold blogFont">{`${
+                    <small className="text-bold blogFont  me-4">{`${
                       blog?.attributes?.title?.length > 20
                         ? `${blog?.attributes?.title?.slice(0, 50)}... `
                         : `${blog?.attributes?.title}`

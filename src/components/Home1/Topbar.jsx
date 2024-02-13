@@ -295,7 +295,7 @@ function Topbar() {
           </li>
         </ul>
         <ul className="d-flex justify-content-center align-items-center">
-          {locales.map((locale, idx) => {
+          {/* {locales.map((locale, idx) => {
             // Only show Arabic if the current locale is English, and vice versa
             if (
               (currentLocale === "en" && locale === "ar") ||
@@ -320,12 +320,11 @@ function Topbar() {
                       {locale === "en" ? "English" : "عربي"}
                     </button>
                   </Link>
-                  {/* <LanguageSwitcher /> */}
                 </div>
               );
             }
             return null; // Do not render anything for other cases
-          })}
+          })} */}
         </ul>
       </div>
     </div>
