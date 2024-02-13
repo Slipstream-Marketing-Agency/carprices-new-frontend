@@ -36,7 +36,7 @@ function CompareCarCard({ carData }) {
   };
 
   return (
-    <div className="col-md-3 col-6">
+    <div className={`col-md-3 col-6 `}>
       <div className="product-card style-2 compare">
         <div className="close-btn" onClick={handleRemoveCar}>
           <i className="bi bi-x" />

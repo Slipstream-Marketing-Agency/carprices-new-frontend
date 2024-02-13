@@ -2272,3 +2272,9 @@ input[type="color"]:focus,
 }
 
 /* Loading animation ends */
+
+/* Footer begins  */
+.footerContainer{
+  padding-bottom:120px;
+}
+/* Footer ends  */

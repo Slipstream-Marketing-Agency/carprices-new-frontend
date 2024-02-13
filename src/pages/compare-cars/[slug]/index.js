@@ -132,9 +132,9 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 600) {
+      if (window.scrollY >= 600 && window.scrollY <= 3400) {
         setIsSticky(true);
-      } else {
+      } else  {
         setIsSticky(false);
       }
     };
@@ -166,8 +166,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
 
       <div className="compare-page pt-30 mb-100" >
         <div className="container">
-          <div  className={`row g-4 mb-50` } style={{position:  "sticky",
-    top:isMobile ? "-160px" : "-190px",background:"white"}} >
+          <div  className={`row g-4 mb-50` } style={{position: isSticky && "fixed",
+    top:isMobile ? "-130px" : "-167px",background:"white",width:isMobile ? '100%' : '82%'}} >
           <div  className={`row g-4 mb-50` }  >
             <div className="col-lg-12">
               <div className="uploded-product-group">
@@ -259,7 +259,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
                 tabIndex={0}
               >
                {(car1Data && car2Data ) && <CarComparisonTable tableData={tableData} />}
-                <Ad728x90 dataAdSlot="5962627056" />
+
               </div>
             </div>
           </div>
