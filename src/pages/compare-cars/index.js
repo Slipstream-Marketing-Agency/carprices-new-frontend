@@ -15,7 +15,21 @@ import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
 function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const router = useRouter();
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
@@ -25,7 +39,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
 
   // Determine the number of cars already selected
   const numberOfSelectedCars = carDataArray.filter((car) => car).length;
-  const numberOfSlotsToFill = 4 - numberOfSelectedCars;
+  const numberOfSlotsToFill = isMobile ? 2 : 4 - numberOfSelectedCars;
 
   const compateCareSettingsSlide = useMemo(() => {
     return {
@@ -144,6 +158,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
 
       <div className="compare-page pt-30 mb-100">
         <div className="container">
+          <h2>Compare Cars</h2>
+          <p>Simplifying Your Decision-Making Process. Compare Your Ideal Cars with Our Comprehensive Tool – Price, Features, Specifications, Fuel Efficiency, Performance, Dimensions, Safety, and More for an Informed Purchase!</p>
           <div className="row g-4 mb-50">
             <div className="col-lg-12">
               <div className="uploded-product-group">
@@ -153,7 +169,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
                       car && <CompareCarCard key={index} carData={car} />
                   )}
                   {Array.from({ length: numberOfSlotsToFill }, (_, index) => (
-                    <div key={index} className="col-md-3">
+                    <div key={index} className={` col-md-3 col-6`}>
                       <div className="product-card style-2 compare">
                         <div className="product-upload-area">
                           <div className="comparea-content">
