@@ -109,7 +109,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
               </div>
               <div className="product-content">
                 <div className="product-content-height">
-                  <h5>
+                  <h5 className="mobileFontCarName ">
                     <Link
                       legacyBehavior
                       href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}

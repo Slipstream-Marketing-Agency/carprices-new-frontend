@@ -33,7 +33,7 @@ export default function VariantsListing({ trim }) {
           </p> */}
         </div>
         <div className="table-responsive table-bordered mt-3">
-          <table className="table align-middle">
+          <table className="table align-middle ">
             <thead>
               <tr>
                 <th scope="col">Variants</th>

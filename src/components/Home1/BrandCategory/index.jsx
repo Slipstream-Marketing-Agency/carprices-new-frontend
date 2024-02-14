@@ -27,7 +27,7 @@ function index({ brandDetails }) {
               <div className="col wow fadeInUp" data-wow-delay="200ms">
                 <Link legacyBehavior href={`/brands/${item?.slug}`} key={idx}>
                   <a className="single-category1">
-                    <div className="brand-icon w-25">
+                    <div className="brand-icon ">
                       <img
                         src={item?.logo}
                         alt="brand-icons"

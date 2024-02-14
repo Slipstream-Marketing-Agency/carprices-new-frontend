@@ -353,7 +353,7 @@ function BlogDetailsPage({
               </div>
 
               <div className="d-flex justify-content-md-end align-items-center">
-                <SocialButtons fullURL={fullURL} />
+                <SocialButtons fullURL={currentURL} />
               </div>
             </div>
             <div className="col-lg-3 mt-md-2 mt-0">

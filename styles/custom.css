@@ -242,12 +242,20 @@ button:focus {
 
 .overflow-list {
   height: 170px;
-  width: 115%;
+  /* width: 115%; */
   padding-right: 10px !important;
   overflow: hidden;
   overflow-y: scroll;
 }
-
+.disableOverflow-list{
+  width: unset !important;
+}
+@media(max-width:650px) {
+  
+  .setTableWidth{
+    width:660px !important;
+  }
+}
 ::-webkit-scrollbar-track {
   background-color: #f5f5f5;
   border-radius: 10px;
@@ -419,6 +427,10 @@ small {
 .blogImage {
   width: 100%;
   height: 330px;
+}
+.blogsImage img{
+  height: 190px !important;
+  object-fit: fill !important;
 }
 .recentBlogImage {
   width: 100%;
@@ -694,6 +706,12 @@ small {
   align-items: center;
   gap: 2px;
 }
+@media(max-width:650px){
+  .shareBtn {
+    font-size: 13px;
+    width: 70px;
+  }
+}
 .shareBtn svg {
   color: var(--light);
 }
@@ -815,7 +833,11 @@ small {
   align-items: center;
   margin-top: 200px;
 }
-
+@media(max-width:680px){
+  .totalAmountContainer{
+    margin-top: 100px !important;
+  }
+}
 .budgetBtn {
   width: 100%;
   height: 50px;
@@ -929,6 +951,9 @@ small {
   .rightSection {
     width: 100%;
   }
+  .carImage{
+    position: unset;
+  }
 }
 /* new loan calculator ends  */
 
@@ -1035,8 +1060,11 @@ small {
 
 .category-box-button {
   width: 80px !important;
-  height: 70px !important;
+  height: 85px !important;
 }
+.category-box-button:hover{
+  box-shadow: 0 0 10px var(--bs-gray-400) !important;
+} 
 /* cookies components style ends */
 /* search inputfield begins */
 
@@ -1596,6 +1624,11 @@ input[type="color"]:focus,
   z-index: 1;
   transition: all ease 0.35s;
 }
+.body-category-area .single-category1:hover{
+  box-shadow: 1px 1px 6px #c2c2c2, 1px 2px 2px #d5d5d5 !important;
+ 
+}
+
 .body-category-area .single-category1 .brand-icon {
   margin-bottom: 5px;
 }
@@ -2292,3 +2325,29 @@ input[type="color"]:focus,
   padding-bottom: 120px;
 }
 /* Footer ends  */
+/* car details page begins */
+@media(max-width:650px){
+  .nameNShareContainer{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .shareBtnMobile{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    top:40px;
+    right:10px;
+
+  }
+  .monthlyEMIContainer,.availableVariantsContainer{
+    margin-top: 20px;
+    width: 100% !important;
+  }
+  
+ .calculatorContentInner{
+  display: flex;
+  flex-direction: column;
+ }
+}
+/* car details page ends   */

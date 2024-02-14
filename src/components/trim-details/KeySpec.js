@@ -14,7 +14,7 @@ export default function KeySpec({ trim }) {
           Key Specs of the {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
         </h2>
         <div className="row py-2 text-center">
-          <div className="col-md-2 col-3 ">
+          <div className="col-sm-4 col-lg-2 col-6 ">
             <div className="d-flex flex-column align-items-center">
               <div className="spec-img">
                 <Image
@@ -37,12 +37,12 @@ export default function KeySpec({ trim }) {
             </div>
           </div>
           {trim?.power !== null ? (
-            <div className="col-md-2 col-3">
+            <div className="col-sm-4  col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
                 <div className="spec-img">
                   <Image
-                    width={50}
-                    height={50}
+                    width={60}
+                    height={60}
                     src="/assets/images/specs/KM.svg"
                     alt=""
                   />
@@ -53,12 +53,12 @@ export default function KeySpec({ trim }) {
             </div>
           ) : null}
           {trim?.torque !== null ? (
-            <div className="col-md-2 col-3">
+            <div className="col-sm-4 col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img p-2">
+                <div className="spec-img mb-2">
                   <Image
-                    width={50}
-                    height={50}
+                    width={30}
+                    height={30}
                     src="/assets/images/specs/Torque.png"
                     alt=""
                   />
@@ -72,12 +72,12 @@ export default function KeySpec({ trim }) {
           ) : null}
 
           {trim?.fuelConsumption !== null || trim?.range !== null ? (
-            <div className="col-md-2 col-3">
+            <div className="col-sm-4 col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
                 <div className="spec-img p-2">
                   <Image
-                    width={50}
-                    height={50}
+                    width={35}
+                    height={35}
                     src="/assets/images/specs/FuelType.png"
                     alt=""
                   />
@@ -95,12 +95,12 @@ export default function KeySpec({ trim }) {
               </div>
             </div>
           ) : null}
-          <div className="col-md-2 col-3">
+          <div className="col-sm-4 col-lg-2  col-6 ">
             <div className="d-flex flex-column align-items-center">
               <div className="spec-img p-2">
                 <Image
-                  width={50}
-                  height={50}
+                  width={35}
+                  height={35}
                   src="/assets/images/specs/Transmission.png"
                   alt=""
                 />
@@ -110,7 +110,7 @@ export default function KeySpec({ trim }) {
             </div>
           </div>
           {trim?.seatingCapacity !== null ? (
-            <div className="col-md-2 col-3">
+            <div className="col-sm-4 col-lg-2 col-6 ">
               <div className="d-flex flex-column align-items-center">
                 <div className="spec-img p-2">
                   <Image

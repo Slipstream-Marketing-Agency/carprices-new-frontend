@@ -404,17 +404,17 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                <div className="d-flex justify-content-between align-items-center position-relative">
-                <h1>
+                <div className="nameNShareContainer d-flex justify-content-between align-items-center position-relative">
+                <h1 className="carNameTxt">
                   {mainTrim?.year} {brand?.name} {model?.name}
                 </h1>{" "}
-                <NewShareBtns />
+               <div className="shareBtnMobile"> <NewShareBtns /></div>
               </div>
                   <h4 className="mt-1">
                     <CarPriceRange />
                   </h4>
 
-                  <div className="d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
+                  <div className="monthlyEMIContainer d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -434,7 +434,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                       Monthly EMI starting from <CarEMIDisplay />
                     </h6>
                   </div>
-                  <div className="mt-3 d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
+                  <div className="availableVariantsContainer mt-3 d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -455,7 +455,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   <div className="mt-2 key_spec">
                     <p className="fw-bold">{t.keySpecification}</p>
                     <div className="row px-2">
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image p-2"
@@ -479,7 +479,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                         </div>
                       </div>
 
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image p-2"
@@ -495,7 +495,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                         </div>
                       </div>
 
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image"
@@ -513,7 +513,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                         </div>
                       </div>
 
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image p-2"
@@ -530,7 +530,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                           </div>
                         </div>
                       </div>
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image p-2"
@@ -544,7 +544,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                         </div>
                       </div>
 
-                      <div className="col-4 mt-1 ps-0">
+                      <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">
                           <img
                             className="spec_image p-2"

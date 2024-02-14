@@ -490,7 +490,7 @@ export default function LoanCalculator() {
                       <Slider
                         range
                         min={1.9}
-                        max={8}
+                        max={8} 
                         // marks={marks}
                         step={0.1}
                         defaultValue={interestRate}

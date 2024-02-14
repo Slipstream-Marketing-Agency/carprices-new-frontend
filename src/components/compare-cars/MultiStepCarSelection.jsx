@@ -398,7 +398,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                 onChange={handleSearchChange}
               />
             </div>
-            <div className="sticky-tab mx-md-5 mx-3 ">
+            <div className="sticky-tab mx-md-5 mx-2 ">
               <ul className="nav nav-tabs modalNavTab">
                 <li className="nav-item compareModelNav">
                   <a

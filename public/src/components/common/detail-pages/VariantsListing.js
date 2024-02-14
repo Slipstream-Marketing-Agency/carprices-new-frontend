@@ -27,7 +27,7 @@ export default function VariantsListing({ model }) {
         <div className="car_description mt-3">
         </div>
         <div className="table-responsive table-bordered mt-3">
-          <table className="table align-middle">
+          <table className="table align-middle ">
             <thead>
               <tr>
                 <th scope="col" />

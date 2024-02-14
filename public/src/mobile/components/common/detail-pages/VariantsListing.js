@@ -38,7 +38,7 @@ export default function MobileVariantsListing({ model }) {
         <div class="container">
         {availableTrim?.map((item, index) => (
   <div class="row">
-      <table class="table align-middle">
+      <table class="table align-middle ">
         <tbody>
             <tr>
               <th className="col-3">Variant</th>
