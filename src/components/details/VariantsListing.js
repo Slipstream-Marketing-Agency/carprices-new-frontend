@@ -51,7 +51,7 @@ export default function VariantsListing({
         </h4>
         <div className="car_description mt-3"></div>
         <div className="table-responsive table-bordered mt-3">
-          <table className="table align-middle">
+          <table className="table align-middle setTableWidth">
             <thead>
               <tr>
                 <th scope="col" />

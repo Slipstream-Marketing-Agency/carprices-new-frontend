@@ -452,7 +452,7 @@ function loanCalculator() {
       {selectedTrim && (
         <div className="d-flex justify-content-center">
           <div className="calculatorContent ">
-            <div className="d-flex justify-content-center">
+            <div className="calculatorContentInner d-flex justify-content-center">
               <div className="leftSection">
                 <div>
                   <div className="monthlyIncomeContainer">

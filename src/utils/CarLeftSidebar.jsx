@@ -629,7 +629,7 @@ function CarLeftSidebar({
                         checked={selectedPrice.includes(option.value)}
                         onChange={() => handlePriceChange(option.value)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option.priceLabel}</span>
                     </label>
                   </li>
@@ -666,7 +666,7 @@ function CarLeftSidebar({
                     onChange={handleSearchChange}
                   />
                 </div>
-                <ul className="overflow-list pt-2 pb-4">
+                <ul className="overflow-list pt-2 pb-4 disableOverflow-list">
                   {filteredAndSortedBrandOptions.map((item, idx) => (
                     <li key={idx}>
                       <label className="containerss">
@@ -675,7 +675,7 @@ function CarLeftSidebar({
                           checked={selectedBrands.includes(item.value)}
                           onChange={() => handleBrandChange(item.value)}
                         />
-                        <span className="checkmark" />
+                        <span className="checkmark checkmarkRight2" />
                         <span className="text">{item.label}</span>
                       </label>
                     </li>
@@ -701,7 +701,7 @@ function CarLeftSidebar({
                     <div className="col-xl-4 col-4">
                       <button
                         key={idx}
-                        className={`category-box-button d-flex flex-column  align-items-center p-2 shadow-sm rounded ${
+                        className={`category-box-button setCategoryButtonHeight d-flex flex-column  align-items-center p-2 shadow-sm rounded ${
                           selectedBody.includes(item.value)
                             ? "text-secondary fw-bold bg-white border border-2"
                             : "bg-white border border-2 border-white"
@@ -751,7 +751,7 @@ function CarLeftSidebar({
                         checked={selectedPower.includes(option.value)}
                         onChange={() => handlePowerChange(option.value)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option.powerLabel}</span>
                     </label>
                   </li>
@@ -792,7 +792,7 @@ function CarLeftSidebar({
                         checked={selectedDisplacement.includes(option.value)}
                         onChange={() => handleDisplacementChange(option.value)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option.displacementLabel}</span>
                     </label>
                   </li>
@@ -831,7 +831,7 @@ function CarLeftSidebar({
                         checked={selectedFuelType.includes(option)}
                         onChange={() => handleFuelTypeChange(option)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option}</span>
                     </label>
                   </li>
@@ -870,7 +870,7 @@ function CarLeftSidebar({
                         checked={selectedCylinders.includes(option)}
                         onChange={() => handleCylindersChange(option)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option} Cylinder</span>
                     </label>
                   </li>
@@ -909,7 +909,7 @@ function CarLeftSidebar({
                         checked={selectedTransmission.includes(option)}
                         onChange={() => handletranmissionChange(option)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option}</span>
                     </label>
                   </li>
@@ -946,7 +946,7 @@ function CarLeftSidebar({
                         checked={selectedDrive.includes(option)}
                         onChange={() => handleDriveChange(option)}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark checkmarkRight0" />
                       <span className="text">{option}</span>
                     </label>
                   </li>

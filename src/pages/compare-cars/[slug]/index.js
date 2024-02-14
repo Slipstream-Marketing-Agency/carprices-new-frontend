@@ -167,7 +167,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
       <div className="compare-page pt-30 mb-100" >
         <div className="container">
           <div  className={`row g-4 mb-50` } style={{position: isSticky && "fixed",
-    top:isMobile ? "-130px" : "-167px",background:"white",width:isMobile ? '100%' : '82%'}} >
+    top:isMobile ? "-130px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : !isMobile && isSticky && '82%'}} >
           <div  className={`row g-4 mb-50` }  >
             <div className="col-lg-12">
               <div className="uploded-product-group">

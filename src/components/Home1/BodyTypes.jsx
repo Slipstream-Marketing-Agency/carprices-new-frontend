@@ -28,7 +28,7 @@ function BodyTypes({ bodyTypeList }) {
               <div className="col wow fadeInUp" data-wow-delay="200ms">
                 <Link legacyBehavior href={`/category/${item?.slug}`} key={idx}>
                   <a className="single-category1">
-                    <div className="brand-icon w-25">
+                    <div className="brand-icon">
                       <img src={item?.image} alt="bodytype-icons" />
                     </div>
                     <h6 className="text-dark">{item?.name}</h6>

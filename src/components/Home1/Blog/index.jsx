@@ -37,7 +37,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                   >
                     <a>
                       {/* <img src={news.attributes.coverImage.data?.attributes.url} alt="" /> */}
-                      <div className="position-relative imageContainer">
+                      <div className="position-relative imageContainer blogsImage">
                         <Image
                           src={news?.coverImage ? news?.coverImage : altImage}
                           alt="Car"

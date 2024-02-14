@@ -13586,6 +13586,20 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 .brand-category-area {
   position: relative;
 }
+.brand-icon img{
+  max-width: 45px !important;
+  
+}
+@media(max-width:650px){
+
+  .brand img{
+    width:30px;
+  }
+  .brand-icon img{
+    width:40px;
+  }
+}
+
 .brand-category-area .single-category1 {
   display: flex;
   align-items: center;
@@ -14028,6 +14042,11 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   align-items: center;
   justify-content: space-between;
   padding-top: 5px;
+}
+@media (max-width:650px){
+  .product-card .product-content .content-btm {
+    padding-top: 0px;
+  }
 }
 .product-card .product-content .content-btm .view-btn2 {
   font-family: var(--font-gilroy);
@@ -15996,7 +16015,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   font-family: var(--font-gilroy);
   font-weight: 600;
   font-size: 18px;
-  line-height: 30px;
+  line-height: 24px;
   color: var(--title-color);
   transition: 0.35s;
 }
@@ -16236,12 +16255,28 @@ footer .footer-widget .widget-title {
   margin-bottom: 23px;
 }
 footer .footer-widget .widget-title h5 {
+  position:relative;
   margin-bottom: 0;
+
   color: var(--white-color);
-  font-size: 20px;
+  font-size: 20px !important;
   font-family: var(--font-gilroy);
   font-weight: 600;
 }
+
+footer .footer-widget .widget-title h5::after {
+  position:absolute;
+  content:"";
+  left:0;
+  bottom:-10px;
+  width:61px;
+  height:3px;
+  border-radius: 10px;
+  background:white;
+  background-size: 100% 100%;
+}
+
+
 footer .footer-widget .menu-container ul {
   margin: 0;
   padding: 0;
@@ -16263,8 +16298,11 @@ footer .footer-widget .menu-container ul li a {
   align-items: center;
   gap: 7px;
 }
+footer .footer-widget .menu-container ul li a:hover {
+  color: var(--primary) !important;
+}
 footer .footer-widget .menu-container ul li a svg {
-  fill: #b3b3b3;
+  fill: var(--light);
   transition: 0.35s;
   opacity: 0;
 }
@@ -23951,6 +23989,9 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .faq-wrap .accordion .accordion-item .accordion-header .accordion-button {
     padding: 15px 45px 15px 15px;
   }
+.accordion-button{
+    font-size:14px !important;
+  }
 }
 .faq-wrap
   .accordion
@@ -25457,6 +25498,14 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #a3a3a3;
   border-radius: 2px;
+}
+
+.checkmarkRight0{
+  right: 10px !important;
+}
+.checkmarkRight2{
+  right: -2px !important;
+
 }
 .product-sidebar
   .product-widget
@@ -29734,6 +29783,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 
 /* slider ends */
 
+
+
 /* mobile view begins */
 @media (max-width: 767px) {
   .contact-page p {
@@ -29772,17 +29823,24 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     font-size: 12px;
   }
   .product-card .product-content .features li {
-    font-size: 8px;
+    font-size: 7px;
+    padding-right:0px !important;
   }
+  
   .product-card .product-content .content-btm .view-btn2 {
-    font-size: 10px;
+    font-size: 8px;
+    font-weight:bold;
   }
   .product-content-height .MobilepriceTextSize {
-    font-size: 11px;
+    font-size: 8px !important;
   }
 
   .product-content-height {
-    min-height: 54px;
+    min-height: 50px;
+    
+  }
+  .mobileFontCarName{
+    min-height:24px;
   }
   .compare-car-section
     .single-compare-card
@@ -29856,6 +29914,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   footer .footer-widget .widget-title h5 {
     font-size: 12px;
   }
+
   .footerVehiclesHeading {
     font-size: 12px;
   }
