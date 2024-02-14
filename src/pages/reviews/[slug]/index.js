@@ -35,7 +35,6 @@ import {
   TelegramIcon,
 } from "next-share";
 import moment from "moment/moment";
-import Error from "../../error";
 import BlogRecent from "@/src/components/BlogRecent";
 import BlogRelated from "@/src/components/BlogRelated";
 import TabNavigation from "@/src/components/TabNavigation";
@@ -152,7 +151,7 @@ function BlogDetailsPage({
   // }, [dynamicHTML, isModified]);
 
   // const [metaDescription, setMetaDescription] = useState("");
-  // const paragraphContent = news?.blog?.content;
+  // const paragraphContent = Review?.blog?.content;
 
   const [metaDescription, setMetaDescription] = useState("");
   const paragraphContent = detailData.content;
@@ -262,7 +261,7 @@ function BlogDetailsPage({
       pageMeta={{
         title: `${detailData?.metaTitle}`,
         description: ``,
-        type: "Car news Website",
+        type: "Car Review Website",
       }}
     >
       <Ad970x250 dataAdSlot="5962627056" />
@@ -364,7 +363,7 @@ function BlogDetailsPage({
               >
                 <div className="white_bg_wrapper mt-3 px-1 py-3">
                   <h4 className="px-2">
-                    Latest News <hr className="my-2" />
+                    Latest Review <hr className="my-2" />
                   </h4>
 
                   <div>
@@ -373,7 +372,7 @@ function BlogDetailsPage({
                       disableMarginTop={true}
                       disableBorder={true}
                       blogs={recentBlog}
-                      heading={"Related News"}
+                      heading={"Related Review"}
                       disableHeading={true}
                     />
                   </div>
@@ -384,7 +383,7 @@ function BlogDetailsPage({
                         disableMarginTop={true}
                         disableBorder={true}
                         blogs={recentBlog}
-                        heading={"Recent News"}
+                        heading={"Recent Review"}
                         disableHeading={true}
                       />
                     </div>
@@ -392,14 +391,14 @@ function BlogDetailsPage({
                 </div>
                 <div className="white_bg_wrapper mt-3 px-1 py-3">
                   <h4 className="px-2">
-                    Related News <hr className="my-2" />
+                    Related Review <hr className="my-2" />
                   </h4>
                   <div>
                     <BlogRelated
                       disableMarginTop={true}
                       disableBorder={true}
                       blogs={detailData?.article_categories?.data}
-                      heading={"Related News"}
+                      heading={"Related Review"}
                       tab1={"Trending"}
                       tab2={"Recent"}
                     />
@@ -448,7 +447,7 @@ export async function getServerSideProps(context) {
 
   const apolloClient = createApolloClient();
   // Fetch data based on the slug (e.g., from a database)
-  // console.log(newsData, "my slug"); // Log the slug value
+  // console.log(ReviewData, "my slug"); // Log the slug value
   console.log("jh");
 
   try {
@@ -523,7 +522,7 @@ export async function getServerSideProps(context) {
       query: gql`
         query {
           articles(
-            filters: { article_type: { type: { eq: "News" } } }
+            filters: { article_type: { type: { eq: "Review" } } }
             pagination: { limit: 6 }
             sort: "createdAt:desc"
           ) {
@@ -593,7 +592,8 @@ export async function getServerSideProps(context) {
         }
       `,
     });
-    
+
+   
 
     return {
       props: {

@@ -116,7 +116,7 @@ function index({ heading, carDetails, compare }) {
                       <div className="compare-btm">
                         <Link
                           legacyBehavior
-                          href={`/compare-cars/${comparison?.carModels[0]?.mainSlug}-vs-${comparison?.carModels[1]?.mainSlug}`}
+                          href={`/compare-cars/${comparison?.carModels[0]?.highTrim?.mainSlug}-vs-${comparison?.carModels[1]?.highTrim?.mainSlug}`}
                         >
                           <button
                             type="button"

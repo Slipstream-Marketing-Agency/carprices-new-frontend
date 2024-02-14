@@ -57,8 +57,11 @@ function ProductCategory({ brands }) {
               <div className="row g-4">
                 {brands?.map((item, idx) => (
                   <div className="col-md-3 col-6">
-                    <div className="category-card text-center">
-                      <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`}>
+                    <Link
+                      legacyBehavior
+                      href={`/brands/${item?.attributes?.slug}`}
+                    >
+                      <div className="category-card text-center">
                         <a className="category-img">
                           <div className="icon">
                             <img
@@ -70,30 +73,30 @@ function ProductCategory({ brands }) {
                             />
                           </div>
                         </a>
-                      </Link>
-                      <div className="content">
-                      <h5>{item?.attributes?.name}</h5>
-                        {/* <p>
+
+                        <div className="content">
+                          <h5>{item?.attributes?.name}</h5>
+                          {/* <p>
                           <Link legacyBehavior href="/single-brand-category">
                             <a>23,323</a>
                           </Link>{" "}
                           Cars Available
                         </p> */}
-                        
-                        <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`}>
+
+                          {/* <Link legacyBehavior href={`/brands/${item?.attributes?.slug}`}>
                           <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block p-2">
                             View All Cars
                           </button>
-                        </Link>
+                        </Link> */}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   );

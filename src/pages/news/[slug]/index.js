@@ -35,7 +35,6 @@ import {
   TelegramIcon,
 } from "next-share";
 import moment from "moment/moment";
-import Error from "../../error";
 import BlogRecent from "@/src/components/BlogRecent";
 import BlogRelated from "@/src/components/BlogRelated";
 import TabNavigation from "@/src/components/TabNavigation";
