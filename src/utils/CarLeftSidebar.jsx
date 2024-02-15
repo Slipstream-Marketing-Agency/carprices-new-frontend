@@ -143,23 +143,14 @@ function CarLeftSidebar({
   useEffect(() => {
     const currentParams = { ...router.query };
 
-     // Check if we should avoid redirecting for brandname and categoryname
-  const shouldAvoidRedirect = currentParams.brandname || currentParams.categoryname;
-
-  // If brandname or categoryname is present in the URL, do not proceed with the URL update
-  if (shouldAvoidRedirect) {
-    console.log("Avoiding redirect due to brandname or categoryname in the URL");
-    return;
-  }
-
+    const { brandname, categoryname, ...paramsForUpdate } = currentParams;
 
     // Function to update or delete the parameter
     const updateParamsForFilter = (key, value) => {
-      
       if (value.length > 0) {
-        currentParams[key] = value.join(",");
+        paramsForUpdate[key] = value.join(",");
       } else {
-        delete currentParams[key];
+        delete paramsForUpdate[key];
       }
     };
 
@@ -175,14 +166,14 @@ function CarLeftSidebar({
     updateParamsForFilter("transmission", selectedTransmission);
 
     if (currentPage > 1) {
-      currentParams["page"] = currentPage.toString();
+      paramsForUpdate["page"] = currentPage.toString();
     } else {
-      delete currentParams["page"];
+      delete paramsForUpdate["page"];
     }
 
     // Manually construct the query string
-    let queryString = Object.keys(currentParams)
-      .map((key) => `${key}=${currentParams[key]}`)
+    let queryString = Object.keys(paramsForUpdate)
+      .map((key) => `${key}=${encodeURIComponent(paramsForUpdate[key])}`)
       .join("&");
 
     console.log(queryString.length, "queryString");
