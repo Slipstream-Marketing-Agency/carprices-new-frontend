@@ -324,7 +324,8 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                               <div className="swiper-wrapper">
                                 <SwiperSlide className="swiper-slide">
                                   <Image
-                                    src={trimData?.featuredImage}
+                                    src={trimData?.featuredImage === null
+                                      ? "/assets/img/car-placeholder.png" : trimData?.featuredImage}
                                     alt="product image"
                                     fill
                                     className="object-contain"
