@@ -720,6 +720,7 @@ font-weight:100px !important;
   .shareBtn {
     font-size: 13px;
     width: 70px;
+    height:28px !important;
   }
 }
 .shareBtn svg {
