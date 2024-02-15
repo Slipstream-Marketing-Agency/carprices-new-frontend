@@ -166,14 +166,14 @@ function BlogStandardPage({
             </div>
           </div>
           <div className="col-lg-3 hideOnMobile ">
-            {articlesThisWeek.length > 0 && (
+            {articlesThisWeek?.length > 0 && (
               <div className="">
                 <div className="ad-container">
                   <Ad300x600 dataAdSlot="8451638145" />
                 </div>
               </div>
             )}
-            {articleTags.length > 0 && (
+            {articleTags?.length > 0 && (
               <div className="white_bg_wrapper my-3">
                 <h4>TAGS</h4>
                 <div className="cursorPointer">

@@ -32,7 +32,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                   <Link
                     legacyBehavior
                     href={`${isNews ? "/news/" : "/reviews/"}${
-                      news?.attributes?.slug
+                      news?.slug
                     }`}
                   >
                     <a>

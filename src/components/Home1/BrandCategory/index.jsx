@@ -4,7 +4,7 @@ import { BrandCategoryHome1 } from "../../../data/data";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 
-function index({ brandDetails }) {
+function BrandCategory({ brandDetails }) {
   const router = useRouter();
 
   const t = useTranslate();
@@ -58,4 +58,4 @@ function index({ brandDetails }) {
   );
 }
 
-export default index;
+export default BrandCategory;

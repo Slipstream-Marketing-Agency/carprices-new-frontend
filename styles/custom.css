@@ -22,7 +22,6 @@ body {
   }
 }
 
-
 .hads {
   height: 800px !important;
 }
@@ -241,19 +240,18 @@ button:focus {
 }
 
 .overflow-list {
-  height: 170px;
-  /* width: 115%; */
+  min-height: 50px;
+  max-height: 250px;
   padding-right: 10px !important;
   overflow: hidden;
   overflow-y: scroll;
 }
-.disableOverflow-list{
+.disableOverflow-list {
   width: unset !important;
 }
-@media(max-width:650px) {
-  
-  .setTableWidth{
-    width:660px !important;
+@media (max-width: 650px) {
+  .setTableWidth {
+    width: 660px !important;
   }
 }
 ::-webkit-scrollbar-track {
@@ -428,7 +426,7 @@ small {
   width: 100%;
   height: 330px;
 }
-.blogsImage img{
+.blogsImage img {
   height: 190px !important;
   object-fit: fill !important;
 }
@@ -558,7 +556,8 @@ small {
     font-size: 13px;
   }
   .BlogCardHeadingTxt {
-    line-height: 0.8;
+    line-height: 14px;
+    height: 29px !important;
   }
   .inputSearchContainer {
     height: 50px;
@@ -706,7 +705,7 @@ small {
   align-items: center;
   gap: 2px;
 }
-@media(max-width:650px){
+@media (max-width: 650px) {
   .shareBtn {
     font-size: 13px;
     width: 70px;
@@ -833,8 +832,8 @@ small {
   align-items: center;
   margin-top: 200px;
 }
-@media(max-width:680px){
-  .totalAmountContainer{
+@media (max-width: 680px) {
+  .totalAmountContainer {
     margin-top: 100px !important;
   }
 }
@@ -951,7 +950,7 @@ small {
   .rightSection {
     width: 100%;
   }
-  .carImage{
+  .carImage {
     position: unset;
   }
 }
@@ -1062,9 +1061,9 @@ small {
   width: 80px !important;
   height: 85px !important;
 }
-.category-box-button:hover{
+.category-box-button:hover {
   box-shadow: 0 0 10px var(--bs-gray-400) !important;
-} 
+}
 /* cookies components style ends */
 /* search inputfield begins */
 
@@ -1624,9 +1623,8 @@ input[type="color"]:focus,
   z-index: 1;
   transition: all ease 0.35s;
 }
-.body-category-area .single-category1:hover{
+.body-category-area .single-category1:hover {
   box-shadow: 1px 1px 6px #c2c2c2, 1px 2px 2px #d5d5d5 !important;
- 
 }
 
 .body-category-area .single-category1 .brand-icon {
@@ -1681,7 +1679,7 @@ input[type="color"]:focus,
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 100;
+  z-index: 10001;
   cursor: pointer;
   background-color: #007bff; /* Primary color */
   color: #ffffff;
@@ -1699,7 +1697,7 @@ input[type="color"]:focus,
 }
 
 .filter-modal {
-  position: absolute;
+  position: fixed;
   top: -50px;
   left: 0;
   width: 100%;
@@ -2326,28 +2324,32 @@ input[type="color"]:focus,
 }
 /* Footer ends  */
 /* car details page begins */
-@media(max-width:650px){
-  .nameNShareContainer{
+@media (max-width: 650px) {
+  .nameNShareContainer {
     display: flex !important;
     flex-direction: column !important;
   }
-  .shareBtnMobile{
+  .shareBtnMobile {
     width: 100%;
     display: flex;
     justify-content: end;
     position: absolute;
-    top:40px;
-    right:10px;
-
+    top: 40px;
+    right: 10px;
   }
-  .monthlyEMIContainer,.availableVariantsContainer{
+  .monthlyEMIContainer,
+  .availableVariantsContainer {
     margin-top: 20px;
     width: 100% !important;
   }
-  
- .calculatorContentInner{
-  display: flex;
-  flex-direction: column;
- }
+
+  .calculatorContentInner {
+    display: flex;
+    flex-direction: column;
+  }
 }
 /* car details page ends   */
+
+.h-full-height {
+  height: 100vh;
+}

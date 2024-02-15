@@ -264,27 +264,17 @@ function BlogDetailsPage({
         type: "Car news Website",
       }}
     >
-      <Ad970x250 dataAdSlot="5962627056" />
+      <div className="hidemobile">
+        <Ad970x250 dataAdSlot="5962627056" />
+      </div>
+      <div className="hidedesktop">
+        <Ad300x250 dataAdSlot="9351332409" />
+      </div>
 
       <div className="blog-details-page mt-3">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
-              <div className="hads mb-4">
-                <div className="sticky_scroll">
-                  <Ad300x600 dataAdSlot="3792539533" />
-                </div>
-              </div>
-              <div className="hads mb-4">
-                <div className="sticky_scroll">
-                  <Ad300x250 dataAdSlot="3792539533" />
-                </div>
-              </div>
-              <div className="sticky_scroll">
-                <Ad300x600 dataAdSlot="3792539533" />
-              </div>
-            </div>
-            <div className="col-lg-6">
+            <div className="col-lg-8">
               <h1 className="post-title mb-3">{detailData?.title}</h1>
               <div className="post-thumb">
                 {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
@@ -356,11 +346,8 @@ function BlogDetailsPage({
                 <SocialButtons fullURL={currentURL} />
               </div>
             </div>
-            <div className="col-lg-3 mt-md-2 mt-0">
-              <div
-                className="blog-sidebar mb-50"
-                style={{ position: "sticky", top: "-780px" }}
-              >
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
+              <div className="blog-sidebar mb-50">
                 <div className="white_bg_wrapper mt-3 px-1 py-3">
                   <h4 className="px-2">
                     Latest News <hr className="my-2" />
@@ -389,30 +376,33 @@ function BlogDetailsPage({
                     </div>
                   )} */}
                 </div>
-                <div className="white_bg_wrapper mt-3 px-1 py-3">
-                  <h4 className="px-2">
-                    Related News <hr className="my-2" />
-                  </h4>
-                  <div>
-                    <BlogRelated
-                      disableMarginTop={true}
-                      disableBorder={true}
-                      blogs={detailData?.article_categories?.data}
-                      heading={"Related News"}
-                      tab1={"Trending"}
-                      tab2={"Recent"}
-                    />
+                {detailData?.article_categories?.data.length > 0 && (
+                  <div className="white_bg_wrapper mt-3 px-1 py-3">
+                    <h4 className="px-2">
+                      Related News <hr className="my-2" />
+                    </h4>
+                    <div>
+                      <BlogRelated
+                        disableMarginTop={true}
+                        disableBorder={true}
+                        blogs={detailData?.article_categories?.data}
+                        heading={"Related News"}
+                        tab1={"Trending"}
+                        tab2={"Recent"}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* <MoreBrands /> */}
                 <div className="my-3">
                   <Ad300x250 dataAdSlot="3792539533" />
                 </div>
-                <div className="my-3">
+                <div className="my-3 sticky_scroll">
                   <Ad300x600 dataAdSlot="3792539533" />
                 </div>
               </div>
+
               {/* <div className="single-widgets sidebar-banner">
                                 <div className="product-content">
                                     <div className="text">
@@ -592,8 +582,6 @@ export async function getServerSideProps(context) {
         }
       `,
     });
-
-   
 
     return {
       props: {

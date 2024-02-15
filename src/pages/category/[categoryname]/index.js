@@ -11,6 +11,9 @@ import Pagination from "@/src/utils/Pagination";
 import axios from "axios";
 import { useRouter } from "next/router";
 import data from "@/src/data/data";
+import BrandCategory from "@/src/components/Home1/BrandCategory";
+import BodyTypes from "@/src/components/Home1/BodyTypes";
+import Image from "next/image";
 
 function CarListingLeftSidebar({
   currentPage,
@@ -25,6 +28,8 @@ function CarListingLeftSidebar({
   cylinderList,
   transmissionList,
   driveList,
+  bodyTypes,
+  brand,
 }) {
   console.log(bodyTypeList, "bodyTypeList");
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
@@ -89,6 +94,31 @@ function CarListingLeftSidebar({
   const [showFilter, setShowFilter] = useState(false); // State to toggle filter visibility
 
   const toggleFilter = () => setShowFilter(!showFilter);
+
+  const [articleslist, setArticlesList] = useState([]);
+  const [articlecurrentPage, setArticleCurrentPage] = useState(1);
+  const [articlehasMore, setarticeHasMore] = useState(true);
+
+  const fetchArticles = async () => {
+    const pageSize = 18; // Set your page size
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}articles/list?slug=news&page=${articlecurrentPage}&pageSize=12`
+      );
+      const fetchedArticles = response.data.data;
+      const newArticles = [...articleslist, ...fetchedArticles];
+      setArticlesList(newArticles);
+      setArticleCurrentPage(articlecurrentPage + 1);
+      setarticeHasMore(response.data.pagination.pageCount > articlecurrentPage);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      setarticeHasMore(false); // Assuming no more articles to fetch if there's an error
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles(); // Initial fetch
+  }, []);
   return (
     <MainLayout
       pageMeta={{
@@ -100,14 +130,31 @@ function CarListingLeftSidebar({
       }}
     >
       <div className="floating-btn d-md-none" onClick={toggleFilter}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-3 h-3"
-        >
-          <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
-        </svg>
+        {!showFilter ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-3 h-3"
+          >
+            <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        )}
       </div>
       <div className="mt-2">
         <Ad728x90 dataAdSlot="5962627056" />
@@ -151,7 +198,7 @@ function CarListingLeftSidebar({
             </div>
 
             <div className="col-xl-9 order-xl-2 order-1">
-              <div className="row mb-40">
+              <div className="row">
                 <div className="col-lg-12">
                   <div className="show-item-and-filte">
                     {/* <p>
@@ -182,6 +229,81 @@ function CarListingLeftSidebar({
                     currentPage={currentPage}
                     totalPages={totalPages}
                   />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
+                  <BrandCategory brandDetails={brand} />
+                  <Ad728x90 dataAdSlot="5962627056" />
+                  <BodyTypes bodyTypeList={bodyTypes} />
+                  <Ad728x90 dataAdSlot="3488506956" />
+                  <div className="row ">
+                    <h2 className="mt-4">Automotive News</h2>
+                    {articleslist?.map((newsItem, index) => {
+                      // Adjust index to account for the first item displayed separately
+                      const adjustedIndex = index + 1;
+
+                      return (
+                        <React.Fragment key={`news-${adjustedIndex}`}>
+                          <div
+                            className="col-xl-4 col-lg-6 col-md-6 col-6 wow fadeInUp  mb-2"
+                            data-wow-delay="200ms"
+                          >
+                            <div className="news-card">
+                              <div className="news-img list-article">
+                                <Link
+                                  legacyBehavior
+                                  href={`/news/${newsItem.slug}`}
+                                >
+                                  <a>
+                                    <div className="position-relative imageContainer">
+                                      <Image
+                                        src={
+                                          newsItem.coverImage
+                                            ? newsItem.coverImage
+                                            : altImage
+                                        }
+                                        alt="Article Image"
+                                        layout="responsive"
+                                        width={300}
+                                        height={205}
+                                        objectFit="cover"
+                                      />
+                                    </div>
+                                  </a>
+                                </Link>
+                              </div>
+                              <div className="content">
+                                <h5 className="mt-3 BlogCardHeadingTxt head_truncate">
+                                  {newsItem.title}
+                                </h5>
+                                {/* Similar details for rest of the articles */}
+                              </div>
+                            </div>
+                          </div>
+                          {/* Display advertisement after the sixth article in the grid (seventh overall) */}
+                          {adjustedIndex % 6 === 0 && (
+                            <div
+                              className="col-lg-12  mt-0"
+                              key={`ad-${adjustedIndex}`}
+                            >
+                              <Ad728x90 dataAdSlot="5962627056" />
+                            </div>
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                    {articlehasMore && (
+                      <div className="view-btn-area">
+                        <button
+                          className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
+                          onClick={fetchArticles}
+                        >
+                          Load More
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -497,6 +619,8 @@ export async function getServerSideProps(context) {
     bodyTypeListres = bodyTypeList;
   }
 
+  const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
+
   try {
     return {
       props: {
@@ -541,6 +665,9 @@ export async function getServerSideProps(context) {
           driveSlugs.length > 0
             ? driveListres?.data.drive
             : fullFilter?.data.drive,
+
+        bodyTypes: home?.data?.data?.bodyTypes,
+        brand: home?.data?.data?.brand,
       },
     };
   } catch (error) {

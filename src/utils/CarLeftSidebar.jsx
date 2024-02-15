@@ -139,59 +139,50 @@ function CarLeftSidebar({
   }, [router.asPath]);
 
   useEffect(() => {
-    const brandQuery =
-      selectedBrands.length > 0 ? `brand=${selectedBrands.join(",")}` : "";
-    const bodyQuery =
-      selectedBody.length > 0 ? `bodytype=${selectedBody.join(",")}` : "";
-    const priceQuery =
-      selectedPrice.length > 0 ? `price=${selectedPrice.join(",")}` : "";
-    const powerQuery =
-      selectedPower.length > 0 ? `power=${selectedPower.join(",")}` : "";
-    const displacementQuery =
-      selectedDisplacement.length > 0
-        ? `displacement=${selectedDisplacement.join(",")}`
-        : "";
-    const fuelTypeQuery =
-      selectedFuelType.length > 0
-        ? `fuelType=${selectedFuelType.join(",")}`
-        : "";
-    const cylindersQuery =
-      selectedCylinders.length > 0
-        ? `cylinders=${selectedCylinders.join(",")}`
-        : "";
-    const driveQuery =
-      selectedDrive.length > 0 ? `drive=${selectedDrive.join(",")}` : "";
-    const transmissionQuery =
-      selectedTransmission.length > 0
-        ? `transmission=${selectedTransmission.join(",")}`
-        : "";
+    const currentParams = { ...router.query };
 
-    const queryString = [
-      brandQuery,
-      bodyQuery,
-      priceQuery,
-      powerQuery,
-      displacementQuery,
-      fuelTypeQuery,
-      cylindersQuery,
-      driveQuery,
-      transmissionQuery,
-      `${currentPage === 1 ? "" : `page=${currentPage}`}`,
-    ]
-      .filter(Boolean)
+    // Function to update or delete the parameter
+    const updateParamsForFilter = (key, value) => {
+      if (value.length > 0) {
+        currentParams[key] = value.join(",");
+      } else {
+        delete currentParams[key];
+      }
+    };
+
+    // Update the parameters based on the filter states
+    updateParamsForFilter("brand", selectedBrands);
+    updateParamsForFilter("bodytype", selectedBody);
+    updateParamsForFilter("price", selectedPrice);
+    updateParamsForFilter("power", selectedPower);
+    updateParamsForFilter("displacement", selectedDisplacement);
+    updateParamsForFilter("fuelType", selectedFuelType);
+    updateParamsForFilter("cylinders", selectedCylinders);
+    updateParamsForFilter("drive", selectedDrive);
+    updateParamsForFilter("transmission", selectedTransmission);
+
+    if (currentPage > 1) {
+      currentParams["page"] = currentPage.toString();
+    } else {
+      delete currentParams["page"];
+    }
+
+    // Manually construct the query string
+    let queryString = Object.keys(currentParams)
+      .map((key) => `${key}=${currentParams[key]}`)
       .join("&");
 
-      console.log(queryString.length,"queryStringqueryString");
+      console.log(queryString.length,"queryString");
 
-    if (router.pathname === "/brands/[brandname]" && !isInitialRender) {
-      router.push(`/brands/${router?.query?.brandname}${queryString.length > 0 ? "?" : ""}${queryString}`);
-    } else if (
-      router.pathname === "/category/[categoryname]" &&
-      !isInitialRender
-    ) {
-      router.push(`/category/${router?.query?.categoryname}${queryString.length > 0 ? "?" : ""}${queryString}`);
-    } else if (router.pathname === "/search-cars" && !isInitialRender) {
-      router.push(`/search-cars${queryString.length > 0 ? "?" : ""}${queryString}`);
+    // The manual construction doesn't require encoding commas, so they remain as is
+
+    const baseUrl = router.pathname.replace(
+      /\[.*?\]/g,
+      (matched) => router.query[matched.substring(1, matched.length - 1)] || ""
+    );
+
+    if (!isInitialRender) {
+      router.push(`${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`);
     } else {
       setIsInitialRender(false);
     }
@@ -206,6 +197,7 @@ function CarLeftSidebar({
     selectedDrive,
     selectedTransmission,
     currentPage,
+    isInitialRender,
   ]);
 
   const handleBrandChange = (brandSlug) => {
@@ -601,43 +593,44 @@ function CarLeftSidebar({
         }`}
       >
         {/* Price filter UI */}
-
-        <div className="product-widget mb-20">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={togglePriceDropdown}
-            >
-              Price
-              <span
-                className={`dropdown-icon ${showPriceDropdown ? "open" : ""}`}
+        {router.pathname !== "/find-your-car" && (
+          <div className="product-widget mb-20">
+            <div className="check-box-item">
+              <h3
+                className="product-widget-title mb-20 cursor_pointer"
+                onClick={togglePriceDropdown}
               >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showPriceDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4">
-                {filteredPriceOptions.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss">
-                      <input
-                        type="checkbox"
-                        checked={selectedPrice.includes(option.value)}
-                        onChange={() => handlePriceChange(option.value)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option.priceLabel}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                Price
+                <span
+                  className={`dropdown-icon ${showPriceDropdown ? "open" : ""}`}
+                >
+                  <i class="bi bi-chevron-down" />
+                </span>
+              </h3>
+              <div
+                className={`checkbox-container ${
+                  showPriceDropdown ? "show" : "hide"
+                }`}
+              >
+                <ul className="pt-2 pb-4 overflow-list">
+                  {filteredPriceOptions.map((option, idx) => (
+                    <li key={idx}>
+                      <label className="containerss">
+                        <input
+                          type="checkbox"
+                          checked={selectedPrice.includes(option.value)}
+                          onChange={() => handlePriceChange(option.value)}
+                        />
+                        <span className="checkmark checkmarkRight0" />
+                        <span className="text">{option.priceLabel}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         {router.pathname !== "/brands/[brandname]" && (
           <div className="product-widget mb-1">
             <div className="check-box-item">
@@ -666,7 +659,7 @@ function CarLeftSidebar({
                     onChange={handleSearchChange}
                   />
                 </div>
-                <ul className="overflow-list pt-2 pb-4 disableOverflow-list">
+                <ul className="overflow-list pt-2 pb-4 ">
                   {filteredAndSortedBrandOptions.map((item, idx) => (
                     <li key={idx}>
                       <label className="containerss">
@@ -675,7 +668,7 @@ function CarLeftSidebar({
                           checked={selectedBrands.includes(item.value)}
                           onChange={() => handleBrandChange(item.value)}
                         />
-                        <span className="checkmark checkmarkRight2" />
+                        <span className="checkmark checkmarkRight0" />
                         <span className="text">{item.label}</span>
                       </label>
                     </li>
@@ -742,7 +735,7 @@ function CarLeftSidebar({
                 showPowerDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {filterPower.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>
@@ -783,7 +776,7 @@ function CarLeftSidebar({
                 showDisplacementDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {filtereDisplacement.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>
@@ -822,7 +815,7 @@ function CarLeftSidebar({
                 showFuelTypeDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {fuelTypeList.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>
@@ -861,7 +854,7 @@ function CarLeftSidebar({
                 showCylindersDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {cylinderList.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>
@@ -900,7 +893,7 @@ function CarLeftSidebar({
                 showTransmissionsDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {transmissionList.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>
@@ -937,7 +930,7 @@ function CarLeftSidebar({
                 showDriveDropdown ? "show" : "hide"
               }`}
             >
-              <ul className="pt-2 pb-4">
+              <ul className="pt-2 pb-4 overflow-list">
                 {driveList.map((option, idx) => (
                   <li key={idx}>
                     <label className="containerss" key={idx}>

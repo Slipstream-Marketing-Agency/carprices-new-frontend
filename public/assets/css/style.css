@@ -16009,7 +16009,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   margin-bottom: 10px;
-  height: 64px;
+  height: 50px;
 }
 .news-section .news-card .content > h6 a {
   font-family: var(--font-gilroy);
@@ -29823,12 +29823,12 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     font-size: 12px;
   }
   .product-card .product-content .features li {
-    font-size: 7px;
+    font-size: 10px;
     padding-right:0px !important;
   }
   
   .product-card .product-content .content-btm .view-btn2 {
-    font-size: 8px;
+    font-size: 10px;
     font-weight:bold;
   }
   .product-content-height .MobilepriceTextSize {
