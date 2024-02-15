@@ -2344,15 +2344,17 @@ input[type="color"]:focus,
 /* car details page begins */
 @media (max-width: 650px) {
   .nameNShareContainer {
+    margin-top: 10px;
     display: flex !important;
-    flex-direction: column !important;
+    /* flex-direction: column !important; */
+    justify-content: space-between;
   }
   .shareBtnMobile {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: end;
-    position: absolute;
-    right: 10px;
+    /* position: absolute;
+    right: 10px; */
   }
   .monthlyEMIContainer,
   .availableVariantsContainer {
