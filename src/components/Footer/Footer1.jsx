@@ -307,7 +307,7 @@ function Footer1() {
                   <span>Mail</span>
                   <h6>
                     <a
-                      href="mailto:hello@slipstream.agency
+                      href="mailto:info@carprices.ae
 "
                     >
                       info@carprices.ae
@@ -330,8 +330,7 @@ function Footer1() {
           <div className="footer-btm">
             <div className="copyright-area">
               <p>
-                Copyright 2023 <a href="#">Car Prices</a> | Design By{" "}
-                <a href="https://slipstream.agency/">SlipStream</a>
+                Copyright 2023 <a href="#">Car Prices</a>
               </p>
             </div>
             <div className="social-area">

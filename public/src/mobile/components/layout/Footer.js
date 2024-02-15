@@ -283,7 +283,7 @@ function Footer() {
                     </li>
                   </ul> */}
                   <div className="title">AFFILIATED WITH</div>
-                  <div className="footer-images">
+                  {/* <div className="footer-images">
                     <div className="row">
                       <div className="col-xs-12">
                         <a href="" target="_blank" rel="noopener" className="w-25">
@@ -307,7 +307,7 @@ function Footer() {
                       </div>
                      
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

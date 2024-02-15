@@ -280,7 +280,7 @@ function Footer() {
                     </li>
                   </ul> */}
                   <div className="title">AFFILIATED WITH</div>
-                  <div className="footer-images">
+                  {/* <div className="footer-images">
                     <div className="row">
                       <div className="col-xs-12">
                         <div className="w-100">
@@ -304,7 +304,7 @@ function Footer() {
                       </div>
 
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
