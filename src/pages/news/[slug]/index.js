@@ -66,7 +66,7 @@ function BlogDetailsPage({
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
-
+  console.log("Test");
   // const [isMobile, setIsMobile] = useState(false);
 
   // const [dynamicHTML, setDynamicHTML] = useState("");
