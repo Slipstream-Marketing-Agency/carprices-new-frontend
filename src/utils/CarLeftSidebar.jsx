@@ -138,11 +138,24 @@ function CarLeftSidebar({
     }
   }, [router.asPath]);
 
+  console.log(router, "routerrouter");
+
   useEffect(() => {
     const currentParams = { ...router.query };
 
+     // Check if we should avoid redirecting for brandname and categoryname
+  const shouldAvoidRedirect = currentParams.brandname || currentParams.categoryname;
+
+  // If brandname or categoryname is present in the URL, do not proceed with the URL update
+  if (shouldAvoidRedirect) {
+    console.log("Avoiding redirect due to brandname or categoryname in the URL");
+    return;
+  }
+
+
     // Function to update or delete the parameter
     const updateParamsForFilter = (key, value) => {
+      
       if (value.length > 0) {
         currentParams[key] = value.join(",");
       } else {
@@ -172,7 +185,7 @@ function CarLeftSidebar({
       .map((key) => `${key}=${currentParams[key]}`)
       .join("&");
 
-      console.log(queryString.length,"queryString");
+    console.log(queryString.length, "queryString");
 
     // The manual construction doesn't require encoding commas, so they remain as is
 
@@ -182,7 +195,9 @@ function CarLeftSidebar({
     );
 
     if (!isInitialRender) {
-      router.push(`${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`);
+      router.push(
+        `${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`
+      );
     } else {
       setIsInitialRender(false);
     }
