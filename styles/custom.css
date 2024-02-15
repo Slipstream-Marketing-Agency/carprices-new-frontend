@@ -417,15 +417,22 @@ small {
   position: sticky;
   top: 60px; /* Adjust this value as needed */
 }
+.blogImage {
+  width: 100% ;
+  height: 421px !important ;
+}
+.blogContainer{
+  box-shadow:0 0 4px rgb(233, 233, 233);
+}
 @media (max-width: 650px) {
   .hideOnMobile {
     display: none;
   }
+  .blogImage {
+    height: auto !important;
+  }
 }
-.blogImage {
-  width: 100%;
-  height: 330px;
-}
+
 .blogsImage img {
   height: 216px !important;
   object-fit: cover !important;
@@ -550,6 +557,10 @@ small {
   height: 50px !important;
   object-fit: cover !important;
 }
+.shareTxt {
+font-size:18px !important;
+font-weight:100px !important;
+}
 /* Mobile view begins */
 @media (max-width: 767px) {
   .BlogCardHeadingTxt a {
@@ -600,7 +611,7 @@ small {
     font-size: 13px;
   }
   .shareTxt {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 }
 
@@ -2364,3 +2375,5 @@ input[type="color"]:focus,
 .h-full-height {
   height: 100vh;
 }
+
+

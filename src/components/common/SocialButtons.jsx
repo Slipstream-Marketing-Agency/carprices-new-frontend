@@ -9,7 +9,7 @@ export default function SocialButtons({fullURL}) {
   let isRtl = router.locale === 'ar';
   return (
     <div className={`social-area d-flex align-items-center gap-1 ${isRtl && 'flex-row-reverse'}`} >
-    {<h6 className='mb-0 shareTxt'>{t.share}</h6>}
+    {<h6 className='mb-0 shareTxt'>{t.share} : </h6>}
     <ul className="social-link d-flex align-items-center gap-1 ps-2 m-auto  ">
       <FacebookShareButton
         url={fullURL} >
