@@ -233,7 +233,7 @@ export default{
     searchByBrandOrTags:"Search By Brand or Tags..",
 
     postedOn:"Posted on ",
-    share:"Share : ",
+    share:"Share ",
     trending:"Trending",
     recent:"Recent",
     otherBrands:"Other Brands",

@@ -26495,8 +26495,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   margin-bottom: 12px;
   color: var(--title-color);
   font-family: var(--font-gilroy);
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 28px !important;
+  font-weight: 600;
 
 }
 .blog-details-page .post-title a {
@@ -26510,7 +26510,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 @media (max-width: 767px) {
   .blog-details-page .post-title {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .blog-details-page .post-title a {
     font-size: 16px;

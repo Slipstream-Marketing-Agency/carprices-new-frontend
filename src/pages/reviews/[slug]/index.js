@@ -62,6 +62,27 @@ function BlogDetailsPage({
   const handleTabChange = (selectedTab) => {
     setActiveTab(selectedTab);
   };
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(()=>{
+    const styleTag = document.createElement('style');
+    styleTag.innerHTML = '@media (min-width: 768px) { p img { height: 421px !important; } }';
+    document.head.appendChild(styleTag);
+
+  },[])
 
   const router = useRouter();
   const t = useTranslate();
@@ -176,9 +197,12 @@ function BlogDetailsPage({
     const currentUrl = router.pathname; // Get the current URL of the website
 
     const content = detailData.content
-      .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
-      .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
-      .replace(/<div>\s*<br\s*\/?>/, "<div>");
+    .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
+    .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, '<h2 style="padding-top: 10px !important;">$1</h2>')
+    .replace(/<h3>(.*?)<\/h3>/g, '<h3 style="padding-top: 10px !important;">$1</h3>')
+    .replace(/<div>\s*<br\s*\/?>/, "<div>")
+    .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, '<p><br></p>')
+    .replace(/<p><img(.*?)width="100%"(.*?)><\/p>/g, '<p><img$1style="width: 100%; height: 421px;"$2></p>');
 
     if (!content) return null;
 
@@ -205,7 +229,6 @@ function BlogDetailsPage({
               allowFullScreen
             ></iframe>
           </div>
-          
         );
       }
 
@@ -239,6 +262,7 @@ function BlogDetailsPage({
     }
     return null;
   };
+  
 
   console.log(detailData);
   // console.log(recentBlog);
@@ -272,11 +296,50 @@ function BlogDetailsPage({
         <Ad300x250 dataAdSlot="9351332409" />
       </div>
 
-      <div className="blog-details-page mt-3">
+      <div className="blog-details-page mt-4">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-lg-8">
-              <h1 className="post-title mb-3">{detailData?.title}</h1>
+            <div className="col-lg-8 pb-2">
+            <div className="row blogContainer mt-2 pb-2">
+                <div className="col-lg-1 d-md-none d-lg-block">
+
+                  <div className={`mt-4 social-area d-flex flex-column align-items-center  gap-3 ${isRtl && 'flex-row-reverse'} ${isMobile && 'd-none'} `} >
+                    {<h5 className='mb-0 shareTxt '>{t.share}  </h5>}
+                    <ul className="social-link d-flex flex-column  gap-2  ps-2 m-auto  ">
+                      <FacebookShareButton
+                        url={fullURL} >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <WhatsappShareButton
+                        url={fullURL} >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+
+                      <LinkedinShareButton
+                        url={fullURL} >
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
+                      <TwitterShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <TelegramShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TelegramIcon size={32} round />
+                      </TelegramShareButton>
+
+                    </ul>
+
+
+                  </div>
+              </div>
+
+              <div className="col-lg-11 ">
+              <h1 className="post-title mb-4 ps-2 mt-4">{detailData?.title}</h1>
               <div className="post-thumb">
                 {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
                 <div className="position-relative ">
@@ -299,8 +362,13 @@ function BlogDetailsPage({
                     </div> */}
               </div>
 
+
+         
+           
+             
+
               {/* <div className="author-area"> */}
-              <div className="row mb-3">
+              <div className="row mb-4">
                 <div className="col-xl-6">
                   <div className="d-flex align-items-center gap-3">
                     {/* <div className="author-img">
@@ -343,10 +411,13 @@ function BlogDetailsPage({
                 {renderContent()}
               </div>
 
-              <div className="d-flex justify-content-md-end align-items-center">
+              <div className="d-flex justify-content-md-end align-items-center ">
                 <SocialButtons fullURL={currentURL} />
               </div>
             </div>
+
+            </div>
+          </div>
             <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
               <div className="blog-sidebar mb-50">
                 <div className="white_bg_wrapper mt-3 px-1 py-3">
@@ -399,7 +470,7 @@ function BlogDetailsPage({
                 <div className="my-3">
                   <Ad300x250 dataAdSlot="3792539533" />
                 </div>
-                <div className="my-3 sticky_scroll">
+                <div className="my-3 sticky_scroll ">
                   <Ad300x600 dataAdSlot="3792539533" />
                 </div>
               </div>
@@ -419,9 +490,11 @@ function BlogDetailsPage({
                                     <img src="assets/img/inner-page/sb-banner-img.png" alt="" />
                                 </div>
                                 </div> */}
-            </div>
           </div>
+       
         </div>
+        </div>
+           
       </div>
       {/* <Ad728x90 dataAdSlot="5962627056" /> */}
     </MainLayout>

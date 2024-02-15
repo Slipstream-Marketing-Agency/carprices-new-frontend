@@ -62,11 +62,33 @@ function BlogDetailsPage({
   const handleTabChange = (selectedTab) => {
     setActiveTab(selectedTab);
   };
+  const [isMobile, setIsMobile] = useState(false);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const styleTag = document.createElement('style');
+    styleTag.innerHTML = '@media (min-width: 768px) { p img { height: 421px !important; } }';
+    document.head.appendChild(styleTag);
+
+  }, [])
 
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
-  console.log("Test");
+
   // const [isMobile, setIsMobile] = useState(false);
 
   // const [dynamicHTML, setDynamicHTML] = useState("");
@@ -178,7 +200,11 @@ function BlogDetailsPage({
     const content = detailData.content
       .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
       .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
-      .replace(/<div>\s*<br\s*\/?>/, "<div>");
+      .replace(/<h3>(.*?)<\/h3>/g, '<h3 style="padding-top: 10px !important;">$1</h3>')
+      .replace(/<div>\s*<br\s*\/?>/, "<div>")
+      .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, '<p><br></p>')
+      .replace(/<p><img(.*?)width="100%"(.*?)><\/p>/g, '<p><img$1style="width: 100%; height: 421px;"$2></p>');
+
 
     if (!content) return null;
 
@@ -256,6 +282,7 @@ function BlogDetailsPage({
       },
     };
   });
+  
   return (
     <MainLayout
       pageMeta={{
@@ -271,79 +298,122 @@ function BlogDetailsPage({
         <Ad300x250 dataAdSlot="9351332409" />
       </div>
 
-      <div className="blog-details-page mt-3">
+      <div className="blog-details-page mt-4">
         <div className="container">
           <div className="row g-lg-4 gy-5">
-            <div className="col-lg-8">
-              <h1 className="post-title mb-3">{detailData?.title}</h1>
-              <div className="post-thumb">
-                {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
-                <div className="position-relative ">
-                  <Image
-                    src={
-                      detailData?.coverImage?.data?.attributes?.url
-                        ? detailData?.coverImage.data?.attributes?.url
-                        : altImage
-                    }
-                    alt="blog image"
-                    layout="responsive"
-                    width={300}
-                    height={205}
-                    objectFit="cover"
-                    className="blogImage"
-                  />
+            <div className="col-lg-8 pb-2">
+              <div className="row blogContainer mt-2 pb-2">
+                <div className="col-lg-1 d-md-none d-lg-block">
+
+                  <div className={`mt-4 social-area d-flex flex-column align-items-center  gap-3 ${isRtl && 'flex-row-reverse'} ${isMobile && 'd-none'} `} >
+                    {<h5 className='mb-0 shareTxt '>{t.share} </h5>}
+                    <ul className="social-link d-flex flex-column  gap-2  ps-2 m-auto  ">
+                      <FacebookShareButton
+                        url={fullURL} >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <WhatsappShareButton
+                        url={fullURL} >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+
+                      <LinkedinShareButton
+                        url={fullURL} >
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
+                      <TwitterShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <TelegramShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TelegramIcon size={32} round />
+                      </TelegramShareButton>
+
+                    </ul>
+
+
+                  </div>
+
                 </div>
-                {/* <div className="date">
-                        <span className="text-white p-1">Buying Advice</span>
-                    </div> */}
-              </div>
+                <div className="col-lg-11">
+                  <h1 className="post-title mb-4 ps-2 mt-4">{detailData?.title}</h1>
 
-              {/* <div className="author-area"> */}
-              <div className="row mb-3">
-                <div className="col-xl-6">
-                  <div className="d-flex align-items-center gap-3">
-                    {/* <div className="author-img">
-                      <span className="border rounded-circle px-2 py-1">C</span>
-                    </div> */}
-
-                    <div className="author-content">
-                      <h6 className="mt-0">
-                        {detailData?.author?.data?.attributes?.name} /{" "}
-                        <span className="postedOnStyle">
-                          {isRtl && " - "}
-                          {t.postedOn}
-                          {!isRtl && " - "}
-                        </span>{" "}
-                        <span className="postedOnStyle">
-                          {moment(detailData?.publishedAt).format(
-                            "MMMM Do YYYY"
-                          )}
-                        </span>
-                      </h6>
+                  <div className="post-thumb">
+                    {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
+                    <div className="position-relative ">
+                      <Image
+                        src={
+                          detailData?.coverImage?.data?.attributes?.url
+                            ? detailData?.coverImage.data?.attributes?.url
+                            : altImage
+                        }
+                        alt="blog image"
+                        layout="responsive"
+                        width={300}
+                        height={205}
+                        objectFit="cover"
+                        className="blogImage"
+                      />
                     </div>
+                    {/* <div className="date">
+                            <span className="text-white p-1">Buying Advice</span>
+                        </div> */}
                   </div>
-                </div>
-                <div className="col-xl-6 m-auto mt-2 mt-md-0">
-                  <div className="d-flex justify-content-md-end align-items-center">
+                  
+
+                  {/* <div className="author-area"> */}
+                  <div className="row mb-3">
+                    <div className="col-xl-6">
+                      <div className="d-flex align-items-center gap-3">
+                        {/* <div className="author-img">
+                          <span className="border rounded-circle px-2 py-1">C</span>
+                        </div> */}
+
+                        <div className="author-content">
+                          <h6 className="mt-0">
+                            {detailData?.author?.data?.attributes?.name} /{" "}
+                            <span className="postedOnStyle">
+                              {isRtl && " - "}
+                              {t.postedOn}
+                              {!isRtl && " - "}
+                            </span>{" "}
+                            <span className="postedOnStyle">
+                              {moment(detailData?.publishedAt).format(
+                                "MMMM Do YYYY"
+                              )}
+                            </span>
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-xl-6 m-auto mt-2 mt-md-0">
+                      <div className="d-flex justify-content-md-end align-items-center">
+                        {" "}
+                        <SocialButtons fullURL={currentURL} />{" "}
+                      </div>
+                    </div>
+                    {/* </div> */}
+                  </div>
+
+                  <p>{detailData?.summary}</p>
+                  {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
+                  <div
+                    // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
+                    className="article-content"
+                  >
                     {" "}
-                    <SocialButtons fullURL={currentURL} />{" "}
+                    {renderContent()}
+                  </div>
+
+                  <div className="d-flex justify-content-md-end align-items-center">
+                    <SocialButtons fullURL={currentURL} />
                   </div>
                 </div>
-                {/* </div> */}
-              </div>
-
-              <p>{detailData?.summary}</p>
-              {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
-              <div
-                // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
-                className="article-content"
-              >
-                {" "}
-                {renderContent()}
-              </div>
-
-              <div className="d-flex justify-content-md-end align-items-center">
-                <SocialButtons fullURL={currentURL} />
               </div>
             </div>
             <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
