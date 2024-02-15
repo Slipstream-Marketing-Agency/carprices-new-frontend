@@ -14014,7 +14014,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   transform: translateX(-50%);
 } */
 .product-card .product-content .features li {
-  display: flex;
+  display: inline;
   align-items: center;
   gap: 5px;
   font-family: var(--font-gilroy);
@@ -29832,7 +29832,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     font-weight:bold;
   }
   .product-content-height .MobilepriceTextSize {
-    font-size: 8px !important;
+    font-size: 10px !important;
   }
 
   .product-content-height {

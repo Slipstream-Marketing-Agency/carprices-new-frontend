@@ -124,7 +124,7 @@ p {
   }
 
   h6 {
-    font-size: 0.6rem !important;
+    font-size: 0.8rem !important;
   }
   p {
     font-size: 14px !important;
@@ -427,8 +427,8 @@ small {
   height: 330px;
 }
 .blogsImage img {
-  height: 190px !important;
-  object-fit: fill !important;
+  height: 216px !important;
+  object-fit: cover !important;
 }
 .recentBlogImage {
   width: 100%;
@@ -1681,7 +1681,7 @@ input[type="color"]:focus,
   right: 20px;
   z-index: 10001;
   cursor: pointer;
-  background-color: #007bff; /* Primary color */
+  background-color: var(--primary); /* Primary color */
   color: #ffffff;
   border-radius: 50%;
   padding: 15px;
@@ -2010,6 +2010,13 @@ input[type="color"]:focus,
 }
 
 @media (max-width: 768px) {
+
+  .product-card{
+    height: 230px;
+  }
+  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+    margin-bottom:0.2rem;
+  }
   .mainarticle img {
     height: 200px !important;
   }
@@ -2334,7 +2341,6 @@ input[type="color"]:focus,
     display: flex;
     justify-content: end;
     position: absolute;
-    top: 40px;
     right: 10px;
   }
   .monthlyEMIContainer,
@@ -2346,6 +2352,11 @@ input[type="color"]:focus,
   .calculatorContentInner {
     display: flex;
     flex-direction: column;
+  }
+
+  .blogsImage img {
+    height: 198px !important;
+    object-fit: cover !important;
   }
 }
 /* car details page ends   */

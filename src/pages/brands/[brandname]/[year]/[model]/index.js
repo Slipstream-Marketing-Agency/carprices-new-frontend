@@ -404,7 +404,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                <div className="nameNShareContainer d-flex justify-content-between align-items-center position-relative">
+                <div className="nameNShareContainer position-relative">
                 <h1 className="carNameTxt">
                   {mainTrim?.year} {brand?.name} {model?.name}
                 </h1>{" "}
