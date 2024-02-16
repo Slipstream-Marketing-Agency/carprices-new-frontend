@@ -13876,10 +13876,17 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   .product-card .product-img img {
     width: 100%;
   }
+
+  .product-card .product-content {
+    padding: 5px 5px !important;
+  }
+  
 }
 .product-card .product-content {
   padding: 5px;
 }
+
+
 @media (max-width: 1499px) {
   .product-card .product-content {
     padding: 5px 10px;
@@ -14047,6 +14054,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   .product-card .product-content .content-btm {
     padding-top: 0px;
   }
+ 
 }
 .product-card .product-content .content-btm .view-btn2 {
   font-family: var(--font-gilroy);
@@ -29830,9 +29838,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .product-card .product-content .content-btm .view-btn2 {
     font-size: 10px;
     font-weight:bold;
+    line-height: 1.1 !important; 
   }
   .product-content-height .MobilepriceTextSize {
     font-size: 10px !important;
+    min-height:25px !important;
   }
 
   .product-content-height {
@@ -29842,7 +29852,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .mobileFontCarName{
     min-height:24px !important;
     font-size:10px !important;
-
+    margin: 0 0 3px !important;
   }
   .compare-car-section
     .single-compare-card
@@ -29927,6 +29937,10 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     line-height: 20px;
     font-size: 13px;
   }
+  .body-category-area .single-category1 {
+    padding: 8px 8px !important;
+  }
+  .body-category-area .single-category1 h6{font-size: 11px !important;}
 }
 
 /* mobile view ends */

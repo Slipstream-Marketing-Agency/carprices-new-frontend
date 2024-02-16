@@ -51,7 +51,16 @@ span.current.placeholder {
 .brand {
   width: 30px;
 }
+@media(max-width:650px){
 
+  .brand{
+    width: 23px !important;
+    height: 23px !important;
+  }
+  .brand img{
+    display:block;
+  }
+}
 a {
   cursor: pointer;
 }
@@ -1680,6 +1689,9 @@ input[type="color"]:focus,
   .trim-content .swiper {
     height: 150px !important;
   }
+  .product-card {
+    height: 235px !important;
+  }
 
   .calculator {
     width: 100%;
@@ -2025,6 +2037,8 @@ input[type="color"]:focus,
 
   .product-card{
     height: 230px;
+
+      padding: 5px 5px 5px 5px !important;
   }
   .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
     margin-bottom:0.2rem;
