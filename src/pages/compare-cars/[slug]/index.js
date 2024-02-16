@@ -26,7 +26,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
@@ -43,6 +43,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
   const canAddMoreCars = cars && cars.length < (isMobile ? 2 : 4);
+  const toBeAddedLength = Array.from({ length: isMobile ? 2-cars.length : 4-cars.length }, (_, index) => index + 1);
 
 
   const compateCareSettingsSlide = useMemo(() => {
@@ -167,7 +168,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
       <div className="compare-page pt-30 mb-100" >
         <div className="container">
           <div  className={`row g-4 mb-50` } style={{position: isSticky && "fixed",
-    top:isMobile ? "-130px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : !isMobile && isSticky && '82%'}} >
+    top:isMobile ? "-90px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : !isMobile && isSticky && '82%'}} >
           <div  className={`row g-4 mb-50` }  >
             <div className="col-lg-12">
               <div className="uploded-product-group">
@@ -177,8 +178,9 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
                   <CompareCarCard carData={car2Data} />
                   <CompareCarCard carData={car3Data} />
                   <CompareCarCard carData={car4Data} />
-                    {(canAddMoreCars  ) && (
-                      
+                    {(canAddMoreCars  ) && 
+                      toBeAddedLength.map((item,index)=>(
+
                       <div className={` ${!isMobile && isSticky ? 'col-2 ' : 'col-6 col-lg-3' }`} style={{position:(!isMobile && isSticky) && 'fixed' , bottom:!isMobile && '20px',right:!isMobile && '0px'}}>
                         <div className="product-card style-2 compare" style={{background:(!isMobile && isSticky) && 'unset' , boxShadow:(!isMobile && isSticky) && 'unset', border:(!isMobile && isSticky) && 'none' }}>
                         <div className="product-upload-area" style={{
@@ -193,7 +195,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
                           </div>
                         </div>
                       </div>
-                    )}
+                      ))
+                    }
                 </div>
               </div>
             </div>
@@ -258,7 +261,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
                 className="scrollspy-example"
                 tabIndex={0}
               >
-               {(car1Data && car2Data ) && <CarComparisonTable tableData={tableData} />}
+               { <CarComparisonTable tableData={tableData} />}
 
               </div>
             </div>
