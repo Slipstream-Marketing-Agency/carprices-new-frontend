@@ -263,15 +263,15 @@ function CarListingLeftSidebar({
                               <div className="news-img list-article">
                                 <Link
                                   legacyBehavior
-                                  href={`/news/${newsItem.slug}`}
+                                  href={`/news/${newsItem?.slug}`}
                                 >
                                   <a>
                                     <div className="position-relative imageContainer">
                                       <Image
                                         src={
-                                          newsItem.coverImage
-                                            ? newsItem.coverImage
-                                            : altImage
+                                          newsItem?.coverImage
+                                            && newsItem?.coverImage
+                                            // for alt image need to add else
                                         }
                                         alt="Article Image"
                                         layout="responsive"
@@ -285,7 +285,7 @@ function CarListingLeftSidebar({
                               </div>
                               <div className="content">
                                 <h5 className="mt-3 BlogCardHeadingTxt head_truncate">
-                                  {newsItem.title}
+                                  {newsItem?.title}
                                 </h5>
                                 {/* Similar details for rest of the articles */}
                               </div>
