@@ -86,7 +86,7 @@ function Footer1() {
               <div className="col d-flex justify-content-sm-center">
                 <div className="footer-widget">
                   <div className="widget-title">
-                    <h5>Comparos</h5>
+                    <h5>Comparisons</h5>
                   </div>
                   <div className="menu-container">
                     <ul>
