@@ -2498,5 +2498,9 @@
   {
     "From": "/wp-content/uploads/2020/07/Ford-Bronco-2021-Dubai-UAE-5-scaled.jpg",
     "To": "/brands/ford"
+  },
+  {
+    "From": "/news/al-masaood-automobiles-nissan-brought-back-the-nissan-pathfinder-in-its-new-avatar!",
+    "To": "/news/al-masaood-automobiles-nissan-brought-back-the-nissan-pathfinder-in-its-new-avatar"
   }
 ]

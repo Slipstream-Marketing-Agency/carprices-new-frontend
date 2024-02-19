@@ -265,8 +265,21 @@ function CarDeatilsPage({ model, trimList, trimData }) {
   return (
     <MainLayout
       pageMeta={{
-        title: `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices, Specification, Variants & Features in UAE - CarPrices.ae`,
-        description: `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} in UAE. Discover its features, specifications, reviews, and compare models. Find your perfect car and make an informed decision. `,
+        title: `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+        description: `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${
+          trimData?.name
+        } price in UAE starts at ${
+          trimData.price <= 0
+            ? "TBD"
+            : "AED" +
+              " " +
+              trimData.price?.toLocaleString("en-AE", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+              })
+        }*.Check out ${
+          trimData?.model
+        } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
         type: "Car Review Website",
       }}
     >
@@ -324,8 +337,11 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                               <div className="swiper-wrapper">
                                 <SwiperSlide className="swiper-slide">
                                   <Image
-                                    src={trimData?.featuredImage === null
-                                      ? "/assets/img/car-placeholder.png" : trimData?.featuredImage}
+                                    src={
+                                      trimData?.featuredImage === null
+                                        ? "/assets/img/car-placeholder.png"
+                                        : trimData?.featuredImage
+                                    }
                                     alt="product image"
                                     fill
                                     className="object-contain"
@@ -350,13 +366,14 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                <div className="d-flex justify-content-between align-items-center position-relative">
+                  <div className="d-flex justify-content-between align-items-center position-relative">
                     <h1>
                       {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                       {trimData?.name}
                     </h1>{" "}
-                    <div className="shareBtnMobile"><NewShareBtns /></div>
-
+                    <div className="shareBtnMobile">
+                      <NewShareBtns />
+                    </div>
                   </div>
                   <h4 className="mt-1">
                     <Price data={trimData.price} />

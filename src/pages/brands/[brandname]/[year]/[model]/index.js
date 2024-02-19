@@ -26,6 +26,7 @@ import axios from "axios";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import ModelVehicleGallery from "@/src/components/trim-details/ModelVehicleGallery";
 import NewShareBtns from "@/src/components/common/NewShareBtns";
+import Price from "@/src/utils/Price";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -315,8 +316,19 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
   return (
     <MainLayout
       pageMeta={{
-        title: `${year} ${brand?.name} ${model?.name} Car Prices, Specification, Variants & Features in UAE - CarPrices.ae`,
-        description: `Explore the ${model?.year} ${brand?.name} ${model?.name} in UAE. Discover its features, specifications, reviews, and compare models. Find your perfect car and make an informed decision. `,
+        title: `${brand?.name} ${model?.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
+        description: `Explore the ${year} ${brand?.name} ${
+          model?.name
+        } starting at ${
+          minPrice <= 0
+            ? "TBD"
+            : "AED" +
+              " " +
+              minPrice?.toLocaleString("en-AE", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+              })
+        }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
         type: "Car Review Website",
       }}
     >
@@ -404,12 +416,15 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                <div className="nameNShareContainer position-relative">
-                <h1 className="carNameTxt">
-                  {mainTrim?.year} {brand?.name} {model?.name}
-                </h1>{" "}
-               <div className="shareBtnMobile"> <NewShareBtns /></div>
-              </div>
+                  <div className="nameNShareContainer position-relative">
+                    <h1 className="carNameTxt">
+                      {mainTrim?.year} {brand?.name} {model?.name}
+                    </h1>{" "}
+                    <div className="shareBtnMobile">
+                      {" "}
+                      <NewShareBtns />
+                    </div>
+                  </div>
                   <h4 className="mt-1">
                     <CarPriceRange />
                   </h4>
