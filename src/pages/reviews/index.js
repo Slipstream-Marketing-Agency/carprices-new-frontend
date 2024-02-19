@@ -134,7 +134,7 @@ function BlogStandardPage({
               >
                 {secondSectionArticles.map((article, index) => (
                   <Link legacyBehavior href={`/reviews/${article.slug}`}>
-                    <div className="review-card d-flex flex-row cursorPointer">
+                    <div className="news-card d-flex flex-row cursorPointer">
                       <div className="secondSectionArticles">
                         <div className="position-relative imageContainer ">
                           <img

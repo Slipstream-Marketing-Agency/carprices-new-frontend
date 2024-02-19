@@ -230,7 +230,7 @@ function BlogStandardPage({
             </div>
           </div>
           <div className="col-lg-3 hideOnMobile mt-1">
-          <Ad300x250 dataAdSlot="8451638145" />
+            <Ad300x250 dataAdSlot="8451638145" />
             {articleTags?.length > 0 && (
               <div className="white_bg_wrapper my-3">
                 <h4>TAGS</h4>
