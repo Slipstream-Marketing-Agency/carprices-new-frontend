@@ -2010,9 +2010,15 @@ input[type="color"]:focus,
 }
 
 .article-content img {
+  margin: 10px 0px;
   width: 100% !important;
   border-radius: 10px;
+  height: 300px !important;
+  object-fit: contain;
+  text-align: center;
+  border-radius: 10px !important;
 }
+
 
 .mainarticle img {
   height: 500px !important;
@@ -2487,5 +2493,15 @@ input[type="color"]:focus,
   .pagination-and-next-prev{
     justify-content: center !important;
   }
+
+  .article-content img {
+    margin: 13px 0px;
+    width: 100% !important;
+    border-radius: 10px;
+    height: auto !important;
+    object-fit: contain;
+    text-align: center;
+  }
+  
 }
 
