@@ -287,7 +287,7 @@ function BlogStandardPage({
       <Ad728x90 dataAdSlot="5962627056" />
       <div className="container">
         <div className="row g-2 mt-3 white_bg_wrapper ">
-          <h4 className="fw-bold mt-2 box_header mb-3">Popular review</h4>
+          <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
 
           {popularArticles?.map((reviewItem, index) => {
             // Adjust index to account for the first item displayed separately
