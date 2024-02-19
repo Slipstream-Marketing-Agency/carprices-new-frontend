@@ -46,8 +46,14 @@ function index({ bannerImage, bannerText }) {
                 </span> */}
 
                 {/* <h1 className="text-black text-center">{t.uaeFastest}</h1> */}
-                <h1 className="text-black text-center">{bannerText}</h1>
-
+                {/* <h1 className="text-black text-center w-50 fw-bold">{bannerText}</h1> */}
+                <h1 className="text-black text-start fw-bold ">
+                  <span className="txt-1">UAE's Fastest Growing </span>
+                  <br />
+                  <span className="txt-2">New Car Buyer's</span>
+                  <br />
+                  <span className="txt-3">Guide</span>
+                </h1>
                 {/* <p>
                   Car dealerships may sell new cars from one or several
                   manufacturers, as well as used cars from a variety of sources.

@@ -2019,7 +2019,6 @@ input[type="color"]:focus,
   border-radius: 10px !important;
 }
 
-
 .mainarticle img {
   height: 500px !important;
 }
@@ -2490,7 +2489,7 @@ input[type="color"]:focus,
     font-size: 10px !important;
     line-height: 12px !important;
   }
-  .pagination-and-next-prev{
+  .pagination-and-next-prev {
     justify-content: center !important;
   }
 
@@ -2502,6 +2501,15 @@ input[type="color"]:focus,
     object-fit: contain;
     text-align: center;
   }
-  
 }
 
+.txt-1 {
+  font-size: 45px !important;
+}
+.txt-2 {
+  font-size: 35px !important;
+}
+
+.txt-3 {
+  font-size: 30px !important;
+}
