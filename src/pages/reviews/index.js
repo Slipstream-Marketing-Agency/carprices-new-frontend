@@ -26,8 +26,9 @@ function BlogStandardPage({
   totalPages,
   articlesThisWeek,
   articleTags,
+  popularArticles,
 }) {
-  console.log(articlesThisWeek, "articlesThisWeek");
+  console.log(articles, "articlesarticles");
   const inputRef = useRef(null);
   const client = createApolloClient();
   const router = useRouter();
@@ -48,6 +49,10 @@ function BlogStandardPage({
       },
     };
   });
+
+  const firstArticle = articles.slice(0, 2);
+  const secondSectionArticles = articles.slice(2, 9);
+  const remainingArticles = articles.slice(8);
   return (
     <MainLayout
       pageMeta={{
@@ -61,58 +66,108 @@ function BlogStandardPage({
       <div className="my-1">
         <Ad970x250 dataAdSlot="8815612950" />
       </div>
-      <div className="container mb-4">
-        <h1 className="fw-bold mt-2">Latest Car review in UAE</h1>
-        <p className="my-2">
-          Stay up-to-date with the latest review and updates on the UAE car
-          industry, including new car launches, launch dates, car images, expos
-          and events, price updates, latest discounts, facelifts, recalls, and
-          more. Get all the insights you need to know about the happenings in
-          the UAE automotive industry.
-        </p>
+      <div className="container mb-3">
+        <div className="white_bg_wrapper">
+          {" "}
+          <h1 className="fw-bold mt-2 box_header">Latest Car review in UAE</h1>
+          <p className="my-2">
+            Stay up-to-date with the latest review and updates on the UAE car
+            industry, including new car launches, launch dates, car images,
+            expos and events, price updates, latest discounts, facelifts,
+            recalls, and more. Get all the insights you need to know about the
+            happenings in the UAE automotive industry.
+          </p>
+        </div>
+
         {/* <BlogDropDown initialFocus={true} review={true}/> */}
 
-        <div className="row g-4 mt-3">
-          <div className="col-lg-9">
+        <div className="row g-3 mt-1">
+          <div className="col-lg-9 mt-2">
             {/* Display the first article separately */}
-            {articles && articles.length > 0 && (
-              <div className="featured-article pb-4">
-                <div className="review-card">
-                  <div className="review-img mainarticle">
-                    <Link legacyBehavior href={`/reviews/${articles[0].slug}`}>
-                      <a>
+            <div className="row g-1 white_bg_wrapper">
+              <div className="col-xl-7 col-12 mt-0">
+                <div className="d-flex flex-column">
+                  {firstArticle.map((article, index) => (
+                    <div className="review-card mb-2 cursorPointer">
+                      <div className="review-img mainarticle first_articles">
+                        <Link legacyBehavior href={`/reviews/${article.slug}`}>
+                          <div className="position-relative imageContainer image-overlay ">
+                            <Image
+                              src={
+                                article.coverImage
+                                  ? article.coverImage
+                                  : altImage
+                              }
+                              alt="Featured Article Image"
+                              layout="responsive"
+                              width={600} // Adjusted for a larger display
+                              height={400}
+                              objectFit="cover"
+                            />
+
+                            <div className="content slider_content_box">
+                              <h5 className="featured-article-title ">
+                                {article.title}
+                              </h5>
+
+                              <small className="text-white">
+                                {" "}
+                                {article?.author} |{" "}
+                                {moment(article?.publishedAt).format(
+                                  "MMMM Do YYYY"
+                                )}
+                              </small>
+
+                              {/* You can add more details like date, author, etc., here */}
+                            </div>
+                          </div>
+                        </Link>
+                        {/* Additional content for the featured article */}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                className="col-xl-5 col-lg-5 col-md-5 col-12 wow fadeInUp mt-0 mb-2 "
+                data-wow-delay="200ms"
+              >
+                {secondSectionArticles.map((article, index) => (
+                  <Link legacyBehavior href={`/reviews/${article.slug}`}>
+                    <div className="review-card d-flex flex-row cursorPointer">
+                      <div className="secondSectionArticles">
                         <div className="position-relative imageContainer ">
-                          <Image
+                          <img
                             src={
-                              articles[0].coverImage
-                                ? articles[0].coverImage
-                                : altImage
+                              article.coverImage ? article.coverImage : altImage
                             }
-                            alt="Featured Article Image"
+                            alt="Article Image"
                             layout="responsive"
-                            width={600} // Adjusted for a larger display
-                            height={400}
+                            width={300}
+                            height={205}
                             objectFit="cover"
                           />
-                          <div className="content">
-                            <h2 className="featured-article-title ">
-                              {articles[0].title}
-                            </h2>
-                            {/* You can add more details like date, author, etc., here */}
-                          </div>
                         </div>
-                      </a>
-                    </Link>
-                    {/* Additional content for the featured article */}
-                  </div>
-                </div>
-                <Ad728x90 dataAdSlot="5962627056" />
+                      </div>
+                      <div className="content ms-3 d-flex flex-column justify-content-between">
+                        <h6 className=" ">{article.title}</h6>
+                        <p className="text-black articlelistdate fw-bold">
+                          {article?.author} |{" "}
+                          {moment(article?.publishedAt).format("MMMM Do YYYY")}
+                        </p>
+                        {/* Similar details for rest of the articles */}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            )}
+            </div>
+
+            <Ad728x90 dataAdSlot="5962627056" />
 
             {/* Grid layout for the rest of the articles */}
-            <div className="row g-4">
-              {articles?.slice(1).map((reviewItem, index) => {
+            <div className="row g-2 mt-3 white_bg_wrapper ">
+              {remainingArticles?.slice(1).map((reviewItem, index) => {
                 // Adjust index to account for the first item displayed separately
                 const adjustedIndex = index + 1;
 
@@ -144,9 +199,15 @@ function BlogStandardPage({
                           </Link>
                         </div>
                         <div className="content">
-                          <h5 className="mt-3 BlogCardHeadingTxt head_truncate">
+                          <h6 className="mt-2 mb-1 blog_title_list_truncate">
                             {reviewItem.title}
-                          </h5>
+                          </h6>
+                          <p className="text-black articlelistdate fw-bold mt-2">
+                            {reviewItem?.author} |{" "}
+                            {moment(reviewItem?.publishedAt).format(
+                              "MMMM Do YYYY"
+                            )}
+                          </p>
                           {/* Similar details for rest of the articles */}
                         </div>
                       </div>
@@ -163,16 +224,13 @@ function BlogStandardPage({
                   </React.Fragment>
                 );
               })}
+              <div className="mt-4">
+                <Pagination currentPage={currentPage} totalPages={totalPages} />
+              </div>
             </div>
           </div>
-          <div className="col-lg-3 hideOnMobile ">
-            {articlesThisWeek?.length > 0 && (
-              <div className="">
-                <div className="ad-container">
-                  <Ad300x600 dataAdSlot="8451638145" />
-                </div>
-              </div>
-            )}
+          <div className="col-lg-3 hideOnMobile mt-1">
+            <Ad300x250 dataAdSlot="8451638145" />
             {articleTags?.length > 0 && (
               <div className="white_bg_wrapper my-3">
                 <h4>TAGS</h4>
@@ -192,9 +250,9 @@ function BlogStandardPage({
             )}
             <Ad300x250 dataAdSlot="8451638145" />
 
-            {articlesThisWeek.length > 0 && (
+            {articlesThisWeek?.length > 0 && (
               <div className="white_bg_wrapper my-3">
-                <h4>FROM LAST TWO WEEK</h4>
+                <h4 className="fw-bold">FROM LAST TWO WEEK</h4>
                 <div className="cursorPointer">
                   {articlesThisWeek?.map((blog) => (
                     <Link
@@ -205,7 +263,7 @@ function BlogStandardPage({
                     >
                       <div className="fs-6 py-1">
                         <div className="">
-                          <h5 className="text-bold blogFont fw-bold mb-0">{`${blog?.title}`}</h5>
+                          <h6 className="text-bold blogFont fw-bold mb-0">{`${blog?.title}`}</h6>
                           <span className="postedOnStyle">
                             {moment(blog?.publishedAt).format("MMMM Do YYYY")}
                           </span>
@@ -225,12 +283,55 @@ function BlogStandardPage({
           </div>
         </div>
       </div>
-      <br />
-      {/* <Ad728x90 dataAdSlot="5962627056" /> */}
-      <br />
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
-      <br />
-      <br />
+
+      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="container">
+        <div className="row g-2 mt-3 white_bg_wrapper ">
+          <h4 className="fw-bold mt-2 box_header mb-3">Popular review</h4>
+
+          {popularArticles?.map((reviewItem, index) => {
+            // Adjust index to account for the first item displayed separately
+
+            return (
+              <React.Fragment key={`review`}>
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 col-6 wow fadeInUp mt-0 mb-2"
+                  data-wow-delay="200ms"
+                >
+                  <div className="review-card">
+                    <div className="review-img list-article">
+                      <Link legacyBehavior href={`/reviews/${reviewItem.slug}`}>
+                        <a>
+                          <div className="position-relative imageContainer">
+                            <Image
+                              src={
+                                reviewItem.coverImage
+                                  ? reviewItem.coverImage
+                                  : altImage
+                              }
+                              alt="Article Image"
+                              layout="responsive"
+                              width={300}
+                              height={205}
+                              objectFit="cover"
+                            />
+                          </div>
+                        </a>
+                      </Link>
+                    </div>
+                    <div className="content">
+                      <h6 className="mt-2 mb-1 blog_title_list_truncate">
+                        {reviewItem.title}
+                      </h6>
+                      {/* Similar details for rest of the articles */}
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
     </MainLayout>
   );
 }
@@ -239,7 +340,7 @@ export async function getServerSideProps(context, query) {
   console.log(context.query, "sssssssssssssssss");
 
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
-  const pageSize = 25; // Set the number of items per page
+  const pageSize = 24; // Set the number of items per page
 
   try {
     const articles = await axios.get(
@@ -254,25 +355,29 @@ export async function getServerSideProps(context, query) {
       `${process.env.NEXT_PUBLIC_API_URL}articletags/list`
     );
 
-    //localhost:1337/api
+    const popularArticles = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/listArticlesByEngagement?pageSize=11`
+    );
+    // Check if the data fetching was successful
+    if (!articles.data.data || articles.data.data.length === 0) {
+      // Trigger a 404 response by returning notFound: true
+      return { notFound: true };
+    }
 
-    http: return {
+    return {
       props: {
         articles: articles.data.data,
         articlesThisWeek: articlesThisWeek.data.data,
         totalPages: articles.data.pagination.pageCount,
         currentPage: page,
         articleTags: articleTags.data,
+        popularArticles: popularArticles.data.data,
       },
     };
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
-    return {
-      props: {
-        error: true,
-        errorMessage: error.message,
-      },
-    };
+    // In case of any error during data fetching, trigger a 404 response
+    return { notFound: true };
   }
 }
 

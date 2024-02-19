@@ -45,6 +45,7 @@ import Ad970x250 from "@/src/components/ads/Ad970x250";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import Ad300x250 from "@/src/components/ads/Ad300x250";
 import AdBlog from "@/src/components/ads/AdBlog";
+import axios from "axios";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -55,7 +56,11 @@ function BlogDetailsPage({
   fullURL,
   recentReviews,
   popularBrands,
+  popularArticles,
+  articlesThisWeek,
+  article,
 }) {
+  console.log(article, "articlearticlearticlearticle");
   const [activeTab, setActiveTab] = useState("tab1");
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -63,7 +68,6 @@ function BlogDetailsPage({
     setActiveTab(selectedTab);
   };
   const [isMobile, setIsMobile] = useState(false);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,11 +83,11 @@ function BlogDetailsPage({
   }, []);
 
   useEffect(() => {
-    const styleTag = document.createElement('style');
-    styleTag.innerHTML = '@media (min-width: 768px) { p img { height: 421px !important; } }';
+    const styleTag = document.createElement("style");
+    styleTag.innerHTML =
+      "@media (min-width: 768px) { p img { height: 421px !important; } }";
     document.head.appendChild(styleTag);
-
-  }, [])
+  }, []);
 
   const router = useRouter();
   const t = useTranslate();
@@ -176,7 +180,7 @@ function BlogDetailsPage({
   // const paragraphContent = news?.blog?.content;
 
   const [metaDescription, setMetaDescription] = useState("");
-  const paragraphContent = detailData.content;
+  const paragraphContent = article?.content;
 
   useEffect(() => {
     if (paragraphContent) {
@@ -197,14 +201,19 @@ function BlogDetailsPage({
 
     const currentUrl = router.pathname; // Get the current URL of the website
 
-    const content = detailData.content
+    const content = article?.content
       .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
       .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
-      .replace(/<h3>(.*?)<\/h3>/g, '<h3 style="padding-top: 10px !important;">$1</h3>')
+      .replace(
+        /<h3>(.*?)<\/h3>/g,
+        '<h3 style="padding-top: 10px !important;">$1</h3>'
+      )
       .replace(/<div>\s*<br\s*\/?>/, "<div>")
-      .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, '<p><br></p>')
-      .replace(/<p><img(.*?)width="100%"(.*?)><\/p>/g, '<p><img$1style="width: 100%; height: 421px;"$2></p>');
-
+      .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, "<p><br></p>")
+      .replace(
+        /<p><img(.*?)width="100%"(.*?)><\/p>/g,
+        '<p><img$1style="width: 100%; height: 421px;"$2></p>'
+      );
 
     if (!content) return null;
 
@@ -265,9 +274,6 @@ function BlogDetailsPage({
     return null;
   };
 
-  console.log(detailData);
-  // console.log(recentBlog);
-
   const settings = useMemo(() => {
     return {
       speed: 1500,
@@ -282,12 +288,12 @@ function BlogDetailsPage({
       },
     };
   });
-  
+
   return (
     <MainLayout
       pageMeta={{
-        title: `${detailData?.metaTitle}`,
-        description: ``,
+        title: `${article?.metaTitle}`,
+        description: `${article?.summary}`,
         type: "Car news Website",
       }}
     >
@@ -300,25 +306,25 @@ function BlogDetailsPage({
 
       <div className="blog-details-page mt-4">
         <div className="container">
-          <div className="row g-lg-4 gy-5">
-            <div className="col-lg-8 pb-2">
-              <div className="row blogContainer mt-2 pb-2">
+          <div className="row g-2 ">
+            <div className="col-lg-9 pb-2">
+              <div className="row g-1">
                 <div className="col-lg-1 d-md-none d-lg-block">
-
-                  <div className={`mt-4 social-area d-flex flex-column align-items-center  gap-3 ${isRtl && 'flex-row-reverse'} ${isMobile && 'd-none'} `} >
-                    {<h5 className='mb-0 shareTxt '>{t.share} </h5>}
+                  <div
+                    className={`sticky_scroll mt-4  social-area d-flex flex-column align-items-center  gap-3 ${
+                      isRtl && "flex-row-reverse"
+                    } ${isMobile && "d-none"} `}
+                  >
+                    {/* {<h5 className="mb-0 shareTxt ">{t.share} </h5>} */}
                     <ul className="social-link d-flex flex-column  gap-2  ps-2 m-auto  ">
-                      <FacebookShareButton
-                        url={fullURL} >
+                      <FacebookShareButton url={fullURL}>
                         <FacebookIcon size={32} round />
                       </FacebookShareButton>
-                      <WhatsappShareButton
-                        url={fullURL} >
+                      <WhatsappShareButton url={fullURL}>
                         <WhatsappIcon size={32} round />
                       </WhatsappShareButton>
 
-                      <LinkedinShareButton
-                        url={fullURL} >
+                      <LinkedinShareButton url={fullURL}>
                         <LinkedinIcon size={32} round />
                       </LinkedinShareButton>
                       <TwitterShareButton
@@ -333,26 +339,47 @@ function BlogDetailsPage({
                       >
                         <TelegramIcon size={32} round />
                       </TelegramShareButton>
-
                     </ul>
+                  </div>
+                </div>
+                <div className="col-lg-11  white_bg_wrapper mt-0">
+                  <h1 className="post-title  mt-1">{article?.title}</h1>
+                  <div className="d-flex align-items-center gap-3">
+                    {/* <div className="author-img">
+                          <span className="border rounded-circle px-2 py-1">C</span>
+                        </div> */}
 
-
+                    <div className="author-content">
+                      <h6 className="mt-0">
+                        {article?.author} /{" "}
+                        <span className="postedOnStyle">
+                          {isRtl && " - "}
+                          {t.postedOn}
+                          {!isRtl && " - "}
+                        </span>{" "}
+                        <span className="postedOnStyle">
+                          {moment(article?.publishedAt).format("MMMM Do YYYY")}
+                        </span>
+                      </h6>
+                    </div>
                   </div>
 
-                </div>
-                <div className="col-lg-11">
-                  <h1 className="post-title mb-4 ps-2 mt-4">{detailData?.title}</h1>
+                  <p className="summary_box">{article?.summary}</p>
 
+                  <div className="d-flex d-md-none d-flex justify-content-end align-items-center mb-2">
+                    {" "}
+                    <SocialButtons fullURL={currentURL} />{" "}
+                  </div>
                   <div className="post-thumb">
                     {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
                     <div className="position-relative ">
                       <Image
                         src={
-                          detailData?.coverImage?.data?.attributes?.url
-                            ? detailData?.coverImage.data?.attributes?.url
-                            : altImage
+                          article?.coverImage
+                            ? article?.coverImage
+                            : "/assets/img/car-placeholder.png"
                         }
-                        alt="blog image"
+                        alt=""
                         layout="responsive"
                         width={300}
                         height={205}
@@ -364,43 +391,9 @@ function BlogDetailsPage({
                             <span className="text-white p-1">Buying Advice</span>
                         </div> */}
                   </div>
-                  
 
                   {/* <div className="author-area"> */}
-                  <div className="row mb-3">
-                    <div className="col-xl-6">
-                      <div className="d-flex align-items-center gap-3">
-                        {/* <div className="author-img">
-                          <span className="border rounded-circle px-2 py-1">C</span>
-                        </div> */}
 
-                        <div className="author-content">
-                          <h6 className="mt-0">
-                            {detailData?.author?.data?.attributes?.name} /{" "}
-                            <span className="postedOnStyle">
-                              {isRtl && " - "}
-                              {t.postedOn}
-                              {!isRtl && " - "}
-                            </span>{" "}
-                            <span className="postedOnStyle">
-                              {moment(detailData?.publishedAt).format(
-                                "MMMM Do YYYY"
-                              )}
-                            </span>
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-xl-6 m-auto mt-2 mt-md-0">
-                      <div className="d-flex justify-content-md-end align-items-center">
-                        {" "}
-                        <SocialButtons fullURL={currentURL} />{" "}
-                      </div>
-                    </div>
-                    {/* </div> */}
-                  </div>
-
-                  <p>{detailData?.summary}</p>
                   {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
                   <div
                     // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
@@ -409,18 +402,14 @@ function BlogDetailsPage({
                     {" "}
                     {renderContent()}
                   </div>
-
-                  <div className="d-flex justify-content-md-end align-items-center">
-                    <SocialButtons fullURL={currentURL} />
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
-              <div className="blog-sidebar mb-50">
-                <div className="white_bg_wrapper mt-3 px-1 py-3">
-                  <h4 className="px-2">
-                    Latest News <hr className="my-2" />
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen mt-0 ">
+              <div className="blog-sidebar mb-3">
+                <div className="white_bg_wrapper  px-1 py-3">
+                  <h4 className="fw-bold px-2">
+                    Latest News <hr className="my-2 " />
                   </h4>
 
                   <div>
@@ -468,9 +457,35 @@ function BlogDetailsPage({
                 <div className="my-3">
                   <Ad300x250 dataAdSlot="3792539533" />
                 </div>
-                <div className="my-3 sticky_scroll">
-                  <Ad300x600 dataAdSlot="3792539533" />
+              </div>
+              {articlesThisWeek?.length > 0 && (
+                <div className="white_bg_wrapper my-3">
+                  <h4 className="fw-bold">FROM LAST TWO WEEK</h4>
+                  <div className="cursorPointer">
+                    {articlesThisWeek?.map((blog) => (
+                      <Link
+                        className="cursorPointer"
+                        legacyBehavior
+                        href={`/news/${blog?.slug}`}
+                        key={blog?.id}
+                      >
+                        <div className="fs-6 py-1">
+                          <div className="">
+                            <h6 className="text-bold blogFont fw-bold mb-0">{`${blog?.title}`}</h6>
+                            <span className="postedOnStyle">
+                              {moment(blog?.publishedAt).format("MMMM Do YYYY")}
+                            </span>
+                          </div>
+                          <hr className="my-2" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
+              )}
+
+              <div className=" sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
               </div>
 
               {/* <div className="single-widgets sidebar-banner">
@@ -490,6 +505,54 @@ function BlogDetailsPage({
                                 </div> */}
             </div>
           </div>
+        </div>
+      </div>
+      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="container">
+        <div className="row g-2 mt-3 white_bg_wrapper ">
+          <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
+
+          {popularArticles?.map((newsItem, index) => {
+            // Adjust index to account for the first item displayed separately
+
+            return (
+              <React.Fragment key={`news`}>
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 col-6 wow fadeInUp mt-0 mb-2"
+                  data-wow-delay="200ms"
+                >
+                  <div className="news-card">
+                    <div className="news-img list-article">
+                      <Link legacyBehavior href={`/news/${newsItem.slug}`}>
+                        <a>
+                          <div className="position-relative imageContainer">
+                            <Image
+                              src={
+                                newsItem.coverImage
+                                  ? newsItem.coverImage
+                                  : altImage
+                              }
+                              alt="Article Image"
+                              layout="responsive"
+                              width={300}
+                              height={205}
+                              objectFit="cover"
+                            />
+                          </div>
+                        </a>
+                      </Link>
+                    </div>
+                    <div className="content">
+                      <h6 className="mt-2 mb-1 blog_title_list_truncate">
+                        {newsItem.title}
+                      </h6>
+                      {/* Similar details for rest of the articles */}
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
       {/* <Ad728x90 dataAdSlot="5962627056" /> */}
@@ -653,22 +716,38 @@ export async function getServerSideProps(context) {
       `,
     });
 
+    const popularArticles = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/listArticlesByEngagement?pageSize=11`
+    );
+
+    const articlesThisWeek = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/listlasttwoweeks?slug=news`
+    );
+
+    const article = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}articles/findone/${slug}/news`
+    );
+
+    if (article?.data?.current?.content === undefined) {
+      // If no articles are found, trigger a 404 response
+      return { notFound: true };
+    }
+
     return {
       props: {
         detailData: data?.articles?.data[0]?.attributes || null,
         recentBlog: recentBlog?.data?.articles?.data,
         fullURL,
         recentReviews: recentReviewsData?.data?.articles?.data,
+        popularArticles: popularArticles.data.data,
+        articlesThisWeek: articlesThisWeek.data.data,
+        article: article.data.current,
       },
     };
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
-    return {
-      props: {
-        error: true,
-        errorMessage: error.message,
-      },
-    };
+    // If an error occurs (e.g., network error, data fetching error), trigger a 404 response
+    return { notFound: true };
   }
 }
 export default BlogDetailsPage;

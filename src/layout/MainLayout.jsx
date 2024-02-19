@@ -39,7 +39,7 @@ function MainLayout({ children, pageMeta }) {
       <Modals />
       <Header />
       {/* <Breadcrumb /> */}
-      <main className="body-height"> {children}</main>
+      <main > {children}</main>
       <Footer1 />
     </>
   );

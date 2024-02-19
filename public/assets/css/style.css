@@ -198,7 +198,6 @@ h4,
 h5,
 h6 {
   font-family: var(--font-gilroy);
-  font-weight: 600;
   color: var(--title-color);
 }
 
@@ -26451,7 +26450,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   border-radius: 10px;
   border: 1px solid #eee;
   padding: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 .blog-details-page .post-thumb img {
   border-radius: 5px;
