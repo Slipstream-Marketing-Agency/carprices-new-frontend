@@ -45,11 +45,11 @@ function index({ heading, carDetails, compare }) {
           spaceBetween: 15,
         },
         992: {
-          slidesPerView: 2,
+          slidesPerView: 3,
           spaceBetween: 1,
         },
         1200: {
-          slidesPerView: 2,
+          slidesPerView: 3,
           spaceBetween: 24,
         },
         1400: {

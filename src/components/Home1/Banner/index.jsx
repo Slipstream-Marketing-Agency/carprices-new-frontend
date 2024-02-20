@@ -50,9 +50,7 @@ function index({ bannerImage, bannerText }) {
                 <h1 className="text-black text-start fw-bold ">
                   <span className="txt-1">UAE's Fastest Growing </span>
                   <br />
-                  <span className="txt-2">New Car Buyer's</span>
-                  <br />
-                  <span className="txt-3">Guide</span>
+                  <span className="txt-2">New Car Buyer's Guide</span>
                 </h1>
                 {/* <p>
                   Car dealerships may sell new cars from one or several
