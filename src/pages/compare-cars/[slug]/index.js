@@ -133,7 +133,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 600 && window.scrollY <= 3400) {
+      if (window.scrollY >=350 && window.scrollY <= 3400) {
         setIsSticky(true);
       } else  {
         setIsSticky(false);
@@ -168,7 +168,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
       <div className="compare-page pt-30 mb-100" >
         <div className="container">
           <div  className={`row g-4 mb-50` } style={{position: isSticky && "fixed",
-    top:isMobile ? "-90px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : !isMobile && isSticky && '82%'}} >
+    top:isMobile ? "-90px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : (!isMobile && isSticky && car1Data && car2Data && car3Data && car4Data) ? '64%' : (!isMobile && isSticky  )&& '82%', right: isSticky && !isMobile && (!isMobile && car1Data && !car2Data && !car3Data && !car4Data)  ? '-838px' : (!isMobile && car2Data && !car3Data && !car4Data && car1Data) ? '-512px' : (!isMobile && car1Data && car2Data && car3Data && !car4Data) ? '-215px': (!isMobile && car1Data && car2Data && car3Data && car4Data) && '133px' }} >
           <div  className={`row g-4 mb-50` }  >
             <div className="col-lg-12">
               <div className="uploded-product-group">
