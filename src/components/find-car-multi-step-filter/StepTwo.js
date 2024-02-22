@@ -1,98 +1,72 @@
-import React, { useEffect, useState } from "react";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
-import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-export default function StepTwo({ filterData, setFilterData }) {
+export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
   const router = useRouter();
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
-  const [minValue, setMinValue] = useState(filterData.budget[0]);
-  const [maxValue, setMaxValue] = useState(filterData.budget[1]);
-  const [initialValues, setInitialValues] = useState([filterData.budget[0], filterData.budget[1]]);
-  
-  useEffect(() => {
-    setInitialValues([filterData.budget[0], filterData.budget[1]]);
-  }, []);
+  let isRtl = router.locale === "ar";
 
-  const marks = {
-    [minValue]: {
-      style: {
-        color: "var(--primary)",
-        marginLeft: "20px",
-        marginTop: "14px",
-      },
-      label: <strong>{filterData.budget[0]}</strong>,
-    },
-    [maxValue]: {
-      style: {
-        color: "var(--primary)",
-        marginLeft: "-25px",
-        marginTop: "14px",
-      },
-      label: <strong>{filterData.budget[1]}</strong>,
-    },
+  console.log(filterData, "filterDatafilterData");
+
+  const filterItems = filterData?.bodyTypes;
+
+  const handlePreferencesClick = (newBodyTypes) => {
+    setFilterData((prevState) => {
+      const index = prevState.bodyTypes.indexOf(newBodyTypes);
+      if (index > -1) {
+        // remove the newBodyTypes from the array
+        const updatedBodyType = [...prevState.bodyTypes];
+        updatedBodyType.splice(index, 1);
+        return {
+          ...prevState,
+          bodyTypes: updatedBodyType,
+        };
+      } else {
+        // add the newBodyTypes to the array
+        return {
+          ...prevState,
+          bodyTypes: [...prevState.bodyTypes, newBodyTypes],
+        };
+      }
+    });
   };
 
-  const handleStyle = {
-    height: "25px",
-    width: "25px",
-    marginTop: "-2px",
-    opacity: "1",
-  };
-
-  const trackStyle = {
-    height: "20px",
-    marginLeft: "0px",
-    backgroundColor: "var(--primary)",
-  };
-  const railStyle = { height: "20px" };
-  const dotStyle = { display: "none" };
-
-  function handleSliderChange(value) {
-    setMinValue(value[0]);
-    setMaxValue(value[1]);
-    setFilterData((prevState) => ({
-      ...prevState,
-      budget: [value[0], value[1]],
-    }));
-  }
-
-
+  /*
+  Logic of handlePreferencesClick
+  Here, we first find the index of the new preference in the preferences array
+  using indexOf. If the index is greater than -1 (i.e., if the new preference
+  already exists in the array), we remove it from the array using the splice
+  method and return a new state object with the updated preferences array.
+  Otherwise, we add the new preference to the preferences array and return
+  a new state object with the updated preferences array.
+*/
   return (
-    <div>
-      <div className="d-flex justify-content-center align-items-center my-4">
-        <div className="value_circle me-2">
-          <h6 className="d-flex flex-column align-items-center justify-content-center ">
-            <span className="head mb-1">{t.from}</span>
-            <span className="mt-4">{t.aed} {minValue}</span>
-          </h6>
-        </div>
-        <div className="value_circle ms-2">
-          <h6 className="d-flex flex-column align-items-center justify-content-center">
-            <span className="head mb-1">{t.upto}</span>
-            <span className="mt-4">{t.aed} {maxValue}</span>
-          </h6>
+    <>
+      <div className="search_filter_box_items">
+        <div className="d-flex justify-content-center flex-wrap gap-1">
+          {" "}
+          {bodyTypeList.map((item, index) => (
+            <div
+              key={index}
+              className={` btn ${
+                filterData.bodyTypes.includes(item.slug) ? "active" : ""
+              } d-flex flex-column justify-content-center align-items-center p-1 w-25`}
+              onClick={() => handlePreferencesClick(item.slug)}
+            >
+              {/* <i className={`bi bi-${item.icon}`} /> */}
+              <Image
+                src={item?.image?.url}
+                alt={item.label}
+                width={60}
+                height={60}
+              />
+              <small className="text-black">{item.name}</small>
+            </div>
+          ))}
         </div>
       </div>
-
-      <div className="pt-2 px-3 pb-5">
-        <Slider
-          range
-          min={initialValues[0]}
-          max={initialValues[1]}
-          marks={marks}
-          step={1}
-          onChange={handleSliderChange}
-          defaultValue={filterData.budget}
-          trackStyle={[trackStyle]}
-          railStyle={railStyle}
-          handleStyle={[handleStyle, handleStyle]}
-          dotStyle={dotStyle}
-          allowCross={false}
-        />
-      </div>
-    </div>
+    </>
   );
 }

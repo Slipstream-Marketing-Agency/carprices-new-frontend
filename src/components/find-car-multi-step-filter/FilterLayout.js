@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import StepThree from "./StepThree";
-import StepTwo from "./StepTwo";
 import StepOne from "./StepOne";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
@@ -11,6 +10,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import StepFour from "./StepFour";
+import StepTwo from "./StepTwo";
 
 export default function FilterLayout() {
   const router = useRouter();
@@ -20,8 +21,13 @@ export default function FilterLayout() {
     preferences: [],
     budget: [25000, 55000],
     seating: [],
+    bodyTypes: [],
   });
 
+  const [bodyTypeList, setBodyTypeList] = useState([]);
+  const [seatList, setSeatList] = useState([]);
+
+  console.log(filterData, "filterData");
   const [specificVehicleFilter, setSpecificVehicleFilter] = useState({
     image: null,
     make: null,
@@ -33,6 +39,13 @@ export default function FilterLayout() {
 
   const [currentStep, setCurrentStep] = useState(0);
   const [specific, setSpecific] = useState(false);
+
+  const bodyTypesParam =
+    filterData.bodyTypes.length > 0
+      ? `bodyTypes=${filterData.bodyTypes.join(",")}`
+      : "";
+
+  console.log( filterData?.budget[0] === filterData?.budget[1], " filterData?.budget[0] === filterData?.budget[1]");
 
   const filterOptions = {
     haveMusic: filterData.preferences.includes("premium-sound") ? 1 : 0,
@@ -53,8 +66,6 @@ export default function FilterLayout() {
   };
 
   useEffect(() => {
-
-    
     const fetchData = () => {
       let query = `${filterOptions.haveMusic === 1 ? "haveMusic=1" : ""}`;
       query += filterOptions.isLuxury === 1 ? "&isLuxury=1" : "";
@@ -70,23 +81,62 @@ export default function FilterLayout() {
       query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
       query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
       query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
-      
 
-      
+      const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
+      const bodyTypesParam =
+        filterData.bodyTypes.length > 0
+          ? `bodyTypes=${encodeURIComponent(bodyTypesJSON)}`
+          : "";
+
       axios
         .get(
-          process.env.NEXT_PUBLIC_API_URL + "car-trims/priceRange" + "?" + query
+          `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
         )
         .then((response) => {
-
-          console.log(response,"ksjhkhdakjsd");
+          console.log(response, "ksjhkhdakjsd");
           setFilterData((prevState) => ({
             ...prevState,
             budget: [
-              response.data.price.min !== null ? response?.data?.price.min : null,
-              response.data.price.max !== null ? response?.data?.price.max : null,
+              response.data.price.min !== null
+                ? response?.data?.price.min
+                : null,
+              response.data.price.max !== null
+                ? response?.data?.price.max
+                : null,
             ],
           }));
+
+          // setMinMaxData(response.data);
+          // setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error", error);
+          // setIsLoading(false);
+          // setError(error);
+        });
+
+      axios
+        .get(`${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${query}`)
+        .then((response) => {
+          console.log(response, "bodyfilter");
+          setBodyTypeList(response?.data?.bodyTypes);
+
+          // setMinMaxData(response.data);
+          // setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error", error);
+          // setIsLoading(false);
+          // setError(error);
+        });
+
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${query}&${bodyTypesParam}`
+        )
+        .then((response) => {
+          console.log(response, "bodyfilter");
+          setSeatList(response?.data?.seats);
 
           // setMinMaxData(response.data);
           // setIsLoading(false);
@@ -99,51 +149,76 @@ export default function FilterLayout() {
     };
 
     fetchData();
-  }, [filterData.preferences,filterData.seating]);
+  }, [filterData.preferences, filterData.seating, , filterData.bodyTypes]);
 
   const steps = [
     {
-      title: `${t.step} 1: ${t.preferences}`,
+      // title: `${t.step} 1: ${t.preferences}`,
+      title: `${t.preferences}`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
     },
     {
-      title: `${t.step} 2 : ${t.chooseSeating}`,
+      // title: `${t.step} 3 : ${t.defineBudget} `,
+      title: `Choose Body Types`,
       component: (
-        <StepThree filterData={filterData} setFilterData={setFilterData} />
+        <StepTwo
+          filterData={filterData}
+          setFilterData={setFilterData}
+          bodyTypeList={bodyTypeList}
+        />
       ),
     },
     {
-      title: `${t.step} 3 : ${t.defineBudget} `,
+      // title: `${t.step} 2 : ${t.chooseSeating}`,
+      title: `${t.chooseSeating}`,
       component: (
-        <StepTwo filterData={filterData} setFilterData={setFilterData} />
+        <StepThree
+          filterData={filterData}
+          setFilterData={setFilterData}
+          seatList={seatList}
+        />
+      ),
+    },
+    {
+      // title: `${t.step} 2 : ${t.chooseSeating}`,
+      title: `${t.chooseSeating}`,
+      component: (
+        <StepFour filterData={filterData} setFilterData={setFilterData} />
       ),
     },
   ];
 
+  console.log(currentStep, "currentStep");
+
   const handleNextStep = () => {
     if (filterData.preferences.length === 0) {
       setError("Select atleast one preference");
+    } else if (currentStep === 1 && filterData.bodyTypes.length === 0) {
+      setError("Select atleast one body type");
     } else if (
-      filterData.seating.length <= 0 &&
-      filterData.preferences.length > 0 &&
+      currentStep === 0 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null
+      filterData?.budget[1] === null ||
+      filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("no cars available for the selected preferences");
     } else if (
-      filterData.seating.length > 0 &&
-      filterData.preferences.length > 0 &&
+      currentStep === 1 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null
+      filterData?.budget[1] === null ||
+      filterData?.budget[0] === filterData?.budget[1]
+    ) {
+      setError("no cars available for the selected body types");
+    } else if (
+      currentStep === 2 &&
+      filterData?.budget[0] === null &&
+      filterData?.budget[1] === null ||
+      filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("no cars available for the selected seats");
-    } else if (
-      filterData.seating.length === 0 &&
-      filterData.preferences.length > 0 &&
-      currentStep === 1
-    ) {
+    } else if (currentStep === 2 && filterData.seating.length === 0) {
       setError("Select atleast one seating option");
     } else {
       setCurrentStep(currentStep + 1);
@@ -156,6 +231,7 @@ export default function FilterLayout() {
       setFilterData((prevState) => ({
         ...prevState,
         seating: [],
+        bodyTypes: [],
       }));
     }
   };
@@ -178,10 +254,16 @@ export default function FilterLayout() {
     query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
     query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
 
+    const bodyTypesQuery =
+      filterData.bodyTypes.length > 0
+        ? `&bodytype=${filterData.bodyTypes.join(",")}`
+        : "";
+
     const url =
       `/find-your-car?` +
       query +
-      `&price=${filterData?.budget[0]}-${filterData?.budget[1]}`;
+      `&price=${filterData?.budget[0]}-${filterData?.budget[1]}` +
+      bodyTypesQuery;
 
     router.push(url);
     // } else {
@@ -205,7 +287,7 @@ export default function FilterLayout() {
         <>
           <div className="search_filter_box text-center">
             <div className="find_car_head ">
-              <h3 className="text-white">{t.newbuyersguide}</h3>
+              <h3 className="text-white mb-0">{t.newbuyersguide}</h3>
             </div>
 
             <div className="inner">
@@ -230,23 +312,16 @@ export default function FilterLayout() {
               <div className="">
                 <div className="">
                   {currentStep > 0 && (
-                    <button
-                      className="btn btn-outline-primary me-1"
-                      onClick={handlePrevStep}
-                    >
+                    <button className="btn me-1" onClick={handlePrevStep}>
                       {t.previous}
                     </button>
                   )}
 
                   <button
-                    className={
-                      error
-                        ? "btn btn-outline-primary ms-1 disabled"
-                        : "btn btn-outline-primary ms-1"
-                    }
-                    onClick={currentStep === 2 ? handleSubmit : handleNextStep}
+                    className={error ? "btn ms-1 disabled" : "btn ms-1"}
+                    onClick={currentStep === 3 ? handleSubmit : handleNextStep}
                   >
-                    {currentStep === 2 ? `${t.submit}` : `${t.next}`}
+                    {currentStep === 3 ? `${t.submit}` : `${t.next}`}
                   </button>
                 </div>
                 {/* <div className="find_specific ">

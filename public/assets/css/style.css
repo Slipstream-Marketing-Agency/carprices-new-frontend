@@ -12850,6 +12850,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   padding: 8px 0;
   padding-bottom: 30px;
   background-position: 50% 86%;
+  height: 500px;
 }
 @media (max-width: 1200px) {
   .transCar {
@@ -13082,7 +13083,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 .banner-section1 .car-filter-area {
   /* background-color: var(--white-color); */
-  margin-top: 35px;
+  margin-top: 40px;
   border-radius: 5px;
 }
 
@@ -13759,7 +13760,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 
 .product-card {
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 0px;
   background: #ffffff;
   border: 1px solid #eeeeee;
   transition: 0.35s;
@@ -15973,7 +15974,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 .news-section .news-card {
   background: #ffffff;
   border: 1px solid #eeeeee;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 10px;
 }
 .news-section .news-card .news-img {
@@ -29077,7 +29078,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .search_filter_box .inner {
   background: #fff;
   position: relative;
-  height: 100%;
+  height: 360px;
   left: 0px;
   padding: 10px;
   width: 100%;
@@ -29085,20 +29086,25 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 .search_filter_box i {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .search_filter_box_items {
   margin: 3px 0px;
+  height: 270px;
 }
 
 .search_filter_box_items .btn {
   width: 30%;
 }
 
+.search_filter_box_items .btn.active{
+  background: #d5d5d5 !important;
+}
+
 .search_filter_box_items img {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 35px;
   object-fit: contain;
   margin-bottom: 7px;
 }
@@ -29110,7 +29116,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .search_filter_box_items small {
   color: var(--white-color);
   line-height: 10px !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-family: var(--font-gilroy);
 }
 
@@ -29121,7 +29127,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 #filter_seating .search_filter_box_items .banner_btn {
-  width: 33% !important;
+  width: 31% !important;
 }
 
 .banner_btn {
@@ -29130,10 +29136,10 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  height: 78px;
   /* border: none !important; */
-  width: 30%;
-  border-radius: 4px;
+  width: 28%;
+  border-radius: 0px;
   margin: 3px 3px;
   font-weight: 600;
   background-color: var(--primary);
@@ -29905,10 +29911,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   }
   .filterStepTxt {
     font-size: 13px;
-  }
-  .search_filter_box_items img {
-    height: 30px;
-    width: 30px;
   }
   .banner_btn small {
     font-size: 10px;

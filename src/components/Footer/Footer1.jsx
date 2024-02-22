@@ -117,7 +117,7 @@ function Footer1() {
                       <li>
                         <Link
                           legacyBehavior
-                          href="2024 LC Prado Vs Used LC Prado"
+                          href="https://carprices.ae/news/should-you-wait-for-the-2024-toyota-land-cruiser-prado-or-should-you-go-for-the-used-one-in-the-uae-new-vs-used"
                         >
                           <a>2024 LC Prado Vs Used LC Prado</a>
                         </Link>

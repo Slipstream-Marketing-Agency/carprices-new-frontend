@@ -13,11 +13,14 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
   return (
     <div className="news-section ">
       <div className="container  white_bg_wrapper">
-        <div className="row mb-2 wow fadeInUp" data-wow-delay="200ms">
+        <div className="row mb-15 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12  d-flex align-items-end justify-content-between flex-wrap gap-2">
             <div className="section-title1 w-100">
               {/* <span>Best Trending</span>  */}
-              <h1 className={`${isRtl && "text-end"} w-100`}>{heading}</h1>
+              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>
+                {heading}
+              </h2>
+              <hr className="my-0 mt-2 heading-bottom " />
             </div>
           </div>
         </div>
@@ -31,9 +34,7 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                 <div className="news-img">
                   <Link
                     legacyBehavior
-                    href={`${isNews ? "/news/" : "/reviews/"}${
-                      news?.slug
-                    }`}
+                    href={`${isNews ? "/news/" : "/reviews/"}${news?.slug}`}
                   >
                     <a>
                       {/* <img src={news.attributes.coverImage.data?.attributes.url} alt="" /> */}

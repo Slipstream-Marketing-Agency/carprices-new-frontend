@@ -13,15 +13,16 @@ function BrandCategory({ brandDetails }) {
   return (
     <div className="brand-category-area mt-3 mb-3">
       <div className="container white_bg_wrapper">
-        <div className="row mb-30 wow fadeInUp" data-wow-delay="200ms">
+        <div className="row mb-15 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
-              {/* <span>Available Brand Car</span> */}
-              <h1 className={`${isRtl && 'text-end'} w-100`}>{t.popularcar}</h1>
+              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>{t.popularcar}</h2>
+              <hr className="my-0 mt-2 heading-bottom "/>
+
             </div>
           </div>
         </div>
-        <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-3 g-4 justify-content-center mb-40">
+        <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-3 g-4 justify-content-center mb-15">
           {brandDetails.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">

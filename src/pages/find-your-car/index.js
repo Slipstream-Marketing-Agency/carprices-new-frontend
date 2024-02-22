@@ -346,6 +346,8 @@ export async function getServerSideProps(context) {
     .map((key) => `${key}=${additionalQueryParams[key]}`)
     .join("&");
 
+    console.log(additionalQueryString,"additionalQueryString");
+
   console.log(additionalQueryString, "additionalQueryString");
   const queryParams = {};
 

@@ -99,8 +99,7 @@ export default function StepOne({ filterData, setFilterData}) {
     <>
     
       <div className="search_filter_box_items">
-        <div className="d-flex justify-content-center flex-wrap">
-          {filterItems.map((item, index) => (
+        <div className="d-flex justify-content-center flex-wrap gap-1">          {filterItems.map((item, index) => (
             <div
               key={index}
               className={` banner_btn ${

@@ -68,11 +68,12 @@ function ProductCard({ subTitle, heading, carDetails }) {
   return (
     <div className="recent-product-section mt-3 mb-3 ">
       <div className="white_bg_wrapper">
-        <div className="row mb-20 wow fadeInUp" data-wow-delay="200ms">
+        <div className="row mb-15 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
               {/* <span>{subTitle}</span> */}
-              <h1 className={`${isRtl && "text-end"} w-100`}>{heading}</h1>
+              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>{heading}</h2>
+              <hr className="my-0 mt-2 heading-bottom "/>
             </div>
             {/* <ul className="nav nav-tabs" id="myTab6" role="tablist">
               <li className="nav-item" role="presentation">
