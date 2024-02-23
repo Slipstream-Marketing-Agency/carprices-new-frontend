@@ -420,10 +420,10 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                     <h1 className="carNameTxt">
                       {mainTrim?.year} {brand?.name} {model?.name}
                     </h1>{" "}
-                    <div className="shareBtnMobile">
+                    {/* <span className="shareBtnMobile">
                       {" "}
                       <NewShareBtns />
-                    </div>
+                    </span> */}
                   </div>
                   <h4 className="mt-1">
                     <CarPriceRange />
@@ -518,7 +518,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bolder">{t.power} (HP)</small>
+                            <small className="fw-bolder">{t.power} (hp)</small>
                             <small>
                               {minPower === maxPower
                                 ? minPower

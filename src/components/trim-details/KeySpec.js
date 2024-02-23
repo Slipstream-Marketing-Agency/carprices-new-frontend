@@ -71,7 +71,7 @@ export default function KeySpec({ trim }) {
             </div>
           ) : null}
 
-          {trim?.fuelConsumption !== null || trim?.range !== null ? (
+          {trim?.fuelConsumption !== null || trim?.range !== 0 ? (
             <div className="col-sm-4 col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
                 <div className="spec-img p-2">
@@ -88,7 +88,7 @@ export default function KeySpec({ trim }) {
                 <small className="">
                   {size === "Electric" &&
                   trim?.fuelConsumption === null &&
-                  trim?.range !== null
+                  trim?.range !== 0
                     ? trim?.range
                     : trim?.fuelConsumption + "kmpl"}
                 </small>

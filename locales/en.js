@@ -32,7 +32,7 @@ export default{
     next:"Next",
     chooseSeating:"Choose Your Seating",
     defineBudget:"Define Your Budget",
-    seats:"seats",
+    seats:"Seats",
     previous:"Previous",
     selectOnePreference:"Select atleast one preference",
     noCarPreference:"no cars available for the selected preferences",

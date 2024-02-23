@@ -111,7 +111,7 @@ export default function TrimDescription({ trim }) {
           )}
 
           {trim?.fuelType === "Electric" ||
-            trim?.fuelType === "Hybrid" && trim?.range !== "" && trim?.range !== null ? (
+            trim?.fuelType === "Hybrid" && trim?.range !== "" && trim?.range !== 0 ? (
             <p>
               <b>Range: </b>The claimed range is <b>{trim?.range}</b> on
               a single charge.

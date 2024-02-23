@@ -16,6 +16,9 @@ export default function VehicleFaq({trim}) {
   //     return "Unknown";
   //   }
   // }
+
+  console.log(trim.haveAdaptiveCuriseControl,"haveAdaptiveCuriseControl");
+  
   const faq = [
     {
       question: `What is the price of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,
@@ -73,7 +76,7 @@ export default function VehicleFaq({trim}) {
       question: `What type of motor the ${trim?.year} ${trim?.brand} ${trim?.name} has?`,
       answer: `The ${trim?.year} ${trim?.brand} ${trim?.name} is equipped with a ${trim?.motor}.`,
       id: 12,
-      condition: trim?.fuelType === "Electric" || trim?.fuelType === "Hybrid",
+      condition: trim?.fuelType === "Electric" || trim?.fuelType === "Hybrid" && trim?.motor !== "",
     },
     {
       question: `What safety features are included in the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,

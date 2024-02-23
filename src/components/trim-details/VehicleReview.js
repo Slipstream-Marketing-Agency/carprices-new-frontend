@@ -102,11 +102,9 @@ export default function VehicleReview({ trim }) {
                 {trim?.name} is a {trim?.bodyType}.
                 <br />
                 <b>Dimensions:</b> The {trim?.year}{" "}
-                {trim?.brand} {trim?.model} {""}is{" "}
+                {trim?.brand} {trim?.model}  {trim?.name} {""}is{" "}
                 {trim?.length ? trim?.length : "-"}mm in length,{" "}
-                {trim?.width}mm in width, and {trim?.height}mm in height,
-                the {trim?.year} {trim?.name}{" "}
-                {trim?.model} {trim?.name}.
+                {trim?.width}mm in width, and {trim?.height}mm in height.
                 <br />
                 <b>Wheelbase:</b> The {trim?.year}{" "}
                 {trim?.brand} {trim?.model}{" "}

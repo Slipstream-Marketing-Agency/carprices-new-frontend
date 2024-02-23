@@ -109,7 +109,7 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
               {!isMobile && <td style={{ width: isMobile ? '100%' : columnWidth }}>Fuel Type</td>}       
                 {tableData.map((item, idx) => (
-                  <td key={idx} className="col-md-2 col-4 text-center">{item?.fuelType ? item.fuelType : "-"}</td>
+                  <td key={idx} className="col-md-2 col-4 text-center">{item?.fuelType ? (item.fuelType === "Hybrid" ? "Petrol" : item.fuelType) : "-"}</td>
                 ))}
               </tr>
             </tbody>
