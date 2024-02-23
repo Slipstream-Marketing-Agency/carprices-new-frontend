@@ -45,7 +45,10 @@ export default function FilterLayout() {
       ? `bodyTypes=${filterData.bodyTypes.join(",")}`
       : "";
 
-  console.log( filterData?.budget[0] === filterData?.budget[1], " filterData?.budget[0] === filterData?.budget[1]");
+  console.log(
+    filterData?.budget[0] === filterData?.budget[1],
+    " filterData?.budget[0] === filterData?.budget[1]"
+  );
 
   const filterOptions = {
     haveMusic: filterData.preferences.includes("premium-sound") ? 1 : 0,
@@ -81,6 +84,25 @@ export default function FilterLayout() {
       query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
       query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
       query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+
+      let queryWithoutSeating = `${
+        filterOptions.haveMusic === 1 ? "haveMusic=1" : ""
+      }`;
+      queryWithoutSeating += filterOptions.isLuxury === 1 ? "&isLuxury=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isPremiumLuxury === 1 ? "&isPremiumLuxury=1" : "";
+      queryWithoutSeating +=
+        filterOptions.haveTechnology === 1 ? "&haveTechnology=1" : "";
+      queryWithoutSeating +=
+        filterOptions.havePerformance === 1 ? "&havePerformance=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isSpacious === 1 ? "&isSpacious=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isElectric === 1 ? "&isElectric=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isFuelEfficient === 1 ? "&isFuelEfficient=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isOffRoad === 1 ? "&isOffRoad=1" : "";
 
       const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
       const bodyTypesParam =
@@ -132,7 +154,7 @@ export default function FilterLayout() {
 
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${query}&${bodyTypesParam}`
+          `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
         )
         .then((response) => {
           console.log(response, "bodyfilter");
@@ -208,7 +230,7 @@ export default function FilterLayout() {
     } else if (
       currentStep === 1 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null 
+      filterData?.budget[1] === null
       // ||
       // filterData?.budget[0] === filterData?.budget[1]
     ) {
@@ -216,7 +238,7 @@ export default function FilterLayout() {
     } else if (
       currentStep === 2 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null 
+      filterData?.budget[1] === null
       // ||
       // filterData?.budget[0] === filterData?.budget[1]
     ) {
@@ -230,7 +252,12 @@ export default function FilterLayout() {
 
   const handlePrevStep = () => {
     setCurrentStep(currentStep - 1);
-    if (currentStep === 1) {
+    if (currentStep === 2) {
+      setFilterData((prevState) => ({
+        ...prevState,
+        seating: [],
+      }));
+    } if (currentStep === 1) {
       setFilterData((prevState) => ({
         ...prevState,
         seating: [],
