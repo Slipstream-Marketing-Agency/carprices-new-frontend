@@ -716,14 +716,8 @@ small {
 .shareBtn {
   padding: 5px 10px;
   border-radius: 6px;
-  font-family: var(--font-gilroy);
-  transition: 0.4s;
-  width: 90px;
   color: var(--black-color);
   border: 0.2px solid gray;
-  display: flex;
-  align-items: center;
-  gap: 2px;
 }
 @media (max-width: 650px) {
   .shareBtn {

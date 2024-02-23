@@ -39,7 +39,7 @@ export default function KeySpec({ trim }) {
           {trim?.power !== null ? (
             <div className="col-sm-4  col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img">
+                <div className="spec-img ">
                   <Image
                     width={60}
                     height={60}
@@ -47,7 +47,7 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Power (HP)</h6>
+                <h6 className="fw-bold mb-1">Power (hp)</h6>
                 <small className="">{trim?.power}</small>
               </div>
             </div>
@@ -55,7 +55,7 @@ export default function KeySpec({ trim }) {
           {trim?.torque !== null ? (
             <div className="col-sm-4 col-lg-2  col-6 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img mb-2">
+                <div className="spec-img p-2">
                   <Image
                     width={30}
                     height={30}

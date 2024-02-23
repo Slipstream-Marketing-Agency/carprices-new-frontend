@@ -716,7 +716,7 @@ export async function getServerSideProps(context) {
   const trimSlug = context.params.trim;
 
   const trim = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${trimSlug}/${year}`
+    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
   );
 
   console.log(trim, "trimtrimtrimtrimtrim");

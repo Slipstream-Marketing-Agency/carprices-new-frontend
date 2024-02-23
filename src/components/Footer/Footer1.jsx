@@ -17,13 +17,10 @@ function Footer1() {
         <Ad300x250 dataAdSlot="9351332409" />
       </div>
       <footer>
-        <div className="container-fluid">
+        <div className="container">
           <div className="footer-top">
-            <div className="footerHeadingContainer">
-              <span className="footerVehiclesHeading">MORE FROM CARPRICES</span>
-            </div>
 
-            <div className="mt-2 row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-3 row-cols-1 justify-content-center g-lg-4 gy-5 ">
+            <div className="mt-2 row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-3 row-cols-1 justify-content-between g-lg-4 gy-5 ">
               <div className="col d-flex justify-content-lg-start">
                 <div className="footer-widget">
                   <div className="widget-title">
@@ -322,7 +319,7 @@ function Footer1() {
                   <a href="/contact-us">Advertise With Us</a>
                 </li>
                 <li>
-                  <a href="#">Our Sitemap</a>
+                  <a href="/sitemap.xml">Our Sitemap</a>
                 </li>
               </ul>
             </div>
@@ -330,11 +327,11 @@ function Footer1() {
           <div className="footer-btm">
             <div className="copyright-area">
               <p>
-                Copyright 2023 <a href="#">Car Prices</a>
+                Copyright 2023 <a href="#">Carprices.ae</a>
               </p>
             </div>
             <div className="social-area">
-              <h6>Follow Car Prices:</h6>
+              <h6>Follow Carprices.ae:</h6>
               <ul>
                 <li>
                   <a href="https://www.youtube.com/@carpricesuae">
