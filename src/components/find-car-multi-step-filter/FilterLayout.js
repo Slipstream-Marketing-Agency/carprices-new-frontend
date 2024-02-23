@@ -200,22 +200,25 @@ export default function FilterLayout() {
     } else if (
       currentStep === 0 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null ||
-      filterData?.budget[0] === filterData?.budget[1]
+      filterData?.budget[1] === null
+      //  ||
+      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("no cars available for the selected preferences");
     } else if (
       currentStep === 1 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null ||
-      filterData?.budget[0] === filterData?.budget[1]
+      filterData?.budget[1] === null 
+      // ||
+      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("no cars available for the selected body types");
     } else if (
       currentStep === 2 &&
       filterData?.budget[0] === null &&
-      filterData?.budget[1] === null ||
-      filterData?.budget[0] === filterData?.budget[1]
+      filterData?.budget[1] === null 
+      // ||
+      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("no cars available for the selected seats");
     } else if (currentStep === 2 && filterData.seating.length === 0) {

@@ -547,6 +547,7 @@ export async function getServerSideProps(context) {
     pricerangesres = priceranges;
   }
 
+
   if (displacementRange.length > 0) {
     const totaldisplacementrange = await axios.get(
       `${
