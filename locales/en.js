@@ -6,15 +6,15 @@ export default{
 
     //Home page
     SelectAtleastOneSeatingOption:"Select atleast one seating option",
-    blog:"BLOG",
+    blog:"News & Reviews",
     popularSearch:"بحث شعبي",
     uaeFastest:"UAE's Fastest Growing New Car Buyers' Guide.",
-    SearchCars:"SEARCH CARS",
+    SearchCars:"SEARCH NEW CARS",
     NewsandReviews:"News & Reviews",
     Language:"English",
     CarNews:"Car News",
     Reviews:"Car Reviews",
-    CompareCars:"Compare Cars",
+    CompareCars:"Compare NEW Cars",
     Loancalculator:"Car Loan Calculator",
     newbuyersguide:"New Car Buyer's Guide",
     step:"Step",
