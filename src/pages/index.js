@@ -17,6 +17,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import BodyTypes from "../components/Home1/BodyTypes";
+import MainLayout from "../layout/MainLayout";
 
 const BannerLazy = dynamic(() => import("../components/Home1/Banner/index"), {
   loading: () => <p>Loading banner...</p>, // Optional loading placeholder
@@ -101,10 +102,15 @@ export default function Home({
   }, []);
 
   return (
-    <>
-      <Modals />
-      <Topbar />
-      <Header />
+    <MainLayout
+    pageMeta={{
+      title: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - Carprices.ae",
+      description:
+        "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      type: "Car Review Website",
+    }}
+  >
+      
       <Ad728x90 dataAdSlot="5962627056" />
       <BannerLazy bannerImage={bannerImage} bannerText={bannerText} />
       {/* <QuickLinkArea /> */}
@@ -183,7 +189,7 @@ export default function Home({
 
       <Footer1 />
       <GoToTopButton />
-    </>
+    </MainLayout>
   );
 }
 
