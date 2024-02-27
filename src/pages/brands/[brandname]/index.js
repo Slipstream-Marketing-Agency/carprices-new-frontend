@@ -157,10 +157,10 @@ function CarListingLeftSidebar({
         )}
       </div>
 
-      <h1 class="cpx-brand-hero__title-primary">
-        {props?.models?.models[0]?.brand?.name} Car Prices, Latest Models,
+      {/* <h1 class="cpx-brand-hero__title-primary">
+       Car Prices, Latest Models,
         Reviews &amp; Comparison In UAE
-      </h1>
+      </h1> */}
 
       <div className="mt-2">
         <Ad728x90 dataAdSlot="5962627056" />
