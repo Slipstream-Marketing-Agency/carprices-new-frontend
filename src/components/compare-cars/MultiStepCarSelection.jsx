@@ -483,7 +483,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                           setCurrentStep("year");
                         }}
                       >
-                        {model.name} ({model.year})
+                        {model.name} 
                       </button>
                     ))}
                   </div>

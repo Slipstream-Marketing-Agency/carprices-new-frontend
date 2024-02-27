@@ -35,6 +35,8 @@ function CompareCarCard({ carData }) {
     }
   };
 
+  console.log(carData?.featuredImage?.data?.attributes?.url,"carData?.featuredImage?.data?.attributes?.url");
+
   return (
     <div className={`col-md-3 col-6 `}>
       <div className="product-card style-2 compare">
@@ -43,7 +45,7 @@ function CompareCarCard({ carData }) {
         </div>
         <div className="product-img d-flex justify-content-center">
           <img
-            src={carData?.featuredImage?.data?.attributes?.url}
+            src={carData?.featuredImage?.data?.attributes?.url === undefined ? "/assets/img/car-placeholder.png" : carData?.featuredImage?.data?.attributes?.url}
             alt={carData?.name}
           />
         </div>
