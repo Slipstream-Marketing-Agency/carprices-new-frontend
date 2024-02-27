@@ -14193,7 +14193,6 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   color: var(--white-color);
 }
 .product-card.style-2.compare .product-content {
-  padding-top: 40px;
   position: relative;
 }
 .product-card.style-2.compare .product-content .content-top {
@@ -27252,7 +27251,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 10px;
-  padding: 31px 21px 30px;
+  padding: 21px 21px 30px;
   display: flex;
   align-items: center;
   justify-content: center;

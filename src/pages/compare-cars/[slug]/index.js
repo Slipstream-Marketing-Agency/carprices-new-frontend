@@ -22,11 +22,10 @@ const CompareCarLazy = dynamic(
     ssr: true, // Set to false if this component is not critical for SEO
   }
 );
-function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
+function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
@@ -43,8 +42,10 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
   const canAddMoreCars = cars && cars.length < (isMobile ? 2 : 4);
-  const toBeAddedLength = Array.from({ length: isMobile ? 2-cars.length : 4-cars.length }, (_, index) => index + 1);
-
+  const toBeAddedLength = Array.from(
+    { length: isMobile ? 2 - cars.length : 4 - cars.length },
+    (_, index) => index + 1
+  );
 
   const compateCareSettingsSlide = useMemo(() => {
     return {
@@ -135,7 +136,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
     const handleScroll = () => {
       if (window.scrollY >= 600 && window.scrollY <= 3400) {
         setIsSticky(true);
-      } else  {
+      } else {
         setIsSticky(false);
       }
     };
@@ -165,42 +166,69 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
         <Ad728x90 dataAdSlot="5962627056" />
       </div>
 
-      <div className="compare-page pt-30 mb-100" >
+      <div className="compare-page pt-30 mb-100">
         <div className="container">
-          <div  className={`row g-4 mb-50` } style={{position: isSticky && "fixed",
-    top:isMobile ? "-90px" : "-167px",background:"white",width:!isMobile && !isSticky ? '100%' : !isMobile && isSticky && '82%'}} >
-          <div  className={`row g-4 mb-50` }  >
-            <div className="col-lg-12">
-              <div className="uploded-product-group">
-                <div className="row g-4">
-                  {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
-                  <CompareCarCard carData={car1Data} />
-                  <CompareCarCard carData={car2Data} />
-                  <CompareCarCard carData={car3Data} />
-                  <CompareCarCard carData={car4Data} />
-                    {(canAddMoreCars  ) && 
-                      toBeAddedLength.map((item,index)=>(
-
-                      <div className={` ${!isMobile && isSticky ? 'col-2 ' : 'col-6 col-lg-3' }`} style={{position:(!isMobile && isSticky) && 'fixed' , bottom:!isMobile && '20px',right:!isMobile && '0px'}}>
-                        <div className="product-card style-2 compare" style={{background:(!isMobile && isSticky) && 'unset' , boxShadow:(!isMobile && isSticky) && 'unset', border:(!isMobile && isSticky) && 'none' }}>
-                        <div className="product-upload-area" style={{
-    padding: !isMobile && isSticky  && ' 0px 20px 0px' }} >
-                            {/* <div className="upload-area">
+          <div
+            className={`row justify-content-center`}
+            // style={{
+            //   position: isSticky && "fixed",
+            //   top: isMobile ? "-90px" : "-167px",
+            //   background: "white",
+            //   width:
+            //     !isMobile && !isSticky ? "" : !isMobile && isSticky && "82%",
+            // }}
+          >
+            <div className={`row g-4 mb-15`}>
+              <div className="col-lg-12">
+                <div className="uploded-product-group">
+                  <div className="row g-4">
+                    {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
+                    <CompareCarCard carData={car1Data} />
+                    <CompareCarCard carData={car2Data} />
+                    <CompareCarCard carData={car3Data} />
+                    <CompareCarCard carData={car4Data} />
+                    {canAddMoreCars &&
+                      toBeAddedLength.map((item, index) => (
+                        <div
+                          className={` ${
+                            !isMobile && isSticky ? "col-2 " : "col-6 col-lg-3 mt-0"
+                          }`}
+                          style={{
+                            position: !isMobile && isSticky && "fixed",
+                            bottom: !isMobile && "20px",
+                            right: !isMobile && "0px",
+                          }}
+                        >
+                          <div
+                            className="product-card style-2 compare"
+                            style={{
+                              background: !isMobile && isSticky && "unset",
+                              boxShadow: !isMobile && isSticky && "unset",
+                              border: !isMobile && isSticky && "none",
+                            }}
+                          >
+                            <div
+                              className="product-upload-area"
+                              style={{
+                                padding:
+                                  !isMobile && isSticky && " 0px 20px 0px",
+                              }}
+                            >
+                              {/* <div className="upload-area">
                           <i className="bi bi-plus" />
                         </div> */}
-                            <div className="comparea-content">
-                              {/* <h6>Add to Compare</h6> */}
-                              <MultiStepCarSelection mode="add" />
+                              <div className="comparea-content">
+                                {/* <h6>Add to Compare</h6> */}
+                                <MultiStepCarSelection mode="add" />
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      ))
-                    }
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
           {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
@@ -261,8 +289,11 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data,compare }) {
                 className="scrollspy-example"
                 tabIndex={0}
               >
-               { <CarComparisonTable tableData={tableData} />}
-
+                {
+                  <CarComparisonTable
+                    tableData={tableData}
+                  />
+                }
               </div>
             </div>
           </div>
@@ -285,43 +316,41 @@ export async function getServerSideProps(context) {
   });
   const compareResponse = await client.query({
     query: gql`
-    query CompareCars {
-      compareCars {
-        data {
-          id
-          attributes {
-            comparison
-            car_models {
-              data {
-                id
-                attributes {
-                  name
-                  car_brands {
-                    data {
-                      id
-                      attributes {
-                        name
-                        slug
+      query CompareCars {
+        compareCars {
+          data {
+            id
+            attributes {
+              comparison
+              car_models {
+                data {
+                  id
+                  attributes {
+                    name
+                    car_brands {
+                      data {
+                        id
+                        attributes {
+                          name
+                          slug
+                        }
                       }
                     }
-                  }
-                  car_trims(
-                    filters: {
-                      year: { eq: 2023 }
-                      highTrim: { eq: true }
-                    }
-                  ) {
-                    data {
-                      id
-                      attributes {
-                        name
-                        slug
-                        mainSlug
-                        featuredImage {
-                          data {
-                            id
-                            attributes {
-                              url
+                    car_trims(
+                      filters: { year: { eq: 2023 }, highTrim: { eq: true } }
+                    ) {
+                      data {
+                        id
+                        attributes {
+                          name
+                          slug
+                          mainSlug
+                          featuredImage {
+                            data {
+                              id
+                              attributes {
+                                url
+                              }
                             }
                           }
                         }
@@ -334,9 +363,8 @@ export async function getServerSideProps(context) {
           }
         }
       }
-    }
-  `,
-  })
+    `,
+  });
 
   const CAR_TRIMS_QUERY = gql`
     query carTrims($mainSlug: String!) {
@@ -487,7 +515,6 @@ export async function getServerSideProps(context) {
     ]);
 
     return {
-      
       props: {
         compare: compareResponse?.data?.compareCars?.data,
         car1Data:
@@ -512,7 +539,6 @@ export async function getServerSideProps(context) {
     console.error("Server-side Data Fetching Error:", error.message);
     return {
       props: {
-      
         error: true,
         errorMessage: error.message,
       },
