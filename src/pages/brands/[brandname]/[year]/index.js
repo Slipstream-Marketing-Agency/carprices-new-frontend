@@ -133,9 +133,9 @@ function CarListingLeftSidebar({
     <MainLayout
       pageMeta={{
         title:
-          "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
+          "",
         description:
-          "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
+          "",
         type: "Car Review Website",
       }}
     >
