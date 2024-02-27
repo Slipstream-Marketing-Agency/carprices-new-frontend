@@ -364,7 +364,9 @@ function BlogDetailsPage({
                     </div>
                   </div>
 
-                  <p className="summary_box">{article?.summary}</p>
+                  {article?.summary !== "" && (
+                    <p className="summary_box">{article?.summary}</p>
+                  )}
 
                   <div className="d-flex d-md-none d-flex justify-content-end align-items-center mb-2">
                     {" "}
@@ -380,11 +382,9 @@ function BlogDetailsPage({
                             : "/assets/img/car-placeholder.png"
                         }
                         alt=""
-                        layout="responsive"
                         width={300}
                         height={205}
-                        objectFit="cover"
-                        className="blogImage"
+                        className=" object-contain"
                       />
                     </div>
                     {/* <div className="date">

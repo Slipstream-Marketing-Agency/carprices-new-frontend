@@ -187,8 +187,6 @@ export default function Home({
         isNews={false}
       />
 
-      <Footer1 />
-      <GoToTopButton />
     </MainLayout>
   );
 }

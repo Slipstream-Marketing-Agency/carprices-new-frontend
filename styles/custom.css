@@ -2519,3 +2519,101 @@ hr {
   height: 1px;
   background-color: #929292; /* Red */
 }
+
+/* Single Brand*/
+
+.read-more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding-left: 15px;
+}
+
+.read-more-less {
+  font-size: 15px;
+  color: #484848;
+  position: relative;
+}
+
+.read-more-less .height-hidden {
+  transition: all 0.1s ease-in;
+}
+
+.height-hidden {
+  height: 44px;
+  overflow: hidden;
+}
+
+.info {
+  font-size: 15px;
+  margin-top: 8px;
+  color: #484848;
+}
+
+.read-more-less .read-more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding-left: 15px;
+}
+
+.read-more-less .read-more,
+.read-more-less .read-less {
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.button,
+.btn-solid,
+.btn-line,
+a,
+.read-more,
+.read-less {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.read-more-less .read-more:before {
+  content: "... ";
+  position: absolute;
+  left: 0;
+  text-decoration: none;
+}
+
+.read-more-less .read-less.hide {
+  display: none;
+}
+
+.read-more-less .read-less {
+  position: relative;
+  display: block;
+  text-align: right;
+}
+
+.read-more-less .read-more,
+.read-more-less .read-less {
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.button,
+.btn-solid,
+.btn-line,
+a,
+.read-more,
+.read-less {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.hide {
+  display: none;
+}
+
+.read-more-less {
+  font-size: 15px;
+  color: #484848;
+  position: relative;
+}

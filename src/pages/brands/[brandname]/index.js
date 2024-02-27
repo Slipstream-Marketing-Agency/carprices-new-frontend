@@ -14,6 +14,7 @@ import data from "@/src/data/data";
 import BrandCategory from "@/src/components/Home1/BrandCategory";
 import BodyTypes from "@/src/components/Home1/BodyTypes";
 import Image from "next/image";
+import moment from "moment";
 
 function CarListingLeftSidebar({
   currentPage,
@@ -30,8 +31,9 @@ function CarListingLeftSidebar({
   driveList,
   bodyTypes,
   brand,
+  branddetails,
 }) {
-  console.log(bodyTypeList, "bodyTypeList");
+  console.log(branddetails, "branddetails");
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const router = useRouter();
   console.log(brandList, "brandList");
@@ -59,6 +61,7 @@ function CarListingLeftSidebar({
   console.log(bodyTypeList, "bodyTypeList");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,11 +160,6 @@ function CarListingLeftSidebar({
         )}
       </div>
 
-      {/* <h1 class="cpx-brand-hero__title-primary">
-       Car Prices, Latest Models,
-        Reviews &amp; Comparison In UAE
-      </h1> */}
-
       <div className="mt-2">
         <Ad728x90 dataAdSlot="5962627056" />
       </div>
@@ -229,6 +227,48 @@ function CarListingLeftSidebar({
               <div className="list-grid-main">
                 <div className={`list-grid-product-wrap ${activeClass}`}>
                   <div className="row md:g-4 g-2 mb-40">
+                    <div className="white_bg_wrapper">
+                      <h1 class="fw-bold">
+                        New {branddetails?.attributes?.name} UAE Cars
+                      </h1>
+                      <hr className="my-0 mt-2 heading-bottom " />
+                      <div className="read-more-less" id="dynamic-content">
+                        <div
+                          className={`info ${
+                            expanded ? "" : "height-hidden"
+                          } dynamic-content content-hidden`}
+                        >
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: branddetails?.attributes?.description,
+                            }}
+                          ></div>
+                          {/* <h2 className="fw-bold mt-4">
+                            {branddetails?.attributes?.name} Cars{" "}
+                            {moment().format("MMMM YYYY")} Price List in UAE
+                          </h2>
+                          <hr className="my-0 mt-2 heading-bottom " /> */}
+                          
+                        </div>
+                        <span
+                          className={`read-more ${
+                            expanded ? "hide" : ""
+                          } text-primary fw-bold mb-[-3px]`}
+                          onClick={() => setExpanded(true)}
+                        >
+                          Read More
+                        </span>
+                        <span
+                          className={`read-less scroll-to-parent-pos content-read-less ${
+                            expanded ? "" : "hide"
+                          } text-primary fw-bold`}
+                          onClick={() => setExpanded(false)}
+                        >
+                          Read Less
+                        </span>
+                      </div>
+                    </div>
+
                     <ProductSideFilterList filteredTrims={filteredTrims} />
                   </div>
                   <Pagination
@@ -267,7 +307,7 @@ function CarListingLeftSidebar({
                                         src={
                                           newsItem.coverImage
                                             ? newsItem.coverImage
-                                            : altImage
+                                            : "/assets/img/car-placeholder.png"
                                         }
                                         alt="Article Image"
                                         layout="responsive"
@@ -627,6 +667,12 @@ export async function getServerSideProps(context) {
 
   const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
 
+  const branddetails = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandSlugs}`
+  );
+
+  console.log(branddetails, "branddetails");
+
   try {
     return {
       props: {
@@ -673,6 +719,7 @@ export async function getServerSideProps(context) {
             : fullFilter?.data.drive,
         bodyTypes: home?.data?.data?.bodyTypes,
         brand: home?.data?.data?.brand,
+        branddetails: branddetails?.data,
       },
     };
   } catch (error) {

@@ -143,7 +143,7 @@ function CarLeftSidebar({
   useEffect(() => {
     const currentParams = { ...router.query };
 
-    const { brandname, categoryname, ...paramsForUpdate } = currentParams;
+    const { brandname, categoryname,year, ...paramsForUpdate } = currentParams;
 
     // Function to update or delete the parameter
     const updateParamsForFilter = (key, value) => {

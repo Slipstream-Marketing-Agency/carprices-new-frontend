@@ -364,7 +364,9 @@ function BlogDetailsPage({
                     </div>
                   </div>
 
-                  <p className="summary_box">{article?.summary}</p>
+                  {article?.summary !== "" && (
+                    <p className="summary_box">{article?.summary}</p>
+                  )}
 
                   <div className="d-flex d-md-none d-flex justify-content-end align-items-center mb-2">
                     {" "}
@@ -380,11 +382,9 @@ function BlogDetailsPage({
                             : "/assets/img/car-placeholder.png"
                         }
                         alt=""
-                        layout="responsive"
                         width={300}
                         height={205}
-                        objectFit="cover"
-                        className="blogImage"
+                        className=" object-contain"
                       />
                     </div>
                     {/* <div className="date">
@@ -407,36 +407,8 @@ function BlogDetailsPage({
             </div>
             <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen mt-0 ">
               <div className="blog-sidebar mb-3">
-                <div className="white_bg_wrapper  px-1 py-3">
-                  <h4 className="fw-bold px-2">
-                    Latest review <hr className="my-2 " />
-                  </h4>
-
-                  <div>
-                    {" "}
-                    <BlogRecent
-                      disableMarginTop={true}
-                      disableBorder={true}
-                      blogs={recentBlog}
-                      heading={"Related review"}
-                      disableHeading={true}
-                    />
-                  </div>
-                  {/* {activeTab === "tab2" && (
-                    <div>
-                      {" "}
-                      <BlogRecent
-                        disableMarginTop={true}
-                        disableBorder={true}
-                        blogs={recentBlog}
-                        heading={"Recent review"}
-                        disableHeading={true}
-                      />
-                    </div>
-                  )} */}
-                </div>
                 {detailData?.article_categories?.data.length > 0 && (
-                  <div className="white_bg_wrapper mt-3 px-1 py-3">
+                  <div className="white_bg_wrapper  px-1 py-3">
                     <h4 className="px-2">
                       Related review <hr className="my-2" />
                     </h4>

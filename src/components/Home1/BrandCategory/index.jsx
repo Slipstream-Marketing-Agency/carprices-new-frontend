@@ -9,7 +9,6 @@ function BrandCategory({ brandDetails }) {
 
   const t = useTranslate();
   let isRtl = router.locale === 'ar';
-  console.log(brandDetails, "brandDetails");
   return (
     <div className="brand-category-area mt-3 mb-3">
       <div className="container white_bg_wrapper">
