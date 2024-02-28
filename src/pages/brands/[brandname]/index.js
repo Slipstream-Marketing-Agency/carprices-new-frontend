@@ -15,6 +15,8 @@ import BrandCategory from "@/src/components/Home1/BrandCategory";
 import BodyTypes from "@/src/components/Home1/BodyTypes";
 import Image from "next/image";
 import moment from "moment";
+import PriceListTable from "@/src/components/common/PriceListTable";
+import Price from "@/src/utils/Price";
 
 function CarListingLeftSidebar({
   currentPage,
@@ -122,6 +124,42 @@ function CarListingLeftSidebar({
   useEffect(() => {
     fetchArticles(); // Initial fetch
   }, []);
+
+  const bodyTypeElements = branddetails?.attributes?.uniqueCarBodyTypes?.map(
+    (item, index, array) => {
+      const count = item.modelCount > 1 ? `${item.modelCount} ` : "1 ";
+      const name = item.modelCount > 1 ? `${item.name}s` : item.name;
+      const link = <a href={`/category/${item.slug}`}>{name}</a>; // Creating link for the name
+
+      // Determine if the current item is the last in the array or if it's the second-to-last (for correct comma and 'and' placement)
+      if (index === array.length - 1) {
+        // Last item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link}
+          </span>
+        );
+      } else if (index === array.length - 2) {
+        // Second-to-last item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link} and{" "}
+          </span>
+        );
+      } else {
+        // Any other item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link},{" "}
+          </span>
+        );
+      }
+    }
+  );
+
   return (
     <MainLayout
       pageMeta={{
@@ -243,12 +281,109 @@ function CarListingLeftSidebar({
                               __html: branddetails?.attributes?.description,
                             }}
                           ></div>
-                          {/* <h2 className="fw-bold mt-4">
+                          <h2 className="fw-bold mt-4">
                             {branddetails?.attributes?.name} Cars{" "}
                             {moment().format("MMMM YYYY")} Price List in UAE
                           </h2>
-                          <hr className="my-0 mt-2 heading-bottom " /> */}
-                          
+                          <hr className="mb-3 mt-2 heading-bottom " />
+
+                          <p>
+                            You can choose from{" "}
+                            <b>
+                              {
+                                branddetails?.attributes?.modelsWithPriceRange
+                                  ?.length
+                              }
+                            </b>{" "}
+                            available{" "}
+                            <Link
+                              href={`/brands/${branddetails?.attributes?.slug}`}
+                              className="fw-bold text-primary"
+                            >
+                              {branddetails?.attributes?.name}
+                            </Link>{" "}
+                            models in the UAE. The{" "}
+                            <Link
+                              href={`/brands/${branddetails?.attributes?.slug}`}
+                              className="fw-bold text-primary"
+                            >
+                              {branddetails?.attributes?.name}
+                            </Link>{" "}
+                            UAE line-up consists of <b>{bodyTypeElements}</b>.{" "}
+                            <Link
+                              href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostAffordableModel?.year}/${branddetails?.attributes?.mostAffordableModel?.modelSlug}/${branddetails?.attributes?.mostAffordableModel?.trimSlug}`}
+                              className="fw-bold text-primary"
+                            >
+                              {branddetails?.attributes?.name}{" "}
+                              {
+                                branddetails?.attributes?.mostAffordableModel
+                                  ?.modelName
+                              }{" "}
+                              {
+                                branddetails?.attributes?.mostAffordableModel
+                                  ?.trimName
+                              }
+                            </Link>
+                            , starting at{" "}
+                            <b>
+                              {" "}
+                              <Price
+                                data={
+                                  branddetails?.attributes?.mostAffordableModel
+                                    ?.price
+                                }
+                              />
+                            </b>
+                            , is the most affordable model while the{" "}
+                            <Link
+                              href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostExpensiveModel?.year}/${branddetails?.attributes?.mostExpensiveModel?.modelSlug}/${branddetails?.attributes?.mostExpensiveModel?.trimSlug}`}
+                              className="fw-bold text-primary"
+                            >
+                              {branddetails?.attributes?.name}{" "}
+                              {
+                                branddetails?.attributes?.mostExpensiveModel
+                                  ?.modelName
+                              }{" "}
+                              {
+                                branddetails?.attributes?.mostExpensiveModel
+                                  ?.trimName
+                              }
+                            </Link>{" "}
+                            at{" "}
+                            <b>
+                              {" "}
+                              <Price
+                                data={
+                                  branddetails?.attributes?.mostExpensiveModel
+                                    ?.price
+                                }
+                              />
+                            </b>{" "}
+                            is the brand’s most expensive model.{" "}
+                            <Link
+                              href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostPowerfulModel?.year}/${branddetails?.attributes?.mostPowerfulModel?.modelSlug}/${branddetails?.attributes?.mostPowerfulModel?.trimSlug}`}
+                              className="fw-bold text-primary"
+                            >
+                              {branddetails?.attributes?.name}{" "}
+                              {
+                                branddetails?.attributes?.mostPowerfulModel
+                                  ?.modelName
+                              }{" "}
+                              {
+                                branddetails?.attributes?.mostPowerfulModel
+                                  ?.trimName
+                              }
+                            </Link>{" "}
+                            is the most powerful model in the brand's line-up.
+                          </p>
+                          <br />
+
+                          <PriceListTable
+                            data={
+                              branddetails?.attributes?.modelsWithPriceRange
+                            }
+                            brand={branddetails?.attributes?.name}
+                          />
                         </div>
                         <span
                           className={`read-more ${
@@ -276,6 +411,62 @@ function CarListingLeftSidebar({
                     totalPages={totalPages}
                   />
                 </div>
+              </div>
+              <div className="white_bg_wrapper mt-5">
+                <h2 className="fw-bold mb-3">
+                  {branddetails?.attributes?.name} Cars Key Highlights
+                </h2>
+                <table className="table table-bordered table-rounded">
+                  <tbody>
+                    <tr>
+                      <th className="col-2" scope="row" colspan="6">
+                        <small>Most Affordable</small>
+                      </th>
+                      <td className="col-6" scope="row" colspan="6">
+                        {branddetails?.attributes?.name}{" "}
+                        {
+                          branddetails?.attributes?.mostAffordableModel
+                            ?.modelName
+                        }{" "}
+                        {
+                          branddetails?.attributes?.mostAffordableModel
+                            ?.trimName
+                        }
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="col-2" scope="row" colspan="6">
+                        <small>Most Expensive</small>
+                      </th>
+                      <td className="col-6" scope="row" colspan="6">
+                        {branddetails?.attributes?.name}{" "}
+                        {
+                          branddetails?.attributes?.mostExpensiveModel
+                            ?.modelName
+                        }{" "}
+                        {branddetails?.attributes?.mostExpensiveModel?.trimName}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="col-2" scope="row" colspan="6">
+                        <small>Most Powerful</small>
+                      </th>
+                      <td className="col-6" scope="row" colspan="6">
+                        {branddetails?.attributes?.name}{" "}
+                        {branddetails?.attributes?.mostPowerfulModel?.modelName}{" "}
+                        {branddetails?.attributes?.mostPowerfulModel?.trimName}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="col-2" scope="row" colspan="6">
+                        <small>Available Body Types</small>
+                      </th>
+                      <td className="col-6" scope="row" colspan="6">
+                        {bodyTypeElements}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
