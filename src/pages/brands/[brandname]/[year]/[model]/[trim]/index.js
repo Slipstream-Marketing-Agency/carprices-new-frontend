@@ -714,6 +714,7 @@ export async function getServerSideProps(context) {
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
   const trimSlug = context.params.trim;
+  
 
   try {
     const response = await axios.get(
