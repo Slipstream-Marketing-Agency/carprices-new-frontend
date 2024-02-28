@@ -420,7 +420,7 @@ function CarListingLeftSidebar({
                   <tbody>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                        <small>Most Affordable</small>
+                      Most Affordable
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -436,7 +436,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                        <small>Most Expensive</small>
+                      Most Expensive
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -449,7 +449,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                        <small>Most Powerful</small>
+                      Most Powerful
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -459,7 +459,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                        <small>Available Body Types</small>
+                      Available Body Types
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {bodyTypeElements}

@@ -715,43 +715,19 @@ export async function getServerSideProps(context) {
   const modelSlug = context.params.model;
   const trimSlug = context.params.trim;
 
-  const trim = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
-  );
-
-  console.log(trim, "trimtrimtrimtrimtrim");
-
   try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
+    );
     return {
-      props: { trimData: trim?.data?.data },
+      props: { trimData: response?.data?.data },
     };
   } catch (error) {
-    if (error.response.status === 404) {
-      try {
-        let redirectTrim = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL_OLD + "trim/redirect",
-          {
-            oldPath: `${brandname}/${year}/${modelSlug}/${trimSlug}/`,
-          }
-        );
-        return {
-          redirect: {
-            permanent: true,
-            destination: `/brands/${redirectTrim.data.trim.brand.slug}/${redirectTrim.data.trim.year}/${redirectTrim.data.trim.model.slug}/${redirectTrim.data.trim.slug}`,
-          },
-          props: {},
-        };
-      } catch (error) {
-        if (error.response && error.response.status !== 200) {
-          return {
-            notFound: true, // Treat non-200 responses as 404 errors
-          };
-        }
-      }
-    } else {
-      return {
-        notFound: true, // Treat non-200 responses as 404 errors
-      };
-    }
+    console.error("Failed to fetch trim data:", error);
+
+    // Redirect to a custom error page or return notFound: true
+    return {
+      notFound: true,
+    };
   }
 }
