@@ -267,7 +267,7 @@ function CarListingLeftSidebar({
                   <div className="row md:g-4 g-2 mb-40">
                     <div className="white_bg_wrapper">
                       <h1 class="fw-bold">
-                        New {branddetails?.attributes?.name} UAE Cars
+                        {branddetails?.attributes?.name} UAE Cars
                       </h1>
                       <hr className="my-0 mt-2 heading-bottom " />
                       <div className="read-more-less" id="dynamic-content">
