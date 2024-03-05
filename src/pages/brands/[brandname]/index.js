@@ -160,13 +160,14 @@ function CarListingLeftSidebar({
     }
   );
 
+  
+  const currentYear = new Date().getFullYear();
+
   return (
     <MainLayout
       pageMeta={{
-        title:
-          "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-        description:
-          "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
+        title: `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE  - Carprices.ae`,
+        description: `Explore a wide selection of ${branddetails?.attributes?.name}`,
         type: "Car Review Website",
       }}
     >
@@ -420,7 +421,7 @@ function CarListingLeftSidebar({
                   <tbody>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                      Most Affordable
+                        Most Affordable
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -436,7 +437,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                      Most Expensive
+                        Most Expensive
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -449,7 +450,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                      Most Powerful
+                        Most Powerful
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {branddetails?.attributes?.name}{" "}
@@ -459,7 +460,7 @@ function CarListingLeftSidebar({
                     </tr>
                     <tr>
                       <th className="col-2" scope="row" colspan="6">
-                      Available Body Types
+                        Available Body Types
                       </th>
                       <td className="col-6" scope="row" colspan="6">
                         {bodyTypeElements}
@@ -861,8 +862,6 @@ export async function getServerSideProps(context) {
   const branddetails = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandSlugs}`
   );
-
-  console.log(branddetails, "branddetails");
 
   try {
     return {
