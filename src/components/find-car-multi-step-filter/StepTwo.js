@@ -45,14 +45,14 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
   return (
     <>
       <div className="search_filter_box_items">
-        <div className="d-flex justify-content-center flex-wrap gap-1">
+        <div className="d-flex justify-content-center flex-wrap gap-2">
           {" "}
           {bodyTypeList.map((item, index) => (
             <div
               key={index}
               className={` btn ${
                 filterData.bodyTypes.includes(item.slug) ? "active" : ""
-              } d-flex flex-column justify-content-center align-items-center p-1 w-25`}
+              } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
               onClick={() => handlePreferencesClick(item.slug)}
             >
               {/* <i className={`bi bi-${item.icon}`} /> */}

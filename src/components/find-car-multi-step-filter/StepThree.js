@@ -51,7 +51,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
           {dynamicFilterItems.map((item, index) => (
             <div
               key={index}
-              className={`banner_btn ${isFilterActive(item.group) ? "active" : ""}`}
+              className={`btn ${isFilterActive(item.group) ? "active" : ""} d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
               onClick={() => handleSeatingClick(item.group)}
             >
               <img src={item.img} alt={item.label}></img>

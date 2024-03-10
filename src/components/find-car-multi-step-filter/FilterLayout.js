@@ -61,6 +61,14 @@ export default function FilterLayout() {
     isElectric: filterData.preferences.includes("electric") ? 1 : 0,
     isFuelEfficient: filterData.preferences.includes("fuel-efficiency") ? 1 : 0,
     isOffRoad: filterData.preferences.includes("off-road") ? 1 : 0,
+    isAffordableLuxury: filterData.preferences.includes("affordable-luxury")
+      ? 1
+      : 0,
+    isDuneBashing: filterData.preferences.includes("dune-bashing") ? 1 : 0,
+    isManualTransmission: filterData.preferences.includes("manual-transmission")
+      ? 1
+      : 0,
+    isSafety: filterData.preferences.includes("safety") ? 1 : 0,
     isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
     isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
     isFourToFive: filterData.seating.includes("4-5") ? 1 : 0,
@@ -79,6 +87,14 @@ export default function FilterLayout() {
       query += filterOptions.isElectric === 1 ? "&isElectric=1" : "";
       query += filterOptions.isFuelEfficient === 1 ? "&isFuelEfficient=1" : "";
       query += filterOptions.isOffRoad === 1 ? "&isOffRoad=1" : "";
+      query +=
+        filterOptions.isAffordableLuxury === 1 ? "&isAffordableLuxury=1" : "";
+      query +=
+        filterOptions.isManualTransmission === 1
+          ? "&isManualTransmission=1"
+          : "";
+      query += filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
+      query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
       query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
       query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
       query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
@@ -103,7 +119,11 @@ export default function FilterLayout() {
         filterOptions.isFuelEfficient === 1 ? "&isFuelEfficient=1" : "";
       queryWithoutSeating +=
         filterOptions.isOffRoad === 1 ? "&isOffRoad=1" : "";
-
+      queryWithoutSeating +=
+        filterOptions.isAffordableLuxury === 1 ? "&isAffordableLuxury=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
+      query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
       const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
       const bodyTypesParam =
         filterData.bodyTypes.length > 0
@@ -205,7 +225,7 @@ export default function FilterLayout() {
     },
     {
       // title: `${t.step} 2 : ${t.chooseSeating}`,
-      title: `${t.chooseSeating}`,
+      title: `${t.defineBudget}`,
       component: (
         <StepFour filterData={filterData} setFilterData={setFilterData} />
       ),
@@ -257,7 +277,8 @@ export default function FilterLayout() {
         ...prevState,
         seating: [],
       }));
-    } if (currentStep === 1) {
+    }
+    if (currentStep === 1) {
       setFilterData((prevState) => ({
         ...prevState,
         seating: [],
@@ -278,6 +299,12 @@ export default function FilterLayout() {
     query += filterOptions.isElectric ? "&isElectric=1" : "";
     query += filterOptions.isFuelEfficient ? "&isFuelEfficient=1" : "";
     query += filterOptions.isOffRoad ? "&isOffRoad=1" : "";
+    query +=
+      filterOptions.isAffordableLuxury === 1 ? "&isAffordableLuxury=1" : "";
+    query += filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
+    query +=
+      filterOptions.isManualTransmission === 1 ? "&isManualTransmission=1" : "";
+    query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
     query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
     query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
     query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
