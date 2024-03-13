@@ -46,7 +46,7 @@ function reducer(state, action) {
 function Header() {
   const router = useRouter();
   const t = useTranslate();
-  let isRtl = router.locale === 'ar';
+  let isRtl = router.locale === "ar";
   const [state, dispatch] = useReducer(reducer, initialState);
   const headerRef = useRef(null);
   const handleScroll = () => {
@@ -159,19 +159,18 @@ function Header() {
               </li>
             </ul>
           </li> */}
-           <li>
+          <li>
             <Link legacyBehavior href="/search-cars">
               <a className="drop-down">{t.SearchCars}</a>
             </Link>
           </li>
-          
-           <li>
+
+          <li>
             <Link legacyBehavior href="/compare-cars">
               <a className="drop-down">{t.CompareCars}</a>
             </Link>
           </li>
-         
-        
+
           <li className="menu-item-has-children">
             <a href="#" className="drop-down">
               {t.blog}
@@ -187,7 +186,6 @@ function Header() {
                 state.activeMenu === "pages" ? "d-block" : ""
               }`}
             >
- 
               <li>
                 <Link legacyBehavior href="/news">
                   <a> {t.news}</a>
@@ -199,15 +197,27 @@ function Header() {
                   <a> {t.reviews}</a>
                 </Link>
               </li>
-    
-          
-              
-              
             </ul>
           </li>
           <li>
             <Link legacyBehavior href="/loan-calculator">
               <a className="drop-down">{t.Loancalculator}</a>
+            </Link>
+          </li>
+          <li>
+            <Link legacyBehavior href="">
+              <a className="drop-down">Insurance Calculator</a>
+            </Link>
+          </li>
+
+          <li>
+            <Link legacyBehavior href="">
+              <a className="drop-down">Car Valuation</a>
+            </Link>
+          </li>
+          <li>
+            <Link legacyBehavior href="">
+              <a className="drop-down">Used Cars</a>
             </Link>
           </li>
         </ul>

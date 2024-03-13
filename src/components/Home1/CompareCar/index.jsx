@@ -67,8 +67,10 @@ function index({ heading, carDetails, compare }) {
           <div className="col-lg-12">
             <div className="section-title1">
               {/* <span>Best Car Collection</span> */}
-              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>{t.comaprecars}</h2>
-              <hr className="my-0 mt-2 heading-bottom "/>
+              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>
+                {t.comaprecars}
+              </h2>
+              <hr className="my-0 mt-2 heading-bottom " />
             </div>
           </div>
         </div>
@@ -83,10 +85,7 @@ function index({ heading, carDetails, compare }) {
                       <div className="compare-top">
                         {comparison.carModels.map((car, carIdx) => (
                           <>
-                            <Link
-                              legacyBehavior
-                              href={`/compare-cars/${car?.higTrim?.mainSlug}`}
-                            >
+                            <div>
                               <div className="single-car">
                                 <div className="car-img">
                                   <img
@@ -105,7 +104,7 @@ function index({ heading, carDetails, compare }) {
                                   </h6>
                                 </div>
                               </div>
-                            </Link>
+                            </div>
                             {carIdx === 0 && (
                               <div className="vs">
                                 <span>VS</span>

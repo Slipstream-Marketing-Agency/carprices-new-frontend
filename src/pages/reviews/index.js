@@ -300,7 +300,7 @@ function BlogStandardPage({
                 >
                   <div className="review-card">
                     <div className="review-img list-article">
-                      <Link legacyBehavior href={`/reviews/${reviewItem.slug}`}>
+                      <Link legacyBehavior href={`/news/${reviewItem.slug}`}>
                         <a>
                           <div className="position-relative imageContainer">
                             <Image
