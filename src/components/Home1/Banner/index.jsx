@@ -24,7 +24,7 @@ function index({ bannerImage, bannerText }) {
         <div className="container">
           <div className="row g-xl-4 gy-4">
             <div
-              className="col-xxl-4 col-xl-4 wow zoomIn"
+              className="col-xxl-5 col-xl-5 wow zoomIn"
               data-wow-delay="300ms"
             >
               <div className="car-filter-area">
@@ -32,7 +32,7 @@ function index({ bannerImage, bannerText }) {
               </div>
             </div>
             <div
-              className="col-xxl-8 col-xl-6 d-flex wow fadeInUp"
+              className="col-xxl-7 col-xl-7 d-flex wow fadeInUp"
               data-wow-delay="200ms"
             >
               <div className="banner-content">

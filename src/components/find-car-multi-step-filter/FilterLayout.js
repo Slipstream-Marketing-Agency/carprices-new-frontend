@@ -196,14 +196,14 @@ export default function FilterLayout() {
   const steps = [
     {
       // title: `${t.step} 1: ${t.preferences}`,
-      title: `${t.preferences}`,
+      title: `What are you looking for in a car?`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
     },
     {
       // title: `${t.step} 3 : ${t.defineBudget} `,
-      title: `Choose Body Types`,
+      title: `Choose your preferred body type`,
       component: (
         <StepTwo
           filterData={filterData}
@@ -214,7 +214,7 @@ export default function FilterLayout() {
     },
     {
       // title: `${t.step} 2 : ${t.chooseSeating}`,
-      title: `${t.chooseSeating}`,
+      title: `How many seats do you need?`,
       component: (
         <StepThree
           filterData={filterData}
