@@ -600,7 +600,7 @@ function CarLeftSidebar({
       >
         {/* Price filter UI */}
         {router.pathname !== "/find-your-car" && (
-          <div className="product-widget mb-20">
+          <div className="product-widget ">
             <div className="check-box-item">
               <h3
                 className="product-widget-title mb-20 cursor_pointer"
@@ -637,6 +637,7 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
+        <hr/>
         {router.pathname !== "/brands/[brandname]" && (
           <div className="product-widget mb-1">
             <div className="check-box-item">
@@ -684,9 +685,9 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
-
+<hr/>
         {router.pathname !== "/category/[categoryname]" && (
-          <div className="product-widget mb-20">
+          <div className="product-widget ">
             <div className="check-box-item">
               <h3
                 className="product-widget-title mb-20 cursor-pointer"
@@ -721,9 +722,9 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
-
+<hr/>
         {/* Power filter UI */}
-        <div className="product-widget mb-20">
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"
@@ -759,10 +760,10 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-
+        <hr/>
         {/* Displacement filter UI */}
 
-        <div className="product-widget mb-20">
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"
@@ -800,8 +801,8 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-
-        <div className="product-widget mb-20">
+        <hr/>
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"
@@ -839,8 +840,8 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-
-        <div className="product-widget mb-20">
+        <hr/>
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"
@@ -878,8 +879,8 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-
-        <div className="product-widget mb-20">
+        <hr/>
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"
@@ -917,8 +918,8 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-
-        <div className="product-widget mb-20">
+        <hr/>
+        <div className="product-widget ">
           <div className="check-box-item">
             <h3
               className="product-widget-title mb-20 cursor_pointer"

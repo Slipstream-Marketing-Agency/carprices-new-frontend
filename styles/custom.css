@@ -279,12 +279,12 @@ button:focus {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: var(--primary-color1);
+  background-color: var(--primary);
 }
 
 .checkbox-container {
   overflow: hidden;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-height: 0;
   transition: max-height 0.3s ease-out;
 }

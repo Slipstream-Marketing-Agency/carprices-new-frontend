@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import Price from "@/src/utils/Price";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 function index({ heading, carDetails, compare }) {
   const router = useRouter();
@@ -100,7 +101,7 @@ function index({ heading, carDetails, compare }) {
                                     <a href="#">{car.name}</a>
                                   </h6>
                                   <h6 className="price">
-                                    {t.aed} {car.minPrice}{" "}
+                                     <Price data={car.minPrice}/>{" "}
                                   </h6>
                                 </div>
                               </div>

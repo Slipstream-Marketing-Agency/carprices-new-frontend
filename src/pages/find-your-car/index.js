@@ -339,6 +339,10 @@ export async function getServerSideProps(context) {
     isFourToFive: query.isFourToFive,
     isFiveToSeven: query.isFiveToSeven,
     isSevenToNine: query.isSevenToNine,
+    isManualTransmission: query.isManualTransmission,
+    isDuneBashing: query.isDuneBashing,
+    isSafety: query.isSafety,
+    isAffordableLuxury: query.isAffordableLuxury,
   };
 
   const additionalQueryString = Object.keys(additionalQueryParams)

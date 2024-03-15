@@ -123,7 +123,8 @@ export default function FilterLayout() {
         filterOptions.isAffordableLuxury === 1 ? "&isAffordableLuxury=1" : "";
       queryWithoutSeating +=
         filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
-      query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
+      queryWithoutSeating += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
+      queryWithoutSeating += filterOptions.isManualTransmission === 1 ? "&isManualTransmission=1" : "";
       const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
       const bodyTypesParam =
         filterData.bodyTypes.length > 0

@@ -463,7 +463,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                     </svg>
 
                     <h6 className="p-0 m-0">
-                      Available Variants : {allTrims?.length}
+                      Available Variants: {allTrims?.length}
                     </h6>
                   </div>
 

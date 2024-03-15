@@ -20,7 +20,6 @@ import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import axios from "axios";
-import Price from "@/src/utils/Price";
 import KeySpec from "@/src/components/trim-details/KeySpec";
 import TrimDescription from "@/src/components/trim-details/TrimDescription";
 import DetailedSpecification from "@/src/components/trim-details/DetailedSpecification";
@@ -28,6 +27,7 @@ import VehicleGallery from "@/src/components/trim-details/VehicleGallery";
 import VehicleReview from "@/src/components/trim-details/VehicleReview";
 import VehicleFaq from "@/src/components/trim-details/VehicleFaq";
 import NewShareBtns from "@/src/components/common/NewShareBtns";
+import Price from "@/src/utils/Price";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -603,7 +603,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                   <div className=" mt-1 ">
                                     <div className="white_bg_wrapper py-1 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Monthly Repayment (EMI) : AED
+                                        Monthly Repayment (EMI):
                                       </span>
                                       <span
                                         className="fw-bold font_small"
@@ -614,7 +614,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     </div>
                                     <div className="white_bg_wrapper py-0 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Total Interest Payment : AED
+                                        Total Interest Payment:
                                       </span>
                                       <span
                                         className="fw-bold font_small"
@@ -625,7 +625,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     </div>
                                     <div className="white_bg_wrapper py-0 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Total Amount to Pay : AED
+                                        Total Amount to Pay:
                                       </span>
                                       <span
                                         className="fw-bold font_small"
