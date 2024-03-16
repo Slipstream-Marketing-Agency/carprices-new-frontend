@@ -363,11 +363,11 @@ export default function FilterLayout() {
                   </small>
                 </>
               )}
-              <p>
+              <h5>
                 <b className="filterStepTxt">{steps[currentStep].title}</b>
-              </p>
+              </h5>
               {steps[currentStep].component}
-              <div className="">
+              <div className="filter-button">
                 <div className="">
                   {currentStep > 0 && (
                     <button className="btn me-1" onClick={handlePrevStep}>

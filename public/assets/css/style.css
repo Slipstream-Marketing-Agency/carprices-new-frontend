@@ -13083,7 +13083,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 .banner-section1 .car-filter-area {
   /* background-color: var(--white-color); */
-  margin-top: 40px;
+  margin-top: 10px;
   border-radius: 5px;
 }
 
@@ -29067,7 +29067,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   background: var(--white-color);
   border: radius 10px;
   box-shadow: 0px 0 5px black;
-  width: 410px;
+  width: 100%;
 
   /* width: 360px;
   z-index: 100;
@@ -29077,7 +29077,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .search_filter_box .inner {
   background: #fff;
   position: relative;
-  height: 360px;
+  height: 410px;
   left: 0px;
   padding: 10px;
   width: 100%;
@@ -29089,8 +29089,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 .search_filter_box_items {
-  margin: 3px 0px;
+  margin-top: 45px;
   height: 270px;
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .search_filter_box_items .btn {
@@ -29103,7 +29106,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 
 .search_filter_box_items img {
   width: 55px;
-  height: 35px;
+  height: 48px;
   object-fit: contain;
   margin-bottom: 7px;
 }
@@ -29135,7 +29138,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 78px;
+  height: 95px;
   /* border: none !important; */
   width: 20%;
   border-radius: 16px;
@@ -29520,6 +29523,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   padding: 3px;
   border-radius: 1px;
   color: black;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
 }
 /* fiter text style ends */
 

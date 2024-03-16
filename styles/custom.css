@@ -2624,8 +2624,40 @@ a,
 }
 
 .body_type_btn{
-  height: 70px;
-  width: 80px !important;
+  height: 93px;
+  width: 109px !important ;
   box-shadow: 0px 2px 8px 0 #dfdfdf;
   border-radius: 16px;
+}
+
+.body_type_btn img{
+width:80px !important
+}
+
+.filter-button{
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width:768px) {
+  .search_filter_box_items img{
+    width: 50px !important;
+    height: 35px !important;
+  }
+  .banner_btn{
+height: 75px !important;
+  }
+  .body_type_btn{
+    height: 75px;
+    width: 80px !important ;
+    box-shadow: 0px 2px 8px 0 #dfdfdf;
+    border-radius: 16px;
+  }
+  
+  .body_type_btn img{
+    width: 50px !important;
+    height: 35px !important;
+  }
 }
