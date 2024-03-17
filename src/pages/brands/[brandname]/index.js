@@ -160,14 +160,13 @@ function CarListingLeftSidebar({
     }
   );
 
-  
   const currentYear = new Date().getFullYear();
 
   return (
     <MainLayout
       pageMeta={{
         title: `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE  - Carprices.ae`,
-        description: `Explore a wide selection of ${branddetails?.attributes?.name}`,
+        description: `Explore a wide selection of ${branddetails?.attributes?.name} ${currentYear} cars at competitive prices in the UAE. Discover expert reviews, specifications, and find authorized dealers near you for a seamless car buying experience.`,
         type: "Car Review Website",
       }}
     >
