@@ -371,9 +371,9 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                       {trimData?.name}
                     </h1>{" "}
-                    <div className="shareBtnMobile">
+                    {/* <div className="shareBtnMobile">
                       <NewShareBtns />
-                    </div>
+                    </div> */}
                   </div>
                   <h4 className="mt-1">
                     <Price data={trimData.price} />

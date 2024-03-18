@@ -72,8 +72,8 @@ export default function FilterLayout() {
     isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
     isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
     isFourToFive: filterData.seating.includes("4-5") ? 1 : 0,
-    isFiveToSeven: filterData.seating.includes("5-7") ? 1 : 0,
-    isSevenToNine: filterData.seating.includes("7-9") ? 1 : 0,
+    isFiveToSeven: filterData.seating.includes("6-7") ? 1 : 0,
+    isSevenToNine: filterData.seating.includes("8-9") ? 1 : 0,
   };
 
   useEffect(() => {

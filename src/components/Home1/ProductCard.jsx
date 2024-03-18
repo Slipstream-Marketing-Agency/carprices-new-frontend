@@ -31,7 +31,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
     }
 
     return (
-      <h6 className="text-danger fw-bold MobilepriceTextSize">{priceInfo}</h6>
+      <h6 className="text-danger fw-bold MobilepriceTextSize mb-1">{priceInfo}</h6>
     );
   };
 
@@ -181,8 +181,8 @@ function ProductCard({ subTitle, heading, carDetails }) {
                           </div>
                           <div className="product-content">
                             <div className="product-content-height">
-                              <h6 className="mobileFontCarName mb-0">
-                                <Link legacyBehavior href="">
+                              <h6 className="mobileFontCarName fw-bold mb-1">
+                                <Link legacyBehavior href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}>
                                   <span>
                                     {car?.highTrim?.year} {car?.brand?.name}{" "}
                                     {car?.name}
