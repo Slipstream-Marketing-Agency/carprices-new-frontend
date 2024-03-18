@@ -364,12 +364,12 @@ export default function FilterLayout() {
                   </small>
                 </>
               )}
-              <h5>
-                <b className="filterStepTxt">{steps[currentStep].title}</b>
-              </h5>
+              <h4>
+                <span className="filterStepTxt">{steps[currentStep].title}</span>
+              </h4>
               {steps[currentStep].component}
               <div className="filter-button">
-                <div className="">
+                <div className="d-flex justify-content-center">
                   {currentStep > 0 && (
                     <button className="btn me-1" onClick={handlePrevStep}>
                       {t.previous}
@@ -377,7 +377,7 @@ export default function FilterLayout() {
                   )}
 
                   <button
-                    className={error ? "btn ms-1 disabled" : "btn ms-1"}
+                    className={error ? "btn  disabled" : "btn "}
                     onClick={currentStep === 3 ? handleSubmit : handleNextStep}
                   >
                     {currentStep === 3 ? `${t.submit}` : `${t.next}`}

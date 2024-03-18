@@ -155,7 +155,7 @@ export default function StepOne({ filterData, setFilterData }) {
               >
                 {/* <i className={`bi bi-${item.icon}`} /> */}
                 <Image src={item.img} alt={item.label} width={40} height={40} />
-                <small>{item.label}</small>
+                {item.label}
               </div>
             </Tooltip>
           ))}

@@ -2498,7 +2498,7 @@ input[type="color"]:focus,
     text-align: center;
   }
 
-  .product-card.style-2.compare .product-content .content-top{
+  .product-card.style-2.compare .product-content .content-top {
     margin-bottom: 4px !important;
     margin-top: 17px;
   }
@@ -2619,45 +2619,122 @@ a,
   position: relative;
 }
 
-.fs-7{
+.fs-7 {
   font-size: 14px;
 }
 
-.body_type_btn{
+.body_type_btn {
   height: 93px;
   width: 109px !important ;
   box-shadow: 0px 2px 8px 0 #dfdfdf;
   border-radius: 16px;
 }
 
-.body_type_btn img{
-width:80px !important
+.body_type_btn img {
+  width: 80px !important;
 }
 
-.filter-button{
+.filter-button {
+  width: 100%;
   position: absolute;
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-@media (max-width:768px) {
-  .search_filter_box_items img{
+.filter-button .btn {
+  font-size: 15px;
+  width: 46%;
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+.filter-button .btn:hover {
+  font-size: 15px;
+  width: 46%;
+  background-color: var(--light) !important;
+  color: black !important;
+}
+
+.filter-price-note {
+  position: absolute;
+  left: 50%;
+  bottom: 80px;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .search_filter_box_items img {
     width: 50px !important;
-    height: 35px !important;
+    height: 40px !important;
+    margin: 0px !important;
   }
-  .banner_btn{
-height: 75px !important;
+
+  .search_filter_box .inner {
+    background: #fff;
+    position: relative;
+    height: 410px;
+    left: 0px;
+    padding: 10px 0px !important;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
   }
-  .body_type_btn{
-    height: 75px;
-    width: 80px !important ;
+
+  .banner_btn {
+    height: 75px !important;
+  }
+  .body_type_btn {
+    height: 81px;
+    width: 110px !important ;
     box-shadow: 0px 2px 8px 0 #dfdfdf;
     border-radius: 16px;
   }
-  
-  .body_type_btn img{
-    width: 50px !important;
-    height: 35px !important;
+
+  .body_type_btn img {
+    width: 91px !important;
+    height: 44px !important;
+  }
+
+  .banner_btn {
+    color: var(--black);
+    line-height: 13px !important;
+    font-size: 14px !important;
+    font-family: var(--font-gilroy);
+  }
+
+  .banner_btn {
+    width: 30% !important;
+    height: 80px !important;
+  }
+
+  .banner-section1 {
+    margin: 0px !important;
+  }
+
+  .banner-section1 .car-filter-area {
+    padding: 0px !important;
+  }
+  .search_filter_box .inner {
+    height: 443px !important;
+  }
+  .search_filter_box_items {
+    margin-top: 64px !important;
+  }
+
+  .filter-button .btn {
+    font-size: 15px;
+    width: 46%;
+    background-color: var(--primary) !important;
+    color: white !important;
+  }
+  .filter-button {
+    bottom: -13px;
+  }
+
+  .padding-remover {
+    padding: 0px !important;
   }
 }

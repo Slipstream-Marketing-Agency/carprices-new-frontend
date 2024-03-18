@@ -50,7 +50,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
           {bodyTypeList.map((item, index) => (
             <div
               key={index}
-              className={` btn ${
+              className={`banner_btn btn ${
                 filterData.bodyTypes.includes(item.slug) ? "active" : ""
               } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
               onClick={() => handlePreferencesClick(item.slug)}
@@ -62,7 +62,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
                 width={60}
                 height={60}
               />
-              <small className="text-black">{item.name}</small>
+              {item.name}
             </div>
           ))}
         </div>

@@ -22,9 +22,9 @@ function index({ bannerImage, bannerText }) {
         }}
       >
         <div className="container">
-          <div className="row g-xl-4 gy-4">
+          <div className="row g-xl-4 gy-4 ">
             <div
-              className="col-xxl-5 col-xl-5 wow zoomIn"
+              className="col-xxl-5 col-xl-5 padding-remover"
               data-wow-delay="300ms"
             >
               <div className="car-filter-area">
