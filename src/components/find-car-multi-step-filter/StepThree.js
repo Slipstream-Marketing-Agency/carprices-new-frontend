@@ -10,8 +10,8 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
     { label: `2 ${t.seats}`, value: ["2 Seater"], group: "2", img: "/assets/img/homepage-filter-icons/Seats-2.png" },
     { label: `2 + 2 ${t.seats}`, value: ["2 + 2 Seater"], group: "2+2", img: "/assets/img/homepage-filter-icons/Seats-2+2.png" },
     { label: `4-5 ${t.seats}`, value: ["4 Seater", "5 Seater"], group: "4-5", img: "/assets/img/homepage-filter-icons/Seats-4-5.png" },
-    { label: `6-7 ${t.seats}`, value: ["6 Seater", "7 Seater"], group: "6-7", img: "/assets/img/homepage-filter-icons/Seats-5-7.png" },
-    { label: `8-9 ${t.seats}`, value: [ "8 Seater", "9 Seater"], group: "8-9", img: "/assets/img/homepage-filter-icons/Seats-7-9.png" },
+    { label: `5-7 ${t.seats}`, value: ["5 Seater","6 Seater", "7 Seater"], group: "5-7", img: "/assets/img/homepage-filter-icons/Seats-5-7.png" },
+    { label: `7-9 ${t.seats}`, value: ["7 Seater","8 Seater", "9 Seater"], group: "7-9", img: "/assets/img/homepage-filter-icons/Seats-7-9.png" },
   ];
 
   const [dynamicFilterItems, setDynamicFilterItems] = useState([]);

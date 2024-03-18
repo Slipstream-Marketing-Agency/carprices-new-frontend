@@ -136,7 +136,6 @@ export default function FilterLayout() {
           `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
         )
         .then((response) => {
-          console.log(response, "ksjhkhdakjsd");
           setFilterData((prevState) => ({
             ...prevState,
             budget: [
@@ -159,7 +158,7 @@ export default function FilterLayout() {
         });
 
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${query}`)
+        .get(`${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`)
         .then((response) => {
           console.log(response, "bodyfilter");
           setBodyTypeList(response?.data?.bodyTypes);
