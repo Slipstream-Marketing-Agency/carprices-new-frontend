@@ -62,7 +62,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
         })}*`
       : "Not Available";
 
-    return <span>{emiString}</span>;
+    return <span className="fw-bold">{emiString}</span>;
   };
 
   return (

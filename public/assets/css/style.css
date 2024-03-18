@@ -16344,21 +16344,9 @@ footer .footer-center {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0px    11% 35px; */
-}
-@media (max-width: 1699px) {
-  footer .footer-center {
-    padding: 0px 6% 35px;
-  }
-}
-@media (max-width: 1399px) {
-  footer .footer-center {
-    padding: 0px 5% 35px;
-  }
 }
 @media (max-width: 1199px) {
   footer .footer-center {
-    padding: 0px 3% 35px;
     flex-direction: column;
     gap: 40px;
   }
@@ -29848,22 +29836,20 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   }
   
   .product-card .product-content .content-btm .view-btn2 {
-    font-size: 10px;
+    font-size: 12px;
     font-weight:bold;
     line-height: 1.1 !important; 
   }
   .product-content-height .MobilepriceTextSize {
-    font-size: 10px !important;
-    min-height:25px !important;
+    font-size: 12px !important;
   }
 
   .product-content-height {
-    min-height: 50px;
+    height: 76px;
     
   }
   .mobileFontCarName{
-    min-height:24px !important;
-    font-size:13px !important;
+    font-size:14px !important;
     margin: 0 0 3px !important;
   }
   .compare-car-section
