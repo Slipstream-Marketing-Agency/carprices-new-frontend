@@ -14,7 +14,7 @@ function index({ bannerImage, bannerText }) {
 
   return (
     <>
-      <AdvanceFilterModal />
+      {/* <AdvanceFilterModal /> */}
       <div
         className="banner-section1"
         style={{

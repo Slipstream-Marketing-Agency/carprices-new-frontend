@@ -106,7 +106,7 @@ export default function StepOne({ filterData, setFilterData }) {
     setFilterData((prevState) => {
       const index = prevState.preferences.indexOf(newPreference);
       if (index > -1) {
-        // remove the newPreference from the array
+        // If the preference is already selected, remove it
         const updatedPreferences = [...prevState.preferences];
         updatedPreferences.splice(index, 1);
         return {
@@ -114,11 +114,17 @@ export default function StepOne({ filterData, setFilterData }) {
           preferences: updatedPreferences,
         };
       } else {
-        // add the newPreference to the array
-        return {
-          ...prevState,
-          preferences: [...prevState.preferences, newPreference],
-        };
+        // Add the new preference if less than 3 are already selected
+        if (prevState.preferences.length < 3) {
+          return {
+            ...prevState,
+            preferences: [...prevState.preferences, newPreference],
+          };
+        } else {
+          // Optionally, inform the user that the maximum number of preferences has been reached
+          alert("You can select up to 3 preferences.");
+          return prevState; // Return the current state without changes
+        }
       }
     });
   };

@@ -69,7 +69,7 @@ export default function StepFour({ filterData, setFilterData }) {
       <div className="d-flex justify-content-center align-items-center my-4">
         <div className="value_circle me-2">
           <h6 className="d-flex flex-column align-items-center justify-content-center ">
-            <span className="head mb-1">{t.from}</span>
+            <span className="head mb-1">Starting from</span>
             <span className="mt-4">
               <Price data={minValue} />
             </span>
@@ -77,7 +77,7 @@ export default function StepFour({ filterData, setFilterData }) {
         </div>
         <div className="value_circle ms-2">
           <h6 className="d-flex flex-column align-items-center justify-content-center">
-            <span className="head mb-1">{t.upto}</span>
+            <span className="head mb-1">Up to</span>
             <span className="mt-4">
               <Price data={maxValue} />
             </span>

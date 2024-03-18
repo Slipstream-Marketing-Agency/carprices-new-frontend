@@ -197,7 +197,7 @@ export default function FilterLayout() {
   const steps = [
     {
       // title: `${t.step} 1: ${t.preferences}`,
-      title: `What are you looking for in a car?`,
+      title: `Top 3 things you need from a car`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
@@ -247,7 +247,7 @@ export default function FilterLayout() {
       //  ||
       // filterData?.budget[0] === filterData?.budget[1]
     ) {
-      setError("no cars available for the selected preferences");
+      setError("No cars available for the selected preferences");
     } else if (
       currentStep === 1 &&
       filterData?.budget[0] === null &&
@@ -255,7 +255,7 @@ export default function FilterLayout() {
       // ||
       // filterData?.budget[0] === filterData?.budget[1]
     ) {
-      setError("no cars available for the selected body types");
+      setError("No cars available for the selected body types");
     } else if (
       currentStep === 2 &&
       filterData?.budget[0] === null &&
@@ -263,7 +263,7 @@ export default function FilterLayout() {
       // ||
       // filterData?.budget[0] === filterData?.budget[1]
     ) {
-      setError("no cars available for the selected seats");
+      setError("No cars available for the selected seats");
     } else if (currentStep === 2 && filterData.seating.length === 0) {
       setError("Select atleast one seating option");
     } else {
@@ -345,7 +345,8 @@ export default function FilterLayout() {
         <>
           <div className="search_filter_box text-center">
             <div className="find_car_head ">
-              <h3 className="text-white mb-0">{t.newbuyersguide}</h3>
+              {/* <h3 className="text-white mb-0">{t.newbuyersguide}</h3> */}
+              <h3 className="text-white mb-0">Interactive Car Buying Assistant</h3>
             </div>
 
             <div className="inner">
