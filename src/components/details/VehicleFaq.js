@@ -16,9 +16,8 @@ export default function VehicleFaq({
   motorTypes,
   allTrims,
   mainTrim,
-  getTransmissionType
+  getTransmissionType,
 }) {
-
   const features = [
     mainTrim?.haveAppleCarPlay && "Apple CarPlay",
     mainTrim?.haveAndroidAuto && "Android Auto",
@@ -215,13 +214,15 @@ export default function VehicleFaq({
     },
   ];
   return (
-    <div className="single-item white_bg_wrapper mb-50 mt-5" id="faqs">
+    <div className="single-item white_bg_wrapper mb-50 mt-3" id="faqs">
       <div className="faq-area">
         <div className="title ">
-          <h3>
+       
+          <h2 className={`w-100 fw-bold`}>
             {year} {brand.name} {model.name} FAQs
-          </h3>
-          <div className="">
+          </h2>
+          <hr className="my-2 heading-bottom " />
+          <div className="mt-3">
             {faq.map((item, index) => (
               <AccordionFaq
                 question={item.question}

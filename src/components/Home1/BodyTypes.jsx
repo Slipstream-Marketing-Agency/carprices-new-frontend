@@ -11,7 +11,7 @@ function BodyTypes({ bodyTypeList }) {
   console.log(bodyTypeList, "bodyTypeList");
   return (
     <div className="body-category-area mt-3 mb-3">
-      <div className="container white_bg_wrapper">
+      <div className="container white_bg_wrapper pb-1">
         <div className="row mb-4 wow fadeInUp " data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-start justify-content-start flex-wrap gap-4">
             <div className="section-title1 w-100">
@@ -22,16 +22,16 @@ function BodyTypes({ bodyTypeList }) {
             </div>
           </div>
         </div>
-        <div className="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-3 g-4 justify-content-center mb-2">
+        <div className="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-2 g-4 justify-content-center mb-2">
           {bodyTypeList.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">
                 <Link legacyBehavior href={`/category/${item?.slug}`} key={idx}>
-                  <a className="single-category1">
-                    <div className="brand-icon">
+                  <a className="single-category">
+                    <div className="body-icon">
                       <img src={item?.image} alt="bodytype-icons" />
                     </div>
-                    <h6 className="text-dark">{item?.name}</h6>
+                    <h6 className="text-black fw-bold mt-2">{item?.name}</h6>
                   </a>
                 </Link>
               </div>

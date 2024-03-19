@@ -417,7 +417,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                 </div>
                 <div className="col-lg-6">
                   <div className="nameNShareContainer position-relative">
-                    <h1 className="carNameTxt">
+                    <h1 className="carNameTxt fw-bold mb-1">
                       {mainTrim?.year} {brand?.name} {model?.name}
                     </h1>{" "}
                     {/* <span className="shareBtnMobile">
@@ -425,9 +425,9 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                       <NewShareBtns />
                     </span> */}
                   </div>
-                  <h4 className="mt-1">
+                  <h2 className="fw-bold text-primary mb-3 ">
                     <CarPriceRange />
-                  </h4>
+                  </h2>
 
                   <div className="monthlyEMIContainer d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
                     <svg
@@ -469,6 +469,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
 
                   <div className="mt-2 key_spec">
                     <p className="fw-bold">{t.keySpecification}</p>
+                    <hr className="my-1 heading-bottom " />
                     <div className="row px-2">
                       <div className="col-6 mt-1 ps-0 col-sm-4">
                         <div className="d-flex d-flex align-items-center justify-content-start">

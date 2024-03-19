@@ -22,9 +22,10 @@ export default function ModelVehicleGallery({
       {mainTrim?.length === 0 ? null : (
         <div id="gallery" className="my-3">
           <div className="white_bg_wrapper mt-3">
-            <h4 className="fw-bold">
+            <h2 className={`w-100 fw-bold`}>
               {year} {brand?.name} {mainTrim?.name} Gallery
-            </h4>
+            </h2>
+            <hr className="my-2 heading-bottom " />
             <div className="row mt-2">
               {mainTrim?.galleryImages?.map((item, index) => (
                 <div

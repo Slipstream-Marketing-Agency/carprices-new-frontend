@@ -48,7 +48,7 @@ export default function StepOne({ filterData, setFilterData }) {
       label: "Affordable Luxury",
       value: "affordable-luxury",
       icon: "gear-wide-connected",
-      img: "/assets/img/filter-icons/affordable-luxury.png",
+      img: "/assets/img/filter-icons/Affordable Luxury.png",
       // toolbar: "Cars that offer a premium experience at a reasonable price. This includes cars that offer good luxury and are under AED 280,000",
     },
     {
@@ -155,7 +155,7 @@ export default function StepOne({ filterData, setFilterData }) {
               >
                 {/* <i className={`bi bi-${item.icon}`} /> */}
                 <Image src={item.img} alt={item.label} width={40} height={40} />
-                {item.label}
+                <span>{item.label}</span>
               </div>
             </Tooltip>
           ))}

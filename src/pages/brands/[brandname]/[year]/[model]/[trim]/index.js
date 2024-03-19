@@ -367,7 +367,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                 </div>
                 <div className="col-lg-6">
                   <div className="d-flex justify-content-between align-items-center position-relative">
-                    <h1>
+                    <h1 className="fw-bold mb-1">
                       {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                       {trimData?.name}
                     </h1>{" "}
@@ -375,9 +375,9 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       <NewShareBtns />
                     </div> */}
                   </div>
-                  <h4 className="mt-1">
+                  <h2 className="fw-bold text-primary mb-3">
                     <Price data={trimData.price} />
-                  </h4>
+                  </h2>
 
                   <div className="d-flex gap-2 align-items-center w-100 border py-1 rounded justify-content-center">
                     <svg

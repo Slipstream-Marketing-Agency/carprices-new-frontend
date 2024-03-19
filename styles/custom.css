@@ -158,6 +158,10 @@ button:focus {
   color: #fff;
 }
 
+.btn-primary:hover {
+  color: #000;
+}
+
 .btn.btn-outline {
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000;
@@ -1284,9 +1288,19 @@ small {
   transition: 0.25s ease-out;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .year_tab .tabs {
     transform: scale(0.6);
+  }
+
+  .year_tab .tab {
+    height: 40px;
+    width: 130px;
+    font-size: 22px;
+  }
+  .year_tab .glider {
+    height: 40px;
+    width: 130px;
   }
 }
 
@@ -1635,27 +1649,30 @@ input[type="color"]:focus,
 .body-category-area {
   position: relative;
 }
-.body-category-area .single-category1 {
+.body-category-area .single-category {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
   background-color: white;
-  box-shadow: 1px 1px 6px #d9d9d9, 1px 2px 2px #e7e7e7;
-  border-radius: 10px;
   padding: 10px 5px;
   z-index: 1;
   transition: all ease 0.35s;
 }
-.body-category-area .single-category1:hover {
+/* .body-category-area .single-category:hover {
   box-shadow: 1px 1px 6px #c2c2c2, 1px 2px 2px #d5d5d5 !important;
-}
+} */
 
-.body-category-area .single-category1 .brand-icon {
+.body-category-area .single-category .body-icon {
   margin-bottom: 5px;
 }
-.body-category-area .single-category1::after {
+.body-icon img {
+  max-width: 140px !important;
+  height: 80px !important;
+  object-fit: contain;
+}
+.body-category-area .single-category::after {
   content: "";
   /* background-image: url(../img/home1/category1-bg.png); */
   background-color: var(--light);
@@ -2637,7 +2654,7 @@ a,
 .filter-button {
   width: 100%;
   position: absolute;
-  bottom: 0px;
+  bottom: -6px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -2666,6 +2683,12 @@ a,
   color: var(--primary);
 }
 
+.banner_btn span {
+  height: 28px !important;
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .search_filter_box_items img {
     width: 50px !important;
@@ -2686,6 +2709,7 @@ a,
   .banner_btn {
     height: 75px !important;
   }
+
   .body_type_btn {
     height: 81px;
     width: 110px !important ;
@@ -2737,4 +2761,8 @@ a,
   .padding-remover {
     padding: 0px !important;
   }
+}
+
+.car_description p {
+  margin-top: 8px;
 }

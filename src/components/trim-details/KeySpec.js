@@ -10,9 +10,10 @@ export default function KeySpec({ trim }) {
   return (
     <div id="keyspec" className="my-3">
       <div className="white_bg_wrapper">
-        <h2 className="fw-bold">
+        <h2 className={`w-100 fw-bold`}>
           Key Specs of the {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
         </h2>
+        <hr className="my-2 heading-bottom " />
         <div className="row py-2 text-center">
           <div className="col-sm-4 col-lg-2 col-6 ">
             <div className="d-flex flex-column align-items-center">

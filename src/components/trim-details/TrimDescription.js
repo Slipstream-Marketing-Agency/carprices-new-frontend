@@ -3,10 +3,9 @@ import { useContext } from "react";
 import Price from "../common/Price";
 
 export default function TrimDescription({ trim }) {
-
   // const availableTrim = trim?.trims?.filter((item) => item.year === 2023);
-  const engineText = ((trim?.displacement / 1000).toFixed(1)) + "L " + trim?.engine
-
+  const engineText =
+    (trim?.displacement / 1000).toFixed(1) + "L " + trim?.engine;
 
   const features = [
     trim?.haveAppleCarPlay && "Apple CarPlay",
@@ -36,8 +35,7 @@ export default function TrimDescription({ trim }) {
     safetyFeature += " and ABS";
   } else if (!hasABS && hasFrontParkAssist) {
     safetyFeature += " and front park assist";
-  }
-  else if (!hasABS && !hasFrontParkAssist) {
+  } else if (!hasABS && !hasFrontParkAssist) {
     safetyFeature += " ";
   }
 
@@ -57,18 +55,18 @@ export default function TrimDescription({ trim }) {
       speed = transmission;
     }
     return `${speed}`;
-  }
+  };
   return (
     <div id="description" className="my-3 ">
       <div className="white_bg_wrapper">
-        <h2 className="fw-bold">
-          {trim?.year} {trim?.brand} {trim?.model}{" "}
-          {trim?.name}
+        <h2 className={`w-100 fw-bold`}>
+          {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
         </h2>
+        <hr className="my-2 heading-bottom " />
         <div className="car_description mt-3">
           <p>
-            <span className="fw-bold">Price: </span> The{" "}
-            {trim?.brand?.name} {trim?.name} is priced at{" "}
+            <span className="fw-bold">Price: </span> The {trim?.brand?.name}{" "}
+            {trim?.name} is priced at{" "}
             <b>
               {trim?.price === null ? (
                 <Price data={trim?.price} />
@@ -88,40 +86,42 @@ export default function TrimDescription({ trim }) {
               </p>
             ) : trim?.fuelType === "Hybrid" ? (
               <p>
-                <b>Engine:</b> It is equipped with a <b>{engineText}</b>{" "}
-                engine.
+                <b>Engine:</b> It is equipped with a <b>{engineText}</b> engine.
               </p>
             ) : (
               <p>
-                <b>Engine:</b> It is equipped with a <b>{engineText}</b>{" "}
-                engine.
+                <b>Engine:</b> It is equipped with a <b>{engineText}</b> engine.
               </p>
             )}
           </>
 
-          {trim?.fuelType === "Electric" || trim?.gearBox === "" || trim?.gearBox === null ? (
+          {trim?.fuelType === "Electric" ||
+          trim?.gearBox === "" ||
+          trim?.gearBox === null ? (
             ""
           ) : (
             <p>
               <b>Transmission: </b>
-              It comes with a{" "}
-              <b>{TransmissionList(trim?.gearBox)}</b>{" "}
-              gearbox.
+              It comes with a <b>{TransmissionList(trim?.gearBox)}</b> gearbox.
             </p>
           )}
 
           {trim?.fuelType === "Electric" ||
-            trim?.fuelType === "Hybrid" && trim?.range !== "" && trim?.range !== 0 ? (
+          (trim?.fuelType === "Hybrid" &&
+            trim?.range !== "" &&
+            trim?.range !== 0) ? (
             <p>
-              <b>Range: </b>The claimed range is <b>{trim?.range}</b> on
-              a single charge.
+              <b>Range: </b>The claimed range is <b>{trim?.range}</b> on a
+              single charge.
             </p>
           ) : (
             ""
           )}
 
           {trim?.fuelType === "Electric" ||
-            trim?.fuelType === "Hybrid" && trim?.batteryCapacity !== "" && trim?.batteryCapacity !== null ? (
+          (trim?.fuelType === "Hybrid" &&
+            trim?.batteryCapacity !== "" &&
+            trim?.batteryCapacity !== null) ? (
             <p>
               <b>Battery Capacity: </b>It comes with a{" "}
               <b>{trim?.batteryCapacity}</b> battery.
@@ -151,8 +151,8 @@ export default function TrimDescription({ trim }) {
           </p>
           {trim?.cargoSpace === "" || trim?.cargoSpace === null ? null : (
             <p>
-              <b>Boot Space: </b>It offers <b>{trim?.cargoSpace}L</b> of
-              cargo space.
+              <b>Boot Space: </b>It offers <b>{trim?.cargoSpace}L</b> of cargo
+              space.
             </p>
           )}
         </div>

@@ -18,9 +18,8 @@ export default function ModelDescription({
   motorTypes,
   allTrims,
   mainTrim,
-  getTransmissionType
+  getTransmissionType,
 }) {
-  console.log(minFuelConsumption, maxFuelConsumption, "mainTrimfsdfsdf");
   const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
   const t = useTranslate();
@@ -134,15 +133,15 @@ export default function ModelDescription({
       }
     });
 
-  
-
   return (
     <div id="description" className={`mb-3 ${isRtl && "text-end"}`}>
       <div className="white_bg_wrapper mb-3">
-        <h4 className="fw-bold">
+        <h2 className={`w-100 fw-bold`}>
           {year} {brand?.name} {model?.name}
-        </h4>
-        <div className="car_description mt-3">
+        </h2>
+        <hr className="my-2 heading-bottom " />
+
+        <div className="car_description">
           <p>
             {isRtl ? (
               <>

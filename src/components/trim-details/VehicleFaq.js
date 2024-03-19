@@ -1,7 +1,7 @@
 import React from "react";
 import AccordionFaq from "../common/AccordionFaq";
 
-export default function VehicleFaq({trim}) {
+export default function VehicleFaq({ trim }) {
   // const getTransmissionType =(transmissions) => {
   //   const hasAutomatic = trim?.trims.some((t) => t.transmission === "Automatic");
   //   const hasManual = trim?.trims.some((t) => t.transmission === "Manual");
@@ -17,8 +17,8 @@ export default function VehicleFaq({trim}) {
   //   }
   // }
 
-  console.log(trim.haveAdaptiveCuriseControl,"haveAdaptiveCuriseControl");
-  
+  console.log(trim.haveAdaptiveCuriseControl, "haveAdaptiveCuriseControl");
+
   const faq = [
     {
       question: `What is the price of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,
@@ -76,7 +76,9 @@ export default function VehicleFaq({trim}) {
       question: `What type of motor the ${trim?.year} ${trim?.brand} ${trim?.name} has?`,
       answer: `The ${trim?.year} ${trim?.brand} ${trim?.name} is equipped with a ${trim?.motor}.`,
       id: 12,
-      condition: trim?.fuelType === "Electric" || trim?.fuelType === "Hybrid" && trim?.motor !== "",
+      condition:
+        trim?.fuelType === "Electric" ||
+        (trim?.fuelType === "Hybrid" && trim?.motor !== ""),
     },
     {
       question: `What safety features are included in the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,
@@ -135,9 +137,9 @@ export default function VehicleFaq({trim}) {
     {
       question: `What kind of connectivity and entertainment features are included in the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?
       `,
-      answer: ` The ${trim?.year} ${trim?.brand} ${
-        trim?.name
-      } comes with ${trim?.haveAppleCarPlay && "Apple CarPlay, "}${
+      answer: ` The ${trim?.year} ${trim?.brand} ${trim?.name} comes with ${
+        trim?.haveAppleCarPlay && "Apple CarPlay, "
+      }${
         trim?.haveAndroidAuto && "Android Auto, "
       }compatibility for seamless connectivity ${
         trim?.haveRearSeatEntertainment ? "and rear seat entertainment" : ""
@@ -149,9 +151,11 @@ export default function VehicleFaq({trim}) {
   return (
     <div id="faq" className="my-3">
       <div className="white_bg_wrapper mt-3">
-        <h2 className="fw-bold">
+    
+        <h2 className={`w-100 fw-bold`}>
           {trim?.year} {trim?.brand} {trim?.model} {trim?.name} FAQs
         </h2>
+        <hr className="my-2 heading-bottom mb-3" />
         {faq.map((item, index) => (
           <div key={index}>
             <AccordionFaq

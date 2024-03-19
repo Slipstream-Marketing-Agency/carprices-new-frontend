@@ -4,12 +4,14 @@ export default function DetailedSpecification({ trim }) {
   return (
     <div id="specifications" className="my-3">
       <div className="white_bg_wrapper">
-        <h2 className="fw-bold mb-3">
+
+        <h2 className={`w-100 fw-bold`}>
           Specifications of{" "}
           <span>
             {trim?.brand} {trim?.model} {trim?.name}
           </span>
         </h2>
+        <hr className="my-2 heading-bottom " />
         {/* <div className="single-item mb-50" id="overview">
           <div className="overview">
             <div className="title mb-2">
@@ -51,6 +53,7 @@ export default function DetailedSpecification({ trim }) {
             ) : (
               <div className="white_bg_wrapper mt-1">
                 <h3 className="fw-bold text-primary spec_head">Engine</h3>
+                <hr className="my-2 heading-bottom " />
                 <div className="d-flex justify-content-between align-items-center mt-1">
                   <p>No. of Cylinders</p>
                   <p className="fw-bold">
@@ -78,6 +81,7 @@ export default function DetailedSpecification({ trim }) {
             {trim?.fuelType === "Electric" || trim?.fuelType === "Hybrid" ? (
               <div className="white_bg_wrapper mt-2">
                 <h3 className="fw-bold text-primary">Motor</h3>
+                <hr className="my-2 heading-bottom " />
                 <div className="d-flex justify-content-between align-items-center mt-1">
                   <p>Motor</p>
                   <p className="fw-bold"> {trim?.motor ? trim?.motor : "-"}</p>
@@ -135,6 +139,7 @@ export default function DetailedSpecification({ trim }) {
 
             <div className="white_bg_wrapper mt-2">
               <h3 className="fw-bold text-primary">Transmission</h3>
+              <hr className="my-2 heading-bottom " />
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Drive</p>
                 <p className="fw-bold"> {trim?.drive}</p>
@@ -165,6 +170,7 @@ export default function DetailedSpecification({ trim }) {
 
             <div className="white_bg_wrapper mt-2">
               <h3 className="fw-bold text-primary">Safety</h3>
+              <hr className="my-2 heading-bottom " />
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>ABS</p>
                 <p className="fw-bold">
@@ -320,6 +326,7 @@ export default function DetailedSpecification({ trim }) {
             ) : (
               <div className="white_bg_wrapper mt-1">
                 <h3 className="fw-bold text-primary">Fuel Efficiency</h3>
+                <hr className="my-2 heading-bottom " />
                 <div className="d-flex justify-content-between align-items-center mt-1">
                   <p>Tank Size</p>
                   <p className="fw-bold">
@@ -336,6 +343,7 @@ export default function DetailedSpecification({ trim }) {
 
             <div className="white_bg_wrapper mt-2">
               <h3 className="fw-bold text-primary">Performance</h3>
+              <hr className="my-2 heading-bottom " />
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Zero to Hundred</p>
                 <p className="fw-bold"> {trim?.zeroToHundred}seconds</p>
@@ -348,6 +356,7 @@ export default function DetailedSpecification({ trim }) {
 
             <div className="white_bg_wrapper mt-2">
               <h3 className="fw-bold text-primary">Dimensions</h3>
+              <hr className="my-2 heading-bottom " />
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Body Type</p>
                 <p className="fw-bold">
@@ -409,6 +418,7 @@ export default function DetailedSpecification({ trim }) {
             </div>
             <div className="white_bg_wrapper mt-2">
               <h3 className="fw-bold text-primary">Interior</h3>
+              <hr className="my-2 heading-bottom " />
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Leather Interior</p>
                 {trim?.haveLeatherInterior ? (

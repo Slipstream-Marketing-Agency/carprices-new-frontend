@@ -99,7 +99,7 @@ export default{
 
 
     // brands page
-   keySpecification:"Key Specification",
+   keySpecification:"Key Specifications",
     torque:"Torque",
     peakTorque:"Peak Torque",
     engine:"Engine",

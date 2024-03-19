@@ -35,6 +35,9 @@
   color: var(--light) !important;
 }
 
+.bg-primary{
+  background-color: var(--primary) !important;
+}
 /*================================================
 1. fonts familly Css
 =================================================*/
@@ -29093,7 +29096,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 .search_filter_box_items img {
-  width: 55px;
+  width: 58px;
   height: 48px;
   object-fit: contain;
 }
