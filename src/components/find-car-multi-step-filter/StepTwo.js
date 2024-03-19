@@ -52,7 +52,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
               key={index}
               className={`banner_btn btn ${
                 filterData.bodyTypes.includes(item.slug) ? "active" : ""
-              } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
+              } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn `}
               onClick={() => handlePreferencesClick(item.slug)}
             >
               {/* <i className={`bi bi-${item.icon}`} /> */}
@@ -61,8 +61,9 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
                 alt={item.label}
                 width={60}
                 height={60}
+                className=""
               />
-              {item.name}
+              <p className="mt-1 fw-bold">{item.name}</p>
             </div>
           ))}
         </div>
