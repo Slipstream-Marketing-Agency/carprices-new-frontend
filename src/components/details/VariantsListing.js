@@ -30,7 +30,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                   <Image
                     width={100}
                     height={100}
-                    src={item?.featuredImage}
+                    src={item?.featuredImage ? item?.featuredImage : "/assets/img/car-placeholder.png"}
                     className="img-fluid p-md-3 p-1"
                   />
                 </div>
