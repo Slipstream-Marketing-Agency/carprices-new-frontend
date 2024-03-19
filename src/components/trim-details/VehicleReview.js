@@ -1,5 +1,6 @@
 import React from "react";
 import Price from "../common/Price";
+import { formatNumberWithCommas } from "@/src/utils/formatNumber";
 
 export default function VehicleReview({ trim }) {
   const TransmissionList = (transmission) => {
@@ -44,10 +45,10 @@ export default function VehicleReview({ trim }) {
                   engine,{" "}
                 </>
               )}
-              it delivers {trim?.power}hp power and {trim?.torque} Nm of torque.
-              It features a {TransmissionList(trim?.gearBox)} transmission and a{" "}
-              {trim?.drive} drive system for smooth handling. It is a{" "}
-              {trim?.fuelType} drivetrain with a{" "}
+              it delivers {trim?.power}hp of power and {trim?.torque} Nm of
+              torque. It features a {TransmissionList(trim?.gearBox)}{" "}
+              transmission and a {trim?.drive} drive system for smooth handling.
+              It is a {trim?.fuelType} drivetrain with a{" "}
               {trim?.fuelType === "Electric" ? "range " : "fuel efficiency "}
               of{" "}
               {trim?.fuelType === "Electric"
@@ -62,10 +63,13 @@ export default function VehicleReview({ trim }) {
               {trim?.haveAppleCarPlay ? "Apple CarPlay" : ""}{" "}
               {trim?.haveAppleCarPlay || trim?.haveAndroidAuto ? "and " : ""}
               {trim?.haveAndroidAuto ? "Android Auto" : ""}. It measures{" "}
-              {trim?.length}mm in length, {trim?.width}mm in width, and{" "}
-              {trim?.height}mm in height
+              {formatNumberWithCommas(trim?.length)}mm in length,{" "}
+              {formatNumberWithCommas(trim?.width)}mm in width, and{" "}
+              {formatNumberWithCommas(trim?.height)}mm in height
               {trim?.cargoSpace
-                ? ` and has ${trim?.cargoSpace}L of cargo space.`
+                ? ` and has ${formatNumberWithCommas(
+                    trim?.cargoSpace
+                  )}L of cargo space.`
                 : "."}
             </span>
           </p>
@@ -102,12 +106,14 @@ export default function VehicleReview({ trim }) {
                 {trim?.name} is a {trim?.bodyType}.
                 <br />
                 <b>Dimensions:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
-                {trim?.name} {""}is {trim?.length ? trim?.length : "-"}mm in
-                length, {trim?.width}mm in width, and {trim?.height}mm in
-                height.
+                {trim?.name} {""}is{" "}
+                {trim?.length ? formatNumberWithCommas(trim?.length) : "-"}mm in
+                length, {formatNumberWithCommas(trim?.width)}mm in width, and{" "}
+                {formatNumberWithCommas(trim?.height)}mm in height.
                 <br />
                 <b>Wheelbase:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
-                {trim?.name} features a {trim?.wheelbase}mm wheelbase. <br />
+                {trim?.name} features a{" "}
+                {formatNumberWithCommas(trim?.wheelbase)}mm wheelbase. <br />
               </div>
             </div>
           </div>
@@ -136,10 +142,10 @@ export default function VehicleReview({ trim }) {
                 <b>Upholstery:</b> The interior is finished in{" "}
                 {trim?.haveLeatherInterior ? "leather." : ""}{" "}
                 {trim?.haveFabricInterior ? "fabric." : ""}
-                <br />
                 <>
                   {features.length > 0 && (
                     <>
+                      <br />
                       <b>Connectivity:</b> Compatibility for{" "}
                       {features.map((feature, index) => (
                         <b key={feature}>

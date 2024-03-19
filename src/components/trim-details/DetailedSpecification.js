@@ -1,3 +1,4 @@
+import { formatNumberWithCommas } from "@/src/utils/formatNumber";
 import React from "react";
 
 export default function DetailedSpecification({ trim }) {
@@ -181,14 +182,14 @@ export default function DetailedSpecification({ trim }) {
                 <p>Brake Type</p>
                 <div className="d-flex">
                   <div className="d-flex flex-row align-items-center me-2">
-                    <small className="fw-bold">
+                    <p className="fw-bold">
                       Front: {trim?.frontBrakes?.replace("(ABS)", "")}
-                    </small>
+                    </p>
                   </div>
                   <div className="d-flex flex-row align-items-center">
-                    <small className="fw-bold ">
+                    <p className="fw-bold ">
                       Rear: {trim?.rearBrakes?.replace("(ABS)", "")}
-                    </small>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -206,7 +207,7 @@ export default function DetailedSpecification({ trim }) {
                 <div className="d-flex">
                   {trim?.haveFrontAirbags ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Front</small>
+                      <p className="fw-bold">Front</p>
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
                       </p>
@@ -216,7 +217,7 @@ export default function DetailedSpecification({ trim }) {
                   )}
                   {trim?.haveSideAirbags ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Side</small>
+                      <p className="fw-bold">Side</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -227,7 +228,7 @@ export default function DetailedSpecification({ trim }) {
                   )}
                   {trim?.haveRearAirbags ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Rear</small>
+                      <p className="fw-bold">Rear</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -244,7 +245,7 @@ export default function DetailedSpecification({ trim }) {
                 <div className="d-flex">
                   {trim?.haveFrontParkAssist ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Front</small>
+                      <p className="fw-bold">Front</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -255,7 +256,7 @@ export default function DetailedSpecification({ trim }) {
                   )}
                   {trim?.haveRearParkAssist ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Rear</small>
+                      <p className="fw-bold">Rear</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -271,7 +272,7 @@ export default function DetailedSpecification({ trim }) {
                 <div className="d-flex">
                   {trim?.haveRearParkingCamera ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">Rear</small>
+                      <p className="fw-bold">Rear</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -282,7 +283,7 @@ export default function DetailedSpecification({ trim }) {
                   )}
                   {trim?.have360ParkingCamera ? (
                     <div className="d-flex flex-row align-items-center ms-2">
-                      <small className="fw-bold">360</small>
+                      <p className="fw-bold">360</p>
 
                       <p className="fw-bold">
                         <i className="bi bi-check-lg"></i>
@@ -372,28 +373,28 @@ export default function DetailedSpecification({ trim }) {
                 <p>Length</p>
                 <p className="fw-bold">
                   {" "}
-                  {trim?.length ? trim?.length + "mm" : "-"}
+                  {trim?.length ? formatNumberWithCommas(trim?.length) + "mm" : "-"}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Width</p>
                 <p className="fw-bold">
                   {" "}
-                  {trim?.width ? trim?.width + "mm" : "-"}
+                  {trim?.width ? formatNumberWithCommas(trim?.width) + "mm" : "-"}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Wheelbase</p>
                 <p className="fw-bold">
                   {" "}
-                  {trim?.wheelbase ? trim?.wheelbase + "mm" : "-"}
+                  {trim?.wheelbase ? formatNumberWithCommas(trim?.wheelbase) + "mm" : "-"}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center mt-1">
                 <p>Weight</p>
                 <p className="fw-bold">
                   {" "}
-                  {trim?.weight ? trim?.weight + "kg" : "-"}
+                  {trim?.weight ? formatNumberWithCommas(trim?.weight) + "kg" : "-"}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center mt-1">

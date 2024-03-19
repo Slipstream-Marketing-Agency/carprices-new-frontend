@@ -1,5 +1,6 @@
 import React from "react";
 import AccordionFaq from "../common/AccordionFaq";
+import { formatNumberWithCommas } from "@/src/utils/formatNumber";
 
 export default function VehicleFaq({ trim }) {
   // const getTransmissionType =(transmissions) => {
@@ -109,7 +110,7 @@ export default function VehicleFaq({ trim }) {
     {
       question: ` What are the exterior dimensions of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?
       `,
-      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} has dimensions of ${trim?.length}mm length, ${trim?.width}mm width, and ${trim?.height}mm height.
+      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} has dimensions of ${formatNumberWithCommas(trim?.length)}mm length, ${formatNumberWithCommas(trim?.width)}mm width, and ${formatNumberWithCommas(trim?.height)}mm height.
       `,
       id: 7,
       condition: true,

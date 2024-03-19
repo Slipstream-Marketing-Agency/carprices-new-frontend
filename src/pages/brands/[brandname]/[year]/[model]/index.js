@@ -63,6 +63,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
 
   const gallery = mainTrim?.galleryImages > 0;
 
+  console.log(allTrims,"allTrims");
+
   const getTransmissionType = () => {
     const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
     const hasManual = allTrims.some((t) => t?.transmission === "Manual");
@@ -89,6 +91,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
       );
     }
   };
+
+  console.log(getTransmissionType(),"getTransmissionType");
 
   console.log(
     "Minimum power:",

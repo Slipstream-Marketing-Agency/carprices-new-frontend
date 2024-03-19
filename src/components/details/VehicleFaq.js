@@ -1,6 +1,7 @@
 import Price from "@/src/utils/Price";
 import React, { useEffect, useState } from "react";
 import AccordionFaq from "../common/AccordionFaq";
+import { formatNumberWithCommas } from "@/src/utils/formatNumber";
 
 export default function VehicleFaq({
   year,
@@ -139,11 +140,14 @@ export default function VehicleFaq({
     },
     {
       question: `What type of engine and transmission does the ${year} ${brand.name} ${model.name} have?`,
-      answer: `The ${year} ${brand.name} ${model.name} is equipped with a ${(
-        mainTrim?.displacement / 1000
-      ).toFixed(1)}L ${
-        mainTrim?.engine
-      } engine and is paired with ${getTransmissionType()} transmission.`,
+      answer: (
+        <>
+          The {year} {brand.name} {model.name} is equipped with a{" "}
+          {((mainTrim?.displacement || 0) / 1000).toFixed(1)}L{" "}
+          {mainTrim?.engine} engine and is paired with {getTransmissionType()}{" "}
+          transmission.
+        </>
+      ),
       id: 4,
       condition:
         mainTrim?.fuelType === "Hybrid" ||
@@ -186,7 +190,13 @@ export default function VehicleFaq({
     {
       question: ` What are the exterior dimensions of the ${year} ${brand.name} ${model.name}?
       `,
-      answer: `The ${year} ${brand.name} ${model.name} has dimensions of ${mainTrim?.length}mm length, ${mainTrim?.width}mm width, and ${mainTrim?.height}mm height.
+      answer: `The ${year} ${brand.name} ${
+        model.name
+      } has dimensions of ${formatNumberWithCommas(
+        mainTrim?.length
+      )}mm length, ${formatNumberWithCommas(
+        mainTrim?.width
+      )}mm width, and ${formatNumberWithCommas(mainTrim?.height)}mm height.
       `,
       id: 7,
       condition: true,
@@ -217,7 +227,6 @@ export default function VehicleFaq({
     <div className="single-item white_bg_wrapper mb-50 mt-3" id="faqs">
       <div className="faq-area">
         <div className="title ">
-       
           <h2 className={`w-100 fw-bold`}>
             {year} {brand.name} {model.name} FAQs
           </h2>
