@@ -34,15 +34,36 @@ export default function CarFilter({
   const { query } = router;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
-  const brandSlugs = router.pathname === "/search-cars" ? (query.brand ? query.brand.split(",") : []) : (router.pathname === "/brands" ? (query.brandname ? [query.brandname] : []) : []);
-  const bodyTypeSlugs = router.pathname === "/search-cars" ? (query.bodytype ? query.bodytype.split(",") : []) : (router.pathname === "/category/[categoryname]" ? (query.categoryname ? [query.categoryname] : []): []);
+  const brandSlugs =
+    router.pathname === "/search-cars" ||
+    router.pathname === "/category/[categoryname]"
+      ? query.brand
+        ? query.brand.split(",")
+        : []
+      : router.pathname === "/brands/[brandname]"
+      ? query.brandname
+        ? [query.brandname]
+        : []
+      : [];
+  const bodyTypeSlugs =
+    router.pathname === "/search-cars" ||
+    router.pathname === "/brands/[brandname]"
+      ? query.bodytype
+        ? query.bodytype.split(",")
+        : []
+      : router.pathname === "/category/[categoryname]"
+      ? query.categoryname
+        ? [query.categoryname]
+        : []
+      : [];
+
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
   const driveSlugs = query.drive ? query.drive.split(",") : [];
   const transmissionSlugs = query.transmission
     ? query.transmission.split(",")
     : [];
-    console.log(router,"bodyTypeSlugs");
+  console.log(router, "bodyTypeSlugs");
 
   const queryParams = {};
 
@@ -586,7 +607,7 @@ export default function CarFilter({
   return (
     <>
       <LoaderOverlay isVisible={isLoading} />
-     
+
       <div className="floating-btn d-md-none" onClick={toggleFilter}>
         {!showFilter ? (
           <svg
@@ -678,7 +699,7 @@ export default function CarFilter({
         </div>
       </div> */}
               <div className="list-grid-main">
-              <Breadcrumb/>
+                <Breadcrumb />
                 <div className={`list-grid-product-wrap ${activeClass}`}>
                   <div className="row md:g-4 g-2 mb-40">
                     <ProductSideFilterList filteredTrims={allTrims} />
