@@ -965,10 +965,20 @@ export default function CarFilter({
               )}
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
-                  <BrandCategory brandDetails={brand} />
-                  <Ad728x90 dataAdSlot="5962627056" />
-                  <BodyTypes bodyTypeList={bodyTypes} />
-                  <Ad728x90 dataAdSlot="3488506956" />
+                  {router.pathname !== "/brands/[brandname]" && (
+                    <>
+                      {" "}
+                      <BrandCategory brandDetails={brand} />
+                      <Ad728x90 dataAdSlot="5962627056" />
+                    </>
+                  )}
+                  {router.pathname !== "/category/[categoryname]" && (
+                    <>
+                      <BodyTypes bodyTypeList={bodyTypes} />
+                      <Ad728x90 dataAdSlot="3488506956" />
+                    </>
+                  )}
+
                   <div className="row ">
                     <h2 className="mt-4">Automotive News</h2>
                     {articleslist?.map((newsItem, index) => {
