@@ -30,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-fast-marquee": "^1.6.0",
     "react-hook-form": "^7.48.2",
+    "react-loader-spinner": "^6.1.6",
     "react-loading-skeleton": "^3.3.1",
     "react-modal-video": "^2.0.1",
     "react-multi-select-component": "^4.3.4",

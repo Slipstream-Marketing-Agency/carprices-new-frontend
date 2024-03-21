@@ -22694,13 +22694,13 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .inner-page-banner .breadcrumb-list {
   margin: 0;
   padding: 0;
-  list-style: none;
+  list-style: none !important;
   line-height: 1;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 24px;
+  padding: 5px 0px;
 }
 .inner-page-banner .breadcrumb-list li {
   line-height: 1;
@@ -22710,16 +22710,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   font-weight: 600;
   position: relative;
   padding-left: 18px;
-}
-.inner-page-banner .breadcrumb-list li::before {
-  content: "";
-  height: 1px;
-  width: 10px;
-  background-color: var(--text-color);
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 .inner-page-banner .breadcrumb-list li:first-child {
   padding-left: 0;

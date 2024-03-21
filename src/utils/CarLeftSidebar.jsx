@@ -55,8 +55,6 @@ function CarLeftSidebar({
     setShowTransmissionsDropdown(!showTransmissionsDropdown);
   const toggleDriveDropdown = () => setShowDriveDropdown(!showDriveDropdown);
 
-  console.log(router, "rooooooooooooter");
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 600) {
@@ -143,7 +141,7 @@ function CarLeftSidebar({
   useEffect(() => {
     const currentParams = { ...router.query };
 
-    const { brandname, categoryname,year, ...paramsForUpdate } = currentParams;
+    const { brandname, categoryname, year, ...paramsForUpdate } = currentParams;
 
     // Function to update or delete the parameter
     const updateParamsForFilter = (key, value) => {
@@ -186,8 +184,10 @@ function CarLeftSidebar({
     );
 
     if (!isInitialRender) {
-      router.push(
-        `${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`
+      router.replace(
+        `${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`,
+        undefined,
+        { shallow: true }
       );
     } else {
       setIsInitialRender(false);
@@ -637,7 +637,7 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
-        <hr/>
+        <hr />
         {router.pathname !== "/brands/[brandname]" && (
           <div className="product-widget mb-1">
             <div className="check-box-item">
@@ -685,7 +685,7 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
-<hr/>
+        <hr />
         {router.pathname !== "/category/[categoryname]" && (
           <div className="product-widget ">
             <div className="check-box-item">
@@ -701,10 +701,10 @@ function CarLeftSidebar({
                     <div className="col-xl-4 col-4">
                       <button
                         key={idx}
-                        className={`category-box-button setCategoryButtonHeight d-flex flex-column  align-items-center p-2 shadow-sm rounded ${
+                        className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
                           selectedBody.includes(item.value)
                             ? "text-secondary fw-bold bg-white border border-2"
-                            : "bg-white border border-2 border-white"
+                            : "bg-white border border-2 border-white fw-bold"
                         }`}
                         onClick={() => handleBodyChange(item.value)}
                       >
@@ -722,7 +722,7 @@ function CarLeftSidebar({
             </div>
           </div>
         )}
-<hr/>
+        <hr />
         {/* Power filter UI */}
         <div className="product-widget ">
           <div className="check-box-item">
@@ -760,7 +760,7 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         {/* Displacement filter UI */}
 
         <div className="product-widget ">
@@ -801,7 +801,7 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div className="product-widget ">
           <div className="check-box-item">
             <h3
@@ -840,7 +840,7 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div className="product-widget ">
           <div className="check-box-item">
             <h3
@@ -879,7 +879,7 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div className="product-widget ">
           <div className="check-box-item">
             <h3
@@ -918,7 +918,7 @@ function CarLeftSidebar({
             </div>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div className="product-widget ">
           <div className="check-box-item">
             <h3

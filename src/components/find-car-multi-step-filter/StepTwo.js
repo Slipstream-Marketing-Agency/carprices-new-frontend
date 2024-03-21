@@ -61,9 +61,9 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
                 alt={item.label}
                 width={60}
                 height={60}
-                className=""
+                className="mb-1"
               />
-              <p className="mt-1 fw-bold">{item.name}</p>
+              {item.name}
             </div>
           ))}
         </div>
