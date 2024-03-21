@@ -37,6 +37,9 @@ export default function CarFilter({
   const [isLoading, setIsLoading] = useState(false);
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const [expanded, setExpanded] = useState(false);
+  const [total, setTotal] = useState(totalPages);
+  const [current, setCurrent] = useState(currentPage);
+
   const { query } = router;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
@@ -165,6 +168,9 @@ export default function CarFilter({
           )}&page=${page}&pageSize=${pageSize}`
         );
 
+      
+        setTotal(response?.data?.data?.pagination?.pageCount);
+        setCurrent(page)
         setAllTrims(response?.data?.data?.list); // Set the data to state
       } catch (error) {
         console.error("Failed to fetch filtered trims:", error);
@@ -566,6 +572,7 @@ export default function CarFilter({
     query.price,
     query.power,
     query.displacement,
+    query.page,
   ]);
 
   const brandoptions = brandListres?.map((brand) => ({
@@ -886,10 +893,7 @@ export default function CarFilter({
                     )}
                     <ProductSideFilterList filteredTrims={allTrims} />
                   </div>
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                  />
+                  <Pagination currentPage={current} totalPages={total} />
                 </div>
               </div>
 

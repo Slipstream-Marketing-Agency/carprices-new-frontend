@@ -37,6 +37,8 @@ function CarListingLeftSidebar({
   const [data, setData] = useState(filteredTrims); // Use state to manage the dynamic data
   const [isLoading, setIsLoading] = useState(false);
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
+  const [total, setTotal] = useState(totalPages);
+  const [current, setCurrent] = useState(currentPage);
   const { query } = router;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
@@ -168,7 +170,8 @@ function CarListingLeftSidebar({
             powerRange
           )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
         );
-
+        setTotal(response?.data?.data?.pagination?.pageCount);
+        setCurrent(page);
         setAllTrims(response?.data?.data?.list); // Set the data to state
       } catch (error) {
         console.error("Failed to fetch filtered trims:", error);
@@ -588,6 +591,7 @@ function CarListingLeftSidebar({
     query.price,
     query.power,
     query.displacement,
+    query.page
   ]);
 
   const brandoptions = brandListres?.map((brand) => ({
