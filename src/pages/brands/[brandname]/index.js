@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import MainLayout from "@/src/layout/MainLayout";
+import CarLeftSidebar from "@/src/utils/CarLeftSidebar";
+import SelectComponent from "@/src/utils/SelectComponent";
+import Ad728x90 from "@/src/components/ads/Ad728x90";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import ProductCardList from "@/src/components/filter/ProductCardList";
+import ProductSideFilterList from "@/src/components/filter/ProductSideFilterList";
+import Pagination from "@/src/utils/Pagination";
 import axios from "axios";
-
+import { useRouter } from "next/router";
+import data from "@/src/data/data";
+import BrandCategory from "@/src/components/Home1/BrandCategory";
+import BodyTypes from "@/src/components/Home1/BodyTypes";
+import Image from "next/image";
+import moment from "moment";
+import PriceListTable from "@/src/components/common/PriceListTable";
+import Price from "@/src/utils/Price";
 import CarFilter from "@/src/components/filter/CarFilter";
 
 function CarListingLeftSidebar({
@@ -19,18 +34,53 @@ function CarListingLeftSidebar({
   driveList,
   bodyTypes,
   brand,
+  branddetails,
 }) {
+  const bodyTypeElements = branddetails?.attributes?.uniqueCarBodyTypes?.map(
+    (item, index, array) => {
+      const count = item.modelCount > 1 ? `${item.modelCount} ` : "1 ";
+      const name = item.modelCount > 1 ? `${item.name}s` : item.name;
+      const link = <a href={`/category/${item.slug}`}>{name}</a>; // Creating link for the name
+
+      // Determine if the current item is the last in the array or if it's the second-to-last (for correct comma and 'and' placement)
+      if (index === array.length - 1) {
+        // Last item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link}
+          </span>
+        );
+      } else if (index === array.length - 2) {
+        // Second-to-last item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link} and{" "}
+          </span>
+        );
+      } else {
+        // Any other item
+        return (
+          <span key={item.slug}>
+            {count}
+            {link},{" "}
+          </span>
+        );
+      }
+    }
+  );
+
+  const currentYear = new Date().getFullYear();
+
   return (
     <MainLayout
       pageMeta={{
-        title:
-          "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-        description:
-          "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
+        title: `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE  - Carprices.ae`,
+        description: `Explore a wide selection of ${branddetails?.attributes?.name} ${currentYear} cars at competitive prices in the UAE. Discover expert reviews, specifications, and find authorized dealers near you for a seamless car buying experience.`,
         type: "Car Review Website",
       }}
     >
-      {" "}
       <CarFilter
         currentPage={currentPage}
         totalPages={totalPages}
@@ -46,6 +96,8 @@ function CarListingLeftSidebar({
         driveList={driveList}
         bodyTypes={bodyTypes}
         brand={brand}
+        branddetails={branddetails}
+        bodyTypeElements={bodyTypeElements}
       />
     </MainLayout>
   );
