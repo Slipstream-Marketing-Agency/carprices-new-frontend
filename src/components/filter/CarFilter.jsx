@@ -610,7 +610,38 @@ export default function CarFilter({
     fetchArticles(); // Initial fetch
   }, []);
 
-  const conditions = ["Used Car", "New Car"];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [
+    query.haveMusic,
+    query.isLuxury,
+    query.isPremiumLuxury,
+    query.haveTechnology,
+    query.havePerformance,
+    query.isSpacious,
+    query.isElectric,
+    query.isFuelEfficient,
+    query.isOffRoad,
+    query.isTwoSeat,
+    query.isTwoPlusTwo,
+    query.isFourToFive,
+    query.isFiveToSeven,
+    query.isSevenToNine,
+    query.isManualTransmission,
+    query.isDuneBashing,
+    query.isAffordableLuxury,
+    query.isSafety,
+    query.brand,
+    query.bodytype,
+    query.fuelType,
+    query.cylinders,
+    query.drive,
+    query.transmission,
+    query.price,
+    query.power,
+    query.displacement,
+  ]);
+
   return (
     <>
       <LoaderOverlay isVisible={isLoading} />
