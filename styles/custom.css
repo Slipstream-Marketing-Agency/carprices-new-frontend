@@ -248,7 +248,7 @@ button:focus {
   color: white !important;
 }
 
-.modal-body{
+.modal-body {
   overflow-y: scroll;
 }
 
@@ -2998,8 +2998,7 @@ a,
   background: #e0f6ff;
 }
 .filterStayLeft {
-  flex: 0 0 auto; /* Prevent items from growing or shrinking */
-  position: sticky;
+  position: sticky !important;
   left: 0px; /* Stick to the left side */
   z-index: 1; /* Ensure the items are above the scrolling content */
   background: white;
@@ -3097,4 +3096,10 @@ a,
   .overflow-list {
     max-height: 100% !important;
   }
+}
+
+.filter_sticky {
+  position: sticky !important;
+  top: 40px !important;
+  z-index: 999;
 }

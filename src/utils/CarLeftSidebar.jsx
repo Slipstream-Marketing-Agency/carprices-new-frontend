@@ -1431,32 +1431,53 @@ function CarLeftSidebar({
 
   return (
     <>
-      <div className="mobileFilter d-md-none d-block p-0 bg-white">
+      <div className="mobileFilter d-md-none d-block p-0 bg-white filter_sticky position-relative">
         <div className=" m-0 py-1 d-flex">
-          {filters.map((filter) => (
-            <React.Fragment key={filter.id}>
-              <div
-                className="specificMobileFilter d-flex align-items-center justify-content-center"
-                onClick={() => handleToggleModal(filter.id)}
-              >
-                <span
-                  className={`mobileFilterTitle fs-8 ${
-                    filter.showModal ? "filterSelected" : ""
-                  }`}
+          <div className="d-flex">
+            {filters
+              .filter((filter) => filter.id === "fullfilter")
+              .map((filter) => (
+                <div
+                  key={filter.id}
+                  className="specificMobileFilter filterStayLeft d-flex align-items-center justify-content-center"
+                  onClick={() => handleToggleModal(filter.id)}
                 >
-                  {filter.id === "fullfilter" && <TuneIcon className="me-2" />}
-
-                  {filter.label}
-
-                  {filter.id !== "fullfilter" &&
-                    (filter.showModal ? (
+                  <span
+                    className={`mobileFilterTitle fs-8 ${
+                      filter.showModal ? "filterSelected" : ""
+                    }`}
+                  >
+                    <TuneIcon className="me-2" />
+                    {filter.label}
+                  </span>
+                </div>
+              ))}
+            {filters
+              .filter((filter) => filter.id !== "fullfilter")
+              .map((filter) => (
+                <div
+                  key={filter.id}
+                  className=" specificMobileFilter d-flex align-items-center justify-content-center"
+                  onClick={() => handleToggleModal(filter.id)}
+                >
+                  <span
+                    className={`mobileFilterTitle fs-8 ${
+                      filter.showModal ? "filterSelected" : ""
+                    }`}
+                  >
+                    {filter.label}
+                    {filter.showModal ? (
                       <KeyboardArrowUpIcon />
                     ) : (
                       <KeyboardArrowDownIcon />
-                    ))}
-                </span>
-              </div>
+                    )}
+                  </span>
+                </div>
+              ))}
+          </div>
 
+          {filters.map((filter) => (
+            <div key={filter.id}>
               <Modal
                 open={filter.showModal}
                 onClose={() => handleToggleModal(filter.id)}
@@ -1524,7 +1545,7 @@ function CarLeftSidebar({
                   </div>
                 </div>
               </Modal>
-            </React.Fragment>
+            </div>
           ))}
         </div>
       </div>
