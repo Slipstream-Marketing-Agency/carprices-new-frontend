@@ -35,7 +35,7 @@ function index({ bannerImage, bannerText }) {
               className="col-xxl-7 col-xl-7 d-flex wow fadeInUp"
               data-wow-delay="200ms"
             >
-              <div className="banner-content">
+              <div className="banner-content mt-3">
                 {/* <span className="sub-title">
                   Fastest Speed
                   <svg width={30} height={23} viewBox="0 0 30 23" xmlns="http://www.w3.org/2000/svg">
@@ -48,9 +48,12 @@ function index({ bannerImage, bannerText }) {
                 {/* <h1 className="text-black text-center">{t.uaeFastest}</h1> */}
                 {/* <h1 className="text-black text-center w-50 fw-bold">{bannerText}</h1> */}
                 <h1 className="text-black text-start fw-bold ">
-                  <span className="txt-1">UAE's Fastest Growing </span>
+                  {/* <span className="txt-1">UAE's Fastest Growing </span>
                   <br />
-                  <span className="txt-2">New Car Buyer's Portal</span>
+                  <span className="txt-2">New Car Buyer's Portal</span> */}
+                  <span className="txt-1">World’s First Truly Interactive </span>
+                  <br />
+                  <span className="txt-2">Car Research Platform</span>
                 </h1>
                 {/* <p>
                   Car dealerships may sell new cars from one or several

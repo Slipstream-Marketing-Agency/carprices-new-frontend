@@ -35,7 +35,6 @@ function MainLayout({ children, pageMeta }) {
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
       <Topbar />
-      <Modals />
       <Header />
       {/* <Breadcrumb /> */}
       <main > {children}</main>
