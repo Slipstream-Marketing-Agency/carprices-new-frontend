@@ -8,7 +8,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
   const t = useTranslate();
   let isRtl = router.locale === "ar";
 
-  console.log(filterData, "filterDatafilterData");
+  
 
   const filterItems = filterData?.bodyTypes;
 

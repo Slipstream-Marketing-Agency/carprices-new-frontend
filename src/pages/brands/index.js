@@ -9,7 +9,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Pagination from "@/src/utils/Pagination";
 
 function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
-  console.log(brands, "ldjdh");
+  
 
   return (
     <MainLayout
@@ -32,7 +32,7 @@ function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
 export default BrandCategoryPage;
 
 export async function getServerSideProps(context) {
-  console.log(context, "jhgf");
+  
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
   const pageSize = 24; // Set the number of items per page
 

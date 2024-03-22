@@ -8,7 +8,7 @@ function BodyTypes({ bodyTypeList }) {
 
   const t = useTranslate();
   let isRtl = router.locale === "ar";
-  console.log(bodyTypeList, "bodyTypeList");
+  
   return (
     <div className="body-category-area mt-3 mb-3">
       <div className="container white_bg_wrapper pb-1">

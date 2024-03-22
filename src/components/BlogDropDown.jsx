@@ -75,7 +75,7 @@ export default function BlogDropDown({searchSlug,news,initialFocus}) {
         const tags = data.articleCategories.data.map((brand) => brand.attributes);
         setTagOptions(tags)
     
-        console.log("tags",tags);
+        
       } catch (error) {
         console.error('Error fetching brands:', error);
       }
@@ -102,7 +102,7 @@ export default function BlogDropDown({searchSlug,news,initialFocus}) {
         });
   
         setBrandOptions(data.carBrands.data);
-        // console.log("all brands",data);
+        
       } catch (error) {
         console.error('Error fetching brands:', error);
       }

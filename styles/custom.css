@@ -1,7 +1,13 @@
 body {
   background-color: #fafafa;
 }
+.fs-7 {
+  font-size: 14px;
+}
 
+.fs-8 {
+  font-size: 12px !important;
+}
 @media (max-width: 1280px) {
   .container,
   .container-lg,
@@ -225,6 +231,25 @@ button:focus {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+.modal-content {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: none;
+}
+
+.modal-header {
+  background: var(--primary);
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+  color: white !important;
+}
+
+.modal-body{
+  overflow-y: scroll;
 }
 
 .category-img .icon {
@@ -2642,10 +2667,6 @@ a,
   position: relative;
 }
 
-.fs-7 {
-  font-size: 14px;
-}
-
 .body_type_btn {
   height: 93px;
   width: 109px !important ;
@@ -2771,4 +2792,309 @@ a,
 
 .car_description p {
   margin-top: 8px;
+}
+
+/* used car page begins  */
+.filter {
+  width: 100%;
+  border: 1px solid rgb(194, 196, 199);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+  height: 65px;
+  border-radius: 15px;
+  /* background: red; */
+  background: white;
+  margin: 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.specificFilter {
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  /* gap: 50px; */
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+}
+.specificFilter:hover {
+  background: rgb(245, 245, 245);
+}
+.specificFilter::before {
+  content: "";
+  height: 60%;
+  width: 1px;
+  position: absolute;
+  right: 0;
+  background-color: rgb(224, 225, 227);
+}
+
+.filterContent {
+  width: 250px;
+  height: 0;
+  /* background: green; */
+  background: white;
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+  border-radius: 8px 8px 0px 0px;
+  position: absolute;
+  top: calc(100% + 10px); /* Position it below the filter */
+  left: -45px;
+  z-index: 100;
+  overflow-x: hidden;
+  overflow: auto;
+
+  transition: height 0.3s ease-in-out;
+}
+.filterHeadTxt {
+  font-size: 12px;
+  font-weight: 700;
+}
+.filterSubHead {
+  font-size: 12px;
+}
+.specificFilter.show .filterContent {
+  overflow-x: hidden;
+
+  height: 249px;
+  /* Show it with the desired height */
+}
+
+@keyframes dropdownAnimation {
+  0% {
+    opacity: 0;
+
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+
+    transform: translateY(64px);
+  }
+}
+
+.sortBtn {
+  background: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 0.3px solid rgb(207, 207, 207);
+  color: black;
+  font-size: 13px;
+}
+.selectedSortTxt {
+  font-size: 14px;
+}
+.brandTag {
+  font-size: 12px;
+  padding: 3px 6px;
+  border: 0.4px solid rgb(184, 184, 184);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+}
+.brandTagCount {
+  font-weight: 500;
+  color: black;
+}
+
+.brandTag:hover {
+  background: var(--light);
+  color: white;
+}
+.brandTag:hover + .brandTagCount {
+  background: var(--light);
+  color: white;
+}
+.tagViewMoreTxt {
+  font-size: 13px;
+  padding: 3px 6px;
+  color: var(--primary);
+  border: 0.4px solid rgb(184, 184, 184);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.tagViewMoreTxt:hover {
+  background: var(--light);
+  color: white;
+}
+
+.descriptionIcon {
+  font-size: 17px;
+}
+.carBrandIcon {
+  cursor: pointer;
+}
+.priceTxt {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cityTags {
+  padding-top: 8px;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-wrap: wrap;
+}
+.cityTag {
+  margin: 10px;
+  display: block;
+}
+.cityTagTxt {
+  padding: 5px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  border: 0.4px solid rgb(227, 227, 227);
+  border-radius: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.cityTagTxt.active {
+  background: var(--light);
+}
+.cityTagTxt:hover {
+  background: #e0f6ff;
+}
+.mobileFilter {
+  display: flex;
+  align-items: center;
+
+  /* flex-wrap: wrap; */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+  scrollbar-width: none; /* Hide the scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide the scrollbar for IE/Edge */
+}
+.mobileFilter::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar for WebKit browsers */
+}
+.specificMobileFilter {
+  cursor: pointer;
+  margin-right: 10px;
+
+  flex: 1; /* Equal width for each item */
+  max-width: 200px; /* Adjust the max-width as needed */
+  margin: 5px;
+}
+.mobileFilterTitle {
+  font-size: 17px;
+  font-weight: 800;
+  padding: 3px 6px;
+  padding-top: 6px;
+  padding-left: 10px;
+  border-radius: 13px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+  display: inline-block;
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobileFilterTitle:active {
+  background: #e0f6ff;
+}
+.filterStayLeft {
+  flex: 0 0 auto; /* Prevent items from growing or shrinking */
+  position: sticky;
+  left: 0px; /* Stick to the left side */
+  z-index: 1; /* Ensure the items are above the scrolling content */
+  background: white;
+  padding-right: 10px;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  margin-left: 0px;
+}
+.filterStayLeft::before {
+  content: "";
+  width: 1px;
+  height: 90%;
+  background: #d5d5d5;
+  position: absolute;
+  right: 0px;
+  top: 2px;
+}
+.cityTagTxt.active {
+  background: var(--light);
+}
+.allBodyTypes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* flex-wrap: wrap; */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+  scrollbar-width: none; /* Hide the scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide the scrollbar for IE/Edge */
+}
+.bodyTypeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 0.3px solid rgb(205, 205, 205);
+}
+.bodyTypeTxt {
+  font-size: 10px;
+  font-weight: 500;
+
+  display: inline-block;
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.selectedBodyType {
+  background-color: var(
+    --light
+  ); /* Change the background color to the desired color */
+}
+.filterSelected {
+  background: #e0f6ff;
+}
+.brandTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.brandTag {
+  display: inline-block;
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.viewMoreContainer {
+  /* display: flex;
+    justify-content: end; */
+}
+
+.slide-container {
+  position: relative;
+}
+
+.button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .product-sidebar .product-widget {
+    /* background-image: url(../img/inner-page/product-wd-bg.png), linear-gradient(#FAF8FB, #FAF8FB); */
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0px !important;
+    border-radius: 5px;
+  }
+  .overflow-list {
+    max-height: 100% !important;
+  }
 }

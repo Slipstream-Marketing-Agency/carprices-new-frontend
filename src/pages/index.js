@@ -70,12 +70,12 @@ export default function Home({
 }) {
   const router = useRouter();
 
-  console.log(articles, "articles");
+  
 
   const t = useTranslate();
   let isRtl = router.locale === "ar";
 
-  console.log(bodyTypes, "brandbrand");
+  
   if (error) {
     return <div>Error: {errorMessage}</div>;
   }

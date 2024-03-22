@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 export default function KeySpec({ trim }) {
-  console.log(trim, "asdasd");
+  
   const engineText = trim?.engine.split(" ");
   const size = engineText[0];
   const type = engineText[1];

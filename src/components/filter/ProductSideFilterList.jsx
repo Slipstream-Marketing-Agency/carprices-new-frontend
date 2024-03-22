@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function ProductSideFilterList({ carDetails, filteredTrims }) {
-  console.log(filteredTrims, "filteredTrims");
+  
   const CarPriceRange = ({ car }) => {
     // Format price for display
     const formatPrice = (price) => {

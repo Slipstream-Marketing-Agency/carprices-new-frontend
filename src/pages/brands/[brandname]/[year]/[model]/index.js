@@ -31,11 +31,11 @@ import Price from "@/src/utils/Price";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
-  console.log(currentmodel, "currentmodel");
+  
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const mainTrim = currentmodel?.highTrim[0];
 
-  console.log(mainTrim, "mainTrimmainTrim");
+  
   const allTrims = currentmodel?.trims;
   const minPower = currentmodel?.power?.min;
   const maxPower = currentmodel?.power?.max;
@@ -63,7 +63,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
 
   const gallery = mainTrim?.galleryImages > 0;
 
-  console.log(allTrims,"allTrims");
+  
 
   const getTransmissionType = () => {
     const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
@@ -92,28 +92,6 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     }
   };
 
-  console.log(getTransmissionType(),"getTransmissionType");
-
-  console.log(
-    "Minimum power:",
-    minPower,
-    "Maximum power:",
-    maxPower,
-    "Minimum price:",
-    minPrice,
-    "Maximum price:",
-    maxPrice,
-    "Minimum torque:",
-    minTorque,
-    "Maximum torque:",
-    maxTorque,
-    "Minimum fuel consumption:",
-    minFuelConsumption,
-    "Maximum fuel consumption:",
-    maxFuelConsumption
-  );
-
-  // console.log(mainTrim.engine, "enginesengines");
 
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
@@ -681,7 +659,7 @@ export async function getServerSideProps(context) {
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
 
-  console.log(typeof year, "year");
+  
 
   try {
     const oldModels = await axios.get(
@@ -692,7 +670,7 @@ export async function getServerSideProps(context) {
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
     );
 
-    console.log(currentmodel, "currentmodel");
+    
 
     return {
       props: {

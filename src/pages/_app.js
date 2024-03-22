@@ -7,6 +7,8 @@ import "../../public/assets/css/swiper-bundle.min.css";
 import "../../public/assets/css/nice-select.css";
 import "../../styles/custom.css";
 import "../../public/assets/css/style.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import Preloader from "../components/common/Preloader";

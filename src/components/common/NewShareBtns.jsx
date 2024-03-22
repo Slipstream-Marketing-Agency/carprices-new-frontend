@@ -11,12 +11,12 @@ export default function NewShareBtns() {
     // navigator.clipboard.writeText(currentURL);
     // alert("Link copied to clipboard!");
     setShowSocialMedia(true)
-    console.log(!showSocialMedia);
+    
 
   };
   const hideSocialButtons = () => {
     setShowSocialMedia(false)
-    console.log(!showSocialMedia);
+    
 
   }
 

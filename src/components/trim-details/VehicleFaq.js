@@ -18,7 +18,7 @@ export default function VehicleFaq({ trim }) {
   //   }
   // }
 
-  console.log(trim.haveAdaptiveCuriseControl, "haveAdaptiveCuriseControl");
+  
 
   const faq = [
     {

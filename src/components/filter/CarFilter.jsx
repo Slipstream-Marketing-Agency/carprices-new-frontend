@@ -72,7 +72,7 @@ export default function CarFilter({
   const transmissionSlugs = query.transmission
     ? query.transmission.split(",")
     : [];
-  console.log(router, "bodyTypeSlugs");
+  
 
   const queryParams = {};
 
@@ -168,9 +168,8 @@ export default function CarFilter({
           )}&page=${page}&pageSize=${pageSize}`
         );
 
-      
         setTotal(response?.data?.data?.pagination?.pageCount);
-        setCurrent(page)
+        setCurrent(page);
         setAllTrims(response?.data?.data?.list); // Set the data to state
       } catch (error) {
         console.error("Failed to fetch filtered trims:", error);
@@ -203,7 +202,7 @@ export default function CarFilter({
             powerRange
           )}&page=${page}&pageSize=${pageSize}`
         );
-        console.log(response, "responseresponsedd");
+        
 
         setAllFilter(response?.data);
       } catch (error) {
@@ -653,7 +652,7 @@ export default function CarFilter({
     <>
       <LoaderOverlay isVisible={isLoading} />
 
-      <div className="floating-btn d-md-none" onClick={toggleFilter}>
+      {/* <div className="floating-btn d-md-none" onClick={toggleFilter}>
         {!showFilter ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -679,7 +678,7 @@ export default function CarFilter({
             />
           </svg>
         )}
-      </div>
+      </div> */}
       <div className="mt-2">
         <Ad728x90 dataAdSlot="5962627056" />
       </div>
@@ -720,7 +719,7 @@ export default function CarFilter({
               </div>
             </div>
 
-            <div className="col-xl-9 order-xl-2 order-1">
+            <div className="col-xl-9 order-xl-2 order-1 mt-md-4 mt-0">
               {/* <div className="row">
         <div className="col-lg-12">
           <div className="show-item-and-filte">

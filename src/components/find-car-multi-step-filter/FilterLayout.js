@@ -27,7 +27,7 @@ export default function FilterLayout() {
   const [bodyTypeList, setBodyTypeList] = useState([]);
   const [seatList, setSeatList] = useState([]);
 
-  console.log(filterData, "filterData");
+  
   const [specificVehicleFilter, setSpecificVehicleFilter] = useState({
     image: null,
     make: null,
@@ -45,10 +45,6 @@ export default function FilterLayout() {
       ? `bodyTypes=${filterData.bodyTypes.join(",")}`
       : "";
 
-  console.log(
-    filterData?.budget[0] === filterData?.budget[1],
-    " filterData?.budget[0] === filterData?.budget[1]"
-  );
 
   const filterOptions = {
     haveMusic: filterData.preferences.includes("premium-sound") ? 1 : 0,
@@ -160,7 +156,7 @@ export default function FilterLayout() {
       axios
         .get(`${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`)
         .then((response) => {
-          console.log(response, "bodyfilter");
+          
           setBodyTypeList(response?.data?.bodyTypes);
 
           // setMinMaxData(response.data);
@@ -177,7 +173,7 @@ export default function FilterLayout() {
           `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
         )
         .then((response) => {
-          console.log(response, "bodyfilter");
+          
           setSeatList(response?.data?.seats);
 
           // setMinMaxData(response.data);
@@ -232,7 +228,7 @@ export default function FilterLayout() {
     },
   ];
 
-  console.log(currentStep, "currentStep");
+  
 
   const handleNextStep = () => {
     if (filterData.preferences.length === 0) {

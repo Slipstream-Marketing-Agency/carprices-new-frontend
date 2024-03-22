@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 function ProductCardList({ subTitle, heading, carDetails }) {
-  console.log(carDetails, "carDetails");
+  
 
   const CarPriceRange = ({ car }) => {
     // Extracting and filtering prices (excluding zeros) from car trims

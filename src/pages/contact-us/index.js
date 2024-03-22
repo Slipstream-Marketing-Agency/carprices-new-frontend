@@ -37,7 +37,7 @@ function ContactPage() {
 
   useEffect(() => {
     validateForm();
-    console.log(touchedFields);
+    
   }, [name, email, phone, subject, note, agreed]);
 
   const handleAgreementChange = (isChecked) => {

@@ -32,7 +32,7 @@ import Price from "@/src/utils/Price";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ model, trimList, trimData }) {
-  console.log(trimData, "trimData");
+  
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
   const [isSticky, setIsSticky] = useState(false);
@@ -67,7 +67,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
   const brand = model?.car_brands?.data[0]?.attributes;
   const trim = model?.car_trims?.data[0]?.attributes;
 
-  console.log(model, "model");
+  
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);

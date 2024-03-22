@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 import BlogDropDown from '@/src/components/BlogDropDown';
 
 function index({ tags, fullData, totalNews, totalPages, currentPage,pageSlug }) {
-    console.log("full tags",tags);
-    console.log("Page slug",pageSlug);
+    
+    
     const router = useRouter();
     const client = createApolloClient();
 

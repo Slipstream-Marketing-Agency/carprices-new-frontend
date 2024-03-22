@@ -13,8 +13,8 @@ import BlogDropDown from '@/src/components/BlogDropDown';
 import BlogHeader from '@/src/components/BlogHeader';
 
 function index({ tags, fullData, totalNews, totalPages, currentPage,pageSlug }) {
-    console.log("full tags",tags);
-    console.log("Page slug",pageSlug);
+    
+    
     const router = useRouter();
     const client = createApolloClient();
 

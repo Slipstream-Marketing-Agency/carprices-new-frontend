@@ -120,7 +120,7 @@ const LiveSearch = ({
                 item.brand
             ))
             setSortedSampleData(sortData)
-            console.log("Popular search",[...results]);
+            
         }
     }
     useEffect(() => {

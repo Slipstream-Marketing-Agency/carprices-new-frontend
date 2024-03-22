@@ -1,6 +1,37 @@
 import React, { useEffect, useMemo, useState } from "react";
 import SelectComponent from "./SelectComponent";
 import { useRouter } from "next/router";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import LanguageIcon from "@mui/icons-material/Language";
+import PlaceIcon from "@mui/icons-material/Place";
+import SpeedIcon from "@mui/icons-material/Speed";
+import Box from "@mui/material/Box";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import TuneIcon from "@mui/icons-material/Tune";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+import { Search } from "@mui/icons-material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 
 function CarLeftSidebar({
   brandoptions,
@@ -71,13 +102,9 @@ function CarLeftSidebar({
     };
   }, []);
 
-  console.log(brandoptions, "brandoptions");
-
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedBrandIds, setSelectedBrandIds] = useState([]);
   const [priceRange, setPriceRange] = useState(null);
-
-  console.log(priceRange, "priceRange");
 
   const brandSlugToIdMap = React.useMemo(() => {
     return brandoptions.reduce((acc, brand) => {
@@ -95,8 +122,6 @@ function CarLeftSidebar({
 
   const [selectedBody, setSelectedBody] = useState([]);
   const [isInitialRender, setIsInitialRender] = useState(true);
-
-  console.log(selectedBrands, "kkkkkkk");
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -136,8 +161,6 @@ function CarLeftSidebar({
     }
   }, [router.asPath]);
 
-  console.log(router, "routerrouter");
-
   useEffect(() => {
     const currentParams = { ...router.query };
 
@@ -173,8 +196,6 @@ function CarLeftSidebar({
     let queryString = Object.keys(paramsForUpdate)
       .map((key) => `${key}=${encodeURIComponent(paramsForUpdate[key])}`)
       .join("&");
-
-    console.log(queryString.length, "queryString");
 
     // The manual construction doesn't require encoding commas, so they remain as is
 
@@ -234,7 +255,6 @@ function CarLeftSidebar({
 
   // Function to update selected filters
   const updateSelectedFilters = (type, value) => {
-    console.log(type, value, "type, value");
     setSelectedFilters((prevFilters) => {
       // Check if filter is already selected
       const isFilterSelected = prevFilters.some(
@@ -370,7 +390,6 @@ function CarLeftSidebar({
     return withinMin || withinMax || encompasses;
   });
 
-  console.log(filteredPriceOptions, "filteredPriceOptions");
   const powerOptions = [
     {
       range: { min: 0, max: 200 },
@@ -502,7 +521,7 @@ function CarLeftSidebar({
         return [...prevSelectedfuelType, fuelTypeValue];
       }
     });
-    console.log(fuelTypeValue, "fuelTypeValue");
+
     setCurrentPage(1); // Reset page number
     updateSelectedFilters("fuelType", fuelTypeValue);
   };
@@ -517,7 +536,7 @@ function CarLeftSidebar({
         return [...prevSelectedcylinders, cylindersValue];
       }
     });
-    console.log(cylindersValue, "cylindersValue");
+
     setCurrentPage(1); // Reset page number
     updateSelectedFilters("cylinders", cylindersValue);
   };
@@ -530,7 +549,7 @@ function CarLeftSidebar({
         return [...prevSelecteddrive, driveValue];
       }
     });
-    console.log(driveValue, "driveValue");
+
     setCurrentPage(1); // Reset page number
     updateSelectedFilters("drive", driveValue);
   };
@@ -545,18 +564,973 @@ function CarLeftSidebar({
         return [...prevSelectedtranmission, tranmissionValue];
       }
     });
-    console.log(tranmissionValue, "tranmissionValue");
+
     setCurrentPage(1); // Reset page number
     updateSelectedFilters("tranmission", tranmissionValue);
   };
 
+  const [showPrice, setShowPrice] = useState(false);
+  const [tempSelectedPrice, setTempSelectedPrice] = useState([]);
+
+  // This effect syncs the selectedPrice with tempSelectedPrice each time the modal is opened
+  useEffect(() => {
+    if (showPrice) {
+      setTempSelectedPrice(selectedPrice);
+    }
+  }, [showPrice, selectedPrice]);
+
+  // Step 2: Update this function to modify tempSelectedPrice instead
+  const handleModalPriceChange = (priceValue) => {
+    setTempSelectedPrice((prevSelectedPrice) => {
+      if (prevSelectedPrice.includes(priceValue)) {
+        return prevSelectedPrice.filter((value) => value !== priceValue);
+      } else {
+        return [...prevSelectedPrice, priceValue];
+      }
+    });
+  };
+
+  console.log(tempSelectedPrice, "tempSelectedPrice");
+  // Step 3: Apply changes when "Apply Filter" is clicked
+  const applyPriceFilter = () => {
+    setSelectedPrice(tempSelectedPrice);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowPrice(false); // Close the modal
+  };
+  const [showBrandModal, setShowBrandModal] = useState(false);
+  const [tempSelectedBrands, setTempSelectedBrands] = useState([]);
+
+  useEffect(() => {
+    if (showBrandModal) {
+      // Assuming you have a state `showBrandModal` to control the modal visibility
+      setTempSelectedBrands(selectedBrands);
+    }
+  }, [showBrandModal, selectedBrands]);
+
+  const handleModalBrandChange = (brandSlug) => {
+    setTempSelectedBrands((prevSelectedBrands) => {
+      if (prevSelectedBrands.includes(brandSlug)) {
+        return prevSelectedBrands.filter((slug) => slug !== brandSlug);
+      } else {
+        return [...prevSelectedBrands, brandSlug];
+      }
+    });
+  };
+
+  const applyBrandFilter = () => {
+    setSelectedBrands(tempSelectedBrands);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowBrandModal(false); // Assuming you manage modal visibility with this state
+  };
+
+  const [tempSelectedBodyTypes, setTempSelectedBodyTypes] = useState([]);
+  const [showBodyTypeModal, setShowBodyTypeModal] = useState(false);
+
+  useEffect(() => {
+    if (showBodyTypeModal) {
+      setTempSelectedBodyTypes(selectedBody);
+    }
+  }, [showBodyTypeModal, selectedBody]);
+
+  const handleModalBodyTypeChange = (bodyTypeSlug) => {
+    setTempSelectedBodyTypes((prevSelectedBodyTypes) => {
+      if (prevSelectedBodyTypes.includes(bodyTypeSlug)) {
+        return prevSelectedBodyTypes.filter((slug) => slug !== bodyTypeSlug);
+      } else {
+        return [...prevSelectedBodyTypes, bodyTypeSlug];
+      }
+    });
+  };
+
+  const applyBodyTypeFilter = () => {
+    setSelectedBody(tempSelectedBodyTypes);
+    setCurrentPage(1); // Reset the page number if necessary
+    setShowBodyTypeModal(false); // Close the modal
+  };
+
+  const [tempSelectedPower, setTempSelectedPower] = useState([]);
+  const [showPowerModal, setShowPowerModal] = useState(false);
+
+  // Synchronize tempSelectedPower with selectedPower when the modal opens
+  useEffect(() => {
+    if (showPowerModal) {
+      setTempSelectedPower(selectedPower);
+    }
+  }, [showPowerModal, selectedPower]);
+
+  // Handle changes in the power modal
+  const handleModalPowerChange = (powerValue) => {
+    setTempSelectedPower((prevSelectedPower) => {
+      if (prevSelectedPower.includes(powerValue)) {
+        return prevSelectedPower.filter((value) => value !== powerValue);
+      } else {
+        return [...prevSelectedPower, powerValue];
+      }
+    });
+  };
+
+  // Apply the changes from the power modal
+  const applyPowerFilter = () => {
+    setSelectedPower(tempSelectedPower);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowPowerModal(false); // Close the modal
+  };
+
+  const [tempSelectedDisplacement, setTempSelectedDisplacement] = useState([]);
+  const [showDisplacementModal, setShowDisplacementModal] = useState(false);
+
+  // Synchronize tempSelectedDisplacement with selectedDisplacement when the modal opens
+  useEffect(() => {
+    if (showDisplacementModal) {
+      setTempSelectedDisplacement(selectedDisplacement);
+    }
+  }, [showDisplacementModal, selectedDisplacement]);
+
+  // Handle changes in the displacement modal
+  const handleModalDisplacementChange = (displacementValue) => {
+    setTempSelectedDisplacement((prevSelectedDisplacement) => {
+      if (prevSelectedDisplacement.includes(displacementValue)) {
+        return prevSelectedDisplacement.filter(
+          (value) => value !== displacementValue
+        );
+      } else {
+        return [...prevSelectedDisplacement, displacementValue];
+      }
+    });
+  };
+
+  // Apply the changes from the displacement modal
+  const applyDisplacementFilter = () => {
+    setSelectedDisplacement(tempSelectedDisplacement);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowDisplacementModal(false); // Close the modal
+  };
+
+  const [tempSelectedFuelType, setTempSelectedFuelType] = useState([]);
+  const [showFuelTypeModal, setShowFuelTypeModal] = useState(false);
+
+  // Synchronize tempSelectedFuelType with selectedFuelType when the modal opens
+  useEffect(() => {
+    if (showFuelTypeModal) {
+      setTempSelectedFuelType(selectedFuelType);
+    }
+  }, [showFuelTypeModal, selectedFuelType]);
+
+  // Handle changes in the fuel type modal
+  const handleModalFuelTypeChange = (fuelTypeValue) => {
+    setTempSelectedFuelType((prevSelectedFuelType) => {
+      if (prevSelectedFuelType.includes(fuelTypeValue)) {
+        return prevSelectedFuelType.filter((value) => value !== fuelTypeValue);
+      } else {
+        return [...prevSelectedFuelType, fuelTypeValue];
+      }
+    });
+  };
+
+  // Apply the changes from the fuel type modal
+  const applyFuelTypeFilter = () => {
+    setSelectedFuelType(tempSelectedFuelType);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowFuelTypeModal(false); // Close the modal
+  };
+
+  const [tempSelectedCylinders, setTempSelectedCylinders] = useState([]);
+  const [showCylinderModal, setShowCylinderModal] = useState(false);
+
+  // Synchronize tempSelectedCylinders with selectedCylinders when the modal opens
+  useEffect(() => {
+    if (showCylinderModal) {
+      setTempSelectedCylinders(selectedCylinders);
+    }
+  }, [showCylinderModal, selectedCylinders]);
+
+  // Handle changes in the cylinder modal
+  const handleModalCylinderChange = (cylinderValue) => {
+    setTempSelectedCylinders((prevSelectedCylinders) => {
+      if (prevSelectedCylinders.includes(cylinderValue)) {
+        return prevSelectedCylinders.filter((value) => value !== cylinderValue);
+      } else {
+        return [...prevSelectedCylinders, cylinderValue];
+      }
+    });
+  };
+
+  // Apply the changes from the cylinder modal
+  const applyCylinderFilter = () => {
+    setSelectedCylinders(tempSelectedCylinders);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowCylinderModal(false); // Close the modal
+  };
+
+  const [tempSelectedTransmissions, setTempSelectedTransmissions] = useState(
+    []
+  );
+  const [showTransmissionModal, setShowTransmissionModal] = useState(false);
+
+  // Synchronize tempSelectedTransmissions with selectedTransmission when the modal opens
+  useEffect(() => {
+    if (showTransmissionModal) {
+      setTempSelectedTransmissions(selectedTransmission);
+    }
+  }, [showTransmissionModal, selectedTransmission]);
+
+  // Handle changes in the transmission modal
+  const handleModalTransmissionChange = (transmissionValue) => {
+    setTempSelectedTransmissions((prevSelectedTransmissions) => {
+      if (prevSelectedTransmissions.includes(transmissionValue)) {
+        return prevSelectedTransmissions.filter(
+          (value) => value !== transmissionValue
+        );
+      } else {
+        return [...prevSelectedTransmissions, transmissionValue];
+      }
+    });
+  };
+
+  // Apply the changes from the transmission modal
+  const applyTransmissionFilter = () => {
+    setSelectedTransmission(tempSelectedTransmissions);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowTransmissionModal(false); // Close the modal
+  };
+
+  const [tempSelectedDrive, setTempSelectedDrive] = useState([]);
+  const [showDriveModal, setShowDriveModal] = useState(false);
+
+  // Synchronize tempSelectedDrive with selectedDrive when the modal opens
+  useEffect(() => {
+    if (showDriveModal) {
+      setTempSelectedDrive(selectedDrive);
+    }
+  }, [showDriveModal, selectedDrive]);
+
+  console.log(tempSelectedDrive, "tempSelectedDrive");
+
+  // Handle changes in the drive modal
+  const handleModalDriveChange = (driveValue) => {
+    setTempSelectedDrive((prevSelectedDrive) => {
+      if (prevSelectedDrive.includes(driveValue)) {
+        return prevSelectedDrive.filter((value) => value !== driveValue);
+      } else {
+        return [...prevSelectedDrive, driveValue];
+      }
+    });
+  };
+
+  // Apply the changes from the drive modal
+  const applyDriveFilter = () => {
+    setSelectedDrive(tempSelectedDrive);
+    setCurrentPage(1); // Reset page number if necessary
+    setShowDriveModal(false); // Close the modal
+  };
+
+  const [filters, setFilters] = useState([
+    {
+      id: "fullfilter",
+      label: "All Filters",
+      showModal: false,
+    },
+    {
+      id: "price",
+      label: "Price",
+      showModal: false,
+    },
+    {
+      id: "brand",
+      label: "Brands",
+      showModal: false,
+    },
+    {
+      id: "bodyType",
+      label: "Body Types",
+      showModal: false,
+    },
+
+    {
+      id: "power",
+      label: "Power",
+      showModal: false,
+    },
+    {
+      id: "displacement",
+      label: "Displacement",
+      showModal: false,
+    },
+    {
+      id: "fuelType",
+      label: "Fuel Types",
+      showModal: false,
+    },
+    {
+      id: "cylinder",
+      label: "Cylinders",
+      showModal: false,
+    },
+    {
+      id: "transmission",
+      label: "Transmissions",
+      showModal: false,
+    },
+    {
+      id: "drive",
+      label: "Drive",
+      showModal: false,
+    },
+    // Add other filters as needed
+  ]);
+
+  const filterFunctions = {
+    price: applyPriceFilter,
+    brand: applyBrandFilter,
+    bodyType: applyBodyTypeFilter,
+    displacement: applyPowerFilter,
+    displacement: applyDisplacementFilter,
+    fuelType: applyFuelTypeFilter,
+    cylinder: applyCylinderFilter,
+    transmission: applyTransmissionFilter,
+    drive: applyDriveFilter,
+  };
+
+  const handleToggleModal = (filterId) => {
+    setFilters(
+      filters.map((filter) => {
+        if (filter.id === filterId) {
+          return { ...filter, showModal: !filter.showModal };
+        }
+        return filter;
+      })
+    );
+  };
+
+  const renderFilterContent = (filter) => {
+    switch (filter.id) {
+      case "price":
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div
+                  className={`checkbox-container ${
+                    showPriceDropdown ? "show" : "hide"
+                  }`}
+                >
+                  <ul className="py-4 px-2">
+                    {filteredPriceOptions.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss ">
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedPrice.includes(option.value)}
+                            onChange={() =>
+                              handleModalPriceChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text ">{option.priceLabel}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      case "brand":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget mb-1">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <div className="border-bottom me-2 sticky p-1 ">
+                    <input
+                      type="text"
+                      placeholder="Search Brand"
+                      value={searchText}
+                      className="fs-7"
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                  <ul className="py-4 px-2">
+                    {filteredAndSortedBrandOptions.map((item, idx) => (
+                      <li key={idx}>
+                        <label className="containerss">
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedBrands.includes(item.value)}
+                            onChange={() => handleModalBrandChange(item.value)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{item.label}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "bodyType":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className="show">
+                  <div className="row g-xl-2 gy-2 ">
+                    {bodyoptions.map((item, idx) => (
+                      <div className="col-xl-4 col-4">
+                        <button
+                          key={idx}
+                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
+                            tempSelectedBodyTypes.includes(item.value)
+                              ? "text-secondary fw-bold bg-white border border-2"
+                              : "bg-white border border-2 border-white fw-bold"
+                          }`}
+                          onClick={() => handleModalBodyTypeChange(item.value)}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.label}
+                            className="w-6 h-6 object-contain mb-2"
+                          />
+                          <small>{item.label}</small>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "power":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {filterPower.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedPower.includes(option.value)}
+                            onChange={() =>
+                              handleModalPowerChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option.powerLabel}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "displacement":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {filtereDisplacement.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedDisplacement.includes(
+                              option.value
+                            )}
+                            onChange={() =>
+                              handleModalDisplacementChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">
+                            {option.displacementLabel}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "fuelType":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {fuelTypeList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedFuelType.includes(option)}
+                            onChange={() => handleModalFuelTypeChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "cylinder":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {cylinderList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedCylinders.includes(option)}
+                            onChange={() => handleModalCylinderChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option} Cylinder</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "transmission":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {transmissionList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedTransmissions.includes(option)}
+                            onChange={() =>
+                              handleModalTransmissionChange(option)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "drive":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="pt-2 pb-4 ">
+                    {driveList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedDrive.includes(option)}
+                            onChange={() => handleModalDriveChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "fullfilter":
+        // Assuming you have a Slider component (from a UI library or a custom one)
+        return (
+          <div className={`car-details-menu product-sidebar border-0`}>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div
+                  className={`checkbox-container ${
+                    showPriceDropdown ? "show" : "hide"
+                  }`}
+                >
+                  <ul className="pb-4 px-2">
+                    <h3 className="fw-bold mb-3">Price</h3>
+                    {filteredPriceOptions.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss ">
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedPrice.includes(option.value)}
+                            onChange={() =>
+                              handleModalPriceChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text ">{option.priceLabel}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="product-widget mb-1">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <div className="border-bottom me-2 sticky p-1 ">
+                    <input
+                      type="text"
+                      placeholder="Search Brand"
+                      value={searchText}
+                      className="fs-7"
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                  <ul className="py-4 px-2">
+                    <h3 className="fw-bold mb-3">Brands</h3>
+                    {filteredAndSortedBrandOptions.map((item, idx) => (
+                      <li key={idx}>
+                        <label className="containerss">
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedBrands.includes(item.value)}
+                            onChange={() => handleModalBrandChange(item.value)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{item.label}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className="show">
+                  <div className="row g-xl-2 gy-2 ">
+                    <h3 className="fw-bold mb-3">Body Types</h3>
+                    {bodyoptions.map((item, idx) => (
+                      <div className="col-xl-4 col-4">
+                        <button
+                          key={idx}
+                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
+                            tempSelectedBodyTypes.includes(item.value)
+                              ? "text-secondary fw-bold bg-white border border-2"
+                              : "bg-white border border-2 border-white fw-bold"
+                          }`}
+                          onClick={() => handleModalBodyTypeChange(item.value)}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.label}
+                            className="w-6 h-6 object-contain mb-2"
+                          />
+                          <small>{item.label}</small>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Power</h3>
+                    {filterPower.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedPower.includes(option.value)}
+                            onChange={() =>
+                              handleModalPowerChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option.powerLabel}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Displacement</h3>
+                    {filtereDisplacement.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedDisplacement.includes(
+                              option.value
+                            )}
+                            onChange={() =>
+                              handleModalDisplacementChange(option.value)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">
+                            {option.displacementLabel}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Fuel Type</h3>
+                    {fuelTypeList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedFuelType.includes(option)}
+                            onChange={() => handleModalFuelTypeChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Cylinders</h3>
+                    {cylinderList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedCylinders.includes(option)}
+                            onChange={() => handleModalCylinderChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option} Cylinder</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Tansmissions</h3>
+                    {transmissionList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedTransmissions.includes(option)}
+                            onChange={() =>
+                              handleModalTransmissionChange(option)
+                            }
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <div className={`checkbox-container show`}>
+                  <ul className="py-4 px-2 ">
+                    <h3 className="fw-bold mb-3">Drive</h3>
+                    {driveList.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss" key={idx}>
+                          <input
+                            type="checkbox"
+                            checked={tempSelectedDrive.includes(option)}
+                            onChange={() => handleModalDriveChange(option)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      // Add cases for other types as needed
+      default:
+        return <div>Unsupported filter type</div>;
+    }
+  };
+
   return (
-    <div
-      className={`col-xl-3 order-xl-1 order-2 ${
-        displaynone && "d-md-block d-none"
-      }`}
-    >
-      {/* <div className="filter-area mb-3">
+    <>
+      <div className="mobileFilter d-md-none d-block p-0 bg-white">
+        <div className=" m-0 py-1 d-flex">
+          {filters.map((filter) => (
+            <React.Fragment key={filter.id}>
+              <div
+                className="specificMobileFilter d-flex align-items-center justify-content-center"
+                onClick={() => handleToggleModal(filter.id)}
+              >
+                <span
+                  className={`mobileFilterTitle fs-8 ${
+                    filter.showModal ? "filterSelected" : ""
+                  }`}
+                >
+                  {filter.id === "fullfilter" && <TuneIcon className="me-2" />}
+
+                  {filter.label}
+
+                  {filter.id !== "fullfilter" &&
+                    (filter.showModal ? (
+                      <KeyboardArrowUpIcon />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    ))}
+                </span>
+              </div>
+
+              <Modal
+                open={filter.showModal}
+                onClose={() => handleToggleModal(filter.id)}
+                aria-labelledby={`${filter.id}ModalLabel`}
+                aria-hidden={!filter.showModal}
+                closeAfterTransition
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                <div className="modal-content">
+                  <div className="modal-header py-2">
+                    <h2 className="modal-title fw-bold text-white">
+                      {filter.label}
+                    </h2>
+                    <Button
+                      onClick={() => handleToggleModal(filter.id)}
+                      className="p-0 m-0 d-flex justify-content-end"
+                    >
+                      <CloseIcon sx={{ color: "white" }} className="p-0 m-0" />
+                    </Button>
+                  </div>
+                  <div className="modal-body ">
+                    {renderFilterContent(filter)}
+                  </div>
+                  <div className="modal-footer p-0">
+                    {filter.id !== "fullfilter" ? (
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          console.log("llllllllllllll");
+                          const applyFilterFunction =
+                            filterFunctions[filter.id];
+                          if (applyFilterFunction) {
+                            applyFilterFunction(); // Call the function dynamically
+                          }
+                          handleToggleModal(filter.id); // Close the modal
+                        }}
+                      >
+                        Apply Filter
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          applyPriceFilter();
+                          applyBrandFilter();
+                          applyBodyTypeFilter();
+                          applyPowerFilter();
+                          applyDisplacementFilter();
+                          applyFuelTypeFilter();
+                          applyCylinderFilter();
+                          applyTransmissionFilter();
+                          applyDriveFilter();
+                          handleToggleModal(filter.id); // Close the modal
+                        }}
+                      >
+                        Apply Filter
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </Modal>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+
+      <div className={`d-md-block d-none col-xl-3 order-xl-1 order-2 `}>
+        {/* <div className="filter-area mb-3">
         <div className="title-and-close-btn mb-20">
           {areFiltersActive() && (
             <div className="close-btn" onClick={clearAllFilters}>
@@ -593,42 +1567,170 @@ function CarLeftSidebar({
         </div>
       </div> */}
 
-      <div
-        className={`car-details-menu ${
-          isSticky ? "sticky product-sidebar" : "product-sidebar"
-        }`}
-      >
-        {/* Price filter UI */}
-        {router.pathname !== "/find-your-car" && (
+        <div
+          className={`car-details-menu ${
+            isSticky ? "sticky product-sidebar" : "product-sidebar"
+          }`}
+        >
+          {/* Price filter UI */}
+          {router.pathname !== "/find-your-car" && (
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <h3
+                  className="product-widget-title mb-20 cursor_pointer"
+                  onClick={togglePriceDropdown}
+                >
+                  Price
+                  <span
+                    className={`dropdown-icon ${
+                      showPriceDropdown ? "open" : ""
+                    }`}
+                  >
+                    <i class="bi bi-chevron-down" />
+                  </span>
+                </h3>
+                <div
+                  className={`checkbox-container ${
+                    showPriceDropdown ? "show" : "hide"
+                  }`}
+                >
+                  <ul className="pt-2 pb-4 overflow-list">
+                    {filteredPriceOptions.map((option, idx) => (
+                      <li key={idx}>
+                        <label className="containerss">
+                          <input
+                            type="checkbox"
+                            checked={selectedPrice.includes(option.value)}
+                            onChange={() => handlePriceChange(option.value)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{option.priceLabel}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+          <hr />
+          {router.pathname !== "/brands/[brandname]" && (
+            <div className="product-widget mb-1">
+              <div className="check-box-item">
+                <h3
+                  className="product-widget-title mb-20 cursor_pointer"
+                  onClick={toggleBrandDropdown}
+                >
+                  Select Brand
+                  {/* Add an icon for dropdown indicator */}
+                  <span
+                    className={`dropdown-icon ${
+                      showBrandDropdown ? "open" : ""
+                    }`}
+                  >
+                    <i class="bi bi-chevron-down" />
+                  </span>
+                </h3>
+                <div
+                  className={`checkbox-container ${
+                    showBrandDropdown ? "show" : "hide"
+                  }`}
+                >
+                  <div className="form-inner">
+                    <input
+                      type="text"
+                      placeholder="Search Brand"
+                      value={searchText}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                  <ul className="overflow-list pt-2 pb-4 ">
+                    {filteredAndSortedBrandOptions.map((item, idx) => (
+                      <li key={idx}>
+                        <label className="containerss">
+                          <input
+                            type="checkbox"
+                            checked={selectedBrands.includes(item.value)}
+                            onChange={() => handleBrandChange(item.value)}
+                          />
+                          <span className="checkmark checkmarkRight0" />
+                          <span className="text">{item.label}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+          <hr />
+          {router.pathname !== "/category/[categoryname]" && (
+            <div className="product-widget ">
+              <div className="check-box-item">
+                <h3
+                  className="product-widget-title mb-20 cursor-pointer"
+                  onClick={toggleBodyDropdown}
+                >
+                  Body Type
+                </h3>
+                <div className={`${showBodyDropdown ? "show" : "hide"}`}>
+                  <div className="row g-xl-2 gy-2 ">
+                    {bodyoptions.map((item, idx) => (
+                      <div className="col-xl-4 col-4">
+                        <button
+                          key={idx}
+                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
+                            selectedBody.includes(item.value)
+                              ? "text-secondary fw-bold bg-white border border-2"
+                              : "bg-white border border-2 border-white fw-bold"
+                          }`}
+                          onClick={() => handleBodyChange(item.value)}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.label}
+                            className="w-6 h-6 object-contain mb-2"
+                          />
+                          <small>{item.label}</small>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <hr />
+          {/* Power filter UI */}
           <div className="product-widget ">
             <div className="check-box-item">
               <h3
                 className="product-widget-title mb-20 cursor_pointer"
-                onClick={togglePriceDropdown}
+                onClick={togglePowerDropdown}
               >
-                Price
+                Power
                 <span
-                  className={`dropdown-icon ${showPriceDropdown ? "open" : ""}`}
+                  className={`dropdown-icon ${showPowerDropdown ? "open" : ""}`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h3>
               <div
                 className={`checkbox-container ${
-                  showPriceDropdown ? "show" : "hide"
+                  showPowerDropdown ? "show" : "hide"
                 }`}
               >
                 <ul className="pt-2 pb-4 overflow-list">
-                  {filteredPriceOptions.map((option, idx) => (
+                  {filterPower.map((option, idx) => (
                     <li key={idx}>
-                      <label className="containerss">
+                      <label className="containerss" key={idx}>
                         <input
                           type="checkbox"
-                          checked={selectedPrice.includes(option.value)}
-                          onChange={() => handlePriceChange(option.value)}
+                          checked={selectedPower.includes(option.value)}
+                          onChange={() => handlePowerChange(option.value)}
                         />
                         <span className="checkmark checkmarkRight0" />
-                        <span className="text">{option.priceLabel}</span>
+                        <span className="text">{option.powerLabel}</span>
                       </label>
                     </li>
                   ))}
@@ -636,47 +1738,42 @@ function CarLeftSidebar({
               </div>
             </div>
           </div>
-        )}
-        <hr />
-        {router.pathname !== "/brands/[brandname]" && (
-          <div className="product-widget mb-1">
+          <hr />
+          {/* Displacement filter UI */}
+
+          <div className="product-widget ">
             <div className="check-box-item">
               <h3
                 className="product-widget-title mb-20 cursor_pointer"
-                onClick={toggleBrandDropdown}
+                onClick={toggleDisplacementDropdown}
               >
-                Select Brand
-                {/* Add an icon for dropdown indicator */}
+                Displacement
                 <span
-                  className={`dropdown-icon ${showBrandDropdown ? "open" : ""}`}
+                  className={`dropdown-icon ${
+                    showDisplacementDropdown ? "open" : ""
+                  }`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h3>
               <div
                 className={`checkbox-container ${
-                  showBrandDropdown ? "show" : "hide"
+                  showDisplacementDropdown ? "show" : "hide"
                 }`}
               >
-                <div className="form-inner">
-                  <input
-                    type="text"
-                    placeholder="Search Brand"
-                    value={searchText}
-                    onChange={handleSearchChange}
-                  />
-                </div>
-                <ul className="overflow-list pt-2 pb-4 ">
-                  {filteredAndSortedBrandOptions.map((item, idx) => (
+                <ul className="pt-2 pb-4 overflow-list">
+                  {filtereDisplacement.map((option, idx) => (
                     <li key={idx}>
-                      <label className="containerss">
+                      <label className="containerss" key={idx}>
                         <input
                           type="checkbox"
-                          checked={selectedBrands.includes(item.value)}
-                          onChange={() => handleBrandChange(item.value)}
+                          checked={selectedDisplacement.includes(option.value)}
+                          onChange={() =>
+                            handleDisplacementChange(option.value)
+                          }
                         />
                         <span className="checkmark checkmarkRight0" />
-                        <span className="text">{item.label}</span>
+                        <span className="text">{option.displacementLabel}</span>
                       </label>
                     </li>
                   ))}
@@ -684,279 +1781,163 @@ function CarLeftSidebar({
               </div>
             </div>
           </div>
-        )}
-        <hr />
-        {router.pathname !== "/category/[categoryname]" && (
+          <hr />
           <div className="product-widget ">
             <div className="check-box-item">
               <h3
-                className="product-widget-title mb-20 cursor-pointer"
-                onClick={toggleBodyDropdown}
+                className="product-widget-title mb-20 cursor_pointer"
+                onClick={toggleFuelTypeDropdown}
               >
-                Body Type
+                Fuel Type
+                <span
+                  className={`dropdown-icon ${
+                    showFuelTypeDropdown ? "open" : ""
+                  }`}
+                >
+                  <i class="bi bi-chevron-down" />
+                </span>
               </h3>
-              <div className={`${showBodyDropdown ? "show" : "hide"}`}>
-                <div className="row g-xl-2 gy-2 ">
-                  {bodyoptions.map((item, idx) => (
-                    <div className="col-xl-4 col-4">
-                      <button
-                        key={idx}
-                        className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
-                          selectedBody.includes(item.value)
-                            ? "text-secondary fw-bold bg-white border border-2"
-                            : "bg-white border border-2 border-white fw-bold"
-                        }`}
-                        onClick={() => handleBodyChange(item.value)}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.label}
-                          className="w-6 h-6 object-contain mb-2"
+              <div
+                className={`checkbox-container ${
+                  showFuelTypeDropdown ? "show" : "hide"
+                }`}
+              >
+                <ul className="pt-2 pb-4 overflow-list">
+                  {fuelTypeList.map((option, idx) => (
+                    <li key={idx}>
+                      <label className="containerss" key={idx}>
+                        <input
+                          type="checkbox"
+                          checked={selectedFuelType.includes(option)}
+                          onChange={() => handleFuelTypeChange(option)}
                         />
-                        <small>{item.label}</small>
-                      </button>
-                    </div>
+                        <span className="checkmark checkmarkRight0" />
+                        <span className="text">{option}</span>
+                      </label>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>
-        )}
-        <hr />
-        {/* Power filter UI */}
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={togglePowerDropdown}
-            >
-              Power
-              <span
-                className={`dropdown-icon ${showPowerDropdown ? "open" : ""}`}
+          <hr />
+          <div className="product-widget ">
+            <div className="check-box-item">
+              <h3
+                className="product-widget-title mb-20 cursor_pointer"
+                onClick={toggleCylindersDropdown}
               >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showPowerDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {filterPower.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedPower.includes(option.value)}
-                        onChange={() => handlePowerChange(option.value)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option.powerLabel}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <hr />
-        {/* Displacement filter UI */}
-
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDisplacementDropdown}
-            >
-              Displacement
-              <span
-                className={`dropdown-icon ${
-                  showDisplacementDropdown ? "open" : ""
+                Cylinders
+                <span
+                  className={`dropdown-icon ${
+                    showCylindersDropdown ? "open" : ""
+                  }`}
+                >
+                  <i class="bi bi-chevron-down" />
+                </span>
+              </h3>
+              <div
+                className={`checkbox-container ${
+                  showCylindersDropdown ? "show" : "hide"
                 }`}
               >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showDisplacementDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {filtereDisplacement.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedDisplacement.includes(option.value)}
-                        onChange={() => handleDisplacementChange(option.value)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option.displacementLabel}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                <ul className="pt-2 pb-4 overflow-list">
+                  {cylinderList.map((option, idx) => (
+                    <li key={idx}>
+                      <label className="containerss" key={idx}>
+                        <input
+                          type="checkbox"
+                          checked={selectedCylinders.includes(option)}
+                          onChange={() => handleCylindersChange(option)}
+                        />
+                        <span className="checkmark checkmarkRight0" />
+                        <span className="text">{option} Cylinder</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <hr />
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleFuelTypeDropdown}
-            >
-              Fuel Type
-              <span
-                className={`dropdown-icon ${
-                  showFuelTypeDropdown ? "open" : ""
+          <hr />
+          <div className="product-widget ">
+            <div className="check-box-item">
+              <h3
+                className="product-widget-title mb-20 cursor_pointer"
+                onClick={toggleTransmissionsDropdown}
+              >
+                Transmissions
+                <span
+                  className={`dropdown-icon ${
+                    showTransmissionsDropdown ? "open" : ""
+                  }`}
+                >
+                  <i class="bi bi-chevron-down" />
+                </span>
+              </h3>
+              <div
+                className={`checkbox-container ${
+                  showTransmissionsDropdown ? "show" : "hide"
                 }`}
               >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showFuelTypeDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {fuelTypeList.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedFuelType.includes(option)}
-                        onChange={() => handleFuelTypeChange(option)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                <ul className="pt-2 pb-4 overflow-list">
+                  {transmissionList.map((option, idx) => (
+                    <li key={idx}>
+                      <label className="containerss" key={idx}>
+                        <input
+                          type="checkbox"
+                          checked={selectedTransmission.includes(option)}
+                          onChange={() => handletranmissionChange(option)}
+                        />
+                        <span className="checkmark checkmarkRight0" />
+                        <span className="text">{option}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <hr />
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleCylindersDropdown}
-            >
-              Cylinders
-              <span
-                className={`dropdown-icon ${
-                  showCylindersDropdown ? "open" : ""
+          <hr />
+          <div className="product-widget ">
+            <div className="check-box-item">
+              <h3
+                className="product-widget-title mb-20 cursor_pointer"
+                onClick={toggleDriveDropdown}
+              >
+                Drive
+                <span
+                  className={`dropdown-icon ${showDriveDropdown ? "open" : ""}`}
+                >
+                  <i class="bi bi-chevron-down" />
+                </span>
+              </h3>
+              <div
+                className={`checkbox-container ${
+                  showDriveDropdown ? "show" : "hide"
                 }`}
               >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showCylindersDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {cylinderList.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedCylinders.includes(option)}
-                        onChange={() => handleCylindersChange(option)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option} Cylinder</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleTransmissionsDropdown}
-            >
-              Transmissions
-              <span
-                className={`dropdown-icon ${
-                  showTransmissionsDropdown ? "open" : ""
-                }`}
-              >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showTransmissionsDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {transmissionList.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedTransmission.includes(option)}
-                        onChange={() => handletranmissionChange(option)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div className="product-widget ">
-          <div className="check-box-item">
-            <h3
-              className="product-widget-title mb-20 cursor_pointer"
-              onClick={toggleDriveDropdown}
-            >
-              Drive
-              <span
-                className={`dropdown-icon ${showDriveDropdown ? "open" : ""}`}
-              >
-                <i class="bi bi-chevron-down" />
-              </span>
-            </h3>
-            <div
-              className={`checkbox-container ${
-                showDriveDropdown ? "show" : "hide"
-              }`}
-            >
-              <ul className="pt-2 pb-4 overflow-list">
-                {driveList.map((option, idx) => (
-                  <li key={idx}>
-                    <label className="containerss" key={idx}>
-                      <input
-                        type="checkbox"
-                        checked={selectedDrive.includes(option)}
-                        onChange={() => handleDriveChange(option)}
-                      />
-                      <span className="checkmark checkmarkRight0" />
-                      <span className="text">{option}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                <ul className="pt-2 pb-4 overflow-list">
+                  {driveList.map((option, idx) => (
+                    <li key={idx}>
+                      <label className="containerss" key={idx}>
+                        <input
+                          type="checkbox"
+                          checked={selectedDrive.includes(option)}
+                          onChange={() => handleDriveChange(option)}
+                        />
+                        <span className="checkmark checkmarkRight0" />
+                        <span className="text">{option}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

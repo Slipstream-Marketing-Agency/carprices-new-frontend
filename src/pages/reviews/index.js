@@ -28,7 +28,7 @@ function BlogStandardPage({
   articleTags,
   popularArticles,
 }) {
-  console.log(articles, "articlesarticles");
+  
   const inputRef = useRef(null);
   const client = createApolloClient();
   const router = useRouter();
@@ -337,7 +337,7 @@ function BlogStandardPage({
 }
 
 export async function getServerSideProps(context, query) {
-  console.log(context.query, "sssssssssssssssss");
+  
 
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
   const pageSize = 24; // Set the number of items per page

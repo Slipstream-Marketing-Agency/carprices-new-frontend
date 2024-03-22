@@ -35,7 +35,7 @@ function CompareCarCard({ carData }) {
     }
   };
 
-  console.log(carData?.featuredImage?.data?.attributes?.url,"carData?.featuredImage?.data?.attributes?.url");
+  
 
   return (
     <div className={`col-md-3 col-6 mt-0`}>

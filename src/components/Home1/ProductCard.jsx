@@ -8,7 +8,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
-  console.log(carDetails, "carDetails");
+  
 
   const CarPriceRange = ({ minPrice, maxPrice }) => {
     const formatPrice = (price) => {

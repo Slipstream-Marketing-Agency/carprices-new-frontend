@@ -106,7 +106,7 @@ export async function getServerSideProps(context) {
     ? parseRanges(query.displacement)
     : [];
 
-  console.log(priceRange, "priceRange");
+  
 
   if (priceRange) {
     queryParams.priceRange = priceRange;
@@ -187,7 +187,7 @@ export async function getServerSideProps(context) {
     fuelTypeListres = fuelTypeList;
   }
 
-  console.log(fuelTypeListres, "fuelTypeListres");
+  
 
   if (cylinderSlugs.length > 0) {
     const cylinderList = await axios.get(

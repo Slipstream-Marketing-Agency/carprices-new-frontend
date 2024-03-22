@@ -60,7 +60,7 @@ function index({ heading, carDetails, compare }) {
     };
   });
 
-  console.log(compare, "eeeeeeee");
+  
   return (
     <div className="compare-car-section mt-3 mb-3 ">
       <div className="container pb-4 container-fluid white_bg_wrapper ">

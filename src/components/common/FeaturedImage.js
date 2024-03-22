@@ -13,7 +13,7 @@ export default function FeaturedImage({ src, alt, title, id, width, height }) {
     setImageLoaded(true);
   };
 
-  console.log(imageUrl,"imageUrlimageUrl");
+  
   
 
   return (

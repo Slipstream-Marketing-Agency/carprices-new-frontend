@@ -53,7 +53,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
   const [year, setYear] = useState([]);
   const [variants, setVariants] = useState([]);
 
-  console.log(selectedYear, "selectedBrand");
+  
   const [isMobile, setIsMobile] = useState(false);
 
 
@@ -207,7 +207,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
               (trim) => trim.attributes
             );
 
-          console.log(variants, "uuuuuuuuuuu");
+          
           setVariants(variants); // Update the state with the fetched variants
           setCurrentStep("variant");
         })
@@ -273,8 +273,8 @@ const MultiStepCarSelection = ({ carData, mode }) => {
     }
 
     const updatedPath = `${basePath}/${slugArray.join("-vs-")}`;
-    console.log("selected slug ",newVariantMainSlug);
-    console.log("Updated path : ",updatedPath);
+    
+    
     router.push(updatedPath);
 
     // Close modal and reset states
@@ -340,7 +340,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
     setSearchTerm(""); // Also clear the search term if needed
   };
 
-  console.log(carData, "sssssssssss");
+  
   return (
     <>
 

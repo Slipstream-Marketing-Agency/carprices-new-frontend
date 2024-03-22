@@ -60,7 +60,7 @@ function BlogDetailsPage({
   articlesThisWeek,
   article,
 }) {
-  console.log(article, "articlearticlearticlearticle");
+  
   const [activeTab, setActiveTab] = useState("tab1");
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -570,8 +570,8 @@ export async function getServerSideProps(context) {
 
   const apolloClient = createApolloClient();
   // Fetch data based on the slug (e.g., from a database)
-  // console.log(newsData, "my slug"); // Log the slug value
-  console.log("jh");
+  
+  
 
   try {
     const { data } = await apolloClient.query({

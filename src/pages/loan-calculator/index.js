@@ -29,7 +29,7 @@ function loanCalculator() {
     image: "", // Example image URL
   });
 
-  console.log(loanFilter, "loanFilter");
+  
 
   const [brandsList, setBrandsList] = useState([]);
 
@@ -39,7 +39,7 @@ function loanCalculator() {
 
   const [trimList, setTrimList] = useState([]);
 
-  console.log(trimList, "trimListtrimListtrimList");
+  
 
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -111,7 +111,7 @@ function loanCalculator() {
         `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
       )
       .then((response) => {
-        console.log(response, "responseresponseresponseresponseresponse");
+        
         const data = response.data.attributes.models.map((item) => ({
           value: item.id,
           label: item.name,
@@ -183,7 +183,7 @@ function loanCalculator() {
   };
 
   const handleTrimChange = (selectedOption) => {
-    console.log(selectedOption, "selectedOptionselectedOption");
+    
     setSelectedTrim(selectedOption);
     setLoanAmount(selectedOption.price);
     setLoanFilter({
@@ -380,7 +380,7 @@ function loanCalculator() {
     },
   ];
 
-  console.log(modelsList, "modelsListmodelsList");
+  
 
   return (
     <MainLayout

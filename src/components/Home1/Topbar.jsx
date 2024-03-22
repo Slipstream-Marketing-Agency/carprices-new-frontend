@@ -38,7 +38,7 @@ function Topbar() {
 
       const brands = data.carBrands.data;
       setBrandOptions(brands);
-      //   console.log(brands);
+      //   
     } catch (error) {
       console.error("Error fetching brands:", error);
     } finally {
@@ -73,7 +73,7 @@ function Topbar() {
       const tags = data.articleCategories.data;
       setTagOptions(tags);
 
-      //   console.log("tags", tags);
+      //   
     } catch (error) {
       console.error("Error fetching brands:", error);
     } finally {
@@ -99,7 +99,7 @@ function Topbar() {
       });
 
       setBrandOptions(data.carBrands.data);
-      // console.log("all brands",data);
+      
     } catch (error) {
       console.error("Error fetching brands:", error);
     }
@@ -119,12 +119,12 @@ function Topbar() {
     //   profile.name.toLowerCase().startsWith(target.value.toLowerCase())
     // );
     const filteredValue = brandOptions.map((brand) => brand.attributes.name);
-    console.log("filtered brands", filteredValue);
+    
     const tagsfilteredValue = tagOptions.map((tag) => tag.attributes.name);
-    console.log("filtered tags", tagsfilteredValue);
-    console.log(filteredValue);
+    
+    
     setResults([...tagsfilteredValue, ...filteredValue]);
-    console.log("results", results);
+    
   };
 
   const [query, setQuery] = useState("");
@@ -132,7 +132,7 @@ function Topbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const searchRef = useRef(null);
 
-  console.log(searchResults, "searchResults");
+  
   useEffect(() => {
     // Handle click outside the search bar to close the dropdown
     const handleClickOutside = (event) => {
@@ -148,7 +148,7 @@ function Topbar() {
   }, [searchRef]);
 
   const handleSearch = async (searchTerm) => {
-    console.log(searchTerm, "searchTerm");
+    
     if (searchTerm.trim().length < 2) {
       setSearchResults([]);
       setShowDropdown(false);
@@ -161,7 +161,7 @@ function Topbar() {
         }car-models/search?searchTerm=${encodeURIComponent(searchTerm)}`
       );
 
-      console.log(response, "responseresponseresponse");
+      
       setSearchResults(response.data.data);
       setShowDropdown(true);
     } catch (error) {

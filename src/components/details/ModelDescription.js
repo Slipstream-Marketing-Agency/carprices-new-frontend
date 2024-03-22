@@ -101,7 +101,7 @@ export default function ModelDescription({
 
   const outputString = `${safetyFeature}`;
 
-  console.log(allTrims, "allTrims");
+  
 
   const variableText = allTrims
     .map((trim, index) => (
