@@ -72,6 +72,7 @@ function Header() {
     dispatch({ type: "TOGGLE_SUB_MENU", subMenu: "" });
     dispatch({ type: "TOGGLE_SIDEBAR" });
   };
+  const { locales, asPath, locale: currentLocale } = useRouter();
   return (
     <header
       ref={headerRef}
@@ -297,6 +298,40 @@ function Header() {
             </h6>
           </div>
         </div> */}
+        {process.env.NEXT_PUBLIC_MODE === "development" && (
+          <ul className="d-flex justify-content-center align-items-center pt-3 d-md-none">
+            {locales.map((locale, idx) => {
+              // Only show Arabic if the current locale is English, and vice versa
+              if (
+                (currentLocale === "en" && locale === "ar") ||
+                (currentLocale === "ar" && locale === "en")
+              ) {
+                return (
+                  <div key={idx}>
+                    <Link
+                      href={asPath}
+                      locale={locale}
+                      key={locale}
+                      className="mx-2"
+                    >
+                      <button
+                        type="button"
+                        className={`${
+                          currentLocale === locale
+                            ? "fw-bold text-white"
+                            : "fw-bold text-white"
+                        } primary-btn1 text-white py-1`}
+                      >
+                        {locale === "en" ? "English" : "عربي"}
+                      </button>
+                    </Link>
+                  </div>
+                );
+              }
+              return null; // Do not render anything for other cases
+            })}
+          </ul>
+        )}
         <div
           className={`sidebar-button mobile-menu-btn ${
             state.isSidebarOpen ? "active" : ""

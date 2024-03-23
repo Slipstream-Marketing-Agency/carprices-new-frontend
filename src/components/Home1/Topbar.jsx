@@ -38,7 +38,7 @@ function Topbar() {
 
       const brands = data.carBrands.data;
       setBrandOptions(brands);
-      //   
+      //
     } catch (error) {
       console.error("Error fetching brands:", error);
     } finally {
@@ -73,7 +73,7 @@ function Topbar() {
       const tags = data.articleCategories.data;
       setTagOptions(tags);
 
-      //   
+      //
     } catch (error) {
       console.error("Error fetching brands:", error);
     } finally {
@@ -99,7 +99,6 @@ function Topbar() {
       });
 
       setBrandOptions(data.carBrands.data);
-      
     } catch (error) {
       console.error("Error fetching brands:", error);
     }
@@ -119,12 +118,10 @@ function Topbar() {
     //   profile.name.toLowerCase().startsWith(target.value.toLowerCase())
     // );
     const filteredValue = brandOptions.map((brand) => brand.attributes.name);
-    
+
     const tagsfilteredValue = tagOptions.map((tag) => tag.attributes.name);
-    
-    
+
     setResults([...tagsfilteredValue, ...filteredValue]);
-    
   };
 
   const [query, setQuery] = useState("");
@@ -132,7 +129,6 @@ function Topbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const searchRef = useRef(null);
 
-  
   useEffect(() => {
     // Handle click outside the search bar to close the dropdown
     const handleClickOutside = (event) => {
@@ -148,7 +144,6 @@ function Topbar() {
   }, [searchRef]);
 
   const handleSearch = async (searchTerm) => {
-    
     if (searchTerm.trim().length < 2) {
       setSearchResults([]);
       setShowDropdown(false);
@@ -161,7 +156,6 @@ function Topbar() {
         }car-models/search?searchTerm=${encodeURIComponent(searchTerm)}`
       );
 
-      
       setSearchResults(response.data.data);
       setShowDropdown(true);
     } catch (error) {
@@ -250,7 +244,7 @@ function Topbar() {
           </div>
 
           {/* test input begins */}
-          <div >
+          <div>
             <div className="container">
               {showDropdown && searchResults.length > 0 && (
                 <div className="searchResultBox position-absolute mt-1 w-100 p-2 bg-white shadow-lg rounded-bottom rounded-end max-h-56 overflow-auto">
@@ -294,38 +288,40 @@ function Topbar() {
             </button> */}
           </li>
         </ul>
-        <ul className="d-flex justify-content-center align-items-center">
-          {/* {locales.map((locale, idx) => {
-            // Only show Arabic if the current locale is English, and vice versa
-            if (
-              (currentLocale === "en" && locale === "ar") ||
-              (currentLocale === "ar" && locale === "en")
-            ) {
-              return (
-                <div key={idx}>
-                  <Link
-                    href={asPath}
-                    locale={locale}
-                    key={locale}
-                    className="mx-2"
-                  >
-                    <button
-                      type="button"
-                      className={`${
-                        currentLocale === locale
-                          ? "fw-bold text-white"
-                          : "fw-bold text-white"
-                      } primary-btn1 text-white`}
+        {process.env.NEXT_PUBLIC_MODE === "development" && (
+          <ul className="d-flex justify-content-center align-items-center">
+            {locales.map((locale, idx) => {
+              // Only show Arabic if the current locale is English, and vice versa
+              if (
+                (currentLocale === "en" && locale === "ar") ||
+                (currentLocale === "ar" && locale === "en")
+              ) {
+                return (
+                  <div key={idx}>
+                    <Link
+                      href={asPath}
+                      locale={locale}
+                      key={locale}
+                      className="mx-2"
                     >
-                      {locale === "en" ? "English" : "عربي"}
-                    </button>
-                  </Link>
-                </div>
-              );
-            }
-            return null; // Do not render anything for other cases
-          })} */}
-        </ul>
+                      <button
+                        type="button"
+                        className={`${
+                          currentLocale === locale
+                            ? "fw-bold text-white"
+                            : "fw-bold text-white"
+                        } primary-btn1 text-white`}
+                      >
+                        {locale === "en" ? "English" : "عربي"}
+                      </button>
+                    </Link>
+                  </div>
+                );
+              }
+              return null; // Do not render anything for other cases
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );
