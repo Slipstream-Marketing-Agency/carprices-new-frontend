@@ -207,18 +207,18 @@ function Header() {
           </li>
           <li>
             <Link legacyBehavior href="">
-              <a className="drop-down">Insurance Calculator</a>
+              <a className="drop-down">{t.insuranceCalculator}</a>
             </Link>
           </li>
 
           <li>
             <Link legacyBehavior href="">
-              <a className="drop-down">Car Valuation</a>
+              <a className="drop-down">{t.carValuation}</a>
             </Link>
           </li>
           <li>
             <Link legacyBehavior href="">
-              <a className="drop-down">Used Cars</a>
+              <a className="drop-down">{t.usedCars}</a>
             </Link>
           </li>
         </ul>

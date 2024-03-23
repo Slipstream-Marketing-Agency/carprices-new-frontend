@@ -77,7 +77,7 @@ export default function StepFour({ filterData, setFilterData }) {
       <div className="d-flex justify-content-center align-items-center my-4">
         <div className="value_circle me-2">
           <p className="d-flex flex-column align-items-center justify-content-center ">
-            <span className="head mb-1 fs-6 fw-bold">Starting from</span>
+            <span className="head mb-1 fs-6 fw-bold">{t.startingFrom}</span>
             <span className="mt-4 fs-5 fw-bold">
               <Price data={minValue} />
             </span>
@@ -85,7 +85,7 @@ export default function StepFour({ filterData, setFilterData }) {
         </div>
         <div className="value_circle ms-2">
           <p className="d-flex flex-column align-items-center justify-content-center">
-            <span className="head mb-1 fs-6 fw-bold">Up to</span>
+            <span className="head mb-1 fs-6 fw-bold">{t.upto}</span>
             <span className="mt-4  fs-5 fw-bold">
               <Price data={maxValue} />
             </span>
@@ -109,7 +109,7 @@ export default function StepFour({ filterData, setFilterData }) {
           allowCross={false}
         />
       </div>
-      <div className="filter-price-note">Slide to select your budget range</div>
+      <div className="filter-price-note">{t.SlideToSelect}</div>
     </div>
   );
 }

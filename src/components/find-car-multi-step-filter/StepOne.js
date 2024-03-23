@@ -45,7 +45,7 @@ export default function StepOne({ filterData, setFilterData }) {
     },
 
     {
-      label: "Affordable Luxury",
+      label: t.affordableLuxury,
       value: "affordable-luxury",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Affordable Luxury.png",
@@ -80,14 +80,14 @@ export default function StepOne({ filterData, setFilterData }) {
       // toolbar: "Pure Electric Cars.",
     },
     {
-      label: "Dune Bashing",
+      label: t.duneBashing,
       value: "dune-bashing",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Dune Bashing.png",
       // toolbar: "Rugged offroad cars that can go dune bashing and offer the right equipment for it. Most SUVs are not dune bashers. ",
     },
     {
-      label: "Manual Transmission",
+      label: t.manualTransmission,
       value: "manual-transmission",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/manual.png",

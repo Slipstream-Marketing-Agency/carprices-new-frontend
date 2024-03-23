@@ -51,9 +51,9 @@ function index({ bannerImage, bannerText }) {
                   {/* <span className="txt-1">UAE's Fastest Growing </span>
                   <br />
                   <span className="txt-2">New Car Buyer's Portal</span> */}
-                  <span className="txt-1">World’s First Truly Interactive </span>
+                  <span className="txt-1">{t.worldFirstInteractive}</span>
                   <br />
-                  <span className="txt-2">Car Research Platform</span>
+                  <span className="txt-2">{t.carResearchPlatform}</span>
                 </h1>
                 {/* <p>
                   Car dealerships may sell new cars from one or several

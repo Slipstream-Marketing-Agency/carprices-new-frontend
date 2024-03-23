@@ -16,7 +16,7 @@ function BodyTypes({ bodyTypeList }) {
           <div className="col-lg-12 d-flex align-items-start justify-content-start flex-wrap gap-4">
             <div className="section-title1 w-100">
               <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>
-                Popular Cars By Body Type
+                {t.popularCarsByBody}
               </h2>
               <hr className="my-0 mt-2 heading-bottom " />
             </div>

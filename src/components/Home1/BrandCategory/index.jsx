@@ -47,7 +47,7 @@ function BrandCategory({ brandDetails }) {
               {/* <p>There will be 100+ Upcoming Car</p> */}
               <Link legacyBehavior href="/brands">
                 <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
-                  View More
+                  {t.viewMore}
                 </button>
               </Link>
             </div>

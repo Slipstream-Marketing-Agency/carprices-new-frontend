@@ -192,14 +192,14 @@ export default function FilterLayout() {
   const steps = [
     {
       // title: `${t.step} 1: ${t.preferences}`,
-      title: `Top 3 things you need from a car`,
+      title: `${t.topThreeThingsYou}`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
     },
     {
       // title: `${t.step} 3 : ${t.defineBudget} `,
-      title: `Choose your preferred body type`,
+      title: t.chooseYourPreferred,
       component: (
         <StepTwo
           filterData={filterData}
@@ -210,7 +210,7 @@ export default function FilterLayout() {
     },
     {
       // title: `${t.step} 2 : ${t.chooseSeating}`,
-      title: `How many seats do you need?`,
+      title: t.howManyseatsDo,
       component: (
         <StepThree
           filterData={filterData}
@@ -232,9 +232,9 @@ export default function FilterLayout() {
 
   const handleNextStep = () => {
     if (filterData.preferences.length === 0) {
-      setError("Select atleast one preference");
+      setError(t.selectAtleastOnePreference);
     } else if (currentStep === 1 && filterData.bodyTypes.length === 0) {
-      setError("Select atleast one body type");
+      setError(t.selectAtleastOneBody);
     } else if (
       currentStep === 0 &&
       filterData?.budget[0] === null &&
@@ -260,7 +260,7 @@ export default function FilterLayout() {
     ) {
       setError("No cars available for the selected seats");
     } else if (currentStep === 2 && filterData.seating.length === 0) {
-      setError("Select atleast one seating option");
+      setError(t.selectAtleastOneSeating);
     } else {
       setCurrentStep(currentStep + 1);
     }
@@ -341,7 +341,7 @@ export default function FilterLayout() {
           <div className="search_filter_box text-center">
             <div className="find_car_head ">
               {/* <h3 className="text-white mb-0">{t.newbuyersguide}</h3> */}
-              <h3 className="text-white mb-0">Interactive Car Buying Assistant</h3>
+              <h3 className="text-white mb-0">{t.interactiveCarBuyingAssistant}</h3>
             </div>
 
             <div className="inner">
