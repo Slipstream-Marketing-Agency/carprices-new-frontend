@@ -1,7 +1,12 @@
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CarComparisonTable({ tableData }) {
-  
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
+
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -44,9 +49,8 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   ></td>
                 )}
                 {tableData.map((item, idx) => (
@@ -82,7 +86,7 @@ export default function CarComparisonTable({ tableData }) {
             <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
             <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
           </svg>
-          <h5 className="ps-2">Engine</h5>
+          <h5 className="ps-2">{t.engine}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table ">
@@ -102,7 +106,7 @@ export default function CarComparisonTable({ tableData }) {
                 ))}
               </tr>} */}
                 <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                  No. Of Cylinders
+                  {t.NoOfCylinders}
                 </p>
               </td>
             )}
@@ -110,11 +114,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    No. Of Cylinders
+                    {t.NoOfCylinders}
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -130,18 +133,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Displacement (cc)
+                    {t.displacement} (cc)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Displacement (cc)
+                    {t.displacement} (cc)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -157,18 +159,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Power (hp)
+                    {t.power} (hp)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Power (hp)
+                    {t.power} (hp)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -184,18 +185,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Peak Torque (Nm)
+                    {t.peakTorque} (Nm)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Peak Torque (Nm)
+                    {t.peakTorque} (Nm)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -211,18 +211,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Fuel Type
+                    {t.fuelType}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Fuel Type
+                    {t.fuelType}
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -248,7 +247,7 @@ export default function CarComparisonTable({ tableData }) {
             src="/assets/images/specs/Transmission.png"
             alt="transmission icon"
           />
-          <h5 className="ps-2 ">Transmission</h5>
+          <h5 className="ps-2 ">{t.transmission}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table ">
@@ -284,11 +283,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Drive
+                    {t.drive}
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -304,18 +302,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Transmission Type
+                    {t.transmissionType}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Transmission Type
+                    {t.transmissionType}
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -331,18 +328,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    No. of Gears
+                    {t.NoOfGears}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    No. of Gears
+                    {t.NoOfGears}
+
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -369,7 +366,7 @@ export default function CarComparisonTable({ tableData }) {
             alt="transmission icon"
           />
 
-          <h5 className="ps-2">Fuel Efficiency</h5>
+          <h5 className="ps-2">{t.fuelefficiency}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table ">
@@ -380,7 +377,7 @@ export default function CarComparisonTable({ tableData }) {
                 style={{ width: "100%" }}
               >
                 <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                  Fuel Tank Size (L)
+                  {t.FuelTankSize}(L)
                 </p>
               </td>
             )}
@@ -396,11 +393,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Fuel Tank Size (L)
+                    {t.FuelTankSize}(L)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -416,18 +412,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Fuel Consumption (kmpl)
+                    {t.FuelConsumption} (kmpl)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Fuel Consumption (kmpl)
+                    {t.FuelConsumption} (kmpl)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -450,7 +445,7 @@ export default function CarComparisonTable({ tableData }) {
             alt="performance icon"
           />
 
-          <h5 className="ps-2">Performance</h5>
+          <h5 className="ps-2">{t.performance}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table ">
@@ -477,9 +472,8 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
                     0 to 100 (s)
                   </td>
@@ -497,18 +491,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Top Speed (km/h)
+                    {t.TopSpeed} (km/h)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Top Speed (km/h)
+                    {t.TopSpeed} (km/h)
                   </td>
                 )}
                 {tableData.map((item, idx) => (
@@ -556,11 +549,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Motor Type
+                    {t.MotorType}
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -577,18 +569,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    No. of Motors
+                    {t.NoOfMotors}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    No. of Motors
+                    {t.NoOfMotors}
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -605,18 +596,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Battery Capacity (kWh)
+                    {t.batteryCapacity} (kWh)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Battery Capacity (kWh)
+                    {t.batteryCapacity} (kWh)
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -633,18 +623,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Charging Time
+                    {t.ChargingTime}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Charging Time
+                    {t.ChargingTime}
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -661,18 +650,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Battery Warranty
+                    {t.BatteryWarranty}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Battery Warranty
+                    {t.BatteryWarranty}
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -689,18 +677,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Range (km)
+                    {t.range}(km)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Range (km)
+                    {t.range} (km)
                   </td>
                 )}
                 {tableData?.map((item, idx) => (
@@ -723,7 +710,7 @@ export default function CarComparisonTable({ tableData }) {
             alt="performance icon"
           />
 
-          <h5 className="ps-2">Safety</h5>
+          <h5 className="ps-2">{t.safety}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table ">
@@ -734,7 +721,7 @@ export default function CarComparisonTable({ tableData }) {
                 style={{ width: "100%" }}
               >
                 <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                  Front Brake
+                  {t.FrontBrake}
                 </p>
               </td>
             )}
@@ -750,11 +737,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Front Brake
+                    {t.FrontBrake}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -770,18 +756,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Brake
+                    {t.RearBrake}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Brake
+                    {t.RearBrake}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -798,18 +783,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Front Airbags
+                    {t.FrontAirbags}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Front Airbags
+                    {t.FrontAirbags}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -848,18 +832,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Airbags
+                    {t.RearAirbags}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Airbags
+                    {t.RearAirbags}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -898,18 +881,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Side Airbags
+                    {t.SideAirbags}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Side Airbags
+                    {t.SideAirbags}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -948,18 +930,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Front Park Assist
+                    {t.FrontParkAssist}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Front Park Assist
+                    {t.FrontParkAssist}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -998,18 +979,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Park Assist
+                    {t.RearParkAssist}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Park Assist
+                    {t.RearParkAssist}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1048,18 +1028,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Parking Camera
+                    {t.RearParkingCamera}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Parking Camera
+                    {t.RearParkingCamera}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1098,18 +1077,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    360 Parking Camera
+                    {t.ParkingCamera}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    360 Parking Camera
+                    {t.ParkingCamera}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1148,18 +1126,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Cruise Control
+                    {t.cruiseControl}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Cruise Control
+                    {t.cruiseControl}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1198,18 +1175,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Adaptive Cruise Control
+                    {t.adaptiveCruiseControl}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Adaptive Cruise Control
+                    {t.adaptiveCruiseControl}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1248,18 +1224,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Lane Change Assist
+                    {t.laneChangeAssist}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Lane Change Assist
+                    {t.laneChangeAssist}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1297,7 +1272,7 @@ export default function CarComparisonTable({ tableData }) {
 
       <div className="single-compare mb-50" id="safety">
         <div className="section-title mb-20 mt-3 zindexMinusOne">
-          <h5>Dimension</h5>
+          <h5>{t.Dimensions}</h5>
         </div>
         <div className="table-wrapper">
           <table className="table">
@@ -1322,11 +1297,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Body Type
+                    {t.bodyType}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1342,18 +1316,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    No. Of Doors
+                    {t.NoOfDoors}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    No. Of Doors
+                    {t.NoOfDoors}
                   </td>
                 )}
 
@@ -1370,18 +1343,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Length (mm)
+                    {t.Length} (mm)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Length (mm)
+                    {t.Length} (mm)
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1398,16 +1370,15 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Width (mm)
+                    {t.Width} (mm)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
                     Width (mm)
                   </td>
@@ -1426,18 +1397,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Height (mm)
+                    {t.Height} (mm)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Height (mm)
+                    {t.Height} (mm)
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1454,18 +1424,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Wheelbase (mm)
+                    {t.Wheelbase} (mm)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Wheelbase (mm)
+                    {t.Wheelbase} (mm)
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1482,18 +1451,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Weight (kg)
+                    {t.Weight} (kg)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Weight (kg)
+                    {t.Weight} (kg)
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1509,18 +1478,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Front Tyres
+                    {t.FrontTyres}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Front Tyres
+                    {t.FrontTyres}
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1536,18 +1505,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Tyres
+                    {t.RearTyres}
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Tyres
+                    {t.RearTyres}
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1564,18 +1533,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Cargo Space (L)
+                    {t.CargoSpace} (L)
                   </p>
                 </td>
               )}
               <tr className="compareTableRow">
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Cargo Space (L)
+                    {t.CargoSpace} (L)
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1591,7 +1559,7 @@ export default function CarComparisonTable({ tableData }) {
 
       <div className="single-compare mb-50" id="interior">
         <div className="section-title mb-20 mt-3 zindexMinusOne">
-          <h5>Interior</h5>
+          <h5>{t.Interior}</h5>
         </div>
 
         <div className="table-wrapper ">
@@ -1603,7 +1571,7 @@ export default function CarComparisonTable({ tableData }) {
                 style={{ width: "100%" }}
               >
                 <p className="md:text-start text-center w-100 py-2 greyBg">
-                  Leather Interior
+                  {t.LeatherInterior}
                 </p>
               </td>
             )}
@@ -1619,11 +1587,10 @@ export default function CarComparisonTable({ tableData }) {
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Leather Interior
+                    {t.LeatherInterior}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1662,18 +1629,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 greyBg">
-                    Fabric Interior
+                    {t.FabricInterior}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Fabric Interior
+                         {t.FabricInterior}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1711,18 +1677,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Rear Seat Entertainment
+                    {t.RearSeatEntertainment}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Rear Seat Entertainment
+                    {t.RearSeatEntertainment}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1761,18 +1726,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Seat Cooling
+                   {t.SeatCooling}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Seat Cooling
+                 {t.SeatCooling}
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1810,18 +1775,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Climate Control
+                    {t.ClimateControl}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Climate Control
+                                   {t.ClimateControl}
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1859,18 +1824,18 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Seating Capacity
+                    {t.SeatingCapacity}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Seating Capacity
+                                 {t.SeatingCapacity}
+
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1886,18 +1851,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Apple CarPlay
+                    {t.AppleCarPlay}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow `}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Apple CarPlay
+                    {t.AppleCarPlay}
                   </td>
                 )}
                 {tableData?.map((item, index) => (
@@ -1935,18 +1899,17 @@ export default function CarComparisonTable({ tableData }) {
                   style={{ width: "100%" }}
                 >
                   <p className="md:text-start text-center w-100 mb-0 py-2 greyBg">
-                    Android Auto
+                    {t.AndroidAuto}
                   </p>
                 </td>
               )}
               <tr className={`compareTableRow '}`}>
                 {!isMobile && (
                   <td
-                    className={`${
-                      isMobile ? "w-full" : "col-md-2 col-4 text-left"
-                    }`}
+                    className={`${isMobile ? "w-full" : "col-md-2 col-4 text-left"
+                      }`}
                   >
-                    Android Auto
+                    {t.AndroidAuto}
                   </td>
                 )}
 

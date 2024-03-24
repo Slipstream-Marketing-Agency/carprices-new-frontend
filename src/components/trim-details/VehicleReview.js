@@ -1,8 +1,13 @@
 import React from "react";
 import Price from "../common/Price";
 import { formatNumberWithCommas } from "@/src/utils/formatNumber";
+import { useRouter } from "next/router";
+import useTranslate from "@/src/utils/useTranslate";
 
 export default function VehicleReview({ trim }) {
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
   const TransmissionList = (transmission) => {
     let type;
     let speed;
@@ -28,33 +33,31 @@ export default function VehicleReview({ trim }) {
       <div className="white_bg_wrapper">
         <h2 className={`w-100 fw-bold`}>
           {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
-          <span> Review</span>
+          <span> {t.review}</span>
         </h2>
         <hr className="my-2 heading-bottom " />
         <div className="car_description mt-2">
           <p>
             <span>
-              Meet the {trim?.year} {trim?.name} {trim?.model} {trim?.name}, a{" "}
-              {trim?.bodyType} priced at AED <Price data={trim?.price} /> .
-              Equipped with a{" "}
+              {t.meetThe}{trim?.year} {trim?.name} {trim?.model} {trim?.name}, a{" "}
+              {trim?.bodyType} {t.pricedAtAED} <Price data={trim?.price} /> .
+              {t.itIsEquippedWith}{" "}
               {trim?.fuelType === "Electric" ? (
                 trim?.motor + ", "
               ) : (
                 <>
                   {(trim?.displacement / 1000).toFixed(1)}L {trim?.engine}{" "}
-                  engine,{" "}
+                  {t.engine},{" "}
                 </>
               )}
-              it delivers {trim?.power}hp of power and {trim?.torque} Nm of
-              torque. It features a {TransmissionList(trim?.gearBox)}{" "}
-              transmission and a {trim?.drive} drive system for smooth handling.
-              It is a {trim?.fuelType} drivetrain with a{" "}
-              {trim?.fuelType === "Electric" ? "range " : "fuel efficiency "}
-              of{" "}
+              {t.itdelivers} {trim?.power}{t.hpOfPowerAnd}{trim?.torque} {t.nmOfTorqueItFeatures}{TransmissionList(trim?.gearBox)}{" "}
+              {t.transmissionAndA}{trim?.drive} {t.driveSystemForSmoothHandling}{trim?.fuelType} {t.drivetrainWithA} {" "}
+              {trim?.fuelType === "Electric" ? t.range : t.fuelefficiency}
+              {t.of}{" "}
               {trim?.fuelType === "Electric"
                 ? trim?.range
                 : trim?.fuelConsumption + "kmpl"}
-              . Key safety components include ABS, {trim?.airbags} airbags,{" "}
+              {t.keySafetyComponentsIncludeABS}{trim?.airbags} {t.airbags},{" "}
               {trim?.haveCruiseControl ? "cruise control" : ""}. It is a{" "}
               {trim?.seatingCapacity}{" "}
               {trim?.haveAppleCarPlay || trim?.haveAndroidAuto
@@ -62,14 +65,14 @@ export default function VehicleReview({ trim }) {
                 : ""}
               {trim?.haveAppleCarPlay ? "Apple CarPlay" : ""}{" "}
               {trim?.haveAppleCarPlay || trim?.haveAndroidAuto ? "and " : ""}
-              {trim?.haveAndroidAuto ? "Android Auto" : ""}. It measures{" "}
-              {formatNumberWithCommas(trim?.length)}mm in length,{" "}
-              {formatNumberWithCommas(trim?.width)}mm in width, and{" "}
-              {formatNumberWithCommas(trim?.height)}mm in height
+              {trim?.haveAndroidAuto ? "Android Auto" : ""}{t.itMeasures}{" "}
+              {formatNumberWithCommas(trim?.length)}{t.mmInLength},{" "}
+              {formatNumberWithCommas(trim?.width)}{t.mmInWidth}{" "}
+              {formatNumberWithCommas(trim?.height)}{t.mmInHeight}
               {trim?.cargoSpace
-                ? ` and has ${formatNumberWithCommas(
+                ? ` ${t.andHas} ${formatNumberWithCommas(
                     trim?.cargoSpace
-                  )}L of cargo space.`
+                  )}${t.lOfCargoSpace}.`
                 : "."}
             </span>
           </p>
@@ -102,18 +105,17 @@ export default function VehicleReview({ trim }) {
               className="accordion-collapse collapse show"
             >
               <div className="accordion-body">
-                <b>Body Type:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
+                <b>{t.bodyType}:</b> {t.the} {trim?.year} {trim?.brand} {trim?.model}{" "}
                 {trim?.name} is a {trim?.bodyType}.
                 <br />
-                <b>Dimensions:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
-                {trim?.name} {""}is{" "}
-                {trim?.length ? formatNumberWithCommas(trim?.length) : "-"}mm in
-                length, {formatNumberWithCommas(trim?.width)}mm in width, and{" "}
-                {formatNumberWithCommas(trim?.height)}mm in height.
+                <b>{t.Dimensions}:</b> {t.the} {trim?.year} {trim?.brand} {trim?.model}{" "}
+                {trim?.name} {""}{t.is}{" "}
+                {trim?.length ? formatNumberWithCommas(trim?.length) : "-"}{t.mmInLength}, {formatNumberWithCommas(trim?.width)}{t.mmInWidth}, and{" "}
+                {formatNumberWithCommas(trim?.height)}{t.mmInHeight}.
                 <br />
-                <b>Wheelbase:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
-                {trim?.name} features a{" "}
-                {formatNumberWithCommas(trim?.wheelbase)}mm wheelbase. <br />
+                <b>{t.Wheelbase}:</b> {t.the} {trim?.year} {trim?.brand} {trim?.model}{" "}
+                {trim?.name} {t.features}{" "}
+                {formatNumberWithCommas(trim?.wheelbase)}{t.mmWheelbase}<br />
               </div>
             </div>
           </div>
@@ -127,7 +129,7 @@ export default function VehicleReview({ trim }) {
                 aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseTwo"
               >
-                {trim?.brand} {trim?.model} {trim?.name} Interior
+                {trim?.brand} {trim?.model} {trim?.name} {t.interior}
               </button>
             </h2>
             <div
@@ -135,18 +137,18 @@ export default function VehicleReview({ trim }) {
               className="accordion-collapse collapse"
             >
               <div className="accordion-body">
-                <b>Seating Capacity:</b> The {trim?.year} {trim?.brand}{" "}
-                {trim?.model} {trim?.name} has seating for up to{" "}
+                <b>{t.SeatingCapacity}:</b> {t.the} {trim?.year} {trim?.brand}{" "}
+                {trim?.model} {trim?.name} {t.seatingForUpTo}{" "}
                 {trim?.seatingCapacity && trim?.seatingCapacity?.split(" ")[0]}{" "}
-                passengers. <br />
-                <b>Upholstery:</b> The interior is finished in{" "}
-                {trim?.haveLeatherInterior ? "leather." : ""}{" "}
-                {trim?.haveFabricInterior ? "fabric." : ""}
+                {t.passengers}. <br />
+                <b>{t.upHolstery}:</b> {t.theInteriorIsFinished}{" "}
+                {trim?.haveLeatherInterior ? t.leather : ""}{" "}
+                {trim?.haveFabricInterior ? t.fabric : ""}
                 <>
                   {features.length > 0 && (
                     <>
                       <br />
-                      <b>Connectivity:</b> Compatibility for{" "}
+                      <b>{t.connectivity}:</b> {t.compatibilityFor}{" "}
                       {features.map((feature, index) => (
                         <b key={feature}>
                           {index > 0 && index < features.length - 1 ? ", " : ""}
@@ -156,15 +158,14 @@ export default function VehicleReview({ trim }) {
                           {feature}
                         </b>
                       ))}{" "}
-                      is provided.
+                      {t.isProvided}
                     </>
                   )}
                 </>
                 <br />
                 {trim?.haveRearSeatEntertainment ? (
                   <>
-                    <b>Entertainment:</b> Enjoy the convenience of rear seat
-                    entertainment.
+                    <b>{t.entertainment}:</b> {t.enjoyTheConvenienceOfRearSeatEntertainment}
                     <br />
                   </>
                 ) : (
@@ -172,8 +173,8 @@ export default function VehicleReview({ trim }) {
                 )}
                 {trim?.haveCooledSeats || trim?.haveClimateControl ? (
                   <>
-                    <b>Comfort:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
-                    {trim?.name} offers comfort features such as
+                    <b>{t.comfort}:</b> {t.the} {trim?.year} {trim?.brand} {trim?.model}{" "}
+                    {trim?.name} {t.offersComfortFeaturesSuch}
                     {trim?.haveCooledSeats ? " ventilated seats " : ""}
                     {trim?.haveCooledSeats && trim?.haveClimateControl
                       ? " and"

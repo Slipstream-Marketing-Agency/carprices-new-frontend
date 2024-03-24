@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import useTranslate from "@/src/utils/useTranslate";
 
 export default function OldModel({ model }) {
   const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";  
 
   const allYearMainTrims = model?.trims;
   // const currentYear = 2023
@@ -97,9 +100,16 @@ export default function OldModel({ model }) {
         <div className="my-3">
           <div className="white_bg_wrapper position-relative">
      
-            <h2 className={`w-100 fw-bold`}>
-              Looking for an older {model?.brand?.name} {model?.name}?
-            </h2>
+            {isRtl ?<h2 className={`w-100 fw-bold`}>
+  {model?.brand?.name} {model?.name}  القديمة هل تبحث عن ؟
+</h2>
+:
+<h2 className={`w-100 fw-bold`}>
+  Looking for an older {model?.brand?.name} {model?.name}?
+</h2>
+
+}
+
             <hr className="my-2 heading-bottom " />
 
             <div className="tab-content mb-2">{tabs}</div>

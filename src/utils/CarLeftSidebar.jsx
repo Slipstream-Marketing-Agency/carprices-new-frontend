@@ -32,6 +32,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import useTranslate from "./useTranslate";
 
 function CarLeftSidebar({
   brandoptions,
@@ -46,6 +47,9 @@ function CarLeftSidebar({
   displaynone,
 }) {
   const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
+
 
   const [isSticky, setIsSticky] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -925,7 +929,7 @@ function CarLeftSidebar({
                               handleModalPriceChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text ">{option.priceLabel}</span>
                         </label>
                       </li>
@@ -946,7 +950,7 @@ function CarLeftSidebar({
                   <div className="border-bottom me-2 sticky p-1 ">
                     <input
                       type="text"
-                      placeholder="Search Brand"
+                      placeholder={t.searchBrand}
                       value={searchText}
                       className="fs-7"
                       onChange={handleSearchChange}
@@ -961,7 +965,7 @@ function CarLeftSidebar({
                             checked={tempSelectedBrands.includes(item.value)}
                             onChange={() => handleModalBrandChange(item.value)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{item.label}</span>
                         </label>
                       </li>
@@ -1026,7 +1030,7 @@ function CarLeftSidebar({
                               handleModalPowerChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option.powerLabel}</span>
                         </label>
                       </li>
@@ -1058,7 +1062,7 @@ function CarLeftSidebar({
                               handleModalDisplacementChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">
                             {option.displacementLabel}
                           </span>
@@ -1088,7 +1092,7 @@ function CarLeftSidebar({
                             checked={tempSelectedFuelType.includes(option)}
                             onChange={() => handleModalFuelTypeChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1116,8 +1120,8 @@ function CarLeftSidebar({
                             checked={tempSelectedCylinders.includes(option)}
                             onChange={() => handleModalCylinderChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
-                          <span className="text">{option} Cylinder</span>
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
+                          <span className="text">{option} {t.cylinder}</span>
                         </label>
                       </li>
                     ))}
@@ -1146,7 +1150,7 @@ function CarLeftSidebar({
                               handleModalTransmissionChange(option)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1174,7 +1178,7 @@ function CarLeftSidebar({
                             checked={tempSelectedDrive.includes(option)}
                             onChange={() => handleModalDriveChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1198,7 +1202,7 @@ function CarLeftSidebar({
                   }`}
                 >
                   <ul className="pb-4 px-2">
-                    <h3 className="fw-bold mb-3">Price</h3>
+                    <h3 className="fw-bold mb-3">{t.price}</h3>
                     {filteredPriceOptions.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss ">
@@ -1209,7 +1213,7 @@ function CarLeftSidebar({
                               handleModalPriceChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text ">{option.priceLabel}</span>
                         </label>
                       </li>
@@ -1225,14 +1229,14 @@ function CarLeftSidebar({
                   <div className="border-bottom me-2 sticky p-1 ">
                     <input
                       type="text"
-                      placeholder="Search Brand"
+                      placeholder={t.searchBrand}
                       value={searchText}
                       className="fs-7"
                       onChange={handleSearchChange}
                     />
                   </div>
                   <ul className="py-4 px-2">
-                    <h3 className="fw-bold mb-3">Brands</h3>
+                    <h3 className="fw-bold mb-3">{t.brands}</h3>
                     {filteredAndSortedBrandOptions.map((item, idx) => (
                       <li key={idx}>
                         <label className="containerss">
@@ -1241,7 +1245,7 @@ function CarLeftSidebar({
                             checked={tempSelectedBrands.includes(item.value)}
                             onChange={() => handleModalBrandChange(item.value)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{item.label}</span>
                         </label>
                       </li>
@@ -1254,7 +1258,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className="show">
                   <div className="row g-xl-2 gy-2 ">
-                    <h3 className="fw-bold mb-3">Body Types</h3>
+                    <h3 className="fw-bold mb-3">{t.bodyType}</h3>
                     {bodyoptions.map((item, idx) => (
                       <div className="col-xl-4 col-4">
                         <button
@@ -1283,7 +1287,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="py-4 px-2 ">
-                    <h3 className="fw-bold mb-3">Power</h3>
+                    <h3 className="fw-bold mb-3">{t.power}</h3>
                     {filterPower.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
@@ -1294,7 +1298,7 @@ function CarLeftSidebar({
                               handleModalPowerChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option.powerLabel}</span>
                         </label>
                       </li>
@@ -1307,7 +1311,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="py-4 px-2 ">
-                    <h3 className="fw-bold mb-3">Displacement</h3>
+                    <h3 className="fw-bold mb-3">{t.displacement}</h3>
                     {filtereDisplacement.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
@@ -1320,7 +1324,7 @@ function CarLeftSidebar({
                               handleModalDisplacementChange(option.value)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">
                             {option.displacementLabel}
                           </span>
@@ -1335,7 +1339,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="py-4 px-2 ">
-                    <h3 className="fw-bold mb-3">Fuel Type</h3>
+                    <h3 className="fw-bold mb-3">{t.fuelType}</h3>
                     {fuelTypeList.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
@@ -1344,7 +1348,7 @@ function CarLeftSidebar({
                             checked={tempSelectedFuelType.includes(option)}
                             onChange={() => handleModalFuelTypeChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1357,7 +1361,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="py-4 px-2 ">
-                    <h3 className="fw-bold mb-3">Cylinders</h3>
+                    <h3 className="fw-bold mb-3">{t.cylinders}</h3>
                     {cylinderList.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
@@ -1366,8 +1370,8 @@ function CarLeftSidebar({
                             checked={tempSelectedCylinders.includes(option)}
                             onChange={() => handleModalCylinderChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
-                          <span className="text">{option} Cylinder</span>
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
+                          <span className="text">{option} {t.cylinder}</span>
                         </label>
                       </li>
                     ))}
@@ -1379,7 +1383,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="py-4 px-2 ">
-                    <h3 className="fw-bold mb-3">Tansmissions</h3>
+                    <h3 className="fw-bold mb-3">{t.transmissions}</h3>
                     {transmissionList.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
@@ -1390,7 +1394,7 @@ function CarLeftSidebar({
                               handleModalTransmissionChange(option)
                             }
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1412,7 +1416,7 @@ function CarLeftSidebar({
                             checked={tempSelectedDrive.includes(option)}
                             onChange={() => handleModalDriveChange(option)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option}</span>
                         </label>
                       </li>
@@ -1425,7 +1429,7 @@ function CarLeftSidebar({
         );
       // Add cases for other types as needed
       default:
-        return <div>Unsupported filter type</div>;
+        return <div>{t.unsupportedFilterType}</div>;
     }
   };
 
@@ -1520,7 +1524,8 @@ function CarLeftSidebar({
                           handleToggleModal(filter.id); // Close the modal
                         }}
                       >
-                        Apply Filter
+                                             {t.applyFilter}
+
                       </Button>
                     ) : (
                       <Button
@@ -1539,7 +1544,7 @@ function CarLeftSidebar({
                           handleToggleModal(filter.id); // Close the modal
                         }}
                       >
-                        Apply Filter
+                        {t.applyFilter}
                       </Button>
                     )}
                   </div>
@@ -1601,7 +1606,7 @@ function CarLeftSidebar({
                   className="product-widget-title mb-20 cursor_pointer"
                   onClick={togglePriceDropdown}
                 >
-                  Price
+                  {t.price}
                   <span
                     className={`dropdown-icon ${
                       showPriceDropdown ? "open" : ""
@@ -1624,7 +1629,7 @@ function CarLeftSidebar({
                             checked={selectedPrice.includes(option.value)}
                             onChange={() => handlePriceChange(option.value)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{option.priceLabel}</span>
                         </label>
                       </li>
@@ -1642,7 +1647,7 @@ function CarLeftSidebar({
                   className="product-widget-title mb-20 cursor_pointer"
                   onClick={toggleBrandDropdown}
                 >
-                  Select Brand
+                  {t.selectBrand}
                   {/* Add an icon for dropdown indicator */}
                   <span
                     className={`dropdown-icon ${
@@ -1660,7 +1665,7 @@ function CarLeftSidebar({
                   <div className="form-inner">
                     <input
                       type="text"
-                      placeholder="Search Brand"
+                      placeholder={t.searchBrand}
                       value={searchText}
                       onChange={handleSearchChange}
                     />
@@ -1674,7 +1679,7 @@ function CarLeftSidebar({
                             checked={selectedBrands.includes(item.value)}
                             onChange={() => handleBrandChange(item.value)}
                           />
-                          <span className="checkmark checkmarkRight0" />
+                          <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                           <span className="text">{item.label}</span>
                         </label>
                       </li>
@@ -1692,7 +1697,7 @@ function CarLeftSidebar({
                   className="product-widget-title mb-20 cursor-pointer"
                   onClick={toggleBodyDropdown}
                 >
-                  Body Type
+                  {t.bodyType}
                 </h3>
                 <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                   <div className="row g-xl-2 gy-2 ">
@@ -1729,7 +1734,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={togglePowerDropdown}
               >
-                Power
+                {t.power}
                 <span
                   className={`dropdown-icon ${showPowerDropdown ? "open" : ""}`}
                 >
@@ -1750,7 +1755,7 @@ function CarLeftSidebar({
                           checked={selectedPower.includes(option.value)}
                           onChange={() => handlePowerChange(option.value)}
                         />
-                        <span className="checkmark checkmarkRight0" />
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                         <span className="text">{option.powerLabel}</span>
                       </label>
                     </li>
@@ -1768,7 +1773,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleDisplacementDropdown}
               >
-                Displacement
+                {t.displacement}
                 <span
                   className={`dropdown-icon ${
                     showDisplacementDropdown ? "open" : ""
@@ -1793,7 +1798,7 @@ function CarLeftSidebar({
                             handleDisplacementChange(option.value)
                           }
                         />
-                        <span className="checkmark checkmarkRight0" />
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`} />
                         <span className="text">{option.displacementLabel}</span>
                       </label>
                     </li>
@@ -1809,7 +1814,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleFuelTypeDropdown}
               >
-                Fuel Type
+                {t.fuelType}
                 <span
                   className={`dropdown-icon ${
                     showFuelTypeDropdown ? "open" : ""
@@ -1832,7 +1837,7 @@ function CarLeftSidebar({
                           checked={selectedFuelType.includes(option)}
                           onChange={() => handleFuelTypeChange(option)}
                         />
-                        <span className="checkmark checkmarkRight0" />
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                         <span className="text">{option}</span>
                       </label>
                     </li>
@@ -1848,7 +1853,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleCylindersDropdown}
               >
-                Cylinders
+                {t.cylinder}
                 <span
                   className={`dropdown-icon ${
                     showCylindersDropdown ? "open" : ""
@@ -1871,8 +1876,8 @@ function CarLeftSidebar({
                           checked={selectedCylinders.includes(option)}
                           onChange={() => handleCylindersChange(option)}
                         />
-                        <span className="checkmark checkmarkRight0" />
-                        <span className="text">{option} Cylinder</span>
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
+                        <span className="text">{option} {t.cylinder}</span>
                       </label>
                     </li>
                   ))}
@@ -1887,7 +1892,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleTransmissionsDropdown}
               >
-                Transmissions
+                {t.transmission}
                 <span
                   className={`dropdown-icon ${
                     showTransmissionsDropdown ? "open" : ""
@@ -1910,7 +1915,7 @@ function CarLeftSidebar({
                           checked={selectedTransmission.includes(option)}
                           onChange={() => handletranmissionChange(option)}
                         />
-                        <span className="checkmark checkmarkRight0" />
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                         <span className="text">{option}</span>
                       </label>
                     </li>
@@ -1926,7 +1931,7 @@ function CarLeftSidebar({
                 className="product-widget-title mb-20 cursor_pointer"
                 onClick={toggleDriveDropdown}
               >
-                Drive
+                {t.drive}
                 <span
                   className={`dropdown-icon ${showDriveDropdown ? "open" : ""}`}
                 >
@@ -1947,7 +1952,7 @@ function CarLeftSidebar({
                           checked={selectedDrive.includes(option)}
                           onChange={() => handleDriveChange(option)}
                         />
-                        <span className="checkmark checkmarkRight0" />
+                        <span className={`checkmark checkmarkRight0 ${isRtl ? 'checkMarkOnArabic' : '' }`}  />
                         <span className="text">{option}</span>
                       </label>
                     </li>

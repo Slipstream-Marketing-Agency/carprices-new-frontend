@@ -13,7 +13,13 @@ import axios from "axios";
 import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
+import useTranslate from "@/src/utils/useTranslate";
 function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";  
+
+
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -30,7 +36,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const router = useRouter();
+
   const { slug } = router.query;
   const cars = slug?.split("-vs-");
   const canAddMoreCars = cars && cars.length < 4;
@@ -158,8 +164,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
 
       <div className="compare-page pt-30 mb-100">
         <div className="container">
-          <h2>Compare Cars</h2>
-          <p>Simplifying Your Decision-Making Process. Compare Your Ideal Cars with Our Comprehensive Tool – Price, Features, Specifications, Fuel Efficiency, Performance, Dimensions, Safety, and More for an Informed Purchase!</p>
+          <h2>{t.comparecars}</h2>
+          <p>{t.compareCaption}</p>
           <div className="row g-4 mb-50">
             <div className="col-lg-12">
               <div className="uploded-product-group">

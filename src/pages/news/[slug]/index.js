@@ -409,7 +409,7 @@ function BlogDetailsPage({
               <div className="blog-sidebar mb-3">
                 <div className="white_bg_wrapper  px-1 py-3">
                   <h4 className="fw-bold px-2">
-                    Latest News <hr className="my-2 " />
+                    {t.latestNews} <hr className="my-2 " />
                   </h4>
 
                   <div>
@@ -438,7 +438,7 @@ function BlogDetailsPage({
                 {detailData?.article_categories?.data.length > 0 && (
                   <div className="white_bg_wrapper mt-3 px-1 py-3">
                     <h4 className="px-2">
-                      Related News <hr className="my-2" />
+                      {t.relatedNews}<hr className="my-2" />
                     </h4>
                     <div>
                       <BlogRelated
@@ -460,7 +460,7 @@ function BlogDetailsPage({
               </div>
               {articlesThisWeek?.length > 0 && (
                 <div className="white_bg_wrapper my-3">
-                  <h4 className="fw-bold">FROM LAST TWO WEEK</h4>
+                  <h4 className="fw-bold">{t.fromLastTwoWeek}</h4>
                   <div className="cursorPointer">
                     {articlesThisWeek?.map((blog) => (
                       <Link
@@ -510,7 +510,7 @@ function BlogDetailsPage({
       <Ad728x90 dataAdSlot="5962627056" />
       <div className="container">
         <div className="row g-2 mt-3 white_bg_wrapper ">
-          <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
+          <h4 className="fw-bold mt-2 box_header mb-3">{t.popularNews}</h4>
 
           {popularArticles?.map((newsItem, index) => {
             // Adjust index to account for the first item displayed separately

@@ -1,8 +1,11 @@
+import useTranslate from "@/src/utils/useTranslate";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function KeySpec({ trim }) {
-  
+  const router = useRouter();
+  const t = useTranslate();
   const engineText = trim?.engine.split(" ");
   const size = engineText[0];
   const type = engineText[1];
@@ -11,7 +14,7 @@ export default function KeySpec({ trim }) {
     <div id="keyspec" className="my-3">
       <div className="white_bg_wrapper">
         <h2 className={`w-100 fw-bold`}>
-          Key Specs of the {trim?.year} {trim?.brand} {trim?.model} {trim?.name}
+          {t.keySpecsOfThe}{trim?.year} {trim?.brand} {trim?.model} {trim?.name}
         </h2>
         <hr className="my-2 heading-bottom " />
         <div className="row py-2 text-center">
@@ -26,7 +29,7 @@ export default function KeySpec({ trim }) {
                 />
               </div>
               <h6 className="fw-bold mb-1">
-                {size === "Electric" ? "Motor Type" : "Engine Type"}
+                {size === "Electric" ? t.MotorType : t.engineType}
               </h6>
               <small className="">
                 {size === "Electric"
@@ -48,7 +51,7 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Power (hp)</h6>
+                <h6 className="fw-bold mb-1">{t.power} (hp)</h6>
                 <small className="">{trim?.power}</small>
               </div>
             </div>
@@ -64,7 +67,7 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Torque (Nm)</h6>
+                <h6 className="fw-bold mb-1">{t.torque} (Nm)</h6>
                 <small className="">
                   {trim?.torque === "" ? "-" : trim?.torque}
                 </small>
@@ -84,7 +87,7 @@ export default function KeySpec({ trim }) {
                   />
                 </div>
                 <h6 className="fw-bold mb-1">
-                  {size === "Electric" ? "Range" : "Fuel Efficiency"}
+                  {size === "Electric" ? t.range : t.fuelefficiency}
                 </h6>
                 <small className="">
                   {size === "Electric" &&
@@ -106,7 +109,7 @@ export default function KeySpec({ trim }) {
                   alt=""
                 />
               </div>
-              <h6 className="fw-bold mb-1">Transmission</h6>
+              <h6 className="fw-bold mb-1">{t.transmission}</h6>
               <small className="">{trim?.transmission}</small>
             </div>
           </div>
@@ -121,7 +124,7 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Seats</h6>
+                <h6 className="fw-bold mb-1">{t.seats}</h6>
                 <small className=" ">
                   {trim?.seatingCapacity?.replace("Seater", "")}
                 </small>

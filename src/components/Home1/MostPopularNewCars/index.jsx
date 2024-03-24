@@ -1,8 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { useCountdownTimer } from "../../hooks/useCountdownTimer";
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 
 function index({ subTitle, heading, carDetails }) {
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
+
   const endTime = "2023-10-23";
   const { days, hours, minutes, seconds } = useCountdownTimer(endTime);
   return (
@@ -131,7 +137,7 @@ function index({ subTitle, heading, carDetails }) {
                           </div>
 
                           <ul className="features">
-                            <li>EMI Starting From {car.emiStartingFrom}</li>
+                            <li>{t.emistart} {car.emiStartingFrom}</li>
                             <li></li>
                             <li>
                               <svg

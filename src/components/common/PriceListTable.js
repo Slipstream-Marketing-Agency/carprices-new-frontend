@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Price from "@/src/utils/Price";
+import { useRouter } from "next/router";
+import useTranslate from "@/src/utils/useTranslate";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,6 +25,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 // Update your component to accept the data prop
 export default function PriceListTable({ data, brand }) {
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
+
   return (
     <TableContainer
       component={Paper}
@@ -31,8 +37,8 @@ export default function PriceListTable({ data, brand }) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Model Name</StyledTableCell>
-            <StyledTableCell>Price List</StyledTableCell>
+            <StyledTableCell>{t.modelName}</StyledTableCell>
+            <StyledTableCell>{t.priceList}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

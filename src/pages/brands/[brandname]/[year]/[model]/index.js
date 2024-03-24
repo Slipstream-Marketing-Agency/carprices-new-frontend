@@ -428,7 +428,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                       <path fill="currentColor" d="M6 10.5h12v2H6z" />
                     </svg>
                     <h6 className="p-0 m-0">
-                      Monthly EMI starting from <CarEMIDisplay />
+                      {t.monthlyEmi} <CarEMIDisplay />
                     </h6>
                   </div>
                   <div className="availableVariantsContainer mt-3 d-flex gap-2 align-items-center w-75 border py-1 rounded justify-content-center">
@@ -445,7 +445,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                     </svg>
 
                     <h6 className="p-0 m-0">
-                      Available Variants: {allTrims?.length}
+                      {t.availableVariants} {allTrims?.length}
                     </h6>
                   </div>
 

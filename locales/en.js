@@ -5,6 +5,7 @@ export default{
 
 
     //Home page
+
     SelectAtleastOneSeatingOption:"Select atleast one seating option",
     blog:"News & Reviews",
     popularSearch:"بحث شعبي",
@@ -27,6 +28,12 @@ export default{
      carValuation:"Car valuation",
      insuranceCalculator:"Insurance Calculator",
      popularCarsByBody:"Popular Cars By Body Type",
+     legalBits:"Legal Bits",
+     quickSearch:"Quick Search",
+     comparisons:"Comparisons",
+     top10s:"Top 10s",
+     aboutUs:"About Us ", 
+
 
      uaeFastest:"UAE's Fastest Growing New Car Buyers' Guide.",
     SearchCars:"SEARCH NEW CARS",
@@ -54,6 +61,10 @@ export default{
     defineBudget:"Define Your Budget",
     seats:"Seats",
     previous:"Previous",
+    prev:"Prev",
+    next:"Next",
+  backToHome:"Back to Home",
+
     selectOnePreference:"Select atleast one preference",
     noCarPreference:"no cars available for the selected preferences",
     noCarSelectedSeat:"no cars available for the selected seats",
@@ -104,9 +115,16 @@ export default{
     power:"Power",
     fuelType:"Fuel Type",
     transmission:"Transmission",
+    transmissions:"Transmissions",
+    unsupportedFilterType:"Unsupported filter type",
+    applyFilter:"Apply Filter",
     transmissionType:"Transmission type",
     NoOfCylinders:"No. of Cylinders",
     driveTypes:"Drive Types",
+    cooledSeats:"Cooled Seats",
+   meetThe:"Meet the",
+   pricedAtAED:"Priced at AED",
+
     drive:"drive",
     displacement:"Displacement",
     reset:"Reset",
@@ -119,8 +137,14 @@ export default{
 
 
     // brands page
+    cylinders:"Cylinders",
+cylinder:"Cylinder",
+keyfeaturesInclude:"Key features include",
+safetyComponentsConsistOf:"Safety components consist of",
+ensuringASecureDrivingExperience:"ensuring a secure driving experience",
    keySpecification:"Key Specifications",
-    torque:"Torque",
+   specificationsOf:"Specifications of",
+   torque:"Torque",
     peakTorque:"Peak Torque",
     engine:"Engine",
     range:"Range",
@@ -151,8 +175,9 @@ export default{
     mostExpensive:"Most Expensive",
     mostPowerful:"Most Powerful",
     availableBodyTypes:"Available Body Types",
-
-
+    modelName:"Model Name",
+    priceList:"Price List",
+    availableVariants: "Available Variants :",
     NoOfGears:"No of Gears",
 
     FuelTankSize:" Fuel Tank Size (L)",
@@ -235,13 +260,63 @@ export default{
     toSendMail:"To Send Mail",
     advertiseWithUs:"Advertise With Us",
     ourSitemap:"Our Sitemap",
+
+    iceVsHybrid:"ICE Vs Hybrid ", 
+    iCEVsEV:"ICE Vs EV",
+    popularReliableSedans:"Popular Reliable Sedans",
+    carLaunches:"2024 Car Launches",
+    bestChineseSUVs:"Best Chinese SUVs",
+
+    
+      twenty24ToyotaPradoVsGWMTank500: "2024 Toyota Prado Vs GWM Tank 500",
+      battleOfFourPopularSUVs: "Battle Of 4 Popular SUVs",
+      LCThreeHundredVsTwenty24ToyotaPrado: "LC 300 Vs 2024 Toyota Prado",
+      twenty24LCPradoVsUsedLCPrado: "2024 LC Prado Vs Used LC Prado",
+      twenty24LCPradoVsNissanPatrol: "2024 LC Prado Vs Nissan Patrol",
+
+      
+      
+      
+        carsWithHighGroundClearance10: "10 Cars with High Ground Clearance",
+        tenMostSearchedCars: "10 Most Searched Cars",
+        tenBestChineseBrands: "10 Best Chinese Brands",
+        tenMythsAboutBuyingANewCar: "10 Myths About Buying a New Car",
+        tenFuelEfficientCars: "10 Fuel Efficient Cars",
+        tenBestHybridCars: "10 Best Hybrid Cars",
+      
+      
+        OurSitemap: "Our Sitemap",
+  AdvertiseWithUs: "Advertise With Us",
+  Mail: "Mail",
+  ForEnquiries: "For Enquiries",
+  FollowCarpricesae: "Follow Carprices.ae",
+      
+    
+    
+    
+    
     //search car page
+
      explorepriceHead:"Explore the Price and Specifications of Brand New Cars in the UAE" ,
     exploresubhead:"Stay up-to-date with the latest news and updates on the UAE car industry, including new car launches, launch dates, car images, exposures and events, price updates, latest discounts, facelifts, recalls, and more. Get all the insights you need to know about the happenings in the UAE automotive industry.",
     pricesort:"Sorted By Price : Low to High",
     loadmorebutton:"Load More",
     //News and Reviews Page
+    relatedNews:"Related News",
+fromLastTwoWeek:"FROM LAST TWO WEEK",
+popularNews:"Popular News",
+
+  latestCarReview:"Latest Car review in UAE",
+    latestNews:"Latest News",
+    automotiveNews:"Automotive News",
+    keySpecsOfThe:"Key Specs of the ", 
     carnewshead:"Latest Car News in UAE",
+    latestNewsSub:`Stay up-to-date with the latest news and updates on the UAE car industry, including new car launches, launch dates, car images, expos and events, price updates, latest discounts, facelifts, recalls, and more. Get all the insights you need to know about the happenings in the UAE automotive industry.` ,
+   latestReviewSub:` Stay up-to-date with the latest review and updates on the UAE car
+   industry, including new car launches, launch dates, car images,
+   expos and events, price updates, latest discounts, facelifts,
+   recalls, and more. Get all the insights you need to know about the
+   happenings in the UAE automotive industry.`,
     carnewssub:"Stay up-to-date with the latest news and updates on the UAE car industry, including new car launches, launch dates, car images, expos and events, price updates, latest discounts, facelifts, recalls, and more. Get all the insights you need to know about the happenings in the UAE automotive industry.",
     filternews:"Filter News",
     reviewHead:"Latest Car Reviews in UAE",
@@ -249,7 +324,7 @@ export default{
     allBrands:"All Brands",
     noResultFound:"No result found",
     tags:"Tags",
-    brand:"brand",
+    brand:"Brand",
     searchByBrandOrTags:"Search By Brand or Tags..",
 
     postedOn:"Posted on ",
@@ -259,7 +334,11 @@ export default{
     otherBrands:"Other Brands",
 
     //compare cars page
+    MostAffordable:"Most Affordable",
+    mostExpensive:"Most Expensive",
+    searchBrand:"Search Brand",
     compareCarHead:"Compare",
+    compareCaption:"Simplifying Your Decision-Making Process. Compare Your Ideal Cars with Our Comprehensive Tool – Price, Features, Specifications, Fuel Efficiency, Performance, Dimensions, Safety, and More for an Informed Purchase!",
     specs:"Specs",
     make:"Make",
     model:"Model",
@@ -268,6 +347,7 @@ export default{
     popular:"Popular Comparisons",
     chooseAtleaseOne:"Please select at least two vehicles to compare",
     selectMake:"Select Make",
+    selectBrand:"Select Brand",
     selectModel:"Select Model",
     selectYear:"Select Year",
     alreadySelected:"Already Selected",
@@ -277,8 +357,85 @@ export default{
     no:"No",
     changeCar:"Change Car",
     addToCompare:"Add To Compare",
-
+    selectYourCar:"Select Your Car For Compare",
+  search:"Search",
+  selectBudget:"Select Budget",
+  itComesWith:"It comes with a",
+  theclaimedRangeIs:"The claimed range is",
+  onASingleCharge:"on a single charge",
+  itOffers:"It offers",
     //load calculator page
+    carLoanEMIAndDownpayment:"Car Loan EMI and Downpayment",
+  interestRateAndMonthlyInstallment:" Interest Rate and Monthly Installment",
+
+    selectMakeModelYearVariant:"  Select Make, Model, Year & Variant to check the EMI",
+  loanFaq1:`When it comes to financing your dream car in the UAE,
+  securing a car loan is a common route taken by many
+  residents and expatriates alike. Car ownership is a symbol
+  of status and convenience in the Emirates, and obtaining the
+  right car loan can make it easily attainable. The allure of
+  owning a car in the UAE, with its well-maintained roads and
+  world-class infrastructure, is a dream shared by many
+  residents and expatriates alike. However, the reality is
+  that purchasing a car in the UAE often requires a
+  substantial financial commitment, and that's where a car
+  loan can make all the difference.
+`,
+loanFaq2:`Interest rates play a pivotal role in determining the cost
+                      of your car loan. Typically, car loan interest rates in the
+                      UAE can vary depending on the lender and the prevailing
+                      market conditions. Therefore, it's essential to compare
+                      interest rates across different financial institutions to
+                      secure the most favorable deal. Lower interest rates
+                      translate to reduced monthly installments, which means less
+                      financial strain over the loan tenure. By doing your
+                      research and finding the best interest rate, you can
+                      optimize your car loan for affordability.`,
+loanFaq3:`Loan Installment and Downpayment Variability on Car Finance`,
+loanFaq4:`Car loan providers in the UAE offer various loan tenures and
+down payment options, allowing you to choose the one that
+aligns with your financial goals. Whether you prefer a
+shorter loan tenure with higher EMI instalments or a longer
+tenure with lower monthly payments, the flexibility offered
+by car loan providers ensures you can adapt the loan
+structure to suit your unique financial situation. Moreover,
+the down payment amount can also vary, giving you the
+freedom to decide how much you can contribute upfront.`,
+loanFaq5:`Monthly Budgeting with Car Loans`,
+loanFaq6:`   A significant advantage of opting for a car loan in the UAE
+is the ability to plan your monthly budget effectively. With
+a fixed EMI amount, you can confidently allocate your
+resources and manage your finances without unexpected
+surprises. This predictability allows you to strike a
+balance between fulfilling your car ownership dreams and
+maintaining financial stability.`,
+loanFrequentlyAsked:`FAQs (Frequently Asked Questions) on car loan in UAE`,
+loanMainFaq1:" Can I get a car loan in the UAE if I'm not a UAE national?",
+loanMainFaq1Sub:` Yes, many banks offer car loans to expatriates, but eligibility
+criteria may differ based on your visa type.`,
+loanMainFaq2:"What interest rates can I expect for a car loan in the UAE?",
+loanMainFaq2Sub:`Interest rates vary between banks and can depend on factors like loan
+amount, tenure, and your creditworthiness.
+`,
+loanMainFaq3:"Is it possible to finance a used luxury car with a car loan?",
+loanMainFaq3Sub:` Yes, some banks in the UAE offer financing options for used luxury
+cars.`,
+loanMainFaq4:"Can I apply for a car loan without a UAE residence visa?",
+loanMainFaq4Sub:`It's challenging, but some lenders offer car loans to individuals with
+certain visa types, such as employment or investor visas.
+`,
+loanMainFaq5:"What happens if I miss an EMI payment?",
+loanMainFaq5Sub:`Missing an EMI payment can result in late payment fees and negatively
+impact your credit score. It's essential to make payments on time.
+`,
+loanMainFaq6:"What banks can be loan providers for a Car loan in the UAE?",
+loanMainFaq6Sub:`Emirates NBD, Dubai Islamic Bank, First Abu Dhabi Bank etc. offer a
+wide range of car loan options, including competitive interest rates
+and flexible repayment terms. Their customer-centric approach makes
+them a top choice for many residents.
+`,
+
+
     carLoanHead:"Car Loan EMI calculator in UAE",
     paragraph :"When it comes to financing your dream car in the UAE, securing a car loan is a common route taken by many residents and expatriates alike. Car ownership is a symbol of status and convenience in the Emirates, and obtaining the right car loan can make it easily attainable. The allure of owning a car in the UAE, with its well-maintained roads and world-class infrastructure, is a dream shared by many residents and expatriates alike. However, the reality is that purchasing a car in the UAE often requires a substantial financial commitment, and that's where a car loan can make all the difference.",
     downpayment:"Car Loan EMI and Downpayment",
@@ -323,6 +480,7 @@ export default{
     brakeType:"Brake Type",
     front:"Front",
     rear:"Rear",
+    airbags:"airbags",
     noOfAirBags:"No of Airbags",
     airBagType:"Airbag Type",
     side:"Side",
@@ -334,6 +492,17 @@ export default{
     zeroToHundred:"Zero to Hundred",
     seconds:"seconds",
     doors:"Doors",
+    faqs:"FAQs",
+    drivetrainWithA:"drivetrain with a",
+  isPricedAt:"is priced at",
+  keySafetyComponentsIncludeABS:"Key safety components include ABS",
+  of:"of",
+  mmInLength:"mm in length",
+  mmInWidth:"mm in width",
+  mmInHeight:"mm in height",
+  itMeasures:"it measures",
+  andHas:"and has",
+  lOfCargoSpace:"L of cargo space",
 
     // about us page
     AboutUs:"About Us",
@@ -390,7 +559,30 @@ export default{
     contactUsShortNotes:"Short Notes",
     contactUsAgreeToTermsNConditions:"I Agree to Terms and Conditions:",
     contactUsSubmitNow:"Submit Now",
-
+    itIsEquippedWith:"It is equipped with a",
+    itdelivers:"It delivers",
+    hpOfPowerAnd:"hp of power and",
+    nmOfTorqueItFeatures:"Nm of torque. It features a ",
+    transmissionAndA:"transmission and a",
+    driveSystemForSmoothHandling:"drive system for smooth handling.",
+    the:"The",
+    is:"is",
+    and:"and",
+  mmWheelbase:"mm wheelbase",
+  seatingForUpTo:"Seating for up to",
+  passengers:"passengers",
+  upHolstery:"upHolstery",
+  leather:"leather",
+  fabric:"fabric",
+  topCarBrandsInUAE:"Top Car Brands in UAE",
+  connectivity:"Connectivity",
+  isProvided:"is provided",
+  entertainment:"entertainment",
+  enjoyTheConvenienceOfRearSeatEntertainment:"Enjoy the convenience of rear seat entertainment",
+  comfort:"Comfort",
+  offersComfortFeaturesSuch:"offers comfort features such as",
+  compatibilityFor:"Compatibility for",
+  theInteriorIsFinished:"The interior is finished in", 
     // Privacy page
     privacyPolicy:"Privacy Policy",
     privacySubPara:"In the course of providing you with our services and through your interactions with us, CarPrices may collect information about you and about your use of our services. We are committed to being transparent in our handling of personal information and we endeavour to comply with applicable privacy and data protection laws in the territories within which we operate. This policy describes the types of information we might collect, how we may use it and the circumstances in which we might disclose or transfer it: If you have any questions or comments about this policy or our approach to privacy please contact us at info@carprices.ae. We aim to reply to any queries within three working days.",

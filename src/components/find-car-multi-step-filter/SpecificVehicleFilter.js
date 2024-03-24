@@ -168,7 +168,7 @@ export default function SpecificVehicleFilter({
               value={specificVehicleFilter.make}
               options={brandListOptions}
               onChange={handleMakeChange}
-              placeholder="Select make"
+              placeholder={t.selectMake}
             />
           </div>
 
@@ -195,7 +195,7 @@ export default function SpecificVehicleFilter({
               options={yearListOptions}
               onChange={handleYearChange}
               isDisabled={!specificVehicleFilter.model}
-              placeholder="Select year"
+              placeholder={t.selectYear}
             />
           </div>
         </div>

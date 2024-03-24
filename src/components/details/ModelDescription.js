@@ -101,7 +101,7 @@ export default function ModelDescription({
 
   const outputString = `${safetyFeature}`;
 
-  
+
 
   const variableText = allTrims
     .map((trim, index) => (
@@ -241,15 +241,21 @@ export default function ModelDescription({
           ) : mainTrimFuelType === "Hybrid" ? (
             <>
               {engineTypes?.length > 1 ? (
-                <p>
-                  <b>{t.engine}:</b> It can be equipped with a{" "}
-                  <b>{engineTypes}</b> engine based on the variant.
+                isRtl ? <p>
+                  <b>{t.engine}:</b> يمكن تجهيزه بمحرك <b>{engineTypes}</b> استنادًا إلى الطراز.
                 </p>
+                  : <p>
+                    <b>{t.engine}:</b> It can be equipped with a <b>{engineTypes}</b> engine based on the variant.
+                  </p>
+
               ) : (
-                <p>
-                  <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
-                  engine.
+                isRtl ? <p>
+                  <b>{t.engine}:</b> مجهزة بمحرك <b>{engineTypes}</b>.
                 </p>
+                  : <p>
+                    <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b> engine.
+                  </p>
+
               )}
 
               {motorTypeCount?.length <= 1 || motorTypeCountOr?.length <= 1 ? (
@@ -264,15 +270,22 @@ export default function ModelDescription({
               )}
             </>
           ) : engineTypes?.length > 1 ? (
-            <p>
-              <b>{t.engine}:</b> It can be equipped with a <b>{engineTypes}</b>{" "}
-              engine based on the variant.
+            isRtl ? <p>
+              <b>{t.engine}:</b> يمكن تجهيزه بمحرك <b>{engineTypes}</b> استنادًا إلى الطراز.
             </p>
+              : <p>
+                <b>{t.engine}:</b> It can be equipped with a <b>{engineTypes}</b> engine based on the variant.
+              </p>
+
           ) : (
-            <p>
-              <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
-              engine.
+            isRtl ? <p>
+              <b>{t.engine}:</b> مجهزة بمحرك <b>{engineTypes}</b>.
             </p>
+              :
+              <p>
+                <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b> engine.
+              </p>
+
           )}
 
           {/* Transmission */}
@@ -280,44 +293,65 @@ export default function ModelDescription({
           {mainTrimFuelType === "Electric" || transmissionList === null ? (
             ""
           ) : (
-            <p>
+            isRtl ? <p>
               <b>{t.transmission}: </b>
-              It comes with {getTransmissionType()} gearbox.
+              يأتي مع صندوق تروس {getTransmissionType()}.
             </p>
+              :
+              <p>
+                <b>{t.transmission}: </b>
+                It comes with {getTransmissionType()} gearbox.
+              </p>
+
           )}
 
           {mainTrimFuelType === "Electric" ||
-          (minFuelConsumption === 0 && maxFuelConsumption === 0) ? (
+            (minFuelConsumption === 0 && maxFuelConsumption === 0) ? (
             ""
           ) : minFuelConsumption !== maxFuelConsumption &&
             minFuelConsumption !== "" ? (
-            <p>
-              <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
+            isRtl ? <p>
+              <b>{t.fuelefficiency}: </b> يتمتع بكفاءة وقود مدعومة تقدم
               <b>
-                {minFuelConsumption}kmpl - {maxFuelConsumption}
-                kmpl
+                {minFuelConsumption} كم/لتر - {maxFuelConsumption} كم/لتر
               </b>{" "}
-              depending on the variant.
+              تبعًا للطراز.
             </p>
+              :
+              <p>
+                <b>{t.fuelefficiency}: </b> It has a claimed fuel economy of{" "}
+                <b>
+                  {minFuelConsumption} kmpl - {maxFuelConsumption} kmpl
+                </b>{" "}
+                depending on the variant.
+              </p>
+
           ) : (
-            <p>
-              <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
-              <b>
-                {minFuelConsumption !== ""
-                  ? minFuelConsumption
-                  : maxFuelConsumption}
-                kmpl
-              </b>
-              .
-            </p>
+            isRtl ? <p>
+            <b>{t.fuelefficiency}: </b> يتمتع بكفاءة وقود مدعومة تقدم
+            <b>
+              {minFuelConsumption !== "" ? minFuelConsumption : maxFuelConsumption} كم/لتر
+            </b>
+            .
+          </p>
+          
+              :
+              <p>
+                <b>{t.fuelefficiency}: </b> It has a claimed fuel economy of{" "}
+                <b>
+                  {minFuelConsumption !== "" ? minFuelConsumption : maxFuelConsumption} kmpl
+                </b>
+                .
+              </p>
+
           )}
 
           {/* Range */}
 
           {mainTrimFuelType === "Electric" ||
-          (mainTrimFuelType === "Hybrid" &&
-            minRange !== "" &&
-            minRange !== null) ? (
+            (mainTrimFuelType === "Hybrid" &&
+              minRange !== "" &&
+              minRange !== null) ? (
             minRange === maxRange ? (
               <p>
                 <b>{t.range}: </b>The claimed range is <b>{minRange}km</b> on a
@@ -335,7 +369,7 @@ export default function ModelDescription({
           ) : null}
 
           {mainTrimFuelType === "Electric" ||
-          (mainTrimFuelType === "Hybrid" && batteryCapacity !== "") ? (
+            (mainTrimFuelType === "Hybrid" && batteryCapacity !== "") ? (
             allTrims.length <= 1 ? (
               <p>
                 <b>{t.batteryCapacity}: </b>It comes with a{" "}
@@ -352,23 +386,44 @@ export default function ModelDescription({
           )}
 
           {features.length > 0 && (
+           isRtl ? <p>
+           <b>{t.features}:</b> تتضمن الميزات الرئيسية
+           {features.map((feature, index) => (
+             <b key={feature}>
+               {index > 0 && index < features.length - 1 ? "، " : ""}
+               {index > 0 && index === features.length - 1 ? " و" : ""}
+               {feature}
+             </b>
+           ))}
+           .
+         </p>
+
+            :
             <p>
-              <b>{t.features}:</b> Key features include{" "}
-              {features.map((feature, index) => (
-                <b key={feature}>
-                  {index > 0 && index < features.length - 1 ? ", " : ""}
-                  {index > 0 && index === features.length - 1 ? " and " : ""}
-                  {feature}
-                </b>
-              ))}
-              .
-            </p>
+  <b>{t.features}:</b> Key features include &nbsp;
+  {features.map((feature, index) => (
+    <b key={feature}>
+      {index > 0 && index < features.length - 1 ? ", " : ""}
+      {index > 0 && index === features.length - 1 ? " and " : ""}
+      {feature}
+    </b>
+  ))}
+  .
+</p>
+
           )}
 
-          <p>
-            <b>{t.safety}:</b> Safety components consist of{" "}
-            <b>{outputString}</b> ensuring a secure driving experience.
-          </p>
+      {isRtl ? <p>
+  <b>{t.safety}:</b> تتألف مكونات السلامة من
+  <b>{outputString}</b> مما يضمن تجربة قيادة آمنة.
+</p>
+ :
+ <p>
+  <b>{t.safety}:</b> Safety components consist of &nbsp;
+  <b>{outputString}</b> ensuring a secure driving experience.
+</p>
+
+ }
           {/* {mainTrim?.cargoSpace === "" ? null : (
             <p>
               <b>Boot Space: </b>

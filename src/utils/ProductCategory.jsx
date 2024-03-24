@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useMemo, useRef } from "react";
 import SwiperCore, {
   Autoplay,
@@ -7,8 +8,12 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import useTranslate from "./useTranslate";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 function ProductCategory({ brands }) {
+  const router  = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
   const ref = useRef();
   const slideSetting = useMemo(() => {
     return {
@@ -49,7 +54,7 @@ function ProductCategory({ brands }) {
     <div className="product-category-page mb-100 mt-15 ">
       <div className="container">
         <div className="page-title">
-          <h1 className="my-4">Top Car Brands in UAE</h1>
+          <h1 className="my-4">{t.topCarBrandsInUAE}</h1>
         </div>
         <div className="row g-4 mb-40">
           <div className="col-lg-12">

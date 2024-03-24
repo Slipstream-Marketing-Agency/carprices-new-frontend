@@ -11,6 +11,8 @@ import StarRating from "@/src/components/common/StarRating";
 import Image from "next/image";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import axios from "axios";
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 function loanCalculator() {
   // const [loanFilter, setLoanFilter] = useState({
   //   make: null,
@@ -19,6 +21,9 @@ function loanCalculator() {
   //   trim: null,
   //   image: null,
   // });
+  const router = useRouter();
+  const t = useTranslate();
+  let isRtl = router.locale === "ar";
 
   const [showCarAnimImage, setShowCarAnimImage] = useState(false);
   const [loanFilter, setLoanFilter] = useState({
@@ -305,11 +310,12 @@ function loanCalculator() {
 
   const faq = [
     {
-      question: <>Can I get a car loan in the UAE if I'm not a UAE national?</>,
+      question: <>        {t.loanMainFaq1}
+   </>,
       answer: (
-        <>
-          Yes, many banks offer car loans to expatriates, but eligibility
-          criteria may differ based on your visa type.
+        <>     
+        {t.loanMainFaq1Sub}
+
         </>
       ),
       id: 1,
@@ -317,47 +323,51 @@ function loanCalculator() {
     },
     {
       question: (
-        <>What interest rates can I expect for a car loan in the UAE?</>
+        <>        {t.loanMainFaq2}
+        </>
       ),
       answer: (
         <>
-          Interest rates vary between banks and can depend on factors like loan
-          amount, tenure, and your creditworthiness.
-        </>
+               
+        {t.loanMainFaq2Sub}</>
       ),
       id: 2,
       condition: true,
     },
     {
       question: (
-        <> Is it possible to finance a used luxury car with a car loan?</>
+        <>         {t.loanMainFaq3}
+       </>
       ),
       answer: (
         <>
-          Yes, some banks in the UAE offer financing options for used luxury
-          cars.
+            
+        {t.loanMainFaq3Sub}
         </>
       ),
       id: 3,
       condition: true,
     },
     {
-      question: <>Can I apply for a car loan without a UAE residence visa?</>,
+      question: <>
+              {t.loanMainFaq4}
+      </>,
       answer: (
         <>
-          It's challenging, but some lenders offer car loans to individuals with
-          certain visa types, such as employment or investor visas.
+             
+        {t.loanMainFaq4Sub}
         </>
       ),
       id: 4,
       condition: true,
     },
     {
-      question: <>What happens if I miss an EMI payment?</>,
+      question: <> {t.loanMainFaq5}
+ </>,
       answer: (
         <>
-          Missing an EMI payment can result in late payment fees and negatively
-          impact your credit score. It's essential to make payments on time.
+
+        {t.loanMainFaq5Sub}
         </>
       ),
       id: 5,
@@ -365,14 +375,12 @@ function loanCalculator() {
     },
     {
       question: (
-        <>What banks can be loan providers for a Car loan in the UAE?</>
+        <>{t.loanMainFaq6}</>
+
       ),
       answer: (
         <>
-          Emirates NBD, Dubai Islamic Bank, First Abu Dhabi Bank etc. offer a
-          wide range of car loan options, including competitive interest rates
-          and flexible repayment terms. Their customer-centric approach makes
-          them a top choice for many residents.
+          {t.loanMainFaq6Sub}
         </>
       ),
       id: 6,
@@ -395,9 +403,9 @@ function loanCalculator() {
       <Ad728x90 dataAdSlot="5962627056" />
 
       <div className="container mt-5">
-        <h1 className="fw-bold mb-3">Car Loan EMI calculator in UAE</h1>
+        <h1 className="fw-bold mb-3">{t.carLoanHead}</h1>
         <h4 className="mb-4">
-          Select Make, Model, Year & Variant to check the EMI
+          {t.selectMakeModelYearVariant}
         </h4>
         <div className="row gx-3">
           <div className="col-md-3 mb-3">
@@ -407,7 +415,7 @@ function loanCalculator() {
               value={loanFilter.make}
               options={brandsList} // Use the state that contains the fetched brands
               onChange={handleMakeChange}
-              placeholder="Select make"
+              placeholder={t.selectMake}
               styles={customStyles}
             />
           </div>
@@ -419,7 +427,7 @@ function loanCalculator() {
               options={modelsList}
               onChange={handleModelChange}
               isDisabled={!loanFilter.make}
-              placeholder="Select model"
+              placeholder={t.selectModel}
               styles={customStyles}
             />
           </div>
@@ -431,7 +439,7 @@ function loanCalculator() {
               options={yearList}
               onChange={handleYearChange}
               isDisabled={!loanFilter.model}
-              placeholder="Select year"
+              placeholder={t.selectYear}
               styles={customStyles}
             />
           </div>
@@ -443,7 +451,7 @@ function loanCalculator() {
               options={trimList}
               onChange={handleTrimChange}
               isDisabled={!loanFilter.year}
-              placeholder="Select trim"
+              placeholder={t.selectTrim}
               styles={customStyles}
             />
           </div>
@@ -456,7 +464,7 @@ function loanCalculator() {
               <div className="leftSection">
                 <div>
                   <div className="monthlyIncomeContainer">
-                    <label className="monthlyIncomeTxt">Down Payment </label>
+                    <label className="monthlyIncomeTxt">{t.downpayment}</label>
                     <div className="amountContainer">
                       <input
                         type="number"
@@ -490,7 +498,7 @@ function loanCalculator() {
                 </div>
                 <div className="mt-2">
                   <div className="monthlyIncomeContainer">
-                    <label className="monthlyIncomeTxt">Interest Rate</label>
+                    <label className="monthlyIncomeTxt">{t.interestRate}</label>
                     <div className="amountContainer">
                       <input
                         type="number"
@@ -525,7 +533,7 @@ function loanCalculator() {
                   </div>
                 </div>
                 <div className="mt-2">
-                  <h3 className="mt-3 monthlyIncomeTxt">Loan Period* (year)</h3>
+                  <h3 className="mt-3 monthlyIncomeTxt">{t.loanPeriod}* ({t.year})</h3>
                   <div className="d-flex my-2 mt-3">
                     <div
                       className={
@@ -606,7 +614,7 @@ function loanCalculator() {
                     onClick={handleSubmit}
                     disabled={loanAmount === 0 ? true : false}
                   >
-                    Calculate
+                    {t.calculate}
                   </button>
                 </div>
               </div>
@@ -621,7 +629,7 @@ function loanCalculator() {
                       </div>
                       <div class="media-body text-right ms-4">
                         <h6 className="fw-bold">
-                          Monthly Payment <small>(AED)</small>
+                          {t.monthlyPayment} <small>(AED)</small>
                         </h6>
                         <h3 className="fw-bold">
                           <Price data={monthlyInstallment} />
@@ -636,7 +644,7 @@ function loanCalculator() {
                       </div>
                       <div class="media-body text-right ms-4">
                         <h6 className="fw-bold">
-                          Total Interest Payment <small>(AED)</small>
+                          {t.totalInterestPayment} <small>(AED)</small>
                         </h6>
                         <h3 className="fw-bold">
                           <Price data={totalInterest} />
@@ -651,7 +659,7 @@ function loanCalculator() {
                       </div>
                       <div class="media-body text-right ms-4">
                         <h6 className="fw-bold">
-                          Total Amount to Pay <small>(AED)</small>
+                          {t.totalAmountToPay} <small>(AED)</small>
                         </h6>
                         <h3 className="fw-bold">
                           <Price data={totalAmount} />
@@ -678,65 +686,29 @@ function loanCalculator() {
               <div className="faq-area">
                 <div>
                   <p className="mt-4">
-                    When it comes to financing your dream car in the UAE,
-                    securing a car loan is a common route taken by many
-                    residents and expatriates alike. Car ownership is a symbol
-                    of status and convenience in the Emirates, and obtaining the
-                    right car loan can make it easily attainable. The allure of
-                    owning a car in the UAE, with its well-maintained roads and
-                    world-class infrastructure, is a dream shared by many
-                    residents and expatriates alike. However, the reality is
-                    that purchasing a car in the UAE often requires a
-                    substantial financial commitment, and that's where a car
-                    loan can make all the difference.
-                  </p>
-                  <h2 className="mt-4 fw-bold">Car Loan EMI and Downpayment</h2>
+                    {t.loanFaq1}</p>
+                  <h2 className="mt-4 fw-bold">{t.carLoanEMIAndDownpayment}</h2>
                   <h4 className="mt-4 fw-bold">
-                    Interest Rate and Monthly Installment
+                    {t.interestRateAndMonthlyInstallment}
                   </h4>
                   <p className="mt-2">
-                    Interest rates play a pivotal role in determining the cost
-                    of your car loan. Typically, car loan interest rates in the
-                    UAE can vary depending on the lender and the prevailing
-                    market conditions. Therefore, it's essential to compare
-                    interest rates across different financial institutions to
-                    secure the most favorable deal. Lower interest rates
-                    translate to reduced monthly installments, which means less
-                    financial strain over the loan tenure. By doing your
-                    research and finding the best interest rate, you can
-                    optimize your car loan for affordability.
-                  </p>
+                    {t.loanFaq2}</p>
                   <h4 className="mt-4 fw-bold">
-                    Loan Installment and Downpayment Variability on Car Finance
+                    {t.loanFaq3}
                   </h4>
                   <p className="mt-2">
-                    Car loan providers in the UAE offer various loan tenures and
-                    down payment options, allowing you to choose the one that
-                    aligns with your financial goals. Whether you prefer a
-                    shorter loan tenure with higher EMI instalments or a longer
-                    tenure with lower monthly payments, the flexibility offered
-                    by car loan providers ensures you can adapt the loan
-                    structure to suit your unique financial situation. Moreover,
-                    the down payment amount can also vary, giving you the
-                    freedom to decide how much you can contribute upfront.
-                  </p>
+                    {t.loanFaq4}</p>
                   <h4 className="mt-4 fw-bold">
-                    Monthly Budgeting with Car Loans
+                    {t.loanFaq5}
                   </h4>
                   <p className="mt-2">
-                    A significant advantage of opting for a car loan in the UAE
-                    is the ability to plan your monthly budget effectively. With
-                    a fixed EMI amount, you can confidently allocate your
-                    resources and manage your finances without unexpected
-                    surprises. This predictability allows you to strike a
-                    balance between fulfilling your car ownership dreams and
-                    maintaining financial stability.
+                  {t.loanFaq6}
                   </p>
                 </div>
                 <div className="section-title-and-filter mt-4">
                   <div className="section-title">
                     <h2 className="fw-bold mb-4">
-                      FAQs (Frequently Asked Questions) on car loan in UAE
+                      {t.loanFrequentlyAsked}
                     </h2>
                   </div>
                 </div>

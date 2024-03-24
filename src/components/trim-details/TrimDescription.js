@@ -1,9 +1,14 @@
 import React from "react";
 import { useContext } from "react";
 import Price from "../common/Price";
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 
 export default function TrimDescription({ trim }) {
   // const availableTrim = trim?.trims?.filter((item) => item.year === 2023);
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
   const engineText =
     (trim?.displacement / 1000).toFixed(1) + "L " + trim?.engine;
 
@@ -82,49 +87,49 @@ export default function TrimDescription({ trim }) {
           <>
             {trim?.fuelType === "Electric" ? (
               <p>
-                <b>Motor:</b> It comes with a <b>{trim?.motor}</b>.
+                <b>{t.motor}</b> {t.itComesWith} <b>{trim?.motor}</b>.
               </p>
             ) : trim?.fuelType === "Hybrid" ? (
               <p>
-                <b>Engine:</b> It is equipped with a <b>{engineText}</b> engine.
+                <b>{t.engine}</b> {t.itIsEquippedWith} <b>{engineText}</b> {t.engine}.
               </p>
             ) : (
               <p>
-                <b>Engine:</b> It is equipped with a <b>{engineText}</b> engine.
+                <b>{t.engine}</b> {t.itIsEquippedWith} <b>{engineText}</b> {t.engine}.
               </p>
             )}
           </>
 
+
           {trim?.fuelType === "Electric" ||
-          trim?.gearBox === "" ||
-          trim?.gearBox === null ? (
+            trim?.gearBox === "" ||
+            trim?.gearBox === null ? (
             ""
           ) : (
             <p>
-              <b>Transmission: </b>
-              It comes with a <b>{TransmissionList(trim?.gearBox)}</b> gearbox.
+              <b>{t.transmission}: </b>
+              {t.itComesWith}<b>{TransmissionList(trim?.gearBox)}</b> gearbox.
             </p>
           )}
 
           {trim?.fuelType === "Electric" ||
-          (trim?.fuelType === "Hybrid" &&
-            trim?.range !== "" &&
-            trim?.range !== 0) ? (
+            (trim?.fuelType === "Hybrid" &&
+              trim?.range !== "" &&
+              trim?.range !== 0) ? (
             <p>
-              <b>Range: </b>The claimed range is <b>{trim?.range}</b> on a
-              single charge.
+              <b>{t.range}: </b>{t.theclaimedRangeIs} <b>{trim?.range}</b> {t.onASingleCharge}
             </p>
           ) : (
             ""
           )}
 
           {trim?.fuelType === "Electric" ||
-          (trim?.fuelType === "Hybrid" &&
-            trim?.batteryCapacity !== "" &&
-            trim?.batteryCapacity !== null) ? (
+            (trim?.fuelType === "Hybrid" &&
+              trim?.batteryCapacity !== "" &&
+              trim?.batteryCapacity !== null) ? (
             <p>
-              <b>Battery Capacity: </b>It comes with a{" "}
-              <b>{trim?.batteryCapacity}</b> battery.
+              <b>{t.batteryCapacity}: </b>{t.itComesWith}{" "}
+              <b>{trim?.batteryCapacity}</b> {t.battery}.
             </p>
           ) : (
             ""
@@ -133,7 +138,7 @@ export default function TrimDescription({ trim }) {
           <>
             {features.length > 0 && (
               <p>
-                <b>Features:</b> Key features include{" "}
+                <b>{t.features}:</b> {t.keyfeaturesInclude}{" "}
                 {features.map((feature, index) => (
                   <b key={feature}>
                     {index > 0 && index < features.length - 1 ? ", " : ""}
@@ -146,13 +151,13 @@ export default function TrimDescription({ trim }) {
             )}
           </>
           <p>
-            <b>Safety:</b> Safety components consist of <b>{outputString}</b>{" "}
-            ensuring a secure driving experience.
+            <b>{t.safety}:</b> {t.safetyComponentsConsistOf}<b>{outputString}</b>{" "}
+            {t.ensuringASecureDrivingExperience}
           </p>
           {trim?.cargoSpace === "" || trim?.cargoSpace === null ? null : (
             <p>
-              <b>Boot Space: </b>It offers <b>{trim?.cargoSpace}L</b> of cargo
-              space.
+              <b>{t.bootSpace}: </b>{t.itOffers}<b>{trim?.cargoSpace}L</b> of cargo
+              {t.space}.
             </p>
           )}
         </div>

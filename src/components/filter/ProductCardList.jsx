@@ -1,10 +1,17 @@
 import React from "react";
 import Link from "next/link";
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 
 function ProductCardList({ subTitle, heading, carDetails }) {
   
 
   const CarPriceRange = ({ car }) => {
+  const router = useRouter();
+   
+    const t = useTranslate();
+    const isRtl = router.locale === "ar";
+  
     // Extracting and filtering prices (excluding zeros) from car trims
     const prices = car?.attributes?.car_trims?.data
       .map((trim) => trim.attributes.price)
@@ -216,7 +223,7 @@ function ProductCardList({ subTitle, heading, carDetails }) {
 
                             <ul className="features">
                               <li>
-                                EMI Starting From <CarEMIDisplay car={car} />
+                                {t.emistart}<CarEMIDisplay car={car} />
                               </li>
                             </ul>
                           </div>
@@ -225,7 +232,7 @@ function ProductCardList({ subTitle, heading, carDetails }) {
                           <div className="content-btm ">
                             <Link legacyBehavior href="/brands/">
                               <a className="view-btn2">
-                                View Details
+                                {t.viewDetails}
                                 <i class="bi bi-chevron-double-right"></i>
                               </a>
                             </Link>

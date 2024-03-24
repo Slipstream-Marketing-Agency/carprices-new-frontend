@@ -9,8 +9,13 @@ import Price from "../common/Price";
 import { useRef } from "react";
 import Image from "next/image";
 import { Galleria } from "primereact/galleria";
+import useTranslate from "@/src/utils/useTranslate";
+import { useRouter } from "next/router";
 
 export default function TrimOverview({ trim }) {
+  const router = useRouter();
+  const t = useTranslate();
+
   const settings = {
     dots: true,
     infinite: true,
@@ -215,7 +220,7 @@ export default function TrimOverview({ trim }) {
                 <p className="overview_emi">
                   <i className="bi bi-bank2" />
                   <span className="ms-2">
-                    Monthly EMI starting from AED{" "}
+                    {t.monthlyEmi}{" "}
                     <Price
                       data={Math.round(
                         ((trim?.trim?.price -
@@ -236,7 +241,7 @@ export default function TrimOverview({ trim }) {
                   <div className="calculator-body">
                     <div>
                       <div className="form-group model_insure_btn mb-1">
-                        <small>Loan Years</small>
+                        <small>{t.loanYears}</small>
                         <div
                           className="btn-group btn-group-toggle"
                           data-toggle="buttons"
@@ -257,7 +262,7 @@ export default function TrimOverview({ trim }) {
                               checked={years === "1"}
                               onChange={(e) => setYears(e?.target?.value)}
                             />
-                            1 Year
+                            1 {t.year}
                           </label>
                           <label
                             className={
@@ -275,7 +280,7 @@ export default function TrimOverview({ trim }) {
                               checked={years === "2"}
                               onChange={(e) => setYears(e?.target?.value)}
                             />{" "}
-                            2 Years
+                            2 {t.years}
                           </label>
                           <label
                             className={
@@ -293,7 +298,7 @@ export default function TrimOverview({ trim }) {
                               checked={years === "3"}
                               onChange={(e) => setYears(e?.target?.value)}
                             />{" "}
-                            3 Years
+                            3 {t.years}
                           </label>
                           <label
                             className={
@@ -311,7 +316,7 @@ export default function TrimOverview({ trim }) {
                               checked={years === "4"}
                               onChange={(e) => setYears(e?.target?.value)}
                             />{" "}
-                            4 Years
+                            4 {t.years}
                           </label>
                           <label
                             className={
@@ -329,7 +334,7 @@ export default function TrimOverview({ trim }) {
                               checked={years === "5"}
                               onChange={(e) => setYears(e?.target?.value)}
                             />{" "}
-                            5 Years
+                            5 {t.years}
                           </label>
                         </div>
                       </div>
@@ -338,7 +343,7 @@ export default function TrimOverview({ trim }) {
                       <div className="w-60">
                         <div className="form-group w-100">
                           <small htmlFor="interest-rate">
-                            Interest Rate (%)
+                            {t.interestRate} (%)
                           </small>
                           <input
                             type="range"
@@ -366,7 +371,7 @@ export default function TrimOverview({ trim }) {
 
                         <div className="form-group w-100">
                           <small htmlFor="down-payment">
-                            Down Payment (AED)
+                            {t.downpayment} (AED)
                           </small>
                           <input
                             type="range"
@@ -398,7 +403,7 @@ export default function TrimOverview({ trim }) {
                           className="calulate_btn font_small py-3 fw-bold"
                           onClick={calculateEMI}
                         >
-                          Calculate
+                          {t.calculate}
                         </div>
                       </div>
                     </div>
@@ -409,7 +414,7 @@ export default function TrimOverview({ trim }) {
                           <div className=" mt-1 ">
                             <div className="white_bg_wrapper py-0 px-2 mt-1">
                               <span className="fw-bold font_small me-1">
-                                Monthly Repayment (EMI) : AED
+                                {t.monthlyRepayment} (EMI) : AED
                               </span>
                               <span
                                 className="fw-bold font_small"
@@ -420,7 +425,7 @@ export default function TrimOverview({ trim }) {
                             </div>
                             <div className="white_bg_wrapper py-0 px-2 mt-1">
                               <span className="fw-bold font_small me-1">
-                                Total Interest Payment : AED
+                                {t.totalInterestPayment} : AED
                               </span>
                               <span
                                 className="fw-bold font_small"
@@ -431,7 +436,7 @@ export default function TrimOverview({ trim }) {
                             </div>
                             <div className="white_bg_wrapper py-0 px-2 mt-1">
                               <span className="fw-bold font_small me-1">
-                                Total Amount to Pay : AED
+                               {t.totalAmountToPay} : AED
                               </span>
                               <span
                                 className="fw-bold font_small"

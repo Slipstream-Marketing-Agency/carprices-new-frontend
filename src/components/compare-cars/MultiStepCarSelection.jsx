@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Link from "next/link";
 import LoadingAnimation from "../common/LoadingAnimation";
+import useTranslate from "@/src/utils/useTranslate";
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
@@ -11,6 +12,11 @@ const client = new ApolloClient({
 });
 
 const MultiStepCarSelection = ({ carData, mode }) => {
+  const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";  
+
+  
   const [isSticky, setIsSticky] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -39,8 +45,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
     };
   }, []);
 
-  const router = useRouter();
-
+ 
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState("brand");
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -355,7 +360,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
               <i className={`bi bi-plus ${!isMobile && isSticky && 'plusIcon'}`} />
             </div>
             <div className="comparea-content">
-              <h6>Add to Compare</h6>
+              <h6>{t.addToCompare}</h6>
               <p>
                 {/* <Link legacyBehavior href="/single-brand-category">
                   <a>24,342</a>
@@ -368,7 +373,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
       ) : (
        <div className="w-100 d-flex ">
           <button className="btn mb-0 mb-md-0 btn-round btn-outline btn-block changeCarBtn" onClick={() => setShowModal(true)}>
-            <>Change Car <i class="bi bi-pencil"></i> </>
+            <>{t.changeCar}<i class="bi bi-pencil"></i> </>
           </button>
        </div>
       )}
@@ -382,10 +387,10 @@ const MultiStepCarSelection = ({ carData, mode }) => {
         <div className={`modal-dialog modal-dialog-centered modal-lg compareModalWidth  ${showModal ? 'showCompareModal' : 'hideCompareModal'}`}  >
           <div className="modal-content compareModelContainer">
             <div className="modal-header border-0 mx-md-4  mt-3 mb-0">
-              <h5 className="modal-title fw-bold"> Select Your Car For Compare</h5>
+              <h5 className="modal-title fw-bold"> {t.selectYourCar}</h5>
               <button
                 type="button"
-                className="btn-close compareModalCloseBtn cursor-pointer"
+                className={`btn-close compareModalCloseBtn cursor-pointer ${isRtl ? 'closeBtnSpacing' : '' }`}
                 onClick={handleCloseModal}
               ></button>
             </div>
@@ -393,7 +398,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
               <input
                 type="search"
                 className="modalSearchInputField mt-0 mb-3 "
-                placeholder="Search..."
+                placeholder={t.search}
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
@@ -408,7 +413,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     href="#brand"
                     onClick={() => {setCurrentStep("brand") ; setSearchTerm('')}}
                   >
-                    Brand
+                    {t.brand}
                   </a>
                 </li>
                 <li className="nav-item compareModelNav">
@@ -419,7 +424,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     href="#model"
                     onClick={() => {selectedBrand && setCurrentStep("model"),setSearchTerm('')}}
                   >
-                    Model
+                    {t.model}
                   </a>
                 </li>
                 <li className="nav-item compareModelNav">
@@ -430,7 +435,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     href="#year"
                     onClick={() => {selectedModel && setCurrentStep("year") ,setSearchTerm('')}}
                   >
-                    Year
+                    {t.year}
                   </a>
                 </li>
                 <li className="nav-item compareModelNav">
@@ -441,7 +446,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     href="#variant"
                     onClick={() => {selectedYear && setCurrentStep("variant"),setSearchTerm('') }}
                   >
-                    Variant
+                    {t.variant}
                   </a>
                 </li>
               </ul>

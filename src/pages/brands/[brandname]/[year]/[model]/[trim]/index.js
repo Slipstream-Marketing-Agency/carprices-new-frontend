@@ -396,7 +396,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       <path fill="currentColor" d="M6 10.5h12v2H6z" />
                     </svg>
                     <h6 className="p-0 m-0 ">
-                      Monthly EMI starting from{" "}
+                      {t.monthlyEmi}{" "}
                       <Price
                         data={Math.round(
                           ((trimData.price -
@@ -420,7 +420,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                           <div className="calculator-body">
                             <div>
                               <div className="form-group model_insure_btn mb-1">
-                                <small>Loan Years</small>
+                                <small>{t.loanYears}</small>
                                 <div
                                   className="btn-group btn-group-toggle"
                                   data-toggle="buttons"
@@ -443,7 +443,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                         setYears(e?.target?.value)
                                       }
                                     />
-                                    1 Year
+                                    1 {t.year}
                                   </label>
                                   <label
                                     className={
@@ -463,7 +463,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                         setYears(e?.target?.value)
                                       }
                                     />{" "}
-                                    2 Years
+                                    2 {t.years}
                                   </label>
                                   <label
                                     className={
@@ -483,7 +483,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                         setYears(e?.target?.value)
                                       }
                                     />{" "}
-                                    3 Years
+                                    3 {t.years}
                                   </label>
                                   <label
                                     className={
@@ -503,7 +503,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                         setYears(e?.target?.value)
                                       }
                                     />{" "}
-                                    4 Years
+                                    4 {t.years}
                                   </label>
                                   <label
                                     className={
@@ -523,7 +523,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                         setYears(e?.target?.value)
                                       }
                                     />{" "}
-                                    5 Years
+                                    5 {t.years}
                                   </label>
                                 </div>
                               </div>
@@ -532,7 +532,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                               <div className="w-60">
                                 <div className="form-group w-100">
                                   <small htmlFor="interest-rate">
-                                    Interest Rate (%)
+                                    {t.interestRate} (%)
                                   </small>
                                   <input
                                     type="range"
@@ -560,7 +560,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
                                 <div className="form-group w-100">
                                   <small htmlFor="down-payment">
-                                    Down Payment (AED)
+                                    {t.downpayment} (AED)
                                   </small>
                                   <input
                                     type="range"
@@ -592,7 +592,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                   className="calulate_btn font_small py-3 fw-bold"
                                   onClick={calculateEMI}
                                 >
-                                  Calculate
+                                  {t.calculate}
                                 </div>
                               </div>
                             </div>
@@ -603,7 +603,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                   <div className=" mt-1 ">
                                     <div className="white_bg_wrapper py-1 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Monthly Repayment (EMI):
+                                        {t.monthlyRepayment} (EMI):
                                       </span>
                                       <span
                                         className="fw-bold font_small"
@@ -614,7 +614,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     </div>
                                     <div className="white_bg_wrapper py-0 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Total Interest Payment:
+                                        {t.totalInterestPayment}:
                                       </span>
                                       <span
                                         className="fw-bold font_small"
@@ -625,7 +625,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     </div>
                                     <div className="white_bg_wrapper py-0 px-2 mt-1">
                                       <span className="fw-bold font_small me-1">
-                                        Total Amount to Pay:
+                                        {t.totalAmountToPay}:
                                       </span>
                                       <span
                                         className="fw-bold font_small"

@@ -16286,6 +16286,11 @@ footer .footer-widget .widget-title h5::after {
   background-size: 100% 100%;
 }
 
+.footerHeadingArabic:after{
+  left:unset;
+  right:0;
+}
+
 
 footer .footer-widget .menu-container ul {
   margin: 0;
@@ -25489,7 +25494,10 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 .checkmarkRight0{
-  right: 10px !important;
+  right: 10px;
+}
+.checkMarkOnArabic{
+  right:84% !important;
 }
 .checkmarkRight2{
   right: -2px !important;

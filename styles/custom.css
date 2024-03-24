@@ -744,6 +744,10 @@ small {
 .cursorPointer {
   cursor: pointer;
 }
+.closeBtnSpacing{
+  margin:unset !important;
+  padding:unset  !important;
+}
 /* compare model ends*/
 
 /* share Btn begins */

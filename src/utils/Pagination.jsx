@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types"; // Import PropTypes
+import useTranslate from "./useTranslate";
 export default function Pagination({ currentPage, totalPages }) {
   if (isNaN(currentPage) || isNaN(totalPages)) {
     return null; // Or handle the error scenario for invalid inputs
   }
 
   const router = useRouter();
+  const t = useTranslate();
   const currentPageNumber = parseInt(currentPage, 10);
 
   const changePage = (page) => {
@@ -90,7 +92,7 @@ export default function Pagination({ currentPage, totalPages }) {
                     disabled={currentPageNumber === 1}
                     className="bg-transparent"
                   >
-                    Prev
+                    {t.prev}
                   </button>
                 </li>
                 <li>
@@ -99,7 +101,7 @@ export default function Pagination({ currentPage, totalPages }) {
                     disabled={currentPageNumber === totalPages}
                     className="bg-transparent"
                   >
-                    Next
+                    {t.next}
                   </button>
                 </li>
               </ul>

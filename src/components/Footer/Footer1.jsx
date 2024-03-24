@@ -24,7 +24,7 @@ function Footer1() {
               <div className="col d-flex justify-content-lg-start">
                 <div className="footer-widget">
                   <div className="widget-title">
-                    <h5>Top 10s</h5>
+                    <h5 className={`${isRtl ? 'footerHeadingArabic' : ''}`}>{t.top10s}</h5>
                   </div>
                   <div className="menu-container">
                     <ul>
@@ -33,7 +33,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
                         >
-                          <a>10 Cars with High Ground Clearance</a>
+                          <a>{t.carsWithHighGroundClearance10}</a>
                         </Link>
                       </li>
                       <li>
@@ -41,7 +41,7 @@ function Footer1() {
                           legacyBehavior
                           href=" https://carprices.ae/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae"
                         >
-                          <a>10 Most Searched Cars</a>
+                          <a>{t.tenMostSearchedCars}</a>
                         </Link>
                       </li>
                       <li>
@@ -49,7 +49,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/chinese-car-brands-uae "
                         >
-                          <a>10 Best Chinese Brands</a>
+                          <a>{t.tenBestChineseBrands}</a>
                         </Link>
                       </li>
                       <li>
@@ -57,7 +57,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/10-myths-busted-about-buying-a-new-car-in-the-uae"
                         >
-                          <a>10 Myths About Buying a New Car</a>
+                          <a>{t.tenMythsAboutBuyingANewCar}</a>
                         </Link>
                       </li>
                       <li>
@@ -65,7 +65,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/top-fuel-effnt"
                         >
-                          <a>10 Fuel Efficient Cars</a>
+                          <a>{t.tenFuelEfficientCars}</a>
                         </Link>
                       </li>
                       <li>
@@ -73,7 +73,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/top-10-hybrid-cars-AED-230k"
                         >
-                          <a>10 Best Hybrid Cars</a>
+                          <a>{t.tenBestHybridCars}</a>
                         </Link>
                       </li>
                     </ul>
@@ -83,7 +83,7 @@ function Footer1() {
               <div className="col d-flex justify-content-sm-center">
                 <div className="footer-widget">
                   <div className="widget-title">
-                    <h5>Comparisons</h5>
+                    <h5 className={`${isRtl ? 'footerHeadingArabic' : ''}`}>{t.comparisons}</h5>
                   </div>
                   <div className="menu-container">
                     <ul>
@@ -92,7 +92,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
                         >
-                          <a>2024 Toyota Prado Vs GWM Tank 500</a>
+                          <a>{t.twenty24ToyotaPradoVsGWMTank500}</a>
                         </Link>
                       </li>
                       <li>
@@ -100,7 +100,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/2024-toyota-land-cruiser-prado-vs-land-rover-defender-vs-jeep-wrangler-vs-the-ford-bronco"
                         >
-                          <a>Battle Of 4 Popular SUVs</a>
+                          <a>{t.battleOfFourPopularSUVs}</a>
                         </Link>
                       </li>
                       <li>
@@ -108,7 +108,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/the-2023-toyota-land-cruiser-300-series-vs-the-2024-toyota-land-cruiser-prado"
                         >
-                          <a>LC 300 Vs 2024 Toyota Prado</a>
+                          <a>{t.LCThreeHundredVsTwenty24ToyotaPrado}</a>
                         </Link>
                       </li>
                       <li>
@@ -116,7 +116,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/new-vs-old-prado"
                         >
-                          <a>2024 LC Prado Vs Used LC Prado</a>
+                          <a>{t.twenty24LCPradoVsUsedLCPrado}</a>
                         </Link>
                       </li>
                       <li>
@@ -124,7 +124,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/lc-prado-vs-patrol"
                         >
-                          <a>2024 LC Prado Vs Nissan Patro</a>
+                          <a>{t.twenty24LCPradoVsNissanPatrol}</a>
                         </Link>
                       </li>
                     </ul>
@@ -134,7 +134,7 @@ function Footer1() {
               <div className="col d-flex justify-content-sm-center">
                 <div className="footer-widget">
                   <div className="widget-title">
-                    <h5>Quick Search</h5>
+                    <h5 className={`${isRtl ? 'footerHeadingArabic' : ''}`}>{t.quickSearch}</h5>
                   </div>
                   <div className="menu-container">
                     <ul>
@@ -143,7 +143,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
                         >
-                          <a>ICE Vs Hybrid</a>
+                          <a>{t.iceVsHybrid}</a>
                         </Link>
                       </li>
                       <li>
@@ -151,7 +151,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/analysing-the-cost-of-living-with-the-electric-vehicle-vs-internal-combustion-engine-vehicle-in-the-uae-ev-vs-ice"
                         >
-                          <a>ICE Vs EV</a>
+                          <a>{t.iCEVsEV}</a>
                         </Link>
                       </li>
                       <li>
@@ -159,7 +159,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/7-popular-reliable-sedans-to-buy-in-the-uae-in-2024-or-best-cars-in-uae"
                         >
-                          <a>Popuar Reliable Sedans</a>
+                          <a>{t.popularReliableSedans}</a>
                         </Link>
                       </li>
                       <li>
@@ -167,7 +167,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
                         >
-                          <a>2024 Car Launches</a>
+                          <a>{t.carLaunches}</a>
                         </Link>
                       </li>
                       <li>
@@ -175,7 +175,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/6-best-chinese-suv-cars-in-uae-under-aed-70000"
                         >
-                          <a>Best Chinese SUVs</a>
+                          <a>{t.bestChineseSUVs}</a>
                         </Link>
                       </li>
                     </ul>
@@ -185,33 +185,33 @@ function Footer1() {
               <div className="col d-flex justify-content-sm-center">
                 <div className="footer-widget">
                   <div className="widget-title">
-                    <h5>Legal Bits</h5>
+                    <h5 className={`${isRtl ? 'footerHeadingArabic' : ''}`}>{t.legalBits}</h5>
                   </div>
                   <div className="menu-container">
                     <ul>
                       <li>
                         <Link legacyBehavior href="/about">
-                          <a>About Us</a>
+                          <a>{t.aboutUs}</a>
                         </Link>
                       </li>
                       <li>
                         <Link legacyBehavior href="/contact-us">
-                          <a>Contact Us</a>
+                          <a>{t.contactUs}</a>
                         </Link>
                       </li>
                       <li>
                         <Link legacyBehavior href="/privacy">
-                          <a>Privacy Policy</a>
+                          <a>{t.privacyPolicy}</a>
                         </Link>
                       </li>
                       <li>
                         <Link legacyBehavior href="/terms-and-conditions">
-                          <a>Terms and Conditions</a>
+                          <a>{t.termsNConditions}</a>
                         </Link>
                       </li>
                       <li>
                         <Link legacyBehavior href="/code-of-conduct">
-                          <a>Code of Conduct</a>
+                          <a>{t.codeOfConduct}</a>
                         </Link>
                       </li>
                     </ul>
@@ -278,7 +278,7 @@ function Footer1() {
                     </svg>
                   </div>
                   <div className="content">
-                    <span>For Enquiries</span>
+                    <span>{t.ForEnquiries}</span>
                     <h6>
                       <a href="tel:+971506494665">+971 50 649 4665</a>
                     </h6>
@@ -300,7 +300,7 @@ function Footer1() {
                     </svg>
                   </div>
                   <div className="content">
-                    <span>Mail</span>
+                    <span>{t.Mail}</span>
                     <h6>
                       <Link
                         href="mailto:info@carprices.ae
@@ -315,10 +315,10 @@ function Footer1() {
               <div className="footer-btm-menu">
                 <ul>
                   <li>
-                    <Link href="/contact-us">Advertise With Us</Link>
+                    <Link href="/contact-us">{t.AdvertiseWithUs}</Link>
                   </li>
                   <li>
-                    <Link href="/sitemap.xml">Our Sitemap</Link>
+                    <Link href="/sitemap.xml">{t.OurSitemap}</Link>
                   </li>
                 </ul>
               </div>
@@ -332,7 +332,7 @@ function Footer1() {
               </p>
             </div>
             <div className="social-area">
-              <h6>Follow Carprices.ae:</h6>
+              <h6>{t.FollowCarpricesae}</h6>
               <ul>
               <li>
                   <Link href="https://youtube.com/@carpricesuae?feature=shared">

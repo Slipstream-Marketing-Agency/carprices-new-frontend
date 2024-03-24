@@ -17,6 +17,7 @@ import Ad300x600 from "@/src/components/ads/Ad300x600";
 import Ad970x250 from "@/src/components/ads/Ad970x250";
 import axios from "axios";
 import moment from "moment";
+import useTranslate from "@/src/utils/useTranslate";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -32,6 +33,8 @@ function BlogStandardPage({
   const inputRef = useRef(null);
   const client = createApolloClient();
   const router = useRouter();
+  const t = useTranslate();
+  let isRtl = router.locale === "ar";
 
   const [brandInput, setBrandInput] = useState("");
 
@@ -69,13 +72,9 @@ function BlogStandardPage({
       <div className="container mb-3">
         <div className="white_bg_wrapper">
           {" "}
-          <h1 className="fw-bold mt-2 box_header">Latest Car review in UAE</h1>
+          <h1 className="fw-bold mt-2 box_header">{t.latestCarReview}</h1>
           <p className="my-2">
-            Stay up-to-date with the latest review and updates on the UAE car
-            industry, including new car launches, launch dates, car images,
-            expos and events, price updates, latest discounts, facelifts,
-            recalls, and more. Get all the insights you need to know about the
-            happenings in the UAE automotive industry.
+{t.latestReviewSub}
           </p>
         </div>
 
@@ -233,7 +232,7 @@ function BlogStandardPage({
             <Ad300x250 dataAdSlot="8451638145" />
             {articleTags?.length > 0 && (
               <div className="white_bg_wrapper my-3">
-                <h4>TAGS</h4>
+                <h4>{t.tags}</h4>
                 <div className="cursorPointer">
                   {articleTags?.map((tag) => (
                     <Link
@@ -252,7 +251,7 @@ function BlogStandardPage({
 
             {articlesThisWeek?.length > 0 && (
               <div className="white_bg_wrapper my-3">
-                <h4 className="fw-bold">FROM LAST TWO WEEK</h4>
+                <h4 className="fw-bold">{t.fromLastTwoWeek}</h4>
                 <div className="cursorPointer">
                   {articlesThisWeek?.map((blog) => (
                     <Link
@@ -287,7 +286,7 @@ function BlogStandardPage({
       <Ad728x90 dataAdSlot="5962627056" />
       <div className="container">
         <div className="row g-2 mt-3 white_bg_wrapper ">
-          <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
+          <h4 className="fw-bold mt-2 box_header mb-3">{t.popularNews}</h4>
 
           {popularArticles?.map((reviewItem, index) => {
             // Adjust index to account for the first item displayed separately

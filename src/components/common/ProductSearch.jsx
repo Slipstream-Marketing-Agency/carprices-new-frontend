@@ -24,19 +24,19 @@ function ProductSearch() {
             </div>
             <div className="col">
               <div className="form-inner">
-                <label>Select Brand*</label>
-                <SelectComponent placeholder="select brand" options={brand} />
+                <label>{t.selectBrand}*</label>
+                <SelectComponent placeholder={t.selectBrand} options={brand} />
               </div>
             </div>
             <div className="col">
               <div className="form-inner">
-                <label>Select Model*</label>
-                <SelectComponent placeholder="select model" options={model} />
+                <label>{t.selectModel}*</label>
+                <SelectComponent placeholder={t.selectModel} options={model} />
               </div>
             </div>
             <div className="col">
               <div className="form-inner">
-                <label>Select Budget*</label>
+                <label>{t.selectBudget}*</label>
                 <SelectComponent
                   placeholder="Ex: 1 - 5 lakh"
                   options={budget}

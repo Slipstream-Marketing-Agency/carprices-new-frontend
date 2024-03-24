@@ -16,6 +16,7 @@ import BodyTypes from "@/src/components/Home1/BodyTypes";
 import Image from "next/image";
 import LoaderOverlay from "@/src/utils/LoaderOverlay ";
 import Breadcrumb from "@/src/utils/Breadcrumb";
+import useTranslate from "@/src/utils/useTranslate";
 
 function CarListingLeftSidebar({
   currentPage,
@@ -34,6 +35,7 @@ function CarListingLeftSidebar({
   brand,
 }) {
   const router = useRouter();
+  const t = useTranslate();
   const [data, setData] = useState(filteredTrims); // Use state to manage the dynamic data
   const [isLoading, setIsLoading] = useState(false);
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
@@ -748,7 +750,7 @@ function CarListingLeftSidebar({
                     <div className="view-btn-area mt-15">
                       <Link legacyBehavior href="/">
                         <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
-                          Back to Home
+                          {t.backToHome}
                         </button>
                       </Link>
                     </div>
@@ -761,7 +763,7 @@ function CarListingLeftSidebar({
                     <BodyTypes bodyTypeList={bodyTypes} />
                     <Ad728x90 dataAdSlot="3488506956" />
                     <div className="row ">
-                      <h2 className="mt-4">Automotive News</h2>
+                      <h2 className="mt-4">{t.automotiveNews}</h2>
                       {articleslist?.map((newsItem, index) => {
                         // Adjust index to account for the first item displayed separately
                         const adjustedIndex = index + 1;
@@ -822,7 +824,7 @@ function CarListingLeftSidebar({
                             className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
                             onClick={fetchArticles}
                           >
-                            Load More
+                            {t.loadmorebutton}
                           </button>
                         </div>
                       )}

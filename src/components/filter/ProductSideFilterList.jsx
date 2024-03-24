@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useTranslate from "@/src/utils/useTranslate";
 
 export default function ProductSideFilterList({ carDetails, filteredTrims }) {
   
@@ -67,6 +68,8 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
   };
 
   const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
 
   return (
     <>
@@ -133,7 +136,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
 
                   <ul className="features">
                     <li>
-                      EMI Starting From <CarEMIDisplay car={car} />
+                      {t.emistart} <CarEMIDisplay car={car} />
                     </li>
                   </ul>
                 </div>
@@ -145,7 +148,7 @@ export default function ProductSideFilterList({ carDetails, filteredTrims }) {
                     href={`/brands/${car?.brand?.slug}/${car?.year}/${car?.model?.slug}`}
                   >
                     <a className="view-btn2">
-                      View Details
+                      {t.viewDetails}
                       <i class="bi bi-chevron-double-right"></i>
                     </a>
                   </Link>

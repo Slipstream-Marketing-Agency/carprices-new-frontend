@@ -14,6 +14,7 @@ import Breadcrumb from "@/src/utils/Breadcrumb";
 import moment from "moment";
 import Price from "@/src/utils/Price";
 import PriceListTable from "../common/PriceListTable";
+import useTranslate from "@/src/utils/useTranslate";
 
 export default function CarFilter({
   currentPage,
@@ -34,6 +35,9 @@ export default function CarFilter({
   bodyTypeElements,
 }) {
   const router = useRouter();
+  const t = useTranslate();
+  const isRtl = router.locale === "ar";
+
   const [isLoading, setIsLoading] = useState(false);
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const [expanded, setExpanded] = useState(false);
@@ -45,26 +49,26 @@ export default function CarFilter({
   const pageSize = 12;
   const brandSlugs =
     router.pathname === "/search-cars" ||
-    router.pathname === "/category/[categoryname]"
+      router.pathname === "/category/[categoryname]"
       ? query.brand
         ? query.brand.split(",")
         : []
       : router.pathname === "/brands/[brandname]"
-      ? query.brandname
-        ? [query.brandname]
-        : []
-      : [];
+        ? query.brandname
+          ? [query.brandname]
+          : []
+        : [];
   const bodyTypeSlugs =
     router.pathname === "/search-cars" ||
-    router.pathname === "/brands/[brandname]"
+      router.pathname === "/brands/[brandname]"
       ? query.bodytype
         ? query.bodytype.split(",")
         : []
       : router.pathname === "/category/[categoryname]"
-      ? query.categoryname
-        ? [query.categoryname]
-        : []
-      : [];
+        ? query.categoryname
+          ? [query.categoryname]
+          : []
+        : [];
 
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
@@ -72,7 +76,7 @@ export default function CarFilter({
   const transmissionSlugs = query.transmission
     ? query.transmission.split(",")
     : [];
-  
+
 
   const queryParams = {};
 
@@ -147,8 +151,7 @@ export default function CarFilter({
 
       try {
         const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
+          `${process.env.NEXT_PUBLIC_API_URL
           }car-trims/homefilter?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -182,8 +185,7 @@ export default function CarFilter({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
+          `${process.env.NEXT_PUBLIC_API_URL
           }car-trims/price-range-by-brands?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -202,7 +204,7 @@ export default function CarFilter({
             powerRange
           )}&page=${page}&pageSize=${pageSize}`
         );
-        
+
 
         setAllFilter(response?.data);
       } catch (error) {
@@ -217,8 +219,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/fuelList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -255,8 +256,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/cylinderList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -291,8 +291,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/transmissionList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -327,8 +326,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/driveList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -365,8 +363,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/priceRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -403,8 +400,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/displacementRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -441,8 +437,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/powerRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -479,8 +474,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/brandList?bodyTypes=${JSON.stringify(
               bodyTypeSlugs
             )}&fuelType=${JSON.stringify(
@@ -517,8 +511,7 @@ export default function CarFilter({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/bodyList?brands=${JSON.stringify(
               brandSlugs
             )}&fuelType=${JSON.stringify(
@@ -749,117 +742,173 @@ export default function CarFilter({
                     {router.pathname === "/brands/[brandname]" && (
                       <>
                         <div className="white_bg_wrapper">
-                          <h1 class="fw-bold">
-                            {branddetails?.attributes?.name} UAE Cars
+                          {isRtl ? <h1 class="fw-bold">
+                            سيارات {branddetails?.attributes?.name} في الإمارات
                           </h1>
+                            : <h1 class="fw-bold">
+                              {branddetails?.attributes?.name} UAE Cars
+                            </h1>}
                           <hr className="my-0 mt-2 heading-bottom " />
                           <div className="read-more-less" id="dynamic-content">
                             <div
-                              className={`info ${
-                                expanded ? "" : "height-hidden"
-                              } dynamic-content content-hidden`}
+                              className={`info ${expanded ? "" : "height-hidden"
+                                } dynamic-content content-hidden`}
                             >
                               <div
                                 dangerouslySetInnerHTML={{
                                   __html: branddetails?.attributes?.description,
                                 }}
                               ></div>
-                              <h2 className="fw-bold mt-4">
-                                {branddetails?.attributes?.name} Cars{" "}
-                                {moment().format("MMMM YYYY")} Price List in UAE
+                              {isRtl ? <h2 className="fw-bold mt-4">
+                                قائمة أسعار سيارات {branddetails?.attributes?.name} في الإمارات لشهر {moment().format("MMMM YYYY")}
                               </h2>
+                                : <h2 className="fw-bold mt-4">
+                                  {branddetails?.attributes?.name} Cars{" "}
+                                  {moment().format("MMMM YYYY")} Price List in UAE
+                                </h2>}
                               <hr className="mb-3 mt-2 heading-bottom " />
 
                               <p>
-                                You can choose from{" "}
-                                <b>
-                                  {
-                                    branddetails?.attributes
-                                      ?.modelsWithPriceRange?.length
-                                  }
-                                </b>{" "}
-                                available{" "}
-                                <Link
-                                  href={`/brands/${branddetails?.attributes?.slug}`}
-                                  className="fw-bold text-primary"
-                                >
-                                  {branddetails?.attributes?.name}
-                                </Link>{" "}
-                                models in the UAE. The{" "}
-                                <Link
-                                  href={`/brands/${branddetails?.attributes?.slug}`}
-                                  className="fw-bold text-primary"
-                                >
-                                  {branddetails?.attributes?.name}
-                                </Link>{" "}
-                                UAE line-up consists of{" "}
-                                <b>{bodyTypeElements}</b>.{" "}
-                                <Link
-                                  href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostAffordableModel?.year}/${branddetails?.attributes?.mostAffordableModel?.modelSlug}/${branddetails?.attributes?.mostAffordableModel?.trimSlug}`}
-                                  className="fw-bold text-primary"
-                                >
-                                  {branddetails?.attributes?.name}{" "}
-                                  {
-                                    branddetails?.attributes
-                                      ?.mostAffordableModel?.modelName
-                                  }{" "}
-                                  {
-                                    branddetails?.attributes
-                                      ?.mostAffordableModel?.trimName
-                                  }
-                                </Link>
-                                , starting at{" "}
-                                <b>
-                                  {" "}
-                                  <Price
-                                    data={
+                           {  !isRtl ?   <>
+                             You can choose from{" "}
+                                  <b>
+                                    {
                                       branddetails?.attributes
-                                        ?.mostAffordableModel?.price
+                                        ?.modelsWithPriceRange?.length
                                     }
-                                  />
-                                </b>
-                                , is the most affordable model while the{" "}
-                                <Link
-                                  href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostExpensiveModel?.year}/${branddetails?.attributes?.mostExpensiveModel?.modelSlug}/${branddetails?.attributes?.mostExpensiveModel?.trimSlug}`}
-                                  className="fw-bold text-primary"
-                                >
-                                  {branddetails?.attributes?.name}{" "}
-                                  {
-                                    branddetails?.attributes?.mostExpensiveModel
-                                      ?.modelName
-                                  }{" "}
-                                  {
-                                    branddetails?.attributes?.mostExpensiveModel
-                                      ?.trimName
-                                  }
-                                </Link>{" "}
-                                at{" "}
-                                <b>
-                                  {" "}
-                                  <Price
-                                    data={
+                                  </b>{" "}
+                                  available{" "}
+                                  <Link
+                                    href={`/brands/${branddetails?.attributes?.slug}`}
+                                    className="fw-bold text-primary"
+                                  >
+                                    {branddetails?.attributes?.name}
+                                  </Link>{" "}
+                                  models in the UAE. The{" "}
+                                  <Link
+                                    href={`/brands/${branddetails?.attributes?.slug}`}
+                                    className="fw-bold text-primary"
+                                  >
+                                    {branddetails?.attributes?.name}
+                                  </Link>{" "}
+                                  UAE line-up consists of{" "}
+                                  <b>{bodyTypeElements}</b>.{" "}
+                                  <Link
+                                    href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostAffordableModel?.year}/${branddetails?.attributes?.mostAffordableModel?.modelSlug}/${branddetails?.attributes?.mostAffordableModel?.trimSlug}`}
+                                    className="fw-bold text-primary"
+                                  >
+                                    {branddetails?.attributes?.name}{" "}
+                                    {
                                       branddetails?.attributes
-                                        ?.mostExpensiveModel?.price
+                                        ?.mostAffordableModel?.modelName
+                                    }{" "}
+                                    {
+                                      branddetails?.attributes
+                                        ?.mostAffordableModel?.trimName
                                     }
-                                  />
-                                </b>{" "}
-                                is the brand’s most expensive model.{" "}
-                                <Link
-                                  href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostPowerfulModel?.year}/${branddetails?.attributes?.mostPowerfulModel?.modelSlug}/${branddetails?.attributes?.mostPowerfulModel?.trimSlug}`}
-                                  className="fw-bold text-primary"
-                                >
-                                  {branddetails?.attributes?.name}{" "}
-                                  {
-                                    branddetails?.attributes?.mostPowerfulModel
-                                      ?.modelName
-                                  }{" "}
-                                  {
-                                    branddetails?.attributes?.mostPowerfulModel
-                                      ?.trimName
-                                  }
-                                </Link>{" "}
-                                is the most powerful model in the brand's
-                                line-up.
+                                  </Link>
+                                  , starting at{" "}
+                                  <b>
+                                    {" "}
+                                    <Price
+                                      data={
+                                        branddetails?.attributes
+                                          ?.mostAffordableModel?.price
+                                      }
+                                    />
+                                  </b>
+                                  , is the most affordable model while the{" "}
+                                  <Link
+                                    href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostExpensiveModel?.year}/${branddetails?.attributes?.mostExpensiveModel?.modelSlug}/${branddetails?.attributes?.mostExpensiveModel?.trimSlug}`}
+                                    className="fw-bold text-primary"
+                                  >
+                                    {branddetails?.attributes?.name}{" "}
+                                    {
+                                      branddetails?.attributes?.mostExpensiveModel
+                                        ?.modelName
+                                    }{" "}
+                                    {
+                                      branddetails?.attributes?.mostExpensiveModel
+                                        ?.trimName
+                                    }
+                                  </Link>{" "}
+                                  at{" "}
+                                  <b>
+                                    {" "}
+                                    <Price
+                                      data={
+                                        branddetails?.attributes
+                                          ?.mostExpensiveModel?.price
+                                      }
+                                    />
+                                  </b>{" "}
+                                  is the brand’s most expensive model.{" "}
+                                  <Link
+                                    href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostPowerfulModel?.year}/${branddetails?.attributes?.mostPowerfulModel?.modelSlug}/${branddetails?.attributes?.mostPowerfulModel?.trimSlug}`}
+                                    className="fw-bold text-primary"
+                                  >
+                                    {branddetails?.attributes?.name}{" "}
+                                    {
+                                      branddetails?.attributes?.mostPowerfulModel
+                                        ?.modelName
+                                    }{" "}
+                                    {
+                                      branddetails?.attributes?.mostPowerfulModel
+                                        ?.trimName
+                                    }
+                                  </Link>{" "}
+                                  is the most powerful model in the brand's
+                                  line-up.
+                           </>
+                                
+                              :
+                              <>
+                              يمكنك الاختيار من بين <b>{branddetails?.attributes?.modelsWithPriceRange?.length}</b> نموذج{" "}
+                              <Link
+                                href={`/brands/${branddetails?.attributes?.slug}`}
+                                className="fw-bold text-primary"
+                              >
+                                {branddetails?.attributes?.name}
+                              </Link>{" "}
+                              المتاحة في الإمارات. تتألف تشكيلة <Link
+                                href={`/brands/${branddetails?.attributes?.slug}`}
+                                className="fw-bold text-primary"
+                              >
+                                {branddetails?.attributes?.name}
+                              </Link>{" "}
+                              في الإمارات من <b>{bodyTypeElements}</b>.{" "}
+                              <Link
+                                href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostAffordableModel?.year}/${branddetails?.attributes?.mostAffordableModel?.modelSlug}/${branddetails?.attributes?.mostAffordableModel?.trimSlug}`}
+                                className="fw-bold text-primary"
+                              >
+                                {branddetails?.attributes?.name}{" "}
+                                {branddetails?.attributes?.mostAffordableModel?.modelName}{" "}
+                                {branddetails?.attributes?.mostAffordableModel?.trimName}
+                              </Link>
+                              ، بسعر يبدأ من <b><Price data={branddetails?.attributes?.mostAffordableModel?.price} /></b>
+                              ، هو النموذج الأكثر تكلفة في تشكيلة العلامة التجارية بينما{" "}
+                              <Link
+                                href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostExpensiveModel?.year}/${branddetails?.attributes?.mostExpensiveModel?.modelSlug}/${branddetails?.attributes?.mostExpensiveModel?.trimSlug}`}
+                                className="fw-bold text-primary"
+                              >
+                                {branddetails?.attributes?.name}{" "}
+                                {branddetails?.attributes?.mostExpensiveModel?.modelName}{" "}
+                                {branddetails?.attributes?.mostExpensiveModel?.trimName}
+                              </Link>{" "}
+                              بسعر <b><Price data={branddetails?.attributes?.mostExpensiveModel?.price} /></b>{" "}
+                              هو النموذج الأغلى للعلامة التجارية.{" "}
+                              <Link
+                                href={`/brands/${branddetails?.attributes?.slug}/${branddetails?.attributes?.mostPowerfulModel?.year}/${branddetails?.attributes?.mostPowerfulModel?.modelSlug}/${branddetails?.attributes?.mostPowerfulModel?.trimSlug}`}
+                                className="fw-bold text-primary"
+                              >
+                                {branddetails?.attributes?.name}{" "}
+                                {branddetails?.attributes?.mostPowerfulModel?.modelName}{" "}
+                                {branddetails?.attributes?.mostPowerfulModel?.trimName}
+                              </Link>{" "}
+                              هو النموذج الأقوى في تشكيلة العلامة التجارية.
+                            </>
+                              }
+                                
                               </p>
                               <br />
 
@@ -871,20 +920,18 @@ export default function CarFilter({
                               />
                             </div>
                             <span
-                              className={`read-more ${
-                                expanded ? "hide" : ""
-                              } text-primary fw-bold mb-[-3px]`}
+                              className={`read-more ${expanded ? "hide" : ""
+                                } text-primary fw-bold mb-[-3px]`}
                               onClick={() => setExpanded(true)}
                             >
-                              Read More
+                             {t.readMore}
                             </span>
                             <span
-                              className={`read-less scroll-to-parent-pos content-read-less ${
-                                expanded ? "" : "hide"
-                              } text-primary fw-bold`}
+                              className={`read-less scroll-to-parent-pos content-read-less ${expanded ? "" : "hide"
+                                } text-primary fw-bold`}
                               onClick={() => setExpanded(false)}
                             >
-                              Read Less
+                              {t.readLess}
                             </span>
                           </div>
                         </div>
@@ -900,14 +947,16 @@ export default function CarFilter({
                 <>
                   {" "}
                   <div className="white_bg_wrapper mt-5">
-                    <h2 className="fw-bold mb-3">
+                    {isRtl ? <h2 className="fw-bold mb-3">
+                      أبرز ملامح سيارات {branddetails?.attributes?.name}
+                    </h2> : <h2 className="fw-bold mb-3">
                       {branddetails?.attributes?.name} Cars Key Highlights
-                    </h2>
+                    </h2>}
                     <table className="table table-bordered table-rounded">
                       <tbody>
                         <tr>
                           <th className="col-2" scope="row" colspan="6">
-                            Most Affordable
+                            {t.MostAffordable}
                           </th>
                           <td className="col-6" scope="row" colspan="6">
                             {branddetails?.attributes?.name}{" "}
@@ -923,7 +972,7 @@ export default function CarFilter({
                         </tr>
                         <tr>
                           <th className="col-2" scope="row" colspan="6">
-                            Most Expensive
+                            {t.mostExpensive}
                           </th>
                           <td className="col-6" scope="row" colspan="6">
                             {branddetails?.attributes?.name}{" "}
@@ -939,7 +988,7 @@ export default function CarFilter({
                         </tr>
                         <tr>
                           <th className="col-2" scope="row" colspan="6">
-                            Most Powerful
+                            {t.mostPowerful}
                           </th>
                           <td className="col-6" scope="row" colspan="6">
                             {branddetails?.attributes?.name}{" "}
@@ -955,7 +1004,7 @@ export default function CarFilter({
                         </tr>
                         <tr>
                           <th className="col-2" scope="row" colspan="6">
-                            Available Body Types
+                            {t.availableBodyTypes}
                           </th>
                           <td className="col-6" scope="row" colspan="6">
                             {bodyTypeElements}
@@ -983,7 +1032,7 @@ export default function CarFilter({
                   )}
 
                   <div className="row ">
-                    <h2 className="mt-4">Automotive News</h2>
+                    <h2 className="mt-4">{t.automotiveNews}</h2>
                     {articleslist?.map((newsItem, index) => {
                       // Adjust index to account for the first item displayed separately
                       const adjustedIndex = index + 1;
@@ -1044,7 +1093,7 @@ export default function CarFilter({
                           className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
                           onClick={fetchArticles}
                         >
-                          Load More
+                         {t.loadmorebutton}
                         </button>
                       </div>
                     )}
