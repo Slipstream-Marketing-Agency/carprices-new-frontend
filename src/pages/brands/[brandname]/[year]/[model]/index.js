@@ -450,7 +450,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   </div>
 
                   <div className="mt-2 key_spec">
-                    <p className="fw-bold">{t.keySpecification}</p>
+                    <p className="fw-bold mb-0">{t.keySpecification}</p>
                     <hr className="my-1 heading-bottom " />
                     <div className="row px-2">
                       <div className="col-6 mt-1 ps-0 col-sm-4">
@@ -461,17 +461,17 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bold">
+                            <h6 className="fw-bold mb-0">
                               {mainTrimFuelType === "Electric"
                                 ? "Motor Type"
                                 : t.NoOfCylinders}
-                            </small>
+                            </h6>
                             <div className="d-flex flex-wrap mt-1">
-                              <small>
+                              <h6 className="mb-0">
                                 {mainTrimFuelType === "Electric"
                                   ? motorTypes
                                   : cylinderList}
-                              </small>
+                              </h6>
                             </div>
                           </div>
                         </div>
@@ -485,9 +485,9 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bold">{t.transmission}</small>
+                            <h6 className="fw-bold mb-0">{t.transmission}</h6>
                             <div className="d-flex flex-wrap">
-                              <small>{transmissionList}</small>
+                              <h6 className="mb-0">{transmissionList}</h6>
                             </div>
                           </div>
                         </div>
@@ -501,12 +501,12 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bolder">{t.power} (hp)</small>
-                            <small>
+                            <h6 className="fw-bolder mb-0">{t.power} (hp)</h6>
+                            <h6 className="mb-0">
                               {minPower === maxPower
                                 ? minPower
                                 : `${minPower} to ${maxPower}`}
-                            </small>
+                            </h6>
                           </div>
                         </div>
                       </div>
@@ -519,12 +519,12 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bolder">{t.torque} (Nm)</small>
-                            <small>
+                            <h6 className="fw-bolder mb-0">{t.torque} (Nm)</h6>
+                            <h6 className="mb-0">
                               {minTorque === maxTorque
                                 ? minTorque
                                 : `${minTorque} to ${maxTorque}`}
-                            </small>
+                            </h6>
                           </div>
                         </div>
                       </div>
@@ -536,8 +536,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bold">{t.seats}</small>
-                            <small>{seatList}</small>
+                            <h6 className="fw-bold mb-0">{t.seats}</h6>
+                            <h6 className="mb-0">{seatList}</h6>
                           </div>
                         </div>
                       </div>
@@ -550,8 +550,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                             alt=""
                           />
                           <div className="d-flex flex-column">
-                            <small className="fw-bold">{t.fuelType}</small>
-                            <small>{mainTrimFuelType}</small>
+                            <h6 className="fw-bold mb-0">{t.fuelType}</h6>
+                            <h6 className="mb-0">{mainTrimFuelType}</h6>
                           </div>
                         </div>
                       </div>

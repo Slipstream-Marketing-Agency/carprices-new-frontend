@@ -61,11 +61,23 @@ function CarListingLeftSidebar({
     isElectric: query.isElectric,
     isFuelEfficient: query.isFuelEfficient,
     isOffRoad: query.isOffRoad,
+    // isTwoSeat: query.isTwoSeat,
+    // isTwoPlusTwo: query.isTwoPlusTwo,
+    // isFourToFive: query.isFourToFive,
+    // isFiveToSeven: query.isFiveToSeven,
+    // isSevenToNine: query.isSevenToNine,
+    isOneSeat: query.isOneSeat,
     isTwoSeat: query.isTwoSeat,
     isTwoPlusTwo: query.isTwoPlusTwo,
-    isFourToFive: query.isFourToFive,
-    isFiveToSeven: query.isFiveToSeven,
-    isSevenToNine: query.isSevenToNine,
+    isThreeSeat: query.isThreeSeat,
+    isFourSeat: query.isFourSeat,
+    isFiveSeat: query.isFiveSeat,
+    isSixSeat: query.isSixSeat,
+    isSevenSeat: query.isSevenSeat,
+    isEightSeat: query.isEightSeat,
+    isNineSeat: query.isNineSeat,
+    isNinePlusSeat: query.isNinePlusSeat,
+
     isManualTransmission: query.isManualTransmission,
     isDuneBashing: query.isDuneBashing,
     isSafety: query.isSafety,
@@ -204,7 +216,6 @@ function CarListingLeftSidebar({
             powerRange
           )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
         );
-        
 
         setAllFilter(response?.data);
       } catch (error) {
@@ -573,11 +584,23 @@ function CarListingLeftSidebar({
     query.isElectric,
     query.isFuelEfficient,
     query.isOffRoad,
+    // query.isTwoSeat,
+    // query.isTwoPlusTwo,
+    // query.isFourToFive,
+    // query.isFiveToSeven,
+    // query.isSevenToNine,
+    query.isOneSeat,
     query.isTwoSeat,
     query.isTwoPlusTwo,
-    query.isFourToFive,
-    query.isFiveToSeven,
-    query.isSevenToNine,
+    query.isThreeSeat,
+    query.isFourSeat,
+    query.isFiveSeat,
+    query.isSixSeat,
+    query.isSevenSeat,
+    query.isEightSeat,
+    query.isNineSeat,
+    query.isNinePlusSeat,
+
     query.isManualTransmission,
     query.isDuneBashing,
     query.isAffordableLuxury,
@@ -591,7 +614,7 @@ function CarListingLeftSidebar({
     query.price,
     query.power,
     query.displacement,
-    query.page
+    query.page,
   ]);
 
   const brandoptions = brandListres?.map((brand) => ({
@@ -646,11 +669,17 @@ function CarListingLeftSidebar({
     query.isElectric,
     query.isFuelEfficient,
     query.isOffRoad,
+    query.isOneSeat,
     query.isTwoSeat,
     query.isTwoPlusTwo,
-    query.isFourToFive,
-    query.isFiveToSeven,
-    query.isSevenToNine,
+    query.isThreeSeat,
+    query.isFourSeat,
+    query.isFiveSeat,
+    query.isSixSeat,
+    query.isSevenSeat,
+    query.isEightSeat,
+    query.isNineSeat,
+    query.isNinePlusSeat,
     query.isManualTransmission,
     query.isDuneBashing,
     query.isAffordableLuxury,
@@ -670,7 +699,6 @@ function CarListingLeftSidebar({
     <>
       <LoaderOverlay isVisible={isLoading} />
       <MainLayout>
-        
         <div className="mt-2">
           <Ad728x90 dataAdSlot="5962627056" />
         </div>
@@ -863,11 +891,17 @@ export async function getServerSideProps(context) {
     isElectric: query.isElectric,
     isFuelEfficient: query.isFuelEfficient,
     isOffRoad: query.isOffRoad,
+    isOneSeat: query.isOneSeat,
     isTwoSeat: query.isTwoSeat,
     isTwoPlusTwo: query.isTwoPlusTwo,
-    isFourToFive: query.isFourToFive,
-    isFiveToSeven: query.isFiveToSeven,
-    isSevenToNine: query.isSevenToNine,
+    isThreeSeat: query.isThreeSeat,
+    isFourSeat: query.isFourSeat,
+    isFiveSeat: query.isFiveSeat,
+    isSixSeat: query.isSixSeat,
+    isSevenSeat: query.isSevenSeat,
+    isEightSeat: query.isEightSeat,
+    isNineSeat: query.isNineSeat,
+    isNinePlusSeat: query.isNinePlusSeat,
     isManualTransmission: query.isManualTransmission,
     isDuneBashing: query.isDuneBashing,
     isSafety: query.isSafety,
@@ -917,8 +951,6 @@ export async function getServerSideProps(context) {
   const displacementRange = query.displacement
     ? parseRanges(query.displacement)
     : [];
-
-  
 
   if (priceRange) {
     queryParams.priceRange = priceRange;
@@ -1000,8 +1032,6 @@ export async function getServerSideProps(context) {
     );
     fuelTypeListres = fuelTypeList;
   }
-
-  
 
   if (cylinderSlugs.length > 0) {
     const cylinderList = await axios.get(

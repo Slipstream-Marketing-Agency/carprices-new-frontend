@@ -8,36 +8,73 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
 
   const initialFilterItems = [
     {
+      label: `1 ${t.seats}`,
+      value: ["1 Seater"],
+      group: "1",
+      img: "/assets/icons/seats/Seats-1.png", // Assume you'll add an icon for 1 seater
+    },
+    {
+      label: `2+2 ${t.seats}`,
+      value: ["2 + 2 Seater"],
+      group: "2+2",
+      img: "/assets/icons/seats/Seats-2.png",
+    },
+    {
       label: `2 ${t.seats}`,
       value: ["2 Seater"],
       group: "2",
-      img: "/assets/img/homepage-filter-icons/Seats-2.png",
+      img: "/assets/icons/seats/Seats-2.png",
     },
     {
-      label: `2 + 2 ${t.seats}`,
-      value: ["2 + 2 Seater"],
-      group: "2+2",
-      img: "/assets/img/homepage-filter-icons/Seats-2+2.png",
+      label: `3 ${t.seats}`,
+      value: ["3 Seater"],
+      group: "3",
+      img: "/assets/icons/seats/Seats-3.png", // Assume an icon for 3 seater
     },
     {
-      label: `4-5 ${t.seats}`,
-      value: ["4 Seater", "5 Seater"],
-      group: "4-5",
-      img: "/assets/img/homepage-filter-icons/Seats-4-5.png",
+      label: `4 ${t.seats}`,
+      value: ["4 Seater"],
+      group: "4",
+      img: "/assets/icons/seats/Seats-4.png",
     },
     {
-      label: `5-7 ${t.seats}`,
-      value: ["5 Seater", "6 Seater", "7 Seater"],
-      group: "5-7",
-      img: "/assets/img/homepage-filter-icons/Seats-5-7.png",
+      label: `5 ${t.seats}`,
+      value: ["5 Seater"],
+      group: "5",
+      img: "/assets/icons/seats/Seats-5.png",
     },
     {
-      label: `7-9 ${t.seats}`,
-      value: ["7 Seater", "8 Seater", "9 Seater"],
-      group: "7-9",
-      img: "/assets/img/homepage-filter-icons/Seats-7-9.png",
+      label: `6 ${t.seats}`,
+      value: ["6 Seater"],
+      group: "6",
+      img: "/assets/icons/seats/Seats-6.png", // Assume an icon for 6 seater
+    },
+    {
+      label: `7 ${t.seats}`,
+      value: ["7 Seater"],
+      group: "7",
+      img: "/assets/icons/seats/Seats-7.png",
+    },
+    {
+      label: `8 ${t.seats}`,
+      value: ["8 Seater"],
+      group: "8",
+      img: "/assets/icons/seats/Seats-8.png", // Assume an icon for 8 seater
+    },
+    {
+      label: `9 ${t.seats}`,
+      value: ["9 Seater"],
+      group: "9",
+      img: "/assets/icons/seats/Seats-9.png",
+    },
+    {
+      label: `9+ ${t.seats}`,
+      value: ["11 Seater", "12 Seater", "13 Seater", "14 Seater", "15 Seater", "16 Seater"],
+      group: "9+",
+      img: "/assets/icons/seats/Seats-9+.png", // Assume an icon for 9+ seater
     },
   ];
+  
 
   const [dynamicFilterItems, setDynamicFilterItems] = useState([]);
 
@@ -74,11 +111,11 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
   return (
     <div id="filter_seating" className="mt-2">
       <div className="search_filter_box_items" id="seats_filter">
-        <div className="d-flex justify-content-center flex-wrap gap-1">
+        <div className="d-flex justify-content-center flex-wrap gap-2">
           {dynamicFilterItems.map((item, index) => (
             <div
               key={index}
-              className={`banner_btn btn ${
+              className={` btn ${
                 isFilterActive(item.group) ? "active" : ""
               } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
               onClick={() => handleSeatingClick(item.group)}

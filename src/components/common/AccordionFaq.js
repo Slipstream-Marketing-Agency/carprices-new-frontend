@@ -10,27 +10,25 @@ export default function AccordionFaq({ question, answer, condition, id }) {
   return (
     <>
       {condition && (
-     
-          <div className="accordion-item">
-            <h5 className="accordion-header fw-bold">
-              <button
-                className={`fw-bold accordion-button ${!isOpen ? 'collapsed' : ''}`}
-                type="button"
-                onClick={handleClick}
-                aria-expanded={isOpen}
-              >
-                {question}
-              </button>
-            </h5>
-            {isOpen && (
-              <div className="accordion-collapse">
-                <div className="accordion-body">
-                  {answer}
-                </div>
-              </div>
-            )}
-          </div>
-
+        <div className="accordion-item">
+          <p className="accordion-header fw-bold">
+            <button
+              className={`fw-bold accordion-button ${
+                !isOpen ? "collapsed" : ""
+              }`}
+              type="button"
+              onClick={handleClick}
+              aria-expanded={isOpen}
+            >
+              <span className="mb-0 fw-bold">{question}</span>
+            </button>
+          </p>
+          {isOpen && (
+            <div className="accordion-collapse">
+              <p className="accordion-body fw-light mb-0">{answer}</p>
+            </div>
+          )}
+        </div>
       )}
     </>
   );

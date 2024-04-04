@@ -27,7 +27,6 @@ export default function FilterLayout() {
   const [bodyTypeList, setBodyTypeList] = useState([]);
   const [seatList, setSeatList] = useState([]);
 
-  
   const [specificVehicleFilter, setSpecificVehicleFilter] = useState({
     image: null,
     make: null,
@@ -44,7 +43,6 @@ export default function FilterLayout() {
     filterData.bodyTypes.length > 0
       ? `bodyTypes=${filterData.bodyTypes.join(",")}`
       : "";
-
 
   const filterOptions = {
     haveMusic: filterData.preferences.includes("premium-sound") ? 1 : 0,
@@ -65,11 +63,22 @@ export default function FilterLayout() {
       ? 1
       : 0,
     isSafety: filterData.preferences.includes("safety") ? 1 : 0,
+    // isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
+    // isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
+    // isFourToFive: filterData.seating.includes("4-5") ? 1 : 0,
+    // isFiveToSeven: filterData.seating.includes("5-7") ? 1 : 0,
+    // isSevenToNine: filterData.seating.includes("7-9") ? 1 : 0,
+    isOneSeat: filterData.seating.includes("1") ? 1 : 0,
     isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
     isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
-    isFourToFive: filterData.seating.includes("4-5") ? 1 : 0,
-    isFiveToSeven: filterData.seating.includes("5-7") ? 1 : 0,
-    isSevenToNine: filterData.seating.includes("7-9") ? 1 : 0,
+    isThreeSeat: filterData.seating.includes("3") ? 1 : 0,
+    isFourSeat: filterData.seating.includes("4") ? 1 : 0,
+    isFiveSeat: filterData.seating.includes("5") ? 1 : 0,
+    isSixSeat: filterData.seating.includes("6") ? 1 : 0,
+    isSevenSeat: filterData.seating.includes("7") ? 1 : 0,
+    isEightSeat: filterData.seating.includes("8") ? 1 : 0,
+    isNineSeat: filterData.seating.includes("9") ? 1 : 0,
+    isNinePlusSeat: filterData.seating.includes("9+") ? 1 : 0,
   };
 
   useEffect(() => {
@@ -90,12 +99,23 @@ export default function FilterLayout() {
           ? "&isManualTransmission=1"
           : "";
       query += filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
-      query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
+      // query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
+      // query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
+      // query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
+      // query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
+      // query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
+      // query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+      query += filterOptions.isOneSeat === 1 ? "&isOneSeat=1" : "";
       query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
       query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
-      query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
-      query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
-      query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+      query += filterOptions.isThreeSeat === 1 ? "&isThreeSeat=1" : "";
+      query += filterOptions.isFourSeat === 1 ? "&isFourSeat=1" : "";
+      query += filterOptions.isFiveSeat === 1 ? "&isFiveSeat=1" : "";
+      query += filterOptions.isSixSeat === 1 ? "&isSixSeat=1" : "";
+      query += filterOptions.isSevenSeat === 1 ? "&isSevenSeat=1" : "";
+      query += filterOptions.isEightSeat === 1 ? "&isEightSeat=1" : "";
+      query += filterOptions.isNineSeat === 1 ? "&isNineSeat=1" : "";
+      query += filterOptions.isNinePlusSeat === 1 ? "&isNinePlusSeat=1" : "";
 
       let queryWithoutSeating = `${
         filterOptions.haveMusic === 1 ? "haveMusic=1" : ""
@@ -120,7 +140,10 @@ export default function FilterLayout() {
       queryWithoutSeating +=
         filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
       queryWithoutSeating += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
-      queryWithoutSeating += filterOptions.isManualTransmission === 1 ? "&isManualTransmission=1" : "";
+      queryWithoutSeating +=
+        filterOptions.isManualTransmission === 1
+          ? "&isManualTransmission=1"
+          : "";
       const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
       const bodyTypesParam =
         filterData.bodyTypes.length > 0
@@ -154,9 +177,10 @@ export default function FilterLayout() {
         });
 
       axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`
+        )
         .then((response) => {
-          
           setBodyTypeList(response?.data?.bodyTypes);
 
           // setMinMaxData(response.data);
@@ -173,7 +197,6 @@ export default function FilterLayout() {
           `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
         )
         .then((response) => {
-          
           setSeatList(response?.data?.seats);
 
           // setMinMaxData(response.data);
@@ -227,8 +250,6 @@ export default function FilterLayout() {
       ),
     },
   ];
-
-  
 
   const handleNextStep = () => {
     if (filterData.preferences.length === 0) {
@@ -301,11 +322,22 @@ export default function FilterLayout() {
     query +=
       filterOptions.isManualTransmission === 1 ? "&isManualTransmission=1" : "";
     query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
+    // query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
+    // query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
+    // query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
+    // query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
+    // query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+    query += filterOptions.isOneSeat === 1 ? "&isOneSeat=1" : "";
     query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
     query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
-    query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
-    query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
-    query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
+    query += filterOptions.isThreeSeat === 1 ? "&isThreeSeat=1" : "";
+    query += filterOptions.isFourSeat === 1 ? "&isFourSeat=1" : "";
+    query += filterOptions.isFiveSeat === 1 ? "&isFiveSeat=1" : "";
+    query += filterOptions.isSixSeat === 1 ? "&isSixSeat=1" : "";
+    query += filterOptions.isSevenSeat === 1 ? "&isSevenSeat=1" : "";
+    query += filterOptions.isEightSeat === 1 ? "&isEightSeat=1" : "";
+    query += filterOptions.isNineSeat === 1 ? "&isNineSeat=1" : "";
+    query += filterOptions.isNinePlusSeat === 1 ? "&isNinePlusSeat=1" : "";
 
     const bodyTypesQuery =
       filterData.bodyTypes.length > 0
@@ -341,7 +373,9 @@ export default function FilterLayout() {
           <div className="search_filter_box text-center">
             <div className="find_car_head ">
               {/* <h3 className="text-white mb-0">{t.newbuyersguide}</h3> */}
-              <h3 className="text-white mb-0">Interactive Car Buying Assistant</h3>
+              <h3 className="text-white mb-0">
+                Interactive Car Buying Assistant
+              </h3>
             </div>
 
             <div className="inner">
@@ -360,7 +394,9 @@ export default function FilterLayout() {
                 </>
               )}
               <h4>
-                <span className="filterStepTxt">{steps[currentStep].title}</span>
+                <span className="filterStepTxt">
+                  {steps[currentStep].title}
+                </span>
               </h4>
               {steps[currentStep].component}
               <div className="filter-button">

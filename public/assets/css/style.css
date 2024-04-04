@@ -29092,7 +29092,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 #seats_filter img {
-  width: 70px !important;
+  width: 85px !important;
+  height: 55px !important;
 }
 
 .search_filter_box_items {
@@ -29838,7 +29839,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   }
 
   .product-content-height {
-    height: 85px;
+    height: 105px;
     
   }
   .mobileFontCarName{
@@ -29912,7 +29913,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     font-size: 12px;
   }
   footer .footer-widget .menu-container ul li a {
-    font-size: 10px;
+    font-size: 14px;
   }
   .blog-details-page p {
     line-height: 20px;
