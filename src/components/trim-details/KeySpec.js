@@ -25,16 +25,16 @@ export default function KeySpec({ trim }) {
                   alt=""
                 />
               </div>
-              <h6 className="fw-bold mb-1">
+              <h5 className="fw-bold mb-1">
                 {size === "Electric" ? "Motor Type" : "Engine Type"}
-              </h6>
-              <small className="">
+              </h5>
+              <h5 className="">
                 {size === "Electric"
                   ? trim?.motor.split(" ")[0]
                   : `${(trim?.displacement / 1000).toFixed(1)}L ${
                       trim?.engine
                     }`}
-              </small>
+              </h5>
             </div>
           </div>
           {trim?.power !== null ? (
@@ -48,8 +48,8 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Power (hp)</h6>
-                <small className="">{trim?.power}</small>
+                <h5 className="fw-bold mb-1">Power (hp)</h5>
+                <h5 className="">{trim?.power}</h5>
               </div>
             </div>
           ) : null}
@@ -64,10 +64,10 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Torque (Nm)</h6>
-                <small className="">
+                <h5 className="fw-bold mb-1">Torque (Nm)</h5>
+                <h5 className="">
                   {trim?.torque === "" ? "-" : trim?.torque}
-                </small>
+                </h5>
               </div>
             </div>
           ) : null}
@@ -83,16 +83,16 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">
+                <h5 className="fw-bold mb-1">
                   {size === "Electric" ? "Range" : "Fuel Efficiency"}
-                </h6>
-                <small className="">
+                </h5>
+                <h5 className="">
                   {size === "Electric" &&
                   trim?.fuelConsumption === null &&
                   trim?.range !== 0
                     ? trim?.range
                     : trim?.fuelConsumption + "kmpl"}
-                </small>
+                </h5>
               </div>
             </div>
           ) : null}
@@ -106,8 +106,8 @@ export default function KeySpec({ trim }) {
                   alt=""
                 />
               </div>
-              <h6 className="fw-bold mb-1">Transmission</h6>
-              <small className="">{trim?.transmission}</small>
+              <h5 className="fw-bold mb-1">Transmission</h5>
+              <h5 className="">{trim?.transmission}</h5>
             </div>
           </div>
           {trim?.seatingCapacity !== null ? (
@@ -121,10 +121,10 @@ export default function KeySpec({ trim }) {
                     alt=""
                   />
                 </div>
-                <h6 className="fw-bold mb-1">Seats</h6>
-                <small className=" ">
+                <h5 className="fw-bold mb-1">Seats</h5>
+                <h5 className=" ">
                   {trim?.seatingCapacity?.replace("Seater", "")}
-                </small>
+                </h5>
               </div>
             </div>
           ) : null}

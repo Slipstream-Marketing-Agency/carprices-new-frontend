@@ -36,11 +36,11 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                 </div>
                 <div className="col-md-7">
                   <div className="card-body">
-                    <h5 className="card-title fw-bold">
+                    <h4 className="card-title fw-bold">
                       {year} {brand.name} {model.name} {item?.name}
-                    </h5>
+                    </h4>
                     <p className="card-text">
-                      <small className="text-muted">
+                      <p className="text-muted">
                         <span>{item?.transmission}</span>,{" "}
                         <span>{item?.seatingCapacity}</span>,{" "}
                         {item?.fuelType === "Electric"
@@ -50,7 +50,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                             } ${item?.drive}`}
                         ,<span> {item?.torque}Nm</span>,{" "}
                         <span> {item?.power}hp</span>
-                      </small>
+                      </p>
                     </p>
                     <h4 className="card-text fw-bold text-primary">
                       <Price data={item?.price} />

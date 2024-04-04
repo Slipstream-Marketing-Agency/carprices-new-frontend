@@ -101,7 +101,7 @@ export default function VehicleReview({ trim }) {
               id="panelsStayOpen-collapseOne"
               className="accordion-collapse collapse show"
             >
-              <div className="accordion-body">
+              <p className="accordion-body">
                 <b>Body Type:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
                 {trim?.name} is a {trim?.bodyType}.
                 <br />
@@ -114,7 +114,7 @@ export default function VehicleReview({ trim }) {
                 <b>Wheelbase:</b> The {trim?.year} {trim?.brand} {trim?.model}{" "}
                 {trim?.name} features a{" "}
                 {formatNumberWithCommas(trim?.wheelbase)}mm wheelbase. <br />
-              </div>
+              </p>
             </div>
           </div>
           <div className="accordion-item">
@@ -134,7 +134,7 @@ export default function VehicleReview({ trim }) {
               id="panelsStayOpen-collapseTwo"
               className="accordion-collapse collapse"
             >
-              <div className="accordion-body">
+              <p className="accordion-body">
                 <b>Seating Capacity:</b> The {trim?.year} {trim?.brand}{" "}
                 {trim?.model} {trim?.name} has seating for up to{" "}
                 {trim?.seatingCapacity && trim?.seatingCapacity?.split(" ")[0]}{" "}
@@ -183,7 +183,7 @@ export default function VehicleReview({ trim }) {
                 ) : (
                   ""
                 )}
-              </div>
+              </p>
             </div>
           </div>
         </div>
