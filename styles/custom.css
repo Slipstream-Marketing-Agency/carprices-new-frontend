@@ -3104,3 +3104,7 @@ a,
   top: 40px !important;
   z-index: 999;
 }
+
+.filter-sorting-sec span{
+  list-style: none !important;
+}
