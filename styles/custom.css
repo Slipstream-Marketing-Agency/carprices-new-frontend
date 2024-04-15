@@ -364,6 +364,7 @@ button:focus {
 
 small {
   font-size: 10px !important;
+  margin-top: 2px !important;
 }
 
 /* news page style begins */

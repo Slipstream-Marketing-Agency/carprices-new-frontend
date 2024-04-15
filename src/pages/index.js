@@ -18,6 +18,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import BodyTypes from "../components/Home1/BodyTypes";
 import MainLayout from "../layout/MainLayout";
+import { ImageLoadingProvider } from "../utils/ImageLoadingContext";
 
 const BannerLazy = dynamic(() => import("../components/Home1/Banner/index"), {
   loading: () => <p>Loading banner...</p>, // Optional loading placeholder
@@ -70,12 +71,9 @@ export default function Home({
 }) {
   const router = useRouter();
 
-  
-
   const t = useTranslate();
   let isRtl = router.locale === "ar";
 
-  
   if (error) {
     return <div>Error: {errorMessage}</div>;
   }
@@ -102,92 +100,93 @@ export default function Home({
   }, []);
 
   return (
-    <MainLayout
-    pageMeta={{
-      title: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - Carprices.ae",
-      description:
-        "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-      type: "Car Review Website",
-    }}
-  >
-      
-      <Ad728x90 dataAdSlot="5962627056" />
-      <BannerLazy bannerImage={bannerImage} bannerText={bannerText} />
-      {/* <QuickLinkArea /> */}
-      {/* <Ad728x90 dataAdSlot="6306241985" /> */}
-      {/* <ProductCard
+    <ImageLoadingProvider>
+      <MainLayout
+        pageMeta={{
+          title:
+            "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - Carprices.ae",
+          description:
+            "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+          type: "Car Review Website",
+        }}
+      >
+        <BannerLazy bannerImage={bannerImage} bannerText={bannerText} />
+        <Ad728x90 dataAdSlot="5962627056" />
+        {/* <QuickLinkArea /> */}
+        {/* <Ad728x90 dataAdSlot="6306241985" /> */}
+        {/* <ProductCard
         subTitle={"Most Popular"}
         heading={"Most Popular New Cars"}
         carDetails={popularcars}
       /> */}
-      <div className="container">
-        <div className="row">
-          <div className="col-xl-9 col-lg-8 col-md-12 col-sm-12">
-            <ProductCard1Lazy
-              subTitle={"Most Popular"}
-              heading={t.PopularNewCars}
-              carDetails={popularcars?.carModels}
-            />
-            <Ad728x90 dataAdSlot="4367254600" />
-            <ProductCard2Lazy
-              subTitle={"Most Popular"}
-              heading={t.featuredcar}
-              carDetails={featuredcars?.carModels}
-            />
-            <Ad728x90 dataAdSlot="3054172934" />
-            <ProductCard3Lazy
-              subTitle={"Most Popular"}
-              heading={t.carElectric}
-              carDetails={electriccars?.carModels}
-            />
-            <Ad728x90 dataAdSlot="7427751965" />
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
-            <div className="sticky_scroll">
-              <Ad300x600 dataAdSlot="3792539533" />
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12 col-md-12 col-sm-12">
+              <ProductCard1Lazy
+                subTitle={"Most Popular"}
+                heading={t.PopularNewCars}
+                carDetails={popularcars?.carModels}
+              />
+              <Ad728x90 dataAdSlot="4367254600" />
+              <ProductCard2Lazy
+                subTitle={"Most Popular"}
+                heading={t.featuredcar}
+                carDetails={featuredcars?.carModels}
+              />
+              <Ad728x90 dataAdSlot="3054172934" />
+              <ProductCard3Lazy
+                subTitle={"Most Popular"}
+                heading={t.carElectric}
+                carDetails={electriccars?.carModels}
+              />
+              <Ad728x90 dataAdSlot="7427751965" />
             </div>
+            {/* <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen">
+              <div className="sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
+              </div>
+            </div> */}
           </div>
         </div>
-      </div>
 
-      {/* <FeaturedNewCars
+        {/* <FeaturedNewCars
         subTitle={"Newly Featured"}
         heading={"Featured New Cars"}
         carDetails={carDetails}
       /> */}
-      {/* <NewPopularBrands brandsData={brands}  /> */}
-      {/* <UpcomingCars  subTitle={"Most Popular"}
+        {/* <NewPopularBrands brandsData={brands}  /> */}
+        {/* <UpcomingCars  subTitle={"Most Popular"}
         heading={"Most Popular New Cars"}
         carDetails={popularcars}/> */}
-      {/* <RecomandationCar /> */}
-      {/* <TopRateUsedCars /> */}
+        {/* <RecomandationCar /> */}
+        {/* <TopRateUsedCars /> */}
 
-      <CompareCarLazy compare={compare} />
+        <CompareCarLazy compare={compare} />
 
-      <Ad728x90 dataAdSlot="5962627056" />
+        <Ad728x90 dataAdSlot="5962627056" />
 
-      {/* <WhyChoose /> */}
-      {/* <ShopCard /> */}
-      {/* <Testimonial /> */}
-      <BrandCategory brandDetails={brand} />
-      <Ad728x90 dataAdSlot="5962627056" />
-      <BodyTypes bodyTypeList={bodyTypes} />
-      <Ad728x90 dataAdSlot="3488506956" />
-      <Blog
-        heading={t.Carnews}
-        btnTitle={t.viewnews}
-        blogApiData={articles.news}
-        isNews={true}
-      />
-      <Ad728x90 dataAdSlot="8972714021" />
-      <Blog
-        heading={t.reviews}
-        btnTitle={t.viewreview}
-        blogApiData={articles.reviews}
-        isNews={false}
-      />
-
-    </MainLayout>
+        {/* <WhyChoose /> */}
+        {/* <ShopCard /> */}
+        {/* <Testimonial /> */}
+        <BrandCategory brandDetails={brand} />
+        <Ad728x90 dataAdSlot="5962627056" />
+        <BodyTypes bodyTypeList={bodyTypes} />
+        <Ad728x90 dataAdSlot="3488506956" />
+        <Blog
+          heading={t.Carnews}
+          btnTitle={t.viewnews}
+          blogApiData={articles.news}
+          isNews={true}
+        />
+        <Ad728x90 dataAdSlot="8972714021" />
+        <Blog
+          heading={t.reviews}
+          btnTitle={t.viewreview}
+          blogApiData={articles.reviews}
+          isNews={false}
+        />
+      </MainLayout>
+    </ImageLoadingProvider>
   );
 }
 
