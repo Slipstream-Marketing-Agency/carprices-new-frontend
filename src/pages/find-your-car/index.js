@@ -780,44 +780,6 @@ function CarListingLeftSidebar({
                       <Price data={Number(maxPrice)} />. Unleash your automotive
                       aspirations with our captivating selection.
                     </h4>
-
-                    <fieldset className="filter-sorting-sec d-flex border-bottom p-sm-b clearfix dev-filter-sorting m-lg-t m-lg-b">
-    <legend className="f-11 f-regular m-sm-r float-left">Sorting :</legend>
-    <label className="radio-check-text m-lg-r dev-selected-sort-value">
-        <input type="radio" data-name="Popularity" name="FilterForm[sort]" value="popularity" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span className="dev-filter-name sort-name">Popularity</span>
-    </label>
-    <label className="radio-check-text m-lg-r dev-selected-sort-value">
-        <input type="radio" data-name="Upcoming" name="FilterForm[sort]" value="upcoming" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span className="dev-filter-name sort-name">Upcoming</span>
-    </label>
-    <label className="radio-check-text m-lg-r dev-selected-sort-value">
-        <input type="radio" data-name="Latest" name="FilterForm[sort]" value="latest" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span className="dev-filter-name sort-name">Latest</span>
-    </label>
-    <label className="radio-check-text m-lg-r sorting-list-data">
-        <input type="radio" data-name="Price High to Low" name="FilterForm[sort]" value="price-desc" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span>
-            <span className="sort-name">Price High to Low</span>
-            <i className="icon-back inline-block m-xs-l dev-icon rotate-minus-90"></i>
-        </span>
-    </label>
-    <label className="radio-check-text m-lg-r sorting-list-data">
-        <input type="radio" data-name="Price Low to High" name="FilterForm[sort]" value="price-asc" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span>
-            <span className="sort-name">Price Low to High</span>
-            <i className="icon-back inline-block m-xs-l dev-icon rotate-90"></i>
-        </span>
-    </label>
-    <label className="radio-check-text m-lg-r sorting-list-data">
-        <input type="radio" data-name="Mileage High to Low" name="FilterForm[sort]" value="mileage-desc" onClick={(e) => { sortingDetail(e.target); fetchDataFromListing(e.target); }} />
-        <span>
-            <span className="sort-name">Mileage High to Low</span>
-            <i className="icon-back inline-block m-xs-l dev-icon rotate-minus-90"></i>
-        </span>
-    </label>
-</fieldset>
-
                     <div className="row md:g-4 g-2 mb-md-40 mb-10">
                       <ProductSideFilterList filteredTrims={allTrims} />
                     </div>
