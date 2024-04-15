@@ -62,7 +62,7 @@ function index({ heading, carDetails, compare }) {
 
   
   return (
-    <div className="compare-car-section mt-3 mb-3 ">
+    <div className="compare-car-section mt-2 mb-3 ">
       <div className="container pb-4 container-fluid white_bg_wrapper ">
         <div className="row mb-15 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12">

@@ -16,7 +16,7 @@ function index({ bannerImage, bannerText }) {
     <>
       {/* <AdvanceFilterModal /> */}
       <div
-        className="banner-section1"
+        className="banner-section1 mb-4"
         style={{
           backgroundImage: `url(${bannerImage})`,
         }}
