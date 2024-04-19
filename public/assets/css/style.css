@@ -26479,25 +26479,15 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   margin-bottom: 12px;
   color: var(--title-color);
   font-family: var(--font-gilroy);
-  font-size: 28px !important;
   font-weight: 600;
 }
 .blog-details-page .post-title a {
   color: var(--text-color);
-  font-size: 18px;
   font-weight: 500;
   transition: 0.35s;
 }
 .blog-details-page .post-title a:hover {
   color: var(--primary);
-}
-@media (max-width: 767px) {
-  .blog-details-page .post-title {
-    font-size: 16px !important;
-  }
-  .blog-details-page .post-title a {
-    font-size: 16px;
-  }
 }
 .blog-details-page .author-area {
   display: flex;
