@@ -120,14 +120,14 @@ p {
 
 @media (max-width: 767px) {
   h1 {
-    font-size: 20px !important;
+    font-size: 1.4rem !important;
   }
   h2 {
-    font-size: 1.4rem !important;
+    font-size: 1.2rem !important;
   }
 
   h3 {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
   }
   h4 {
     font-size: 1rem !important;
@@ -1619,6 +1619,9 @@ input[type="color"]:focus,
 }
 
 @media (max-width: 728px) {
+  .cover_card_image img {
+    height: 80px;
+  }
   .responsive_leaderboard_horizontal {
     text-align: center;
     width: 100% !important;
