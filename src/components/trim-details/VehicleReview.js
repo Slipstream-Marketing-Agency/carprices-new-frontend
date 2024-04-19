@@ -47,7 +47,7 @@ export default function VehicleReview({ trim }) {
               )}
               it delivers {trim?.power}hp of power and {trim?.torque} Nm of
               torque. It features a {TransmissionList(trim?.gearBox)}{" "}
-              transmission and a {trim?.drive} drive system for smooth handling.
+              transmission and a {trim?.drive} system for smooth handling.
               It is a {trim?.fuelType} drivetrain with a{" "}
               {trim?.fuelType === "Electric" ? "range " : "fuel efficiency "}
               of{" "}

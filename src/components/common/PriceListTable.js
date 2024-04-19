@@ -18,17 +18,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontFamily: "Gilroy, sans-serif",
+    whiteSpace: "nowrap", // Prevent cell content from wrapping
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
 }));
 
-// Update your component to accept the data prop
 export default function PriceListTable({ data, brand }) {
   return (
-    <TableContainer
-      component={Paper}
-      sx={{ borderRadius: 0, fontFamily: "Gilroy" }}
-    >
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    <TableContainer component={Paper} sx={{ borderRadius: 0, fontFamily: "Gilroy" }}>
+      <Table aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Model Name</StyledTableCell>

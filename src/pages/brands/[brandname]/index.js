@@ -106,311 +106,316 @@ function CarListingLeftSidebar({
 export default CarListingLeftSidebar;
 
 export async function getServerSideProps(context) {
-  const { query } = context;
-  const page = parseInt(query.page) || 1;
-  const pageSize = 12;
-  const brandSlugs = [query.brandname ? query.brandname : []];
-  const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
-  const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
-  const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
-  const driveSlugs = query.drive ? query.drive.split(",") : [];
-  const transmissionSlugs = query.transmission
-    ? query.transmission.split(",")
-    : [];
-
-  const queryParams = {};
-
-  if (brandSlugs.length > 0) {
-    queryParams.brands = JSON.stringify(brandSlugs);
-  }
-
-  if (bodyTypeSlugs.length > 0) {
-    queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
-  }
-
-  if (fuelTypeSlugs.length > 0) {
-    queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
-  }
-
-  if (cylinderSlugs.length > 0) {
-    queryParams.cylinders = JSON.stringify(cylinderSlugs);
-  }
-
-  if (driveSlugs.length > 0) {
-    queryParams.drive = JSON.stringify(driveSlugs);
-  }
-
-  if (transmissionSlugs.length > 0) {
-    queryParams.transmission = JSON.stringify(transmissionSlugs);
-  }
-  // Parse ranges
-  const parseRanges = (rangeStr) => {
-    return rangeStr.split(",").map((range) => {
-      const [min, max] = range.split("-");
-      return { min: parseInt(min), max: parseInt(max) || null };
-    });
-  };
-
-  const priceRange = query.price ? parseRanges(query.price) : [];
-  const powerRange = query.power ? parseRanges(query.power) : [];
-  const displacementRange = query.displacement
-    ? parseRanges(query.displacement)
-    : [];
-
-  if (priceRange) {
-    queryParams.priceRange = priceRange;
-  }
-  if (powerRange) {
-    queryParams.powerRange = powerRange;
-  }
-  if (displacementRange) {
-    queryParams.displacementRange = displacementRange;
-  }
-
-  const filteredTrims = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-trims/filter?brands=${JSON.stringify(
-      brandSlugs
-    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-      fuelTypeSlugs
-    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-      driveSlugs
-    )}&transmission=${JSON.stringify(
-      transmissionSlugs
-    )}&priceRanges=${JSON.stringify(
-      priceRange
-    )}&displacementRanges=${JSON.stringify(
-      displacementRange
-    )}&powerRanges=${JSON.stringify(
-      powerRange
-    )}&page=${page}&pageSize=${pageSize}`
-  );
-
-  const fullFilter = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
-    }car-trims/price-range-by-brands?brands=${JSON.stringify(
-      brandSlugs
-    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-      fuelTypeSlugs
-    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-      driveSlugs
-    )}&transmission=${JSON.stringify(
-      transmissionSlugs
-    )}&priceRanges=${JSON.stringify(
-      priceRange
-    )}&displacementRanges=${JSON.stringify(
-      displacementRange
-    )}&powerRanges=${JSON.stringify(
-      powerRange
-    )}&page=${page}&pageSize=${pageSize}`
-  );
-
-  let fuelTypeListres,
-    cylinderListres,
-    transmissionListres,
-    driveListres,
-    pricerangesres,
-    totaldisplacementrangeres,
-    totalpowerrangeres,
-    brandListres,
-    bodyTypeListres;
-
-  if (fuelTypeSlugs.length > 0) {
-    const fuelTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/fuelList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    fuelTypeListres = fuelTypeList;
-  }
-
-  if (cylinderSlugs.length > 0) {
-    const cylinderList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/cylinderList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    cylinderListres = cylinderList;
-  }
-
-  if (transmissionSlugs.length > 0) {
-    const transmissionSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/transmissionList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    transmissionListres = transmissionSlugs;
-  }
-
-  if (driveSlugs.length > 0) {
-    const driveSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/driveList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    driveListres = driveSlugs;
-  }
-
-  if (priceRange.length > 0) {
-    const priceranges = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/priceRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    pricerangesres = priceranges;
-  }
-
-  if (displacementRange.length > 0) {
-    const totaldisplacementrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/displacementRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totaldisplacementrangeres = totaldisplacementrange;
-  }
-
-  if (powerRange.length > 0) {
-    const totalpowerrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/powerRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totalpowerrangeres = totalpowerrange;
-  }
-
-  if (brandSlugs.length > 0) {
-    const brandList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/brandList?bodyTypes=${JSON.stringify(
-        bodyTypeSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    brandListres = brandList;
-  }
-
-  if (bodyTypeSlugs.length > 0) {
-    const bodyTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/bodyList?brands=${JSON.stringify(
-        brandSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    bodyTypeListres = bodyTypeList;
-  }
-
-  const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
-
-  const branddetails = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandSlugs}`
-  );
-
   try {
+    const { query } = context;
+    const page = parseInt(query.page) || 1;
+    const pageSize = 12;
+    const brandSlugs = [query.brandname ? query.brandname : []];
+    const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
+    const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
+    const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
+    const driveSlugs = query.drive ? query.drive.split(",") : [];
+    const transmissionSlugs = query.transmission
+      ? query.transmission.split(",")
+      : [];
+
+    const queryParams = {};
+
+    if (brandSlugs.length > 0) {
+      queryParams.brands = JSON.stringify(brandSlugs);
+    }
+
+    if (bodyTypeSlugs.length > 0) {
+      queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
+    }
+
+    if (fuelTypeSlugs.length > 0) {
+      queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
+    }
+
+    if (cylinderSlugs.length > 0) {
+      queryParams.cylinders = JSON.stringify(cylinderSlugs);
+    }
+
+    if (driveSlugs.length > 0) {
+      queryParams.drive = JSON.stringify(driveSlugs);
+    }
+
+    if (transmissionSlugs.length > 0) {
+      queryParams.transmission = JSON.stringify(transmissionSlugs);
+    }
+    // Parse ranges
+    const parseRanges = (rangeStr) => {
+      return rangeStr.split(",").map((range) => {
+        const [min, max] = range.split("-");
+        return { min: parseInt(min), max: parseInt(max) || null };
+      });
+    };
+
+    const priceRange = query.price ? parseRanges(query.price) : [];
+    const powerRange = query.power ? parseRanges(query.power) : [];
+    const displacementRange = query.displacement
+      ? parseRanges(query.displacement)
+      : [];
+
+    if (priceRange) {
+      queryParams.priceRange = priceRange;
+    }
+    if (powerRange) {
+      queryParams.powerRange = powerRange;
+    }
+    if (displacementRange) {
+      queryParams.displacementRange = displacementRange;
+    }
+
+    const filteredTrims = await axios.get(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }car-trims/filter?brands=${JSON.stringify(
+        brandSlugs
+      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+        fuelTypeSlugs
+      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+        driveSlugs
+      )}&transmission=${JSON.stringify(
+        transmissionSlugs
+      )}&priceRanges=${JSON.stringify(
+        priceRange
+      )}&displacementRanges=${JSON.stringify(
+        displacementRange
+      )}&powerRanges=${JSON.stringify(
+        powerRange
+      )}&page=${page}&pageSize=${pageSize}`
+    );
+
+    const fullFilter = await axios.get(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }car-trims/price-range-by-brands?brands=${JSON.stringify(
+        brandSlugs
+      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+        fuelTypeSlugs
+      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+        driveSlugs
+      )}&transmission=${JSON.stringify(
+        transmissionSlugs
+      )}&priceRanges=${JSON.stringify(
+        priceRange
+      )}&displacementRanges=${JSON.stringify(
+        displacementRange
+      )}&powerRanges=${JSON.stringify(
+        powerRange
+      )}&page=${page}&pageSize=${pageSize}`
+    );
+
+    let fuelTypeListres,
+      cylinderListres,
+      transmissionListres,
+      driveListres,
+      pricerangesres,
+      totaldisplacementrangeres,
+      totalpowerrangeres,
+      brandListres,
+      bodyTypeListres;
+
+    if (fuelTypeSlugs.length > 0) {
+      const fuelTypeList = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/fuelList?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(
+          bodyTypeSlugs
+        )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+          driveSlugs
+        )}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      fuelTypeListres = fuelTypeList;
+    }
+
+    if (cylinderSlugs.length > 0) {
+      const cylinderList = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/cylinderList?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      cylinderListres = cylinderList;
+    }
+
+    if (transmissionSlugs.length > 0) {
+      const transmissionSlugs = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/transmissionList?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+          driveSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      transmissionListres = transmissionSlugs;
+    }
+
+    if (driveSlugs.length > 0) {
+      const driveSlugs = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/driveList?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&cylinders=${JSON.stringify(
+          cylinderSlugs
+        )}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      driveListres = driveSlugs;
+    }
+
+    if (priceRange.length > 0) {
+      const priceranges = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/priceRange?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+          driveSlugs
+        )}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      pricerangesres = priceranges;
+    }
+
+    if (displacementRange.length > 0) {
+      const totaldisplacementrange = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/displacementRange?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+          driveSlugs
+        )}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      totaldisplacementrangeres = totaldisplacementrange;
+    }
+
+    if (powerRange.length > 0) {
+      const totalpowerrange = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/powerRange?brands=${JSON.stringify(
+          brandSlugs
+        )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+          fuelTypeSlugs
+        )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+          driveSlugs
+        )}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      totalpowerrangeres = totalpowerrange;
+    }
+
+    if (brandSlugs.length > 0) {
+      const brandList = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/brandList?bodyTypes=${JSON.stringify(
+          bodyTypeSlugs
+        )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+          cylinderSlugs
+        )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      brandListres = brandList;
+    }
+
+    if (bodyTypeSlugs.length > 0) {
+      const bodyTypeList = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-trims/bodyList?brands=${JSON.stringify(
+          brandSlugs
+        )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+          cylinderSlugs
+        )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+          transmissionSlugs
+        )}&priceRanges=${JSON.stringify(
+          priceRange
+        )}&displacementRanges=${JSON.stringify(
+          displacementRange
+        )}&powerRanges=${JSON.stringify(
+          powerRange
+        )}&page=${page}&pageSize=${pageSize}`
+      );
+      bodyTypeListres = bodyTypeList;
+    }
+
+    const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
+
+    const branddetails = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandSlugs}`
+    );
     return {
       props: {
         // brands: brandsData?.data?.carModels?.data,

@@ -15,7 +15,7 @@ export default function KeySpec({ trim }) {
         </h2>
         <hr className="my-2 heading-bottom " />
         <div className="row py-2 text-center">
-          <div className="col-sm-4 col-lg-2 col-6 ">
+          <div className="col-sm-4 col-lg-2 col-4 ">
             <div className="d-flex flex-column align-items-center">
               <div className="spec-img">
                 <Image
@@ -38,7 +38,7 @@ export default function KeySpec({ trim }) {
             </div>
           </div>
           {trim?.power !== null ? (
-            <div className="col-sm-4  col-lg-2  col-6 ">
+            <div className="col-sm-4  col-lg-2  col-4 ">
               <div className="d-flex flex-column align-items-center">
                 <div className="spec-img ">
                   <Image
@@ -54,9 +54,9 @@ export default function KeySpec({ trim }) {
             </div>
           ) : null}
           {trim?.torque !== null ? (
-            <div className="col-sm-4 col-lg-2  col-6 ">
+            <div className="col-sm-4 col-lg-2  col-4 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img p-2">
+                <div className="spec-img p-1">
                   <Image
                     width={30}
                     height={30}
@@ -73,9 +73,9 @@ export default function KeySpec({ trim }) {
           ) : null}
 
           {trim?.fuelConsumption !== null || trim?.range !== 0 ? (
-            <div className="col-sm-4 col-lg-2  col-6 ">
+            <div className="col-sm-4 col-lg-2  col-4 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img p-2">
+                <div className="spec-img p-1">
                   <Image
                     width={35}
                     height={35}
@@ -96,9 +96,9 @@ export default function KeySpec({ trim }) {
               </div>
             </div>
           ) : null}
-          <div className="col-sm-4 col-lg-2  col-6 ">
+          <div className="col-sm-4 col-lg-2  col-4 ">
             <div className="d-flex flex-column align-items-center">
-              <div className="spec-img p-2">
+              <div className="spec-img p-1">
                 <Image
                   width={35}
                   height={35}
@@ -111,9 +111,9 @@ export default function KeySpec({ trim }) {
             </div>
           </div>
           {trim?.seatingCapacity !== null ? (
-            <div className="col-sm-4 col-lg-2 col-6 ">
+            <div className="col-sm-4 col-lg-2 col-4 ">
               <div className="d-flex flex-column align-items-center">
-                <div className="spec-img p-2">
+                <div className="spec-img p-1">
                   <Image
                     width={50}
                     height={50}
