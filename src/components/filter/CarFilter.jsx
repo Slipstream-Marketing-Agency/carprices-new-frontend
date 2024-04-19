@@ -149,7 +149,7 @@ export default function CarFilter({
         const response = await axios.get(
           `${
             process.env.NEXT_PUBLIC_API_URL
-          }car-trims/homefilter?brands=${JSON.stringify(
+          }car-trims/filter?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
             bodyTypeSlugs
