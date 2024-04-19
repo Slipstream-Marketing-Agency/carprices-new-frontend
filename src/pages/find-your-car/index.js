@@ -17,6 +17,7 @@ import Image from "next/image";
 import LoaderOverlay from "@/src/utils/LoaderOverlay ";
 import Breadcrumb from "@/src/utils/Breadcrumb";
 import Price from "@/src/utils/Price";
+import FilterLayout from "@/src/components/find-car-multi-step-filter/FilterLayout";
 
 function CarListingLeftSidebar({
   currentPage,
@@ -43,6 +44,7 @@ function CarListingLeftSidebar({
   const { query } = router;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
+  const sorting = query.sort ? query.sort : "";
   const brandSlugs = query.brand ? query.brand.split(",") : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
@@ -181,7 +183,9 @@ function CarListingLeftSidebar({
             displacementRange
           )}&powerRanges=${JSON.stringify(
             powerRange
-          )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+          )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(
+            sorting
+          )}`
         );
         setTotal(response?.data?.data?.pagination?.pageCount);
         setCurrent(page);
@@ -616,6 +620,7 @@ function CarListingLeftSidebar({
     query.power,
     query.displacement,
     query.page,
+    query.sort,
   ]);
 
   const brandoptions = brandListres?.map((brand) => ({
@@ -660,6 +665,7 @@ function CarListingLeftSidebar({
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setShowModal(false);
   }, [
     query.haveMusic,
     query.isLuxury,
@@ -701,9 +707,67 @@ function CarListingLeftSidebar({
   const minPrice = parseInt(prices[0]); // Convert to integer
   const maxPrice = parseInt(prices[1]);
 
+  const [selectedOption, setSelectedOption] = useState(query.sort);
+
+  const handleOptionChange = (value) => {
+    setSelectedOption(value);
+  };
+
+  useEffect(() => {
+    const updateQuery = () => {
+      const currentParams = { ...router.query };
+      currentParams.sort = selectedOption;
+      const queryString = new URLSearchParams(currentParams).toString();
+      router.replace(`${router.pathname}?${queryString}`, undefined, {
+        shallow: true,
+      });
+    };
+
+    if (selectedOption !== "") {
+      updateQuery();
+    }
+  }, [selectedOption]);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <LoaderOverlay isVisible={isLoading} />
+
+      <div
+        className={`modal compareModalMainContainer  ${
+          showModal ? "show modal-overlay " : ""
+        }`}
+        style={{ display: showModal ? "block " : "none " }}
+        tabIndex="-1"
+      >
+        <div
+          className={`modal-dialog d-flex justify-content-center modal-dialog-centered modal-lg compareModalWidth  ${
+            showModal ? "showCompareModal" : "hideCompareModal"
+          }`}
+        >
+          <div className="filter-modal-content compareModelContainer">
+            <div
+              className="modal-body mt-3 mx-md-4 mx-0 mb-4"
+             
+            >
+              <div className="d-flex justify-content-end mb-2">
+                <i
+                  class="bi bi-x-square text-white fs-3"
+                  onClick={handleCloseModal}
+                ></i>
+              </div>
+              <div className="car-filter-area">
+                <FilterLayout />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <MainLayout>
         <div className="mt-2">
           <Ad728x90 dataAdSlot="5962627056" />
@@ -771,15 +835,50 @@ function CarListingLeftSidebar({
                 </div>
                 <div className="list-grid-main">
                   <div className={`list-grid-product-wrap ${activeClass}`}>
-                    <Breadcrumb />
+                    {/* <Breadcrumb /> */}
                     <h1 className="fw-bold">New Car Buyer's Guide</h1>
-                    <hr className="my-2"/>
-                    <h4>
+                    <p>
                       Discover our exceptional range of vehicles, priced between{" "}
-                      <Price data={Number(minPrice)} /> and {" "}
+                      <Price data={Number(minPrice)} /> and{" "}
                       <Price data={Number(maxPrice)} />. Unleash your automotive
                       aspirations with our captivating selection.
-                    </h4>
+                    </p>
+                    <div className="d-md-flex d-none align-items-center justify-content-between">
+                      <fieldset className="filter-sorting-sec d-flex gap-4  p-sm-b clearfix dev-filter-sorting m-lg-t m-lg-b ">
+                        <label
+                          className={`radio-check-text m-lg-r sorting-list-data ${
+                            selectedOption === "price-desc" ? "active" : ""
+                          }`}
+                          onClick={() => handleOptionChange("price-desc")}
+                        >
+                          <span className="sort-name">
+                            <i class="bi bi-sort-down " />
+                            Price High to Low
+                          </span>
+                          <i className="icon-back inline-block m-xs-l dev-icon rotate-minus-90"></i>
+                        </label>
+                        <label
+                          className={`radio-check-text m-lg-r sorting-list-data ${
+                            selectedOption === "price-asc" ? "active" : ""
+                          }`}
+                          onClick={() => handleOptionChange("price-asc")}
+                        >
+                          <span className="sort-name">
+                            <i class="bi bi-sort-up"></i>Price Low to High
+                          </span>
+                          <i className="icon-back inline-block m-xs-l dev-icon rotate-90"></i>
+                        </label>
+                      </fieldset>
+                      <button
+                        className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
+                        onClick={() => setShowModal(true)}
+                      >
+                        <i class="bi bi-funnel-fill mt-1 ms-1 text-primary" />
+                        Back to Main Filter
+                      </button>
+                    </div>
+
+                    <hr className="mb-3 mt-3" />
                     <div className="row md:g-4 g-2 mb-md-40 mb-10">
                       <ProductSideFilterList filteredTrims={allTrims} />
                     </div>
@@ -787,12 +886,20 @@ function CarListingLeftSidebar({
                       currentPage={currentPage}
                       totalPages={totalPages}
                     />
+
                     <div className="view-btn-area mt-15">
-                      <Link legacyBehavior href="/">
+                      {/* <Link legacyBehavior href="/">
                         <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
                           Back to Home
                         </button>
-                      </Link>
+                      </Link> */}
+                      <button
+                        className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
+                        onClick={() => setShowModal(true)}
+                      >
+                        <i class="bi bi-funnel-fill mt-1 ms-1 text-primary" />
+                        Back to Main Filter
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -886,6 +993,7 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const page = parseInt(query.page) || 1;
   const pageSize = 12;
+  const sorting = query.sort ? query.sort : "";
   const brandSlugs = query.brand ? query.brand.split(",") : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
@@ -993,7 +1101,9 @@ export async function getServerSideProps(context) {
       displacementRange
     )}&powerRanges=${JSON.stringify(
       powerRange
-    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}`
+    )}&${additionalQueryString}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(
+      sorting
+    )}`
   );
 
   const fullFilter = await axios.get(

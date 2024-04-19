@@ -8,7 +8,6 @@ function ProductCard({ subTitle, heading, carDetails }) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
-  
 
   const CarPriceRange = ({ minPrice, maxPrice }) => {
     const formatPrice = (price) => {
@@ -31,7 +30,9 @@ function ProductCard({ subTitle, heading, carDetails }) {
     }
 
     return (
-      <h6 className="text-danger fw-bold MobilepriceTextSize mb-1">{priceInfo}</h6>
+      <h6 className="text-danger fw-bold MobilepriceTextSize mb-1">
+        {priceInfo}
+      </h6>
     );
   };
 
@@ -62,7 +63,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
         })}*`
       : "Not Available";
 
-    return <span className="fw-bold">{emiString}</span>;
+    return <span className="fw-bold text-p">{emiString}</span>;
   };
 
   return (
@@ -72,8 +73,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
               {/* <span>{subTitle}</span> */}
-              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>{heading}</h2>
-              <hr className="my-0 mt-2 heading-bottom "/>
+              <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>
+                {heading}
+              </h2>
+              <hr className="my-0 mt-2 heading-bottom " />
             </div>
             {/* <ul className="nav nav-tabs" id="myTab6" role="tablist">
               <li className="nav-item" role="presentation">
@@ -182,7 +185,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
                           <div className="product-content">
                             <div className="product-content-height">
                               <h6 className="mobileFontCarName fw-bold mb-1">
-                                <Link legacyBehavior href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}>
+                                <Link
+                                  legacyBehavior
+                                  href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
+                                >
                                   <span>
                                     {car?.highTrim?.year} {car?.brand?.name}{" "}
                                     {car?.name}
@@ -194,12 +200,10 @@ function ProductCard({ subTitle, heading, carDetails }) {
                                 maxPrice={car?.maxPrice}
                               />
 
-                              <ul className="features">
-                                <li className="mobileFontEmi">
-                                  {t.emistart}{" "}
-                                  <CarEMIDisplay minPrice={car?.minPrice} />
-                                </li>
-                              </ul>
+                              <h6 className="MobilepriceTextSize mb-1">
+                                {t.emistart}{" "}
+                                <CarEMIDisplay minPrice={car?.minPrice} />
+                              </h6>
                             </div>
 
                             <div
@@ -213,10 +217,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                               </span>
                               <div className="brand ">
                                 <Link legacyBehavior href="">
-                                  <img
-                                    src={car?.brand?.logo}
-                                    alt="brandLogo"
-                                  />
+                                  <img src={car?.brand?.logo} alt="brandLogo" />
                                 </Link>
                               </div>
                             </div>

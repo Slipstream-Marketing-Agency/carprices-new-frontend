@@ -241,6 +241,30 @@ button:focus {
   border: none;
 }
 
+.filter-modal-content{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  outline: 0;
+  max-width: 600px;
+  width: 600px;
+}
+.filter-modal-content i {
+  position: absolute;
+  margin-top: 15px;
+  margin-right: 5px;
+  z-index: 100;
+}
+.filter-modal-content .modal-body{
+  max-height: 600px;
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+}
 .modal-header {
   background: var(--primary);
   border-top-left-radius: 19px;
@@ -2207,9 +2231,6 @@ input[type="color"]:focus,
 .compareModalCloseBtn {
   font-size: 13px;
 }
-.compareModelContainer {
-  /* top:-1000px; */
-}
 /* .compareModalMainContainer{
   position: relative !important;
   transition: 1s  !important;
@@ -3108,3 +3129,34 @@ a,
 .filter-sorting-sec span{
   list-style: none !important;
 }
+.radio-check-text{
+  
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+.radio-check-text.active {
+  
+  font-weight: 600;
+  color: var(--light);
+  cursor: pointer;
+}
+
+/* .radio-check-text{
+  background-color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+.radio-check-text.active {
+  background-color: var(--light);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+} */
