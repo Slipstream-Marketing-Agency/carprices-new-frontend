@@ -35,7 +35,7 @@
   color: var(--light) !important;
 }
 
-.bg-primary{
+.bg-primary {
   background-color: var(--primary) !important;
 }
 /*================================================
@@ -13589,17 +13589,15 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 .brand-category-area {
   position: relative;
 }
-.brand-icon img{
+.brand-icon img {
   max-width: 45px !important;
-  
 }
-@media(max-width:650px){
-
-  .brand img{
-    width:30px;
+@media (max-width: 650px) {
+  .brand img {
+    width: 30px;
   }
-  .brand-icon img{
-    width:40px;
+  .brand-icon img {
+    width: 40px;
   }
 }
 
@@ -13883,12 +13881,10 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   .product-card .product-content {
     padding: 5px 5px !important;
   }
-  
 }
 .product-card .product-content {
   padding: 5px;
 }
-
 
 @media (max-width: 1499px) {
   .product-card .product-content {
@@ -14053,11 +14049,10 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   justify-content: space-between;
   /* padding-top: 5px; */
 }
-@media (max-width:650px){
+@media (max-width: 650px) {
   .product-card .product-content .content-btm {
     padding-top: 0px;
   }
- 
 }
 .product-card .product-content .content-btm .view-btn2 {
   font-family: var(--font-gilroy);
@@ -14163,7 +14158,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 .product-card.style-2.compare {
   border-radius: 10px;
-  box-shadow:4px 4px 10px var(--bs-gray-200);
+  box-shadow: 4px 4px 10px var(--bs-gray-200);
   border: 1px solid rgba(238, 238, 238, 0.93);
   background: #fff;
   position: relative;
@@ -16018,7 +16013,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
   margin-bottom: 0;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   height: 50px;
 }
 .news-section .news-card .content > h6 a {
@@ -16265,7 +16260,7 @@ footer .footer-widget .widget-title {
   margin-bottom: 23px;
 }
 footer .footer-widget .widget-title h5 {
-  position:relative;
+  position: relative;
   margin-bottom: 0;
 
   color: var(--white-color);
@@ -16275,17 +16270,16 @@ footer .footer-widget .widget-title h5 {
 }
 
 footer .footer-widget .widget-title h5::after {
-  position:absolute;
-  content:"";
-  left:0;
-  bottom:-10px;
-  width:61px;
-  height:3px;
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -10px;
+  width: 61px;
+  height: 3px;
   border-radius: 10px;
-  background:white;
+  background: white;
   background-size: 100% 100%;
 }
-
 
 footer .footer-widget .menu-container ul {
   margin: 0;
@@ -16373,8 +16367,11 @@ footer .footer-center .contact-area {
 @media (max-width: 767px) {
   footer .footer-center .contact-area {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
     gap: 20px;
+  }
+  footer .footer-center{
+    align-items: start;
   }
 }
 footer .footer-center .contact-area .hotline-area {
@@ -16482,7 +16479,7 @@ footer .footer-btm {
 @media (max-width: 767px) {
   footer .footer-btm {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
     gap: 12px;
   }
 }
@@ -23977,8 +23974,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .faq-wrap .accordion .accordion-item .accordion-header .accordion-button {
     padding: 15px 45px 15px 15px;
   }
-.accordion-button{
-    font-size:14px !important;
+  .accordion-button {
+    font-size: 14px !important;
   }
 }
 .faq-wrap
@@ -25279,7 +25276,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .product-sidebar .product-widget .check-box-item .product-widget-title {
   color: var(--title-color);
   font-family: var(--font-gilroy);
-  font-size: 16px ;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1;
   display: flex;
@@ -25488,12 +25485,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   border-radius: 2px;
 }
 
-.checkmarkRight0{
+.checkmarkRight0 {
   right: 10px !important;
 }
-.checkmarkRight2{
+.checkmarkRight2 {
   right: -2px !important;
-
 }
 .product-sidebar
   .product-widget
@@ -26485,7 +26481,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   font-family: var(--font-gilroy);
   font-size: 28px !important;
   font-weight: 600;
-
 }
 .blog-details-page .post-title a {
   color: var(--text-color);
@@ -29072,16 +29067,16 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .search_filter_box_items {
   margin-top: 45px;
   height: 270px;
-      display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .search_filter_box_items .btn {
   width: 30%;
 }
 
-.search_filter_box_items .btn.active{
+.search_filter_box_items .btn.active {
   background: #d5d5d5 !important;
 }
 
@@ -29487,8 +29482,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 /* home filter style ends */
 
-
-
 /* ads ends */
 
 /* popular brands begins*/
@@ -29785,8 +29778,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 
 /* slider ends */
 
-
-
 /* mobile view begins */
 @media (max-width: 767px) {
   .contact-page p {
@@ -29826,13 +29817,13 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   }
   .product-card .product-content .features li {
     font-size: 10px;
-    padding-right:0px !important;
+    padding-right: 0px !important;
   }
-  
+
   .product-card .product-content .content-btm .view-btn2 {
     font-size: 12px;
-    font-weight:bold;
-    line-height: 1.1 !important; 
+    font-weight: bold;
+    line-height: 1.1 !important;
   }
   .product-content-height .MobilepriceTextSize {
     font-size: 12px !important;
@@ -29840,10 +29831,9 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 
   .product-content-height {
     height: 105px;
-    
   }
-  .mobileFontCarName{
-    font-size:14px !important;
+  .mobileFontCarName {
+    font-size: 14px !important;
     margin: 0 0 3px !important;
   }
   .compare-car-section
@@ -29876,7 +29866,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   }
 
   .news-section .news-card .content > h6 a {
-    font-size: 12px;
+    font-size: 14px;
   }
   .news-section .news-card .content .news-btm .author-area .author-content h6 {
     font-size: 11px;
@@ -29888,10 +29878,10 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     font-size: 10px;
   }
   .news-section .news-card .content {
-    padding: 10px 15px;
+    padding: 0px 0px;
   }
   .news-section .news-card .content > h6 {
-    margin-top: 15px;
+    margin-top: 5px;
   }
   .find_car_head h3 {
     font-size: 15px;
@@ -29922,7 +29912,9 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .body-category-area .single-category1 {
     padding: 8px 8px !important;
   }
-  .body-category-area .single-category1 h6{font-size: 11px !important;}
+  .body-category-area .single-category1 h6 {
+    font-size: 11px !important;
+  }
 }
 
 /* mobile view ends */

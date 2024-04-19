@@ -71,17 +71,10 @@ function index({ heading, btnTitle, blogData, blogApiData, isNews }) {
                   </h6>
                   <div className="news-btm">
                     <div className="author-area">
-                      <div className="author-content d-flex">
-                        <h6>
-                          {news?.author}
-                          {" -"}
-                        </h6>
-
-                        <small>
-                          {" "}
-                          {/* {t.postedOn} -{" "} */}
-                          {moment(news.publishedAt).format("MMMM Do YYYY")}
-                        </small>
+                      <div className="">
+                        <p>
+                          {news?.author} - {moment(news.publishedAt).format("MMMM Do YYYY")}
+                        </p>
                       </div>
                     </div>
                   </div>

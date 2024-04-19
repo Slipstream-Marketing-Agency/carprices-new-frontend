@@ -124,7 +124,7 @@ function Footer1() {
                           legacyBehavior
                           href="https://carprices.ae/news/lc-prado-vs-patrol"
                         >
-                          <a>2024 LC Prado Vs Nissan Patro</a>
+                          <a>2024 LC Prado Vs Nissan Patrol</a>
                         </Link>
                       </li>
                     </ul>
