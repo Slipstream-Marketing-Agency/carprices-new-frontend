@@ -31,11 +31,9 @@ import Price from "@/src/utils/Price";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
-  
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const mainTrim = currentmodel?.highTrim[0];
 
-  
   const allTrims = currentmodel?.trims;
   const minPower = currentmodel?.power?.min;
   const maxPower = currentmodel?.power?.max;
@@ -63,8 +61,6 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
 
   const gallery = mainTrim?.galleryImages > 0;
 
-  
-
   const getTransmissionType = () => {
     const hasAutomatic = allTrims.some((t) => t?.transmission === "Automatic");
     const hasManual = allTrims.some((t) => t?.transmission === "Manual");
@@ -91,7 +87,6 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
       );
     }
   };
-
 
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
@@ -659,8 +654,6 @@ export async function getServerSideProps(context) {
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
 
-  
-
   try {
     const oldModels = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-model/${modelSlug}`
@@ -670,8 +663,6 @@ export async function getServerSideProps(context) {
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
     );
 
-    
-
     return {
       props: {
         oldModel: oldModels?.data?.data,
@@ -679,29 +670,35 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    if (error) {
-      try {
-        let redirectModel = await axios.get(
-          process.env.NEXT_PUBLIC_API_URL_OLD + "model/old-slug/" + modelSlug
-        );
-        return {
-          redirect: {
-            permanent: true,
-            destination: `/brands/${brandname}/${year}/${redirectModel.data.model.slug}`,
-          },
-          props: {},
-        };
-      } catch (error) {
-        if (error.response && error.response.status !== 200) {
-          return {
-            notFound: true, // Treat non-200 responses as 404 errors
-          };
-        }
-      }
-    } else {
-      return {
-        notFound: true, // Treat non-200 responses as 404 errors
-      };
-    }
+    return {
+      props: {
+        error: true,
+        errorMessage: error.message,
+      },
+    };
+    // if (error) {
+    //   try {
+    //     let redirectModel = await axios.get(
+    //       process.env.NEXT_PUBLIC_API_URL_OLD + "model/old-slug/" + modelSlug
+    //     );
+    //     return {
+    //       redirect: {
+    //         permanent: true,
+    //         destination: `/brands/${brandname}/${year}/${redirectModel.data.model.slug}`,
+    //       },
+    //       props: {},
+    //     };
+    //   } catch (error) {
+    //     if (error.response && error.response.status !== 200) {
+    //       return {
+    //         notFound: true, // Treat non-200 responses as 404 errors
+    //       };
+    //     }
+    //   }
+    // } else {
+    //   return {
+    //     notFound: true, // Treat non-200 responses as 404 errors
+    //   };
+    // }
   }
 }

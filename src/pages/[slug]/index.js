@@ -1,57 +1,66 @@
-import React from 'react';
-import axios from 'axios';
+// import React from 'react';
+// import axios from 'axios';
 
-export default function Redirection(news) {
+// export default function Redirection(news) {
     
-    return (
-        <></>
-    );
-}
+//     return (
+//         <></>
+//     );
+// }
 
-export async function getServerSideProps({ req, res, params }) {
-    const slug = params.slug;
+// export async function getServerSideProps({ req, res, params }) {
+//     const slug = params.slug;
     
 
-    try {
-        const resNews = await axios.get(
-            process.env.NEXT_PUBLIC_API_URL_OLD + 'blog/' + slug
-        );
-        const news = resNews.data;
+//     try {
+//         const resNews = await axios.get(
+//             process.env.NEXT_PUBLIC_API_URL_OLD + 'blog/' + slug
+//         );
+//         const news = resNews.data;
 
         
         
-        if (resNews.status === 200) {
-            if (news?.blog?.type === "news") {
-                return {
-                    redirect: {
-                        permanent: true,
-                        destination: `/news/${slug}`,
-                    },
-                    props: {},
-                };
-            } else if (news?.blog?.type === "review") {
-                return {
-                    redirect: {
-                        permanent: true,
-                        destination: `/reviews/${slug}`,
-                    },
-                    props: {},
-                };
-            } 
-        }
+//         if (resNews.status === 200) {
+//             if (news?.blog?.type === "news") {
+//                 return {
+//                     redirect: {
+//                         permanent: true,
+//                         destination: `/news/${slug}`,
+//                     },
+//                     props: {},
+//                 };
+//             } else if (news?.blog?.type === "review") {
+//                 return {
+//                     redirect: {
+//                         permanent: true,
+//                         destination: `/reviews/${slug}`,
+//                     },
+//                     props: {},
+//                 };
+//             } 
+//         }
 
-        // Pass data to the page via props
-        return {
-            props: {
-                news,
-            },
-        };
-    } catch (error) {
+//         // Pass data to the page via props
+//         return {
+//             props: {
+//                 // news,
+//             },
+//         };
+//     } catch (error) {
         
-        if (error.response) {
-          return {
-            notFound: true, // Treat non-200 responses as 404 errors
-          };
-        }
-    }
+//         if (error.response) {
+//           return {
+//             notFound: true, // Treat non-200 responses as 404 errors
+//           };
+//         }
+//     }
+// }
+
+
+import React from 'react'
+
+export default function index() {
+  return (
+    <div>index</div>
+  )
 }
