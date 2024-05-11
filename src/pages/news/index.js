@@ -377,7 +377,7 @@ export async function getServerSideProps(context, query) {
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
     // In case of any error during data fetching, trigger a 404 response
-    return { notFound: true };
+    // return { notFound: true };
   }
 }
 
