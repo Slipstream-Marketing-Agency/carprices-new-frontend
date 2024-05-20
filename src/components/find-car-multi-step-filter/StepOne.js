@@ -115,12 +115,16 @@ export default function StepOne({ filterData, setFilterData }) {
         <Tooltip key={index} title={item.toolbar} arrow>
           <button
             key={item.label}
-            className={`flex flex-col items-center p-2 rounded-xl border bg-white border-zinc-100 hover:bg-blue-100 focus:bg-blue-200 ${
-              filterData.preferences.includes(item.value) ? "bg-blue-200" : ""
-            }`}
+            className={`flex flex-col items-center p-2 rounded-xl border bg-white border-zinc-100 h-[80px] 
+          ${
+            filterData.preferences.includes(item.value)
+              ? "bg-blue-200"
+              : "hover:bg-blue-100"
+          }
+          `}
             onClick={() => handlePreferencesClick(item.value)}
           >
-            <div className="w-[31px] h-[31px] flex justify-center items-center">
+            <div className="w-[40px] h-[40px] flex justify-center items-center">
               <Image
                 loading="lazy"
                 src={item.img}
@@ -130,7 +134,7 @@ export default function StepOne({ filterData, setFilterData }) {
                 className="w-full aspect-square object-contain"
               />
             </div>
-            <span className="text-xs text-center text-zinc-600">
+            <span className="text-xs text-center text-zinc-600 font-bold">
               {item.label}
             </span>
           </button>

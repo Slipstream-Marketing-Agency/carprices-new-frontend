@@ -30,31 +30,33 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
   };
 
   return (
-    <div className="search_filter_box_items">
+    <div className="">
       <div className="grid grid-cols-3 gap-5">
         {bodyTypeList.map((item, index) => (
-          <div
+          <button
             key={index}
-            className={` btn ${
-              filterData.bodyTypes.includes(item.slug)
-                ? "bg-blue-200"
-                : "bg-white"
-            } flex flex-col items-center p-2 rounded-xl border bg-white border-zinc-100 hover:bg-blue-100 focus:bg-blue-200`}
+            className={` flex flex-col items-center p-2 rounded-xl border 
+          ${
+            filterData.bodyTypes.includes(item.slug)
+              ? "bg-blue-200"
+              : "bg-white"
+          }
+          border-zinc-100 hover:bg-blue-100 `}
             onClick={() => handlePreferencesClick(item.slug)}
           >
-             <div className="w-[30px] h-[45px] flex justify-center items-center">
-            <Image
-              src={item?.image?.url}
-              alt={item.label}
-              width={60}
-              height={60}
-              className="mb-1 object-contain"
-            />
-             </div>
-            <span className="text-xs text-center text-zinc-600">
+            <div className="w-[50px] h-[50px] flex justify-center items-center">
+              <Image
+                src={item?.image?.url}
+                alt={item.label}
+                width={60}
+                height={60}
+                className="object-contain"
+              />
+            </div>
+            <p className="text-xs text-center text-zinc-600 font-bold">
               {item.name}
-            </span>
-          </div>
+            </p>
+          </button>
         ))}
       </div>
     </div>
