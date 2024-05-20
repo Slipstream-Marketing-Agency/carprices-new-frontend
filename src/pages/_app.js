@@ -1,19 +1,20 @@
 import Head from "next/head";
-import "../../public/assets/css/bootstrap-icons.css";
-import "../../public/assets/css/boxicons.min.css";
-import "../../public/assets/css/fontawesome.min.css";
-import "../../public/assets/css/bootstrap.min.css";
-import "../../public/assets/css/swiper-bundle.min.css";
-import "../../public/assets/css/nice-select.css";
+// import "../../public/assets/css/bootstrap-icons.css";
+// import "../../public/assets/css/boxicons.min.css";
+// import "../../public/assets/css/fontawesome.min.css";
+// import "../../public/assets/css/bootstrap.min.css";
+// import "../../public/assets/css/swiper-bundle.min.css";
+// import "../../public/assets/css/nice-select.css";
 import "../../styles/custom.css";
-import "../../public/assets/css/style.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "../../public/assets/css/style.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import Preloader from "../components/common/Preloader";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useRouter } from "next/router";
+
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
@@ -30,8 +31,11 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     import("../../public/assets/js/bootstrap.min.js");
   }, []);
+
   const router = useRouter();
   const { locale } = router;
+
+  console.log(router, "fffffffffff");
 
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
@@ -48,6 +52,38 @@ function MyApp({ Component, pageProps }) {
           type="image/gif"
           sizes="20x20"
         />
+        {router.pathname === "/" ? (
+          <>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+              tailwind.config = {
+                theme: {
+                  extend: {
+                    fontFamily: {
+                      gilroy: ['Gilroy', 'sans-serif'],
+                    },
+                  },
+                },
+              };
+            `,
+              }}
+            ></script>
+          </>
+        ) : (
+          <>
+            {" "}
+            <link rel="stylesheet" href="/assets/css/bootstrap-icons.css" />
+            <link rel="stylesheet" href="/assets/css/boxicons.min.css" />
+            <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
+            <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+            <link rel="stylesheet" href="/assets/css/nice-select.css" />
+            <link rel="stylesheet" href="/assets/css/style.css" />
+            <script src="/assets/js/bootstrap.min.js"></script>
+          </>
+        )}
       </Head>
 
       <Component {...pageProps} />

@@ -241,7 +241,7 @@ button:focus {
   border: none;
 }
 
-.filter-modal-content{
+.filter-modal-content {
   position: relative;
   display: flex;
   align-items: center;
@@ -259,7 +259,7 @@ button:focus {
   margin-right: 5px;
   z-index: 100;
 }
-.filter-modal-content .modal-body{
+.filter-modal-content .modal-body {
   max-height: 600px;
   max-width: 600px;
   width: 100%;
@@ -3129,17 +3129,15 @@ a,
   z-index: 999;
 }
 
-.filter-sorting-sec span{
+.filter-sorting-sec span {
   list-style: none !important;
 }
-.radio-check-text{
-  
+.radio-check-text {
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
 }
 .radio-check-text.active {
-  
   font-weight: 600;
   color: var(--light);
   cursor: pointer;
@@ -3163,3 +3161,92 @@ a,
   color: white;
   cursor: pointer;
 } */
+
+/* styles/globals.css */
+.custom-arrow {
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white !important;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+}
+
+.custom-next-arrow {
+  right: -25px !important;
+}
+
+.custom-prev-arrow {
+  left: -25px !important;
+}
+
+.custom-arrow img {
+  width: 20px;
+  height: 20px;
+}
+
+.slick-next:before {
+  display: none;
+}
+
+.slick-prev:before {
+  display: none;
+}
+
+.slick-list {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.featured-news-card .slick-track {
+  will-change: transform !important;
+}
+
+.featured-news-card .slick-active {
+  transform: scale(1.3) !important;
+  margin-left: 30px !important;
+  margin-right: 70px !important;
+}
+
+.featured-news-card .slick-slide {
+  width: 320px !important;
+  max-height: 450px !important;
+  height: 450px !important;
+  /* object-fit: cover; */
+  margin-top: 40px;
+}
+
+.featured-news-card .slick-slide {
+  transform: scale(1.1) translateY(-40px);
+  transition: 0.2s ease;
+  margin-right: 40px;
+}
+
+.featured-news-card .slick-list {
+  padding-left: 50px !important;
+}
+
+.custom-dots .slick-active {
+  margin: 0px !important;
+}
+
+.MuiTabs-root {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .featured-news-card .slick-list {
+    height: 600px !important;
+  }
+  .custom-dots{
+    display: none !important;
+  }
+}

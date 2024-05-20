@@ -25,6 +25,12 @@ export default function Document() {
           href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css"
           crossOrigin="anonymous"
         />
+
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        />
+
         {/* <meta name="robots" content="noindex,nofollow" /> */}
       </Head>
       <body>

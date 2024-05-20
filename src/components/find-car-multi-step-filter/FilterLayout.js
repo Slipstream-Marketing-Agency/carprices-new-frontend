@@ -370,22 +370,15 @@ export default function FilterLayout() {
     <>
       {!specific ? (
         <>
-          <div className="search_filter_box text-center">
-            <div className="find_car_head ">
-              {/* <h3 className="text-white mb-0">{t.newbuyersguide}</h3> */}
-              <h3 className="text-white mb-0">
-                Interactive Car Buying Assistant
-              </h3>
-            </div>
-
-            <div className="inner">
+          <div className="search_filter_box text-center ">
+            <div className="">
               {error && (
                 <>
                   <div className="banner_filter_overlay"></div>
-                  <small className="error_message fw-bold">
+                  <small className="error_message font-bold">
                     {error}{" "}
                     <div
-                      className="close_button pointer"
+                      className="close_button cursor-pointer"
                       onClick={() => setError(false)}
                     >
                       <i className="bi bi-x-circle-fill"></i>
@@ -393,30 +386,48 @@ export default function FilterLayout() {
                   </small>
                 </>
               )}
-              <h4>
-                <span className="filterStepTxt">
-                  {steps[currentStep].title}
-                </span>
-              </h4>
-              {steps[currentStep].component}
-              <div className="filter-button">
-                <div className="d-flex justify-content-center">
-                  {currentStep > 0 && (
-                    <button className="btn me-1" onClick={handlePrevStep}>
-                      {t.previous}
-                    </button>
-                  )}
 
-                  <button
-                    className={error ? "btn  disabled" : "btn "}
-                    onClick={currentStep === 3 ? handleSubmit : handleNextStep}
-                  >
-                    {currentStep === 3 ? `${t.submit}` : `${t.next}`}
-                  </button>
+              <div className="relative flex flex-col justify-center items-start px-7 py-8 text-2xl leading-7 text-white bg-gradient-to-r from-blue-500 to-blue-800">
+                <img
+                  loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bab8732d6429f1ac3aedfbc9eccfd4a3c451d479881fd9a558a59b846ba101d?apiKey=7580612134c3412b9f32a9330debcde8&"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <h2 className="relative z-10 text-start font-bold">
+                  {steps[currentStep].title}
+                </h2>
+              </div>
+
+              
+              <div className="row-span-1 md:col-span-3 col-span-12 flex flex-col justify-center rounded-2xl border border-neutral-100 overflow-hidden">
+                <div className="flex flex-col px-6 pt-6 pb-3 bg-white border-t border-neutral-100 shadow-lg ">
+                  <div className="h-[350px]">
+                    {steps[currentStep].component}
+                  </div>
+                  <div className="flex justify-end mt-12">
+                    {currentStep > 0 && (
+                      <button
+                        className="px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
+                        onClick={handlePrevStep}
+                      >
+                        {t.previous}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={
+                        currentStep === 3 ? handleSubmit : handleNextStep
+                      }
+                      className={`btn ${
+                        error
+                          ? "disabled px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
+                          : "px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
+                      }`}
+                    >
+                      {currentStep === 3 ? `${t.submit}` : `${t.next}`}
+                    </button>
+                  </div>
                 </div>
-                {/* <div className="find_specific ">
-                  <p onClick={handleFilterSwitch}>{t.findcar}</p>
-                </div> */}
               </div>
             </div>
           </div>

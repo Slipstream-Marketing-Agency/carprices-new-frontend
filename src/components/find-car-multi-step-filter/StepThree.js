@@ -74,7 +74,6 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
       img: "/assets/icons/seats/Seats-9+.png", // Assume an icon for 9+ seater
     },
   ];
-  
 
   const [dynamicFilterItems, setDynamicFilterItems] = useState([]);
 
@@ -86,19 +85,16 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
   }, [seatList, t.seats]);
 
   const handleSeatingClick = (selectedGroup) => {
-    // Find the item that matches the selected group
     const selectedItem = initialFilterItems.find(
       (item) => item.group === selectedGroup
     );
-    if (!selectedItem) return; // Early return if not found
+    if (!selectedItem) return;
 
-    // Toggle the group value in filterData
     setFilterData((prevState) => {
-      // Check if the group is already selected
       const isGroupSelected = prevState.seating.includes(selectedItem.group);
       const newSeating = isGroupSelected
-        ? prevState.seating.filter((group) => group !== selectedItem.group) // Remove the group if already selected
-        : [...prevState.seating, selectedItem.group]; // Add the group if not
+        ? prevState.seating.filter((group) => group !== selectedItem.group)
+        : [...prevState.seating, selectedItem.group];
 
       return { ...prevState, seating: newSeating };
     });
@@ -111,17 +107,21 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
   return (
     <div id="filter_seating" className="mt-2">
       <div className="search_filter_box_items" id="seats_filter">
-        <div className="d-flex justify-content-center flex-wrap gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {dynamicFilterItems.map((item, index) => (
             <div
               key={index}
-              className={` btn ${
-                isFilterActive(item.group) ? "active" : ""
-              } d-flex flex-column justify-content-center align-items-center p-1  body_type_btn`}
+              className={`flex flex-col justify-center items-center p-4 rounded-xl border cursor-pointer ${
+                isFilterActive(item.group)
+                  ? "bg-blue-200 border-blue-300"
+                  : "bg-white border-zinc-100"
+              }`}
               onClick={() => handleSeatingClick(item.group)}
             >
-              <img src={item.img} alt={item.label}></img>
-              {item.label}
+              <img src={item.img} alt={item.label} className="mb-1" />
+              <span className="text-xs text-center text-zinc-600">
+                {item.label}
+              </span>
             </div>
           ))}
         </div>

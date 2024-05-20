@@ -2506,5 +2506,9 @@
   {
     "From": "/reviews/best-new-budget-suv-cars-under-aed-80000",
     "To": "/news/best-new-budget-suv-cars-under-aed-80000"
+  },
+  {
+    "From": "/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae",
+    "To": "/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
   }
 ]
