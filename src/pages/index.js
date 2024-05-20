@@ -577,7 +577,7 @@ export default function index({
             <div className="flex gap-5 text-base leading-5 text-zinc-500 w-full max-md:flex-wrap">
               <img
                 loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/89268078c4586423302deebb6db89b428dc8cf5af6cfe75463429bb9543bf77f?apiKey=7580612134c3412b9f32a9330debcde8&"
+                srcSet="/assets/img/car-prices-logo.png"
                 className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px]"
               />
               <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
@@ -666,10 +666,10 @@ export default function index({
           <div className="flex gap-2 text-xl tracking-wider text-center whitespace-nowrap text-neutral-900">
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/e8c53479a61c2a05e6d63deb51c0cabad40c53c0f51ef13f77189b3acd84a109?apiKey=7580612134c3412b9f32a9330debcde8&"
-              className="shrink-0 w-9 aspect-[1.16]"
+              src="/assets/img/car-prices-logo.png"
+              className="w-[150px] object-contain"
             />
-            <div className="my-auto">Carprices.ae</div>
+            <div className="my-auto"></div>
           </div>
           <div className="flex gap-4 justify-center my-auto">
             <img
