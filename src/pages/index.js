@@ -1167,11 +1167,11 @@ export default function index({
 
       <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 container ">
         <div className="flex flex-col w-full">
-          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-auto h-[200px]">
+          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
             <img
               src="/emi.jpg"
               alt=""
-              className="absolute inset-0 object-cover w-full md:h-auto h-[200px] rounded-2xl"
+              className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
             />
             <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white">
               <div>
@@ -1185,19 +1185,19 @@ export default function index({
                 </p>
               </div>
 
-              <div className="flex md:gap-2.5 md:mt-10 mt-3 ">
+              <Link href="/loan-calculator" className="flex md:gap-2.5 md:mt-10 mt-3 ">
                 <p>Calculate Now</p>
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
         <div className="flex flex-col w-full">
-          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-auto h-[200px]">
+          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
             <img
               src="/car-value.jpg"
               alt=""
-              className="absolute inset-0 object-cover w-full md:h-auto h-[200px] rounded-2xl"
+              className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
             />
             <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white">
               <div>
@@ -1218,44 +1218,32 @@ export default function index({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 container md:mt-20 md:mb-20">
-        <div className="flex flex-col w-full">
-          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-auto h-[200px]">
-            <img
-              src="/sponsored.jpg"
-              alt=""
-              className="absolute inset-0 object-cover w-full md:h-auto h-[200px] rounded-2xl"
-            />
-            <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white"></div>
+      {/* <div className="container">
+        <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
+          <div className="flex flex-col w-full">
+            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[300px] h-[200px]">
+              <img
+                src="/sponsored.jpg"
+                alt=""
+                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+              />
+              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white"></div>
+            </div>
+          </div>
+          <div className="flex flex-col w-full">
+            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
+              <img
+                src="/sponsored-content-3.png"
+                alt=""
+                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+              />
+              
+            </div>
           </div>
         </div>
-        <div className="flex flex-col w-full">
-          <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-auto h-[200px]">
-            <img
-              src="/sponsored-content-3.png"
-              alt=""
-              className="absolute inset-0 object-cover w-full md:h-auto h-[200px] rounded-2xl"
-            />
-            {/* <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white">
-              <div>
-                {" "}
-                <div className="md:text-3xl text-xl">Know Your Car's Worth</div>
-                <p className="md:mt-6 leading-6 w-[50%]">
-                  Input your car's details to receive an instant valuation based
-                  on real-time market data.
-                </p>
-              </div>
+      </div> */}
 
-              <div className="flex md:gap-2.5 md:mt-10 mt-3 ">
-                <p>Value My Car</p>
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </div>
-            </div> */}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col container md:mt-44 my-6">
+      <div className="flex flex-col container md:mt-10 my-6">
         <div className="flex flex-wrap justify-between w-full gap-5 ">
           <div className="flex flex-col max-w-full">
             <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
