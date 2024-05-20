@@ -1155,7 +1155,7 @@ export default function index({
                   <img
                     loading="lazy"
                     src={`${item?.image}`}
-                    className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                    className="object-contain w-full h-full transition-all duration-300"
                   />
                 </div>
                 <div className="md:mt-6 font-semibold">{item.name}</div>
@@ -1185,7 +1185,10 @@ export default function index({
                 </p>
               </div>
 
-              <Link href="/loan-calculator" className="flex md:gap-2.5 md:mt-10 mt-3 ">
+              <Link
+                href="/loan-calculator"
+                className="flex md:gap-2.5 md:mt-10 mt-3 "
+              >
                 <p>Calculate Now</p>
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>
@@ -1442,33 +1445,65 @@ export default function index({
             <div className="flex flex-col text-sm leading-6 capitalize text-neutral-900 max-md:mt-10">
               <div>Searched Keywords</div>
               <div className="flex flex-col mt-4">
-                <Link href="#">Top 10 Best-Selling Cars of the Year</Link>
-                <Link href="#" className="mt-2">
-                  Budget-Friendly Cars Under AED 50,000
+                <Link href="https://carprices.ae/news/10-important-things-to-know-about-the-2024-toyota-land-cruiser-prado-before-its-uae-launch">
+                  10 Important Things To Know About the 2024 Toyota Land Cruiser
+                  Prado Before Its UAE Launch!
                 </Link>
-                <Link href="#" className="mt-2">
-                  Electric Vehicles: The Future of Driving
+                <Link
+                  href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
+                  className="mt-2"
+                >
+                  The 2024 Toyota Land Cruiser Prado VS The GWM Tank 500!
                 </Link>
-                <Link href="#" className="mt-2">
-                  SUV Showdown: Comparing the Top Models
+                <Link
+                  href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
+                  className="mt-2"
+                >
+                  5 Exciting Car Launches To Happen In The UAE In 2024!
                 </Link>
-                <Link href="#" className="mt-2">
-                  New car launches
+                <Link
+                  href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
+                  className="mt-2"
+                >
+                  10 Popular Cars In UAE With High Ground Clearance Sorted By
+                  Price Low To High!
                 </Link>
-                <Link href="#" className="mt-2">
-                  Maintenance Tips to Keep Your Car Running Smoothly
+                <Link
+                  href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
+                  className="mt-2"
+                >
+                  Internal Combustion Engine Car VS Hybrid Car!
                 </Link>
-                <Link href="#" className="mt-2">
-                  Most popular new car models
+                <Link
+                  href="https://carprices.ae/news/are-chinese-luxury-cars-better-than-german-luxury-cars-in-uae-chinese-cars-vs-german-cars"
+                  className="mt-2"
+                >
+                  Are Chinese Luxury Cars Better Than German Luxury Cars In UAE?
                 </Link>
-                <Link href="#" className="mt-2">
-                  Top-selling new car trims
+                <Link
+                  href="https://carprices.ae/news/heres-what-you-can-do-during-a-car-break-down-in-the-middle-of-nowhere-in-the-uae"
+                  className="mt-2"
+                >
+                  Here's What You Can Do During A Car Break Down!
                 </Link>
-                <Link href="#" className="mt-2">
-                  Top new car demand
+                <Link
+                  href="https://carprices.ae/news/6-best-and-cheapest-suvs-in-uae-under-aed-150000"
+                  className="mt-2"
+                >
+                  6 Best And Cheapest SUVs In UAE Under AED 150,000!
                 </Link>
-                <Link href="#" className="mt-2">
-                  Top-selling new car brands
+                <Link
+                  href="https://carprices.ae/news/10-best-cars-to-buy-in-uae-under-aed-100k"
+                  className="mt-2"
+                >
+                  10 Best Cars To Buy In UAE Under AED 100K In 2024
+                </Link>
+                <Link
+                  href="https://carprices.ae/news/are-chinese-cars-superior-and-reliable-than-japanese-cars-in-uae"
+                  className="mt-2"
+                >
+                  Are Chinese Cars Superior And Reliable Than Japanese Cars In
+                  UAE?
                 </Link>
               </div>
             </div>
