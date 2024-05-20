@@ -74,26 +74,26 @@ export default function StepFour({ filterData, setFilterData }) {
 
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center my-4">
-        <div className="value_circle me-2">
-          <p className="d-flex flex-column align-items-center justify-content-center ">
-            <span className="head mb-1 fs-6 fw-bold">Starting from</span>
-            <span className="mt-4 fs-5 fw-bold">
+      <div className="flex justify-center items-center my-4">
+        <div className="value_circle mr-2 border rounded-lg p-3">
+          <p className="flex flex-col items-center justify-center">
+            <span className="head mb-1 text-base font-bold">Starting from</span>
+            <span className="mt-4 text-lg font-bold">
               <Price data={minValue} />
             </span>
           </p>
         </div>
-        <div className="value_circle ms-2">
-          <p className="d-flex flex-column align-items-center justify-content-center">
-            <span className="head mb-1 fs-6 fw-bold">Up to</span>
-            <span className="mt-4  fs-5 fw-bold">
+        <div className="value_circle ml-2 border rounded-lg p-3">
+          <p className="flex flex-col items-center justify-center">
+            <span className="head mb-1 text-base font-bold">Up to</span>
+            <span className="mt-4 text-lg font-bold">
               <Price data={maxValue} />
             </span>
           </p>
         </div>
       </div>
 
-      <div className="pt-2 px-5 b-5">
+      <div className="pt-2 px-5 pb-5">
         <Slider
           range
           min={initialValues[0]}
@@ -109,7 +109,7 @@ export default function StepFour({ filterData, setFilterData }) {
           allowCross={false}
         />
       </div>
-      <div className="filter-price-note">Slide to select your budget range</div>
+      <div className="mt-20 font-bold">Slide to select your budget range</div>
     </div>
   );
 }

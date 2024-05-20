@@ -288,7 +288,7 @@ function Topbar() {
             </button> */}
           </li>
         </ul>
-        {process.env.NEXT_PUBLIC_MODE === "development" && (
+        {/* {process.env.NEXT_PUBLIC_MODE === "development" && (
           <ul className="d-flex justify-content-center align-items-center">
             {locales.map((locale, idx) => {
               // Only show Arabic if the current locale is English, and vice versa
@@ -318,10 +318,10 @@ function Topbar() {
                   </div>
                 );
               }
-              return null; // Do not render anything for other cases
+              return null; 
             })}
           </ul>
-        )}
+        )} */}
       </div>
     </div>
   );
