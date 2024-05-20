@@ -1355,58 +1355,66 @@ export default function index({
           </div>
           <div className="mt-7 w-full">
             <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
-              <div
-                className="md:flex hidden col-span-2 relative flex-col justify-center p-8 pt-20 pb-9 text-slate-100 bg-cover rounded-2xl min-h-[838px]"
-                style={{
-                  backgroundImage: `url('${articles.news[0].coverImage}')`,
-                }}
-              >
-                <div className="relative flex flex-col justify-center py-3 border-l-4 border-blue-400 backdrop-blur-[32px] mt-[552px]">
-                  <div className="px-6">
-                    <div className="text-4xl line-clamp-2">
-                      {articles.news[0].title}
-                    </div>
-                    <div className="mt-1 text-base line-clamp-2 ">
-                      {articles.news[0].summary}
+              <Link href={`/news/${articles.news[0]?.slug}`}>
+                <div
+                  className="md:flex hidden col-span-2 relative flex-col justify-center p-8 pt-20 pb-9 text-slate-100 bg-cover rounded-2xl min-h-[838px]"
+                  style={{
+                    backgroundImage: `url('${articles.news[0].coverImage}')`,
+                  }}
+                >
+                  <div className="relative flex flex-col justify-center py-3 border-l-4 border-blue-400 backdrop-blur-[32px] mt-[552px]">
+                    <div className="px-6">
+                      <div className="text-4xl line-clamp-2">
+                        {articles.news[0].title}
+                      </div>
+                      <div className="mt-1 text-base line-clamp-2 ">
+                        {articles.news[0].summary}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div
-                key={index}
-                className="md:hidden flex relative flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
-                style={{
-                  backgroundImage: `url('${articles.news[0].coverImage}')`,
-                }}
+              </Link>
+              <Link
+                href={`/news/${articles.news[0]?.slug}`}
+                className="md:hidden flex"
               >
-                <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
-                  <div className="text-lg">{articles.news[0].title}</div>
-                  {/* <div className="flex mt-1 text-sm">
+                <div
+                  key={index}
+                  className="md:hidden flex relative flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
+                  style={{
+                    backgroundImage: `url('${articles.news[0].coverImage}')`,
+                  }}
+                >
+                  <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
+                    <div className="text-lg">{articles.news[0].title}</div>
+                    {/* <div className="flex mt-1 text-sm">
                       <div className="uppercase">Carprices Team - </div>
                       <div>12th April 2024</div>
                     </div> */}
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="grid grid-rows-3 gap-4">
                 {articles.news.slice(1, 4).map((item, index) => (
-                  <div
-                    key={index}
-                    className="relative flex flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
-                    style={{
-                      backgroundImage: `url('${
-                        item?.coverImage ? item?.coverImage : altImage
-                      }')`,
-                    }}
-                  >
-                    <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
-                      <div className="text-lg">{item.title}</div>
-                      {/* <div className="flex mt-1 text-sm">
+                  <Link href={`/news/${item?.slug}`}>
+                    <div
+                      key={index}
+                      className="relative flex flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
+                      style={{
+                        backgroundImage: `url('${
+                          item?.coverImage ? item?.coverImage : altImage
+                        }')`,
+                      }}
+                    >
+                      <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
+                        <div className="text-lg">{item.title}</div>
+                        {/* <div className="flex mt-1 text-sm">
                       <div className="uppercase">Carprices Team - </div>
                       <div>12th April 2024</div>
                     </div> */}
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
