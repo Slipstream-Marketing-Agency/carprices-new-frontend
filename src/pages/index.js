@@ -1031,12 +1031,13 @@ export default function index({
       </div>
 
       <div className="container md:my-20 my-4">
-        <div className="flex gap-5  bg-zinc-50 max-md:flex-wrap">
+        <div className="flex gap-5 bg-zinc-50 max-md:flex-wrap">
           <div className="flex flex-col my-auto text-neutral-900">
             <div className="flex flex-col text-end">
+              {/* Commented out the large number display */}
               {/* <div className="self-end text-7xl leading-[96px] max-md:text-4xl">
-                20+
-              </div> */}
+          20+
+        </div> */}
               <div className="text-3xl font-bold">
                 Notable
                 <br className="md:block hidden" /> Upcoming Cars
@@ -1050,18 +1051,15 @@ export default function index({
                   key={index}
                   className="flex flex-col justify-center items-center text-white bg-black"
                 >
-                  <div className="relative flex flex-col justify-end  pt-20 w-full min-h-[400px]">
+                  <div className="relative flex flex-col justify-end pt-20 w-full min-h-[400px]">
                     <img
                       loading="lazy"
-                      srcSet={`${item.imgSrc}?width=100 100w, ${item.imgSrc}?width=200 200w, ${item.imgSrc}?width=400 400w, ${item.imgSrc}?width=800 800w, ${item.imgSrc}?width=1200 1200w, ${item.imgSrc}?width=1600 1600w, ${item.imgSrc}?width=2000 2000w`}
+                      src={`${item.imgSrc}`}
                       className="object-cover absolute inset-0 w-full h-full"
                     />
-                    <div className="relative flex flex-col justify-center px-4 py-5  max-md:mt-10 max-md:max-w-full">
+                    <div className="relative flex flex-col justify-center px-4 py-5 max-md:mt-10 max-md:max-w-full">
                       <div className="flex flex-col max-md:max-w-full">
                         <h4 className="self-start font-bold">{item.title}</h4>
-                        {/* <div className="mt-1.5 text-2xl leading-8 max-md:max-w-full">
-                          {item.price}
-                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -1119,11 +1117,11 @@ export default function index({
         </div>
       </div>
 
-      <div className="relative overflow-hidden flex flex-col items-start md:pr-20 md:pb-20 text-white md:min-h-[558px] min-h-[320px] max-md:pr-5 w-full md:my-20 my-4">
+      <div className="relative overflow-hidden flex flex-col items-start md:pr-20 md:pb-20 text-white md:h-[400px] min-h-[320px] max-md:pr-5 w-full md:my-5 my-4">
         <img
           loading="lazy"
           srcSet="/ferrari-sponsored.jpg"
-          className="object-cover absolute inset-0 w-full h-full md:block hidden"
+          className="object-contain absolute inset-0 w-full h-full md:block hidden"
         />
         <img
           loading="lazy"
