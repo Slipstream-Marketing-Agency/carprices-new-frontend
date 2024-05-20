@@ -1103,7 +1103,7 @@ export default function index({
                 >
                   <img
                     loading="lazy"
-                    srcSet={`${item?.logo}width=100 100w, ${item?.logo}width=200 200w, ${item?.logo}width=400 400w, ${item?.logo}width=800 800w, ${item?.logo}width=1200 1200w, ${item?.logo}width=1600 1600w, ${item?.logo}width=2000 2000w`}
+                    src={`${item?.logo}`}
                     className="object-cover aspect-square w-[100px] grayscale hover:filter-none"
                   />
                   <div className="mt-3.5">{item.name}</div>
@@ -1154,7 +1154,7 @@ export default function index({
                 <div className="w-full md:h-32 overflow-hidden">
                   <img
                     loading="lazy"
-                    srcSet={`${item?.image}width=100 100w, ${item?.image}width=200 200w, ${item?.image}width=400 400w, ${item?.image}width=800 800w, ${item?.image}width=1200 1200w, ${item?.image}width=1600 1600w, ${item?.image}width=2000 2000w`}
+                    src={`${item?.image}`}
                     className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
                   />
                 </div>
