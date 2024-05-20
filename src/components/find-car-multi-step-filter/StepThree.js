@@ -106,7 +106,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
 
   return (
     <div id="filter_seating" className="mt-2">
-      <div className="search_filter_box_items" id="seats_filter">
+      <div className="" id="seats_filter">
         <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {dynamicFilterItems.map((item, index) => (
             <div

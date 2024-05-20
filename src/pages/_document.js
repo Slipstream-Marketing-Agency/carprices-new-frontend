@@ -31,6 +31,11 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
         />
 
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+          rel="stylesheet"
+        />
+
         {/* <meta name="robots" content="noindex,nofollow" /> */}
       </Head>
       <body>

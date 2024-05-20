@@ -201,7 +201,6 @@ export default function index({
   const sliderSettings = {
     dots: false,
     infinite: true,
-    speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -283,7 +282,6 @@ export default function index({
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
@@ -543,7 +541,7 @@ export default function index({
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
-      <main className="flex flex-col items-center justify-between w-full font-gilroy ">
+      <main className="flex flex-col items-center justify-between w-full font-gilroy overflow-x-hidden">
         <div className="flex flex-col bg-white w-full md:block hidden">
           <div className="flex flex-col justify-center px-10 py-2 w-full text-sm text-white shadow-sm bg-neutral-900 max-md:px-5 max-md:max-w-full">
             <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-5 w-full">
@@ -602,7 +600,7 @@ export default function index({
                   href="/search-cars"
                   className="justify-center font-semibold"
                 >
-                  Serch New Cars
+                  Search New Cars
                 </Link>
                 <Link
                   href="/compare-cars"
@@ -778,24 +776,24 @@ export default function index({
             </div>
           </div>
         </div> */}
-          <div className="row-span-1 md:col-span-7 col-span-12 flex flex-col justify-center text-white rounded-2xl leading-[100%] relative overflow-hidden md:h-full h-[280px]">
+          <div className="row-span-1 md:col-span-7 col-span-12 flex flex-col md:justify-center text-white rounded-2xl leading-[100%] relative overflow-hidden md:h-full h-[280px]">
             <img
               loading="lazy"
               src="/cp-banner.jpg"
               className="object-cover absolute inset-0 w-full md:h-full h-[280px]"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>{" "}
+            <div className="absolute inset-0 bg-black opacity-30"></div>{" "}
             {/* Overlay */}
-            <div className="relative flex flex-col px-12 md:pt-12 md:pb-20 w-full max-w-[622px]">
+            <div className="relative flex flex-col md:px-12 px-3 md:pt-12 pt-3 md:pb-20 w-full max-w-[622px]">
               {/* <div className="text-center text-sm uppercase tracking-wider">
       Carpricces - a car research platform
     </div> */}
-              <h1 className="md:mt-5  md:leading-9 leading-6  font-bold">
+              <h1 className=" md:leading-9 leading-6  font-bold">
                 World’s First Truly Interactive
                 <br className="md:block hidden" />
                 New Car Finder Platform
               </h1>
-              <p className="mt-5 text-lg leading-6">
+              <p className="md:mt-5 mt-2 text-lg leading-6">
                 Experience a revolutionary approach to navigating car prices.
                 Explore innovation as you navigate the world of automotive
                 pricing with a fresh perspective.
@@ -885,7 +883,6 @@ export default function index({
                           <CarEMIDisplay minPrice={car?.minPrice} />
                         </div>
                         <Link
-                          legacyBehavior
                           href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                         >
                           <button className="mt-3 px-7 py-3 text-base font-semibold tracking-tight leading-4 text-white bg-blue-600 border border-blue-600 border-solid rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -1044,7 +1041,6 @@ export default function index({
                       <CarEMIDisplay minPrice={car?.minPrice} />
                     </div>
                     <Link
-                      legacyBehavior
                       href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                     >
                       <button className="mt-3 px-7 py-3 text-base font-semibold tracking-tight leading-4 text-white bg-blue-600 border border-blue-600 border-solid rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -1158,9 +1154,9 @@ export default function index({
           />
         </div>
 
-        <div className="container md:my-20 my-4">
-          <div className="flex justify-between items-start gap-5 px-0.5 w-full max-md:flex-wrap max-md:max-w-full">
-            <div className="flex flex-col px-5 max-md:max-w-full">
+        <div className="container md:my-20 my-4 px-5">
+          <div className="flex justify-between items-start gap-5 w-full max-md:flex-wrap max-md:max-w-full">
+            <div className="flex flex-col max-md:max-w-full">
               <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
                 Choose by Type
               </h6>
@@ -1176,12 +1172,12 @@ export default function index({
           <div className="grid md:grid-cols-5 grid-cols-3 md:gap-10 gap-8 md:mt-10 mt-5 max-w-full">
             {bodyTypes.map((item, index) => (
               <Link href={`/category/${item?.slug}`} key={index}>
-                <div className="flex flex-col items-center text-center text-black">
-                  <div className="w-full md:h-32 overflow-hidden">
+                <div className="flex flex-col justify-center items-center text-center text-black">
+                  <div className="w-full md:h-32 h-24 overflow-hidden">
                     <img
                       loading="lazy"
                       src={`${item?.image}`}
-                      className="object-contain w-full h-full transition-all duration-300"
+                      className="object-contain w-full h-full transition-all duration-300 p-3"
                     />
                   </div>
                   <div className="md:mt-6 font-semibold">{item.name}</div>
@@ -1191,7 +1187,7 @@ export default function index({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 container ">
+        <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 container px-5">
           <div className="flex flex-col w-full">
             <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
               <img
@@ -1278,7 +1274,7 @@ export default function index({
         </div>
       </div> */}
 
-        <div className="flex flex-col container md:mt-10 my-6">
+        <div className="flex flex-col container md:mt-10 my-6 px-5">
           <div className="flex flex-wrap justify-between w-full gap-5 ">
             <div className="flex flex-col max-w-full">
               <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
@@ -1342,9 +1338,9 @@ export default function index({
           </div>
         </div>
 
-        <div className="flex flex-col container">
+        <div className="flex flex-col container px-5">
           <div className="flex justify-between gap-5 px-px w-full max-md:flex-wrap">
-            <div className="px-5">
+            <div className="">
               <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
                 Trending automotive news
               </h6>
@@ -1376,8 +1372,24 @@ export default function index({
                   </div>
                 </div>
               </div>
+
+              <div
+                key={index}
+                className="md:hidden flex relative flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
+                style={{
+                  backgroundImage: `url('${articles.news[0].coverImage}')`,
+                }}
+              >
+                <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
+                  <div className="text-lg">{articles.news[0].title}</div>
+                  {/* <div className="flex mt-1 text-sm">
+                      <div className="uppercase">Carprices Team - </div>
+                      <div>12th April 2024</div>
+                    </div> */}
+                </div>
+              </div>
               <div className="grid grid-rows-3 gap-4">
-                {articles.news.slice(1, 2).map((item, index) => (
+                {articles.news.slice(1, 4).map((item, index) => (
                   <div
                     key={index}
                     className="relative flex flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
@@ -1401,14 +1413,14 @@ export default function index({
           </div>
         </div>
 
-        <div className="mt-12 w-full max-md:pr-5 max-md:mt-10 max-md:max-w-full container">
+        <div className="mt-12 w-full max-md:pr-5 max-md:mt-10 max-md:max-w-full container px-5">
           <div className="flex gap-5 max-md:flex-col max-md:gap-0">
             <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
               <div className="max-md:mt-10">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                   <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                     <div className="flex flex-col grow text-sm leading-6 capitalize text-neutral-900 max-md:mt-10">
-                      <div>Popular New Cars</div>
+                      <h4 className="font-semibold">Popular New Cars</h4>
                       <div className="flex flex-col mt-4">
                         <Link href="#">New Honda HR-V</Link>
                         <Link href="#" className="mt-2">
@@ -1478,7 +1490,7 @@ export default function index({
             </div>
             <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
               <div className="flex flex-col text-sm leading-6 capitalize text-neutral-900 max-md:mt-10">
-                <div>Searched Keywords</div>
+                <h4 className="font-semibold">Searched Keywords</h4>
                 <div className="flex flex-col mt-4">
                   <Link href="https://carprices.ae/news/10-important-things-to-know-about-the-2024-toyota-land-cruiser-prado-before-its-uae-launch">
                     10 Important Things To Know About the 2024 Toyota Land
@@ -1544,7 +1556,7 @@ export default function index({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
+            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full mb-10">
               <div className="flex flex-col grow px-8 py-10 w-full bg-sky-100 rounded-2xl max-md:px-5 max-md:mt-10 max-md:max-w-full">
                 <div className="text-2xl leading-9 text-neutral-900">
                   Why Carprices.ae ?
@@ -1611,44 +1623,38 @@ export default function index({
                   <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-[29%] max-md:ml-0 max-md:w-full">
                       <div className="flex flex-col grow text-sm leading-5 text-white max-md:mt-10">
-                        <div className="tracking-wide uppercase">Top 10s</div>
-                        <div className="flex flex-col mt-6">
-                          <Link
-                            legacyBehavior
-                            href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
-                          >
+                        <h4 className="tracking-wide uppercase font-semibold">
+                          Top 10s
+                        </h4>
+                        <div className="flex flex-col mt-6 space-y-2">
+                          <Link href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae">
                             10 Cars with High Ground Clearance
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae"
                             className="mt-1"
                           >
                             10 Most Searched Cars
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/chinese-car-brands-uae"
                             className="mt-1"
                           >
                             10 Best Chinese Brands
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/10-myths-busted-about-buying-a-new-car-in-the-uae"
                             className="mt-1"
                           >
                             10 Myths About Buying a Car
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/top-fuel-effnt"
                             className="mt-1"
                           >
                             10 Fuel Efficient Cars
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/top-10-hybrid-cars-AED-230k"
                             className="mt-1"
                           >
@@ -1659,39 +1665,32 @@ export default function index({
                     </div>
                     <div className="flex flex-col ml-5 w-[29%] max-md:ml-0 max-md:w-full">
                       <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <div className="tracking-wide uppercase">
+                        <h4 className="tracking-wide uppercase font-semibold">
                           Comparisons
-                        </div>
-                        <div className="flex flex-col mt-6">
-                          <Link
-                            legacyBehavior
-                            href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
-                          >
+                        </h4>
+                        <div className="flex flex-col mt-6 space-y-2">
+                          <Link href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500">
                             2024 Toyota Prado Vs GWM Tank 500
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/2024-toyota-land-cruiser-prado-vs-land-rover-defender-vs-jeep-wrangler-vs-the-ford-bronco"
                             className="mt-1"
                           >
                             Battle Of 4 Popular SUVs
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/the-2023-toyota-land-cruiser-300-series-vs-the-2024-toyota-land-cruiser-prado"
                             className="mt-1"
                           >
                             LC 300 Vs 2024 Toyota Prado
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/new-vs-old-prado"
                             className="mt-1"
                           >
                             2024 LC Prado Vs Used LC Prado
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/lc-prado-vs-patrol"
                             className="mt-1"
                           >
@@ -1702,39 +1701,32 @@ export default function index({
                     </div>
                     <div className="flex flex-col ml-5 w-[22%] max-md:ml-0 max-md:w-full">
                       <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <div className="tracking-wide uppercase">
+                        <h4 className="tracking-wide uppercase font-semibold">
                           Quick Search
-                        </div>
-                        <div className="flex flex-col mt-6">
-                          <Link
-                            legacyBehavior
-                            href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
-                          >
+                        </h4>
+                        <div className="flex flex-col mt-6 space-y-2">
+                          <Link href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae">
                             ICE Vs Hybrid
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/analysing-the-cost-of-living-with-the-electric-vehicle-vs-internal-combustion-engine-vehicle-in-the-uae-ev-vs-ice"
                             className="mt-1"
                           >
                             ICE Vs EV
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/7-popular-reliable-sedans-to-buy-in-the-uae-in-2024-or-best-cars-in-uae"
                             className="mt-1"
                           >
                             Popular Reliable Sedans
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
                             className="mt-1"
                           >
                             2024 Car Launches
                           </Link>
                           <Link
-                            legacyBehavior
                             href="https://carprices.ae/news/6-best-chinese-suv-cars-in-uae-under-aed-70000"
                             className="mt-1"
                           >
@@ -1745,35 +1737,21 @@ export default function index({
                     </div>
                     <div className="flex flex-col ml-5 w-1/5 max-md:ml-0 max-md:w-full">
                       <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <div className="tracking-wide uppercase">
+                        <h4 className="tracking-wide uppercase font-semibold">
                           Legal Bits
-                        </div>
+                        </h4>
                         <div className="flex flex-col mt-6">
-                          <Link legacyBehavior href="/about">
-                            About us
-                          </Link>
-                          <Link
-                            legacyBehavior
-                            href="/contact-us"
-                            className="mt-1"
-                          >
+                          <Link href="/about">About us</Link>
+                          <Link href="/contact-us" className="mt-1">
                             Contact Us
                           </Link>
-                          <Link legacyBehavior href="/privacy" className="mt-1">
+                          <Link href="/privacy" className="mt-1">
                             Privacy Policy
                           </Link>
-                          <Link
-                            legacyBehavior
-                            href="/terms-and-conditions"
-                            className="mt-1"
-                          >
+                          <Link href="/terms-and-conditions" className="mt-1">
                             Terms and Conditions
                           </Link>
-                          <Link
-                            legacyBehavior
-                            href="/code-of-conduct"
-                            className="mt-1"
-                          >
+                          <Link href="/code-of-conduct" className="mt-1">
                             Code of Conduct
                           </Link>
                         </div>
@@ -1839,11 +1817,6 @@ export default function index({
               <div className="my-auto">
                 ©2017 - {currentYear} Carprices.ae. All rights reserved.
               </div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d4f6d2ef221279fe2bdd42dd51b0cfec6811a3326e21c9b661bee7b14e84b6b8?apiKey=7580612134c3412b9f32a9330debcde8&"
-                className="shrink-0 aspect-square w-[60px]"
-              />
             </div>
           </div>
         </div>

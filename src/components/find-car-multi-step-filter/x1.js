@@ -66,7 +66,7 @@ export default function StepThree({ filterData, setFilterData}) {
 
   return (
     <div id="filter_seating" className="mt-2">
-      <div className="search_filter_box_items" id="seats_filter">
+      <div className="" id="seats_filter">
         <div className="d-flex justify-content-center flex-wrap gap-1">
           {filterItems.map((item, index) => (
             <div
