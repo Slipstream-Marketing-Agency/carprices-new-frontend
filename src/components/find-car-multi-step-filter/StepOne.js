@@ -118,7 +118,7 @@ export default function StepOne({ filterData, setFilterData }) {
             className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px] ${
               filterData.preferences.includes(item.value)
                 ? "tw-bg-blue-200"
-                : "hover:tw-bg-blue-100"
+                : ""
             }`}
             onClick={() => handlePreferencesClick(item.value)}
           >
