@@ -215,7 +215,7 @@ export default function FilterLayout() {
   const steps = [
     {
       // title: `${t.step} 1: ${t.preferences}`,
-      title: `Top 3 things you need from a car`,
+      title: `Pick the top 3 things you need from your new car`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
@@ -387,15 +387,15 @@ export default function FilterLayout() {
                 </>
               )}
 
-              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-7 tw-py-8 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
+              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
                 <img
                   loading="lazy"
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bab8732d6429f1ac3aedfbc9eccfd4a3c451d479881fd9a558a59b846ba101d?apiKey=7580612134c3412b9f32a9330debcde8&"
                   className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover"
                 />
-                <h2 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
+                <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
                   {steps[currentStep].title}
-                </h2>
+                </h3>
               </div>
 
               <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
