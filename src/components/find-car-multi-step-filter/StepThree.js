@@ -69,7 +69,14 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
     },
     {
       label: `9+ ${t.seats}`,
-      value: ["11 Seater", "12 Seater", "13 Seater", "14 Seater", "15 Seater", "16 Seater"],
+      value: [
+        "11 Seater",
+        "12 Seater",
+        "13 Seater",
+        "14 Seater",
+        "15 Seater",
+        "16 Seater",
+      ],
       group: "9+",
       img: "/assets/icons/seats/Seats-9+.png", // Assume an icon for 9+ seater
     },
@@ -105,24 +112,24 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
   };
 
   return (
-    <div id="filter_seating" className="mt-2">
+    <div id="filter_seating" className="tw-mt-2">
       <div className="" id="seats_filter">
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
+        <div className="tw-grid tw-grid-cols-3 sm:tw-grid-cols-3 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-4">
           {dynamicFilterItems.map((item, index) => (
-            <div
+            <button
               key={index}
-              className={`flex flex-col justify-center items-center p-4 rounded-xl border cursor-pointer ${
+              className={`tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-4 tw-rounded-xl tw-border-2 tw-border-solid ${
                 isFilterActive(item.group)
-                  ? "bg-blue-200 border-blue-300"
-                  : "bg-white border-zinc-100"
+                  ? "tw-bg-blue-200 tw-border-blue-300"
+                  : "tw-bg-white tw-border-zinc-100"
               }`}
               onClick={() => handleSeatingClick(item.group)}
             >
-              <img src={item.img} alt={item.label} className="mb-1" />
-              <span className="text-xs text-center text-zinc-600">
+              <img src={item.img} alt={item.label} className="tw-mb-1" />
+              <span className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
                 {item.label}
               </span>
-            </div>
+            </button>
           ))}
         </div>
       </div>

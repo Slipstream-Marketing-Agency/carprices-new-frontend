@@ -293,21 +293,21 @@ export default function index({
     draggable: true,
     beforeChange: (current, next) => setActiveSlide(next),
     customPaging: (i) => (
-      <div className="custom-dot ">
+      <div className="custom-dot">
         {i === activeSlide ? (
-          <div className="flex flex-col items-center  justify-center self-stretch mt-[-4px] mr-4 ml-4">
-            <div className="flex flex-col justify-center items-center  px-[6px] py-[6px] rounded-full border border-black border-solid">
-              <div className="shrink-0 bg-black rounded-full border border-black border-solid h-[9px] w-[9px] " />
+          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-self-stretch tw-mt-[-4px] tw-mr-4 tw-ml-4">
+            <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-[6px] tw-py-[6px] tw-rounded-full tw-border tw-border-black tw-border-solid">
+              <div className="tw-shrink-0 tw-bg-black tw-rounded-full tw-border tw-border-black tw-border-solid tw-h-[9px] tw-w-[9px]" />
             </div>
           </div>
         ) : (
-          <div className="shrink-0 self-stretch my-auto rounded-full bg-zinc-400 h-[11px] w-[11px] mr-4 ml-4" />
+          <div className="tw-shrink-0 tw-self-stretch tw-my-auto tw-rounded-full tw-bg-zinc-400 tw-h-[11px] tw-w-[11px] tw-mr-4 tw-ml-4" />
         )}
       </div>
     ),
     appendDots: (dots) => (
       <div>
-        <ul className="custom-dots flex justify-center absolute top-[-110px] md:left-[48%] items-center gap-0">
+        <ul className="custom-dots tw-flex tw-justify-center tw-absolute tw-top-[-110px] md:tw-left-[48%] tw-items-center tw-gap-0">
           {dots}
         </ul>
       </div>
@@ -479,7 +479,7 @@ export default function index({
     }
 
     return (
-      <span className="mt-1.5 text-neutral-900 font-bold md:text-[21px]">
+      <span className="tw-mt-1.5 tw-text-neutral-900 tw-font-bold md:tw-text-[21px] ">
         {priceInfo}
       </span>
     );
@@ -512,7 +512,7 @@ export default function index({
         })}*`
       : "Not Available";
 
-    return <span className="mt-1 text-base font-semibold">{emiString}</span>;
+    return <span className="tw-mt-1 tw-text-base tw-font-semibold">{emiString}</span>;
   };
 
   const t = useTranslate();
@@ -541,99 +541,99 @@ export default function index({
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
-      <main className="flex flex-col items-center justify-between w-full font-gilroy overflow-x-hidden">
-        <div className="flex flex-col bg-white w-full md:block hidden">
-          <div className="flex flex-col justify-center px-10 py-2 w-full text-sm text-white shadow-sm bg-neutral-900 max-md:px-5 max-md:max-w-full">
-            <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-5 w-full">
-              <div className="flex gap-4 tracking-tight max-md:flex-wrap max-md:max-w-full">
+      <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
+        <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden">
+          {/* <div className="tw-flex tw-flex-col tw-justify-center tw-px-10 tw-py-2 tw-w-full tw-text-sm tw-text-white tw-shadow-sm tw-bg-neutral-900 max-md:tw-px-5 max-md:max-w-full">
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[70%_30%] tw-gap-5 tw-w-full">
+              <div className="tw-flex tw-gap-4 tw-tracking-tight max-md:tw-flex-wrap max-md:tw-max-w-full">
                 <div>About Us</div>
-                <div className="justify-center items-start px-4 border-l border-solid border-zinc-700">
+                <div className="tw-justify-center tw-items-start tw-px-4 tw-border-l tw-border-solid tw-border-zinc-700">
                   Contact Us
                 </div>
-                <div className="justify-center self-start px-4 py-px text-red-400 border-l border-solid border-zinc-700">
-                  <span className="text-white">Unlock Car Prices : </span>
-                  <span className="text-red-400">
+                <div className="tw-justify-center tw-self-start tw-px-4 tw-py-px tw-text-red-400 tw-border-l tw-border-solid tw-border-zinc-700">
+                  <span className="tw-text-white">Unlock Car Prices : </span>
+                  <span className="tw-text-red-400">
                     Discover Transparent Pricing for Your Next Ride!
                   </span>
                 </div>
               </div>
-              {/* <div className="flex gap-5 justify-end">
-              <div className="flex justify-between items-center gap-1 tracking-tight whitespace-nowrap">
+              <div className="tw-flex tw-gap-5 tw-justify-end">
+              <div className="tw-flex tw-justify-between tw-items-center tw-gap-1 tw-tracking-tight tw-whitespace-nowrap">
                 <div>English</div>
-                <span className="material-symbols-outlined h-6 w-6 text-gray-500 ml-2">
+                <span className="material-symbols-outlined tw-h-6 tw-w-6 tw-text-gray-500 tw-ml-2">
                   keyboard_arrow_down
                 </span>
               </div>
-              <div className="flex justify-between items-center gap-1 px-4 tracking-wide border-l border-solid border-zinc-700 leading-[100%]">
-                <span className="material-symbols-outlined text-gray-500 ml-2">
+              <div className="tw-flex tw-justify-between tw-items-center tw-gap-1 tw-px-4 tw-tracking-wide tw-border-l tw-border-solid tw-border-zinc-700 tw-leading-[100%]">
+                <span className="material-symbols-outlined tw-text-gray-500 tw-ml-2">
                   call
                 </span>
                 <div>(225) 555-0118</div>
               </div>
-            </div> */}
             </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-[50%_50%] gap-5 px-10 py-2 w-full max-md:flex-wrap max-md:px-5 max-md:max-w-full">
-            <div className="flex gap-5 text-base leading-5 text-zinc-500 w-full max-md:flex-wrap">
+            </div>
+          </div> */}
+          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[50%_50%] tw-gap-5 tw-px-10 tw-py-4 tw-w-full max-md:tw-flex-wrap max-md:tw-px-5 max-md:tw-max-w-full">
+            <div className="tw-flex tw-gap-5 tw-text-base tw-leading-5 tw-text-zinc-500 tw-w-full max-md:tw-flex-wrap">
               <img
                 loading="lazy"
                 srcSet="/assets/img/car-prices-logo.png"
-                className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px]"
+                className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
               />
-              <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
-                <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
-                  <div className="flex justify-center items-center gap-2 px-4 py-1 max-md:flex-wrap w-full">
+              <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
+                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
+                  <div className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full">
                     <span className="material-symbols-outlined">search</span>
                     <input
                       type="text"
                       id="search"
                       placeholder="Search for brands, cars or price..."
-                      className="bg-transparent border-none text-gray-900 text-sm rounded-full w-full p-2.5 focus:outline-none focus:ring-0"
+                      className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-5 max-md:flex-wrap">
-              <div className="flex flex-auto justify-end  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap">
+            <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap">
+              <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
                 <Link
                   href="/search-cars"
-                  className="justify-center font-semibold"
+                  className="tw-justify-center tw-font-semibold"
                 >
                   Search New Cars
                 </Link>
                 <Link
                   href="/compare-cars"
-                  className="justify-center font-semibold"
+                  className="tw-justify-center tw-font-semibold"
                 >
                   Compare New Cars
                 </Link>
-                {/* <div className="relative">
+                {/* <div className="tw-relative">
                 <div
-                  className="flex justify-center font-semibold cursor-pointer"
+                  className="tw-flex tw-justify-center tw-font-semibold tw-cursor-pointer"
                   onClick={() => toggleMenu("blog")}
                 >
                   {t.blog}
                   <i
                     className={`bi bi-${
                       state.activeMenu === "blog" ? "dash" : "plus"
-                    } dropdown-icon ml-2`}
+                    } tw-dropdown-icon tw-ml-2`}
                   />
                 </div>
                 <div
-                  className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md ${
-                    state.activeMenu === "blog" ? "block" : "hidden"
+                  className={`tw-absolute tw-left-0 tw-mt-2 tw-w-48 tw-bg-white tw-shadow-lg tw-rounded-md ${
+                    state.activeMenu === "blog" ? "tw-block" : "tw-hidden"
                   }`}
                 >
                   <Link
                     href="/news"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="tw-block tw-px-4 tw-py-2 tw-hover:tw-bg-gray-100"
                   >
                     {t.news}
                   </Link>
                   <Link
                     href="/reviews"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="tw-block tw-px-4 tw-py-2 tw-hover:tw-bg-gray-100"
                   >
                     {t.reviews}
                   </Link>
@@ -641,204 +641,123 @@ export default function index({
               </div> */}
                 <Link
                   href="/loan-calculator"
-                  className="justify-center font-semibold"
+                  className="tw-justify-center tw-font-semibold"
                 >
                   Car Loan Calculator
                 </Link>
 
-                <Link href="/news" className="justify-center font-semibold">
+                <Link
+                  href="/news"
+                  className="tw-justify-center tw-font-semibold"
+                >
                   News
                 </Link>
-                <Link href="/review" className="justify-center font-semibold">
+                <Link
+                  href="/review"
+                  className="tw-justify-center tw-font-semibold"
+                >
                   Reviews
                 </Link>
               </div>
-              {/* <div className="flex flex-col justify-center text-base tracking-tight leading-4 text-center text-white bg-white">
-              <button className="btn btn-primary justify-center px-7 py-3 border border-solid bg-neutral-900 border-neutral-900 rounded-[119px] max-md:px-5 hover:bg-red-500">
+              {/* <div className="tw-flex tw-flex-col tw-justify-center tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-text-white tw-bg-white">
+              <button className="tw-btn tw-btn-primary tw-justify-center tw-px-7 tw-py-3 tw-border tw-border-solid tw-bg-neutral-900 tw-border-neutral-900 tw-rounded-[119px] max-md:tw-px-5 tw-hover:tw-bg-red-500">
                 Sign In
               </button>{" "}
             </div> */}
             </div>
           </div>
         </div>
-
-        <div className=" gap-5 justify-between px-5 py-4 bg-white w-full md:hidden flex">
-          <div className="flex gap-2 text-xl tracking-wider text-center whitespace-nowrap text-neutral-900">
+        <div className="tw-gap-5 tw-justify-between tw-px-5 tw-py-4 tw-bg-white tw-w-full md:tw-hidden tw-flex">
+          <div className="tw-flex tw-gap-2 tw-text-xl tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
             <img
               loading="lazy"
               src="/assets/img/car-prices-logo.png"
-              className="w-[150px] object-contain"
+              className="tw-w-[150px] tw-object-contain"
             />
-            <div className="my-auto"></div>
+            <div className="tw-my-auto"></div>
           </div>
-          <div className="flex gap-4 justify-center my-auto">
+          <div className="tw-flex tw-gap-4 tw-justify-center tw-my-auto">
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/21ea1ee3a349af39481479e911636e030f9dc6ae5fb159c14a2e89fb64b53a21?apiKey=7580612134c3412b9f32a9330debcde8&"
-              className="shrink-0 w-5 aspect-square"
+              className="tw-shrink-0 tw-w-5 tw-aspect-square"
             />
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffd71299533f8ebed0eb731e47a56e0fb50d0acd0bbae0dd3adc23ebaf110f29?apiKey=7580612134c3412b9f32a9330debcde8&"
-              className="shrink-0 self-start w-6 aspect-[1.27]"
+              className="tw-shrink-0 tw-self-start tw-w-6 tw-aspect-[1.27]"
             />
           </div>
         </div>
 
-        <div className="grid  gap-4 p-4 lg:grid-rows-1 lg:grid-cols-10 w-full container">
-          <div className="row-span-1 md:col-span-3 col-span-12 flex flex-col justify-center rounded-2xl border border-neutral-100 overflow-hidden">
+        <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
+          <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
             <FilterLayout />
           </div>
-          {/* <div className="row-span-1 md:col-span-3 col-span-12 flex flex-col justify-center rounded-2xl border border-neutral-100 overflow-hidden">
-          <div className="relative flex flex-col justify-center items-start px-7 py-8 text-2xl leading-7 text-white bg-gradient-to-r from-blue-500 to-blue-800">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bab8732d6429f1ac3aedfbc9eccfd4a3c451d479881fd9a558a59b846ba101d?apiKey=7580612134c3412b9f32a9330debcde8&"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <h2 className="relative z-10">
-              Top three things you <br /> need from a car
-            </h2>
-          </div>
-          <div className="flex flex-col px-6 pt-6 pb-3 bg-white border-t border-neutral-100 shadow-lg">
-            <div className="grid grid-cols-3 gap-5">
-              {[
-                {
-                  text: "Technology",
-                  icon: "438c50b503902f6e252e47bd0a8d4daf8040c0aded89ad77892ea582bd592e80",
-                },
-                {
-                  text: "Fuel Efficiency",
-                  icon: "06208606e5a94790f819bd4a2505e45b102957beacd8437d135f7925dd85f2ac",
-                },
-                {
-                  text: "Off-Road",
-                  icon: "463360bb6afa3b7d2a1e9bde7c9f41604ea6b802c9d81278dcdf81425a795dd0",
-                },
-                {
-                  text: "Performance",
-                  icon: "0424d9ca34269c4253cf2c9b6e29b6fb0e00153bb0d0b78a0fe0053d5f2e5e85",
-                },
-                {
-                  text: "Affordable Luxury",
-                  icon: "3ebcd0c49da9e6a44886cf69e8934a0989f33c0ca8b96b9baf5476b7f139a469",
-                },
-                {
-                  text: "Luxury",
-                  icon: "52840919da3cdd448cc331fbe4786adff1859df3dfc2423aecc717126af4ed3b",
-                },
-                {
-                  text: "Premium Luxury",
-                  icon: "52840919da3cdd448cc331fbe4786adff1859df3dfc2423aecc717126af4ed3b",
-                },
-                {
-                  text: "Space",
-                  icon: "113620ef9ad5c397d2f98542e4ffeb2bc44f87245d9c53d653e8fad763362aa2",
-                },
-                {
-                  text: "Electric",
-                  icon: "071aae5f8732eb044c9c309c471d4106257d26c58774b3db939a6f225744c5a2",
-                },
-                {
-                  text: "Manual Transmission",
-                  icon: "31eb02410151d86a2ba546aa451d773e237a753d0d1f15279d80db4209d88f0e",
-                },
-                {
-                  text: "Manual Transmission",
-                  icon: "31eb02410151d86a2ba546aa451d773e237a753d0d1f15279d80db4209d88f0e",
-                },
-                {
-                  text: "Manual Transmission",
-                  icon: "31eb02410151d86a2ba546aa451d773e237a753d0d1f15279d80db4209d88f0e",
-                },
-              ].map((item) => (
-                <button
-                  key={item.text}
-                  className="flex flex-col items-center p-2 rounded-xl border bg-white border-zinc-100 hover:bg-blue-100 focus:bg-blue-200"
-                >
-                  <div className="w-[31px] h-[31px] flex justify-center items-center">
-                    <img
-                      loading="lazy"
-                      src={`https://cdn.builder.io/api/v1/image/assets/TEMP/${item.icon}?apiKey=7580612134c3412b9f32a9330debcde8&width=100`}
-                      className="w-full aspect-square"
-                    />
-                  </div>
-                  <span className="text-xs text-center text-zinc-600">
-                    {item.text}
-                  </span>
-                </button>
-              ))}
-            </div>
-            <div className="flex justify-end mt-6">
-              <button className="px-6 py-2.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700">
-                Next
-              </button>
-            </div>
-          </div>
-        </div> */}
-          <div className="row-span-1 md:col-span-7 col-span-12 flex flex-col md:justify-center text-white rounded-2xl leading-[100%] relative overflow-hidden md:h-full h-[280px]">
+
+          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-center tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[280px]">
             <img
               loading="lazy"
               src="/cp-banner.jpg"
-              className="object-cover absolute inset-0 w-full md:h-full h-[280px]"
+              className="tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-full tw-h-[280px]"
             />
-            <div className="absolute inset-0 bg-black opacity-30"></div>{" "}
+            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>{" "}
             {/* Overlay */}
-            <div className="relative flex flex-col md:px-12 px-3 md:pt-12 pt-3 md:pb-20 w-full max-w-[622px]">
-              {/* <div className="text-center text-sm uppercase tracking-wider">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full tw-max-w-[622px]">
+              {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
       Carpricces - a car research platform
     </div> */}
-              <h1 className=" md:leading-9 leading-6  font-bold">
+              <h1 className="text-white md:tw-leading-9 tw-leading-6  tw-font-bold">
                 World’s First Truly Interactive
-                <br className="md:block hidden" />
+                <br className="md:tw-block tw-hidden" />
                 New Car Finder Platform
               </h1>
-              <p className="md:mt-5 mt-2 text-lg leading-6">
+              <p className="md:tw-mt-5 tw-mt-2 tw-text-lg tw-leading-6">
                 Experience a revolutionary approach to navigating car prices.
                 Explore innovation as you navigate the world of automotive
                 pricing with a fresh perspective.
               </p>
-              {/* <button className="self-start px-4 py-3 mt-5 text-base font-medium text-center text-white border border-white rounded-full hover:bg-white hover:text-black">
-              Explore Now
-            </button> */}
+              {/* <button className="tw-self-start tw-px-4 tw-py-3 tw-mt-5 tw-text-base tw-font-medium tw-text-center tw-text-white tw-border tw-border-white tw-rounded-full tw-hover:tw-bg-white tw-hover:tw-text-black">
+      Explore Now
+    </button> */}
             </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 md:py-8">
-          <header className=" mb-0">
-            <h5 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+        <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8">
+          <header className="tw-mb-0">
+            <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What's Trending?
             </h5>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="tw-text-2xl tw-font-semibold">
               Take A Look At Some Of Our Featured Cars
             </h2>
-            {/* <a href="#" className="text-blue-600 hover:underline">
-            View More
-          </a> */}
+            {/* <a href="#" className="tw-text-blue-600 tw-hover:tw-underline">
+    View More
+  </a> */}
           </header>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-            <div className="lg:col-span-3">
+          <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-5">
+            <div className="lg:tw-col-span-3">
               <Slider {...sliderSettings}>
                 {featuredcars?.carModels.map((car, index) => (
-                  <div key={index} className="px-2">
-                    <div className="flex flex-col h-full py-5 bg-white rounded-2xl border border-solid border-zinc-100 shadow-lg">
-                      <div className="flex flex-col text-sm leading-4 text-neutral-900 px-5 flex-grow">
-                        <div className="self-start py-1 px-3 mb-2 text-xs rounded-full border border-solid bg-slate-100 border-blue-600 border-opacity-30">
+                  <div key={index} className="tw-px-2">
+                    <div className="tw-flex tw-flex-col tw-h-full tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-lg">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-5 tw-flex-grow">
+                        <div className="tw-self-start tw-py-1 tw-px-3 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
                           Model: {car?.highTrim?.year}
                         </div>
                         <img
                           loading="lazy"
                           src={car?.highTrim?.featuredImage}
-                          className="self-center w-full h-48 object-contain"
+                          className="tw-self-center tw-w-full tw-h-48 tw-object-contain"
                           alt=""
                         />
                       </div>
-                      <div className="flex flex-col justify-center px-5 pt-3 mt-2 w-full flex-grow">
-                        <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+                      <div className="tw-flex tw-flex-col tw-justify-center tw-px-5 tw-pt-3 tw-mt-2 tw-w-full tw-flex-grow">
+                        <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                           {car.brand.name}
                         </h6>
-                        <h4 className="text-lg leading-6 text-gray-900 font-semibold">
+                        <h4 className=" tw-text-lg tw-leading-6 tw-text-gray-900 tw-font-semibold">
                           {car.name}
                         </h4>
                         <CarPriceRange
@@ -846,38 +765,38 @@ export default function index({
                           maxPrice={car?.maxPrice}
                         />
                       </div>
-                      {/* <div className="px-5">
-                      <div className="flex justify-between p-4 mt-3 w-full rounded-lg bg-slate-100 text-neutral-900 ">
-                        <div className="flex flex-col text-center">
-                          <span className="text-xs leading-5 uppercase">
-                            Mileage
-                          </span>
-                          <span className="text-base font-semibold">
-                            {car.mileage}
-                          </span>
-                        </div>
-                        <div className="flex flex-col text-center">
-                          <span className="text-xs leading-5 uppercase">
-                            Transmission
-                          </span>
-                          <span className="text-base font-semibold">
-                            {car.transmission}
-                          </span>
-                        </div>
-                        <div className="flex flex-col text-center">
-                          <span className="text-xs leading-5 uppercase">
-                            Seats
-                          </span>
-                          <span className="text-base font-semibold">
-                            {car.seats}
-                          </span>
-                        </div>
-                      </div>
-                    </div> */}
+                      {/* <div className="tw-px-5">
+              <div className="tw-flex tw-justify-between tw-p-4 tw-mt-3 tw-w-full tw-rounded-lg tw-bg-slate-100 tw-text-neutral-900 ">
+                <div className="tw-flex tw-flex-col tw-text-center">
+                  <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                    Mileage
+                  </span>
+                  <span className="tw-text-base tw-font-semibold">
+                    {car.mileage}
+                  </span>
+                </div>
+                <div className="tw-flex tw-flex-col tw-text-center">
+                  <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                    Transmission
+                  </span>
+                  <span className="tw-text-base tw-font-semibold">
+                    {car.transmission}
+                  </span>
+                </div>
+                <div className="tw-flex tw-flex-col tw-text-center">
+                  <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                    Seats
+                  </span>
+                  <span className="tw-text-base tw-font-semibold">
+                    {car.seats}
+                  </span>
+                </div>
+              </div>
+            </div> */}
 
-                      <div className="flex mt-4 w-full justify-between items-center px-5">
-                        <div className="flex flex-col items-left">
-                          <span className="text-xs leading-3">
+                      <div className="tw-flex tw-mt-4 tw-w-full tw-justify-between tw-items-center tw-px-5">
+                        <div className="tw-flex tw-flex-col tw-items-left">
+                          <span className="tw-text-xs tw-leading-3">
                             EMI Starting from
                           </span>
                           <CarEMIDisplay minPrice={car?.minPrice} />
@@ -885,7 +804,7 @@ export default function index({
                         <Link
                           href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                         >
-                          <button className="mt-3 px-7 py-3 text-base font-semibold tracking-tight leading-4 text-white bg-blue-600 border border-blue-600 border-solid rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                          <button className="tw-mt-3 tw-px-7 tw-py-3 tw-text-base tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500">
                             View Details
                           </button>
                         </Link>
@@ -895,50 +814,50 @@ export default function index({
                 ))}
               </Slider>
             </div>
-            <div className="pt-3">
-              <div className="flex flex-col h-full py-5 ">
+            <div className="tw-pt-3">
+              <div className="tw-flex tw-flex-col tw-h-full tw-py-5 ">
                 <Ad300x250 dataAdSlot="8451638145" />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 md:py-8">
-          <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-            <div className="flex flex-col w-1/4 max-md:w-full justify-center">
-              <div className="flex flex-col  max-md:mt-10">
-                <h5 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+        <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8">
+          <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
+            <div className="tw-flex tw-flex-col tw-w-1/4 max-md:tw-w-full tw-justify-center">
+              <div className="tw-flex tw-flex-col max-md:tw-mt-10">
+                <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
                 </h5>
 
-                <h2 className="mt-2 text-4xl leading-8 font-semibold text-neutral-900">
+                <h2 className="tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900">
                   {FeaturedData[0].name}
                 </h2>
-                <p className="mt-4 text-base leading-6 text-neutral-900">
+                <p className="tw-mt-4 tw-text-base tw-leading-6 tw-text-neutral-900">
                   {FeaturedData[0].description}
                 </p>
                 <Link href="/news/all-new-geely-starray-launched-in-uae-at-aed-84900">
-                  <button className="self-start md:px-14 px-8 md:py-5 py-2 md:mt-9 mt-4 text-base leading-4 text-center text-white bg-blue-600 border border-blue-600 rounded-full max-md:px-5">
+                  <button className="tw-self-start md:tw-px-14 tw-px-8 md:tw-py-5 tw-py-2 md:tw-mt-9 tw-mt-4 tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-rounded-full max-md:tw-px-5">
                     View Details
                   </button>
                 </Link>
               </div>
             </div>
-            <div className="flex flex-col w-3/4 max-md:w-full featured-news-card mt-5">
+            <div className="tw-flex tw-flex-col tw-w-3/4 max-md:tw-w-full featured-news-card tw-mt-5">
               <Slider {...settings}>
                 {FeaturedData.map((car, index) => (
-                  <Link href={car.url} key={index} className="p-2">
-                    <div className="relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-500 custom-scale">
+                  <Link href={car.url} key={index} className="tw-p-2">
+                    <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
                       <img
                         src={car.image}
                         alt={`${car.brand} ${car.name}`}
-                        className="object-cover w-full h-96"
+                        className="tw-object-cover tw-w-full tw-h-96"
                       />
-                      <div className="m-2 absolute bottom-0 left-0 right-0 py-3 pl-4 mt-96 rounded-xl border border-solid backdrop-blur-[32px] bg-zinc-500 bg-opacity-10 border-white border-opacity-10 max-md:mt-10 text-white">
-                        <h6 className="">{car.name}</h6>
-                        {/* <small className="mt-1">
-                        Created on: {car.createdOn}
-                      </small> */}
+                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
+                        <h6 className="tw-text-white">{car.name}</h6>
+                        {/* <small className="tw-mt-1 tw-text-white">
+                Created on: {car.createdOn}
+              </small> */}
                       </div>
                     </div>
                   </Link>
@@ -948,25 +867,28 @@ export default function index({
           </div>
         </div>
 
-        <div className="flex flex-col container">
-          <div className="flex flex-col self-start px-5 max-md:max-w-full">
-            <h5 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+        <div className="tw-flex tw-flex-col tw-container">
+          <div className="tw-flex tw-flex-col tw-self-start tw-px-5 max-md:tw-max-w-full">
+            <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What's Trending?
             </h5>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="tw-text-2xl tw-font-semibold">
               Take a look at some of our Popular Cars
             </h2>
           </div>
 
-          <div className="flex md:gap-5 gap-2 md:justify-between mt-3 w-full text-base leading-4 text-center text-neutral-900 max-md:flex-wrap max-md:max-w-full">
-            <div className="flex md:gap-5  gap-2 md:justify-between px-5 max-md:flex-wrap max-md:max-w-full">
+          <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-mt-3 tw-w-full tw-text-base tw-leading-4 tw-text-center tw-text-neutral-900 max-md:tw-flex-wrap max-md:tw-max-w-full">
+            <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-px-5 max-md:tw-flex-wrap max-md:tw-max-w-full">
               {categories.map((category, index) => (
-                <div key={index} className="flex flex-col justify-center">
+                <div
+                  key={index}
+                  className="tw-flex tw-flex-col tw-justify-center"
+                >
                   <div
-                    className={`justify-center md:px-14 px-10 md:py-5 py-3 border border-solid rounded-[73px] max-md:px-5 cursor-pointer ${
+                    className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${
                       selectedTab === index
-                        ? "bg-neutral-900 text-white"
-                        : "bg-violet-100 border-violet-100"
+                        ? "tw-bg-neutral-900 tw-text-white"
+                        : "tw-bg-violet-100 tw-border-violet-100"
                     }`}
                     onClick={() => setSelectedTab(index)}
                   >
@@ -979,24 +901,24 @@ export default function index({
 
           <Slider {...categorysliderSettings}>
             {filterCars(selectedTab).map((car, index) => (
-              <div key={index} className="px-2">
-                <div className="flex flex-col h-full py-5 bg-white rounded-2xl border border-solid border-zinc-100 shadow-lg">
-                  <div className="flex flex-col text-sm leading-4 text-neutral-900 px-5 flex-grow">
-                    <div className="self-start py-1 px-3 mb-2 text-xs rounded-full border border-solid bg-slate-100 border-blue-600 border-opacity-30">
+              <div key={index} className="tw-px-2">
+                <div className="tw-flex tw-flex-col tw-h-full tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-lg">
+                  <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-5 tw-flex-grow">
+                    <div className="tw-self-start tw-py-1 tw-px-3 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
                       Model: {car?.highTrim?.year}
                     </div>
                     <img
                       loading="lazy"
                       src={car?.highTrim?.featuredImage}
-                      className="self-center w-full h-48 object-contain"
+                      className="tw-self-center tw-w-full tw-h-48 tw-object-contain"
                       alt=""
                     />
                   </div>
-                  <div className="flex flex-col justify-center px-5 pt-3 mt-2 w-full flex-grow">
-                    <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+                  <div className="tw-flex tw-flex-col tw-justify-center tw-px-5 tw-pt-3 tw-mt-2 tw-w-full tw-flex-grow">
+                    <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                       {car.brand.name}
                     </h6>
-                    <h4 className="text-lg leading-6 text-gray-900 font-semibold">
+                    <h4 className=" tw-text-white tw-text-lg tw-leading-6 tw-text-gray-900 tw-font-semibold">
                       {car.name}
                     </h4>
                     <CarPriceRange
@@ -1004,38 +926,38 @@ export default function index({
                       maxPrice={car?.maxPrice}
                     />
                   </div>
-                  {/* <div className="px-5">
-                <div className="flex justify-between p-4 mt-3 w-full rounded-lg bg-slate-100 text-neutral-900 ">
-                  <div className="flex flex-col text-center">
-                    <span className="text-xs leading-5 uppercase">
-                      Mileage
-                    </span>
-                    <span className="text-base font-semibold">
-                      {car.mileage}
-                    </span>
-                  </div>
-                  <div className="flex flex-col text-center">
-                    <span className="text-xs leading-5 uppercase">
-                      Transmission
-                    </span>
-                    <span className="text-base font-semibold">
-                      {car.transmission}
-                    </span>
-                  </div>
-                  <div className="flex flex-col text-center">
-                    <span className="text-xs leading-5 uppercase">
-                      Seats
-                    </span>
-                    <span className="text-base font-semibold">
-                      {car.seats}
-                    </span>
-                  </div>
-                </div>
-              </div> */}
+                  {/* <div className="tw-px-5">
+          <div className="tw-flex tw-justify-between tw-p-4 tw-mt-3 tw-w-full tw-rounded-lg tw-bg-slate-100 tw-text-neutral-900 ">
+            <div className="tw-flex tw-flex-col tw-text-center">
+              <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                Mileage
+              </span>
+              <span className="tw-text-base tw-font-semibold">
+                {car.mileage}
+              </span>
+            </div>
+            <div className="tw-flex tw-flex-col tw-text-center">
+              <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                Transmission
+              </span>
+              <span className="tw-text-base tw-font-semibold">
+                {car.transmission}
+              </span>
+            </div>
+            <div className="tw-flex tw-flex-col tw-text-center">
+              <span className="tw-text-xs tw-leading-5 tw-uppercase">
+                Seats
+              </span>
+              <span className="tw-text-base tw-font-semibold">
+                {car.seats}
+              </span>
+            </div>
+          </div>
+        </div> */}
 
-                  <div className="flex mt-4 w-full justify-between items-center px-5">
-                    <div className="flex flex-col items-left">
-                      <span className="text-xs leading-3">
+                  <div className="tw-flex tw-mt-4 tw-w-full tw-justify-between tw-items-center tw-px-5">
+                    <div className="tw-flex tw-flex-col tw-items-left">
+                      <span className="tw-text-xs tw-leading-3">
                         EMI Starting from
                       </span>
                       <CarEMIDisplay minPrice={car?.minPrice} />
@@ -1043,7 +965,7 @@ export default function index({
                     <Link
                       href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                     >
-                      <button className="mt-3 px-7 py-3 text-base font-semibold tracking-tight leading-4 text-white bg-blue-600 border border-blue-600 border-solid rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <button className="tw-mt-3 tw-px-7 tw-py-3 tw-text-base tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500">
                         View Details
                       </button>
                     </Link>
@@ -1054,36 +976,38 @@ export default function index({
           </Slider>
         </div>
 
-        <div className="container md:my-20 my-4">
-          <div className="flex gap-5 bg-zinc-50 max-md:flex-wrap">
-            <div className="flex flex-col my-auto text-neutral-900">
-              <div className="flex flex-col text-end">
+        <div className="tw-container md:tw-my-20 tw-my-4">
+          <div className="tw-flex tw-gap-5 tw-bg-zinc-50 max-md:tw-flex-wrap">
+            <div className="tw-flex tw-flex-col tw-my-auto tw-text-neutral-900">
+              <div className="tw-flex tw-flex-col tw-text-end">
                 {/* Commented out the large number display */}
-                {/* <div className="self-end text-7xl leading-[96px] max-md:text-4xl">
+                {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
           20+
         </div> */}
-                <div className="text-3xl font-bold">
+                <div className="tw-text-3xl tw-font-bold">
                   Notable
-                  <br className="md:block hidden" /> Upcoming Cars
+                  <br className="md:tw-block tw-hidden" /> Upcoming Cars
                 </div>
               </div>
             </div>
-            <div className="flex flex-col grow shrink-0 justify-center basis-0 w-fit max-md:max-w-full">
+            <div className="tw-flex tw-flex-col tw-grow tw-shrink-0 tw-justify-center tw-basis-0 tw-w-fit max-md:tw-max-w-full">
               <Slider {...settingsupcoming}>
                 {cars.map((item, index) => (
                   <div
                     key={index}
-                    className="flex flex-col justify-center items-center text-white bg-black"
+                    className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-bg-black"
                   >
-                    <div className="relative flex flex-col justify-end pt-20 w-full min-h-[400px]">
+                    <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-w-full tw-min-h-[400px]">
                       <img
                         loading="lazy"
                         src={`${item.imgSrc}`}
-                        className="object-cover absolute inset-0 w-full h-full"
+                        className="tw-object-cover tw-absolute tw-inset-0 tw-w-full tw-h-full"
                       />
-                      <div className="relative flex flex-col justify-center px-4 py-5 max-md:mt-10 max-md:max-w-full">
-                        <div className="flex flex-col max-md:max-w-full">
-                          <h4 className="self-start font-bold">{item.title}</h4>
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10 max-md:tw-max-w-full">
+                        <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
+                          <h4 className=" tw-text-white tw-self-start tw-font-bold">
+                            {item.title}
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -1094,114 +1018,110 @@ export default function index({
           </div>
         </div>
 
-        <div className="w-full">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 max-md:gap-0">
-            <div className="flex flex-col max-md:w-full">
-              <div className="relative flex flex-col grow md:items-end md:px-16 md:pb-20 md:min-h-[645px] md:mt-10">
+        <div className="tw-w-full">
+          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-5 max-md:tw-gap-0">
+            <div className="tw-flex tw-flex-col max-md:tw-w-full">
+              <div className="tw-relative tw-flex tw-flex-col tw-grow md:tw-items-end md:tw-px-16 md:tw-pb-20 md:tw-min-h-[645px] md:tw-mt-10">
                 <img
                   loading="lazy"
                   srcSet="/car-side.png"
-                  className="object-contain absolute inset-0 w-full h-full md:block hidden"
+                  className="tw-object-contain tw-absolute tw-inset-0 tw-w-full tw-h-full md:tw-block tw-hidden"
                 />
-                <div className="relative flex flex-col justify-center">
-                  <div className="flex flex-col justify-center">
-                    <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center">
+                  <div className="tw-flex tw-flex-col tw-justify-center">
+                    <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                       Choose your Brand
                     </h6>
-                    <div className="font-semibold mt-2 text-3xl leading-9 capitalize text-neutral-900">
+                    <div className="tw-font-semibold tw-mt-2 tw-text-3xl tw-leading-9 tw-capitalize tw-text-neutral-900">
                       Shop By Brand
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col justify-center col-span-3 max-md:w-full">
-              <div className="grid md:grid-cols-6 grid-cols-3 gap-5 md:pr-20 max-md:pr-5">
+            <div className="tw-flex tw-flex-col tw-justify-center tw-col-span-3 max-md:tw-w-full">
+              <div className="tw-grid md:tw-grid-cols-6 tw-grid-cols-3 tw-gap-5 md:tw-pr-20 max-md:tw-pr-5">
                 {brand.map((item, index) => (
                   <Link
                     href={`/brands/${item?.slug}`}
                     key={index}
-                    className="flex flex-col justify-center items-center text-center text-black p-4"
+                    className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black tw-p-4"
                   >
                     <img
                       loading="lazy"
                       src={`${item?.logo}`}
-                      className="object-cover aspect-square w-[100px] grayscale hover:filter-none"
+                      className="tw-object-cover tw-aspect-square tw-w-[100px] tw-grayscale tw-hover:tw-filter-none"
                     />
-                    <div className="mt-3.5">{item.name}</div>
+                    <div className="tw-mt-3.5 font-bold">{item.name}</div>
                   </Link>
                 ))}
               </div>
               <Link href="/brands">
-                <button className="flex justify-center items-center px-16 md:py-5 py-3 mt-14 max-w-full text-base leading-4 text-center text-white bg-blue-600 border border-blue-600 border-solid rounded-[73px] md:w-[300px] w-full max-md:px-5 max-md:mt-10">
+                <button className="tw-flex tw-justify-center tw-items-center tw-px-16 md:tw-py-5 tw-py-3 tw-mt-14 tw-max-w-full tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-[73px] md:tw-w-[300px] tw-w-full max-md:tw-px-5 max-md:tw-mt-10">
                   View All
                 </button>
               </Link>
             </div>
           </div>
         </div>
+        <img
+          loading="lazy"
+          srcSet="/ferrari-sponsored.jpg"
+          className="tw-object-contain tw-w-full tw-h-full md:tw-block tw-hidden"
+        />
+        <img
+          loading="lazy"
+          srcSet="/sponsored-mob.jpg"
+          className="tw-object-contain tw-w-full tw-h-full md:tw-hidden tw-block"
+        />
 
-        <div className="relative overflow-hidden flex flex-col items-start md:pr-20 md:pb-20 text-white md:h-[400px] min-h-[320px] max-md:pr-5 w-full md:my-5 my-4">
-          <img
-            loading="lazy"
-            srcSet="/ferrari-sponsored.jpg"
-            className="object-contain absolute inset-0 w-full h-full md:block hidden"
-          />
-          <img
-            loading="lazy"
-            srcSet="/sponsored-mob.jpg"
-            className="object-contain absolute inset-0 w-full h-full md:hidden block"
-          />
-        </div>
-
-        <div className="container md:my-20 my-4 px-5">
-          <div className="flex justify-between items-start gap-5 w-full max-md:flex-wrap max-md:max-w-full">
-            <div className="flex flex-col max-md:max-w-full">
-              <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+        <div className="tw-container md:tw-my-20 tw-my-4 tw-px-5">
+          <div className="tw-flex tw-justify-between tw-items-start tw-gap-5 tw-w-full max-md:tw-flex-wrap max-md:tw-max-w-full">
+            <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
+              <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                 Choose by Type
               </h6>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="tw-text-2xl tw-font-semibold">
                 You can choose by the body type
               </h2>
             </div>
-            {/* <button className="px-6 py-3 mt-4 text-base tracking-tight leading-4 text-center rounded-[119px] text-neutral-900">
-            View More
-          </button> */}
+            {/* <button className="tw-px-6 tw-py-3 tw-mt-4 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+      View More
+    </button> */}
           </div>
 
-          <div className="grid md:grid-cols-5 grid-cols-3 md:gap-10 gap-8 md:mt-10 mt-5 max-w-full">
+          <div className="tw-grid md:tw-grid-cols-5 tw-grid-cols-3 md:tw-gap-10 tw-gap-8 md:tw-mt-10 tw-mt-5 tw-max-w-full">
             {bodyTypes.map((item, index) => (
               <Link href={`/category/${item?.slug}`} key={index}>
-                <div className="flex flex-col justify-center items-center text-center text-black">
-                  <div className="w-full md:h-32 h-24 overflow-hidden">
+                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black">
+                  <div className="tw-w-full md:tw-h-32 tw-h-24 tw-overflow-hidden">
                     <img
                       loading="lazy"
                       src={`${item?.image}`}
-                      className="object-contain w-full h-full transition-all duration-300 p-3"
+                      className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 tw-p-3"
                     />
                   </div>
-                  <div className="md:mt-6 font-semibold">{item.name}</div>
+                  <div className="md:tw-mt-6 tw-font-semibold">{item.name}</div>
                 </div>
               </Link>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 container px-5">
-          <div className="flex flex-col w-full">
-            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
+        <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container tw-px-5">
+          <div className="tw-flex tw-flex-col tw-w-full">
+            <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
               <img
                 src="/emi.jpg"
                 alt=""
-                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+                className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
-              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white">
+              <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  {" "}
-                  <div className="md:text-3xl text-xl">
+                  <div className="md:tw-text-3xl tw-text-xl">
                     Calculate Your Car Loan EMI
                   </div>
-                  <p className="md:mt-6 leading-6 w-[50%]">
+                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
                     Input your loan amount, interest rate, and loan term to get
                     instant results.
                   </p>
@@ -1209,36 +1129,35 @@ export default function index({
 
                 <Link
                   href="/loan-calculator"
-                  className="flex md:gap-2.5 md:mt-10 mt-3 "
+                  className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3"
                 >
-                  <p>Calculate Now</p>
-                  <span className="material-symbols-outlined">
+                  <p className="tw-text-white">Calculate Now</p>
+                  <span className="material-symbols-outlined tw-text-white">
                     arrow_forward
                   </span>
                 </Link>
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full">
-            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
+          <div className="tw-flex tw-flex-col tw-w-full">
+            <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
               <img
                 src="/car-value.jpg"
                 alt=""
-                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+                className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
-              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white">
+              <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  {" "}
-                  <div className="md:text-3xl text-xl">
+                  <div className="md:tw-text-3xl tw-text-xl">
                     Know Your Car's Worth
                   </div>
-                  <p className="md:mt-6 leading-6 w-[50%]">
+                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
                     Input your car's details to receive an instant valuation
                     based on real-time market data.
                   </p>
                 </div>
 
-                <div className="flex md:gap-2.5 md:mt-10 mt-3 ">
+                <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
                   <p>Coming Soon</p>
                   <span className="material-symbols-outlined">
                     arrow_forward
@@ -1258,7 +1177,7 @@ export default function index({
                 alt=""
                 className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
               />
-              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 text-white"></div>
+              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 tw-text-white"></div>
             </div>
           </div>
           <div className="flex flex-col w-full">
@@ -1273,20 +1192,19 @@ export default function index({
           </div>
         </div>
       </div> */}
-
-        <div className="flex flex-col container md:mt-10 my-6 px-5">
-          <div className="flex flex-wrap justify-between w-full gap-5 ">
-            <div className="flex flex-col max-w-full">
-              <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+        <div className="tw-flex tw-flex-col tw-container md:tw-mt-10 tw-my-6 tw-px-5">
+          <div className="tw-flex tw-flex-wrap tw-justify-between tw-w-full tw-gap-5">
+            <div className="tw-flex tw-flex-col tw-max-w-full">
+              <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                 Trending automotive videos
               </h6>
-              <h2 className="text-2xl font-semibold">Latest Videos</h2>
+              <h2 className="tw-text-2xl tw-font-semibold">Latest Videos</h2>
             </div>
-            {/* <div className="self-start px-6 py-3 mt-2.5 text-base tracking-tight leading-4 text-center rounded-[119px] text-neutral-900">
-            View More
-          </div> */}
+            {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+      View More
+    </div> */}
           </div>
-          <div className="grid gap-5 md:mt-7  grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="tw-grid tw-gap-5 md:tw-mt-7 tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3">
             {[
               {
                 imgSrc: "/10-Facts-About-The-LC.png",
@@ -1308,110 +1226,107 @@ export default function index({
                 href={item.url}
                 target="_blank"
                 key={index}
-                className="flex flex-col bg-white rounded-2xl shadow-sm pb-7 max-md:mt-5"
+                className="tw-flex tw-flex-col tw-bg-white tw-rounded-2xl tw-shadow-sm tw-pb-7 max-md:tw-mt-5"
               >
-                <div className="relative flex flex-col overflow-hidden justify-center w-full rounded-2xl md:min-h-[250px] min-h-[200px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-justify-center tw-w-full tw-rounded-2xl md:tw-min-h-[250px] tw-min-h-[200px]">
                   <img
                     loading="lazy"
                     srcSet={item?.imgSrc}
-                    className="absolute inset-0 object-cover w-full md:h-full h-[200px]"
+                    className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-full tw-h-[200px]"
                   />
                 </div>
-                <div className="relative flex flex-col pl-7 mt-7 text-neutral-900 max-md:pl-5">
+                <div className="tw-relative tw-flex tw-flex-col tw-pl-7 tw-mt-7 tw-text-neutral-900 max-md:tw-pl-5">
                   <img
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/f9d5fef3659a0fe531b3dc3ad5973537a8ec930dbb49f5a75f67de7a78660e9f?apiKey=7580612134c3412b9f32a9330debcde8&"
-                    className=" absolute right-5 top-[-65px] w-[70px] "
+                    className=" tw-absolute tw-right-5 tw-top-[-65px] tw-w-[70px]"
                   />
-                  <div className="flex flex-wrap justify-between gap-5 text-2xl">
-                    <h4 className="font-semibold" line-clamp-2>
+                  <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 tw-text-2xl">
+                    <h4 className=" tw-text-black tw-font-semibold" line-clamp-2>
                       {item.name}
                     </h4>
                   </div>
-                  {/* <small className="flex flex-wrap mt-2 text-base">
-                  <div className="uppercase">Carprices.ae Team -</div>
-                  <div>12th April 2024</div>
-                </small> */}
+                  {/* <small className="tw-flex tw-flex-wrap tw-mt-2 tw-text-base">
+            <div className="tw-uppercase">Carprices.ae Team -</div>
+            <div>12th April 2024</div>
+          </small> */}
                 </div>
               </Link>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col container px-5">
-          <div className="flex justify-between gap-5 px-px w-full max-md:flex-wrap">
+        <div className="tw-flex tw-flex-col tw-container tw-px-5">
+          <div className="tw-flex tw-justify-between tw-gap-5 tw-px-px tw-w-full max-md:tw-flex-wrap">
             <div className="">
-              <h6 className="text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+              <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                 Trending automotive news
               </h6>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="tw-text-2xl tw-font-semibold">
                 {" "}
                 Latest Automotive News
               </h2>
             </div>
-            {/* <div className="self-start px-6 py-3 mt-2.5 text-base tracking-tight leading-4 text-center rounded-[119px] text-neutral-900">
-            View More
-          </div> */}
+            {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+      View More
+    </div> */}
           </div>
-          <div className="mt-7 w-full">
-            <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
-              <Link href={`/news/${articles.news[0]?.slug}`}>
-                <div
-                  className="md:flex hidden col-span-2 relative flex-col justify-center p-8 pt-20 pb-9 text-slate-100 bg-cover rounded-2xl min-h-[838px]"
-                  style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
-                  }}
-                >
-                  <div className="relative flex flex-col justify-center py-3 border-l-4 border-blue-400 backdrop-blur-[32px] mt-[552px]">
-                    <div className="px-6">
-                      <div className="text-4xl line-clamp-2">
-                        {articles.news[0].title}
-                      </div>
-                      <div className="mt-1 text-base line-clamp-2 ">
-                        {articles.news[0].summary}
-                      </div>
+          <div className="tw-mt-7 tw-w-full">
+            <div className="tw-grid tw-grid-cols-3 tw-gap-5 max-md:tw-grid-cols-1">
+              <Link
+                href={`/news/${articles.news[0]?.slug}`}
+                className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-center tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
+                style={{
+                  backgroundImage: `url('${articles.news[0].coverImage}')`,
+                }}
+              >
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-py-3 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-mt-[552px]">
+                  <div className="tw-px-6">
+                    <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
+                      {articles.news[0].title}
+                    </div>
+                    <div className="tw-mt-1 tw-text-base tw-line-clamp-2 tw-text-white">
+                      {articles.news[0].summary}
                     </div>
                   </div>
                 </div>
               </Link>
+
               <Link
                 href={`/news/${articles.news[0]?.slug}`}
-                className="md:hidden flex"
+                key={index}
+                className="md:tw-hidden tw-flex tw-relative tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
+                style={{
+                  backgroundImage: `url('${articles.news[0].coverImage}')`,
+                }}
               >
-                <div
-                  key={index}
-                  className="md:hidden flex relative flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
-                  style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
-                  }}
-                >
-                  <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
-                    <div className="text-lg">{articles.news[0].title}</div>
-                    {/* <div className="flex mt-1 text-sm">
-                      <div className="uppercase">Carprices Team - </div>
-                      <div>12th April 2024</div>
-                    </div> */}
-                  </div>
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
+                  <div className="tw-text-lg tw-text-white">{articles.news[0].title}</div>
+                  {/* <div className="tw-flex tw-mt-1 tw-text-sm">
+            <div className="tw-uppercase">Carprices Team - </div>
+            <div>12th April 2024</div>
+          </div> */}
                 </div>
               </Link>
-              <div className="grid grid-rows-3 gap-4">
+
+              <div className="tw-grid tw-grid-rows-3 tw-gap-4">
                 {articles.news.slice(1, 4).map((item, index) => (
                   <Link href={`/news/${item?.slug}`}>
                     <div
                       key={index}
-                      className="relative flex flex-col justify-end p-4  text-slate-100 bg-cover rounded-2xl min-h-[269px]"
+                      className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
                       style={{
                         backgroundImage: `url('${
                           item?.coverImage ? item?.coverImage : altImage
                         }')`,
                       }}
                     >
-                      <div className="relative flex flex-col justify-center p-4 border-l-4 border-blue-400 backdrop-blur-[32px] bg-opacity-10">
-                        <div className="text-lg">{item.title}</div>
-                        {/* <div className="flex mt-1 text-sm">
-                      <div className="uppercase">Carprices Team - </div>
-                      <div>12th April 2024</div>
-                    </div> */}
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
+                        <div className="tw-text-lg tw-text-white">{item.title}</div>
+                        {/* <div className="tw-flex tw-mt-1 tw-text-sm">
+                  <div className="tw-uppercase">Carprices Team - </div>
+                  <div>12th April 2024</div>
+                </div> */}
                       </div>
                     </div>
                   </Link>
@@ -1421,74 +1336,74 @@ export default function index({
           </div>
         </div>
 
-        <div className="mt-12 w-full max-md:pr-5 max-md:mt-10 max-md:max-w-full container px-5">
-          <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-            <div className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="max-md:mt-10">
-                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                  <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col grow text-sm leading-6 capitalize text-neutral-900 max-md:mt-10">
-                      <h4 className="font-semibold">Popular New Cars</h4>
-                      <div className="flex flex-col mt-4">
+        <div className="tw-mt-12 tw-w-full max-md:tw-pr-5 max-md:tw-mt-10 max-md:tw-max-w-full tw-container tw-px-5">
+          <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
+            <div className="tw-flex tw-flex-col tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full">
+              <div className="max-md:tw-mt-10">
+                <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
+                  <div className="tw-flex tw-flex-col tw-w-6/12 max-md:tw-ml-0 max-md:tw-w-full">
+                    <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900 max-md:tw-mt-10">
+                      <h4 className="tw-font-semibold">Popular New Cars</h4>
+                      <div className="tw-flex tw-flex-col tw-mt-4">
                         <Link href="#">New Honda HR-V</Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           JAC S3 Plus
                         </Link>
-                        <Link href="#" className="mt-2 max-md:mr-2.5">
+                        <Link href="#" className="tw-mt-2 max-md:tw-mr-2.5">
                           New Chevrolet Trailblazer
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Chevrolet Bolt EV
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Chevrolet Bolt EUV
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Ford Bronco
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Ford Maverick
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Ford Mustang Mach-E
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Honda Accord
                         </Link>
-                        <Link href="#" className="mt-2">
+                        <Link href="#" className="tw-mt-2">
                           New Honda Civic
                         </Link>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                    <div className="flex flex-col grow mt-10 text-sm leading-6 capitalize text-neutral-900">
+                  <div className="tw-flex tw-flex-col tw-ml-5 tw-w-6/12 max-md:tw-ml-0 max-md:tw-w-full">
+                    <div className="tw-flex tw-flex-col tw-grow tw-mt-10 tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900">
                       <Link href="#">New Honda HR-V</Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         JAC S3 Plus
                       </Link>
-                      <Link href="#" className="mt-2 max-md:mr-2.5">
+                      <Link href="#" className="tw-mt-2 max-md:tw-mr-2.5">
                         New Chevrolet Trailblazer
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Chevrolet Bolt EV
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Chevrolet Bolt EUV
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Ford Bronco
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Ford Maverick
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Ford Mustang Mach-E
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Honda Accord
                       </Link>
-                      <Link href="#" className="mt-2">
+                      <Link href="#" className="tw-mt-2">
                         New Honda Civic
                       </Link>
                     </div>
@@ -1496,67 +1411,67 @@ export default function index({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col text-sm leading-6 capitalize text-neutral-900 max-md:mt-10">
-                <h4 className="font-semibold">Searched Keywords</h4>
-                <div className="flex flex-col mt-4">
+            <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full">
+              <div className="tw-flex tw-flex-col tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900 max-md:tw-mt-10">
+                <h4 className=" tw-font-semibold">Searched Keywords</h4>
+                <div className="tw-flex tw-flex-col tw-mt-4">
                   <Link href="https://carprices.ae/news/10-important-things-to-know-about-the-2024-toyota-land-cruiser-prado-before-its-uae-launch">
                     10 Important Things To Know About the 2024 Toyota Land
                     Cruiser Prado Before Its UAE Launch!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     The 2024 Toyota Land Cruiser Prado VS The GWM Tank 500!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     5 Exciting Car Launches To Happen In The UAE In 2024!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     10 Popular Cars In UAE With High Ground Clearance Sorted By
                     Price Low To High!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     Internal Combustion Engine Car VS Hybrid Car!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/are-chinese-luxury-cars-better-than-german-luxury-cars-in-uae-chinese-cars-vs-german-cars"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     Are Chinese Luxury Cars Better Than German Luxury Cars In
                     UAE?
                   </Link>
                   <Link
                     href="https://carprices.ae/news/heres-what-you-can-do-during-a-car-break-down-in-the-middle-of-nowhere-in-the-uae"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     Here's What You Can Do During A Car Break Down!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/6-best-and-cheapest-suvs-in-uae-under-aed-150000"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     6 Best And Cheapest SUVs In UAE Under AED 150,000!
                   </Link>
                   <Link
                     href="https://carprices.ae/news/10-best-cars-to-buy-in-uae-under-aed-100k"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     10 Best Cars To Buy In UAE Under AED 100K In 2024
                   </Link>
                   <Link
                     href="https://carprices.ae/news/are-chinese-cars-superior-and-reliable-than-japanese-cars-in-uae"
-                    className="mt-2"
+                    className="tw-mt-2"
                   >
                     Are Chinese Cars Superior And Reliable Than Japanese Cars In
                     UAE?
@@ -1564,16 +1479,16 @@ export default function index({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full mb-10">
-              <div className="flex flex-col grow px-8 py-10 w-full bg-sky-100 rounded-2xl max-md:px-5 max-md:mt-10 max-md:max-w-full">
-                <div className="text-2xl leading-9 text-neutral-900">
+            <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full tw-mb-10">
+              <div className="tw-flex tw-flex-col tw-grow tw-px-8 tw-py-10 tw-w-full tw-bg-sky-100 tw-rounded-2xl max-md:tw-px-5 max-md:tw-mt-10 max-md:tw-max-w-full">
+                <div className="tw-text-2xl tw-leading-9 tw-text-neutral-900">
                   Why Carprices.ae ?
                 </div>
-                <div className="flex flex-col mt-9 text-neutral-900">
-                  <div className="text-base leading-6">
+                <div className="tw-flex tw-flex-col tw-mt-9 tw-text-neutral-900">
+                  <div className="tw-text-base tw-leading-6">
                     Innovative Search Filters
                   </div>
-                  <div className="mt-1 text-sm leading-5">
+                  <div className="tw-mt-1 tw-text-sm tw-leading-5">
                     Say goodbye to endless scrolling and irrelevant listings.
                     Our advanced search filters allow you to find your dream car
                     with precision. Narrow down your search by make, model,
@@ -1581,11 +1496,11 @@ export default function index({
                     result matches your exact preferences.
                   </div>
                 </div>
-                <div className="flex flex-col mt-6 text-neutral-900">
-                  <div className="text-base leading-6">
+                <div className="tw-flex tw-flex-col tw-mt-6 tw-text-neutral-900">
+                  <div className="tw-text-base tw-leading-6">
                     Comprehensive Database
                   </div>
-                  <div className="mt-1 text-sm leading-5">
+                  <div className="tw-mt-1 tw-text-sm tw-leading-5">
                     With our extensive database of new and used cars, you'll
                     have access to a wide range of vehicles from trusted
                     dealerships across the UAE. Whether you're in the market for
@@ -1593,10 +1508,10 @@ export default function index({
                     we've got you covered.
                   </div>
                 </div>
-                <div className="flex gap-0.5 self-start p-0.5 mt-9 border border-blue-600 border-solid rounded-[36px]">
-                  <div className="shrink-0 w-full bg-blue-600 h-[7px] rounded-[36px]" />
-                  <div className="shrink-0 bg-blue-600 h-[7px] rounded-[36px] w-[7px]" />
-                  <div className="shrink-0 bg-blue-600 h-[7px] rounded-[36px] w-[7px]" />
+                <div className="tw-flex tw-gap-0.5 tw-self-start tw-p-0.5 tw-mt-9 tw-border tw-border-blue-600 tw-border-solid tw-rounded-[36px]">
+                  <div className="tw-shrink-0 tw-w-full tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px]" />
+                  <div className="tw-shrink-0 tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px] tw-w-[7px]" />
+                  <div className="tw-shrink-0 tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px] tw-w-[7px]" />
                 </div>
               </div>
             </div>
@@ -1604,162 +1519,167 @@ export default function index({
         </div>
 
         <div className="hidemobile">
-          <Ad970x250 dataAdSlot="6082880703" />{" "}
+          <Ad970x250 dataAdSlot="6082880703" />
         </div>
         <div className="hidedesktop">
           <Ad300x250 dataAdSlot="9351332409" />
         </div>
-        <div className="flex justify-center items-center px-16 py-16 bg-neutral-900 max-md:px-5 w-full">
-          <div className="flex flex-col w-full container">
-            <div className="flex flex-col max-md:max-w-full">
-              <div className="flex gap-5 justify-between py-8 w-full rounded-2xl max-md:flex-wrap max-md:max-w-full">
-                <div className="flex flex-col text-gray-50 max-md:max-w-full">
-                  <div className="text-3xl tracking-tight leading-8 max-md:max-w-full">
+        <div className="tw-flex tw-justify-center tw-items-center tw-px-16 tw-py-16 tw-bg-neutral-900 max-md:tw-px-5 tw-w-full ">
+          <div className="tw-flex tw-flex-col tw-w-full tw-container">
+            <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
+              <div className="tw-flex tw-gap-5 tw-justify-between tw-py-8 tw-w-full tw-rounded-2xl max-md:tw-flex-wrap max-md:tw-max-w-full">
+                <div className="tw-flex tw-flex-col tw-text-gray-50 max-md:tw-max-w-full">
+                  <div className="tw-text-3xl tw-tracking-tight tw-leading-8 max-md:tw-max-w-full">
                     Do you need updates?
                   </div>
-                  <div className="mt-2.5 text-sm leading-5 max-md:max-w-full">
+                  <div className="tw-mt-2.5 tw-text-sm tw-leading-5 max-md:tw-max-w-full">
                     We will provide updates, shopping tips and more.
                   </div>
                 </div>
-                <div className="flex gap-5 justify-between my-auto text-xl leading-7 text-white">
-                  <Link href="/contact-us">Get consultation</Link>
-                  <span class="material-symbols-outlined">arrow_right_alt</span>
+                <div className="tw-flex tw-gap-5 tw-justify-between tw-my-auto tw-text-xl tw-leading-7 tw-text-white">
+                  <Link href="/contact-us" className="text-white">Get consultation</Link>
+                  <span className="material-symbols-outlined">
+                    arrow_right_alt
+                  </span>
                 </div>
               </div>
-              <div className="flex gap-5 justify-between mt-12 w-full max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-                <div className="max-md:max-w-full">
-                  <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                    <div className="flex flex-col w-[29%] max-md:ml-0 max-md:w-full">
-                      <div className="flex flex-col grow text-sm leading-5 text-white max-md:mt-10">
-                        <h4 className="tracking-wide uppercase font-semibold">
+              <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-12 tw-w-full max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
+                <div className="max-md:tw-max-w-full">
+                  <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
+                    <div className="tw-flex tw-flex-col tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
+                      <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Top 10s
                         </h4>
-                        <div className="flex flex-col mt-6 space-y-2">
-                          <Link href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae">
+                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                          <Link href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae" className="text-white">
                             10 Cars with High Ground Clearance
                           </Link>
                           <Link
                             href="https://carprices.ae/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             10 Most Searched Cars
                           </Link>
                           <Link
                             href="https://carprices.ae/news/chinese-car-brands-uae"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             10 Best Chinese Brands
                           </Link>
                           <Link
                             href="https://carprices.ae/news/10-myths-busted-about-buying-a-new-car-in-the-uae"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             10 Myths About Buying a Car
                           </Link>
                           <Link
                             href="https://carprices.ae/news/top-fuel-effnt"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             10 Fuel Efficient Cars
                           </Link>
                           <Link
                             href="https://carprices.ae/news/top-10-hybrid-cars-AED-230k"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             10 Best Hybrid Cars
                           </Link>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col ml-5 w-[29%] max-md:ml-0 max-md:w-full">
-                      <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <h4 className="tracking-wide uppercase font-semibold">
+                    <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Comparisons
                         </h4>
-                        <div className="flex flex-col mt-6 space-y-2">
-                          <Link href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500">
+                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                          <Link href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500" className="text-white">
                             2024 Toyota Prado Vs GWM Tank 500
                           </Link>
                           <Link
                             href="https://carprices.ae/news/2024-toyota-land-cruiser-prado-vs-land-rover-defender-vs-jeep-wrangler-vs-the-ford-bronco"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             Battle Of 4 Popular SUVs
                           </Link>
                           <Link
                             href="https://carprices.ae/news/the-2023-toyota-land-cruiser-300-series-vs-the-2024-toyota-land-cruiser-prado"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             LC 300 Vs 2024 Toyota Prado
                           </Link>
                           <Link
                             href="https://carprices.ae/news/new-vs-old-prado"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             2024 LC Prado Vs Used LC Prado
                           </Link>
                           <Link
                             href="https://carprices.ae/news/lc-prado-vs-patrol"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             2024 LC Prado Vs Nissan Patrol
                           </Link>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col ml-5 w-[22%] max-md:ml-0 max-md:w-full">
-                      <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <h4 className="tracking-wide uppercase font-semibold">
+                    <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[22%] max-md:tw-ml-0 max-md:tw-w-full">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Quick Search
                         </h4>
-                        <div className="flex flex-col mt-6 space-y-2">
-                          <Link href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae">
+                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                          <Link href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae" className="text-white">
                             ICE Vs Hybrid
                           </Link>
                           <Link
                             href="https://carprices.ae/news/analysing-the-cost-of-living-with-the-electric-vehicle-vs-internal-combustion-engine-vehicle-in-the-uae-ev-vs-ice"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             ICE Vs EV
                           </Link>
                           <Link
                             href="https://carprices.ae/news/7-popular-reliable-sedans-to-buy-in-the-uae-in-2024-or-best-cars-in-uae"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             Popular Reliable Sedans
                           </Link>
                           <Link
                             href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             2024 Car Launches
                           </Link>
                           <Link
                             href="https://carprices.ae/news/6-best-chinese-suv-cars-in-uae-under-aed-70000"
-                            className="mt-1"
+                            className="tw-mt-1 tw-text-white"
                           >
                             Best Chinese SUVs
                           </Link>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col ml-5 w-1/5 max-md:ml-0 max-md:w-full">
-                      <div className="flex flex-col text-sm leading-5 text-white max-md:mt-10">
-                        <h4 className="tracking-wide uppercase font-semibold">
+                    <div className="tw-flex tw-flex-col tw-ml-5 tw-w-1/5 max-md:tw-ml-0 max-md:tw-w-full">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Legal Bits
                         </h4>
-                        <div className="flex flex-col mt-6">
-                          <Link href="/about">About us</Link>
-                          <Link href="/contact-us" className="mt-1">
+                        <div className="tw-flex tw-flex-col tw-mt-6">
+                          <Link href="/about" className="text-white">About us</Link>
+                          <Link href="/contact-us" className="tw-mt-1 tw-text-white">
                             Contact Us
                           </Link>
-                          <Link href="/privacy" className="mt-1">
+                          <Link href="/privacy" className="tw-mt-1 tw-text-white">
                             Privacy Policy
                           </Link>
-                          <Link href="/terms-and-conditions" className="mt-1">
+                          <Link
+                            href="/terms-and-conditions"
+                            className="tw-mt-1 tw-text-white"
+                          >
                             Terms and Conditions
                           </Link>
-                          <Link href="/code-of-conduct" className="mt-1">
+                          <Link href="/code-of-conduct" className="tw-mt-1 tw-text-white">
                             Code of Conduct
                           </Link>
                         </div>
@@ -1767,52 +1687,52 @@ export default function index({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col justify-center self-start">
-                  <div className="flex flex-col">
-                    <div className="shrink-0 self-end h-px bg-white w-[45px]" />
-                    <div className="flex flex-col mt-6">
-                      <div className="flex flex-col self-end text-sm leading-5 text-white">
+                <div className="tw-flex tw-flex-col tw-justify-center tw-self-start">
+                  <div className="tw-flex tw-flex-col">
+                    <div className="tw-shrink-0 tw-self-end tw-h-px tw-bg-white tw-w-[45px]" />
+                    <div className="tw-flex tw-flex-col tw-mt-6">
+                      <div className="tw-flex tw-flex-col tw-self-end tw-text-sm tw-leading-5 tw-text-white">
                         {/* <div>+971 50 649 4665</div> */}
-                        <div className="mt-1 text-right">
-                          <Link href="mailto:info@carprices.ae">
+                        <div className="tw-mt-1 tw-text-right tw-text-white">
+                          <Link href="mailto:info@carprices.ae" className="text-white">
                             info@carprices.ae
                           </Link>
                         </div>
                       </div>
-                      <div className="flex gap-2 mt-2">
+                      <div className="tw-flex tw-gap-2 tw-mt-2">
                         <Link href="https://youtube.com/@carpricesuae?feature=shared">
                           <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/89539fb8ec01af9a7f038afd91c58e261f280173a90f447aa81acbc97aa5bd68?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="shrink-0 w-6 aspect-square"
+                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
                           />
                         </Link>
                         <Link href="https://www.facebook.com/carprices.ae/">
                           <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/989ca5cee220b9472a192b392c3c43f2675c6d4a9f075180fafad8163839aee5?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="shrink-0 w-6 aspect-square"
+                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
                           />
                         </Link>
                         <Link href="https://x.com/CarPricesAe?t=_IgNE0J6jf5r1ZiiKrkaYw&s=09">
                           <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/5105e8bdd60ff0245b9f094d1b7529a5939d0436f5ce2ebad352d77ca2bd6576?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="shrink-0 w-6 aspect-square"
+                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
                           />
                         </Link>
                         <Link href="https://www.linkedin.com/company/car-prices-ae/">
                           <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/280619b280591c941855898a9c986f9346aa18dcf6ee0f84e15d1bfd4d37bcb1?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="shrink-0 w-6 aspect-square"
+                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
                           />
                         </Link>
                         <Link href="https://www.instagram.com/carprices.ae?igsh=bnE4cnpudjFwMHg1">
                           <img
                             loading="lazy"
                             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d67ce5820088e265263fd67a72a832801a8cf6b563bf67494b5d1b6113014034?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="shrink-0 w-6 aspect-square"
+                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
                           />
                         </Link>
                       </div>
@@ -1821,8 +1741,8 @@ export default function index({
                 </div>
               </div>
             </div>
-            <div className="flex gap-5 justify-between mt-14 text-sm leading-5 text-white max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-              <div className="my-auto">
+            <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
+              <div className="tw-my-auto">
                 ©2017 - {currentYear} Carprices.ae. All rights reserved.
               </div>
             </div>

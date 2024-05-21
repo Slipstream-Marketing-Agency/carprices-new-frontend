@@ -1,15 +1,16 @@
 import Head from "next/head";
-// import "../../public/assets/css/bootstrap-icons.css";
-// import "../../public/assets/css/boxicons.min.css";
-// import "../../public/assets/css/fontawesome.min.css";
-// import "../../public/assets/css/bootstrap.min.css";
-// import "../../public/assets/css/swiper-bundle.min.css";
-// import "../../public/assets/css/nice-select.css";
+import "../../public/assets/css/bootstrap-icons.css";
+import "../../public/assets/css/boxicons.min.css";
+import "../../public/assets/css/fontawesome.min.css";
+import "../../public/assets/css/bootstrap.min.css";
+import "../../public/assets/css/swiper-bundle.min.css";
+import "../../public/assets/css/nice-select.css";
 import "../../styles/custom.css";
-// import "../../public/assets/css/style.css";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "../../public/assets/css/style.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
+import "@/styles/tailwind.css";
 import Script from "next/script";
 import Preloader from "../components/common/Preloader";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -27,9 +28,6 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, []);
-  useEffect(() => {
-    import("../../public/assets/js/bootstrap.min.js");
   }, []);
 
   const router = useRouter();
@@ -52,7 +50,7 @@ function MyApp({ Component, pageProps }) {
           type="image/gif"
           sizes="20x20"
         />
-        {router.pathname === "/" ? (
+        {/* {router.pathname === "/" ? (
           <>
             <script src="https://cdn.tailwindcss.com"></script>
             <script
@@ -83,7 +81,7 @@ function MyApp({ Component, pageProps }) {
             <link rel="stylesheet" href="/assets/css/style.css" />
             <script src="/assets/js/bootstrap.min.js"></script>
           </>
-        )}
+        )} */}
       </Head>
 
       <Component {...pageProps} />

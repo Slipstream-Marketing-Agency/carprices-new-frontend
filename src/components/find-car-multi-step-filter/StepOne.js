@@ -110,31 +110,30 @@ export default function StepOne({ filterData, setFilterData }) {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="tw-grid tw-grid-cols-3 tw-gap-5">
       {filterItems.map((item, index) => (
         <Tooltip key={index} title={item.toolbar} arrow>
           <button
             key={item.label}
-            className={`flex flex-col items-center p-2 rounded-xl border bg-white border-zinc-100 h-[80px] 
-          ${
-            filterData.preferences.includes(item.value)
-              ? "bg-blue-200"
-              : "hover:bg-blue-100"
-          }
-          `}
+            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px]         ${
+          filterData.preferences.includes(item.value)
+            ? "tw-bg-blue-200"
+            : "hover:tw-bg-blue-100"
+        }
+        `}
             onClick={() => handlePreferencesClick(item.value)}
           >
-            <div className="w-[40px] h-[40px] flex justify-center items-center">
+            <div className="tw-w-[40px] tw-h-[40px] tw-flex tw-justify-center tw-items-center">
               <Image
                 loading="lazy"
                 src={item.img}
                 alt={item.label}
                 width={40}
                 height={40}
-                className="w-full aspect-square object-contain"
+                className="tw-w-full tw-aspect-square tw-object-contain"
               />
             </div>
-            <span className="text-xs text-center text-zinc-600 font-bold">
+            <span className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
               {item.label}
             </span>
           </button>

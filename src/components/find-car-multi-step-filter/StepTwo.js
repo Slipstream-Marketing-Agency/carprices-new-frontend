@@ -31,29 +31,28 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
 
   return (
     <div className="">
-      <div className="grid grid-cols-3 gap-5">
+      <div className="tw-grid tw-grid-cols-3 tw-gap-5">
         {bodyTypeList.map((item, index) => (
           <button
             key={index}
-            className={` flex flex-col items-center p-2 rounded-xl border 
-          ${
-            filterData.bodyTypes.includes(item.slug)
-              ? "bg-blue-200"
-              : "bg-white"
-          }
-          border-zinc-100 hover:bg-blue-100 `}
+            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px]         ${
+          filterData.bodyTypes.includes(item.slug)
+            ? "tw-bg-blue-200"
+            : "tw-bg-white"
+        }
+        tw-border-zinc-100 hover:tw-bg-blue-100`}
             onClick={() => handlePreferencesClick(item.slug)}
           >
-            <div className="w-[50px] h-[50px] flex justify-center items-center">
+            <div className="tw-w-[50px] tw-h-[50px] tw-flex tw-justify-center tw-items-center">
               <Image
                 src={item?.image?.url}
                 alt={item.label}
                 width={60}
                 height={60}
-                className="object-contain"
+                className="tw-object-contain"
               />
             </div>
-            <p className="text-xs text-center text-zinc-600 font-bold">
+            <p className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
               {item.name}
             </p>
           </button>
