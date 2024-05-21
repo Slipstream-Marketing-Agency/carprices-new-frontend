@@ -986,7 +986,7 @@ export default function index({
                 {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
           20+
         </div> */}
-                <div className="tw-text-3xl tw-font-bold">
+                <div className="md:tw-text-3xl tw-text-xl tw-font-bold md:px-0 px-2">
                   Notable
                   <br className="md:tw-block tw-hidden" /> Upcoming Cars
                 </div>
@@ -1020,7 +1020,7 @@ export default function index({
           </div>
         </div>
 
-        <div className="tw-w-full">
+        <div className="tw-w-full md:px-0 tw-px-5">
           <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-5 max-md:tw-gap-0">
             <div className="tw-flex tw-flex-col max-md:tw-w-full">
               <div className="tw-relative tw-flex tw-flex-col tw-grow md:tw-items-end md:tw-px-16 md:tw-pb-20 md:tw-min-h-[645px] md:tw-mt-10">
@@ -1041,7 +1041,7 @@ export default function index({
                 </div>
               </div>
             </div>
-            <div className="tw-flex tw-flex-col tw-justify-center tw-col-span-3 max-md:tw-w-full">
+            <div className="tw-flex tw-flex-col tw-justify-center tw-col-span-3 max-md:tw-w-full ">
               <div className="tw-grid md:tw-grid-cols-6 tw-grid-cols-3 tw-gap-5 md:tw-pr-20 max-md:tw-pr-5">
                 {brand.map((item, index) => (
                   <Link
@@ -1076,7 +1076,7 @@ export default function index({
         <img
           loading="lazy"
           srcSet="/sponsored-mob.jpg"
-          className="tw-object-contain tw-w-full tw-h-full md:tw-hidden tw-block"
+          className="tw-object-contain tw-w-full tw-h-full md:tw-hidden tw-block tw-mt-10 tw-mb-3"
         />
 
         <div className="tw-container md:tw-my-20 tw-my-4 tw-px-5">
