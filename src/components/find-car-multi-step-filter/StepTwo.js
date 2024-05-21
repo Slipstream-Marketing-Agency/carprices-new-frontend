@@ -52,9 +52,9 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
                 className="tw-object-contain"
               />
             </div>
-            <p className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
+            <span className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
               {item.name}
-            </p>
+            </span>
           </button>
         ))}
       </div>

@@ -1050,9 +1050,9 @@ export default function index({
                     <img
                       loading="lazy"
                       src={`${item?.logo}`}
-                      className="tw-object-cover tw-aspect-square tw-w-[100px] tw-grayscale tw-hover:tw-filter-none"
+                      className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] tw-grayscale tw-hover:tw-filter-none"
                     />
-                    <div className="tw-mt-3.5 font-bold">{item.name}</div>
+                    <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">{item.name}</div>
                   </Link>
                 ))}
               </div>
