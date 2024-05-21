@@ -512,7 +512,9 @@ export default function index({
         })}*`
       : "Not Available";
 
-    return <span className="tw-mt-1 tw-text-base tw-font-semibold">{emiString}</span>;
+    return (
+      <span className="tw-mt-1 tw-text-base tw-font-semibold">{emiString}</span>
+    );
   };
 
   const t = useTranslate();
@@ -1052,7 +1054,9 @@ export default function index({
                       src={`${item?.logo}`}
                       className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] tw-grayscale tw-hover:tw-filter-none"
                     />
-                    <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">{item.name}</div>
+                    <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">
+                      {item.name}
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -1242,7 +1246,10 @@ export default function index({
                     className=" tw-absolute tw-right-5 tw-top-[-65px] tw-w-[70px]"
                   />
                   <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 tw-text-2xl">
-                    <h4 className=" tw-text-black tw-font-semibold" line-clamp-2>
+                    <h4
+                      className=" tw-text-black tw-font-semibold"
+                      line-clamp-2
+                    >
                       {item.name}
                     </h4>
                   </div>
@@ -1301,7 +1308,9 @@ export default function index({
                 }}
               >
                 <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
-                  <div className="tw-text-lg tw-text-white">{articles.news[0].title}</div>
+                  <div className="tw-text-lg tw-text-white">
+                    {articles.news[0].title}
+                  </div>
                   {/* <div className="tw-flex tw-mt-1 tw-text-sm">
             <div className="tw-uppercase">Carprices Team - </div>
             <div>12th April 2024</div>
@@ -1322,7 +1331,9 @@ export default function index({
                       }}
                     >
                       <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
-                        <div className="tw-text-lg tw-text-white">{item.title}</div>
+                        <div className="tw-text-lg tw-text-white">
+                          {item.title}
+                        </div>
                         {/* <div className="tw-flex tw-mt-1 tw-text-sm">
                   <div className="tw-uppercase">Carprices Team - </div>
                   <div>12th April 2024</div>
@@ -1345,66 +1356,130 @@ export default function index({
                     <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900 max-md:tw-mt-10">
                       <h4 className="tw-font-semibold">Popular New Cars</h4>
                       <div className="tw-flex tw-flex-col tw-mt-4">
-                        <Link href="#">New Honda HR-V</Link>
-                        <Link href="#" className="tw-mt-2">
-                          JAC S3 Plus
+                        <Link href="https://carprices.ae/brands/toyota/2024/land-cruiser-70">
+                          New Toyota Land Cruiser 70 Series
                         </Link>
-                        <Link href="#" className="tw-mt-2 max-md:tw-mr-2.5">
-                          New Chevrolet Trailblazer
+                        <Link
+                          href="https://carprices.ae/brands/toyota/2024/land-cruiser"
+                          className="tw-mt-2"
+                        >
+                          New Toyota Land Cruiser 300 Series
                         </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Chevrolet Bolt EV
+                        <Link
+                          href="https://carprices.ae/brands/toyota/2024/rav4-hybrid"
+                          className="tw-mt-2 max-md:tw-mr-2.5"
+                        >
+                          New Toyota Rav 4
                         </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Chevrolet Bolt EUV
+                        <Link
+                          href="https://carprices.ae/brands/toyota/2024/hilux"
+                          className="tw-mt-2"
+                        >
+                          New Toyota Hilux
                         </Link>
-                        <Link href="#" className="tw-mt-2">
+                        <Link
+                          href="https://carprices.ae/brands/toyota/2024/rav4"
+                          className="tw-mt-2"
+                        >
+                          New Toyota Camry
+                        </Link>
+                        <Link
+                          href="https://carprices.ae/brands/hyundai/2024/tucson"
+                          className="tw-mt-2"
+                        >
+                          New Hyundai Tucson
+                        </Link>
+                        <Link
+                          href="https://carprices.ae/brands/hyundai/2024/santa-fe"
+                          className="tw-mt-2"
+                        >
+                          New Hyundai Santa Fe
+                        </Link>
+                        <Link
+                          href="https://carprices.ae/brands/ford/2024/bronco"
+                          className="tw-mt-2"
+                        >
                           New Ford Bronco
                         </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Ford Maverick
+                        <Link
+                          href="https://carprices.ae/brands/ford/2024/f-150"
+                          className="tw-mt-2"
+                        >
+                          New Ford F-150
                         </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Ford Mustang Mach-E
-                        </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Honda Accord
-                        </Link>
-                        <Link href="#" className="tw-mt-2">
-                          New Honda Civic
+                        <Link
+                          href="https://carprices.ae/brands/chevrolet/2024/silverado"
+                          className="tw-mt-2"
+                        >
+                          New Chevrolet Silverado
                         </Link>
                       </div>
                     </div>
                   </div>
                   <div className="tw-flex tw-flex-col tw-ml-5 tw-w-6/12 max-md:tw-ml-0 max-md:tw-w-full">
-                    <div className="tw-flex tw-flex-col tw-grow tw-mt-10 tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900">
-                      <Link href="#">New Honda HR-V</Link>
-                      <Link href="#" className="tw-mt-2">
-                        JAC S3 Plus
+                    <div className="tw-flex tw-flex-col tw-grow tw-mt-12 tw-text-sm tw-leading-6 tw-capitalize tw-text-neutral-900">
+                      <Link href="https://carprices.ae/brands/mitsubishi/2024/outlander">
+                        New Mitsubishi Outlander
                       </Link>
-                      <Link href="#" className="tw-mt-2 max-md:tw-mr-2.5">
-                        New Chevrolet Trailblazer
+                      <Link
+                        href="https://carprices.ae/brands/jeep/2024/wrangler"
+                        className="tw-mt-2"
+                      >
+                        New Jeep Wrangler
                       </Link>
-                      <Link href="#" className="tw-mt-2">
-                        New Chevrolet Bolt EV
-                      </Link>
-                      <Link href="#" className="tw-mt-2">
-                        New Chevrolet Bolt EUV
-                      </Link>
-                      <Link href="#" className="tw-mt-2">
-                        New Ford Bronco
-                      </Link>
-                      <Link href="#" className="tw-mt-2">
-                        New Ford Maverick
-                      </Link>
-                      <Link href="#" className="tw-mt-2">
-                        New Ford Mustang Mach-E
-                      </Link>
-                      <Link href="#" className="tw-mt-2">
+                      <Link
+                        href="https://carprices.ae/brands/honda/2024/accord"
+                        className="tw-mt-2 max-md:tw-mr-2.5"
+                      >
                         New Honda Accord
                       </Link>
-                      <Link href="#" className="tw-mt-2">
+                      <Link
+                        href="https://carprices.ae/brands/honda/2024/civic"
+                        className="tw-mt-2"
+                      >
                         New Honda Civic
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/honda/2024/cr-v"
+                        className="tw-mt-2"
+                      >
+                        New Honda CR-V
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/geely/2024/coolray"
+                        className="tw-mt-2"
+                      >
+                        New Geely Tugella
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/geely/2024/starray"
+                        className="tw-mt-2"
+                      >
+                        New Geely Starray
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/nissan/2024/patrol-safari"
+                        className="tw-mt-2"
+                      >
+                        New Nissan Patrol Safari
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/nissan/2024/patrol"
+                        className="tw-mt-2"
+                      >
+                        New Nissan Patrol
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/audi/2024/a3-sedan"
+                        className="tw-mt-2"
+                      >
+                        New Audi A3
+                      </Link>
+                      <Link
+                        href="https://carprices.ae/brands/bmw/2024/3-series-sedan"
+                        className="tw-mt-2"
+                      >
+                        New BMW 3-Series
                       </Link>
                     </div>
                   </div>
@@ -1537,7 +1612,9 @@ export default function index({
                   </div>
                 </div>
                 <div className="tw-flex tw-gap-5 tw-justify-between tw-my-auto tw-text-xl tw-leading-7 tw-text-white">
-                  <Link href="/contact-us" className="text-white">Get consultation</Link>
+                  <Link href="/contact-us" className="text-white">
+                    Get consultation
+                  </Link>
                   <span className="material-symbols-outlined">
                     arrow_right_alt
                   </span>
@@ -1552,7 +1629,10 @@ export default function index({
                           Top 10s
                         </h4>
                         <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
-                          <Link href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae" className="text-white">
+                          <Link
+                            href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
+                            className="text-white"
+                          >
                             10 Cars with High Ground Clearance
                           </Link>
                           <Link
@@ -1594,7 +1674,10 @@ export default function index({
                           Comparisons
                         </h4>
                         <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
-                          <Link href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500" className="text-white">
+                          <Link
+                            href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
+                            className="text-white"
+                          >
                             2024 Toyota Prado Vs GWM Tank 500
                           </Link>
                           <Link
@@ -1630,7 +1713,10 @@ export default function index({
                           Quick Search
                         </h4>
                         <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
-                          <Link href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae" className="text-white">
+                          <Link
+                            href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
+                            className="text-white"
+                          >
                             ICE Vs Hybrid
                           </Link>
                           <Link
@@ -1666,11 +1752,19 @@ export default function index({
                           Legal Bits
                         </h4>
                         <div className="tw-flex tw-flex-col tw-mt-6">
-                          <Link href="/about" className="text-white">About us</Link>
-                          <Link href="/contact-us" className="tw-mt-1 tw-text-white">
+                          <Link href="/about" className="text-white">
+                            About us
+                          </Link>
+                          <Link
+                            href="/contact-us"
+                            className="tw-mt-1 tw-text-white"
+                          >
                             Contact Us
                           </Link>
-                          <Link href="/privacy" className="tw-mt-1 tw-text-white">
+                          <Link
+                            href="/privacy"
+                            className="tw-mt-1 tw-text-white"
+                          >
                             Privacy Policy
                           </Link>
                           <Link
@@ -1679,7 +1773,10 @@ export default function index({
                           >
                             Terms and Conditions
                           </Link>
-                          <Link href="/code-of-conduct" className="tw-mt-1 tw-text-white">
+                          <Link
+                            href="/code-of-conduct"
+                            className="tw-mt-1 tw-text-white"
+                          >
                             Code of Conduct
                           </Link>
                         </div>
@@ -1694,7 +1791,10 @@ export default function index({
                       <div className="tw-flex tw-flex-col tw-self-end tw-text-sm tw-leading-5 tw-text-white">
                         {/* <div>+971 50 649 4665</div> */}
                         <div className="tw-mt-1 tw-text-right tw-text-white">
-                          <Link href="mailto:info@carprices.ae" className="text-white">
+                          <Link
+                            href="mailto:info@carprices.ae"
+                            className="text-white"
+                          >
                             info@carprices.ae
                           </Link>
                         </div>
