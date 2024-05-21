@@ -38,6 +38,10 @@
 .bg-primary {
   background-color: var(--primary) !important;
 }
+
+.bg-light {
+  background-color: var(--light) !important;
+}
 /*================================================
 1. fonts familly Css
 =================================================*/

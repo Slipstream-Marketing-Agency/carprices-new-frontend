@@ -37,8 +37,8 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
             key={index}
             className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px]         ${
           filterData.bodyTypes.includes(item.slug)
-            ? "tw-bg-blue-200"
-            : "tw-bg-white"
+          ? "bg-light"
+          : ""
         }
         tw-border-zinc-100 hover:tw-bg-blue-100`}
             onClick={() => handlePreferencesClick(item.slug)}
