@@ -2,7 +2,7 @@ import { AddBox } from "@mui/icons-material";
 import { Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Slider from "react-slick";
 import altImage from "../../public/assets/images/blog-alt-image.png";
 import Ad300x250 from "../components/ads/Ad300x250";
@@ -29,149 +29,7 @@ export default function index({
   errorMessage,
 }) {
   const currentYear = new Date().getFullYear();
-  const carsData = [
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "BMW",
-      name: "1 Series",
-      priceRange: "AED 185,000*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 2,296*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/902f3f72aebf143656bbed380ae00b2201392a0a440e662b433d37df53c7fd62?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Audi",
-      name: "Q3 Sportsback",
-      priceRange: "AED 165,850* - 199,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 2,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/e521907434b41dd95262fec39e1fd61a1a0cab1c0e2118987177637e1d095496?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Audi",
-      name: "Q3 Sportsback",
-      priceRange: "AED 165,850* - 199,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 2,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/e521907434b41dd95262fec39e1fd61a1a0cab1c0e2118987177637e1d095496?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Audi",
-      name: "Q3 Sportsback",
-      priceRange: "AED 165,850* - 199,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 2,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/e521907434b41dd95262fec39e1fd61a1a0cab1c0e2118987177637e1d095496?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Audi",
-      name: "Q3 Sportsback",
-      priceRange: "AED 165,850* - 199,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 2,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/e521907434b41dd95262fec39e1fd61a1a0cab1c0e2118987177637e1d095496?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-  ];
-
-  const electricData = [
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-    {
-      model: "2024",
-      brand: "Volvo",
-      name: "XC40",
-      category: "Most Popular",
-      priceRange: "AED 185,850* - 299,145*",
-      mileage: "90 Litre",
-      transmission: "Manual",
-      seats: "5 Seater",
-      emi: "AED 3,196*",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/569965a4a0b1bfa6bdfed279b557b5c7634e7186eff5e499bfdd0ed06379e3f2?apiKey=7580612134c3412b9f32a9330debcde8&width=800",
-    },
-  ];
+  const sliderRef = useRef(null);
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -295,19 +153,19 @@ export default function index({
     customPaging: (i) => (
       <div className="custom-dot">
         {i === activeSlide ? (
-          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-self-stretch tw-mt-[-4px] tw-mr-4 tw-ml-4">
+          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-self-stretch tw-mt-[-4px] ">
             <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-[6px] tw-py-[6px] tw-rounded-full tw-border tw-border-black tw-border-solid">
               <div className="tw-shrink-0 tw-bg-black tw-rounded-full tw-border tw-border-black tw-border-solid tw-h-[9px] tw-w-[9px]" />
             </div>
           </div>
         ) : (
-          <div className="tw-shrink-0 tw-self-stretch tw-my-auto tw-rounded-full tw-bg-zinc-400 tw-h-[11px] tw-w-[11px] tw-mr-4 tw-ml-4" />
+          <div className="tw-shrink-0 tw-self-stretch tw-my-auto tw-rounded-full tw-bg-zinc-400 tw-h-[11px] tw-w-[11px] " />
         )}
       </div>
     ),
     appendDots: (dots) => (
       <div>
-        <ul className="custom-dots tw-flex tw-justify-center tw-absolute tw-top-[-110px] md:tw-left-[48%] tw-items-center tw-gap-0">
+        <ul className="custom-dots tw-flex tw-justify-center tw-absolute tw-top-[-90px] md:tw-left-[48%] tw-items-center tw-gap-6">
           {dots}
         </ul>
       </div>
@@ -332,56 +190,32 @@ export default function index({
     ],
   };
 
-  const settingsupcoming = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-    ],
-  };
-
   const cars = [
     {
-      imgSrc: "/Hyundai-Tucson.jpg",
-      title: "Hyundai Tucson",
+      imgSrc: "/2024_Lexus_GX_Overtrail_NoriGreen.png",
+      title: "2024 Lexus GX",
       price: "AED 185,850* - 299,145*",
     },
     {
-      imgSrc: "/Kia.jpg",
-      title: "Kia Sorento",
+      imgSrc: "/2024-Kia-Sorento.png",
+      title: "2024 Kia Sorento",
       price: "Visit Site",
     },
     {
-      imgSrc: "/Lexus.jpg",
-      title: "Lexus GX",
+      imgSrc: "/2024-Land-Cruiser-Prado.png",
+      title: "2024 Toyota Land Cruiser Prado",
       price: "AED 185,850* - 299,145*",
     },
-    // {
-    //   imgSrc: "/Lexus.jpg",
-    //   title: "Volvo XC40",
-    //   price: "AED 185,850* - 299,145*",
-    // },
+    {
+      imgSrc: "/hyundai-new-tucson-korean-specs.png",
+      title: "2024 Hyundai Tucson",
+      price: "AED 185,850* - 299,145*",
+    },
+    {
+      imgSrc: "/New-Mercedes-Benz-G-Class.png",
+      title: "2024 Mercedes G-Class",
+      price: "AED 185,850* - 299,145*",
+    },
     // {
     //   imgSrc: "/Lexus.jpg",
     //   title: "Volvo XC40",
@@ -540,6 +374,58 @@ export default function index({
     { href: "/news", label: "News" },
     { href: "/review", label: "Reviews" },
   ];
+
+  const UpcomingNextArrow = ({ onClick }) => {
+    return (
+      <button
+        className="tw-bg-white tw-text-black tw-px-4 tw-pb-1 tw-pt-2 tw-rounded-full tw-shadow-md"
+        onClick={onClick}
+      >
+        &gt;
+      </button>
+    );
+  };
+
+  // Custom Previous Button
+  const UpcomingPrevArrow = ({ onClick }) => {
+    return (
+      <button
+        className="tw-bg-white tw-text-black tw-px-4 tw-py-2 tw-rounded-full tw-shadow-md"
+        onClick={onClick}
+      >
+        &lt;
+      </button>
+    );
+  };
+
+  const settingsupcoming = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -1072,22 +958,42 @@ export default function index({
           </Slider>
         </div>
 
-        <div className="tw-container md:tw-my-20 tw-my-4">
-          <div className="tw-flex tw-gap-5 tw-bg-zinc-50 max-md:tw-flex-wrap">
-            <div className="tw-flex tw-flex-col tw-my-auto tw-text-neutral-900">
-              <div className="tw-flex tw-flex-col tw-text-end">
-                {/* Commented out the large number display */}
-                {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
+        <div className="tw-container tw-mt-12 tw-mb-8">
+          <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-12 w-full">
+            <div className="tw-pt-3 lg:tw-col-span-2">
+              <div className="tw-flex tw-flex-col tw-h-full tw-py-5">
+                <div className="tw-flex md:tw-flex-col tw-justify-between tw-h-full md:tw-p-4 md:tw-px-0 tw-px-5">
+                  {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
           20+
         </div> */}
-                <div className="md:tw-text-3xl tw-text-xl tw-font-bold md:px-0 px-2">
-                  Notable
-                  <br className="md:tw-block tw-hidden" /> Upcoming Cars
+                  <div className="md:tw-text-3xl md:tw-text-center tw-text-xl tw-font-bold md:px-0 px-2">
+                    Notable
+                    <br /> Upcoming Cars
+                  </div>
+                  <div className="tw-flex tw-justify-center tw-gap-4 tw-mt-4">
+                    <button
+                      className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                      onClick={() => sliderRef.current.slickPrev()}
+                    >
+                      <span className="material-symbols-outlined">
+                        chevron_left
+                      </span>
+                    </button>
+                    <button
+                      className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                      onClick={() => sliderRef.current.slickNext()}
+                    >
+                      <span className="material-symbols-outlined">
+                        chevron_right
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="tw-flex tw-flex-col tw-grow tw-shrink-0 tw-justify-center tw-basis-0 tw-w-fit max-md:tw-max-w-full">
-              <Slider {...settingsupcoming}>
+
+            <div className="lg:tw-col-span-10">
+              <Slider ref={sliderRef} {...settingsupcoming}>
                 {cars.map((item, index) => (
                   <div
                     key={index}
@@ -1096,12 +1002,15 @@ export default function index({
                     <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-w-full tw-min-h-[400px]">
                       <img
                         loading="lazy"
+                        srcSet={`${item.imgSrc} 480w, ${item.imgSrc} 800w, ${item.imgSrc} 1200w`}
+                        sizes="(max-width: 600px) 480px, (max-width: 960px) 800px, 1200px"
                         src={`${item.imgSrc}`}
                         className="tw-object-cover tw-absolute tw-inset-0 tw-w-full tw-h-full"
+                        alt={item.title}
                       />
                       <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10 max-md:tw-max-w-full">
                         <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
-                          <h4 className=" tw-text-white tw-self-start tw-font-bold">
+                          <h4 className="tw-text-white tw-self-start tw-font-bold">
                             {item.title}
                           </h4>
                         </div>
@@ -1146,7 +1055,7 @@ export default function index({
                     <img
                       loading="lazy"
                       src={`${item?.logo}`}
-                      className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] tw-grayscale tw-hover:tw-filter-none"
+                      className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] tw-grayscale hover:tw-filter-none"
                     />
                     <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">
                       {item.name}
@@ -1376,12 +1285,12 @@ export default function index({
             <div className="tw-grid tw-grid-cols-3 tw-gap-5 max-md:tw-grid-cols-1">
               <Link
                 href={`/news/${articles.news[0]?.slug}`}
-                className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-center tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
+                className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
                 style={{
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-py-3 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-mt-[552px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10">
                   <div className="tw-px-6">
                     <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                       {articles.news[0].title}
@@ -1401,7 +1310,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10">
                   <div className="tw-text-lg tw-text-white">
                     {articles.news[0].title}
                   </div>
@@ -1424,7 +1333,7 @@ export default function index({
                         }')`,
                       }}
                     >
-                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-blue-400 tw-backdrop-blur-[32px] tw-bg-opacity-10">
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10">
                         <div className="tw-text-lg tw-text-white">
                           {item.title}
                         </div>
