@@ -900,7 +900,7 @@ export default function index({
                     <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                       {car.brand.name}
                     </h6>
-                    <h4 className=" tw-text-white tw-text-lg tw-leading-6 tw-text-gray-900 tw-font-semibold">
+                    <h4 className="tw-text-lg tw-leading-6 tw-text-gray-900 tw-font-semibold">
                       {car.name}
                     </h4>
                     <CarPriceRange
