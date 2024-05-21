@@ -110,14 +110,14 @@ export default function StepOne({ filterData, setFilterData }) {
   };
 
   return (
-    <div className="tw-grid tw-grid-cols-3 tw-gap-5">
+    <div className="tw-grid tw-grid-cols-3 tw-gap-2">
       {filterItems.map((item, index) => (
         <Tooltip key={index} title={item.toolbar} arrow>
           <button
             key={item.label}
-            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px] ${
+            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[90px] ${
               filterData.preferences.includes(item.value)
-                ? "bg-secondary"
+                ? "bg-light"
                 : ""
             }`}
             onClick={() => handlePreferencesClick(item.value)}

@@ -112,16 +112,16 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
   };
 
   return (
-    <div id="filter_seating" className="tw-mt-2">
-      <div className="" id="seats_filter">
+    <div id="" className="tw-mt-2">
+      <div className="" id="">
         <div className="tw-grid tw-grid-cols-3 sm:tw-grid-cols-3 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-4">
           {dynamicFilterItems.map((item, index) => (
-            <button
+            <div
               key={index}
-              className={`tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-4 tw-rounded-xl tw-border-2 tw-border-solid ${
+              className={`cursor-pointer tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-4 tw-rounded-xl tw-border-2 tw-border-solid ${
                 isFilterActive(item.group)
-                  ? "tw-bg-blue-200 tw-border-blue-300"
-                  : "tw-bg-white tw-border-zinc-100"
+                  ? "bg-light tw-border-blue-300"
+                  : "bg-white tw-border-zinc-100"
               }`}
               onClick={() => handleSeatingClick(item.group)}
             >
@@ -129,7 +129,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
               <span className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
                 {item.label}
               </span>
-            </button>
+            </div>
           ))}
         </div>
       </div>
