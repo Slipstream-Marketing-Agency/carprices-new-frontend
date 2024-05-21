@@ -527,6 +527,20 @@ export default function index({
     ? "https://carprices.ae/search-cars"
     : "https://carprices.ae" + router.asPath.split("?")[0];
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleNavigation = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const links = [
+    { href: "/search-cars", label: "Search New Cars" },
+    { href: "/compare-cars", label: "Compare New Cars" },
+    { href: "/loan-calculator", label: "Car Loan Calculator" },
+    { href: "/news", label: "News" },
+    { href: "/review", label: "Reviews" },
+  ];
+
   return (
     <>
       <Head>
@@ -543,6 +557,76 @@ export default function index({
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
+
+      <div
+        className={`tw-fixed tw-top-0 tw-left-0 tw-z-30 tw-w-3/4 tw-max-w-[480px] tw-h-full tw-bg-white tw-shadow-lg tw-transform tw-transition-transform tw-duration-300 ${
+          isOpen ? "tw-translate-x-0" : "-tw-translate-x-full"
+        }`}
+      >
+        <div className="tw-flex tw-flex-col tw-pb-20 tw-mx-auto tw-w-full tw-max-w-[480px]">
+          <div className="tw-flex tw-flex-col tw-px-4 tw-pt-2 tw-w-full">
+            <div className="tw-flex tw-justify-between tw-items-start tw-gap-5 tw-pt-7 tw-w-full tw-text-base tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
+              <div className="tw-flex tw-items-center tw-gap-1.5 tw-mt-2">
+                <img
+                  loading="lazy"
+                  src="/assets/img/car-prices-logo.png"
+                  className="tw-w-[150px] tw-object-contain"
+                />
+              </div>
+              <div onClick={toggleNavigation}>
+                <img
+                  loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/24bc018f4a3c591da223aaaab9ecf5bec19a5dee9b2c1e12a8d3d633f9a2c4e3?apiKey=7580612134c3412b9f32a9330debcde8&"
+                  className="tw-shrink-0 tw-w-6 tw-aspect-[0.8]"
+                />
+              </div>
+            </div>
+
+            <div className="tw-flex tw-flex-col tw-pt-4">
+              {links.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="tw-justify-center tw-font-semibold tw-py-3"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* <div className="tw-flex tw-flex-col tw-self-center tw-px-3 tw-py-2 tw-mt-3 tw-w-full tw-text-base tw-tracking-wider tw-leading-6 tw-rounded-xl tw-bg-stone-50 tw-max-w-[288px] tw-text-slate-800">
+            {[
+              {
+                text: "My Account",
+                img: "https://cdn.builder.io/api/v1/image/assets/TEMP/e292635af687a424882bb0b2199e2c86a9034ee7a9432fdef4e851d13e5d7493?apiKey=7580612134c3412b9f32a9330debcde8&",
+              },
+              {
+                text: "About Us",
+                img: "https://cdn.builder.io/api/v1/image/assets/TEMP/5419132d38579fff35b5f82c22021ccad4ebbe9b9c05cc273e19c98d1616d95f?apiKey=7580612134c3412b9f32a9330debcde8&",
+              },
+              {
+                text: "(225) 555-0118",
+                img: "https://cdn.builder.io/api/v1/image/assets/TEMP/1f7a000a6a125d9417cfea7ec683a78dcc053e5b3d96c137a4eeb474fee0f5c2?apiKey=7580612134c3412b9f32a9330debcde8&",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="tw-flex tw-flex-col tw-justify-center tw-py-2"
+              >
+                <div className="tw-flex tw-items-center tw-gap-2">
+                  <img
+                    loading="lazy"
+                    src={item.img}
+                    className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                  />
+                  <div>{item.text}</div>
+                </div>
+              </div>
+            ))}
+          </div> */}
+        </div>
+      </div>
       <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
         <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden">
           {/* <div className="tw-flex tw-flex-col tw-justify-center tw-px-10 tw-py-2 tw-w-full tw-text-sm tw-text-white tw-shadow-sm tw-bg-neutral-900 max-md:tw-px-5 max-md:max-w-full">
@@ -684,12 +768,22 @@ export default function index({
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/21ea1ee3a349af39481479e911636e030f9dc6ae5fb159c14a2e89fb64b53a21?apiKey=7580612134c3412b9f32a9330debcde8&"
               className="tw-shrink-0 tw-w-5 tw-aspect-square"
             />
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffd71299533f8ebed0eb731e47a56e0fb50d0acd0bbae0dd3adc23ebaf110f29?apiKey=7580612134c3412b9f32a9330debcde8&"
-              className="tw-shrink-0 tw-self-start tw-w-6 tw-aspect-[1.27]"
-            />
+
+            <div onClick={toggleNavigation}>
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffd71299533f8ebed0eb731e47a56e0fb50d0acd0bbae0dd3adc23ebaf110f29?apiKey=7580612134c3412b9f32a9330debcde8&"
+                className="tw-shrink-0 tw-self-start tw-w-6 tw-aspect-[1.27]"
+              />
+            </div>
           </div>
+
+          <div
+            className={`tw-fixed tw-top-0 tw-left-0 tw-z-10 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-50 tw-transition-opacity tw-duration-300 ${
+              isOpen ? "tw-opacity-100" : "tw-opacity-0 tw-pointer-events-none"
+            }`}
+            onClick={toggleNavigation}
+          ></div>
         </div>
 
         <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
