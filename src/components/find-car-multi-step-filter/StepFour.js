@@ -74,26 +74,30 @@ export default function StepFour({ filterData, setFilterData }) {
 
   return (
     <div>
-      <div className="flex justify-center items-center my-4">
-        <div className="value_circle mr-2 border rounded-lg p-3">
-          <p className="flex flex-col items-center justify-center">
-            <span className="head mb-1 text-base font-bold">Starting from</span>
-            <span className="mt-4 text-lg font-bold">
+      <div className="tw-flex tw-justify-center tw-items-center tw-my-4">
+        <div className="value_circle tw-mr-2 tw-border tw-rounded-lg tw-p-3">
+          <p className="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <span className="head tw-mb-1 tw-text-base tw-font-bold">
+              Starting from
+            </span>
+            <span className="tw-mt-4 tw-text-lg tw-font-bold">
               <Price data={minValue} />
             </span>
           </p>
         </div>
-        <div className="value_circle ml-2 border rounded-lg p-3">
-          <p className="flex flex-col items-center justify-center">
-            <span className="head mb-1 text-base font-bold">Up to</span>
-            <span className="mt-4 text-lg font-bold">
+        <div className="value_circle tw-ml-2 tw-border tw-rounded-lg tw-p-3">
+          <p className="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <span className="head tw-mb-1 tw-text-base tw-font-bold">
+              Up to
+            </span>
+            <span className="tw-mt-4 tw-text-lg tw-font-bold">
               <Price data={maxValue} />
             </span>
           </p>
         </div>
       </div>
 
-      <div className="pt-2 px-5 pb-5">
+      <div className="tw-pt-2 tw-px-5 tw-pb-5">
         <Slider
           range
           min={initialValues[0]}
@@ -109,7 +113,9 @@ export default function StepFour({ filterData, setFilterData }) {
           allowCross={false}
         />
       </div>
-      <div className="mt-20 font-bold">Slide to select your budget range</div>
+      <div className="tw-mt-20 tw-font-bold">
+        Slide to select your budget range
+      </div>
     </div>
   );
 }

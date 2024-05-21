@@ -370,15 +370,15 @@ export default function FilterLayout() {
     <>
       {!specific ? (
         <>
-          <div className="search_filter_box text-center ">
+          <div className="search_filter_box tw-text-center ">
             <div className="">
               {error && (
                 <>
                   <div className="banner_filter_overlay"></div>
-                  <small className="error_message font-bold">
+                  <small className="error_message tw-font-bold">
                     {error}{" "}
                     <div
-                      className="close_button cursor-pointer"
+                      className="close_button tw-cursor-pointer"
                       onClick={() => setError(false)}
                     >
                       <i className="bi bi-x-circle-fill"></i>
@@ -387,27 +387,26 @@ export default function FilterLayout() {
                 </>
               )}
 
-              <div className="relative flex flex-col justify-center items-start px-7 py-8 text-2xl leading-7 text-white bg-gradient-to-r from-blue-500 to-blue-800">
+              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-7 tw-py-8 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
                 <img
                   loading="lazy"
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bab8732d6429f1ac3aedfbc9eccfd4a3c451d479881fd9a558a59b846ba101d?apiKey=7580612134c3412b9f32a9330debcde8&"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover"
                 />
-                <h2 className="relative z-10 text-start font-bold">
+                <h2 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
                   {steps[currentStep].title}
                 </h2>
               </div>
 
-              
-              <div className="row-span-1 md:col-span-3 col-span-12 flex flex-col justify-center rounded-2xl border border-neutral-100 overflow-hidden">
-                <div className="flex flex-col px-6 pt-6 pb-3 bg-white border-t border-neutral-100 shadow-lg ">
-                  <div className="h-[350px]">
+              <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
+                <div className="tw-flex tw-flex-col tw-px-6 tw-pt-6 tw-pb-3 tw-bg-white tw-border-t tw-border-neutral-100 tw-shadow-lg">
+                  <div className="tw-h-[350px]">
                     {steps[currentStep].component}
                   </div>
-                  <div className="flex justify-end mt-12">
+                  <div className="tw-flex tw-justify-end tw-mt-12">
                     {currentStep > 0 && (
                       <button
-                        className="px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
+                        className="tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
                         onClick={handlePrevStep}
                       >
                         {t.previous}
@@ -420,8 +419,8 @@ export default function FilterLayout() {
                       }
                       className={`btn ${
                         error
-                          ? "disabled px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
-                          : "px-6 md:py-2.5 py-1.5 bg-blue-600 text-white text-base font-bold rounded-full hover:bg-blue-700"
+                          ? "disabled tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
+                          : "tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
                       }`}
                     >
                       {currentStep === 3 ? `${t.submit}` : `${t.next}`}
