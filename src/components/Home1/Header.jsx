@@ -205,7 +205,7 @@ function Header() {
               <a className="drop-down">{t.Loancalculator}</a>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link legacyBehavior href="">
               <a className="drop-down">Insurance Calculator</a>
             </Link>
@@ -220,7 +220,7 @@ function Header() {
             <Link legacyBehavior href="">
               <a className="drop-down">Used Cars</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
         {/* <div className="topbar-right d-lg-none d-block">
           <a href="#">

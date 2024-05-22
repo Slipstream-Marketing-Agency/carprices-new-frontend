@@ -107,197 +107,147 @@ function About() {
         type: "Car Review Website",
       }}
     >
-      <div className="welcome-banner-section pb-2 pt-5">
-        <div className="container">
-          <h1 className={`fw-bolder mb-4 ${isRtl && "text-end"}`}>
-            {t.AboutUs}
-          </h1>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className=" ">
-                <div
-                  className=" wow fadeInUp font-bold"
-                  data-wow-delay="200ms"
-                ></div>
-                <div
-                  className="welcome-content wow fadeInUp mb-5"
-                  data-wow-delay="300ms"
-                >
-                  <p className={`paragraph ${isRtl && "text-end"}`}>
-                    {t.aboutEstablishedPara}
-                  </p>
-                </div>
-              </div>
+      <div className="tw-container mx-auto">
+        <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
+          <div className="tw-row-span-1 md:tw-col-span-12 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-[400px] tw-h-[200px]">
+            <img
+              loading="lazy"
+              src="/About-Us.jpg"
+              className="tw-object-cover tw-w-full tw-h-full tw-absolute tw-inset-0"
+            />
+            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>{" "}
+            {/* Overlay */}
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full tw-h-full">
+              <h1 className="tw-text-white md:tw-leading-10 tw-leading-6 tw-font-bold banner-header">
+                About CarPrices.ae
+              </h1>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="container mb-4">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="">
-              <div
-                className="section-title1 wow fadeInUp mb-4"
-                data-wow-delay="200ms"
-              >
-                <h3 className={`${isRtl && "text-end"}`}>
-                  {t.aboutWhatOfferTxt}
-                </h3>
-                <div
-                  className={`w-100 d-flex ${isRtl && "justify-content-end"} `}
-                >
-                  <div className={`underLine `}></div>
-                </div>
-              </div>
-              <div className="wow fadeInUp " data-wow-delay="300ms">
-                <ul className={`${isRtl && "text-end list-unstyled"} `}>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutWhatOfferPoint1}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutWhatOfferPoint2}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutWhatOfferPoint3}
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 tw-p-6 ">
+          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg md:tw-order-1 tw-order-2">
+            <img
+              loading="lazy"
+              src="/assets/about-us/06_Social.jpg"
+              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
+            />
+          </div>
+          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4 md:tw-order-2 tw-order-1">
+            <p className=" tw-text-gray-600">
+              Established in 2017 in Dubai, UAE, CarPrices.ae is a fast-growing
+              online portal for new car buyers’ research in the United Arab
+              Emirates. Our platform is dedicated to new and used car buyers and
+              enthusiasts who are looking for a platform that helps them pick
+              the right new car.
+            </p>
+            <p className=" tw-text-gray-600">
+              Our mission is to empower new car buyers’ to make informed car
+              buying decisions by providing comprehensive and up-to-date
+              information on all new cars in the UAE and allowing them to find a
+              right car that suits their needs.
+            </p>
+            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
+              What We Offer
+            </h2>
+            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+              {[
+                "A ‘World’s First’ truly interactive new car research platform which recommends cars based on buyers’ preferences and requirements.",
+                "Extensive new car database maintained by our automotive experts.",
+                "New car buyers can compare a wide range of vehicles side-by-side for a comprehensive pricing and feature overview.",
+                "Equipping users with tools and insights to find the perfect car aligned with their needs, preferences, and budget.",
+              ].map((point, index) => (
+                <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                  {index === 0 ? (
+                    <>
+                      A <span className="tw-font-bold">‘World’s First’</span>{" "}
+                      truly interactive new car research platform which
+                      recommends cars based on buyers’ preferences and
+                      requirements.
+                    </>
+                  ) : (
+                    point
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
-      <div className="container mb-4">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="">
-              <div
-                className="section-title1 wow fadeInUp mb-4"
-                data-wow-delay="200ms"
-              >
-                <h3 className={`${isRtl && "text-end"}`}>
-                  {t.aboutOurCommitment}
-                </h3>
-                <div
-                  className={`w-100 d-flex ${isRtl && "justify-content-end"} `}
-                >
-                  <div className={`underLine `}></div>
-                </div>
-              </div>
-              <div className="wow fadeInUp" data-wow-delay="300ms">
-                <ul className={`${isRtl && "text-end list-unstyled"} `}>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutOurCommitmentPoint1}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutOurCommitmentPoint2}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutOurCommitmentPoint3}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutOurCommitmentPoint4}
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 md:tw-px-6 md:tw-py-6 tw-py-0 tw-px-6">
+          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4">
+            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
+              Our Commitment
+            </h2>
+            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+              {[
+                "Ensuring accuracy, reliability, and authenticity in the information provided, fostering trust among our platform users.",
+                "Maintaining transparency in our operations, processes, and data sources, enabling users to make well-informed decisions confidently.",
+                "Commitment to continual enhancement of our platform, incorporating user feedback and technological advancements for an optimized user experience.",
+                "Fostering a supportive and interactive community environment where users can share, learn, and engage with fellow car enthusiasts and experts.",
+              ].map((point, index) => (
+                <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
+              Continuous Updates
+            </h2>
+            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+              {[
+                "Regularly updated platform keeping pace with the dynamic automotive industry.",
+                "Timely incorporation of the latest car models, ensuring users have access to current information.",
+                "Industry news and trends regularly added to keep users informed about the evolving automotive landscape.",
+                "Ensuring that users have access to the freshest details to aid their decision-making process when buying a car.",
+              ].map((point, index) => (
+                <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg">
+            <img
+              loading="lazy"
+              src="/assets/about-us/05_social.jpg"
+              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
+            />
           </div>
         </div>
-      </div>
-      <div className="container mb-4">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="">
-              <div
-                className="section-title1 wow fadeInUp mb-4"
-                data-wow-delay="200ms"
-              >
-                <h3 className={`${isRtl && "text-end"}`}>
-                  {t.aboutContinuousUpdates}
-                </h3>
-                <div
-                  className={`w-100 d-flex ${isRtl && "justify-content-end"} `}
-                >
-                  <div className={`underLine `}></div>
-                </div>
-              </div>
-              <div className="wow fadeInUp" data-wow-delay="300ms">
-                <ul className={`${isRtl && "text-end list-unstyled"} `}>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutContinuousUpdatesPoint1}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutContinuousUpdatesPoint2}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutContinuousUpdatesPoint3}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutContinuousUpdatesPoint4}
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 md:tw-px-6 md:tw-py-6 tw-py-0 tw-px-6">
+          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg md:tw-order-1 tw-order-2">
+            <img
+              loading="lazy"
+              src="/assets/about-us/04_Social.jpg"
+              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
+            />
+          </div>
+          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4 md:tw-order-2 tw-order-1">
+            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
+              Additional Resources
+            </h2>
+            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+              {[
+                "A user-friendly tool aiding in financial planning for car purchases by calculating potential loan amounts, interest rates, and repayment periods.",
+                "An organized and easily navigable sitemap ensuring effortless access to our diverse range of resources, including car specifications, reviews, and comparison tools.",
+                "Detailed guides and tips on vehicle maintenance, ownership, insurance, and more, providing valuable insights for both new and experienced car owners.",
+                "In-depth articles and analyses on industry trends, market forecasts, and emerging technologies, fostering a deeper understanding of the automotive world.",
+              ].map((point, index) => (
+                <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <p>
+              For inquiries, suggestions, or feedback, reach out through our
+              <Link href="/contact-us" className="tw-font-semibold">
+                {" "}
+                Contact Us
+              </Link>{" "}
+              section.
+            </p>
           </div>
         </div>
-      </div>
-      <div className="container mb-4">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="">
-              <div
-                className="section-title1 wow fadeInUp mb-4"
-                data-wow-delay="200ms"
-              >
-                <h3 className={`${isRtl && "text-end"}`}>
-                  {t.aboutAdditionalResources}
-                </h3>
-                <div
-                  className={`w-100 d-flex ${isRtl && "justify-content-end"} `}
-                >
-                  <div className={`underLine `}></div>
-                </div>
-              </div>
-              <div className="wow fadeInUp" data-wow-delay="300ms">
-                <ul className={`${isRtl && "text-end list-unstyled"} `}>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutAdditionalResourcesPoint1}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutAdditionalResourcesPoint2}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutAdditionalResourcesPoint3}
-                  </li>
-                  <li className={`${isRtl && "text-left"} `}>
-                    {t.aboutAdditionalResourcesPoint4}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <div className="container"><GalleryCards /></div> */}
-
-      <Lightbox
-        className="img-fluid"
-        open={isOpenimg.openingState}
-        plugins={[Fullscreen]}
-        index={isOpenimg.openingIndex}
-        close={() => setOpenimg(false)}
-        styles={{ container: { backgroundColor: "rgba(0, 0, 0, .9)" } }}
-        slides={images.map(function (elem) {
-          return { src: elem.imageBig };
-        })}
-      />
-
-      <div className="container mb-5">
-        <p className={`paragraph ${isRtl ? "text-end" : ""}`}>
-          {isRtl && <a href="/contact-us">{t.contactUs}</a>}{" "}
-          {t.aboutForInquiries}
-          {!isRtl && <a href="/contact-us">{t.contactUs} section.</a>}
-        </p>
       </div>
     </MainLayout>
   );
