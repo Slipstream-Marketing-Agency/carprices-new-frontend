@@ -839,7 +839,7 @@ export default function index({
                         alt={`${car.brand} ${car.name}`}
                         className="tw-object-cover tw-w-full tw-h-96"
                       />
-                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
+                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[4px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
                         <h6 className="tw-text-white">{car.name}</h6>
                         {/* <small className="tw-mt-1 tw-text-white">
                 Created on: {car.createdOn}
@@ -860,7 +860,7 @@ export default function index({
                         alt={`${item.brand} ${item.name}`}
                         className="tw-object-cover tw-w-full tw-h-96"
                       />
-                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
+                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[4px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
                         <h6 className="tw-text-white">{item.name}</h6>
                         {/* <small className="tw-mt-1 tw-text-white">
               Created on: {car.createdOn}
@@ -1200,7 +1200,7 @@ export default function index({
                     <img
                       loading="lazy"
                       src={`${item?.image}`}
-                      className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 tw-p-3"
+                      className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-3"
                     />
                   </div>
                   <div className=" tw-font-semibold">{item.name}</div>
@@ -1218,12 +1218,12 @@ export default function index({
                 alt=""
                 className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
+              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+
               <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  <div className="md:tw-text-3xl tw-text-xl">
-                    Calculate Your Car Loan EMI
-                  </div>
-                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
+                  <h2 className="tw-text-white">Calculate Your Car Loan EMI</h2>
+                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                     Fill in the details and find out what the installment will
                     be for your new car. Our car loan calculator is interactive
                     and accurate.
@@ -1249,12 +1249,13 @@ export default function index({
                 alt=""
                 className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
+              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
               <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  <div className="md:tw-text-3xl tw-text-xl">
+                  <h2 className="tw-text-white">
                     Find out the value of your current car
-                  </div>
-                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
+                  </h2>
+                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                     Our car valuation calculator helps you find out what you can
                     expect for your current car. Fill in the details and get an
                     estimated current value for your used car.
@@ -1262,10 +1263,10 @@ export default function index({
                 </div>
 
                 <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
-                  <p>Coming Soon</p>
-                  <span className="material-symbols-outlined">
+                  <p className="tw-font-bold">Coming Soon</p>
+                  {/* <span className="material-symbols-outlined">
                     arrow_forward
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </div>
@@ -1386,7 +1387,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[32px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
                   <div className="tw-px-6">
                     <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                       {articles.news[0].title}
@@ -1406,7 +1407,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[32px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
                   <div className="tw-text-lg tw-text-white">
                     {articles.news[0].title}
                   </div>
@@ -1429,7 +1430,7 @@ export default function index({
                         }')`,
                       }}
                     >
-                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[32px]">
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
                         <div className="tw-text-lg tw-text-white">
                           {item.title}
                         </div>
@@ -1945,7 +1946,7 @@ export default function index({
             </div>
             <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
               <div className="tw-my-auto">
-                ©2017 - {currentYear} Carprices.ae. All rights reserved.
+                ©2017 - {currentYear} CarPrices.ae. All rights reserved.
               </div>
             </div>
           </div>
