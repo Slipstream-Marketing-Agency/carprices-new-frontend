@@ -3180,11 +3180,11 @@ a,
 }
 
 .custom-next-arrow {
-  right: -25px !important;
+  right: -13px !important;
 }
 
 .custom-prev-arrow {
-  left: -25px !important;
+  left: -13px !important;
 }
 
 .custom-arrow img {
@@ -3245,8 +3245,5 @@ a,
 
   .featured-news-card .slick-list {
     height: 600px !important;
-  }
-  .custom-dots{
-    display: none !important;
   }
 }

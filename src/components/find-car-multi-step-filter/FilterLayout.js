@@ -403,7 +403,7 @@ export default function FilterLayout() {
                   <div className="tw-h-[350px]">
                     {steps[currentStep].component}
                   </div>
-                  <div className="tw-flex tw-justify-end tw-mt-12">
+                  <div className="tw-flex tw-justify-end tw-mt-12 gap-3">
                     {currentStep > 0 && (
                       <button
                         className="tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
