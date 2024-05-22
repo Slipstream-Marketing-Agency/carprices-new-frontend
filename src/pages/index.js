@@ -679,7 +679,7 @@ export default function index({
             <FilterLayout />
           </div>
 
-          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-center tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[280px]">
+          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[280px]">
             <img
               loading="lazy"
               src="/cp-banner.jpg"
@@ -687,16 +687,16 @@ export default function index({
             />
             <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>{" "}
             {/* Overlay */}
-            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full tw-max-w-[622px]">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full ">
               {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
       Carpricces - a car research platform
     </div> */}
-              <h1 className="text-white md:tw-leading-9 tw-leading-6  tw-font-bold">
-                World’s First Truly Interactive
+              <h1 className="text-white md:tw-leading-10 tw-leading-6  tw-font-bold banner-header">
+                World’s First Truly Interactive{" "}
                 <br className="md:tw-block tw-hidden" />
                 New Car Finder Platform
               </h1>
-              <p className="md:tw-mt-5 tw-mt-2 tw-text-lg tw-leading-6">
+              <p className="md:tw-mt-5 tw-mt-2 ">
                 Experience a revolutionary approach to navigating car prices.
                 Explore innovation as you navigate the world of automotive
                 pricing with a fresh perspective.
@@ -994,7 +994,7 @@ export default function index({
                   {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
           20+
         </div> */}
-                  <div className="md:tw-text-3xl md:tw-text-center tw-text-xl tw-font-bold md:px-0 px-2">
+                  <div className="md:tw-text-3xl md:tw-text-left tw-text-xl tw-font-bold md:px-0 px-2">
                     Notable
                     <br /> Upcoming Cars
                   </div>
@@ -1140,7 +1140,7 @@ export default function index({
                     <img
                       loading="lazy"
                       src={`${item?.logo}`}
-                      className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] tw-grayscale hover:tw-filter-none"
+                      className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] md:tw-grayscale hover:tw-filter-none"
                     />
                     <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">
                       {item.name}

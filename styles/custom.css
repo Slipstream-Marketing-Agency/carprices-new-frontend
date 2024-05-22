@@ -114,7 +114,7 @@ h6 {
 }
 
 p {
-  line-height: 1.5 !important;
+  line-height: 1.2 !important;
   margin-bottom: 0rem;
 }
 
@@ -3241,9 +3241,17 @@ a,
   display: none;
 }
 
+.banner-header{
+  font-size: 40px !important;
+}
+
 @media (max-width: 768px) {
 
   .featured-news-card .slick-list {
     height: 600px !important;
+  }
+
+  .banner-header{
+    font-size: 20px !important;
   }
 }
