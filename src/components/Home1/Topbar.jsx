@@ -264,13 +264,13 @@ function Topbar() {
                 </div>
               )}
             </div>
-            <LiveSearch
+            {/* <LiveSearch
               results={results}
               value={selectedProfile ? selectedProfile.name : ""}
               renderItem={(item) => <p>{item}</p>}
               onChange={handleChange}
               onSelect={(item) => setSelectedProfile(item)}
-            />
+            /> */}
           </div>
           {/* test input ends */}
         </form>
