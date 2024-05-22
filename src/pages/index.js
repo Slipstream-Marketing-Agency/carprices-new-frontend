@@ -1960,7 +1960,7 @@ export default function index({
                 <div className="max-md:tw-max-w-full">
                   <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
                     <div className="tw-flex tw-flex-col tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
-                      <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white md:tw-mt-10">
+                      <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white">
                         <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Top 10s
                         </h4>
