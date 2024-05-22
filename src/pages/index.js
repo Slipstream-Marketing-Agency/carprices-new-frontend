@@ -1218,12 +1218,12 @@ export default function index({
                 alt=""
                 className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
+              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+
               <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  <div className="md:tw-text-3xl tw-text-xl">
-                    Calculate Your Car Loan EMI
-                  </div>
-                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
+                  <h2 className="tw-text-white">Calculate Your Car Loan EMI</h2>
+                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                     Fill in the details and find out what the installment will
                     be for your new car. Our car loan calculator is interactive
                     and accurate.
@@ -1249,12 +1249,13 @@ export default function index({
                 alt=""
                 className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
               />
+              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
               <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
                 <div>
-                  <div className="md:tw-text-3xl tw-text-xl">
+                  <h2 className="tw-text-white">
                     Find out the value of your current car
-                  </div>
-                  <p className="md:tw-mt-6 tw-leading-6 tw-w-[50%]">
+                  </h2>
+                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                     Our car valuation calculator helps you find out what you can
                     expect for your current car. Fill in the details and get an
                     estimated current value for your used car.
@@ -1262,10 +1263,10 @@ export default function index({
                 </div>
 
                 <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
-                  <p>Coming Soon</p>
-                  <span className="material-symbols-outlined">
+                  <p className="tw-font-bold">Coming Soon</p>
+                  {/* <span className="material-symbols-outlined">
                     arrow_forward
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </div>
