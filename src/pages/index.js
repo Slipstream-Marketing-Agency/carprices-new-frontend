@@ -1655,11 +1655,11 @@ export default function index({
             </div>
             <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full tw-mb-10">
               <div className="tw-flex tw-flex-col tw-grow tw-px-8 tw-py-8 tw-w-full tw-bg-sky-100 tw-rounded-2xl max-md:tw-px-5 max-md:tw-mt-10 max-md:tw-max-w-full">
-                <div className="tw-text-2xl tw-leading-9 tw-text-neutral-900 font-bold">
+                <div className="tw-text-2xl tw-leading-9 tw-text-neutral-900 tw-font-bold">
                   Why CarPrices.ae?
                 </div>
-                <div className="tw-flex tw-flex-col tw-mt-9 tw-text-neutral-900">
-                  <div className="tw-text-base tw-leading-6 font-semibold">
+                <div className="tw-flex tw-flex-col tw-mt-2 tw-text-neutral-900">
+                  <div className="tw-text-base tw-leading-6 tw-font-semibold">
                     New Car Buyer’s Guide
                   </div>
                   <div className="tw-mt-1 tw-text-sm tw-leading-5">
@@ -1671,7 +1671,7 @@ export default function index({
                   </div>
                 </div>
                 <div className="tw-flex tw-flex-col tw-mt-6 tw-text-neutral-900">
-                  <div className="tw-text-base tw-leading-6 font-semibold">
+                  <div className="tw-text-base tw-leading-6 tw-font-semibold">
                     Comprehensive Database
                   </div>
                   <div className="tw-mt-1 tw-text-sm tw-leading-5">
