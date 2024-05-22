@@ -2,7 +2,7 @@ import { AddBox } from "@mui/icons-material";
 import { Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import altImage from "../../public/assets/images/blog-alt-image.png";
 import Ad300x250 from "../components/ads/Ad300x250";
@@ -11,6 +11,9 @@ import FilterLayout from "../components/find-car-multi-step-filter/FilterLayout"
 import useTranslate from "../utils/useTranslate";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import NewSearch from "../utils/NewSearch";
+import { gql } from "@apollo/client";
+import { createApolloClient } from "@/src/lib/apolloClient";
 
 export default function index({
   bannerImage,
@@ -429,6 +432,183 @@ export default function index({
     ],
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [brandOptions, setBrandOptions] = useState([]);
+  const [tagOptions, setTagOptions] = useState([]);
+  const client = createApolloClient();
+
+  const fetchBrands = async (brandInput) => {
+    try {
+      setIsLoading(true);
+      const { data } = await client.query({
+        query: gql`
+            query {
+              carBrands(filters:{name:{containsi:"${brandInput}"}}) {
+                data {
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+            `,
+      });
+
+      const brands = data.carBrands.data;
+      setBrandOptions(brands);
+      //
+    } catch (error) {
+      console.error("Error fetching brands:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false when the request is complete
+    }
+  };
+  const fetchTags = async (tagInput) => {
+    try {
+      const { data } = await client.query({
+        query: gql`
+            query{
+              articleCategories(filters:{name:{containsi:"${tagInput}"}}){
+                data{
+                  attributes{
+                    name
+                    slug
+                    articles{
+                      data{
+                        attributes{
+                          title
+                          slug
+                          
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            `,
+      });
+      const tags = data.articleCategories.data;
+      setTagOptions(tags);
+
+      //
+    } catch (error) {
+      console.error("Error fetching brands:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false when the request is complete
+    }
+  };
+
+  const fetchAllBrands = async () => {
+    try {
+      const { data } = await client.query({
+        query: gql`
+          query SearchBrands {
+            carBrands(pagination: { limit: -1 }, sort: "name:asc") {
+              data {
+                attributes {
+                  name
+                  slug
+                }
+              }
+            }
+          }
+        `,
+      });
+
+      setBrandOptions(data.carBrands.data);
+    } catch (error) {
+      console.error("Error fetching brands:", error);
+    }
+    setSearchLoading(false);
+  };
+
+  const [results, setResults] = useState([]);
+  const [selectedProfile, setSelectedProfile] = useState(null);
+
+  const handleChangedd = (e) => {
+    fetchBrands(e.target.value);
+    fetchTags(e.target.value);
+    const { target } = e;
+    if (!target.value.trim()) return setResults([]);
+
+    // const filteredValue = profiles.filter((profile) =>
+    //   profile.name.toLowerCase().startsWith(target.value.toLowerCase())
+    // );
+    const filteredValue = brandOptions.map((brand) => brand.attributes.name);
+
+    const tagsfilteredValue = tagOptions.map((tag) => tag.attributes.name);
+
+    setResults([...tagsfilteredValue, ...filteredValue]);
+  };
+
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    // Handle click outside the search bar to close the dropdown
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchRef]);
+
+  const handleSearch = async (searchTerm) => {
+    if (searchTerm.trim().length < 2) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+    try {
+      const response = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }car-models/search?searchTerm=${encodeURIComponent(searchTerm)}`
+      );
+
+      setSearchResults(response.data.data);
+      setShowDropdown(true);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setSearchResults([]);
+      setShowDropdown(false);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    setQuery(value);
+    handleSearch(value);
+  };
+
+  const handleItemClick = (item) => {
+    if (item.type === "brand") {
+      // Redirect to the brand page
+      router.push(`/brands/${item.slug}`);
+    } else if (item.type === "model") {
+      // Redirect to the model page (assuming you have the year available in the item)
+      router.push(`/brands/${item.brandSlug}/${item.year}/${item.slug}`);
+    }
+    setShowDropdown(false);
+  };
+
+  const formatLabel = (item) => {
+    if (item.type === "brand") {
+      return item.name;
+    } else if (item.type === "model") {
+      return `${item.year} ${item.brand} ${item.name}`;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -554,7 +734,7 @@ export default function index({
                 srcSet="/assets/img/car-prices-logo.png"
                 className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
               />
-              <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
+              {/* <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
                   <div className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full">
                     <span className="material-symbols-outlined">search</span>
@@ -566,6 +746,59 @@ export default function index({
                     />
                   </div>
                 </div>
+              </div> */}
+
+              <div
+                className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full"
+                ref={searchRef}
+              >
+                <form>
+                  <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
+                    <div
+                      className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full"
+                      ref={searchRef}
+                    >
+                      <span className="material-symbols-outlined">search</span>
+                      <input
+                        type="search"
+                        className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
+                        value={query}
+                        onChange={handleInputChange}
+                        placeholder={t.searchForBrandandCars}
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="tw-relative tw-w-full ">
+                    {showDropdown && searchResults.length > 0 && (
+                      <div className="tw-absolute tw-mt-1 tw-w-full tw-p-2 tw-bg-white tw-shadow-lg tw-rounded-b-lg tw-max-h-56 tw-overflow-auto tw-z-50">
+                        {searchResults.map((item, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200"
+                            onClick={() => handleItemClick(item)}
+                          >
+                            {formatLabel(item)}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* test input begins */}
+                  <div>
+                    {/* <NewSearch
+        results={results}
+        value={selectedProfile ? selectedProfile.name : ""}
+        renderItem={(item) => <p>{item}</p>}
+        onChange={handleChangedd}
+        onSelect={(item) => setSelectedProfile(item)}
+      /> */}
+                  </div>
+                  {/* test input ends */}
+                </form>
               </div>
             </div>
             <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap">
@@ -696,7 +929,7 @@ export default function index({
                 <br className="md:tw-block tw-hidden" />
                 New Car Finder Platform
               </h1>
-              <p className="md:tw-mt-5 tw-mt-2 ">
+              <p className="md:tw-mt-5 tw-mt-2 md:tw-w-[50%]">
                 Experience a revolutionary approach to navigating car prices.
                 Explore innovation as you navigate the world of automotive
                 pricing with a fresh perspective.
@@ -1659,7 +1892,7 @@ export default function index({
                 <div className="tw-text-2xl tw-leading-9 tw-text-neutral-900 tw-font-bold">
                   Why CarPrices.ae?
                 </div>
-                <div className="tw-flex tw-flex-col tw-mt-2 tw-text-neutral-900">
+                <div className="tw-flex tw-flex-col tw-mt-6 tw-text-neutral-900">
                   <div className="tw-text-base tw-leading-6 tw-font-semibold">
                     New Car Buyer’s Guide
                   </div>
@@ -1683,11 +1916,11 @@ export default function index({
                     covered.
                   </div>
                 </div>
-                <div className="tw-flex tw-gap-0.5 tw-self-start tw-p-0.5 tw-mt-9 tw-border tw-border-blue-600 tw-border-solid tw-rounded-[36px]">
+                {/* <div className="tw-flex tw-gap-0.5 tw-self-start tw-p-0.5 tw-mt-9 tw-border tw-border-blue-600 tw-border-solid tw-rounded-[36px]">
                   <div className="tw-shrink-0 tw-w-full tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px]" />
                   <div className="tw-shrink-0 tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px] tw-w-[7px]" />
                   <div className="tw-shrink-0 tw-bg-blue-600 tw-h-[7px] tw-rounded-[36px] tw-w-[7px]" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -1714,7 +1947,7 @@ export default function index({
                     We will provide updates, shopping tips and more.
                   </div>
                 </div>
-                <div className="tw-flex tw-gap-5 tw-justify-between tw-my-auto tw-text-xl tw-leading-7 tw-text-white">
+                <div className="tw-flex tw-gap-5 tw-justify-between tw-items-center tw-my-auto tw-text-xl tw-leading-7 tw-text-white">
                   <Link href="/contact-us" className="text-white">
                     Get consultation
                   </Link>
@@ -1723,11 +1956,11 @@ export default function index({
                   </span>
                 </div>
               </div>
-              <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-12 tw-w-full max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
+              <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-12 tw-w-full max-md:tw-flex-wrap md:tw-mt-10 tw-mt-0 max-md:tw-max-w-full">
                 <div className="max-md:tw-max-w-full">
                   <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
                     <div className="tw-flex tw-flex-col tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
-                      <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                      <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white md:tw-mt-10">
                         <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
                           Top 10s
                         </h4>
@@ -1870,7 +2103,7 @@ export default function index({
                           >
                             Privacy Policy
                           </Link>
-                          <Link
+                          {/* <Link
                             href="/terms-and-conditions"
                             className="tw-mt-1 tw-text-white"
                           >
@@ -1881,7 +2114,7 @@ export default function index({
                             className="tw-mt-1 tw-text-white"
                           >
                             Code of Conduct
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     </div>
@@ -1889,11 +2122,11 @@ export default function index({
                 </div>
                 <div className="tw-flex tw-flex-col tw-justify-center tw-self-start">
                   <div className="tw-flex tw-flex-col">
-                    <div className="tw-shrink-0 tw-self-end tw-h-px tw-bg-white tw-w-[45px]" />
+                    <div className="tw-shrink-0 md:tw-self-end tw-h-px tw-bg-white tw-w-[45px]" />
                     <div className="tw-flex tw-flex-col tw-mt-6">
-                      <div className="tw-flex tw-flex-col tw-self-end tw-text-sm tw-leading-5 tw-text-white">
+                      <div className="tw-flex tw-flex-col md:tw-self-end tw-text-sm tw-leading-5 tw-text-white">
                         {/* <div>+971 50 649 4665</div> */}
-                        <div className="tw-mt-1 tw-text-right tw-text-white">
+                        <div className="tw-mt-1 md:tw-text-right tw-text-white">
                           <Link
                             href="mailto:info@carprices.ae"
                             className="text-white"

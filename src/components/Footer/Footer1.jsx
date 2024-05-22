@@ -204,7 +204,7 @@ function Footer1() {
                           <a>Privacy Policy</a>
                         </Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link legacyBehavior href="/terms-and-conditions">
                           <a>Terms and Conditions</a>
                         </Link>
@@ -213,7 +213,7 @@ function Footer1() {
                         <Link legacyBehavior href="/code-of-conduct">
                           <a>Code of Conduct</a>
                         </Link>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
@@ -277,12 +277,12 @@ function Footer1() {
                       <path d="M18.1324 11.7344C19.6041 11.7362 20.7968 12.9289 20.7986 14.4007C20.7986 14.5422 20.8548 14.6778 20.9548 14.7778C21.0548 14.8778 21.1905 14.934 21.3319 14.934C21.4733 14.934 21.6089 14.8778 21.7089 14.7778C21.8089 14.6778 21.8651 14.5422 21.8651 14.4007C21.8627 12.3402 20.1929 10.6703 18.1324 10.668C17.8378 10.668 17.5991 10.9067 17.5991 11.2012C17.5991 11.4957 17.8378 11.7344 18.1324 11.7344Z" />
                     </svg>
                   </div>
-                  <div className="content">
+                  {/* <div className="content">
                     <span>For Enquiries</span>
                     <h6>
                       <a href="tel:+971506494665">+971 50 649 4665</a>
                     </h6>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="hotline-area">
                   <div className="icon">
@@ -312,7 +312,7 @@ function Footer1() {
                   </div>
                 </div>
               </div>
-              <div className="footer-btm-menu">
+              {/* <div className="footer-btm-menu">
                 <ul>
                   <li>
                     <Link href="/contact-us">Advertise With Us</Link>
@@ -321,7 +321,7 @@ function Footer1() {
                     <Link href="/sitemap.xml">Our Sitemap</Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
 
