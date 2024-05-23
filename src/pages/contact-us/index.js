@@ -3,6 +3,7 @@ import useTranslate from "@/src/utils/useTranslate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function ContactPage() {
   const router = useRouter();
@@ -48,9 +49,7 @@ function ContactPage() {
     let errors = {};
     if (!name) {
       errors.name = t.nameRequired;
-    } else if (name.length < 3) {
-      errors.name = t.nameMustBeTwo;
-    }
+    } 
 
     if (!touchedFields.email && !email.trim()) {
       errors.email = t.emailRequired;
@@ -60,37 +59,32 @@ function ContactPage() {
 
     if (!touchedFields.phone && !phone) {
       errors.phone = t.phoneRequired;
-    } else if (!/^\+?\d{2,}-?\d{8,}$/.test(phone)) {
-      errors.phone = t.invalidPhoneNumb;
-    }
+    } 
 
-    if (!subject) {
-      errors.subject = t.subRequired;
-    } else if (subject.length < 4) {
-      errors.subject = t.subMustBe3Char;
-    }
-
-    if (!note) {
-      errors.note = t.noteRequired;
-    } else if (note.length < 4) {
-      errors.note = t.noteMustbeMore;
-    }
-
-    if (!agreed) {
-      errors.agreed = t.agreeToTerms;
-    }
 
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
   };
-  // Submit
-  const handleSubmit = () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     makeTouchedTrue();
     validateForm();
     if (isFormValid) {
-      alert(t.formSubmitted);
-    } else {
-      // alert('Form has errors. Please correct them.');
+      try {
+        const response = await axios.post("/api/sendContacUsMail", {
+          name,
+          email,
+          phone,
+          subject,
+        });
+        if (response.status === 200) {
+          alert(t.formSubmitted);
+        }
+      } catch (error) {
+        console.error("Error submitting form", error);
+        alert("Error submitting form");
+      }
     }
   };
 
@@ -111,8 +105,7 @@ function ContactPage() {
               src="/Contact-Us.jpg"
               className="tw-object-cover tw-w-full tw-h-full tw-absolute tw-inset-0"
             />
-            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>{" "}
-            {/* Overlay */}
+            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
             <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full tw-h-full">
               <h1 className="tw-text-white md:tw-leading-10 tw-leading-6 tw-font-bold banner-header">
                 {t.contactUs}
@@ -127,7 +120,7 @@ function ContactPage() {
       <div className="tw-row tw-gap-4 tw-mb-24 tw-mx-auto md:tw-w-[70%] tw-w-[95%]">
         <div className="tw-col-lg-12">
           <div className="tw-inquiry-form tw-bg-white tw-p-8 tw-rounded-xl tw-shadow-lg">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="tw-row tw-space-y-6">
                 <div className="tw-col-md-12">
                   <div className="tw-form-inner">
@@ -136,7 +129,7 @@ function ContactPage() {
                     </label>
                     <input
                       type="text"
-                      placeholder="Jackson Mile"
+                      placeholder="Enter your fullname"
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
@@ -164,9 +157,6 @@ function ContactPage() {
                       placeholder="Ex- +971-58* ** ***"
                       className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
                     />
-                    {errors.phone && touchedFields.phone && (
-                      <p className="tw-text-red-500 tw-mt-1">{errors.phone}</p>
-                    )}
                   </div>
                 </div>
                 <div className="tw-col-md-6">
@@ -211,70 +201,12 @@ function ContactPage() {
                     )}
                   </div>
                 </div>
-                <div className="tw-col-md-12">
-                  <div className="tw-form-inner">
-                    <label className="tw-block tw-mb-2 tw-font-semibold">
-                      {t.contactUsShortNotes}*
-                    </label>
-                    <textarea
-                      placeholder="Write Something..."
-                      value={note}
-                      onChange={(e) => {
-                        setNote(e.target.value);
-                        touchedFields.note = true;
-                      }}
-                      className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
-                    />
-                    {errors.note && touchedFields.note && (
-                      <p className="tw-text-red-500 tw-mt-1">{errors.note}</p>
-                    )}
-                  </div>
-                </div>
-                <div className="tw-col-md-12">
-                  <div className="tw-form-inner">
-                    <label className="tw-flex tw-items-center tw-gap-2">
-                      <input
-                        className="tw-termsCheckBox tw-w-5 tw-h-5 tw-border tw-border-gray-300 tw-rounded tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
-                        type="checkbox"
-                        checked={agreed}
-                        onChange={() => {
-                          handleAgreementChange(!agreed);
-                          touchedFields.agreed = true;
-                        }}
-                      />
-                      {!isRtl && (
-                        <>
-                          <span className="tw-ps-1">I agree to </span>
-                          <a
-                            className="tw-text-blue-500 tw-underline"
-                            href="/terms-and-conditions"
-                          >
-                            terms and conditions
-                          </a>
-                        </>
-                      )}
-                      {isRtl && (
-                        <>
-                          <span className="tw-ps-1">أنا أوافق على </span>
-                          <a
-                            className="tw-text-blue-500 tw-underline"
-                            href="/terms-and-conditions"
-                          >
-                            الشروط والأحكام
-                          </a>
-                        </>
-                      )}
-                    </label>
-                  </div>
-                  {errors.agreed && touchedFields.agreed && (
-                    <p className="tw-text-red-500 tw-mt-1">{errors.agreed}</p>
-                  )}
-                </div>
+               
+              
                 <div className="tw-col-md-12 tw-mt-4">
                   <div className="tw-form-inner">
                     <button
-                      type="button"
-                      onClick={handleSubmit}
+                      type="submit"
                       className="tw-w-full tw-bg-blue-500 tw-text-white tw-py-3 tw-rounded-md tw-shadow-lg tw-transition tw-duration-300 hover:tw-bg-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-opacity-50"
                     >
                       {t.contactUsSubmitNow}
