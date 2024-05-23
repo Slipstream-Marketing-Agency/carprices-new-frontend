@@ -777,7 +777,7 @@ export default function index({
                           <button
                             key={index}
                             type="button"
-                            className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200"
+                            className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200 tw-bg-white"
                             onClick={() => handleItemClick(item)}
                           >
                             {formatLabel(item)}
@@ -1620,7 +1620,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-bg-black tw-rounded-2xl">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
                   <div className="tw-px-6">
                     <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                       {articles.news[0].title}
@@ -1640,7 +1640,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10  tw-bg-black tw-rounded-2xl">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
                   <div className="tw-text-lg tw-text-white">
                     {articles.news[0].title}
                   </div>
@@ -1663,7 +1663,7 @@ export default function index({
                         }')`,
                       }}
                     >
-                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10  tw-bg-black tw-rounded-2xl">
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
                         <div className="tw-text-lg tw-text-white">
                           {item.title}
                         </div>
