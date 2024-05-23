@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StepThree from "./StepThree";
 import StepOne from "./StepOne";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import SpecificVehicleFilter from "./SpecificVehicleFilter";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import StepFour from "./StepFour";
 import StepTwo from "./StepTwo";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  IconButton,
+  DialogContentText,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function FilterLayout() {
   const router = useRouter();
@@ -35,9 +42,14 @@ export default function FilterLayout() {
   });
 
   const [error, setError] = useState("");
-
   const [currentStep, setCurrentStep] = useState(0);
   const [specific, setSpecific] = useState(false);
+  const [openErrorDialog, setOpenErrorDialog] = useState(false);
+
+  const handleErrorClose = () => {
+    setOpenErrorDialog(false);
+    setError("");
+  };
 
   const bodyTypesParam =
     filterData.bodyTypes.length > 0
@@ -63,11 +75,6 @@ export default function FilterLayout() {
       ? 1
       : 0,
     isSafety: filterData.preferences.includes("safety") ? 1 : 0,
-    // isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
-    // isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
-    // isFourToFive: filterData.seating.includes("4-5") ? 1 : 0,
-    // isFiveToSeven: filterData.seating.includes("5-7") ? 1 : 0,
-    // isSevenToNine: filterData.seating.includes("7-9") ? 1 : 0,
     isOneSeat: filterData.seating.includes("1") ? 1 : 0,
     isTwoSeat: filterData.seating.includes("2") ? 1 : 0,
     isTwoPlusTwo: filterData.seating.includes("2+2") ? 1 : 0,
@@ -99,12 +106,6 @@ export default function FilterLayout() {
           ? "&isManualTransmission=1"
           : "";
       query += filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
-      // query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
-      // query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
-      // query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
-      // query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
-      // query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
-      // query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
       query += filterOptions.isOneSeat === 1 ? "&isOneSeat=1" : "";
       query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
       query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
@@ -166,14 +167,9 @@ export default function FilterLayout() {
                 : null,
             ],
           }));
-
-          // setMinMaxData(response.data);
-          // setIsLoading(false);
         })
         .catch((error) => {
           console.error("Error", error);
-          // setIsLoading(false);
-          // setError(error);
         });
 
       axios
@@ -182,14 +178,9 @@ export default function FilterLayout() {
         )
         .then((response) => {
           setBodyTypeList(response?.data?.bodyTypes);
-
-          // setMinMaxData(response.data);
-          // setIsLoading(false);
         })
         .catch((error) => {
           console.error("Error", error);
-          // setIsLoading(false);
-          // setError(error);
         });
 
       axios
@@ -198,14 +189,9 @@ export default function FilterLayout() {
         )
         .then((response) => {
           setSeatList(response?.data?.seats);
-
-          // setMinMaxData(response.data);
-          // setIsLoading(false);
         })
         .catch((error) => {
           console.error("Error", error);
-          // setIsLoading(false);
-          // setError(error);
         });
     };
 
@@ -214,14 +200,12 @@ export default function FilterLayout() {
 
   const steps = [
     {
-      // title: `${t.step} 1: ${t.preferences}`,
       title: `Pick the top 3 things you need from your new car`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),
     },
     {
-      // title: `${t.step} 3 : ${t.defineBudget} `,
       title: `Choose your preferred body type`,
       component: (
         <StepTwo
@@ -232,7 +216,6 @@ export default function FilterLayout() {
       ),
     },
     {
-      // title: `${t.step} 2 : ${t.chooseSeating}`,
       title: `How many seats do you need?`,
       component: (
         <StepThree
@@ -243,7 +226,6 @@ export default function FilterLayout() {
       ),
     },
     {
-      // title: `${t.step} 2 : ${t.chooseSeating}`,
       title: `${t.defineBudget}`,
       component: (
         <StepFour filterData={filterData} setFilterData={setFilterData} />
@@ -253,35 +235,37 @@ export default function FilterLayout() {
 
   const handleNextStep = () => {
     if (filterData.preferences.length === 0) {
-      setError("Select atleast one preference");
+      setError(
+        "Looks like your selection is too narrow and no vehicle can truly tick those boxes. Please broaden your preferences."
+      );
+      setOpenErrorDialog(true);
     } else if (currentStep === 1 && filterData.bodyTypes.length === 0) {
-      setError("Select atleast one body type");
+      setError("Select at least one body type");
+      setOpenErrorDialog(true);
     } else if (
       currentStep === 0 &&
       filterData?.budget[0] === null &&
       filterData?.budget[1] === null
-      //  ||
-      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("No cars available for the selected preferences");
+      setOpenErrorDialog(true);
     } else if (
       currentStep === 1 &&
       filterData?.budget[0] === null &&
       filterData?.budget[1] === null
-      // ||
-      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("No cars available for the selected body types");
+      setOpenErrorDialog(true);
     } else if (
       currentStep === 2 &&
       filterData?.budget[0] === null &&
       filterData?.budget[1] === null
-      // ||
-      // filterData?.budget[0] === filterData?.budget[1]
     ) {
       setError("No cars available for the selected seats");
+      setOpenErrorDialog(true);
     } else if (currentStep === 2 && filterData.seating.length === 0) {
-      setError("Select atleast one seating option");
+      setError("Select at least one seating option");
+      setOpenErrorDialog(true);
     } else {
       setCurrentStep(currentStep + 1);
     }
@@ -306,7 +290,6 @@ export default function FilterLayout() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if ( filterData.seating.length > 0) {
     let query = `${filterOptions.haveMusic == 1 ? "haveMusic=1" : ""}`;
     query += filterOptions.isLuxury ? "&isLuxury=1" : "";
     query += filterOptions.isPremiumLuxury ? "&isPremiumLuxury=1" : "";
@@ -322,11 +305,6 @@ export default function FilterLayout() {
     query +=
       filterOptions.isManualTransmission === 1 ? "&isManualTransmission=1" : "";
     query += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
-    // query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
-    // query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
-    // query += filterOptions.isFourToFive === 1 ? "&isFourToFive=1" : "";
-    // query += filterOptions.isFiveToSeven === 1 ? "&isFiveToSeven=1" : "";
-    // query += filterOptions.isSevenToNine === 1 ? "&isSevenToNine=1" : "";
     query += filterOptions.isOneSeat === 1 ? "&isOneSeat=1" : "";
     query += filterOptions.isTwoSeat === 1 ? "&isTwoSeat=1" : "";
     query += filterOptions.isTwoPlusTwo === 1 ? "&isTwoPlusTwo=1" : "";
@@ -351,15 +329,6 @@ export default function FilterLayout() {
       bodyTypesQuery;
 
     router.push(url);
-    // } else {
-    // setError("Select atleast one seating");
-    // if (
-    //   filterData.preferences.length === 0 &&
-    //   filterData.seating.length === 0
-    // ) {
-    // toast.error("Select atleast one seating");
-    // }
-    // }
   };
 
   const handleFilterSwitch = () => {
@@ -368,29 +337,46 @@ export default function FilterLayout() {
 
   return (
     <>
+      <Dialog
+        open={openErrorDialog}
+        onClose={handleErrorClose}
+        PaperProps={{
+          style: {
+            borderRadius: "10px",
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
+          },
+        }}
+      >
+        <DialogContent dividers>
+          <DialogContentText>
+            <div className="tw-text-center">
+              <h2 className="tw-font-bold tw-text-red-400">
+                Oops! We’ve blown a gasket…
+              </h2>
+              <p className="tw-font-semibold">{error}</p>
+            </div>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleErrorClose}
+            variant="contained"
+            color="primary"
+          >
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {!specific ? (
         <>
           <div className="search_filter_box tw-text-center ">
             <div className="">
-              {error && (
-                <>
-                  <div className="banner_filter_overlay"></div>
-                  <small className="error_message tw-font-bold">
-                    {error}{" "}
-                    <div
-                      className="close_button tw-cursor-pointer"
-                      onClick={() => setError(false)}
-                    >
-                      <i className="bi bi-x-circle-fill"></i>
-                    </div>
-                  </small>
-                </>
-              )}
-
               <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
                 <img
                   loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bab8732d6429f1ac3aedfbc9eccfd4a3c451d479881fd9a558a59b846ba101d?apiKey=7580612134c3412b9f32a9330debcde8&"
+                  src="/gradiend-lines.svg"
                   className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover"
                 />
                 <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">

@@ -369,7 +369,7 @@ export default{
     contactUsSubject:"Subject",
     contactUsShortNotes:"Short Notes",
     contactUsAgreeToTermsNConditions:"I Agree to Terms and Conditions:",
-    contactUsSubmitNow:"Submit Now",
+    contactUsSubmitNow:"Submit",
 
     // Privacy page
     privacyPolicy:"Privacy Policy",
