@@ -644,7 +644,7 @@ export default function index({
               <div onClick={toggleNavigation}>
                 <img
                   loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/24bc018f4a3c591da223aaaab9ecf5bec19a5dee9b2c1e12a8d3d633f9a2c4e3?apiKey=7580612134c3412b9f32a9330debcde8&"
+                  src="/close-button.svg"
                   className="tw-shrink-0 tw-w-6 tw-aspect-[0.8]"
                 />
               </div>
@@ -886,14 +886,14 @@ export default function index({
           <div className="tw-flex tw-gap-4 tw-justify-center tw-my-auto">
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/21ea1ee3a349af39481479e911636e030f9dc6ae5fb159c14a2e89fb64b53a21?apiKey=7580612134c3412b9f32a9330debcde8&"
+              src="/search.svg"
               className="tw-shrink-0 tw-w-5 tw-aspect-square"
             />
 
             <div onClick={toggleNavigation}>
               <img
                 loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffd71299533f8ebed0eb731e47a56e0fb50d0acd0bbae0dd3adc23ebaf110f29?apiKey=7580612134c3412b9f32a9330debcde8&"
+                src="/menu.svg"
                 className="tw-shrink-0 tw-self-start tw-w-6 tw-aspect-[1.27]"
               />
             </div>
@@ -1972,7 +1972,7 @@ export default function index({
                             10 Cars with High Ground Clearance
                           </Link>
                           <Link
-                            href="https://carprices.ae/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae"
+                            href="https://carprices.ae/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
                             className="tw-mt-1 tw-text-white"
                           >
                             10 Most Searched Cars

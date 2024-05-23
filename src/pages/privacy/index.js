@@ -133,9 +133,7 @@ export default function privacy() {
           </div>
 
           <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
-            <h4 className=" tw-font-semibold tw-mb-4">
-              Your Rights
-            </h4>
+            <h4 className=" tw-font-semibold tw-mb-4">Your Rights</h4>
             <p className="tw-text-gray-700 tw-leading-relaxed">
               You have the following rights regarding your personal data:
             </p>
@@ -184,9 +182,7 @@ export default function privacy() {
           </div>
 
           <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
-            <h4 className=" tw-font-semibold tw-mb-4">
-              Third-Party Websites
-            </h4>
+            <h4 className=" tw-font-semibold tw-mb-4">Third-Party Websites</h4>
             <p className="tw-text-gray-700 tw-leading-relaxed">
               Our website may contain links to third-party websites. We do not
               control and are not responsible for the content or practices of
@@ -196,9 +192,7 @@ export default function privacy() {
           </div>
 
           <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
-            <h4 className=" tw-font-semibold tw-mb-4">
-              Your Consent
-            </h4>
+            <h4 className=" tw-font-semibold tw-mb-4">Your Consent</h4>
             <p className="tw-text-gray-700 tw-leading-relaxed">
               By using our site, you consent to our privacy policy. If you do
               not agree with our policies and practices, your choice is not to
@@ -221,9 +215,7 @@ export default function privacy() {
           </div>
 
           <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
-            <h4 className=" tw-font-semibold tw-mb-4">
-              Contacting Us
-            </h4>
+            <h4 className=" tw-font-semibold tw-mb-4">Contacting Us</h4>
             <p className="tw-text-gray-700 tw-leading-relaxed">
               If you have any questions about this privacy policy, the practices
               of this site, or your dealings with this site, please contact us
@@ -252,6 +244,11 @@ export default function privacy() {
                 info@carprices.ae
               </a>
             </address>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              Thank you for visiting www.carprices.ae. Your privacy is important
+              to us, and we are committed to protecting your personal
+              information.
+            </p>
           </div>
         </div>
       </div>

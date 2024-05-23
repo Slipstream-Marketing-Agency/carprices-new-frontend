@@ -39,7 +39,7 @@ function Footer1() {
                       <li>
                         <Link
                           legacyBehavior
-                          href=" https://carprices.ae/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae"
+                          href="https://carprices.ae/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
                         >
                           <a>10 Most Searched Cars</a>
                         </Link>
@@ -264,7 +264,7 @@ function Footer1() {
                 </Link>
               </div>
               <div className="contact-area">
-                <div className="hotline-area">
+                {/* <div className="hotline-area">
                   <div className="icon">
                     <svg
                       width={32}
@@ -277,13 +277,13 @@ function Footer1() {
                       <path d="M18.1324 11.7344C19.6041 11.7362 20.7968 12.9289 20.7986 14.4007C20.7986 14.5422 20.8548 14.6778 20.9548 14.7778C21.0548 14.8778 21.1905 14.934 21.3319 14.934C21.4733 14.934 21.6089 14.8778 21.7089 14.7778C21.8089 14.6778 21.8651 14.5422 21.8651 14.4007C21.8627 12.3402 20.1929 10.6703 18.1324 10.668C17.8378 10.668 17.5991 10.9067 17.5991 11.2012C17.5991 11.4957 17.8378 11.7344 18.1324 11.7344Z" />
                     </svg>
                   </div>
-                  {/* <div className="content">
+                  <div className="content">
                     <span>For Enquiries</span>
                     <h6>
                       <a href="tel:+971506494665">+971 50 649 4665</a>
                     </h6>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
                 <div className="hotline-area">
                   <div className="icon">
                     <svg
