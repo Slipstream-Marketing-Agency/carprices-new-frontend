@@ -1433,7 +1433,7 @@ export default function index({
                     <img
                       loading="lazy"
                       src={`${item?.image}`}
-                      className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-3"
+                      className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                     />
                   </div>
                   <div className=" tw-font-semibold">{item.name}</div>
@@ -1578,10 +1578,10 @@ export default function index({
                 <div className="tw-relative tw-flex tw-flex-col tw-pl-7 tw-mt-7 tw-text-neutral-900 max-md:tw-pl-5">
                   <img
                     loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/f9d5fef3659a0fe531b3dc3ad5973537a8ec930dbb49f5a75f67de7a78660e9f?apiKey=7580612134c3412b9f32a9330debcde8&"
-                    className=" tw-absolute tw-right-5 tw-top-[-65px] tw-w-[70px]"
+                    src="/playbutton.svg"
+                    className=" tw-absolute tw-right-5 tw-top-[-53px] tw-w-[47px]"
                   />
-                  <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 tw-text-2xl">
+                  <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 ">
                     <h4
                       className=" tw-text-black tw-font-semibold"
                       line-clamp-2
@@ -1620,7 +1620,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-bg-black tw-rounded-2xl">
                   <div className="tw-px-6">
                     <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                       {articles.news[0].title}
@@ -1640,7 +1640,7 @@ export default function index({
                   backgroundImage: `url('${articles.news[0].coverImage}')`,
                 }}
               >
-                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
+                <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10  tw-bg-black tw-rounded-2xl">
                   <div className="tw-text-lg tw-text-white">
                     {articles.news[0].title}
                   </div>
@@ -1663,7 +1663,7 @@ export default function index({
                         }')`,
                       }}
                     >
-                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10 tw-backdrop-blur-[4px]">
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-10  tw-bg-black tw-rounded-2xl">
                         <div className="tw-text-lg tw-text-white">
                           {item.title}
                         </div>
@@ -1938,7 +1938,7 @@ export default function index({
         <div className="tw-flex tw-justify-center tw-items-center tw-px-16 tw-py-16 tw-bg-neutral-900 max-md:tw-px-5 tw-w-full ">
           <div className="tw-flex tw-flex-col tw-w-full tw-container">
             <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
-              <div className="tw-flex tw-gap-5 tw-justify-between tw-py-8 tw-w-full tw-rounded-2xl max-md:tw-flex-wrap max-md:tw-max-w-full">
+              {/* <div className="tw-flex tw-gap-5 tw-justify-between tw-py-8 tw-w-full tw-rounded-2xl max-md:tw-flex-wrap max-md:tw-max-w-full">
                 <div className="tw-flex tw-flex-col tw-text-gray-50 max-md:tw-max-w-full">
                   <div className="tw-text-3xl tw-tracking-tight tw-leading-8 max-md:tw-max-w-full">
                     Do you need updates?
@@ -1955,7 +1955,7 @@ export default function index({
                     arrow_right_alt
                   </span>
                 </div>
-              </div>
+              </div> */}
               <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-12 tw-w-full max-md:tw-flex-wrap md:tw-mt-10 tw-mt-0 max-md:tw-max-w-full">
                 <div className="max-md:tw-max-w-full">
                   <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
@@ -2137,39 +2137,19 @@ export default function index({
                       </div>
                       <div className="tw-flex tw-gap-2 tw-mt-2">
                         <Link href="https://youtube.com/@carpricesuae?feature=shared">
-                          <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/89539fb8ec01af9a7f038afd91c58e261f280173a90f447aa81acbc97aa5bd68?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
-                          />
+                          <i className="bx bxl-youtube tw-text-white" />
                         </Link>
                         <Link href="https://www.facebook.com/carprices.ae/">
-                          <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/989ca5cee220b9472a192b392c3c43f2675c6d4a9f075180fafad8163839aee5?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
-                          />
+                          <i className="bx bxl-facebook tw-text-white" />
                         </Link>
                         <Link href="https://x.com/CarPricesAe?t=_IgNE0J6jf5r1ZiiKrkaYw&s=09">
-                          <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/5105e8bdd60ff0245b9f094d1b7529a5939d0436f5ce2ebad352d77ca2bd6576?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
-                          />
+                          <i className="bx bxl-twitter tw-text-white" />
                         </Link>
                         <Link href="https://www.linkedin.com/company/car-prices-ae/">
-                          <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/280619b280591c941855898a9c986f9346aa18dcf6ee0f84e15d1bfd4d37bcb1?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
-                          />
+                          <i className="bx bxl-linkedin tw-text-white" />
                         </Link>
                         <Link href="https://www.instagram.com/carprices.ae?igsh=bnE4cnpudjFwMHg1">
-                          <img
-                            loading="lazy"
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d67ce5820088e265263fd67a72a832801a8cf6b563bf67494b5d1b6113014034?apiKey=7580612134c3412b9f32a9330debcde8&"
-                            className="tw-shrink-0 tw-w-6 tw-aspect-square"
-                          />
+                          <i className="bx bxl-instagram-alt tw-text-white" />
                         </Link>
                       </div>
                     </div>
