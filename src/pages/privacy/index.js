@@ -16,481 +16,242 @@ export default function privacy() {
         type: "Car Review Website",
       }}
     >
-      <div className="container pt-5 mb-100">
-        <h1 className={`fw-bolder ${isRtl && "text-end"}`}>
-          {t.privacyPolicy}
+      <div className="tw-container tw-mx-auto tw-pt-10 tw-pb-24 tw-px-6 lg:tw-px-20">
+        <h1 className="tw-text-4xl tw-font-bold tw-mb-10 tw-text-center">
+          Privacy Policy
         </h1>
-        <div className="row">
-          <div className="col-lg-12 ">
-            {!isRtl && (
-              <div className="update-date mb-30">
-                <div>
-                  {" "}
-                  <i className="bi bi-caret-right-fill" /> Last Updated{" "}
-                  <span> --20 Dec, 2023</span>
-                </div>
-              </div>
-            )}
-            {isRtl && (
-              <div className="update-date mb-30 text-end">
-                <div>
-                  {" "}
-                  <i className="bi bi-caret-right-fill" /> آخر تحديث{" "}
-                  <span> --20 ديسمبر، 2023</span>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="col-lg-12 mb-4">
-            <div>
-              <p className={`paragraph mt-3 ${isRtl && "text-end"}`}>
-                {t.privacySubPara}
-              </p>
-              <h4 className={`mt-5 ${isRtl && "text-end"}`}>
-                {t.privacyPoint1}
-              </h4>
-              <p className={`paragraph ${isRtl && "text-end"}`}>
-                {t.privacyPoint1Sub}
-              </p>
-              <br />
-              <h4 className={`${isRtl && "text-end"}`}>{t.privacyPoint2}</h4>
-              <p className={`paragraph ${isRtl && "text-end"}`}>
-                {t.privacyPoint2Sub}
-              </p>
+        <div className="tw-space-y-10">
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <div className="tw-text-gray-700 tw-mb-6">
+              <i className="bi bi-caret-right-fill tw-text-blue-500" /> Last
+              Updated <span className="tw-font-semibold">20 Dec, 2023</span>
             </div>
-          </div>
-          <div className={`mb-4 `}>
-            <h4 className={`${isRtl && "text-end"}`}>
-              {t.privacyPersonalInformationHeading}
-            </h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPersonalInformationSub}
-            </p>
-          </div>
-          <div className="mb-4">
-            <h4 className={`${isRtl && "text-end"}`}>
-              {t.privacyInformationCollectedHeading}
-            </h4>
-            <p className="paragraph">
-              {t.privacyInformationCollectedSub1}
-              <br />
-              {t.privacyInformationCollectedSub2}
-              <br />
-              {t.privacyInformationCollectedSub3}
-              <br />
-              {t.privacyInformationCollectedSub4}
-              <br />
-              {t.privacyInformationCollectedSub5}
-              <br />
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              Slipstream Holdings Limited ("we", "our", "us") is committed to
+              protecting your privacy. This privacy policy explains how we
+              collect, use, disclose, and safeguard your information when you
+              visit our website www.carprices.ae in compliance with the General
+              Data Protection Regulation (GDPR).
             </p>
           </div>
 
-          <div>
-            <h4 className={`mb-4 ${isRtl && "text-end"}`}>{t.privacyPoint3}</h4>
-
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint3Sub}
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Information We Collect
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              We may collect personal information from you in various ways
+              including when you visit our site, register on the site, fill out
+              a form, and in connection with other activities, services,
+              features, or resources we make available on our site.
             </p>
-            <ul className={`${isRtl && "text-end"} `}>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP1}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP2}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP3}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP4}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP5}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP6}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP7}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP8}
-              </li>
-              <li>{t.privacyPoint3SubP9}</li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP10}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP11}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP12}
-              </li>
-              <li className={`${isRtl && "text-left"} `}>
-                {t.privacyPoint3SubP13}
+            <ul className="tw-list-disc tw-list-inside tw-text-gray-700 tw-ml-4">
+              <li className="tw-my-2">Name</li>
+              <li className="tw-my-2">Email address</li>
+              <li className="tw-my-2">Phone number</li>
+              <li className="tw-my-2">
+                Any other personal information you willingly provide
               </li>
             </ul>
-            <p className="paragraph">{t.privacyWhereCarPricesPara}</p>
+            <p className="tw-text-gray-700 tw-leading-relaxed tw-mt-4">
+              Information we collect automatically:
+            </p>
+            <ul className="tw-list-disc tw-list-inside tw-text-gray-700 tw-ml-4">
+              <li className="tw-my-2">Browsing behavior and preferences</li>
+            </ul>
           </div>
 
-          {!isRtl && (
-            <div className="mt-4" style={{ overflowX: "auto" }}>
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <td>
-                      <strong>Purpose/Activity</strong>
-                    </td>
-                    <td>
-                      <strong>Type of data</strong>
-                    </td>
-                    <td>
-                      <strong>
-                        Lawful basis for processing including basis of
-                        legitimate&nbsp;interest
-                      </strong>
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>To register you as a new customer</td>
-                    <td>(a)&nbsp;Identity (b)&nbsp;Contact</td>
-                    <td>Performance of a contract with you</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To manage our relationship with you which
-                      will&nbsp;include: (a) Notifying you about changes to our
-                      terms or privacy&nbsp;policy (b) Asking you to leave a
-                      review or take a&nbsp;survey
-                    </td>
-                    <td>
-                      (a)&nbsp;Identity (b)&nbsp;Contact (c)&nbsp;Profile (d)
-                      Marketing and&nbsp;Communications
-                    </td>
-                    <td>
-                      (a) Performance of a contract with&nbsp;you (b) Necessary
-                      to comply with a legal&nbsp;obligation (c) Necessary for
-                      our legitimate interests (to keep our records updated and
-                      to study how customers use our&nbsp;products/services)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To enable you to partake in a prize draw, competition or
-                      complete a survey
-                    </td>
-                    <td>
-                      (a)&nbsp;Identity (b)&nbsp;Contact (c)&nbsp;Profile
-                      (d)&nbsp;Usage (e) Marketing and&nbsp;Communications
-                    </td>
-                    <td>
-                      (a) Performance of a contract with&nbsp;you (b) Necessary
-                      for our legitimate interests (to study how customers use
-                      our products/services, to develop them and grow
-                      our&nbsp;business)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To administer and protect our business and this website
-                      (including troubleshooting, data analysis, testing, system
-                      maintenance, support, reporting and hosting of&nbsp;data)
-                    </td>
-                    <td>
-                      (a)&nbsp;Identity (b)&nbsp;Contact (c)&nbsp;Technical
-                    </td>
-                    <td>
-                      (a) Necessary for our legitimate interests (for running
-                      our business, provision of administration and IT services,
-                      network security, to prevent fraud and in the context of a
-                      business reorganisation or group
-                      restructuring&nbsp;exercise) (b) Necessary to comply with
-                      a legal&nbsp;obligation
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To deliver relevant website content and advertisements to
-                      you and measure or understand the effectiveness of the
-                      advertising we serve to&nbsp;you
-                    </td>
-                    <td>
-                      (a)&nbsp;Identity (b)&nbsp;Contact (c)&nbsp;Profile
-                      (d)&nbsp;Usage (e) Marketing and&nbsp;Communications
-                      (f)&nbsp;Technical
-                    </td>
-                    <td>
-                      Necessary for our legitimate interests (to study how
-                      customers use our products/services, to develop them, to
-                      grow our business and to inform our
-                      marketing&nbsp;strategy)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To use data analytics to improve our website,
-                      products/services, marketing, customer relationships
-                      and&nbsp;experiences
-                    </td>
-                    <td>(a)&nbsp;Technical (b)&nbsp;Usage</td>
-                    <td>
-                      Necessary for our legitimate interests (to define types of
-                      customers for our products and services, to keep our
-                      website updated and relevant, to develop our business and
-                      to inform our marketing&nbsp;strategy)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      To make suggestions and recommendations to you about goods
-                      or services that may be of interest to&nbsp;you
-                    </td>
-                    <td>
-                      (a)&nbsp;Identity (b)&nbsp;Contact (c)&nbsp;Technical
-                      (d)&nbsp;Usage (e)&nbsp;Profile
-                    </td>
-                    <td>
-                      Necessary for our legitimate interests (to develop our
-                      products/services and grow our&nbsp;business)
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
-          {isRtl && (
-            <div
-              className="mt-4"
-              style={{ overflowX: "auto", textAlign: "right" }}
-            >
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <td>
-                      <strong>الغرض/النشاط</strong>
-                    </td>
-                    <td>
-                      <strong>نوع البيانات</strong>
-                    </td>
-                    <td>
-                      <strong>
-                        الأساس القانوني لمعالجة البيانات بما في ذلك أساس المصلحة
-                        الشرعية
-                      </strong>
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>تسجيلك كعميل جديد</td>
-                    <td>(أ)&nbsp;الهوية (ب)&nbsp;الاتصال</td>
-                    <td>أداء عقد معك</td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      إدارة علاقتنا معك والتي ستشمل: (أ) إعلامك بتغييرات في
-                      شروطنا أو سياسة الخصوصية (ب) طلب ترك تقييم أو إجراء
-                      استطلاع للرأي
-                    </td>
-                    <td>
-                      (أ)&nbsp;الهوية (ب)&nbsp;الاتصال (ج)&nbsp;الملف الشخصي (د)
-                      التسويق والاتصالات
-                    </td>
-                    <td>
-                      (أ) أداء عقد معك (ب) ضروري للامتثال لالتزام قانوني (ج)
-                      ضروري لمصلحتنا الشرعية (للحفاظ على تحديث سجلاتنا ودراسة
-                      كيفية استخدام العملاء لمنتجاتنا/خدماتنا)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      تمكينك من المشاركة في سحب الجوائز، المسابقة، أو إكمال
-                      استطلاع الرأي
-                    </td>
-                    <td>
-                      (أ)&nbsp;الهوية (ب)&nbsp;الاتصال (ج)&nbsp;الملف الشخصي
-                      (د)&nbsp;الاستخدام (هـ) التسويق والاتصالات
-                    </td>
-                    <td>
-                      (أ) أداء عقد معك (ب) ضروري لمصلحتنا الشرعية (لدراسة كيفية
-                      استخدام العملاء لمنتجاتنا/خدماتنا، وتطويرها، ونمو أعمالنا)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      إدارة وحماية أعمالنا وهذا الموقع (بما في ذلك استكشاف
-                      الأخطاء، تحليل البيانات، اختبار الأنظمة، الصيانة، الدعم،
-                      التقارير واستضافة البيانات)
-                    </td>
-                    <td>(أ)&nbsp;الهوية (ب)&nbsp;الاتصال (ج)&nbsp;تقنية</td>
-                    <td>
-                      (أ) ضروري لمصلحتنا الشرعية (لتشغيل أعمالنا، وتقديم خدمات
-                      الإدارة وتكنولوجيا المعلومات، وأمان الشبكة، والوقاية من
-                      الاحتيال، وفي سياق إعادة تنظيم الأعمال أو تغيير هيكل
-                      المجموعة) (ب) ضروري للامتثال لالتزام قانوني
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      تقديم محتوى وإعلانات موقع الويب ذات الصلة لك وقياس أو فهم
-                      فعالية الإعلانات التي نقدمها لك
-                    </td>
-                    <td>
-                      (أ)&nbsp;الهوية (ب)&nbsp;الاتصال (ج)&nbsp;الملف الشخصي
-                      (د)&nbsp;الاستخدام (هـ) التسويق والاتصالات (ف)&nbsp;تقنية
-                    </td>
-                    <td>
-                      ضروري لمصلحتنا الشرعية (لدراسة كيفية استخدام العملاء
-                      لمنتجاتنا/خدماتنا، وتطويرها، ونمو أعمالنا وإعلام
-                      استراتيجية التسويق الخاصة بنا)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      استخدام تحليلات البيانات لتحسين موقعنا الإلكتروني
-                      ومنتجاتنا/خدماتنا، والتسويق، وعلاقات العملاء والتجارب
-                    </td>
-                    <td>(أ)&nbsp;تقنية (ب)&nbsp;الاستخدام</td>
-                    <td>
-                      ضروري لمصلحتنا الشرعية (لتحديد أنواع العملاء لمنتجاتنا
-                      وخدماتنا، والحفاظ على تحديث موقعنا الإلكتروني وجعله ذا
-                      صلة، وتطوير أعمالنا وإعلام استراتيجية التسويق الخاصة بنا)
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      تقديم اقتراحات وتوصيات لك بشأن السلع أو الخدمات التي قد
-                      تكون مهتمًا بها
-                    </td>
-                    <td>
-                      (أ)&nbsp;الهوية (ب)&nbsp;الاتصال (ج)&nbsp;تقنية
-                      (د)&nbsp;الاستخدام (هـ)&nbsp;الملف الشخصي
-                    </td>
-                    <td>
-                      ضروري لمصلحتنا الشرعية (لتطوير منتجاتنا/خدماتنا ونمو
-                      أعمالنا)
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          <div>
-            <h4 className={`mt-5 mb-4 ${isRtl && "text-end"}`}>
-              {t.privacySharingNDisclosingHeading}
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Lawful Basis for Processing
             </h4>
-
-            <h5 className={isRtl && "text-end"}>
-              {t.privacySharingNDisclosingSub1}
-            </h5>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacySharingNDisclosingSub2}
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              We process your personal data based on the following lawful bases:
             </p>
-            <br />
-
-            <h5 className={isRtl && "text-end"}>
-              {t.privacySharingNDisclosingSub3}
-            </h5>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacySharingNDisclosingSub32}
-            </p>
-            <br />
-            <h5 className={isRtl && "text-end"}>
-              {t.privacySharingNDisclosingSub004}
-            </h5>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacySharingNDisclosingSub4}
-            </p>
-            <br />
-            <h5 className={isRtl && "text-end"}>
-              {t.privacySharingNDisclosingSub5}
-            </h5>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacySharingNDisclosingSub6}
-            </p>
-            <br />
-
-            <h4 className={isRtl && "text-end"}>{t.privacyPoint5WhereStore}</h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint5WhereStoreSub}
-            </p>
-            <br />
-
-            <h4 className={isRtl && "text-end"}>
-              {t.privacyPoint6LongkeepInform}
-            </h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint6LongkeepInformSub}
-            </p>
-            <br />
-
-            <h4 className={isRtl && "text-end"}>
-              {t.privacyPoint7ChildrenUsing}
-            </h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint7ChildrenUsingSub}
-            </p>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyIfThereParents}
-            </p>
-            <a href="mailto:info@carprices.ae" className={isRtl && "text-end"}>
-              info@carprices.ae
-            </a>
-            {t.privacyInfoCarPrice}
-            <br />
-            <br />
-
-            <h4 className={isRtl && "text-end"}>{t.privacyPoint8Secure}</h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint8SecureSub}
-            </p>
-            <br />
+            <ul className="tw-list-disc tw-list-inside tw-text-gray-700 tw-ml-4">
+              <li className="tw-my-2">Your consent</li>
+              <li className="tw-my-2">
+                The necessity to perform a contract with you
+              </li>
+              <li className="tw-my-2">Compliance with legal obligations</li>
+              <li className="tw-my-2">
+                Legitimate interests pursued by us or a third party
+              </li>
+            </ul>
           </div>
 
-          <div>
-            <h4 className={isRtl && "text-end"}>
-              {t.privacyPoint9privacyChoiceHeading}
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              How We Use Your Information
             </h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyPoint9privacyChoiceSub}
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              We may use the information we collect from you in the following
+              ways:
             </p>
-            <br />
+            <ul className="tw-list-disc tw-list-inside tw-text-gray-700 tw-ml-4">
+              <li className="tw-my-2">
+                To personalize your experience and respond better to your
+                individual needs
+              </li>
+              <li className="tw-my-2">
+                To improve our website and service offerings
+              </li>
+              <li className="tw-my-2">
+                To send periodic emails for updates, promotions, or other
+                products and services (only if you have opted-in to receive such
+                communications)
+              </li>
+            </ul>
+          </div>
 
-            <h5 className={isRtl && "text-end"}>{t.privacyCommunication}</h5>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyWishStop}
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Protection of Your Information
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              We adopt appropriate data collection, storage, and processing
+              practices and security measures to protect against unauthorized
+              access, alteration, disclosure, or destruction of your personal
+              information, username, password, transaction information, and data
+              stored on our site.
             </p>
-            <br />
+          </div>
 
-            <div className="mt-5">
-              <h4 className={isRtl && "text-end"}>
-                {t.privacyChangesToPolicy}
-              </h4>
-              <p className={`paragraph ${isRtl && "text-end"}`}>
-                {t.privacyChangesToPolicySub}
-              </p>
-            </div>
-            <br />
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Sharing Your Information
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              We do not sell, trade, or otherwise transfer to outside parties
+              your Personally Identifiable Information unless we provide users
+              with advance notice and obtain their explicit consent. This does
+              not include website hosting partners and other parties who assist
+              us in operating our website, conducting our business, or serving
+              our users so long as those parties agree to keep this information
+              confidential.
+            </p>
+          </div>
 
-            <h4 className={isRtl && "text-end"}>{t.privacyContact}</h4>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyContactSub1}
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Your Rights
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              You have the following rights regarding your personal data:
             </p>
-            <p className={`paragraph ${isRtl && "text-end"}`}>
-              {t.privacyContactSub2}
+            <ul className="tw-list-disc tw-list-inside tw-text-gray-700 tw-ml-4">
+              <li className="tw-my-2">
+                The right to access – You have the right to request copies of
+                your personal data.
+              </li>
+              <li className="tw-my-2">
+                The right to rectification – You have the right to request that
+                we correct any information you believe is inaccurate or complete
+                information you believe is incomplete.
+              </li>
+              <li className="tw-my-2">
+                The right to erasure – You have the right to request that we
+                erase your personal data under certain conditions.
+              </li>
+              <li className="tw-my-2">
+                The right to restrict processing – You have the right to request
+                that we restrict the processing of your personal data under
+                certain conditions.
+              </li>
+              <li className="tw-my-2">
+                The right to object to processing – You have the right to object
+                to our processing of your personal data under certain
+                conditions.
+              </li>
+              <li className="tw-my-2">
+                The right to data portability – You have the right to request
+                that we transfer the data that we have collected to another
+                organization or directly to you under certain conditions.
+              </li>
+            </ul>
+          </div>
+
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">Cookies</h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              Our website may use "cookies" to enhance user experience. Your web
+              browser places cookies on your hard drive for record-keeping
+              purposes and sometimes to track information about them. You can
+              choose to set your web browser to refuse cookies or to alert you
+              when cookies are being sent. If they do so, note that some parts
+              of the site may not function properly.
             </p>
-            <div className={`${isRtl && "text-end"}`}>
-              <strong className={isRtl && "text-end"}>
-                {t.privacyEmail}&nbsp;
-              </strong>
-              <strong className={isRtl && "text-end"}>
-                <a href="mailto:info@carprices.ae">info@carprices.ae</a>
-              </strong>
-            </div>
+          </div>
+
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Third-Party Websites
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              Our website may contain links to third-party websites. We do not
+              control and are not responsible for the content or practices of
+              these websites. This privacy policy does not apply to third-party
+              websites.
+            </p>
+          </div>
+
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Your Consent
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              By using our site, you consent to our privacy policy. If you do
+              not agree with our policies and practices, your choice is not to
+              use our site.
+            </p>
+          </div>
+
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Changes to Our Privacy Policy
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              Slipstream Holdings Limited reserves the right to update or change
+              our privacy policy at any time. We will notify you of any changes
+              by posting the new privacy policy on our website. You are advised
+              to review this privacy policy periodically for any changes.
+              Changes to this privacy policy are effective when they are posted
+              on this page.
+            </p>
+          </div>
+
+          <div className="tw-bg-white tw-shadow-lg tw-rounded-lg tw-p-8">
+            <h4 className=" tw-font-semibold tw-mb-4">
+              Contacting Us
+            </h4>
+            <p className="tw-text-gray-700 tw-leading-relaxed">
+              If you have any questions about this privacy policy, the practices
+              of this site, or your dealings with this site, please contact us
+              at:
+            </p>
+            <address className="tw-not-italic tw-text-gray-700 tw-leading-relaxed">
+              Slipstream Holdings Limited
+              <br />
+              DD-15-134-004 – 007
+              <br />
+              Level 15 WeWork Hub71
+              <br />
+              Al Khatem Tower
+              <br />
+              Abu Dhabi Global Market Square
+              <br />
+              Al Maryah Island
+              <br />
+              Abu Dhabi, United Arab Emirates
+              <br />
+              Email:{" "}
+              <a
+                href="mailto:info@carprices.ae"
+                className="tw-text-blue-500 tw-underline"
+              >
+                info@carprices.ae
+              </a>
+            </address>
           </div>
         </div>
       </div>
