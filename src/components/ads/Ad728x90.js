@@ -19,7 +19,7 @@ export default function Ad728x90(props) {
   return (
     <>
 
-      <div className="Ad728x90 my-2">
+      <div className="Ad728x90 my-2 ">
 
           <ins className="adsbygoogle responsive_leaderboard_horizontal"
             style={{ display: "block" }}

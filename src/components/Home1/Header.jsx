@@ -298,7 +298,7 @@ function Header() {
             </h6>
           </div>
         </div> */}
-        {process.env.NEXT_PUBLIC_MODE === "development" && (
+        {/* {process.env.NEXT_PUBLIC_MODE === "development" && (
           <ul className="d-flex justify-content-center align-items-center pt-3 d-md-none">
             {locales.map((locale, idx) => {
               // Only show Arabic if the current locale is English, and vice versa
@@ -331,7 +331,7 @@ function Header() {
               return null; // Do not render anything for other cases
             })}
           </ul>
-        )}
+        )} */}
         <div
           className={`sidebar-button mobile-menu-btn ${
             state.isSidebarOpen ? "active" : ""

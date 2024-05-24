@@ -1,5 +1,5 @@
 import { AddBox } from "@mui/icons-material";
-import { Tab, Tabs } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
@@ -14,6 +14,18 @@ import Head from "next/head";
 import NewSearch from "../utils/NewSearch";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "@/src/lib/apolloClient";
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import Ad728x90 from "../components/ads/Ad728x90";
+import Ad300x600 from "../components/ads/Ad300x600";
 
 export default function index({
   bannerImage,
@@ -34,6 +46,7 @@ export default function index({
   console.log(articles.news, "articles.news");
   const currentYear = new Date().getFullYear();
   const sliderRef = useRef(null);
+  const featuredSliderRef = useRef(null);
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -148,8 +161,7 @@ export default function index({
     slidesToScroll: 1,
     centerMode: false,
     centerPadding: "0",
-    autoplay: true,
-    autoplaySpeed: 4000,
+    autoplay: false,
     focusOnSelect: true,
     variableWidth: true,
     draggable: true,
@@ -324,6 +336,16 @@ export default function index({
     );
   };
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
   const CarEMIDisplay = ({ minPrice }) => {
     const tenureInMonths = 60; // Loan tenure in months
 
@@ -727,151 +749,198 @@ export default function index({
             </div>
             </div>
           </div> */}
-          <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[50%_50%] tw-gap-5 tw-px-10 tw-py-4 tw-w-full max-md:tw-flex-wrap max-md:tw-px-5 max-md:tw-max-w-full">
-            <div className="tw-flex tw-gap-5 tw-text-base tw-leading-5 tw-text-zinc-500 tw-w-full max-md:tw-flex-wrap">
-              <img
-                loading="lazy"
-                srcSet="/assets/img/car-prices-logo.png"
-                className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
-              />
-              {/* <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
-                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
-                  <div className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full">
-                    <span className="material-symbols-outlined">search</span>
-                    <input
-                      type="text"
-                      id="search"
-                      placeholder="Search for brands, cars or price..."
-                      className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
-                    />
-                  </div>
-                </div>
-              </div> */}
-
-              <div
-                className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full"
-                ref={searchRef}
-              >
-                <form>
-                  <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
-                    <div
-                      className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full"
-                      ref={searchRef}
-                    >
-                      <span className="material-symbols-outlined">search</span>
-                      <input
-                        type="search"
-                        className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
-                        value={query}
-                        onChange={handleInputChange}
-                        placeholder={t.searchForBrandandCars}
-                        autoComplete="off"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="tw-relative tw-w-full ">
-                    {showDropdown && searchResults.length > 0 && (
-                      <div className="tw-absolute tw-mt-1 tw-w-full tw-p-2 tw-bg-white tw-shadow-lg tw-rounded-b-lg tw-max-h-56 tw-overflow-auto tw-z-50">
-                        {searchResults.map((item, index) => (
-                          <button
-                            key={index}
-                            type="button"
-                            className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200 tw-bg-white"
-                            onClick={() => handleItemClick(item)}
-                          >
-                            {formatLabel(item)}
-                          </button>
-                        ))}
+          <div>
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[50%_50%] tw-gap-5 tw-px-10 tw-py-4 tw-w-full max-md:tw-flex-wrap max-md:tw-px-5 max-md:tw-max-w-full">
+              <div className="tw-flex tw-gap-5 tw-text-base tw-leading-5 tw-text-zinc-500 tw-w-full max-md:tw-flex-wrap">
+                <img
+                  loading="lazy"
+                  srcSet="/assets/img/car-prices-logo.png"
+                  className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
+                />
+                <div
+                  className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full"
+                  ref={searchRef}
+                >
+                  <form>
+                    <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
+                      <div
+                        className="tw-flex tw-justify-center tw-items-center tw-gap-2 tw-px-4 tw-py-1 max-md:tw-flex-wrap tw-w-full"
+                        ref={searchRef}
+                      >
+                        <span className="material-symbols-outlined">
+                          search
+                        </span>
+                        <input
+                          type="search"
+                          className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
+                          value={query}
+                          onChange={handleInputChange}
+                          placeholder={t.searchForBrandandCars}
+                          autoComplete="off"
+                        />
                       </div>
-                    )}
-                  </div>
+                    </div>
 
-                  {/* test input begins */}
-                  <div>
-                    {/* <NewSearch
-        results={results}
-        value={selectedProfile ? selectedProfile.name : ""}
-        renderItem={(item) => <p>{item}</p>}
-        onChange={handleChangedd}
-        onSelect={(item) => setSelectedProfile(item)}
-      /> */}
-                  </div>
-                  {/* test input ends */}
-                </form>
-              </div>
-            </div>
-            <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap">
-              <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
-                <Link
-                  href="/search-cars"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Search New Cars
-                </Link>
-                <Link
-                  href="/compare-cars"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Compare New Cars
-                </Link>
-                {/* <div className="tw-relative">
-                <div
-                  className="tw-flex tw-justify-center tw-font-semibold tw-cursor-pointer"
-                  onClick={() => toggleMenu("blog")}
-                >
-                  {t.blog}
-                  <i
-                    className={`bi bi-${
-                      state.activeMenu === "blog" ? "dash" : "plus"
-                    } tw-dropdown-icon tw-ml-2`}
-                  />
+                    <div className="tw-relative tw-w-full ">
+                      {showDropdown && searchResults.length > 0 && (
+                        <div className="tw-absolute tw-mt-1 tw-w-full tw-p-2 tw-bg-white tw-shadow-lg tw-rounded-b-lg tw-max-h-56 tw-overflow-auto tw-z-50">
+                          {searchResults.map((item, index) => (
+                            <button
+                              key={index}
+                              type="button"
+                              className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200 tw-bg-white"
+                              onClick={() => handleItemClick(item)}
+                            >
+                              {formatLabel(item)}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </form>
                 </div>
-                <div
-                  className={`tw-absolute tw-left-0 tw-mt-2 tw-w-48 tw-bg-white tw-shadow-lg tw-rounded-md ${
-                    state.activeMenu === "blog" ? "tw-block" : "tw-hidden"
-                  }`}
-                >
+              </div>
+              <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap">
+                <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
+                  <Link
+                    href="/search-cars"
+                    className="tw-justify-center tw-font-semibold"
+                  >
+                    Search New Cars
+                  </Link>
+                  <Link
+                    href="/compare-cars"
+                    className="tw-justify-center tw-font-semibold"
+                  >
+                    Compare New Cars
+                  </Link>
+                  <Link
+                    href="/loan-calculator"
+                    className="tw-justify-center tw-font-semibold"
+                  >
+                    Car Loan Calculator
+                  </Link>
                   <Link
                     href="/news"
-                    className="tw-block tw-px-4 tw-py-2 tw-hover:tw-bg-gray-100"
+                    className="tw-justify-center tw-font-semibold"
                   >
-                    {t.news}
+                    News
                   </Link>
                   <Link
-                    href="/reviews"
-                    className="tw-block tw-px-4 tw-py-2 tw-hover:tw-bg-gray-100"
+                    href="/review"
+                    className="tw-justify-center tw-font-semibold"
                   >
-                    {t.reviews}
+                    Reviews
                   </Link>
                 </div>
-              </div> */}
-                <Link
-                  href="/loan-calculator"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Car Loan Calculator
-                </Link>
-
-                <Link
-                  href="/news"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  News
-                </Link>
-                <Link
-                  href="/review"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Reviews
-                </Link>
               </div>
-              {/* <div className="tw-flex tw-flex-col tw-justify-center tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-text-white tw-bg-white">
-              <button className="tw-btn tw-btn-primary tw-justify-center tw-px-7 tw-py-3 tw-border tw-border-solid tw-bg-neutral-900 tw-border-neutral-900 tw-rounded-[119px] max-md:tw-px-5 tw-hover:tw-bg-red-500">
-                Sign In
-              </button>{" "}
-            </div> */}
             </div>
+            <div className="tw-gap-5 tw-justify-between tw-px-5 tw-py-4 tw-bg-white tw-w-full md:tw-hidden tw-flex">
+              <div className="tw-flex tw-gap-2 tw-text-xl tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
+                <img
+                  loading="lazy"
+                  src="/assets/img/car-prices-logo.png"
+                  className="tw-w-[150px] tw-object-contain"
+                />
+                <div className="tw-my-auto"></div>
+              </div>
+              <div className="tw-flex tw-gap-4 tw-justify-center tw-my-auto">
+                <img
+                  loading="lazy"
+                  src="/search.svg"
+                  className="tw-shrink-0 tw-w-5 tw-aspect-square"
+                  onClick={toggleSearch}
+                />
+                <IconButton onClick={toggleDrawer}>
+                  <MenuIcon />
+                </IconButton>
+              </div>
+            </div>
+
+            <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
+              <div
+                className="tw-w-64 tw-px-5 tw-py-4"
+                role="presentation"
+                onClick={toggleDrawer}
+                onKeyDown={toggleDrawer}
+              >
+                <div className="tw-flex tw-justify-between tw-items-center">
+                  <img
+                    loading="lazy"
+                    src="/assets/img/car-prices-logo.png"
+                    className="tw-w-[150px] tw-object-contain"
+                  />
+                  <IconButton onClick={toggleDrawer}>
+                    <CloseIcon />
+                  </IconButton>
+                </div>
+                <Divider />
+                <List>
+                  <ListItem button component="a" href="/search-cars">
+                    <ListItemText primary="Search New Cars" />
+                  </ListItem>
+                  <ListItem button component="a" href="/compare-cars">
+                    <ListItemText primary="Compare New Cars" />
+                  </ListItem>
+                  <ListItem button component="a" href="/loan-calculator">
+                    <ListItemText primary="Car Loan Calculator" />
+                  </ListItem>
+                  <ListItem button component="a" href="/news">
+                    <ListItemText primary="News" />
+                  </ListItem>
+                  <ListItem button component="a" href="/review">
+                    <ListItemText primary="Reviews" />
+                  </ListItem>
+                </List>
+              </div>
+            </Drawer>
+
+            <Dialog open={isSearchOpen} onClose={toggleSearch} fullScreen>
+              <DialogTitle>
+                Search
+                <IconButton
+                  aria-label="close"
+                  onClick={toggleSearch}
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: 8,
+                    color: (theme) => theme.palette.grey[500],
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <div className="tw-flex tw-items-center tw-bg-gray-200 tw-rounded-full tw-px-4 tw-py-2">
+                  <span className="material-symbols-outlined">search</span>
+                  <input
+                    type="search"
+                    className="tw-bg-transparent tw-border-none tw-text-gray-900 tw-text-sm tw-rounded-full tw-w-full tw-p-2.5 tw-focus:tw-outline-none tw-focus:tw-ring-0"
+                    value={query}
+                    onChange={handleInputChange}
+                    placeholder={t.searchForBrandandCars}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="tw-w-full tw-px-5 tw-mt-4">
+                  {showDropdown && searchResults.length > 0 && (
+                    <div className="tw-w-full tw-bg-white tw-shadow-lg tw-rounded-lg tw-max-h-56 tw-overflow-auto tw-z-50">
+                      {searchResults.map((item, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className="tw-w-full tw-text-left tw-p-2 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-bg-gray-200 tw-bg-white"
+                          onClick={() => handleItemClick(item)}
+                        >
+                          {formatLabel(item)}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
         <div className="tw-gap-5 tw-justify-between tw-px-5 tw-py-4 tw-bg-white tw-w-full md:tw-hidden tw-flex">
@@ -912,15 +981,15 @@ export default function index({
             <FilterLayout />
           </div>
 
-          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[280px]">
+          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden tw-h-full">
             <img
               loading="lazy"
               src="/cp-banner.jpg"
-              className="tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-full tw-h-[280px]"
+              className="tw-object-contain tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "
             />
-            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>{" "}
+            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "></div>{" "}
             {/* Overlay */}
-            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full ">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full md:tw-h-full tw-h-[230px]">
               {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
       Carpricces - a car research platform
     </div> */}
@@ -938,21 +1007,24 @@ export default function index({
       Explore Now
     </button> */}
             </div>
+            <Ad728x90 dataAdSlot="4367254600" />
           </div>
         </div>
 
-        <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8">
-          <header className="tw-mb-0">
-            <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
-              What’s trending in the new car market?
-            </h5>
-            <h2 className=" tw-font-semibold">
-              Here are some of the featured new cars in the UAE
-            </h2>
-            {/* <a href="#" className="tw-text-blue-600 tw-hover:tw-underline">
+        <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8 tw-relative ">
+          <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+            What’s trending in the new car market?
+          </h5>
+          <h2 className=" tw-font-semibold">
+            Here are some of the featured new cars in the UAE
+          </h2>
+          {/* <a href="#" className="tw-text-blue-600 tw-hover:tw-underline">
     View More
   </a> */}
-          </header>
+
+          <div className="tw-absolute tw-top-10 tw-right-0 md:tw-block tw-hidden">
+            <Ad300x600 dataAdSlot="3792539533" />
+          </div>
           <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-5">
             <div className="lg:tw-col-span-3">
               <Slider {...sliderSettings}>
@@ -1030,10 +1102,15 @@ export default function index({
                   </div>
                 ))}
               </Slider>
+              <div className=" md:tw-block tw-hidden">
+                <Ad728x90 dataAdSlot="4367254600" />
+              </div>
             </div>
-            <div className="tw-pt-3">
+            <div className="tw-top-0 tw-right-0">
               <div className="tw-flex tw-flex-col tw-h-full tw-py-5 ">
-                <Ad300x250 dataAdSlot="8451638145" />
+                <div className="md:tw-hidden tw-block">
+                  <Ad300x250 dataAdSlot="8451638145" />
+                </div>
               </div>
             </div>
           </div>
@@ -1041,7 +1118,7 @@ export default function index({
 
         <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8">
           <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
-            <div className="tw-flex tw-flex-col tw-w-1/4 max-md:tw-w-full tw-justify-center">
+            <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full tw-justify-center">
               <div className="tw-flex tw-flex-col max-md:tw-mt-10">
                 {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
@@ -1061,9 +1138,27 @@ export default function index({
                   </button>
                 </Link>
               </div>
+              <div className="tw-flex tw-justify-end items-center tw-gap-4 py-2">
+                <button
+                  className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                  onClick={() => featuredSliderRef.current.slickPrev()}
+                >
+                  <span className="material-symbols-outlined">
+                    chevron_left
+                  </span>
+                </button>
+                <button
+                  className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                  onClick={() => featuredSliderRef.current.slickNext()}
+                >
+                  <span className="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
             </div>
             <div className="md:tw-flex tw-hidden tw-flex-col tw-w-3/4 max-md:tw-w-full featured-news-card tw-mt-5">
-              <Slider {...settings}>
+              <Slider ref={featuredSliderRef} {...settings}>
                 {FeaturedData.map((car, index) => (
                   <Link href={car.url} key={index} className="tw-p-2">
                     <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
@@ -1084,7 +1179,7 @@ export default function index({
               </Slider>
             </div>
             <div className="md:tw-hidden tw-block">
-              <Slider {...settings}>
+              <Slider ref={featuredSliderRef} {...settings}>
                 {FeaturedData.map((item, index) => (
                   <Link href={item.url} key={index} className="tw-p-2">
                     <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
@@ -1599,7 +1694,7 @@ export default function index({
           </div>
         </div>
 
-        <div className="tw-flex tw-flex-col tw-container tw-px-5">
+        <div className="tw-flex tw-flex-col tw-container tw-px-5 md:tw-mt-8 tw-mt-0">
           <div className="tw-flex tw-justify-between tw-gap-5 tw-px-px tw-w-full max-md:tw-flex-wrap">
             <div className="">
               <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
