@@ -985,7 +985,7 @@ export default function index({
             <img
               loading="lazy"
               src="/cp-banner.jpg"
-              className="tw-object-contain tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "
+              className="tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "
             />
             <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "></div>{" "}
             {/* Overlay */}
@@ -1007,7 +1007,10 @@ export default function index({
       Explore Now
     </button> */}
             </div>
+            <div className="md:tw-block tw-hidden">
             <Ad728x90 dataAdSlot="4367254600" />
+
+            </div>
           </div>
         </div>
 
