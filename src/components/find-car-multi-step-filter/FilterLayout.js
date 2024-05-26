@@ -17,6 +17,7 @@ import {
   Button,
   IconButton,
   DialogContentText,
+  CircularProgress,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -24,6 +25,7 @@ export default function FilterLayout() {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
+  const [loading, setLoading] = useState(false); // Loading state
   const [filterData, setFilterData] = useState({
     preferences: [],
     budget: [25000, 55000],
@@ -88,8 +90,9 @@ export default function FilterLayout() {
     isNinePlusSeat: filterData.seating.includes("9+") ? 1 : 0,
   };
 
-  useEffect(() => {
-    const fetchData = () => {
+  const fetchData = async () => {
+    setLoading(true); // Start loader
+    try {
       let query = `${filterOptions.haveMusic === 1 ? "haveMusic=1" : ""}`;
       query += filterOptions.isLuxury === 1 ? "&isLuxury=1" : "";
       query += filterOptions.isPremiumLuxury === 1 ? "&isPremiumLuxury=1" : "";
@@ -151,97 +154,52 @@ export default function FilterLayout() {
           ? `bodyTypes=${encodeURIComponent(bodyTypesJSON)}`
           : "";
 
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
-        )
-        .then((response) => {
-          setFilterData((prevState) => ({
-            ...prevState,
-            budget: [
-              response.data.price.min !== null
-                ? response?.data?.price.min
-                : null,
-              response.data.price.max !== null
-                ? response?.data?.price.max
-                : null,
-            ],
-          }));
-        })
-        .catch((error) => {
-          console.error("Error", error);
-        });
+      const responsePrice = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
+      );
 
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`
-        )
-        .then((response) => {
-          setBodyTypeList(response?.data?.bodyTypes);
-        })
-        .catch((error) => {
-          console.error("Error", error);
-        });
+      setFilterData((prevState) => ({
+        ...prevState,
+        budget: [
+          responsePrice.data.price.min !== null
+            ? responsePrice?.data?.price.min
+            : null,
+          responsePrice.data.price.max !== null
+            ? responsePrice?.data?.price.max
+            : null,
+        ],
+      }));
 
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
-        )
-        .then((response) => {
-          setSeatList(response?.data?.seats);
-        })
-        .catch((error) => {
-          console.error("Error", error);
-        });
-    };
+      const responseBodyType = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`
+      );
 
-    fetchData();
-  }, [filterData.preferences, filterData.seating, , filterData.bodyTypes]);
+      setBodyTypeList(responseBodyType?.data?.bodyTypes);
 
-  const steps = [
-    {
-      title: `Pick the top 3 things you need from your new car`,
-      component: (
-        <StepOne filterData={filterData} setFilterData={setFilterData} />
-      ),
-    },
-    {
-      title: `Choose your preferred body type`,
-      component: (
-        <StepTwo
-          filterData={filterData}
-          setFilterData={setFilterData}
-          bodyTypeList={bodyTypeList}
-        />
-      ),
-    },
-    {
-      title: `How many seats do you need?`,
-      component: (
-        <StepThree
-          filterData={filterData}
-          setFilterData={setFilterData}
-          seatList={seatList}
-        />
-      ),
-    },
-    {
-      title: `${t.defineBudget}`,
-      component: (
-        <StepFour filterData={filterData} setFilterData={setFilterData} />
-      ),
-    },
-  ];
+      const responseSeat = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
+      );
 
-  const handleNextStep = () => {
+      setSeatList(responseSeat?.data?.seats);
+    } catch (error) {
+      console.error("Error", error);
+    } finally {
+      setLoading(false); // Stop loader
+    }
+  };
+
+  const handleNextStep = async () => {
+    setLoading(true); // Start loader on next step
     if (filterData.preferences.length === 0) {
       setError(
         "Looks like your selection is too narrow and no vehicle can truly tick those boxes. Please broaden your preferences."
       );
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else if (currentStep === 1 && filterData.bodyTypes.length === 0) {
       setError("Select at least one body type");
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else if (
       currentStep === 0 &&
       filterData?.budget[0] === null &&
@@ -249,6 +207,7 @@ export default function FilterLayout() {
     ) {
       setError("No cars available for the selected preferences");
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else if (
       currentStep === 1 &&
       filterData?.budget[0] === null &&
@@ -256,6 +215,7 @@ export default function FilterLayout() {
     ) {
       setError("No cars available for the selected body types");
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else if (
       currentStep === 2 &&
       filterData?.budget[0] === null &&
@@ -263,33 +223,40 @@ export default function FilterLayout() {
     ) {
       setError("No cars available for the selected seats");
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else if (currentStep === 2 && filterData.seating.length === 0) {
       setError("Select at least one seating option");
       setOpenErrorDialog(true);
+      setLoading(false); // Stop loader if there's an error
     } else {
+      await fetchData(); // Fetch data when moving to the next step
       setCurrentStep(currentStep + 1);
+      setLoading(false); // Stop loader after step change
     }
   };
 
   const handlePrevStep = () => {
+    setLoading(true); // Start loader
     setCurrentStep(currentStep - 1);
+
     if (currentStep === 2) {
       setFilterData((prevState) => ({
         ...prevState,
         seating: [],
       }));
-    }
-    if (currentStep === 1) {
+    } else if (currentStep === 1) {
       setFilterData((prevState) => ({
         ...prevState,
-        seating: [],
         bodyTypes: [],
       }));
     }
+
+    setLoading(false); // Stop loader after state reset
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true); // Start loader on submit
     let query = `${filterOptions.haveMusic == 1 ? "haveMusic=1" : ""}`;
     query += filterOptions.isLuxury ? "&isLuxury=1" : "";
     query += filterOptions.isPremiumLuxury ? "&isPremiumLuxury=1" : "";
@@ -335,6 +302,41 @@ export default function FilterLayout() {
     setSpecific(!specific);
   };
 
+  const steps = [
+    {
+      title: `Pick the top 3 things you need from your new car`,
+      component: (
+        <StepOne filterData={filterData} setFilterData={setFilterData} />
+      ),
+    },
+    {
+      title: `Choose your preferred body type`,
+      component: (
+        <StepTwo
+          filterData={filterData}
+          setFilterData={setFilterData}
+          bodyTypeList={bodyTypeList}
+        />
+      ),
+    },
+    {
+      title: `How many seats do you need?`,
+      component: (
+        <StepThree
+          filterData={filterData}
+          setFilterData={setFilterData}
+          seatList={seatList}
+        />
+      ),
+    },
+    {
+      title: `${t.defineBudget}`,
+      component: (
+        <StepFour filterData={filterData} setFilterData={setFilterData} />
+      ),
+    },
+  ];
+
   return (
     <>
       <Dialog
@@ -371,8 +373,8 @@ export default function FilterLayout() {
 
       {!specific ? (
         <>
-          <div className="search_filter_box tw-text-center ">
-            <div className="">
+          <div className="search_filter_box tw-text-center">
+            <div>
               <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
                 <img
                   loading="lazy"
@@ -385,8 +387,13 @@ export default function FilterLayout() {
               </div>
 
               <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
-                <div className="tw-flex tw-flex-col tw-px-6 tw-pt-6 tw-pb-3 tw-bg-white tw-border-t tw-border-neutral-100 tw-shadow-lg">
-                  <div className="tw-h-[350px]">
+                <div className="tw-flex tw-flex-col tw-px-6 tw-pt-6 tw-pb-3 tw-bg-white tw-border-t tw-border-neutral-100 tw-shadow-lg tw-relative">
+                  {loading && (
+                    <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
+                      <CircularProgress />
+                    </div>
+                  )}
+                  <div className="tw-h-[350px] tw-relative">
                     {steps[currentStep].component}
                   </div>
                   <div className="tw-flex tw-justify-end tw-mt-12 gap-3">
