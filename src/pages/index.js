@@ -986,21 +986,18 @@ export default function index({
             <img
               loading="lazy"
               src="/Al-Ghandi-Auto-Chevrolet.jpg"
-              className="md:tw-block tw-hidden tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "
+              className="md:tw-block tw-hidden tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl"
             />
+
             <img
               loading="lazy"
               src="/Al-Ghandi-Auto-Chevrolet-Mob.jpg"
-              className="md:tw-hidden tw-block tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "
+              className="md:tw-hidden tw-block tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl"
             />
 
-            {/* <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "></div>{" "} */}
             {/* Overlay */}
-            <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-8 tw-w-full md:tw-h-full tw-h-[536px]">
-              {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
-      Carpricces - a car research platform
-    </div> */}
-              <h1 className="text-white md:tw-leading-10 tw-leading-6  tw-font-bold banner-header">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-0 tw-w-full md:tw-h-[457px] tw-h-[536px]">
+              <h1 className="text-white md:tw-leading-10 tw-leading-6 tw-font-bold banner-header">
                 World’s First Truly Interactive{" "}
                 <br className="md:tw-block tw-hidden" />
                 New Car Finder Platform
@@ -1008,17 +1005,31 @@ export default function index({
               <p className="md:tw-mt-2 tw-mt-2 md:tw-w-[90%]">
                 Navigate the world of new car buying research with a fresh
                 perspective and our interactive car finder. Explore all the
-                latest 2024/25 new car models in the UAE. We have listed over 74
-                car brands, 603 unique car models and 1,776 individual vehicle
-                trims for you to choose from.
+                latest 2024/25 new car models in the UAE. We have listed over
+                <span className="tw-font-bold">
+                  {" "}
+                  74 car brands, 603 unique car models and 1,776 individual
+                  vehicle trims
+                </span>{" "}
+                for you to choose from.
               </p>
-              {/* <button className="tw-self-start tw-px-4 tw-py-3 tw-mt-5 tw-text-base tw-font-medium tw-text-center tw-text-white tw-border tw-border-white tw-rounded-full tw-hover:tw-bg-white tw-hover:tw-text-black">
-      Explore Now
-    </button> */}
+              <img
+                loading="lazy"
+                src="/Logo-Al-Ghandi-Auto.png"
+                className="tw-absolute tw-object-contain tw-bottom-0 tw-left-6 tw-w-[120px] tw-h-[55px] tw-mb-4 tw-ml-4"
+              />
+              <img
+                loading="lazy"
+                src="/Chevrolet-Logo.png"
+                className="tw-absolute tw-bottom-0 tw-object-contain tw-right-6 tw-w-[110px] tw-h-[50px] tw-mb-4 tw-mr-4"
+              />
             </div>
+
             <div className="md:tw-block tw-hidden">
               <Ad728x90 dataAdSlot="4367254600" />
             </div>
+
+            {/* Logos at the bottom left and right */}
           </div>
         </div>
 
