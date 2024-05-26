@@ -1016,12 +1016,12 @@ export default function index({
               <img
                 loading="lazy"
                 src="/Logo-Al-Ghandi-Auto.png"
-                className="tw-absolute tw-object-contain tw-bottom-0 tw-left-6 tw-w-[120px] tw-h-[55px] tw-mb-4 tw-ml-4"
+                className="tw-absolute tw-object-contain tw-bottom-0 tw-left-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[55px] tw-h-[35px] tw-mb-4 tw-ml-4"
               />
               <img
                 loading="lazy"
                 src="/Chevrolet-Logo.png"
-                className="tw-absolute tw-bottom-0 tw-object-contain tw-right-6 tw-w-[110px] tw-h-[50px] tw-mb-4 tw-mr-4"
+                className="tw-absolute tw-bottom-0 tw-object-contain tw-right-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[50px] tw-h-[40px] tw-mb-4 tw-mr-4"
               />
             </div>
 
