@@ -47,6 +47,7 @@ export default function index({
   const currentYear = new Date().getFullYear();
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
+  const featuredSliderRefMob = useRef(null);
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -155,7 +156,7 @@ export default function index({
   const [activeSlide, setActiveSlide] = useState(0);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -165,27 +166,27 @@ export default function index({
     focusOnSelect: true,
     variableWidth: true,
     draggable: true,
-    beforeChange: (current, next) => setActiveSlide(next),
-    customPaging: (i) => (
-      <div className="custom-dot">
-        {i === activeSlide ? (
-          <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-self-stretch tw-mt-[-4px] ">
-            <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-[6px] tw-py-[6px] tw-rounded-full tw-border tw-border-black tw-border-solid">
-              <div className="tw-shrink-0 tw-bg-black tw-rounded-full tw-border tw-border-black tw-border-solid tw-h-[9px] tw-w-[9px]" />
-            </div>
-          </div>
-        ) : (
-          <div className="tw-shrink-0 tw-self-stretch tw-my-auto tw-rounded-full tw-bg-zinc-400 tw-h-[11px] tw-w-[11px] " />
-        )}
-      </div>
-    ),
-    appendDots: (dots) => (
-      <div>
-        <ul className="custom-dots tw-flex tw-justify-center tw-items-center md:tw-absolute tw-top-[-90px] md:tw-left-[48%] tw-items-center tw-gap-6">
-          {dots}
-        </ul>
-      </div>
-    ),
+    // beforeChange: (current, next) => setActiveSlide(next),
+    // customPaging: (i) => (
+    //   <div className="custom-dot">
+    //     {i === activeSlide ? (
+    //       <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-self-stretch tw-mt-[-4px] ">
+    //         <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-[6px] tw-py-[6px] tw-rounded-full tw-border tw-border-black tw-border-solid">
+    //           <div className="tw-shrink-0 tw-bg-black tw-rounded-full tw-border tw-border-black tw-border-solid tw-h-[9px] tw-w-[9px]" />
+    //         </div>
+    //       </div>
+    //     ) : (
+    //       <div className="tw-shrink-0 tw-self-stretch tw-my-auto tw-rounded-full tw-bg-zinc-400 tw-h-[11px] tw-w-[11px] " />
+    //     )}
+    //   </div>
+    // ),
+    // appendDots: (dots) => (
+    //   <div>
+    //     <ul className="custom-dots tw-flex tw-justify-center tw-items-center md:tw-absolute tw-top-[-90px] md:tw-left-[48%] tw-items-center tw-gap-6">
+    //       {dots}
+    //     </ul>
+    //   </div>
+    // ),
     responsive: [
       {
         breakpoint: 1024,
@@ -981,15 +982,21 @@ export default function index({
             <FilterLayout />
           </div>
 
-          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px]">
+          <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[536px]">
             <img
               loading="lazy"
               src="/Al-Ghandi-Auto-Chevrolet.jpg"
-              className="tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "
+              className="md:tw-block tw-hidden tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "
             />
-            {/* <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "></div>{" "} */}
+            <img
+              loading="lazy"
+              src="/Al-Ghandi-Auto-Chevrolet-Mob.jpg"
+              className="md:tw-hidden tw-block tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "
+            />
+
+            {/* <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl "></div>{" "} */}
             {/* Overlay */}
-            <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-8 tw-w-full md:tw-h-full tw-h-[230px]">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-8 tw-w-full md:tw-h-full tw-h-[536px]">
               {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
       Carpricces - a car research platform
     </div> */}
@@ -1142,7 +1149,7 @@ export default function index({
                   </button>
                 </Link>
               </div>
-              <div className="tw-flex tw-justify-end items-center tw-gap-4 py-2">
+              <div className="md:tw-flex tw-hidden tw-justify-end items-center tw-gap-4 py-2 ">
                 <button
                   className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                   onClick={() => featuredSliderRef.current.slickPrev()}
@@ -1154,6 +1161,25 @@ export default function index({
                 <button
                   className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                   onClick={() => featuredSliderRef.current.slickNext()}
+                >
+                  <span className="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                </button>
+              </div>
+
+              <div className="md:tw-hidden tw-flex tw-justify-end items-center tw-gap-4 py-2">
+                <button
+                  className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                  onClick={() => featuredSliderRefMob.current.slickPrev()}
+                >
+                  <span className="material-symbols-outlined">
+                    chevron_left
+                  </span>
+                </button>
+                <button
+                  className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                  onClick={() => featuredSliderRefMob.current.slickNext()}
                 >
                   <span className="material-symbols-outlined">
                     chevron_right
@@ -1183,7 +1209,7 @@ export default function index({
               </Slider>
             </div>
             <div className="md:tw-hidden tw-block">
-              <Slider ref={featuredSliderRef} {...settings}>
+              <Slider {...settings}>
                 {FeaturedData.map((item, index) => (
                   <Link href={item.url} key={index} className="tw-p-2">
                     <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">

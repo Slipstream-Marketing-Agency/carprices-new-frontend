@@ -2510,5 +2510,9 @@
   {
     "From": "/news/2023's-top-10-cars-that-buyers-searched-for-on-carprices.ae",
     "To": "/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
+  },
+  {
+    "From": "/brands/nissan/2023/x-trail-4",
+    "To": "/brands/nissan/2023/x-trail"
   }
 ]
