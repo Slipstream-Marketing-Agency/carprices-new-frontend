@@ -115,7 +115,7 @@ export default function index({
       createdOn: "11th April 2024",
       url: "/news/all-new-geely-starray-launched-in-uae-at-aed-84900",
       image:
-        "/httpscarprices.aenewsall-new-geely-starray-launched-in-uae-at-aed-84900.jpg",
+        "/all-new-geely-starray-launched-in-uae-at-aed-84900.jpg",
     },
     {
       model: "2024",
@@ -126,7 +126,7 @@ export default function index({
       createdOn: "12th April 2024",
       url: "/news/aston-martin-revives-its-twin-turbo-v12-engine-the-new-vanquish-will-be-the-first-car-to-get",
       image:
-        "/httpscarprices.aenewsaston-martin-revives-its-twin-turbo-v12-engine-the-new-vanquish-will-be-the-first-car-to-get.jpg",
+        "/aston-martin-revives-its-twin-turbo-v12-engine-the-new-vanquish-will-be-the-first-car-to-get.jpg",
     },
 
     {
@@ -138,7 +138,7 @@ export default function index({
       createdOn: "11th April 2024",
       url: "/news/refreshed-land-rover-defender-lineup-unveiled-with-extra-features-and-power",
       image:
-        "/httpscarprices.aenewsrefreshed-land-rover-defender-lineup-unveiled-with-extra-features-and-power.jpg",
+        "/refreshed-land-rover-defender-lineup-unveiled-with-extra-features-and-power.jpg",
     },
 
     {
@@ -150,7 +150,7 @@ export default function index({
       createdOn: "11th April 2024",
       url: "/news/soon-to-launch-g90-bmw-m5-teased-detailed-preview-and-analysis",
       image:
-        "/httpscarprices.aenewssoon-to-launch-g90-bmw-m5-teased-detailed-preview-and-analysis.jpg",
+        "/soon-to-launch-g90-bmw-m5-teased-detailed-preview-and-analysis.jpg",
     },
   ];
   const [activeSlide, setActiveSlide] = useState(0);
@@ -1208,8 +1208,8 @@ export default function index({
                         alt={`${car.brand} ${car.name}`}
                         className="tw-object-cover tw-w-full tw-h-96"
                       />
-                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[4px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
-                        <h6 className="tw-text-white">{car.name}</h6>
+                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
+                        <h6 className="tw-text-white tw-mb-0">{car.name}</h6>
                         {/* <small className="tw-mt-1 tw-text-white">
                 Created on: {car.createdOn}
               </small> */}
