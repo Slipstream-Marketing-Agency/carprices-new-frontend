@@ -55,7 +55,8 @@ export default function StepFour({ filterData, setFilterData }) {
           price?.toLocaleString("en-AE", {
             minimumFractionDigits: 0,
             maximumFractionDigits: 2,
-          })+"*";
+          }) +
+          "*";
   };
 
   return (
@@ -66,8 +67,13 @@ export default function StepFour({ filterData, setFilterData }) {
             <span className="head tw-mb-1 tw-text-base tw-font-bold">
               Starting from
             </span>
-            <span className="tw-mt-4 tw-text-lg tw-font-bold">
-              <Price data={minValue} />
+            <span className="tw-mt-4 tw-text-lg tw-font-bold ">
+              AED <br />
+              {minValue?.toLocaleString("en-AE", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+              })}
+              *
             </span>
           </p>
         </div>
@@ -77,7 +83,12 @@ export default function StepFour({ filterData, setFilterData }) {
               Up to
             </span>
             <span className="tw-mt-4 tw-text-lg tw-font-bold">
-              <Price data={maxValue} />
+              AED <br />
+              {maxValue?.toLocaleString("en-AE", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+              })}
+              *
             </span>
           </p>
         </div>
