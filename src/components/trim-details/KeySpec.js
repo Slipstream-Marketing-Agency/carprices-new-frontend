@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 export default function KeySpec({ trim }) {
-  
   const engineText = trim?.engine.split(" ");
   const size = engineText[0];
   const type = engineText[1];
@@ -15,28 +14,31 @@ export default function KeySpec({ trim }) {
         </h2>
         <hr className="my-2 heading-bottom " />
         <div className="row py-2 text-center">
-          <div className="col-sm-4 col-lg-2 col-4 ">
-            <div className="d-flex flex-column align-items-center">
-              <div className="spec-img">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/assets/images/specs/EngineType.svg"
-                  alt=""
-                />
+          {trim?.motor !== null && trim?.engine !== null && (
+            <div className="col-sm-4 col-lg-2 col-4 ">
+              <div className="d-flex flex-column align-items-center">
+                <div className="spec-img">
+                  <Image
+                    width={50}
+                    height={50}
+                    src="/assets/images/specs/EngineType.svg"
+                    alt=""
+                  />
+                </div>
+                <h5 className="fw-bold mb-1">
+                  {size === "Electric" ? "Motor Type" : "Engine Type"}
+                </h5>
+                <h5 className="">
+                  {size === "Electric"
+                    ? trim?.motor?.split(" ")[0]
+                    : `${(trim?.displacement / 1000).toFixed(1)}L ${
+                        trim?.engine
+                      }`}
+                </h5>
               </div>
-              <h5 className="fw-bold mb-1">
-                {size === "Electric" ? "Motor Type" : "Engine Type"}
-              </h5>
-              <h5 className="">
-                {size === "Electric"
-                  ? trim?.motor.split(" ")[0]
-                  : `${(trim?.displacement / 1000).toFixed(1)}L ${
-                      trim?.engine
-                    }`}
-              </h5>
             </div>
-          </div>
+          )}
+
           {trim?.power !== null ? (
             <div className="col-sm-4  col-lg-2  col-4 ">
               <div className="d-flex flex-column align-items-center">
@@ -65,9 +67,7 @@ export default function KeySpec({ trim }) {
                   />
                 </div>
                 <h5 className="fw-bold mb-1">Torque (Nm)</h5>
-                <h5 className="">
-                  {trim?.torque === "" ? "-" : trim?.torque}
-                </h5>
+                <h5 className="">{trim?.torque === "" ? "-" : trim?.torque}</h5>
               </div>
             </div>
           ) : null}

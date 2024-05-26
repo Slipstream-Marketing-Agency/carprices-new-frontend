@@ -31,7 +31,15 @@ import Price from "@/src/utils/Price";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
-  const currentURL = typeof window !== "undefined" ? window.location.href : "";
+  // const currentURL = typeof window !== "undefined" ? window.location.href : "";
+  const [currentURL, setCurrentURL] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentURL(window.location.href);
+    }
+  }, []);
+
   const mainTrim = currentmodel?.highTrim[0];
 
   const allTrims = currentmodel?.trims;
@@ -671,11 +679,9 @@ export async function getServerSideProps(context) {
     };
   } catch (error) {
     return {
-      props: {
-        error: true,
-        errorMessage: error.message,
-      },
+      notFound: true, // This will trigger Next.js to render the 404 page
     };
+
     // if (error) {
     //   try {
     //     let redirectModel = await axios.get(
