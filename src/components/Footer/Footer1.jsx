@@ -328,11 +328,11 @@ function Footer1() {
           <div className="footer-btm">
             <div className="copyright-area">
               <p>
-              ©2017 - {currentYear} Carprices.ae
+              ©2017 - {currentYear} CarPrices.ae
               </p>
             </div>
             <div className="social-area">
-              <h6>Follow Carprices.ae:</h6>
+              <h6>Follow CarPrices.ae:</h6>
               <ul>
               <li>
                   <Link href="https://youtube.com/@carpricesuae?feature=shared">
