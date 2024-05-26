@@ -751,10 +751,7 @@ function CarListingLeftSidebar({
           }`}
         >
           <div className="filter-modal-content compareModelContainer">
-            <div
-              className="modal-body mt-3 mx-md-4 mx-0 mb-4"
-             
-            >
+            <div className="modal-body mt-3 mx-md-4 mx-0 mb-4">
               <div className="d-flex justify-content-end mb-2">
                 <i
                   class="bi bi-x-square text-white fs-3"
@@ -838,12 +835,29 @@ function CarListingLeftSidebar({
                     {/* <Breadcrumb /> */}
                     <h1 className="fw-bold">New Car Buyer's Guide</h1>
                     <p>
-                      Discover our exceptional range of vehicles, priced between{" "}
-                      <Price data={Number(minPrice)} /> and{" "}
-                      <Price data={Number(maxPrice)} />. Unleash your automotive
-                      aspirations with our captivating selection.
+                      Unleash your automotive aspirations with our captivating
+                      selection. Here is a list of shortlisted cars priced
+                      between{" "}
+                      <span className="tw-font-bold">
+                        <Price data={Number(minPrice)} />
+                      </span>{" "}
+                      and{" "}
+                      <span className="tw-font-bold">
+                        <Price data={Number(maxPrice)} />
+                      </span>{" "}
+                      and based on your selection. If you want to see more
+                      options, please expand your search by using the “Restart
+                      Search” button. Happy car shopping!
                     </p>
-                    <div className="d-md-flex d-none align-items-center justify-content-between">
+                    <div className="d-md-flex d-none align-items-center justify-content-between mt-3">
+                      <button
+                        type="button"
+                        className="tw-text-white tw-bg-[#3b5998] hover:tw-bg-[#3b5998]/90 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-[#3b5998]/50 tw-font-medium tw-rounded-lg tw-px-5 tw-py-2 tw-text-center tw-inline-flex tw-items-center dark:focus:tw-ring-[#3b5998]/55 "
+                        onClick={() => setShowModal(true)}
+                      >
+                        <img src="/assets/icons/filter-white.svg" />
+                        Restart Search
+                      </button>
                       <fieldset className="filter-sorting-sec d-flex gap-4  p-sm-b clearfix dev-filter-sorting m-lg-t m-lg-b ">
                         <label
                           className={`radio-check-text m-lg-r sorting-list-data ${
@@ -869,13 +883,11 @@ function CarListingLeftSidebar({
                           <i className="icon-back inline-block m-xs-l dev-icon rotate-90"></i>
                         </label>
                       </fieldset>
-                      <button
-                        className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
-                        onClick={() => setShowModal(true)}
-                      >
+
+                      {/* <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
                         <i class="bi bi-funnel-fill mt-1 ms-1 text-primary" />
                         Back to Main Filter
-                      </button>
+                      </button> */}
                     </div>
 
                     <hr className="mb-3 mt-3" />
@@ -887,12 +899,7 @@ function CarListingLeftSidebar({
                       totalPages={totalPages}
                     />
 
-                    <div className="view-btn-area mt-15">
-                      {/* <Link legacyBehavior href="/">
-                        <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
-                          Back to Home
-                        </button>
-                      </Link> */}
+                    {/* <div className="view-btn-area mt-15">
                       <button
                         className="btn mb-2 mb-md-0 btn-round btn-outline btn-block"
                         onClick={() => setShowModal(true)}
@@ -900,7 +907,7 @@ function CarListingLeftSidebar({
                         <i class="bi bi-funnel-fill mt-1 ms-1 text-primary" />
                         Back to Main Filter
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="row">

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
+import Slider from "@mui/material/Slider";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import Price from "@/src/utils/Price";
@@ -20,57 +19,44 @@ export default function StepFour({ filterData, setFilterData }) {
     setInitialValues([filterData.budget[0], filterData.budget[1]]);
   }, []);
 
-  const marks = {
-    [minValue]: {
-      style: {
-        color: "var(--primary)",
-        marginLeft: "20px",
-        marginTop: "14px",
-      },
+  const marks = [
+    {
+      value: minValue,
       label: (
         <strong>
-          <Price data={filterData.budget[0]} />
+          <Price data={minValue} />
         </strong>
       ),
     },
-    [maxValue]: {
-      style: {
-        color: "var(--primary)",
-        marginLeft: "-25px",
-        marginTop: "14px",
-        width: "100px",
-      },
+    {
+      value: maxValue,
       label: (
         <strong>
-          <Price data={filterData.budget[1]} />
+          <Price data={maxValue} />
         </strong>
       ),
     },
-  };
+  ];
 
-  const handleStyle = {
-    height: "25px",
-    width: "25px",
-    marginTop: "-2px",
-    opacity: "1",
-  };
-
-  const trackStyle = {
-    height: "20px",
-    marginLeft: "0px",
-    backgroundColor: "var(--primary)",
-  };
-  const railStyle = { height: "20px" };
-  const dotStyle = { display: "none" };
-
-  function handleSliderChange(value) {
-    setMinValue(value[0]);
-    setMaxValue(value[1]);
+  const handleSliderChange = (event, newValue) => {
+    setMinValue(newValue[0]);
+    setMaxValue(newValue[1]);
     setFilterData((prevState) => ({
       ...prevState,
-      budget: [value[0], value[1]],
+      budget: [newValue[0], newValue[1]],
     }));
-  }
+  };
+
+  const formatPrice = (price) => {
+    return price <= 0
+      ? "TBD"
+      : "AED" +
+          " " +
+          price?.toLocaleString("en-AE", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })+"*";
+  };
 
   return (
     <div>
@@ -97,24 +83,36 @@ export default function StepFour({ filterData, setFilterData }) {
         </div>
       </div>
 
-      <div className="tw-pt-2 tw-px-5 tw-pb-5">
+      <div className="tw-pt-10 tw-px-5 tw-pb-5">
         <Slider
-          range
+          value={[minValue, maxValue]}
+          onChange={handleSliderChange}
+          valueLabelDisplay="auto"
+          valueLabelFormat={formatPrice}
           min={initialValues[0]}
           max={initialValues[1]}
-          marks={marks}
+          // marks={marks}
           step={1}
-          onChange={handleSliderChange}
-          defaultValue={filterData.budget}
-          trackStyle={[trackStyle]}
-          railStyle={railStyle}
-          handleStyle={[handleStyle, handleStyle]}
-          dotStyle={dotStyle}
-          allowCross={false}
+          sx={{
+            "& .MuiSlider-track": {
+              height: 20,
+              backgroundColor: "var(--primary)",
+            },
+            "& .MuiSlider-rail": {
+              height: 20,
+            },
+            "& .MuiSlider-thumb": {
+              height: 25,
+              width: 25,
+              "&:hover, &.Mui-focusVisible, &.Mui-active": {
+                boxShadow: "none",
+              },
+            },
+          }}
         />
       </div>
-      <div className="tw-mt-20 tw-font-bold">
-        Slide to select your budget range
+      <div className="tw-mt-10 tw-font-bold">
+        Use the slider to select your budget range
       </div>
     </div>
   );

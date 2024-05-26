@@ -800,7 +800,7 @@ export default function index({
                   </form>
                 </div>
               </div>
-              <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap">
+              <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4">
                 <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
                   <Link
                     href="/search-cars"
@@ -984,12 +984,12 @@ export default function index({
           <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px]">
             <img
               loading="lazy"
-              src="/cp-banner.jpg"
+              src="/Al-Ghandi-Auto-Chevrolet.jpg"
               className="tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "
             />
-            <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "></div>{" "}
+            {/* <div className="tw-absolute tw-inset-0 tw-bg-black tw-opacity-30 md:tw-h-[457px] tw-h-[230px] tw-rounded-2xl "></div>{" "} */}
             {/* Overlay */}
-            <div className="tw-relative tw-flex tw-flex-col md:tw-px-12 tw-px-3 md:tw-pt-12 tw-pt-3 md:tw-pb-20 tw-w-full md:tw-h-full tw-h-[230px]">
+            <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-8 tw-w-full md:tw-h-full tw-h-[230px]">
               {/* <div className="tw-text-center tw-text-sm tw-uppercase tw-tracking-wider">
       Carpricces - a car research platform
     </div> */}
@@ -998,18 +998,19 @@ export default function index({
                 <br className="md:tw-block tw-hidden" />
                 New Car Finder Platform
               </h1>
-              <p className="md:tw-mt-5 tw-mt-2 md:tw-w-[50%]">
-                Experience a revolutionary approach to navigating car prices.
-                Explore innovation as you navigate the world of automotive
-                pricing with a fresh perspective.
+              <p className="md:tw-mt-2 tw-mt-2 md:tw-w-[90%]">
+                Navigate the world of new car buying research with a fresh
+                perspective and our interactive car finder. Explore all the
+                latest 2024/25 new car models in the UAE. We have listed over 74
+                car brands, 603 unique car models and 1,776 individual vehicle
+                trims for you to choose from.
               </p>
               {/* <button className="tw-self-start tw-px-4 tw-py-3 tw-mt-5 tw-text-base tw-font-medium tw-text-center tw-text-white tw-border tw-border-white tw-rounded-full tw-hover:tw-bg-white tw-hover:tw-text-black">
       Explore Now
     </button> */}
             </div>
             <div className="md:tw-block tw-hidden">
-            <Ad728x90 dataAdSlot="4367254600" />
-
+              <Ad728x90 dataAdSlot="4367254600" />
             </div>
           </div>
         </div>
