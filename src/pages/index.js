@@ -5,9 +5,6 @@ import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import altImage from "../../public/assets/images/blog-alt-image.png";
-import Ad300x250 from "../components/ads/Ad300x250";
-import Ad970x250 from "../components/ads/Ad970x250";
-import FilterLayout from "../components/find-car-multi-step-filter/FilterLayout";
 import useTranslate from "../utils/useTranslate";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -24,8 +21,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import Ad728x90 from "../components/ads/Ad728x90";
-import Ad300x600 from "../components/ads/Ad300x600";
+import dynamic from "next/dynamic";
 
 export default function index({
   bannerImage,
@@ -114,8 +110,7 @@ export default function index({
         "AGMC, UAE's Geely distributor, introduces the 2024 Geely Starray, priced at AED 84,900. This SUV blends luxury, technology, and modern design, promising an unparalleled driving experience.",
       createdOn: "11th April 2024",
       url: "/news/all-new-geely-starray-launched-in-uae-at-aed-84900",
-      image:
-        "/all-new-geely-starray-launched-in-uae-at-aed-84900.jpg",
+      image: "/all-new-geely-starray-launched-in-uae-at-aed-84900.jpg",
     },
     {
       model: "2024",
@@ -632,6 +627,23 @@ export default function index({
     }
   };
 
+  const Ad300x250 = dynamic(() => import("../components/ads/Ad300x250"), {
+    ssr: false,
+  });
+  const Ad970x250 = dynamic(() => import("../components/ads/Ad970x250"), {
+    ssr: false,
+  });
+  const Ad728x90 = dynamic(() => import("../components/ads/Ad728x90"), {
+    ssr: false,
+  });
+  const Ad300x600 = dynamic(() => import("../components/ads/Ad300x600"), {
+    ssr: false,
+  });
+  const FilterLayout = dynamic(
+    () => import("../components/find-car-multi-step-filter/FilterLayout"),
+    { ssr: false }
+  );
+
   return (
     <>
       <Head>
@@ -647,9 +659,21 @@ export default function index({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={canonicalUrl} key="canonical" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: "Car Prices in UAE",
+              description: "Explore the latest car prices in UAE.",
+              url: canonicalUrl,
+            }),
+          }}
+        />
       </Head>
 
-      <div
+      <main
         className={`tw-fixed tw-top-0 tw-left-0 tw-z-30 tw-w-3/4 tw-max-w-[480px] tw-h-full tw-bg-white tw-shadow-lg tw-transform tw-transition-transform tw-duration-300 ${
           isOpen ? "tw-translate-x-0" : "-tw-translate-x-full"
         }`}
@@ -717,7 +741,7 @@ export default function index({
             ))}
           </div> */}
         </div>
-      </div>
+      </main>
       <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
         <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden">
           {/* <div className="tw-flex tw-flex-col tw-justify-center tw-px-10 tw-py-2 tw-w-full tw-text-sm tw-text-white tw-shadow-sm tw-bg-neutral-900 max-md:tw-px-5 max-md:max-w-full">
@@ -1719,8 +1743,8 @@ export default function index({
                   />
                   <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 ">
                     <h4
-                      className=" tw-text-black tw-font-semibold"
-                      line-clamp-2
+                      className=" tw-text-black tw-font-semibold line-clamp-2"
+                      
                     >
                       {item.name}
                     </h4>
@@ -2305,20 +2329,14 @@ export default function index({
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
-    const carSection = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`
-    );
-    const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
-
-    const articles = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}articles/home`
-    );
-
-    const compare = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}compare-car/home`
-    );
+    const [carSection, home, articles, compare] = await Promise.all([
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`),
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
+    ]);
 
     return {
       props: {
@@ -2331,10 +2349,10 @@ export async function getServerSideProps() {
         electriccars: carSection?.data[2],
         suv: carSection?.data[3],
         performance: carSection?.data[4],
-
         compare: compare?.data,
         articles: articles?.data?.data,
       },
+      revalidate: 60, // Regenerate the page at most once per minute
     };
   } catch (error) {
     console.error("Server-side Data Fetching Error:", error.message);
