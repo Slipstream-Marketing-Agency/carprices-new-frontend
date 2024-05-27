@@ -23,6 +23,7 @@ import Skeleton from "@mui/material/Skeleton";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import dynamic from "next/dynamic";
+import FilterLayout from "../components/find-car-multi-step-filter/FilterLayout";
 
 export default function index({
   bannerImage,
@@ -80,7 +81,7 @@ export default function index({
     autoplaySpeed: 4000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-
+    draggable: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -161,7 +162,7 @@ export default function index({
     autoplay: false,
     focusOnSelect: true,
     variableWidth: true,
-    draggable: true,
+    draggable: false,
     // beforeChange: (current, next) => setActiveSlide(next),
     // customPaging: (i) => (
     //   <div className="custom-dot">
@@ -254,7 +255,7 @@ export default function index({
     autoplaySpeed: 4000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-
+    draggable: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -651,11 +652,10 @@ export default function index({
   const Ad300x600 = dynamic(() => import("../components/ads/Ad300x600"), {
     ssr: false,
   });
-  const FilterLayout = dynamic(
-    () => import("../components/find-car-multi-step-filter/FilterLayout"),
-    { ssr: false }
-  );
-  
+  // const FilterLayout = dynamic(
+  //   () => import("../components/find-car-multi-step-filter/FilterLayout"),
+  //   { ssr: false }
+  // );
 
   return (
     <>
@@ -1050,7 +1050,7 @@ export default function index({
                 </span>{" "}
                 for you to choose from.
               </p>
-              <img
+              {/* <img
                 loading="lazy"
                 src="/Logo-Al-Ghandi-Auto.png"
                 className="tw-absolute tw-object-contain tw-bottom-0 tw-left-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[55px] tw-h-[35px] tw-mb-4 tw-ml-4"
@@ -1059,7 +1059,7 @@ export default function index({
                 loading="lazy"
                 src="/Chevrolet-Logo.png"
                 className="tw-absolute tw-bottom-0 tw-object-contain tw-right-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[50px] tw-h-[40px] tw-mb-4 tw-mr-4"
-              />
+              /> */}
             </div>
 
             <div className="md:tw-block tw-hidden">
@@ -1334,41 +1334,44 @@ export default function index({
             ) : ( */}
             <Slider key={selectedTab} {...categorysliderSettings}>
               {filterCars(selectedTab).map((car, index) => (
-                <div key={index} className="tw-px-2">
-                  <div className="tw-flex tw-flex-col tw-h-full tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-lg">
-                    <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-5 tw-flex-grow">
-                      <div className="tw-self-start tw-py-1 tw-px-3 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
-                        Model: {car?.highTrim?.year}
+                <Link
+                  href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
+                >
+                  <div key={index} className="tw-px-2">
+                    <div className="tw-flex tw-flex-col tw-h-full tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-lg">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-5 tw-flex-grow">
+                        <div className="tw-self-start tw-py-1 tw-px-3 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
+                          Model: {car?.highTrim?.year}
+                        </div>
+                        {loading ? (
+                          <Skeleton
+                            variant="rectangular"
+                            width="100%"
+                            height={192}
+                          />
+                        ) : (
+                          <img
+                            loading="lazy"
+                            src={car?.highTrim?.featuredImage}
+                            className="tw-self-center tw-w-full tw-h-48 tw-object-contain"
+                            alt=""
+                          />
+                        )}
                       </div>
-                      {loading ? (
-                        <Skeleton
-                          variant="rectangular"
-                          width="100%"
-                          height={192}
+                      <div className="tw-flex tw-flex-col tw-justify-center tw-px-5 tw-pt-3 tw-mt-2 tw-w-full tw-flex-grow tw-m-0">
+                        <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold tw-m-0">
+                          {car.brand.name}
+                        </h6>
+                        <h4 className="tw-text-lg tw-text-gray-900 tw-font-semibold tw-m-0">
+                          {car.name}
+                        </h4>
+                        <CarPriceRange
+                          minPrice={car?.minPrice}
+                          maxPrice={car?.maxPrice}
                         />
-                      ) : (
-                        <img
-                          loading="lazy"
-                          src={car?.highTrim?.featuredImage}
-                          className="tw-self-center tw-w-full tw-h-48 tw-object-contain"
-                          alt=""
-                        />
-                      )}
-                    </div>
-                    <div className="tw-flex tw-flex-col tw-justify-center tw-px-5 tw-pt-3 tw-mt-2 tw-w-full tw-flex-grow tw-m-0">
-                      <h6 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold tw-m-0">
-                        {car.brand.name}
-                      </h6>
-                      <h4 className="tw-text-lg tw-text-gray-900 tw-font-semibold tw-m-0">
-                        {car.name}
-                      </h4>
-                      <CarPriceRange
-                        minPrice={car?.minPrice}
-                        maxPrice={car?.maxPrice}
-                      />
-                    </div>
+                      </div>
 
-                    {/* <div className="tw-px-5">
+                      {/* <div className="tw-px-5">
           <div className="tw-flex tw-justify-between tw-p-4 tw-mt-3 tw-w-full tw-rounded-lg tw-bg-slate-100 tw-text-neutral-900 ">
             <div className="tw-flex tw-flex-col tw-text-center">
               <span className="tw-text-xs tw-leading-5 tw-uppercase">
@@ -1397,23 +1400,21 @@ export default function index({
           </div>
         </div> */}
 
-                    <div className="tw-flex tw-mt-4 tw-w-full tw-justify-between tw-items-center tw-px-5">
-                      <div className="tw-flex tw-flex-col tw-items-left">
-                        <span className="tw-text-xs tw-leading-3">
-                          EMI Starting from
-                        </span>
-                        <CarEMIDisplay minPrice={car?.minPrice} />
-                      </div>
-                      <Link
-                        href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
-                      >
+                      <div className="tw-flex tw-mt-4 tw-w-full tw-justify-between tw-items-center tw-px-5">
+                        <div className="tw-flex tw-flex-col tw-items-left">
+                          <span className="tw-text-xs tw-leading-3">
+                            EMI Starting from
+                          </span>
+                          <CarEMIDisplay minPrice={car?.minPrice} />
+                        </div>
+
                         <button className="tw-mt-3 tw-px-7 tw-py-3 tw-text-base tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500">
                           View Details
                         </button>
-                      </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </Slider>
             {/* )} */}
