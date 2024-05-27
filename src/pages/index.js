@@ -656,6 +656,12 @@ export default function index({
     { ssr: false }
   );
 
+  useEffect(() => {
+    if (featuredSliderRef.current) {
+      featuredSliderRef.current.slickGoTo(0); // Force the slider to reinitialize
+    }
+  }, [FeaturedData]);
+
   return (
     <>
       <Head>
@@ -1244,11 +1250,8 @@ export default function index({
                         alt={`${car.brand} ${car.name}`}
                         className="tw-object-cover tw-w-full tw-h-96"
                       />
-                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
+                      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl tw-text-white">
                         <h6 className="tw-text-white tw-mb-0">{car.name}</h6>
-                        {/* <small className="tw-mt-1 tw-text-white">
-                Created on: {car.createdOn}
-              </small> */}
                       </div>
                     </div>
                   </Link>
@@ -1267,9 +1270,6 @@ export default function index({
                       />
                       <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[4px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
                         <h6 className="tw-text-white">{item.name}</h6>
-                        {/* <small className="tw-mt-1 tw-text-white">
-              Created on: {car.createdOn}
-            </small> */}
                       </div>
                     </div>
                   </Link>
