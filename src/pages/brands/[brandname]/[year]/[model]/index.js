@@ -28,6 +28,7 @@ import ModelVehicleGallery from "@/src/components/trim-details/ModelVehicleGalle
 import NewShareBtns from "@/src/components/common/NewShareBtns";
 import Price from "@/src/utils/Price";
 
+
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {

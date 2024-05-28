@@ -15,6 +15,8 @@ import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
 import CarComparisonTable from "@/src/components/compare-cars/CarComparisonTable";
 import dynamic from "next/dynamic";
+
+
 const CompareCarLazy = dynamic(
   () => import("../../../components/Home1/CompareCar/index"),
   {

@@ -18,6 +18,7 @@ import Ad728x90 from "@/src/components/ads/Ad728x90";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 
+
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function About() {

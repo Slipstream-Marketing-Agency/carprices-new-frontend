@@ -8,6 +8,8 @@ import Ad728x90 from "@/src/components/ads/Ad728x90";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Pagination from "@/src/utils/Pagination";
 
+
+
 function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
   
 

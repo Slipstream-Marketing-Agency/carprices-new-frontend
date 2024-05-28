@@ -20,21 +20,21 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
-  async redirects() {
-    const temporaryRedirects = TemporaryRedirects.map((redirect) => ({
-      source: redirect.From,
-      destination: redirect.To,
-      permanent: false,
-    }));
+  // async redirects() {
+  //   const temporaryRedirects = TemporaryRedirects.map((redirect) => ({
+  //     source: redirect.From,
+  //     destination: redirect.To,
+  //     permanent: false,
+  //   }));
 
-    const permanentRedirects = PermanentRedirects.map((redirect) => ({
-      source: redirect.From,
-      destination: redirect.To,
-      permanent: true,
-    }));
+  //   const permanentRedirects = PermanentRedirects.map((redirect) => ({
+  //     source: redirect.From,
+  //     destination: redirect.To,
+  //     permanent: true,
+  //   }));
 
-    return [...temporaryRedirects, ...permanentRedirects];
-  },
+  //   return [...temporaryRedirects, ...permanentRedirects];
+  // },
 };
 
 module.exports = nextConfig;

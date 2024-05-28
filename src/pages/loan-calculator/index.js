@@ -11,6 +11,7 @@ import StarRating from "@/src/components/common/StarRating";
 import Image from "next/image";
 import Ad300x600 from "@/src/components/ads/Ad300x600";
 import axios from "axios";
+
 function loanCalculator() {
   // const [loanFilter, setLoanFilter] = useState({
   //   make: null,
