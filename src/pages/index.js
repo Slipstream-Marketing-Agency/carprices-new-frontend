@@ -1827,7 +1827,7 @@ export default function index({
           <div className="tw-flex tw-flex-col tw-w-full">
             <Link
               href="/loan-calculator"
-              className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3"
+              className="tw-flex md:tw-gap-2.5 "
             >
               <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                 <img
