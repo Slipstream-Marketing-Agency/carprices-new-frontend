@@ -10,7 +10,7 @@ export default function StepOne({ filterData, setFilterData }) {
   let isRtl = router.locale === "ar";
   const filterItems = [
     {
-      label: t.technology,
+      label: "In-car <br/>Technology",
       value: "safetech",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Tech.png",
@@ -22,7 +22,7 @@ export default function StepOne({ filterData, setFilterData }) {
       img: "/assets/img/filter-icons/Fuel.png",
     },
     {
-      label: t.offroad,
+      label: "Basic <br/>Off-roading",
       value: "off-road",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/offroad.png",
@@ -34,7 +34,7 @@ export default function StepOne({ filterData, setFilterData }) {
       img: "/assets/img/filter-icons/Perfomance.png",
     },
     {
-      label: "Affordable Luxury",
+      label: "Affordable <br/>Luxury",
       value: "affordable-luxury",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Affordable Luxury.png",
@@ -64,7 +64,7 @@ export default function StepOne({ filterData, setFilterData }) {
       img: "/assets/img/filter-icons/EV.png",
     },
     {
-      label: "Dune Bashing",
+      label: "Serious <br/>Off-roading",
       value: "dune-bashing",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Dune Bashing.png",
@@ -116,9 +116,7 @@ export default function StepOne({ filterData, setFilterData }) {
           <button
             key={item.label}
             className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[90px] ${
-              filterData.preferences.includes(item.value)
-                ? "bg-light"
-                : ""
+              filterData.preferences.includes(item.value) ? "bg-light" : ""
             }`}
             onClick={() => handlePreferencesClick(item.value)}
           >
@@ -132,9 +130,10 @@ export default function StepOne({ filterData, setFilterData }) {
                 className="tw-w-full tw-aspect-square tw-object-contain"
               />
             </div>
-            <span className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold">
-              {item.label}
-            </span>
+            <span
+              className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold"
+              dangerouslySetInnerHTML={{ __html: item.label }}
+            ></span>
           </button>
         </Tooltip>
       ))}

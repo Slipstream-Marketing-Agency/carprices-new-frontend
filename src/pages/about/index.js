@@ -126,14 +126,7 @@ function About() {
         </div>
 
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 tw-p-6 ">
-          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg md:tw-order-1 tw-order-2">
-            <img
-              loading="lazy"
-              src="/assets/about-us/06_Social.jpg"
-              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
-            />
-          </div>
-          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4 md:tw-order-2 tw-order-1">
+          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4">
             <p className=" tw-text-gray-600">
               Established in 2017 in Dubai, UAE, CarPrices.ae is a fast-growing
               online portal for new car buyers’ research in the United Arab
@@ -171,10 +164,6 @@ function About() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 md:tw-px-6 md:tw-py-6 tw-py-0 tw-px-6">
-          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4">
             <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
               Our Commitment
             </h2>
@@ -204,25 +193,7 @@ function About() {
                   {point}
                 </li>
               ))}
-            </ul>
-          </div>
-          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg">
-            <img
-              loading="lazy"
-              src="/assets/about-us/05_social.jpg"
-              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
-            />
-          </div>
-        </div>
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 md:tw-px-6 md:tw-py-6 tw-py-0 tw-px-6">
-          <div className="tw-rounded-2xl tw-overflow-hidden tw-shadow-lg md:tw-order-1 tw-order-2">
-            <img
-              loading="lazy"
-              src="/assets/about-us/04_Social.jpg"
-              className="tw-object-cover tw-w-full tw-h-full tw-transform tw-transition-transform tw-duration-500 hover:tw-scale-105"
-            />
-          </div>
-          <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4 md:tw-order-2 tw-order-1">
+            </ul>{" "}
             <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
               Additional Resources
             </h2>
@@ -246,6 +217,18 @@ function About() {
               </Link>{" "}
               section.
             </p>
+          </div>
+          <div className="tw-space-y-10 ">
+            <img
+              loading="lazy"
+              src="/assets/about-us/06_Social.jpg"
+              className="tw-object-contain tw-w-full tw-h-auto tw-rounded-2xl"
+            />
+            <img
+              loading="lazy"
+              src="/assets/about-us/05_social.jpg"
+              className="tw-object-contain tw-w-full tw-h-auto tw-rounded-2xl md:tw-block tw-hidden"
+            />
           </div>
         </div>
       </div>

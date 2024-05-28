@@ -249,7 +249,7 @@ function ContactPage() {
               </div>
               <div>
                 <label className="tw-block tw-mb-2 tw-font-semibold">
-                  {t.contactUsSubject}*
+                  Message
                 </label>
                 <input
                   type="text"
@@ -258,7 +258,7 @@ function ContactPage() {
                     setSubject(e.target.value);
                     touchedFields.subject = true;
                   }}
-                  placeholder="Subject"
+                  placeholder="Share your thoughts or questions with us"
                   className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
                 />
                 {errors.subject && touchedFields.subject && (
