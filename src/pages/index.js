@@ -833,6 +833,183 @@ export default function index({
                             </button>
                           ))}
                         </div>
+                        // <div className="tw-px-4 tw-py-6 tw-bg-white tw-rounded-xl tw-shadow-lg tw-absolute tw-z-50">
+                        //   <div className="tw-flex tw-gap-5 tw-max-md:tw-flex-col tw-max-md:tw-gap-0">
+                        //     <div className="tw-flex tw-flex-col tw-w-[22%] tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //       <div className="tw-flex tw-flex-col tw-max-md:tw-mt-10">
+                        //         <div className="tw-flex tw-flex-col tw-text-sm tw-leading-6 tw-text-slate-800">
+                        //           <div className="tw-justify-center tw-leading-[129%] tw-text-neutral-400">
+                        //             Recent searches
+                        //           </div>
+                        //           {searchResults.map((item, index) => (
+                        //             <div className="tw-flex tw-gap-3 tw-justify-between tw-py-2">
+                        //               <div className="tw-flex tw-gap-2">
+                        //                 <img
+                        //                   loading="lazy"
+                        //                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b52b3f9b35f46f045a8a46c03f5d7e95a4c4e0f5f00d2a8939e31eb00504355?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                   className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //                 />
+                        //                 <div className="tw-justify-center tw-my-auto">
+                        //                   {formatLabel(item)}
+                        //                 </div>
+                        //               </div>
+                        //               <img
+                        //                 loading="lazy"
+                        //                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/74b321bbdc5e630832324473665e26cc5cec64ae70f6bc6ac7059a2fb8b56dbe?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                 className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //               />
+                        //             </div>
+                        //           ))}
+                        //           <div className="tw-flex tw-gap-3 tw-justify-between tw-py-2 tw-w-full tw-leading-[140%] tw-text-slate-800">
+                        //             <div className="tw-flex tw-gap-2">
+                        //               <img
+                        //                 loading="lazy"
+                        //                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c79273b06c72f9d8534113077fee508cf9aedeb85601e194e87be1e80d5d697?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                 className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //               />
+                        //               <div className="tw-justify-center tw-my-auto">
+                        //                 Affordable Luxury
+                        //               </div>
+                        //             </div>
+                        //             <img
+                        //               loading="lazy"
+                        //               src="https://cdn.builder.io/api/v1/image/assets/TEMP/74b321bbdc5e630832324473665e26cc5cec64ae70f6bc6ac7059a2fb8b56dbe?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //               className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //             />
+                        //           </div>
+                        //           <div className="tw-flex tw-gap-3 tw-justify-between tw-py-2 tw-w-full tw-whitespace-nowrap">
+                        //             <div className="tw-flex tw-gap-2">
+                        //               <img
+                        //                 loading="lazy"
+                        //                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2c79273b06c72f9d8534113077fee508cf9aedeb85601e194e87be1e80d5d697?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                 className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //               />
+                        //               <div className="tw-justify-center tw-my-auto">
+                        //                 SUV
+                        //               </div>
+                        //             </div>
+                        //             <img
+                        //               loading="lazy"
+                        //               src="https://cdn.builder.io/api/v1/image/assets/TEMP/74b321bbdc5e630832324473665e26cc5cec64ae70f6bc6ac7059a2fb8b56dbe?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //               className="tw-shrink-0 tw-w-6 tw-aspect-square"
+                        //             />
+                        //           </div>
+                        //         </div>
+                        //         <div className="tw-flex tw-flex-col tw-py-0.5 tw-mt-4 tw-text-xs tw-leading-4 tw-text-gray-600">
+                        //           <div className="tw-justify-center tw-text-sm tw-leading-5 tw-text-neutral-400">
+                        //             Popular Searches
+                        //           </div>
+                        //           <div className="tw-flex tw-gap-3 tw-pr-12 tw-mt-3 tw-max-md:tw-pr-5">
+                        //             <div className="tw-justify-center tw-px-4 tw-pt-2 tw-pb-2.5 tw-border tw-border-solid tw-bg-zinc-100 tw-border-zinc-300 tw-rounded-[100px]">
+                        //               Best Car
+                        //             </div>
+                        //             <div className="tw-justify-center tw-px-4 tw-pt-2 tw-pb-2.5 tw-border tw-border-solid tw-bg-zinc-100 tw-border-zinc-300 tw-rounded-[100px]">
+                        //               News Cars
+                        //             </div>
+                        //             <div className="tw-justify-center tw-px-4 tw-pt-2 tw-pb-2.5 tw-whitespace-nowrap tw-border tw-border-solid tw-bg-zinc-100 tw-border-zinc-300 tw-rounded-[100px]">
+                        //               Trending
+                        //             </div>
+                        //           </div>
+                        //           <div className="tw-flex tw-gap-3 tw-mt-3 tw-whitespace-nowrap">
+                        //             <div className="tw-justify-center tw-px-4 tw-pt-2 tw-pb-2.5 tw-border tw-border-solid tw-bg-zinc-100 tw-border-zinc-300 tw-rounded-[100px]">
+                        //               Affordable
+                        //             </div>
+                        //             <div className="tw-justify-center tw-px-4 tw-pt-2 tw-pb-2.5 tw-border tw-border-solid tw-bg-zinc-100 tw-border-zinc-300 tw-rounded-[100px]">
+                        //               Luxury
+                        //             </div>
+                        //           </div>
+                        //         </div>
+                        //       </div>
+                        //     </div>
+                        //     <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[78%] tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //       <div className="tw-flex tw-flex-col tw-grow tw-self-stretch tw-max-md:tw-mt-10 tw-max-md:tw-max-w-full">
+                        //         <div className="tw-justify-center tw-py-0.5 tw-text-sm tw-leading-5 tw-text-neutral-400 tw-max-md:tw-max-w-full">
+                        //           Quick access
+                        //         </div>
+                        //         <div className="tw-mt-2 tw-max-md:tw-max-w-full">
+                        //           <div className="tw-flex tw-gap-5 tw-max-md:tw-flex-col tw-max-md:tw-gap-0">
+                        //             <div className="tw-flex tw-flex-col tw-w-3/12 tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //               <div className="tw-flex tw-flex-col tw-grow tw-justify-center tw-self-stretch tw-text-white tw-rounded-xl tw-max-md:tw-mt-4">
+                        //                 <div className="tw-flex tw-overflow-hidden tw-relative tw-flex-col tw-justify-end tw-px-1 tw-pt-20 tw-pb-1 tw-w-full tw-aspect-[0.84]">
+                        //                   <img
+                        //                     loading="lazy"
+                        //                     srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/fa239baf7026fd369e47c8bf361a74ae362c0395876ab122eec97bb3cb78ead5?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                     className="tw-object-cover tw-absolute tw-inset-0 tw-size-full"
+                        //                   />
+                        //                   <div className="tw-flex tw-relative tw-flex-col tw-justify-center tw-items-start tw-px-4 tw-py-3 tw-mt-44 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 tw-max-md:tw-pr-5 tw-max-md:tw-mt-10">
+                        //                     <div className="tw-text-sm tw-leading-5">
+                        //                       Premium Luxury Cars
+                        //                     </div>
+                        //                     <div className="tw-text-xs tw-leading-5">
+                        //                       100+ Cars
+                        //                     </div>
+                        //                   </div>
+                        //                 </div>
+                        //               </div>
+                        //             </div>
+                        //             <div className="tw-flex tw-flex-col tw-ml-5 tw-w-3/12 tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //               <div className="tw-flex tw-flex-col tw-grow tw-justify-center tw-self-stretch tw-text-white tw-rounded-xl tw-max-md:tw-mt-4">
+                        //                 <div className="tw-flex tw-overflow-hidden tw-relative tw-flex-col tw-justify-end tw-px-1 tw-pt-20 tw-pb-1 tw-w-full tw-aspect-[0.85]">
+                        //                   <img
+                        //                     loading="lazy"
+                        //                     srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/30f642534c03f672851fd019bff1375085520e6b2411494e7a16db0afd56b3ce?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                     className="tw-object-cover tw-absolute tw-inset-0 tw-size-full"
+                        //                   />
+                        //                   <div className="tw-flex tw-relative tw-flex-col tw-justify-center tw-items-start tw-px-4 tw-py-3 tw-mt-44 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 tw-max-md:tw-pr-5 tw-max-md:tw-mt-10">
+                        //                     <div className="tw-text-sm tw-leading-5">
+                        //                       Sporty Performance Cars
+                        //                     </div>
+                        //                     <div className="tw-text-xs tw-leading-5">
+                        //                       100+ Cars
+                        //                     </div>
+                        //                   </div>
+                        //                 </div>
+                        //               </div>
+                        //             </div>
+                        //             <div className="tw-flex tw-flex-col tw-ml-5 tw-w-3/12 tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //               <div className="tw-flex tw-flex-col tw-grow tw-justify-center tw-self-stretch tw-text-white tw-rounded-xl tw-max-md:tw-mt-4">
+                        //                 <div className="tw-flex tw-overflow-hidden tw-relative tw-flex-col tw-justify-end tw-px-1 tw-pt-20 tw-pb-1 tw-w-full tw-aspect-[0.84]">
+                        //                   <img
+                        //                     loading="lazy"
+                        //                     srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/296588e04b9d834a009e4e8cdb494407205be059f04511f13f9d27d4e25a20b6?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                     className="tw-object-cover tw-absolute tw-inset-0 tw-size-full"
+                        //                   />
+                        //                   <div className="tw-flex tw-relative tw-flex-col tw-justify-center tw-items-start tw-px-4 tw-py-3 tw-mt-44 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 tw-max-md:tw-pr-5 tw-max-md:tw-mt-10">
+                        //                     <div className="tw-text-sm tw-leading-5">
+                        //                       Budget-Friendly Options
+                        //                     </div>
+                        //                     <div className="tw-text-xs tw-leading-5">
+                        //                       100+ Cars
+                        //                     </div>
+                        //                   </div>
+                        //                 </div>
+                        //               </div>
+                        //             </div>
+                        //             <div className="tw-flex tw-flex-col tw-ml-5 tw-w-3/12 tw-max-md:tw-ml-0 tw-max-md:tw-w-full">
+                        //               <div className="tw-flex tw-flex-col tw-grow tw-justify-center tw-self-stretch tw-text-white tw-rounded-xl tw-max-md:tw-mt-4">
+                        //                 <div className="tw-flex tw-overflow-hidden tw-relative tw-flex-col tw-justify-end tw-px-1 tw-pt-20 tw-pb-1 tw-w-full tw-aspect-[0.84]">
+                        //                   <img
+                        //                     loading="lazy"
+                        //                     srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/88beb1c344962704eceaf9613bfa29456e274a4d6f4e357900a44754c35b3622?apiKey=7580612134c3412b9f32a9330debcde8&"
+                        //                     className="tw-object-cover tw-absolute tw-inset-0 tw-size-full"
+                        //                   />
+                        //                   <div className="tw-flex tw-relative tw-flex-col tw-justify-center tw-items-start tw-px-4 tw-py-3 tw-mt-44 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[32px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 tw-max-md:tw-pr-5 tw-max-md:tw-mt-10">
+                        //                     <div className="tw-text-sm tw-leading-5">
+                        //                       Off-Road Adventure Vehicles
+                        //                     </div>
+                        //                     <div className="tw-text-xs tw-leading-5">
+                        //                       100+ Cars
+                        //                     </div>
+                        //                   </div>
+                        //                 </div>
+                        //               </div>
+                        //             </div>
+                        //           </div>
+                        //         </div>
+                        //       </div>
+                        //     </div>
+                        //   </div>
+                        // </div>
                       )}
                     </div>
                   </form>
@@ -1089,9 +1266,10 @@ export default function index({
               <Slider {...sliderSettings}>
                 {featuredcars?.carModels.map((car, index) => (
                   <Link
+                    key={index}
                     href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
                   >
-                    <div key={index} className="tw-px-2">
+                    <div className="tw-px-2">
                       <div className="tw-flex tw-flex-col tw-h-full tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-lg">
                         <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-5 tw-flex-grow ">
                           <div className="tw-self-start tw-py-1 tw-px-3 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30 ">
@@ -1152,13 +1330,9 @@ export default function index({
                             </span>
                             <CarEMIDisplay minPrice={car?.minPrice} />
                           </div>
-                          <Link
-                            href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
-                          >
-                            <button className="tw-mt-3 tw-px-7 tw-py-3 tw-text-base tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500">
-                              View Details
-                            </button>
-                          </Link>
+                          <button className="tw-mt-3 tw-px-7 tw-py-3 tw-text-base tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500">
+                            View Details
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1651,35 +1825,37 @@ export default function index({
 
         <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container tw-px-5">
           <div className="tw-flex tw-flex-col tw-w-full">
-            <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
-              <img
-                src="/emi.jpg"
-                alt=""
-                className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
-              />
-              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+            <Link
+              href="/loan-calculator"
+              className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3"
+            >
+              <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
+                <img
+                  src="/emi.jpg"
+                  alt=""
+                  className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
+                />
+                <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
 
-              <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
-                <div>
-                  <h2 className="tw-text-white">Calculate Your Car Loan EMI</h2>
-                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
-                    Fill in the details and find out what the installment will
-                    be for your new car. Our car loan calculator is interactive
-                    and accurate.
-                  </p>
-                </div>
+                <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
+                  <div>
+                    <h2 className="tw-text-white">
+                      Calculate Your Car Loan EMI
+                    </h2>
+                    <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                      Fill in the details and find out what the installment will
+                      be for your new car. Our car loan calculator is
+                      interactive and accurate.
+                    </p>
+                  </div>
 
-                <Link
-                  href="/loan-calculator"
-                  className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3"
-                >
                   <p className="tw-text-white">Calculate Now</p>
                   <span className="material-symbols-outlined tw-text-white">
                     arrow_forward
                   </span>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="tw-flex tw-flex-col tw-w-full">
             <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
