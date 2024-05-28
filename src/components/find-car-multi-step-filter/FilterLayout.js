@@ -375,13 +375,13 @@ export default function FilterLayout() {
         <>
           <div className="search_filter_box tw-text-center">
             <div>
-              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl tw-leading-7 tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800">
+              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[85px]">
                 <img
                   loading="lazy"
                   src="/gradiend-lines.svg"
                   className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover"
                 />
-                <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
+                <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold tw-mb-0">
                   {steps[currentStep].title}
                 </h3>
               </div>
