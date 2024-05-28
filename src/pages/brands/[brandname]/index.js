@@ -19,6 +19,7 @@ import PriceListTable from "@/src/components/common/PriceListTable";
 import Price from "@/src/utils/Price";
 import CarFilter from "@/src/components/filter/CarFilter";
 
+
 function CarListingLeftSidebar({
   currentPage,
   totalPages,

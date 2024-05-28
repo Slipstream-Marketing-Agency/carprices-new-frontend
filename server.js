@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const next = require('next');
 const path = require('path');
@@ -24,6 +23,12 @@ app.prepare().then(() => {
   // Handle all other requests
   server.all('*', (req, res) => {
     return handle(req, res);
+  });
+
+  // Error handling middleware
+  server.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
   });
 
   const PORT = process.env.PORT || 3000;

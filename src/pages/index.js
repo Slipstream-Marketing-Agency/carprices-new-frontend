@@ -25,6 +25,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import dynamic from "next/dynamic";
 import FilterLayout from "../components/find-car-multi-step-filter/FilterLayout";
 
+
+export const runtime ="edge";
+
 export default function index({
   bannerImage,
   bannerText,
@@ -41,7 +44,7 @@ export default function index({
   error,
   errorMessage,
 }) {
-  console.log(articles.news, "articles.news");
+  
   const currentYear = new Date().getFullYear();
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
@@ -663,7 +666,7 @@ export default function index({
         {" "}
         <title>
           New Car Prices, Comparisons, Specifications, Models, Reviews & Auto
-          News in UAE - Carprices.ae
+          News in UAE - CarPrices.ae
         </title>
         <meta
           name="description"
@@ -678,8 +681,8 @@ export default function index({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebPage",
-              name: "Car Prices in UAE",
-              description: "Explore the latest car prices in UAE.",
+              name: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+              description: "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
               url: canonicalUrl,
             }),
           }}

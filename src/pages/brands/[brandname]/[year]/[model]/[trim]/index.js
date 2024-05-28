@@ -29,6 +29,7 @@ import VehicleFaq from "@/src/components/trim-details/VehicleFaq";
 import NewShareBtns from "@/src/components/common/NewShareBtns";
 import Price from "@/src/utils/Price";
 
+
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ model, trimList, trimData }) {

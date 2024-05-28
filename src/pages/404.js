@@ -1,7 +1,5 @@
 import MainLayout from "../layout/MainLayout";
 import Link from "next/link";
-
-
 export default function Custom404() {
     return (
         <MainLayout><div id="notfound">

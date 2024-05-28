@@ -3,6 +3,8 @@ import useTranslate from "@/src/utils/useTranslate";
 import { useRouter } from "next/router";
 import React from "react";
 
+
+
 export default function codeOfConduct() {
   const router = useRouter();
   const t = useTranslate();

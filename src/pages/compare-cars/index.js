@@ -13,6 +13,8 @@ import axios from "axios";
 import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
+
+
 function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
