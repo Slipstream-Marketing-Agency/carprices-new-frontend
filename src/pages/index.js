@@ -26,8 +26,6 @@ import dynamic from "next/dynamic";
 import FilterLayout from "../components/find-car-multi-step-filter/FilterLayout";
 
 
-export const runtime ="edge";
-
 export default function index({
   bannerImage,
   bannerText,
