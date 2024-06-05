@@ -54,12 +54,13 @@ const CarTestDriveForm = ({ carName, brand, model, year, open, onClose }) => {
 
   return (
     <>
+      
+      <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       {loading && (
         <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
           <CircularProgress />
         </div>
       )}
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
         <DialogTitle>
           <strong>Book a Test Drive</strong>
         </DialogTitle>

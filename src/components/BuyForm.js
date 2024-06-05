@@ -54,14 +54,14 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
 
   return (
     <>
-      {loading && (
-        <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
-          <CircularProgress />
-        </div>
-      )}
       <Dialog open={buyOpen} onClose={onClose} fullWidth maxWidth="sm">
+        {loading && (
+          <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
+            <CircularProgress />
+          </div>
+        )}
         <DialogTitle>
-          <strong>Buy Now</strong>
+          <strong>{submitted ? "Thank You" : "Buy Now"}</strong>
         </DialogTitle>
         <Formik
           initialValues={{
@@ -191,16 +191,18 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
               </DialogContent>
               <DialogActions>
                 <Button onClick={onClose} color="primary" variant="outlined">
-                  Cancel
+                  {submitted ? "Ok" : "Cancel"}
                 </Button>
-                <Button
-                  type="submit"
-                  color="primary"
-                  variant="outlined"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </Button>
+                {!submitted && (
+                  <Button
+                    type="submit"
+                    color="primary"
+                    variant="outlined"
+                    disabled={isSubmitting}
+                  >
+                    Submit
+                  </Button>
+                )}
               </DialogActions>
             </Form>
           )}
