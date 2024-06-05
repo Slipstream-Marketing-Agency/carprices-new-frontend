@@ -28,12 +28,22 @@ import VehicleReview from "@/src/components/trim-details/VehicleReview";
 import VehicleFaq from "@/src/components/trim-details/VehicleFaq";
 import NewShareBtns from "@/src/components/common/NewShareBtns";
 import Price from "@/src/utils/Price";
+import CarTestDriveForm from "@/src/components/CarTestDriveForm";
 
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  MenuItem,
+} from "@mui/material";
+import BuyForm from "@/src/components/BuyForm";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ model, trimList, trimData }) {
-  
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
   const [isSticky, setIsSticky] = useState(false);
@@ -67,8 +77,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
   const brand = model?.car_brands?.data[0]?.attributes;
   const trim = model?.car_trims?.data[0]?.attributes;
-
-  
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentURL);
@@ -263,6 +271,22 @@ function CarDeatilsPage({ model, trimList, trimData }) {
     };
   }, []);
 
+  const [open, setOpen] = useState(false);
+  const [buyOpen, setBuyOpen] = useState(false);
+
+  // Mock data based on the id (You should fetch real data from your API)
+  const carData = {
+    carName: "Test Car",
+    brand: "BrandX",
+    model: "ModelY",
+    year: "2024",
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleBuyOpen = () => setBuyOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleBuyClose = () => setBuyOpen(false);
+
   return (
     <MainLayout
       pageMeta={{
@@ -380,6 +404,14 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     <Price data={trimData.price} />
                   </h2>
 
+                  <div className="tw-space-x-2 tw-mb-4 tw-ml-[-3px]">
+                    <Button variant="contained" onClick={handleBuyOpen}>
+                      <strong>Buy</strong>
+                    </Button>
+                    <Button variant="outlined" onClick={handleOpen}>
+                    <strong>Book Now</strong>
+                    </Button>
+                  </div>
                   <div className="d-flex gap-2 align-items-center w-100 border py-1 rounded justify-content-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -643,6 +675,23 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       )}
                     </div>
                   </div>
+                  
+                  <BuyForm
+                    carName={trimData?.name}
+                    brand={trimData?.brand}
+                    model={trimData?.model}
+                    year={trimData?.year}
+                    buyOpen={buyOpen}
+                    onClose={handleBuyClose}
+                  />
+                  <CarTestDriveForm
+                    carName={trimData?.name}
+                    brand={trimData?.brand}
+                    model={trimData?.model}
+                    year={trimData?.year}
+                    open={open}
+                    onClose={handleClose}
+                  />
                 </div>
               </div>
               <div
@@ -715,7 +764,6 @@ export async function getServerSideProps(context) {
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
   const trimSlug = context.params.trim;
-  
 
   try {
     const response = await axios.get(
