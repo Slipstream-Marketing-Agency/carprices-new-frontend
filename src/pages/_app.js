@@ -17,6 +17,7 @@ import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -86,6 +87,7 @@ function MyApp({ Component, pageProps }) {
 
       <Component {...pageProps} />
       <Analytics />
+      <SpeedInsights/>
       <style jsx global>
         {`
           /* Define global styles for right-to-left (rtl) layout */
