@@ -770,7 +770,7 @@ export default function CarFilter({
                               </h2>
                               <hr className="mb-3 mt-2 heading-bottom " />
 
-                              <p>
+                              {/* <p>
                                 You can choose from{" "}
                                 <b>
                                   {
@@ -860,7 +860,7 @@ export default function CarFilter({
                                 </Link>{" "}
                                 is the most powerful model in the brand's
                                 line-up.
-                              </p>
+                              </p> */}
                               <br />
 
                               <PriceListTable
@@ -873,7 +873,7 @@ export default function CarFilter({
                             <span
                               className={`read-more ${
                                 expanded ? "hide" : ""
-                              } text-primary fw-bold mb-[-3px]`}
+                              } text-primary fw-bold tw-mb-[-3px]`}
                               onClick={() => setExpanded(true)}
                             >
                               Read More
@@ -896,7 +896,7 @@ export default function CarFilter({
                 </div>
               </div>
 
-              {router.pathname === "/brands/[brandname]" && (
+              {/* {router.pathname === "/brands/[brandname]" && (
                 <>
                   {" "}
                   <div className="white_bg_wrapper mt-5">
@@ -965,7 +965,7 @@ export default function CarFilter({
                     </table>
                   </div>
                 </>
-              )}
+              )} */}
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
                   {router.pathname !== "/brands/[brandname]" && (

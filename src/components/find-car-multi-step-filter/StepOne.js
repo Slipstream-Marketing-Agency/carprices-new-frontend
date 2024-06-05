@@ -10,7 +10,7 @@ export default function StepOne({ filterData, setFilterData }) {
   let isRtl = router.locale === "ar";
   const filterItems = [
     {
-      label: "In-car <br/>Technology",
+      label: "Good <br/>Infotainment",
       value: "safetech",
       icon: "gear-wide-connected",
       img: "/assets/img/filter-icons/Tech.png",
