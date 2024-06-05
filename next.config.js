@@ -35,6 +35,10 @@ const nextConfig = {
 
   //   return [...temporaryRedirects, ...permanentRedirects];
   // },
+  async redirects() {
+    return []; // No static redirects, handled by middleware
+  },
+  compress: true,
 };
 
 module.exports = nextConfig;

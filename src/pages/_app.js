@@ -14,7 +14,10 @@ import "@/styles/tailwind.css";
 import Script from "next/script";
 import Preloader from "../components/common/Preloader";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { useRouter } from "next/router";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -32,8 +35,6 @@ function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
   const { locale } = router;
-
-  console.log(router, "fffffffffff");
 
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
@@ -85,6 +86,8 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Component {...pageProps} />
+      <Analytics />
+      <SpeedInsights/>
       <style jsx global>
         {`
           /* Define global styles for right-to-left (rtl) layout */

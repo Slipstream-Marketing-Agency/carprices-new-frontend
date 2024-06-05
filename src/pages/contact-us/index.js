@@ -16,9 +16,6 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-
-
-
 function ContactPage() {
   const router = useRouter();
   const t = useTranslate();
@@ -52,6 +49,27 @@ function ContactPage() {
     validateForm();
   }, [name, email, phone, subject]);
 
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          console.log("reCAPTCHA ready");
+        });
+      }
+    };
+
+    if (!window.grecaptcha) {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = loadRecaptcha;
+      document.body.appendChild(script);
+    } else {
+      loadRecaptcha();
+    }
+  }, []);
+
   const validateForm = () => {
     let errors = {};
     if (!name) {
@@ -70,34 +88,49 @@ function ContactPage() {
 
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
+    console.log("Form validation result:", errors, "isFormValid:", isFormValid);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     makeTouchedTrue();
     validateForm();
+
     if (isFormValid) {
       setLoading(true);
+      console.log("Form is valid. Generating reCAPTCHA token...");
+
       try {
-        const response = await axios.post("/api/sendContacUsMail", {
+        const token = await window.grecaptcha.execute(
+          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+          { action: "submit" }
+        );
+        console.log("reCAPTCHA token generated:", token);
+
+        const response = await axios.post("/api/sendContactUsMail", {
           name,
           email,
           phone,
           subject,
+          recaptchaToken: token,
         });
+
         if (response.status === 200) {
           setOpenThankYou(true);
           setName("");
           setEmail("");
           setPhone("");
           setSubject("");
+          console.log("Form submitted successfully");
         }
       } catch (error) {
-        console.error("Error submitting form", error);
+        console.error("Error submitting form:", error);
         alert("Error submitting form");
       } finally {
         setLoading(false);
       }
+    } else {
+      console.log("Form is not valid:", errors);
     }
   };
 
@@ -203,11 +236,11 @@ function ContactPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your fullname"
+                  placeholder="Enter your full name"
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
-                    touchedFields.name = true;
+                    setTouchedFields({ ...touchedFields, name: true });
                   }}
                   className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
                 />
@@ -225,9 +258,9 @@ function ContactPage() {
                     value={phone}
                     onChange={(e) => {
                       setPhone(e.target.value);
-                      touchedFields.phone = true;
+                      setTouchedFields({ ...touchedFields, phone: true });
                     }}
-                    placeholder="Ex- +971-58* ** ***"
+                    placeholder="+971-58* ** ***"
                     className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
                   />
                 </div>
@@ -237,11 +270,11 @@ function ContactPage() {
                   </label>
                   <input
                     type="email"
-                    placeholder="Ex- info@gmail.com"
+                    placeholder="Please enter your email"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
-                      touchedFields.email = true;
+                      setTouchedFields({ ...touchedFields, email: true });
                     }}
                     className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
                   />
@@ -259,7 +292,7 @@ function ContactPage() {
                   value={subject}
                   onChange={(e) => {
                     setSubject(e.target.value);
-                    touchedFields.subject = true;
+                    setTouchedFields({ ...touchedFields, subject: true });
                   }}
                   placeholder="Share your thoughts or questions with us"
                   className="tw-w-full tw-p-4 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-transition tw-duration-300 focus:tw-outline-none focus:tw-border-blue-500"
@@ -273,6 +306,7 @@ function ContactPage() {
                 <button
                   type="submit"
                   className="tw-w-full tw-bg-blue-500 tw-text-white tw-py-3 tw-rounded-md tw-shadow-lg tw-transition tw-duration-300 hover:tw-bg-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-opacity-50"
+                  disabled={loading}
                 >
                   {t.contactUsSubmitNow}
                 </button>
