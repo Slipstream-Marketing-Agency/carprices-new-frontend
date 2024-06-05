@@ -88,7 +88,7 @@ function ContactPage() {
 
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
-    console.log("Form validation result:", errors, "isFormValid:", isFormValid);
+    
   };
 
   const handleSubmit = async (e) => {
@@ -98,14 +98,12 @@ function ContactPage() {
 
     if (isFormValid) {
       setLoading(true);
-      console.log("Form is valid. Generating reCAPTCHA token...");
 
       try {
         const token = await window.grecaptcha.execute(
           process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
           { action: "submit" }
         );
-        console.log("reCAPTCHA token generated:", token);
 
         const response = await axios.post("/api/sendContactUsMail", {
           name,
@@ -121,7 +119,6 @@ function ContactPage() {
           setEmail("");
           setPhone("");
           setSubject("");
-          console.log("Form submitted successfully");
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -130,7 +127,7 @@ function ContactPage() {
         setLoading(false);
       }
     } else {
-      console.log("Form is not valid:", errors);
+      // console.log("Form is not valid:", errors);
     }
   };
 
