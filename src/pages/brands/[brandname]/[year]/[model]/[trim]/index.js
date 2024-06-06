@@ -38,8 +38,46 @@ import {
   DialogTitle,
   TextField,
   MenuItem,
+  ToggleButton,
+  ToggleButtonGroup,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Slider,
+  Typography,
+  Box,
 } from "@mui/material";
+import { styled } from "@mui/system";
 import BuyForm from "@/src/components/BuyForm";
+import LoanEnquireForm from "@/src/components/LoanEnquireForm";
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
+  .MuiToggleButtonGroup-grouped {
+    margin-right: 6px;
+    padding: 4px 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    &:not(:first-of-type) {
+      border-left: 1px solid #ddd;
+    }
+    &:first-of-type {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    &:last-of-type {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+    &.Mui-selected {
+      background-color: #1976d2;
+      color: white;
+    }
+  }
+`;
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -54,6 +92,11 @@ function CarDeatilsPage({ model, trimList, trimData }) {
   const [downPaymentResult, setDownPaymentResult] = useState(0);
   const [totalCostResult, setTotalCostResult] = useState(0);
   const [monthlyRepaymentResult, setMonthlyRepaymentResult] = useState(0);
+  const [calculateOpen, setCalculateOpen] = useState(false);
+
+  const handleCalculateClose = () => {
+    setCalculateOpen(false); // Close the dialog
+  };
 
   const calculateEMI = () => {
     const p =
@@ -61,17 +104,22 @@ function CarDeatilsPage({ model, trimList, trimData }) {
     const r = parseFloat(interestRate) / 100 / 12; // monthly interest rate
     const n = parseFloat(years) * 12; // loan tenure in months
 
-    const emi = (
-      (p * r * Math.pow(1 + r, n)) /
-      (Math.pow(1 + r, n) - 1)
-    ).toFixed(2);
+    const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     setMonthlyRepaymentResult(emi);
 
-    const totalCost = (emi * n).toFixed(2);
+    const totalCost = emi * n;
     setTotalCostResult(totalCost);
-    const totalInterestPayment = (totalCost - p).toFixed(2);
+    const totalInterestPayment = totalCost - p;
     setDownPaymentResult(totalInterestPayment);
+    setCalculateOpen(true);
   };
+
+  const handleYearsChange = (event, newYears) => {
+    if (newYears !== null) {
+      setYears(newYears);
+    }
+  };
+
   const router = useRouter();
   const t = useTranslate();
 
@@ -273,19 +321,18 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
   const [open, setOpen] = useState(false);
   const [buyOpen, setBuyOpen] = useState(false);
+  const [loanOpen, setLoanOpen] = useState(false);
 
-  // Mock data based on the id (You should fetch real data from your API)
-  const carData = {
-    carName: "Test Car",
-    brand: "BrandX",
-    model: "ModelY",
-    year: "2024",
-  };
-
+  
   const handleOpen = () => setOpen(true);
   const handleBuyOpen = () => setBuyOpen(true);
+  const handleLoanOpen = () => {
+    setCalculateOpen(false);
+   setLoanOpen(true)
+  };
   const handleClose = () => setOpen(false);
   const handleBuyClose = () => setBuyOpen(false);
+  const handleLoanClose = () => setLoanOpen(false);
 
   return (
     <MainLayout
@@ -392,7 +439,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                 </div>
                 <div className="col-lg-6">
                   <div className="d-flex justify-content-between align-items-center position-relative">
-                    <h1 className="fw-bold mb-1">
+                    <h1 className="fw-bold mb-0">
                       {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                       {trimData?.name}
                     </h1>{" "}
@@ -400,35 +447,20 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       <NewShareBtns />
                     </div> */}
                   </div>
-                  <h2 className="fw-bold text-primary mb-3">
+                  <h2 className="fw-bold text-primary mb-2">
                     <Price data={trimData.price} />
                   </h2>
 
-                  <div className="tw-space-x-2 tw-mb-4 tw-ml-[-3px]">
+                  <div className="tw-space-x-2 tw-mb-1 tw-ml-[-3px]">
                     <Button variant="contained" onClick={handleBuyOpen}>
                       <strong>Buy</strong>
                     </Button>
                     <Button variant="outlined" onClick={handleOpen}>
-                    <strong>Book Now</strong>
+                      <strong>Book Now</strong>
                     </Button>
                   </div>
-                  <div className="d-flex gap-2 align-items-center w-100 border py-1 rounded justify-content-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="20"
-                      height="20"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M21.5 13.3v7.2H2.5v-8.7l9-6.8 9 6.8zm-2 5.8V8.5l-8-6-8 6v10.6h16z"
-                      />
-                      <path fill="currentColor" d="M6 18.5h5v2H6z" />
-                      <path fill="currentColor" d="M14 18.5h4v2h-4z" />
-                      <path fill="currentColor" d="M6 14.5h12v2H6z" />
-                      <path fill="currentColor" d="M6 10.5h12v2H6z" />
-                    </svg>
-                    <h6 className="p-0 m-0 ">
+                  <div className="d-flex gap-2 align-items-center w-100  py-1 rounded justify-content-start ">
+                    <h6 className="p-0 m-0 tw-font-semibold">
                       Monthly EMI starting from{" "}
                       <Price
                         data={Math.round(
@@ -443,239 +475,233 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     </h6>
                   </div>
 
-                  <div className="mt-2 key_spec">
-                    {/* <p className="fw-bold">{t.keySpecification}</p> */}
-                    <div className="row px-2">
-                      {trimData.price === null ? (
-                        ""
-                      ) : (
-                        <div className="calculator mt-2">
-                          <div className="calculator-body">
-                            <div>
-                              <div className="form-group model_insure_btn mb-1">
-                                <small>Loan Years</small>
-                                <div
-                                  className="btn-group btn-group-toggle"
-                                  data-toggle="buttons"
-                                >
-                                  <label
-                                    className={
-                                      years === "1"
-                                        ? "btn btn-outline-primary pt-2 px-1"
-                                        : "btn btn-primary pt-2 px-1"
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="loan-years"
-                                      id="loan-years-1"
-                                      autoComplete="off"
-                                      value="1"
-                                      checked={years === "1"}
-                                      onChange={(e) =>
-                                        setYears(e?.target?.value)
-                                      }
-                                    />
-                                    1 Year
-                                  </label>
-                                  <label
-                                    className={
-                                      years === "2"
-                                        ? "btn btn-outline-primary pt-2 px-1"
-                                        : "btn btn-primary pt-2 px-1"
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="loan-years"
-                                      id="loan-years-2"
-                                      autoComplete="off"
-                                      value="2"
-                                      checked={years === "2"}
-                                      onChange={(e) =>
-                                        setYears(e?.target?.value)
-                                      }
-                                    />{" "}
-                                    2 Years
-                                  </label>
-                                  <label
-                                    className={
-                                      years === "3"
-                                        ? "btn btn-outline-primary pt-2 px-1"
-                                        : "btn btn-primary pt-2 px-1"
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="loan-years"
-                                      id="loan-years-3"
-                                      autoComplete="off"
-                                      value="3"
-                                      checked={years === "3"}
-                                      onChange={(e) =>
-                                        setYears(e?.target?.value)
-                                      }
-                                    />{" "}
-                                    3 Years
-                                  </label>
-                                  <label
-                                    className={
-                                      years === "4"
-                                        ? "btn btn-outline-primary pt-2 px-1"
-                                        : "btn btn-primary pt-2 px-1"
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="loan-years"
-                                      id="loan-years-4"
-                                      autoComplete="off"
-                                      value="4"
-                                      checked={years === "4"}
-                                      onChange={(e) =>
-                                        setYears(e?.target?.value)
-                                      }
-                                    />{" "}
-                                    4 Years
-                                  </label>
-                                  <label
-                                    className={
-                                      years === "5"
-                                        ? "btn btn-outline-primary pt-2 px-1"
-                                        : "btn btn-primary pt-2 px-1"
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="loan-years"
-                                      id="loan-years-5"
-                                      autoComplete="off"
-                                      value="5"
-                                      checked={years === "5"}
-                                      onChange={(e) =>
-                                        setYears(e?.target?.value)
-                                      }
-                                    />{" "}
-                                    5 Years
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="d-flex align-items-center">
-                              <div className="w-60">
-                                <div className="form-group w-100">
-                                  <small htmlFor="interest-rate">
-                                    Interest Rate (%)
-                                  </small>
-                                  <input
-                                    type="range"
-                                    id="interest-rate"
-                                    className="form-control-range"
-                                    defaultValue={interestRate}
-                                    min={2.0}
-                                    max={8.0}
-                                    step="0.1"
-                                    onChange={(e) => {
-                                      setInterestRate(e?.target?.value);
-                                      document.getElementById(
-                                        "interest-rate-value"
-                                      ).innerHTML = e?.target?.value + "%";
-                                    }}
-                                  />
-                                  <div className="d-flex justify-content-between">
-                                    <small>1.99%</small>
-                                    <small id="interest-rate-value">
-                                      {interestRate}%
-                                    </small>
-                                    <small>8%</small>
-                                  </div>
-                                </div>
+                  <div className="tw-mt-2 key_spec">
+                    {trimData.price === null ? (
+                      ""
+                    ) : (
+                      <Box className="calculator tw-mt-2">
+                        <Box className="calculator-body">
+                          {/* <FormControl component="fieldset" className="tw-mb-4">
+              <FormLabel component="legend">Loan Years</FormLabel>
+              <RadioGroup
+                row
+                aria-label="loan-years"
+                name="loan-years"
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
+              >
+                {["1", "2", "3", "4", "5"].map((year) => (
+                  <FormControlLabel
+                    key={year}
+                    value={year}
+                    control={<Radio />}
+                    label={`${year} Year${year > 1 ? "s" : ""}`}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl> */}
 
-                                <div className="form-group w-100">
-                                  <small htmlFor="down-payment">
-                                    Down Payment (AED)
-                                  </small>
-                                  <input
-                                    type="range"
-                                    id="down-payment"
-                                    className="form-control-range"
-                                    defaultValue={downPayment}
-                                    min={20}
-                                    max={80}
-                                    step={1}
-                                    onChange={(e) => {
-                                      setDownPayment(e?.target?.value);
-                                      document.getElementById(
-                                        "down-payment-value"
-                                      ).innerHTML = e?.target?.value + "%";
-                                    }}
-                                  />
-                                  <div className="d-flex justify-content-between">
-                                    <small>20%</small>
-                                    <small id="down-payment-value">
-                                      {downPayment}%
-                                    </small>
-                                    <small>80%</small>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="form-group w-40 px-4">
-                                <div
-                                  type="button"
-                                  className="calulate_btn font_small py-3 fw-bold"
+                          <Box className="tw-w-full tw-mb-2">
+                            <p className="tw-font-bold tw-text-[13px] tw-mb-2">
+                              Loan Years
+                            </p>
+                            <StyledToggleButtonGroup
+                              value={years}
+                              exclusive
+                              onChange={handleYearsChange}
+                              aria-label="loan period"
+                            >
+                              <ToggleButton value="1" aria-label="1 year">
+                                1 Year
+                              </ToggleButton>
+                              <ToggleButton value="2" aria-label="2 years">
+                                2 Years
+                              </ToggleButton>
+                              <ToggleButton value="3" aria-label="3 years">
+                                3 Years
+                              </ToggleButton>
+                              <ToggleButton value="4" aria-label="4 years">
+                                4 Years
+                              </ToggleButton>
+                              <ToggleButton value="5" aria-label="5 years">
+                                5 Years
+                              </ToggleButton>
+                            </StyledToggleButtonGroup>
+                          </Box>
+
+                          <Box className="tw-d-flex tw-align-items-center ">
+                            <Box className="tw-w-full">
+                              <Box className="tw-mb-0 tw-w-[95%] ">
+                                <p className="tw-font-bold tw-text-[13px]">
+                                  Interest Rate (%)
+                                </p>
+                                <Slider
+                                  value={interestRate}
+                                  onChange={(e, value) =>
+                                    setInterestRate(value)
+                                  }
+                                  step={0.1}
+                                  min={2.0}
+                                  max={8.0}
+                                  valueLabelDisplay="auto"
+                                  marks={[
+                                    { value: 2.0, label: "2%" },
+                                    { value: 8.0, label: "8%" },
+                                  ]}
+                                  className="tw-ml-2 tw-mb-3 "
+                                />
+                              </Box>
+
+                              <Box className="tw-mb-0 tw-w-[95%]">
+                                <p className="tw-font-bold tw-text-[13px]">
+                                  Down Payment (%)
+                                </p>
+                                <Slider
+                                  value={downPayment}
+                                  onChange={(e, value) => setDownPayment(value)}
+                                  step={1}
+                                  min={20}
+                                  max={80}
+                                  valueLabelDisplay="auto"
+                                  marks={[
+                                    { value: 20, label: "20%" },
+                                    { value: 80, label: "80%" },
+                                  ]}
+                                  className="tw-ml-2 "
+                                />
+                              </Box>
+                            </Box>
+                            <Box className="tw-w-full tw-px-0 ">
+                              <div className="tw-justify-center tw-flex">
+                                <Button
+                                  variant="contained"
+                                  color="primary"
                                   onClick={calculateEMI}
+                                  className="tw-w-full tw-py-1 tw-font-bold"
                                 >
                                   Calculate
-                                </div>
+                                </Button>
                               </div>
-                            </div>
-                            {monthlyRepaymentResult !== 0 &&
-                              downPaymentResult !== 0 &&
-                              totalCostResult !== 0 && (
-                                <div>
-                                  <div className=" mt-1 ">
-                                    <div className="white_bg_wrapper py-1 px-2 mt-1">
-                                      <span className="fw-bold font_small me-1">
-                                        Monthly Repayment (EMI):
-                                      </span>
-                                      <span
-                                        className="fw-bold font_small"
-                                        id="monthly-repayment-result"
-                                      >
-                                        <Price data={monthlyRepaymentResult} />
-                                      </span>
+                            </Box>
+                            <p className="tw-text-[10px] tw-leading-6">
+                              *The rate mentioned in the calculator is an
+                              indicative rate only. The actual rate may vary.
+                            </p>
+
+                            <Dialog
+                              open={calculateOpen}
+                              onClose={handleCalculateClose}
+                            >
+                              <DialogTitle className="tw-font-bold tw-px-16">
+                                Loan Calculation Result
+                              </DialogTitle>
+                              <DialogContent className="tw-pb-3">
+                                <div className="tw-bg-red-100 tw-mx-2 tw-py-10 tw-px-10 tw-border tw-rounded">
+                                  <div className="tw-flex tw-justify-between">
+                                    <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                                      <h5 className="tw-font-bold">
+                                        AED{" "}
+                                        {downPaymentResult.toLocaleString(
+                                          "en-AE",
+                                          {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}
+                                      </h5>
+                                      <h5>Down Payment</h5>
                                     </div>
-                                    <div className="white_bg_wrapper py-0 px-2 mt-1">
-                                      <span className="fw-bold font_small me-1">
-                                        Total Interest Payment:
-                                      </span>
-                                      <span
-                                        className="fw-bold font_small"
-                                        id="down-payment-result"
-                                      >
-                                        <Price data={downPaymentResult} />
-                                      </span>
-                                    </div>
-                                    <div className="white_bg_wrapper py-0 px-2 mt-1">
-                                      <span className="fw-bold font_small me-1">
-                                        Total Amount to Pay:
-                                      </span>
-                                      <span
-                                        className="fw-bold font_small"
-                                        id="total-cost-result"
-                                      >
-                                        <Price data={totalCostResult} />
-                                      </span>
+                                    <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                                      <h5 className="tw-font-bold">
+                                        AED{" "}
+                                        {totalCostResult.toLocaleString(
+                                          "en-AE",
+                                          {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}
+                                      </h5>
+                                      <h5>Total Cost</h5>
                                     </div>
                                   </div>
+                                  <hr />
+                                  <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                                    <h5>Monthly Repayment (EMI)</h5>
+                                    <h2 className="tw-font-bold tw-text-red-500">
+                                      AED{" "}
+                                      {monthlyRepaymentResult.toLocaleString(
+                                        "en-AE",
+                                        {
+                                          minimumFractionDigits: 0,
+                                          maximumFractionDigits: 2,
+                                        }
+                                      )}
+                                    </h2>
+                                  </div>
                                 </div>
-                              )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button
+                                  onClick={handleLoanOpen}
+                                  color="primary"
+                                  variant="contained"
+                                >
+                                  Inquire Now
+                                </Button>
+                                <Button
+                                  onClick={handleCalculateClose}
+                                  color="error"
+                                  variant="outlined"
+                                >
+                                  Close
+                                </Button>
+                              </DialogActions>
+                            </Dialog>
+                          </Box>
+
+                          {/* {monthlyRepaymentResult !== 0 &&
+              downPaymentResult !== 0 &&
+              totalCostResult !== 0 && (
+                <Box className="tw-mt-4">
+                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
+                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
+                      Monthly Repayment (EMI):
+                    </Typography>
+                    <Typography variant="body1" className="tw-font-bold">
+                      <Price data={monthlyRepaymentResult} />
+                    </Typography>
+                  </Box>
+                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
+                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
+                      Total Interest Payment:
+                    </Typography>
+                    <Typography variant="body1" className="tw-font-bold">
+                      <Price data={downPaymentResult} />
+                    </Typography>
+                  </Box>
+                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
+                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
+                      Total Amount to Pay:
+                    </Typography>
+                    <Typography variant="body1" className="tw-font-bold">
+                      <Price data={totalCostResult} />
+                    </Typography>
+                  </Box>
+                </Box>
+              )} */}
+                        </Box>
+                      </Box>
+                    )}
                   </div>
-                  
+                  <LoanEnquireForm
+                    carName={trimData?.name}
+                    brand={trimData?.brand}
+                    model={trimData?.model}
+                    year={trimData?.year}
+                    loanOpen={loanOpen}
+                    onClose={handleLoanClose}
+                  />
                   <BuyForm
                     carName={trimData?.name}
                     brand={trimData?.brand}
