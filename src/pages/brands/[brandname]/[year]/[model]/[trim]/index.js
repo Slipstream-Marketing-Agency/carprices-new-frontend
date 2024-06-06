@@ -452,7 +452,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   </h2>
 
                   <div className="tw-space-x-2 tw-mb-1 tw-ml-[-3px]">
-                    <Button variant="contained" onClick={handleBuyOpen}>
+                    <Button variant="contained" color="success" onClick={handleBuyOpen}>
                       <strong>Buy</strong>
                     </Button>
                     <Button variant="outlined" onClick={handleOpen}>
