@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  font-family: Gilroy !important; 
+  font-family: Gilroy ; 
 }
 
 :root {
@@ -171,11 +171,10 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-gilroy);
+  font-family: var(--font-gilroy) !important;
   color: var(--title-color);
   font-size: 16px;
   font-weight: 400;
-  font-family: Gilroy !important; 
 }
 body.home-5 {
   padding: 0px 6.3%;
