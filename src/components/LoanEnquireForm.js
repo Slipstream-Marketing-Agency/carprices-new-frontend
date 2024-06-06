@@ -109,7 +109,6 @@ const LoanEnquireForm = ({ carName, brand, model, year, loanOpen, onClose }) => 
               console.error("Error submitting form:", error);
             } finally {
               setLoading(false);
-              setSubmitting(false);
             }
           }}
         >

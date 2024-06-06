@@ -109,7 +109,6 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
               console.error("Error submitting form:", error);
             } finally {
               setLoading(false);
-              setSubmitting(false);
             }
           }}
         >
