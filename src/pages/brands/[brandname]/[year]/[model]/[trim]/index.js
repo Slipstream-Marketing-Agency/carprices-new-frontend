@@ -583,7 +583,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                 </Button>
                               </div>
                             </Box>
-                            <p className="tw-text-[10px] tw-leading-6">
+                            <p className="loan-disclaimer tw-leading-6 tw-mt-2">
                               *The rate mentioned in the calculator is an
                               indicative rate only. The actual rate may vary.
                             </p>
