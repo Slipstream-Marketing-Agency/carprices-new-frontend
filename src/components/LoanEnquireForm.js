@@ -26,7 +26,7 @@ const emirates = [
   "Fujairah",
 ];
 
-const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
+const LoanEnquireForm = ({ carName, brand, model, year, loanOpen, onClose }) => {
   const fullCarName = `${year} ${brand} ${model} (${carName})`;
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -58,14 +58,14 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
 
   return (
     <>
-      <Dialog open={buyOpen} onClose={onClose} fullWidth maxWidth="sm">
+      <Dialog open={loanOpen} onClose={onClose} fullWidth maxWidth="sm">
         {loading && (
           <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
             <CircularProgress />
           </div>
         )}
         <DialogTitle>
-          <strong>{submitted ? "Thank You" : "Buy Now"}</strong>
+          <strong>{submitted ? "Thank You" : "Inquire Now"}</strong>
         </DialogTitle>
         <Formik
           initialValues={{
@@ -93,7 +93,7 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
                 { action: "submit" }
               );
 
-              const response = await axios.post("/api/buyCar", {
+              const response = await axios.post("/api/loanEnquiry", {
                 ...values,
                 carName: fullCarName,
                 recaptchaToken: token,
@@ -125,16 +125,16 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
               <DialogContent dividers>
                 {submitted ? (
                   <Typography variant="body1" mb={2}>
-                    Thank you for your submission. We will contact you shortly.
+                   Thank you for your inquiry, our partnering banks will reach out to you for your loan inquiry.
                   </Typography>
                 ) : (
                   <>
-                    <Typography variant="body1" mb={2}>
+                    {/* <p variant="body1" mb={2}>
                       You are expressing interest in buying a{" "}
                       <strong>{fullCarName}</strong>.. We will forward your
                       request to the authorised dealer and their team will
                       contact you at the earliest to proceed with this request.
-                    </Typography>
+                    </p> */}
                     <TextField
                       fullWidth
                       margin="normal"
@@ -216,4 +216,4 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
   );
 };
 
-export default BuyForm;
+export default LoanEnquireForm;
