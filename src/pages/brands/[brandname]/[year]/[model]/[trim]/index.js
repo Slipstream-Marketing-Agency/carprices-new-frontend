@@ -460,9 +460,8 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     </Button>
                   </div>
                   <div className="d-flex gap-2 align-items-center w-100  py-1 rounded justify-content-start ">
-                    <h6 className="p-0 m-0 tw-font-semibold">
-                      Monthly EMI starting from{" "}
-                      <Price
+                    <p className="p-0 m-0 ">
+                      Monthly EMI starting from{" "}<strong>  <Price
                         data={Math.round(
                           ((trimData.price -
                             trimData.price * (downPayment / 100)) *
@@ -471,16 +470,17 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                             (Math.pow(1 + interestRate / 100 / 12, years * 12) -
                               1)
                         )}
-                      />
-                    </h6>
+                      /></strong>
+                    
+                    </p>
                   </div>
 
                   <div className="tw-mt-2 key_spec">
                     {trimData.price === null ? (
                       ""
                     ) : (
-                      <Box className="calculator tw-mt-2">
-                        <Box className="calculator-body">
+                      <Box className=" tw-mt-2">
+                        <Box className="">
                           {/* <FormControl component="fieldset" className="tw-mb-4">
               <FormLabel component="legend">Loan Years</FormLabel>
               <RadioGroup
@@ -501,8 +501,8 @@ function CarDeatilsPage({ model, trimList, trimData }) {
               </RadioGroup>
             </FormControl> */}
 
-                          <Box className="tw-w-full tw-mb-2">
-                            <p className="tw-font-bold tw-text-[13px] tw-mb-2">
+                          <Box className="tw-w-full tw-mb-2 tw-flex tw-items-center">
+                            <p className="tw-font-bold tw-text-[13px] tw-mb-0 tw-mr-2">
                               Loan Years
                             </p>
                             <StyledToggleButtonGroup
@@ -548,7 +548,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     { value: 2.0, label: "2%" },
                                     { value: 8.0, label: "8%" },
                                   ]}
-                                  className="tw-ml-2 tw-mb-3 "
+                                  className="tw-ml-2 tw-mb-4 "
                                 />
                               </Box>
 
