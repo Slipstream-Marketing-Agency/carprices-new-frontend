@@ -107,10 +107,12 @@ function CarDeatilsPage({ model, trimList, trimData }) {
     const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     setMonthlyRepaymentResult(emi);
 
-    const totalCost = emi * n;
+    const totalRepayment = emi * n;
+    const downPaymentAmount =
+      (parseFloat(downPayment) / 100) * parseFloat(price);
+    const totalCost = totalRepayment + downPaymentAmount;
+    setDownPaymentResult(downPaymentAmount);
     setTotalCostResult(totalCost);
-    const totalInterestPayment = totalCost - p;
-    setDownPaymentResult(totalInterestPayment);
     setCalculateOpen(true);
   };
 
@@ -323,12 +325,11 @@ function CarDeatilsPage({ model, trimList, trimData }) {
   const [buyOpen, setBuyOpen] = useState(false);
   const [loanOpen, setLoanOpen] = useState(false);
 
-  
   const handleOpen = () => setOpen(true);
   const handleBuyOpen = () => setBuyOpen(true);
   const handleLoanOpen = () => {
     setCalculateOpen(false);
-   setLoanOpen(true)
+    setLoanOpen(true);
   };
   const handleClose = () => setOpen(false);
   const handleBuyClose = () => setBuyOpen(false);
@@ -452,7 +453,11 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   </h2>
 
                   <div className="tw-space-x-2 tw-mb-1 tw-ml-[-3px]">
-                    <Button variant="contained" color="success" onClick={handleBuyOpen}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={handleBuyOpen}
+                    >
                       <strong>Buy</strong>
                     </Button>
                     <Button variant="outlined" onClick={handleOpen}>
@@ -461,17 +466,26 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                   </div>
                   <div className="d-flex gap-2 align-items-center w-100  py-1 rounded justify-content-start ">
                     <p className="p-0 m-0 ">
-                      Monthly EMI starting from{" "}<strong>  <Price
-                        data={Math.round(
-                          ((trimData.price -
-                            trimData.price * (downPayment / 100)) *
-                            (interestRate / 100 / 12) *
-                            Math.pow(1 + interestRate / 100 / 12, years * 12)) /
-                            (Math.pow(1 + interestRate / 100 / 12, years * 12) -
-                              1)
-                        )}
-                      /></strong>
-                    
+                      Monthly EMI starting from{" "}
+                      <strong>
+                        {" "}
+                        <Price
+                          data={Math.round(
+                            ((trimData.price -
+                              trimData.price * (downPayment / 100)) *
+                              (interestRate / 100 / 12) *
+                              Math.pow(
+                                1 + interestRate / 100 / 12,
+                                years * 12
+                              )) /
+                              (Math.pow(
+                                1 + interestRate / 100 / 12,
+                                years * 12
+                              ) -
+                                1)
+                          )}
+                        />
+                      </strong>
                     </p>
                   </div>
 
@@ -614,13 +628,10 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                                       <h5 className="tw-font-bold">
                                         AED{" "}
-                                        {totalCostResult.toLocaleString(
-                                          "en-AE",
-                                          {
-                                            minimumFractionDigits: 0,
-                                            maximumFractionDigits: 2,
-                                          }
-                                        )}
+                                        {totalCostResult.toLocaleString("en-AE", {
+                                          minimumFractionDigits: 0,
+                                          maximumFractionDigits: 2,
+                                        })}
                                       </h5>
                                       <h5>Total Cost</h5>
                                     </div>
