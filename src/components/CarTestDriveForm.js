@@ -52,6 +52,11 @@ const CarTestDriveForm = ({ carName, brand, model, year, open, onClose }) => {
     }
   }, []);
 
+  const handleClose = () => {
+    onClose();
+    setSubmitted(false);
+  };
+
   return (
     <>
       
@@ -105,7 +110,6 @@ const CarTestDriveForm = ({ carName, brand, model, year, open, onClose }) => {
               console.error("Error submitting form:", error);
             } finally {
               setLoading(false);
-              setSubmitting(false);
             }
           }}
         >
@@ -191,7 +195,7 @@ const CarTestDriveForm = ({ carName, brand, model, year, open, onClose }) => {
               </DialogContent>
               <DialogActions>
                 <Button
-                  onClick={onClose}
+                  onClick={handleClose}
                   color="primary"
                   variant="outlined"
                   disabled={loading}

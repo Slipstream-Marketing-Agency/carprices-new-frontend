@@ -234,7 +234,7 @@ export default function ModelDescription({
               </p>
             ) : (
               <p>
-                <b>Motor:</b> It can be equipped with a <b>{motorTypes}</b>{" "}
+                <b>Motor:</b> It is equipped with a <b>{motorTypes}</b>{" "}
                 based on the variant.
               </p>
             )
@@ -242,7 +242,7 @@ export default function ModelDescription({
             <>
               {engineTypes?.length > 1 ? (
                 <p>
-                  <b>{t.engine}:</b> It can be equipped with a{" "}
+                  <b>{t.engine}:</b> It is equipped with a{" "}
                   <b>{engineTypes}</b> engine based on the variant.
                 </p>
               ) : (
@@ -258,14 +258,14 @@ export default function ModelDescription({
                 </p>
               ) : (
                 <p>
-                  <b>Motor:</b> It can be equipped with a <b>{motorTypes}</b>{" "}
+                  <b>Motor:</b> It is equipped with a <b>{motorTypes}</b>{" "}
                   based on the variant.
                 </p>
               )}
             </>
           ) : engineTypes?.length > 1 ? (
             <p>
-              <b>{t.engine}:</b> It can be equipped with a <b>{engineTypes}</b>{" "}
+              <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
               engine based on the variant.
             </p>
           ) : (
