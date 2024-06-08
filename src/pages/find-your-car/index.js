@@ -836,8 +836,7 @@ function CarListingLeftSidebar({
                     {/* <Breadcrumb /> */}
                     <h1 className="fw-bold">New Car Buyer's Guide</h1>
                     <p>
-                      Unleash your automotive aspirations with our captivating
-                      selection. Here is a list of shortlisted cars priced
+                     Here is a list of shortlisted cars priced
                       between{" "}
                       <span className="tw-font-bold">
                         <Price data={Number(minPrice)} />
