@@ -59,6 +59,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
     padding: 4px 4px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    text-transform: capitalize;
     font-size: 12px;
     font-weight: 600;
     &:not(:first-of-type) {
@@ -458,10 +459,10 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       color="success"
                       onClick={handleBuyOpen}
                     >
-                      <strong>Buy</strong>
+                      <strong>Reserve Online</strong>
                     </Button>
                     <Button variant="outlined" onClick={handleOpen}>
-                      <strong>Book Now</strong>
+                      <strong>Book a Test Drive</strong>
                     </Button>
                   </div>
                   <div className="d-flex gap-2 align-items-center w-100  py-1 rounded justify-content-start ">

@@ -27,7 +27,7 @@ const emirates = [
 ];
 
 const CarTestDriveForm = ({ carName, brand, model, year, open, onClose }) => {
-  const fullCarName = `${year} ${brand} ${model} (${carName})`;
+  const fullCarName = `${year} ${brand} ${model} ${carName}`;
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
