@@ -27,7 +27,7 @@ const emirates = [
 ];
 
 const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
-  const fullCarName = `${year} ${brand} ${model} (${carName})`;
+  const fullCarName = `${year} ${brand} ${model} ${carName}`;
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -130,7 +130,7 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
                   <>
                     <Typography variant="body1" mb={2}>
                       You are expressing interest in buying a{" "}
-                      <strong>{fullCarName}</strong>.. We will forward your
+                      <strong>{fullCarName}</strong>. We will forward your
                       request to the authorised dealer and their team will
                       contact you at the earliest to proceed with this request.
                     </Typography>
