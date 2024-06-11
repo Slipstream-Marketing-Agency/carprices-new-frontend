@@ -1,12 +1,42 @@
+import { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useState } from 'react';
 import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
+import {
+  Button,
+  CircularProgress,
+  TextField,
+  Box,
+  Typography,
+} from '@mui/material';
 
 const SubscribeForm = () => {
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          console.log('reCAPTCHA ready');
+        });
+      }
+    };
+
+    if (!window.grecaptcha) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = loadRecaptcha;
+      document.body.appendChild(script);
+    } else {
+      loadRecaptcha();
+    }
+  }, []);
 
   const initialValues = { email: '' };
 
@@ -17,25 +47,34 @@ const SubscribeForm = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setMessage('');
     try {
+      setLoading(true);
+      setSubmitting(true);
+
+      const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit' });
+      setRecaptchaToken(token);
+
       const response = await axios.post('/api/subscribe', {
         email: values.email,
-        recaptchaToken,
+        recaptchaToken: token,
       });
 
       setMessage(response.data);
       resetForm();
-      setRecaptchaToken(null);
+      setSubmitted(true);
     } catch (error) {
       console.error('Error submitting form:', error);
       setMessage(error.response ? error.response.data.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
   };
 
   return (
-    <div className="tw-max-w-md tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-overflow-hidden tw-p-8 tw-my-8">
-      <h2 className="tw-text-2xl tw-font-bold tw-mb-6">Subscribe to our Newsletter</h2>
+    <Box className="tw-max-w-md tw-mx-auto tw-bg-white tw-shadow-lg tw-rounded-lg tw-overflow-hidden tw-p-8 tw-my-8">
+      <Typography variant="h4" component="h2" gutterBottom>
+        Subscribe to our Newsletter
+      </Typography>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -44,41 +83,40 @@ const SubscribeForm = () => {
         {({ isSubmitting }) => (
           <Form className="tw-space-y-6">
             <div>
-              <label htmlFor="email" className="tw-block tw-text-sm tw-font-medium tw-text-gray-700">
-                Email Address
-              </label>
               <Field
+                as={TextField}
+                name="email"
                 type="email"
-                name="email"
-                id="email"
-                className="tw-mt-1 tw-block tw-w-full tw-px-3 tw-py-2 tw-border tw-border-gray-300 tw-rounded-md tw-shadow-sm tw-focus:outline-none tw-focus:ring-indigo-500 tw-focus:border-indigo-500 sm:tw-text-sm"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="tw-mt-2 tw-text-sm tw-text-red-600"
+                label="Email Address"
+                fullWidth
+                variant="outlined"
+                error={Boolean(ErrorMessage)}
+                helperText={<ErrorMessage name="email" />}
               />
             </div>
-            <div className="tw-flex tw-justify-center">
+            <Box display="flex" justifyContent="center">
               <ReCAPTCHA
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                 onChange={setRecaptchaToken}
               />
-            </div>
+            </Box>
             <div>
-              <button
+              <Button
                 type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
                 disabled={isSubmitting || !recaptchaToken}
-                className="tw-w-full tw-px-4 tw-py-2 tw-bg-indigo-600 tw-border tw-border-transparent tw-rounded-md tw-shadow-sm tw-text-sm tw-font-medium tw-text-white tw-hover:bg-indigo-700 tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-offset-2 tw-focus:ring-indigo-500"
+                endIcon={loading && <CircularProgress size="1rem" />}
               >
                 {isSubmitting ? 'Submitting...' : 'Subscribe'}
-              </button>
+              </Button>
             </div>
           </Form>
         )}
       </Formik>
-      {message && <p className="tw-mt-4 tw-text-sm tw-text-green-600">{message}</p>}
-    </div>
+      {message && <Typography variant="body2" color="textSecondary" align="center">{message}</Typography>}
+    </Box>
   );
 };
 

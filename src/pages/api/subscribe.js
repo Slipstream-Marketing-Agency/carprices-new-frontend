@@ -46,22 +46,19 @@ const handler = async (req, res) => {
 
     try {
       // Post the email to Strapi
-      const strapiResponse = await axios.post(
-        `${process.env.NEXT_PUBLIC_STRAPI_URL}/newsletter-subscriptions`,
-        {
-          data: { email },
+      const strapiResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/newsletter-subscriptions`, {
+        data: { email },
+      }, {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-          },
-        }
-      );
+      });
 
       if (strapiResponse.status !== 200 && strapiResponse.status !== 201) {
-        return res.status(500).json({ message: 'Error occurred while saving to database' });
+        throw new Error('Failed to store the email in Strapi');
       }
 
+      // Send email notification
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
@@ -97,8 +94,8 @@ const handler = async (req, res) => {
 
       res.status(200).send('Subscription successful');
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Error occurred while processing the request');
+      console.error('Error processing request:', error);
+      res.status(500).send('Error occurred while processing your request');
     }
   } else {
     res.status(404).send();
