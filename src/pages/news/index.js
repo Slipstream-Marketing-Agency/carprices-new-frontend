@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MainLayout from '@/src/layout/MainLayout';
-import dynamic from 'next/dynamic';
 import Pagination from "@/src/utils/Pagination";
 import moment from 'moment';
 import Image from 'next/image';
@@ -10,8 +9,7 @@ import Link from 'next/link';
 import Ad300x250 from '@/src/components/ads/Ad300x250';
 import Ad300x600 from '@/src/components/ads/Ad300x600';
 import Ad728x90 from '@/src/components/ads/Ad728x90';
-
-
+import { useRouter } from 'next/router';
 
 const SkeletonArticle = () => (
   <div className="skeleton-article">
@@ -44,33 +42,40 @@ const SkeletonArticle = () => (
 function BlogStandardPage() {
   const [articles, setArticles] = useState([]);
   const [articlesThisWeek, setArticlesThisWeek] = useState([]);
-  const [articleTags, setArticleTags] = useState([]);
   const [popularArticles, setPopularArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
+  const [totalPage, setTotalPage] = useState(5);
+
+  const router = useRouter();
+  const page = router.query.page || 1; // Get the current page from the query, defaulting to 1
+  const pageSize = 24; // Set the number of items per page
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [articlesRes, articlesThisWeekRes, articleTagsRes, popularArticlesRes] = await Promise.all([
-          axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/list?slug=news&page=1&pageSize=24`),
+        setPageLoading(true); // Set page loading to true
+        const [articlesRes, articlesThisWeekRes, popularArticlesRes] = await Promise.all([
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/list?slug=news&page=${page}&pageSize=${pageSize}`),
           axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/listlasttwoweeks?slug=news`),
-          axios.get(`${process.env.NEXT_PUBLIC_API_URL}articletags/list`),
           axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/listArticlesByEngagement?pageSize=11`)
         ]);
 
         setArticles(articlesRes.data.data);
+        setTotalPage(articlesRes.data.pagination.pageCount);
         setArticlesThisWeek(articlesThisWeekRes.data.data);
-        setArticleTags(articleTagsRes.data);
         setPopularArticles(popularArticlesRes.data.data);
         setLoading(false);
+        setPageLoading(false); // Set page loading to false
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
+        setPageLoading(false); // Set page loading to false
       }
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   return (
     <MainLayout
@@ -92,7 +97,7 @@ function BlogStandardPage() {
         </div>
         <div className="row g-3 mt-1">
           <div className="col-lg-9 mt-2">
-            {loading ? (
+            {loading || pageLoading ? (
               <>
                 <SkeletonArticle />
                 <SkeletonArticle />
@@ -138,7 +143,7 @@ function BlogStandardPage() {
                       <div className="news-card d-flex flex-row cursorPointer">
                         <div className="secondSectionArticles">
                           <div className="position-relative imageContainer ">
-                            <img
+                            <Image
                               src={article.coverImage || altImage}
                               alt="Article Image"
                               layout="responsive"
@@ -163,7 +168,7 @@ function BlogStandardPage() {
             )}
             <Ad728x90 />
             <div className="row g-2 mt-3 white_bg_wrapper">
-              {loading ? (
+              {loading || pageLoading ? (
                 <>
                   <SkeletonArticle />
                   <SkeletonArticle />
@@ -199,7 +204,7 @@ function BlogStandardPage() {
                         </div>
                       </div>
                     </div>
-                    {index % 6 === 0 && (
+                    {index % 6 === 2 && (
                       <div className="col-lg-12 mt-0" key={`ad-${index}`}>
                         <Ad728x90 />
                       </div>
@@ -207,9 +212,9 @@ function BlogStandardPage() {
                   </React.Fragment>
                 ))
               )}
-              {!loading && (
+              {!loading && !pageLoading && (
                 <div className="mt-4">
-                  <Pagination currentPage={1} totalPages={5} />
+                  <Pagination currentPage={page} totalPages={totalPage} onPageChange={setPageLoading} />
                 </div>
               )}
             </div>
@@ -250,7 +255,7 @@ function BlogStandardPage() {
       <div className="container">
         <div className="row g-2 mt-3 white_bg_wrapper">
           <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
-          {loading ? (
+          {loading || pageLoading ? (
             <>
               <SkeletonArticle />
               <SkeletonArticle />
