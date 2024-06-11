@@ -1041,6 +1041,31 @@ function MainLayout({ children, pageMeta }) {
                         </div>
                       </div>
                     </div>
+                    <div className="tw-flex tw-flex-col tw-ml-5 tw-w-1/5 max-md:tw-ml-0 max-md:tw-w-full">
+                      <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
+                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                          Media
+                        </h4>
+                        <div className="tw-flex tw-flex-col tw-mt-6">
+                          <Link href="/press-releases" className="text-white">
+                           Press Releases
+                          </Link>
+                          
+                          {/* <Link
+                            href="/terms-and-conditions"
+                            className="tw-mt-1 tw-text-white"
+                          >
+                            Terms and Conditions
+                          </Link>
+                          <Link
+                            href="/code-of-conduct"
+                            className="tw-mt-1 tw-text-white"
+                          >
+                            Code of Conduct
+                          </Link> */}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="tw-flex tw-flex-col tw-justify-center tw-self-start">
