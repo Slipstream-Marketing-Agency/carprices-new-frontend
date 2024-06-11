@@ -29,7 +29,17 @@ export default function index({ initialPressReleases }) {
         <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-8">
           <div className="lg:tw-col-span-3">
             <div className="tw-flex tw-justify-between tw-items-center tw-mb-8">
-              <h1 className="tw-font-bold">Our Press Releases</h1>
+              <div className="white_bg_wrapper">
+                <h1 className="fw-bold mt-2 box_header">
+                  Latest News and Press Releases
+                </h1>
+                <p className="my-2">
+                  Stay up to date with the latest announcements, updates, and
+                  stories from our team. Explore our press releases to learn
+                  more about our latest innovations, partnerships, and industry
+                  insights.
+                </p>
+              </div>
               {/* <div>
             <label className="tw-mr-2">Sort by:</label>
             <select
@@ -44,11 +54,10 @@ export default function index({ initialPressReleases }) {
           </div> */}
             </div>
             <PressReleaseList pressReleases={pressReleases} />
-            
           </div>
           <div className="lg:tw-col-span-1">
-          <div className="tw-mt-8">
-              <SubscribeForm/>
+            <div className="tw-mt-0">
+              <SubscribeForm />
             </div>
             <div className="sticky-sidebar">
               <div className="ad-container">

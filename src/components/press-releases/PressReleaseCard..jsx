@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 
 const PressReleaseCard = ({ release }) => {
-  const imageUrl = release.attributes.FeaturedImage.data.attributes.formats.large.url;
-  const downloadUrl = release.attributes.FeaturedImage.data.attributes.url;
+  const imageUrl = release?.attributes?.FeaturedImage?.data?.attributes?.formats?.large?.url;
+  const downloadUrl = release?.attributes?.media?.data?.attributes?.url;
   const formattedDate = format(new Date(release.attributes.date), 'dd/MM/yyyy');
   return (
     <div className="tw-bg-white tw-rounded-lg tw-overflow-hidden tw-shadow-lg hover:tw-shadow-2xl tw-transition-shadow tw-duration-300">
