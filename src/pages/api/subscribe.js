@@ -45,7 +45,7 @@ const handler = async (req, res) => {
     }
 
     try {
-      // Post the email to Strapi
+      // Post the email to Strapi in the required format
       const strapiResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/newsletter-subscriptions`, {
         data: { email },
       }, {
@@ -87,7 +87,7 @@ const handler = async (req, res) => {
 
       await transporter.sendMail({
         from: process.env.SMTP_USER,
-        to: 'sahin@slipstream.agency', // Replace with your email
+        to: 'sahin@slipstream.agency,martin@slipstream.agency', // Replace with your email
         subject: 'New Newsletter Subscription',
         html: emailMessage,
       });
