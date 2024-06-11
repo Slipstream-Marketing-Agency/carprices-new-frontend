@@ -46,7 +46,7 @@ const handler = async (req, res) => {
 
     try {
       // Post the email to Strapi in the required format
-      const strapiResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/newsletter-subscriptions`, {
+      const strapiResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}newsletter-subscriptions`, {
         data: { email },
       }, {
         headers: {
