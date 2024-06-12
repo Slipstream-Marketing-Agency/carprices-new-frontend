@@ -503,6 +503,7 @@ export default function index({
                   autoPlay
                   muted
                   loop
+                  playsInline
                   poster="/path/to/poster.jpg"
                   className="banner-video"
                 >
