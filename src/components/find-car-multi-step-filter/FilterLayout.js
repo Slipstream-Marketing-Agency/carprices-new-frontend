@@ -393,7 +393,7 @@ export default function FilterLayout() {
                       <CircularProgress />
                     </div>
                   )}
-                  <div className="tw-h-[350px] tw-relative">
+                  <div className="tw-h-[380px] tw-relative">
                     {steps[currentStep].component}
                   </div>
 

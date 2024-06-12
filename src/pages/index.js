@@ -496,54 +496,28 @@ export default function index({
               <FilterLayout />
             </div>
 
-            <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[536px]">
-              <img
-                loading="lazy"
-                src="/Al-Ghandi-Auto-Chevrolet.jpg"
-                className="md:tw-block tw-hidden tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl"
-              />
-
-              <img
-                loading="lazy"
-                src="/Al-Ghandi-Auto-Chevrolet-Mob.jpg"
-                className="md:tw-hidden tw-block tw-object-cover tw-absolute tw-inset-0 tw-w-full md:tw-h-[457px] tw-h-[536px] tw-rounded-2xl"
-              />
-
-              {/* Overlay */}
-              <div className="tw-relative tw-flex tw-flex-col md:tw-px-8 tw-px-3 md:tw-pt-8 tw-pt-3 md:tw-pb-0 tw-w-full md:tw-h-[457px] tw-h-[536px]">
-                <h1 className="text-white md:tw-leading-10 tw-leading-6 tw-font-bold banner-header">
-                  World’s First Truly Interactive{" "}
-                  {/* <br className="md:tw-block tw-hidden" /> */}
-                  New Car Finder Platform
-                </h1>
-                <p className="md:tw-mt-2 tw-mt-2 md:tw-w-[100%]">
-                  Navigate the world of new car buying research with a fresh
-                  perspective and our interactive car finder. Explore all the
-                  latest 2024/25 new car models in the UAE. We have listed over
-                  <span className="tw-font-bold">
-                    {" "}
-                    74 car brands, 603 unique car models and 1,776 individual
-                    vehicle trims
-                  </span>{" "}
-                  for you to choose from.
-                </p>
-                {/* <img
-                loading="lazy"
-                src="/Logo-Al-Ghandi-Auto.png"
-                className="tw-absolute tw-object-contain tw-bottom-0 tw-left-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[55px] tw-h-[35px] tw-mb-4 tw-ml-4"
-              />
-              <img
-                loading="lazy"
-                src="/Chevrolet-Logo.png"
-                className="tw-absolute tw-bottom-0 tw-object-contain tw-right-6 md:tw-w-[120px] tw-w-[100px] md:tw-h-[50px] tw-h-[40px] tw-mb-4 tw-mr-4"
-              /> */}
+            <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px]">
+              <div className="video-container">
+                <video
+                  preload="metadata"
+                  autoPlay
+                  muted
+                  loop
+                  poster="/path/to/poster.jpg"
+                  className="banner-video"
+                >
+                  <source
+                    src="https://cdn.carprices.ae/assets/Promo_Web_1_103eaf6dea.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
               </div>
 
-              <div className="md:tw-block tw-hidden">
+              {/* Overlay and additional content can go here */}
+              {/* <div className="md:tw-block tw-hidden">
                 <Ad728x90 dataAdSlot="4367254600" />
-              </div>
-
-              {/* Logos at the bottom left and right */}
+              </div> */}
             </div>
           </div>
 
