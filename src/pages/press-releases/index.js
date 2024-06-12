@@ -24,20 +24,25 @@ export default function index({ initialPressReleases }) {
   console.log(pressReleases, "pressReleases");
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title: " CarPrices.ae - Latest Automotive News and Updates",
+        description:
+          "Stay informed with CarPrices.ae for the latest in the automotive industry. Get updates on new car launches, industry trends, and company announcements. Your one-stop source for automotive news and insights.",
+        type: "Car Review Website",
+      }}
+    >
       <div className="tw-container tw-mx-auto tw-px-4 tw-my-8">
         <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-8">
           <div className="lg:tw-col-span-3">
             <div className="tw-flex tw-justify-between tw-items-center tw-mb-8">
               <div className="white_bg_wrapper">
                 <h1 className="fw-bold mt-2 box_header">
-                  Latest News and Press Releases
+                  CarPrices.ae in the media
                 </h1>
                 <p className="my-2">
-                  Stay up to date with the latest announcements, updates, and
-                  stories from our team. Explore our press releases to learn
-                  more about our latest innovations, partnerships, and industry
-                  insights.
+                  CarPrices.ae is getting noticed for its innovative approach in
+                  simplifying car buying and the while purchase experience.
                 </p>
               </div>
               {/* <div>
