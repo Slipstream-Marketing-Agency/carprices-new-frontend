@@ -492,11 +492,9 @@ export default function index({
       >
         <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
           <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
-            <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
-              <FilterLayout />
-            </div>
+           
 
-            <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px]">
+            <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px] md:tw-order-1 tw-order-2">
               <div className="video-container">
                 <video
                   preload="metadata"
@@ -519,6 +517,9 @@ export default function index({
               {/* <div className="md:tw-block tw-hidden">
                 <Ad728x90 dataAdSlot="4367254600" />
               </div> */}
+            </div>
+            <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden md:tw-order-2 tw-order-1">
+              <FilterLayout />
             </div>
           </div>
 

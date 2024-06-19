@@ -397,7 +397,7 @@ export default function FilterLayout() {
                     {steps[currentStep].component}
                   </div>
 
-                  <div className="tw-mt-12 tw-relative">
+                  <div className="tw-mt-6 tw-relative">
                     {currentStep === 1 && (
                       <div className="tw-absolute tw-top-[-21px] tw-w-full">
                          <p className="tw-text-[11px] tw-font-bold ">
