@@ -5,14 +5,14 @@ SwiperCore.use([Pagination, Autoplay, Navigation]);
 import Link from "next/link";
 
 import MainLayout from "@/src/layout/MainLayout";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import axios from "axios";
 import Price from "@/src/utils/Price";
-import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
-import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
+import CompareCarCard from "@/src/components-old/compare-cars/CompareCarCard";
+import MultiStepCarSelection from "@/src/components-old/compare-cars/MultiStepCarSelection";
 
 
 function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {

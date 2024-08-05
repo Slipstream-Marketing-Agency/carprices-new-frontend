@@ -20,19 +20,15 @@ async function fetchRedirects() {
 
 async function middleware(request) {
   try {
-    console.log('Middleware triggered for:', request.url);
 
     const now = Date.now();
     // Check if cache is empty or expired
     if (!redirectsCache.length || now - cacheTime > CACHE_DURATION) {
-      console.log('Fetching redirects from Strapi');
       redirectsCache = await fetchRedirects();
       cacheTime = now;
     }
 
     const requestPath = request.nextUrl.pathname;
-    console.log('Request path:', requestPath);
-    console.log('Redirects cache:', redirectsCache);
 
     const matchedRedirect = redirectsCache.find(r => r.from === requestPath);
 
@@ -59,16 +55,16 @@ async function middleware(request) {
       }
 
       if (statusCode === 410 || statusCode === 451) {
-        console.log(`Returning status ${statusCode} for ${matchedRedirect.from}`);
+        // console.log(`Returning status ${statusCode} for ${matchedRedirect.from}`);
         return new NextResponse(null, { status: statusCode });
       }
 
       const destination = new URL(matchedRedirect.to, request.nextUrl.origin);
-      console.log(`Redirecting from ${matchedRedirect.from} to ${matchedRedirect.to} with status ${statusCode}`);
+      // console.log(`Redirecting from ${matchedRedirect.from} to ${matchedRedirect.to} with status ${statusCode}`);
       return NextResponse.redirect(destination, statusCode);
     }
 
-    console.log('No redirect match found, proceeding to next handler');
+    // console.log('No redirect match found, proceeding to next handler');
     return NextResponse.next();
   } catch (error) {
     console.error('Error in middleware:', error);

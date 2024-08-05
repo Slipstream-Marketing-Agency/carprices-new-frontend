@@ -11,13 +11,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import "@/styles/tailwind.css";
-import Script from "next/script";
-import Preloader from "../components/common/Preloader";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
+// import Script from "next/script";
+// import Preloader from "../components/common/Preloader";
+// import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Provider } from "react-redux";
+import store from "../store";
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -84,8 +86,9 @@ function MyApp({ Component, pageProps }) {
           </>
         )} */}
       </Head>
-
+      <Provider store={store}>
       <Component {...pageProps} />
+      </Provider>
       <Analytics />
       <SpeedInsights/>
       <style jsx global>

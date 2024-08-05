@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BrandCategoryHome1 } from "../../../data/data";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import PrimaryButton from "@/src/components/buttons/PrimaryButton";
 
 function BrandCategory({ brandDetails }) {
   const router = useRouter();
@@ -11,7 +12,7 @@ function BrandCategory({ brandDetails }) {
   let isRtl = router.locale === 'ar';
   return (
     <div className="brand-category-area mt-3 mb-3">
-      <div className="container white_bg_wrapper">
+      <div className=" ">
         <div className="row mb-15 wow fadeInUp" data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
@@ -45,11 +46,12 @@ function BrandCategory({ brandDetails }) {
           <div className="col-lg-12">
             <div className="view-btn-area">
               {/* <p>There will be 100+ Upcoming Car</p> */}
-              <Link legacyBehavior href="/brands">
+              {/* <Link legacyBehavior href="/brands">
                 <button className="btn mb-2 mb-md-0 btn-round btn-outline btn-block">
                   View More
                 </button>
-              </Link>
+              </Link> */}
+              <PrimaryButton label="View More" href="/brands"/>
             </div>
           </div>
         </div>

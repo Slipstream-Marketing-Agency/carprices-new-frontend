@@ -11,7 +11,7 @@ function BodyTypes({ bodyTypeList }) {
   
   return (
     <div className="body-category-area mt-3 mb-3">
-      <div className="container white_bg_wrapper pb-1">
+      <div className=" pb-1">
         <div className="row mb-4 wow fadeInUp " data-wow-delay="200ms">
           <div className="col-lg-12 d-flex align-items-start justify-content-start flex-wrap gap-4">
             <div className="section-title1 w-100">

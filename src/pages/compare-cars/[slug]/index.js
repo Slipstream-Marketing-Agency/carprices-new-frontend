@@ -5,20 +5,20 @@ SwiperCore.use([Pagination, Autoplay, Navigation]);
 import Link from "next/link";
 
 import MainLayout from "@/src/layout/MainLayout";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import axios from "axios";
 import Price from "@/src/utils/Price";
-import CompareCarCard from "@/src/components/compare-cars/CompareCarCard";
-import MultiStepCarSelection from "@/src/components/compare-cars/MultiStepCarSelection";
-import CarComparisonTable from "@/src/components/compare-cars/CarComparisonTable";
+import CompareCarCard from "@/src/components-old/compare-cars/CompareCarCard";
+import MultiStepCarSelection from "@/src/components-old/compare-cars/MultiStepCarSelection";
+import CarComparisonTable from "@/src/components-old/compare-cars/CarComparisonTable";
 import dynamic from "next/dynamic";
 
 
 const CompareCarLazy = dynamic(
-  () => import("../../../components/Home1/CompareCar/index"),
+  () => import("../../../components-old/Home1/CompareCar/index"),
   {
     loading: () => <p>Loading comparison...</p>, // Optional loading placeholder
     ssr: true, // Set to false if this component is not critical for SEO

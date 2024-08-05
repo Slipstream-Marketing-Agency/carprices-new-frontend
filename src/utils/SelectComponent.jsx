@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import useCustomSelect from "../components/hooks/useCustomSelect";
+import useCustomSelect from "../components-old/hooks/useCustomSelect";
 // import useCustomSelect from './useCustomSelect'; // Update the path based on your project structure
 
 const SelectComponent = ({ options, placeholder, open, customClass }) => {
