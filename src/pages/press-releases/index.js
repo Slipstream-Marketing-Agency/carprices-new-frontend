@@ -1,10 +1,10 @@
 import React from "react";
 
-import PressReleaseList from "@/src/components/press-releases/PressReleaseList";
+import PressReleaseList from "@/src/components-old/press-releases/PressReleaseList";
 import MainLayout from "@/src/layout/MainLayout";
 import { useState, useEffect } from "react";
-import Ad300x600 from "@/src/components/ads/Ad300x600";
-import SubscribeForm from "@/src/components/press-releases/SubscribeForm";
+import Ad300x600 from "@/src/components-old/ads/Ad300x600";
+import SubscribeForm from "@/src/components-old/press-releases/SubscribeForm";
 
 export default function index({ initialPressReleases }) {
   const [pressReleases, setPressReleases] = useState(initialPressReleases);

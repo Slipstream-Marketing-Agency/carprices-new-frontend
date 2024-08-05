@@ -1,5 +1,5 @@
-import Ad160x600 from '@/src/components/ads/Ad160x600';
-import Ad728x90 from '@/src/components/ads/Ad728x90';
+import Ad160x600 from '@/src/components-old/ads/Ad160x600';
+import Ad728x90 from '@/src/components-old/ads/Ad728x90';
 import MainLayout from '@/src/layout/MainLayout';
 import { createApolloClient } from '@/src/lib/apolloClient';
 import Pagination from '@/src/utils/Pagination';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import altImage from '../../../../../public/assets/images/blog-alt-image.png'
 import { useRouter } from 'next/router';
-import BlogHeader from '@/src/components/BlogHeader';
+import BlogHeader from '@/src/components-old/BlogHeader';
 
 function index({searchSlug,news,fullData,totalNews,totalPages,currentPage}) {
     const router = useRouter();

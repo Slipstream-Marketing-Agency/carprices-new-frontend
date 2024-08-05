@@ -11,24 +11,24 @@ import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import MainLayout from "@/src/layout/MainLayout";
 import SelectComponent from "@/src/utils/SelectComponent";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
-import Ad300x250 from "@/src/components/ads/Ad300x250";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
+import Ad300x250 from "@/src/components-old/ads/Ad300x250";
 import Image from "next/image";
-import CarDetailsNav from "@/src/components/details/CarDetailsNav";
+import CarDetailsNav from "@/src/components-old/details/CarDetailsNav";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
-import Ad300x600 from "@/src/components/ads/Ad300x600";
+import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import axios from "axios";
-import KeySpec from "@/src/components/trim-details/KeySpec";
-import TrimDescription from "@/src/components/trim-details/TrimDescription";
-import DetailedSpecification from "@/src/components/trim-details/DetailedSpecification";
-import VehicleGallery from "@/src/components/trim-details/VehicleGallery";
-import VehicleReview from "@/src/components/trim-details/VehicleReview";
-import VehicleFaq from "@/src/components/trim-details/VehicleFaq";
-import NewShareBtns from "@/src/components/common/NewShareBtns";
+import KeySpec from "@/src/components-old/trim-details/KeySpec";
+import TrimDescription from "@/src/components-old/trim-details/TrimDescription";
+import DetailedSpecification from "@/src/components-old/trim-details/DetailedSpecification";
+import VehicleGallery from "@/src/components-old/trim-details/VehicleGallery";
+import VehicleReview from "@/src/components-old/trim-details/VehicleReview";
+import VehicleFaq from "@/src/components-old/trim-details/VehicleFaq";
+import NewShareBtns from "@/src/components-old/common/NewShareBtns";
 import Price from "@/src/utils/Price";
-import CarTestDriveForm from "@/src/components/CarTestDriveForm";
+import CarTestDriveForm from "@/src/components-old/CarTestDriveForm";
 
 import {
   Button,
@@ -50,8 +50,8 @@ import {
   Box,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import BuyForm from "@/src/components/BuyForm";
-import LoanEnquireForm from "@/src/components/LoanEnquireForm";
+import BuyForm from "@/src/components-old/BuyForm";
+import LoanEnquireForm from "@/src/components-old/LoanEnquireForm";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {

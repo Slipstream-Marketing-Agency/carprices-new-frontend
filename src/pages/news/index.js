@@ -6,9 +6,9 @@ import moment from 'moment';
 import Image from 'next/image';
 import altImage from '../../../public/assets/images/blog-alt-image.png';
 import Link from 'next/link';
-import Ad300x250 from '@/src/components/ads/Ad300x250';
-import Ad300x600 from '@/src/components/ads/Ad300x600';
-import Ad728x90 from '@/src/components/ads/Ad728x90';
+import Ad300x250 from '@/src/components-old/ads/Ad300x250';
+import Ad300x600 from '@/src/components-old/ads/Ad300x600';
+import Ad728x90 from '@/src/components-old/ads/Ad728x90';
 import { useRouter } from 'next/router';
 
 const SkeletonArticle = () => (

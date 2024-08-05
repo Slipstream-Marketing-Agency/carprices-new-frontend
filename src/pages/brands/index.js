@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import MainLayout from "@/src/layout/MainLayout";
-import ProductSearch from "@/src/components/common/ProductSearch";
+import ProductSearch from "@/src/components-old/common/ProductSearch";
 import ProductCategory from "@/src/utils/ProductCategory";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Pagination from "@/src/utils/Pagination";
 

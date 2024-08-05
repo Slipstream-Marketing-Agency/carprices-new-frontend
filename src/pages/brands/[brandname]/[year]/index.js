@@ -2,7 +2,7 @@ import React from "react";
 import MainLayout from "@/src/layout/MainLayout";
 import axios from "axios";
 
-import CarFilter from "@/src/components/filter/CarFilter";
+import CarFilter from "@/src/components-old/filter/CarFilter";
 
 
 function CarListingLeftSidebar({

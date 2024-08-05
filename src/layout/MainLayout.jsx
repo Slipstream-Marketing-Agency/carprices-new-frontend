@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "../components/Home1/Header";
-import Footer1 from "../components/Footer/Footer1";
-import Topbar from "../components/Home1/Topbar";
-import Modals from "../components/Home1/Modals";
+import Header from "../components-old/Home1/Header";
+import Footer1 from "../components-old/Footer/Footer1";
+import Topbar from "../components-old/Home1/Topbar";
+import Modals from "../components-old/Home1/Modals";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -20,8 +20,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import axios from "axios";
-import Ad970x250 from "../components/ads/Ad970x250";
-import Ad300x250 from "../components/ads/Ad300x250";
+import Ad970x250 from "../components-old/ads/Ad970x250";
+import Ad300x250 from "../components-old/ads/Ad300x250";
+import Image from "next/image";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -1099,6 +1100,9 @@ function MainLayout({ children, pageMeta }) {
                         <Link href="https://www.instagram.com/carprices.ae?igsh=bnE4cnpudjFwMHg1">
                           <i className="bx bxl-instagram-alt tw-text-white" />
                         </Link>
+                      </div>
+                      <div className="tw-mt-4">
+                        <Image src="/assets/sponsored/Razrcorp-White-Logo.png" alt="" width={100} height={100}/>
                       </div>
                     </div>
                   </div>

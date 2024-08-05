@@ -14,7 +14,7 @@ import "yet-another-react-lightbox/styles.css";
 import "node_modules/react-modal-video/css/modal-video.css";
 import ModalVideo from "react-modal-video";
 import MainLayout from "@/src/layout/MainLayout";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 

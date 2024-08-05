@@ -1,12 +1,16 @@
-body {
+/* body {
   background-color: #fafafa;
-}
+} */
 .fs-7 {
   font-size: 14px;
 }
 
 .fs-8 {
   font-size: 12px !important;
+}
+
+.text-primary{
+  color: var(--primary)
 }
 @media (max-width: 1280px) {
   .container,
@@ -140,9 +144,9 @@ p {
   h6 {
     font-size: 0.8rem !important;
   }
-  p {
+  /* p {
     font-size: 14px !important;
-  }
+  } */
 }
 
 button {
@@ -265,12 +269,7 @@ button:focus {
   width: 100%;
   overflow: hidden;
 }
-.modal-header {
-  background: var(--primary);
-  border-top-left-radius: 19px;
-  border-top-right-radius: 19px;
-  color: white !important;
-}
+
 
 .modal-body {
   overflow-y: scroll;
@@ -336,7 +335,7 @@ button:focus {
 }
 
 .checkbox-container {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* overflow-y: scroll; */
   max-height: 0;
   transition: max-height 0.3s ease-out;
@@ -1041,12 +1040,12 @@ small {
 }
 /* about Page ends */
 
-.underLine {
+/* .underLine {
   width: 101px;
   height: 3px;
   background: var(--primary-color1);
   border-radius: 30%;
-}
+} */
 
 /* contact form begins */
 
@@ -3285,4 +3284,43 @@ a,
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
+}
+
+
+
+.car-filter-card h3{
+  font-size: 15px !important;
+}
+
+.car-filter-card h4{
+  font-size: 20px !important;
+}
+
+.car-filter-card p{
+  font-size: 24px !important;
+}
+
+.car-filter-card-spec  .spec-head{
+  font-size: 13px;
+}
+
+.car-filter-card-spec .spec-value{
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.primary-delete{
+  color: #FF541E;
+}
+
+.emi-text{
+  font-size: 12px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-content {
+  height: 95% !important;
 }

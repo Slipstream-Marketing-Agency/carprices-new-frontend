@@ -25213,10 +25213,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
    53. Product Page
 ========================================*/
 .product-sidebar {
-  border-radius: 10px;
-  border: 1px solid rgba(238, 238, 238, 0.93);
+  border: none;
   background: #fff;
-  padding: 10px 0px;
 }
 .product-sidebar .wp-block-categoris-cloud {
   margin: 0;
@@ -25281,6 +25279,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   line-height: 1;
   display: flex;
   justify-content: space-between;
+  border-bottom: 0.5px solid #EFEFEF;
 }
 .product-sidebar
   .product-widget
@@ -25289,6 +25288,9 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .form-inner {
   margin-bottom: 5px;
 }
+
+/* Important */
+
 .product-sidebar
   .product-widget
   .check-box-item
@@ -25296,7 +25298,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   .form-inner
   input {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 50px;
   background: #fff;
   color: var(--text-color);
   font-family: var(--font-gilroy);
@@ -25304,7 +25306,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   font-weight: 400;
   height: 40px;
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid #EFEFEF;
 }
 .product-sidebar
   .product-widget
@@ -25368,7 +25370,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 .product-sidebar .product-widget .check-box-item .checkbox-container > ul {
   margin: 0;
-  padding: 0;
+  padding-left: 0;
   list-style: none;
 }
 .product-sidebar .product-widget .check-box-item .checkbox-container > ul > li {
@@ -25424,7 +25426,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   > li
   .containerss
   span.text {
-  font-weight: 600;
+  font-weight: 400;
 }
 .product-sidebar
   .product-widget
@@ -29032,7 +29034,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   border-radius: 10px;
   background: var(--white-color);
   border: radius 10px;
-  box-shadow: 0px 0 5px black;
   width: 100%;
 
   /* width: 360px;
@@ -29088,11 +29089,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   font-family: var(--font-gilroy);
 }
 
-.search_filter_box {
-  border-radius: 10px 10px 2px 2px;
-  box-shadow: 0 0 38px 0 rgba(36, 39, 44, 0.3);
-  transition: all 1s ease-in;
-}
+
 
 #filter_seating .search_filter_box_items .banner_btn {
   width: 31% !important;
@@ -29673,9 +29670,6 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 /* banner button ends */
 
-.modal-content {
-  height: 500px !important;
-}
 
 /* StarRating.module.css */
 

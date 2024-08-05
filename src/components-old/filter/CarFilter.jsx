@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import CarLeftSidebar from "@/src/utils/CarLeftSidebar";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
-import ProductSideFilterList from "@/src/components/filter/ProductSideFilterList";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
+import ProductSideFilterList from "@/src/components-old/filter/ProductSideFilterList";
 import Pagination from "@/src/utils/Pagination";
 import axios from "axios";
 import { useRouter } from "next/router";
-import BodyTypes from "@/src/components/Home1/BodyTypes";
-import BrandCategory from "@/src/components/Home1/BrandCategory";
+import BodyTypes from "@/src/components-old/Home1/BodyTypes";
+import BrandCategory from "@/src/components-old/Home1/BrandCategory";
 import Image from "next/image";
 import LoaderOverlay from "@/src/utils/LoaderOverlay ";
 import Breadcrumb from "@/src/utils/Breadcrumb";

@@ -12,10 +12,10 @@ import { gql } from "@apollo/client";
 import { createApolloClient } from "@/src/lib/apolloClient";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Ad728x90 from "@/src/components/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 import altImage from "../../../../public/assets/images/blog-alt-image.png";
-import Ad160x600 from "@/src/components/ads/Ad160x600";
+import Ad160x600 from "@/src/components-old/ads/Ad160x600";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -35,16 +35,16 @@ import {
   TelegramIcon,
 } from "next-share";
 import moment from "moment/moment";
-import BlogRecent from "@/src/components/BlogRecent";
-import BlogRelated from "@/src/components/BlogRelated";
-import TabNavigation from "@/src/components/TabNavigation";
-import MoreBrands from "@/src/components/MoreBrands";
-import SocialButtons from "@/src/components/common/SocialButtons";
+import BlogRecent from "@/src/components-old/BlogRecent";
+import BlogRelated from "@/src/components-old/BlogRelated";
+import TabNavigation from "@/src/components-old/TabNavigation";
+import MoreBrands from "@/src/components-old/MoreBrands";
+import SocialButtons from "@/src/components-old/common/SocialButtons";
 import useTranslate from "@/src/utils/useTranslate";
-import Ad970x250 from "@/src/components/ads/Ad970x250";
-import Ad300x600 from "@/src/components/ads/Ad300x600";
-import Ad300x250 from "@/src/components/ads/Ad300x250";
-import AdBlog from "@/src/components/ads/AdBlog";
+import Ad970x250 from "@/src/components-old/ads/Ad970x250";
+import Ad300x600 from "@/src/components-old/ads/Ad300x600";
+import Ad300x250 from "@/src/components-old/ads/Ad300x250";
+import AdBlog from "@/src/components-old/ads/AdBlog";
 import axios from "axios";
 
 const adCode =

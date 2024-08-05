@@ -33,6 +33,8 @@ export default function FilterLayout() {
     bodyTypes: [],
   });
 
+  console.log(filterData, "filterData");
+
   const [bodyTypeList, setBodyTypeList] = useState([]);
   const [seatList, setSeatList] = useState([]);
 
@@ -52,6 +54,21 @@ export default function FilterLayout() {
     setOpenErrorDialog(false);
     setError("");
   };
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setFilterData({
+        preferences: [],
+        budget: [25000, 55000],
+        seating: [],
+        bodyTypes: [],
+      });
+      setCurrentStep(0);
+      setLoading(false);
+    };
+
+    handleRouteChange();
+  }, [router.query]);
 
   const bodyTypesParam =
     filterData.bodyTypes.length > 0
@@ -292,7 +309,7 @@ export default function FilterLayout() {
     const url =
       `/find-your-car?` +
       query +
-      `&price=${filterData?.budget[0]}-${filterData?.budget[1]}` +
+      `&price=${filterData?.budget[0]}-${filterData?.budget[1]}&initialprice=${filterData?.budget[0]}-${filterData?.budget[1]}&sort=price-asc` +
       bodyTypesQuery;
 
     router.push(url);
@@ -373,63 +390,72 @@ export default function FilterLayout() {
 
       {!specific ? (
         <>
-          <div className="search_filter_box tw-text-center">
-            <div>
-              <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[85px]">
-                <img
-                  loading="lazy"
-                  src="/gradiend-lines.svg"
-                  className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover"
-                />
-                <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold tw-mb-0">
-                  {steps[currentStep].title}
-                </h3>
-              </div>
+          <div
+            className={`${
+              router.pathname === "/"
+                ? "tw-shadow-lg tw-rounded-2xl tw-text-center  "
+                : "tw-text-center "
+            }`}
+          >
+            <div
+              className={`${
+                router.pathname === "/"
+                  ? "tw-relative tw-flex tw-flex-col tw-rounded-tr-2xl tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[85px]"
+                  : "tw-relative tw-flex tw-flex-col  tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[85px]"
+              }`}
+            >
+              <img
+                loading="lazy"
+                src="/gradiend-lines.svg"
+                className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-rounded-tr-2xl tw-rounded-tl-2xl"
+              />
+              <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold tw-mb-0">
+                {steps[currentStep].title}
+              </h3>
+            </div>
 
-              <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-border tw-border-neutral-100 tw-overflow-hidden">
-                <div className="tw-flex tw-flex-col tw-px-6 tw-pt-6 tw-pb-3 tw-bg-white tw-border-t tw-border-neutral-100 tw-shadow-lg tw-relative">
-                  {loading && (
-                    <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
-                      <CircularProgress />
-                    </div>
-                  )}
-                  <div className="tw-h-[380px] tw-relative">
-                    {steps[currentStep].component}
+            <div className="tw-row-span-1 md:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-relative">
+              <div className="tw-flex tw-flex-col tw-px-6 tw-pt-6 tw-pb-3 ">
+                {loading && (
+                  <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
+                    <CircularProgress />
                   </div>
+                )}
+                <div className="tw-h-[380px] tw-relative">
+                  {steps[currentStep].component}
+                </div>
 
-                  <div className="tw-mt-12 tw-relative">
-                    {currentStep === 1 && (
-                      <div className="tw-absolute tw-top-[-21px] tw-w-full">
-                         <p className="tw-text-[11px] tw-font-bold ">
+                <div className="tw-mt-6 tw-relative">
+                  {currentStep === 1 && (
+                    <div className="tw-absolute tw-top-[-21px] tw-w-full">
+                      <p className="tw-text-[11px] tw-font-bold ">
                         {" "}
                         *Choose Multiple Body Types
                       </p>
-                        </div>
-                     
-                    )}
-                    <div className="tw-flex tw-justify-end  gap-3">
-                      {currentStep > 0 && (
-                        <button
-                          className="tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
-                          onClick={handlePrevStep}
-                        >
-                          {t.previous}
-                        </button>
-                      )}
-
-                      <button
-                        onClick={
-                          currentStep === 3 ? handleSubmit : handleNextStep
-                        }
-                        className={`btn ${
-                          error
-                            ? "tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
-                            : "tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
-                        }`}
-                      >
-                        {currentStep === 3 ? `${t.submit}` : `${t.next}`}
-                      </button>
                     </div>
+                  )}
+                  <div className="tw-flex tw-justify-end  gap-3">
+                    {currentStep > 0 && (
+                      <button
+                        className="tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
+                        onClick={handlePrevStep}
+                      >
+                        {t.previous}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={
+                        currentStep === 3 ? handleSubmit : handleNextStep
+                      }
+                      className={`btn ${
+                        error
+                          ? "tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
+                          : "tw-px-6 md:tw-py-2.5 tw-py-1.5 tw-bg-blue-600 tw-text-white tw-text-base tw-font-bold tw-rounded-full hover:tw-bg-blue-700"
+                      }`}
+                    >
+                      {currentStep === 3 ? `${t.submit}` : `${t.next}`}
+                    </button>
                   </div>
                 </div>
               </div>
