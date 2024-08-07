@@ -1101,9 +1101,6 @@ function MainLayout({ children, pageMeta }) {
                           <i className="bx bxl-instagram-alt tw-text-white" />
                         </Link>
                       </div>
-                      <div className="tw-mt-4">
-                        <Image src="/assets/sponsored/Razrcorp-White-Logo.png" alt="" width={100} height={100}/>
-                      </div>
                     </div>
                   </div>
                 </div>
