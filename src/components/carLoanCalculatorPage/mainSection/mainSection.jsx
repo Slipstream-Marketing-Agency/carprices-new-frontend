@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import LoanDetails from "../loanDetails/LoanDetails";
-import ChooseCarDiv from "../chooseCarDiv/old/ChooseCarDiv_old";
 import DimensionSection from "../dimensionsSection/DimensionSection";
 import FrequentlySearched from "../frequentlySearched/FrequentlySearched";
 import { carLoanPage } from "@/src/mocks/labels";
