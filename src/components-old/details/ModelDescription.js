@@ -37,8 +37,8 @@ export default function ModelDescription({
     .filter((value, index, self) => self.indexOf(value) === index)
     .sort((a, b) => a - b);
 
-  const minRange = range.length > 0 ? range[0] : 'N/A';
-  const maxRange = range.length > 0 ? range[range.length - 1] : 'N/A';
+  const minRange = range.length > 0 ? range[0] : "N/A";
+  const maxRange = range.length > 0 ? range[range.length - 1] : "N/A";
 
   const batteryCapacity = allTrims
     ?.map((item) => item?.attributes?.batteryCapacity)
@@ -101,8 +101,6 @@ export default function ModelDescription({
 
   const outputString = `${safetyFeature}`;
 
-  
-
   const variableText = allTrims
     .map((trim, index) => (
       <Link
@@ -134,250 +132,323 @@ export default function ModelDescription({
     });
 
   return (
-    <div id="description" className={`mb-3 ${isRtl && "text-end"}`}>
-      <div className="white_bg_wrapper mb-3">
-        <h2 className={`w-100 fw-bold`}>
-          {year} {brand?.name} {model?.name}
-        </h2>
-        <hr className="my-2 heading-bottom " />
+    <>
+      <div className="tw-mb-10">
+        <h2 className="tw-font-semibold tw-mb-5">Overview</h2>
+        <table className="tw-min-w-full tw-rounded-full tw-bg-white tw-border tw-border-solid  tw-border-gray-200">
+          <tbody className="tw-text-gray-800 tw-text-sm ">
+            <tr className="tw-border-b tw-border-gray-200">
+              <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                {t.price}
+              </td>
+              <td className="tw-py-4 tw-px-6">
+                {isRtl ? (
+                  <>
+                    {brand?.name} {model?.name}{" "}
+                    {minPrice === null ? "" : `${t.aed} `}
+                    <b>
+                      {minPrice !== null ? (
+                        <>
+                          <Price data={minPrice} />
+                          {minPrice !== maxPrice && maxPrice !== null ? (
+                            <>
+                              {" "}
+                              - د.إ <Price data={maxPrice} />
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      ) : (
+                        " TBD*" // Assuming you want to display a message when the price is not available
+                      )}
+                    </b>
+                    {minPrice !== maxPrice &&
+                    minPrice !== null &&
+                    maxPrice !== null
+                      ? " اعتمادًا على الطراز"
+                      : "."}
+                  </>
+                ) : (
+                  <>
+                    The{" "}
+                    <b>
+                      {brand?.name} {model?.name}
+                    </b>{" "}
+                    is priced
+                    {minPrice === null ? "" : ` at `}
+                    <b>
+                      {minPrice !== null ? (
+                        <>
+                          <Price data={minPrice} />
+                          {minPrice !== maxPrice && maxPrice !== null ? (
+                            <>
+                              {" "}
+                              - <Price data={maxPrice} />
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      ) : (
+                        " TBD*" // Assuming you want to display a message when the price is not available
+                      )}
+                    </b>
+                    {minPrice !== maxPrice &&
+                    minPrice !== null &&
+                    maxPrice !== null
+                      ? " based on the variant."
+                      : "."}
+                  </>
+                )}
+              </td>
+            </tr>
+            <tr className="tw-border-b tw-border-gray-200">
+              <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                {t.variants}
+              </td>
+              <td className="tw-py-4 tw-px-6">
+                {isRtl ? (
+                  allTrims?.length === 1 ? (
+                    <p>
+                      <b>{allTrims.map((trim) => trim.name)}</b>.
+                    </p>
+                  ) : (
+                    <p>
+                      <b>{allTrims?.length}</b>
+                      {variableText}.
+                    </p>
+                  )
+                ) : allTrims?.length === 1 ? (
+                  <p>
+                    It is only available in one variant:{" "}
+                    <b>{allTrims.map((trim) => trim.name)}</b>.
+                  </p>
+                ) : (
+                  <p>
+                    It is available in <b>{allTrims?.length}</b> variants:{" "}
+                    {variableText}.
+                  </p>
+                )}
+              </td>
+            </tr>
+            <tr className="tw-border-b tw-border-gray-200">
+              <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                {mainTrimFuelType === "Electric" ? (
+                  motorTypeCount?.length <= 1 ||
+                  motorTypeCountOr?.length <= 1 ? (
+                    "Motor:"
+                  ) : (
+                    "Motor:"
+                  )
+                ) : mainTrimFuelType === "Hybrid" ? (
+                  <>
+                    {engineTypes?.length > 1 ? (
+                      <>{t.engine}</>
+                    ) : (
+                      <>{t.engine}</>
+                    )}
 
-        <div className="car_description">
-          <p>
-            {isRtl ? (
-              <>
-                <b>{t.price}: </b>
-                {brand?.name} {model?.name}{" "}
-                {minPrice === null ? "" : `${t.aed} `}
-                <b>
-                  {minPrice !== null ? (
+                    {motorTypeCount?.length <= 1 ||
+                    motorTypeCountOr?.length <= 1 ? (
+                      <>Motor:</>
+                    ) : (
+                      <>Motor:</>
+                    )}
+                  </>
+                ) : engineTypes?.length > 1 ? (
+                  <>{t.engine}</>
+                ) : (
+                  <>{t.engine}</>
+                )}
+              </td>
+              <td className="tw-py-4 tw-px-6">
+                {mainTrimFuelType === "Electric" ? (
+                  motorTypeCount?.length <= 1 ||
+                  motorTypeCountOr?.length <= 1 ? (
                     <>
-                      <Price data={minPrice} />
-                      {minPrice !== maxPrice && maxPrice !== null ? (
-                        <>
-                          {" "}
-                          - د.إ <Price data={maxPrice} />
-                        </>
-                      ) : (
-                        ""
-                      )}
+                      It comes with a <b>{motorTypes}</b>.
                     </>
                   ) : (
-                    " TBD*" // Assuming you want to display a message when the price is not available
-                  )}
-                </b>
-                {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
-                  ? " اعتمادًا على الطراز"
-                  : "."}
-              </>
+                    <>
+                      It is equipped with a <b>{motorTypes}</b> based on the
+                      variant.
+                    </>
+                  )
+                ) : mainTrimFuelType === "Hybrid" ? (
+                  <>
+                    {engineTypes?.length > 1 ? (
+                      <>
+                        It is equipped with a <b>{engineTypes}</b> engine based
+                        on the variant.
+                      </>
+                    ) : (
+                      <>
+                        It is equipped with a <b>{engineTypes}</b> engine.
+                      </>
+                    )}
+
+                    {motorTypeCount?.length <= 1 ||
+                    motorTypeCountOr?.length <= 1 ? (
+                      <>
+                        It comes with a <b>{motorTypes}</b>
+                      </>
+                    ) : (
+                      <>
+                        It is equipped with a <b>{motorTypes}</b> based on the
+                        variant.
+                      </>
+                    )}
+                  </>
+                ) : engineTypes?.length > 1 ? (
+                  <>
+                    It is equipped with a <b>{engineTypes}</b> engine based on
+                    the variant.
+                  </>
+                ) : (
+                  <>
+                    It is equipped with a <b>{engineTypes}</b> engine.
+                  </>
+                )}
+              </td>
+            </tr>
+            {mainTrimFuelType === "Electric" || transmissionList === null ? (
+              ""
             ) : (
-              <>
-                <b>{t.price}: </b>The{" "}
-                <b>
-                  {brand?.name} {model?.name}
-                </b>{" "}
-                is priced
-                {minPrice === null ? "" : ` at `}
-                <b>
-                  {minPrice !== null ? (
-                    <>
-                      <Price data={minPrice} />
-                      {minPrice !== maxPrice && maxPrice !== null ? (
-                        <>
-                          {" "}
-                          - <Price data={maxPrice} />
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </>
-                  ) : (
-                    " TBD*" // Assuming you want to display a message when the price is not available
-                  )}
-                </b>
-                {minPrice !== maxPrice && minPrice !== null && maxPrice !== null
-                  ? " based on the variant."
-                  : "."}
-              </>
+              <tr className="tw-border-b tw-border-gray-200">
+                <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                  {t.transmission}
+                </td>
+                <td className="tw-py-4 tw-px-6">
+                  It comes with {getTransmissionType()} gearbox.
+                </td>
+              </tr>
             )}
-          </p>
 
-          {isRtl ? (
-            allTrims?.length === 1 ? (
-              <p>
-                <b>{t.variants}: </b>هو متوفر في طراز واحد فقط:{" "}
-                <b>{allTrims.map((trim) => trim.name)}</b>.
-              </p>
+            {mainTrimFuelType === "Electric" ||
+            (minFuelConsumption === 0 && maxFuelConsumption === 0) ? (
+              ""
+            ) : minFuelConsumption !== maxFuelConsumption &&
+              minFuelConsumption !== "" ? (
+              <tr className="tw-border-b tw-border-gray-200">
+                <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                  {t.fuelefficiency}
+                </td>
+                <td className="tw-py-4 tw-px-6">
+                  It has a claimed fuel economy of{" "}
+                  <b>
+                    {minFuelConsumption}kmpl - {maxFuelConsumption}
+                    kmpl
+                  </b>{" "}
+                  depending on the variant.
+                </td>
+              </tr>
             ) : (
-              <p>
-                <b>{t.variants}: </b>متوفر بـ<b>{allTrims?.length}</b> طرازات:{" "}
-                {variableText}.
-              </p>
-            )
-          ) : allTrims?.length === 1 ? (
-            <p>
-              <b>{t.variants}: </b>It is only available in one variant:{" "}
-              <b>{allTrims.map((trim) => trim.name)}</b>.
-            </p>
-          ) : (
-            <p>
-              <b>{t.variants}: </b>It is available in <b>{allTrims?.length}</b>{" "}
-              variants: {variableText}.
-            </p>
-          )}
+              <tr className="tw-border-b tw-border-gray-200">
+                <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                  {t.fuelefficiency}
+                </td>
+                <td className="tw-py-4 tw-px-6">
+                  It has a claimed fuel economy of{" "}
+                  <b>
+                    {minFuelConsumption !== ""
+                      ? minFuelConsumption
+                      : maxFuelConsumption}
+                    kmpl
+                  </b>
+                  .
+                </td>
+              </tr>
+            )}
 
-          {/* Engine and Motor */}
-
-          {mainTrimFuelType === "Electric" ? (
-            motorTypeCount?.length <= 1 || motorTypeCountOr?.length <= 1 ? (
-              <p>
-                <b>Motor:</b> It comes with a <b>{motorTypes}</b>.
-              </p>
-            ) : (
-              <p>
-                <b>Motor:</b> It is equipped with a <b>{motorTypes}</b>{" "}
-                based on the variant.
-              </p>
-            )
-          ) : mainTrimFuelType === "Hybrid" ? (
-            <>
-              {engineTypes?.length > 1 ? (
-                <p>
-                  <b>{t.engine}:</b> It is equipped with a{" "}
-                  <b>{engineTypes}</b> engine based on the variant.
-                </p>
+            {mainTrimFuelType === "Electric" ||
+            (mainTrimFuelType === "Hybrid" &&
+              minRange !== "" &&
+              minRange !== null) ? (
+              minRange === maxRange ? (
+                <tr className="tw-border-b tw-border-gray-200">
+                  <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                    {t.range}
+                  </td>
+                  <td className="tw-py-4 tw-px-6">
+                    The claimed range is <b>{minRange}km</b> on a single charge.
+                  </td>
+                </tr>
               ) : (
-                <p>
-                  <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
-                  engine.
-                </p>
-              )}
+                <tr className="tw-border-b tw-border-gray-200">
+                  <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                    {t.range}
+                  </td>
+                  <td className="tw-py-4 tw-px-6">
+                    The claimed range is{" "}
+                    <b>
+                      {minRange}km - {maxRange}km
+                    </b>{" "}
+                    on a single charge based on the variant.
+                  </td>
+                </tr>
+              )
+            ) : null}
 
-              {motorTypeCount?.length <= 1 || motorTypeCountOr?.length <= 1 ? (
-                <p>
-                  <b>Motor:</b> It comes with a <b>{motorTypes}</b>
-                </p>
+            {mainTrimFuelType === "Electric" ||
+            (mainTrimFuelType === "Hybrid" && batteryCapacity !== "") ? (
+              allTrims.length <= 1 ? (
+                <tr className="tw-border-b tw-border-gray-200">
+                  <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                    {t.batteryCapacity}
+                  </td>
+                  <td className="tw-py-4 tw-px-6">
+                    It comes with a <b>{mainTrim.batteryCapacity}</b> battery.
+                  </td>
+                </tr>
               ) : (
-                <p>
-                  <b>Motor:</b> It is equipped with a <b>{motorTypes}</b>{" "}
-                  based on the variant.
-                </p>
-              )}
-            </>
-          ) : engineTypes?.length > 1 ? (
-            <p>
-              <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
-              engine based on the variant.
-            </p>
-          ) : (
-            <p>
-              <b>{t.engine}:</b> It is equipped with a <b>{engineTypes}</b>{" "}
-              engine.
-            </p>
-          )}
-
-          {/* Transmission */}
-
-          {mainTrimFuelType === "Electric" || transmissionList === null ? (
-            ""
-          ) : (
-            <p>
-              <b>{t.transmission}: </b>
-              It comes with {getTransmissionType()} gearbox.
-            </p>
-          )}
-
-          {mainTrimFuelType === "Electric" ||
-          (minFuelConsumption === 0 && maxFuelConsumption === 0) ? (
-            ""
-          ) : minFuelConsumption !== maxFuelConsumption &&
-            minFuelConsumption !== "" ? (
-            <p>
-              <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
-              <b>
-                {minFuelConsumption}kmpl - {maxFuelConsumption}
-                kmpl
-              </b>{" "}
-              depending on the variant.
-            </p>
-          ) : (
-            <p>
-              <b>{t.fuelefficiency}: </b>It has a claimed fuel economy of{" "}
-              <b>
-                {minFuelConsumption !== ""
-                  ? minFuelConsumption
-                  : maxFuelConsumption}
-                kmpl
-              </b>
-              .
-            </p>
-          )}
-
-          {/* Range */}
-
-          {mainTrimFuelType === "Electric" ||
-          (mainTrimFuelType === "Hybrid" &&
-            minRange !== "" &&
-            minRange !== null) ? (
-            minRange === maxRange ? (
-              <p>
-                <b>{t.range}: </b>The claimed range is <b>{minRange}km</b> on a
-                single charge.
-              </p>
+                <tr className="tw-border-b tw-border-gray-200">
+                  <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                    {t.batteryCapacity}
+                  </td>
+                  <td className="tw-py-4 tw-px-6">
+                    It comes with a <b>{mainTrim.batteryCapacity}</b> battery
+                    based on the variant.
+                  </td>
+                </tr>
+              )
             ) : (
-              <p>
-                <b>{t.range}: </b>The claimed range is{" "}
-                <b>
-                  {minRange}km - {maxRange}km
-                </b>{" "}
-                on a single charge based on the variant.
-              </p>
-            )
-          ) : null}
+              ""
+            )}
 
-          {mainTrimFuelType === "Electric" ||
-          (mainTrimFuelType === "Hybrid" && batteryCapacity !== "") ? (
-            allTrims.length <= 1 ? (
-              <p>
-                <b>{t.batteryCapacity}: </b>It comes with a{" "}
-                <b>{mainTrim.batteryCapacity}</b> battery.
-              </p>
-            ) : (
-              <p>
-                <b>{t.batteryCapacity}: </b>It comes with a{" "}
-                <b>{mainTrim.batteryCapacity}</b> battery based on the variant.
-              </p>
-            )
-          ) : (
-            ""
-          )}
+            {features.length > 0 && (
+              <tr className="tw-border-b tw-border-gray-200">
+                <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                  {t.features}
+                </td>
+                <td className="tw-py-4 tw-px-6">
+                  Key features include{" "}
+                  {features.map((feature, index) => (
+                    <b key={feature}>
+                      {index > 0 && index < features.length - 1 ? ", " : ""}
+                      {index > 0 && index === features.length - 1
+                        ? " and "
+                        : ""}
+                      {feature}
+                    </b>
+                  ))}
+                  .
+                </td>
+              </tr>
+            )}
 
-          {features.length > 0 && (
-            <p>
-              <b>{t.features}:</b> Key features include{" "}
-              {features.map((feature, index) => (
-                <b key={feature}>
-                  {index > 0 && index < features.length - 1 ? ", " : ""}
-                  {index > 0 && index === features.length - 1 ? " and " : ""}
-                  {feature}
-                </b>
-              ))}
-              .
-            </p>
-          )}
-
-          <p>
-            <b>{t.safety}:</b> Safety components consist of{" "}
-            <b>{outputString}</b> ensuring a secure driving experience.
-          </p>
-          {/* {mainTrim?.cargoSpace === "" ? null : (
-            <p>
-              <b>Boot Space: </b>
-              The {brand?.name} {model?.name} offers{" "}
-              <b>{mainTrim?.cargoSpace} L</b> of cargo space.
-            </p>
-          )} */}
-        </div>
+            <tr className="tw-border-b tw-border-gray-200">
+              <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
+                {t.safety}
+              </td>
+              <td className="tw-py-4 tw-px-6">
+                Safety components consist of <b>{outputString}</b> ensuring a
+                secure driving experience.
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+    </>
   );
 }

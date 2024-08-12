@@ -223,25 +223,68 @@ export default function VehicleFaq({
       condition: true,
     },
   ];
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
   return (
-    <div className="single-item white_bg_wrapper mb-50 mt-3" id="faqs">
-      <div className="faq-area">
-        <div className="title ">
-          <h2 className={`w-100 fw-bold`}>
-            {year} {brand.name} {model.name} FAQs
-          </h2>
-          <hr className="my-2 heading-bottom " />
-          <div className="mt-3">
-            {faq.map((item, index) => (
-              <AccordionFaq
-                question={item.question}
-                answer={item.answer}
-                condition={item?.condition}
-              />
-            ))}
-          </div>
+    <>
+      <h2 className="tw-font-semibold tw-mb-5">
+        FAQs (Frequently Asked Questions) on {year} {brand.name} {model.name}
+      </h2>
+      <div className="tw-shadow-lg tw-p-10 tw-rounded-2xl" id="faqs">
+        <div className="tw-w-full  tw-mx-auto tw-space-y-2 ">
+          {faq.map((item, index) => (
+            <>
+              {item.condition && (
+                <div key={index} className="tw-border tw-rounded tw-bg-white">
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className="tw-text-xl tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
+                  >
+                    <span
+                      className={`${
+                        activeIndex === index ? "tw-text-blue-700" : ""
+                      }`}
+                    >
+                      {item.question}
+                    </span>
+                    <svg
+                      className={`tw-w-6 tw-h-6 tw-transform ${
+                        activeIndex === index
+                          ? "tw-rotate-180 tw-text-blue-700"
+                          : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className={`tw-overflow-hidden tw-transition-[max-height] tw-duration-500 ${
+                      activeIndex === index
+                        ? "tw-max-h-96 tw-p-0"
+                        : "tw-max-h-0 tw-p-0"
+                    }`}
+                  >
+                    <p className="tw-text-gray-700 tw-p-4">{item.answer}</p>
+                  </div>
+                </div>
+              )}
+            </>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

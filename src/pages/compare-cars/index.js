@@ -14,11 +14,9 @@ import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components-old/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components-old/compare-cars/MultiStepCarSelection";
 
-
 function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -154,31 +152,29 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
         type: "Car Review Website",
       }}
     >
-      <div className="mt-3">
-        <Ad728x90 dataAdSlot="5962627056" />
-      </div>
-
-      <div className="compare-page pt-30 mb-100">
-        <div className="container">
-          <h2>Compare Cars</h2>
-          <p>Simplifying Your Decision-Making Process. Compare Your Ideal Cars with Our Comprehensive Tool – Price, Features, Specifications, Fuel Efficiency, Performance, Dimensions, Safety, and More for an Informed Purchase!</p>
+      <div>
+        <div className="tw-container tw-mx-auto">
+          <h1>Compare Cars</h1>
+          <p>
+            Simplifying Your Decision-Making Process. Compare Your Ideal Cars
+            with Our Comprehensive Tool – Price, Features, Specifications, Fuel
+            Efficiency, Performance, Dimensions, Safety, and More for an
+            Informed Purchase!
+          </p>
           <div className="row g-4 mb-50">
             <div className="col-lg-12">
               <div className="uploded-product-group">
-                <div className="row g-4">
-                  {carDataArray.map(
+                <div className="tw-grid tw-grid-cols-12 tw-gap-3 ">
+                  {/* {carDataArray.map(
                     (car, index) =>
                       car && <CompareCarCard key={index} carData={car} />
-                  )}
+                  )} */}
                   {Array.from({ length: numberOfSlotsToFill }, (_, index) => (
-                    <div key={index} className={` col-md-3 col-6`}>
-                      <div className="product-card style-2 compare">
-                        <div className="product-upload-area">
-                          <div className="comparea-content">
-                            <MultiStepCarSelection mode="add" />
-                          </div>
-                        </div>
-                      </div>
+                    <div
+                      key={index}
+                      className={`md:tw-col-span-3 tw-col-span-6 tw-flex tw-justify-center tw-items-center tw-border-solid tw-border tw-border-gray-200 tw-rounded-lg tw-h-[340px] `}
+                    >
+                      <MultiStepCarSelection mode="add" />
                     </div>
                   ))}
                 </div>

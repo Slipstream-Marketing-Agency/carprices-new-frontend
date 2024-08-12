@@ -4,6 +4,7 @@ import Price from "@/src/utils/Price"; // Ensure this path is correct
 import SelectComponent from "@/src/utils/SelectComponent";
 import MultiStepCarSelection from "./MultiStepCarSelection";
 import { useRouter } from "next/router";
+import CloseIcon from "@mui/icons-material/Close";
 
 function CompareCarCard({ carData }) {
   if (!carData) return null;
@@ -23,60 +24,57 @@ function CompareCarCard({ carData }) {
 
     if (comparisonSlugs) {
       let slugArray = comparisonSlugs.split("-vs-");
-      slugArray = slugArray.filter(slug => slug !== carData.mainSlug);
+      slugArray = slugArray.filter((slug) => slug !== carData.mainSlug);
 
       if (slugArray.length > 0) {
-        const updatedPath = `${basePath}/compare-cars/${slugArray.join("-vs-")}`;
+        const updatedPath = `${basePath}/compare-cars/${slugArray.join(
+          "-vs-"
+        )}`;
         router.push(updatedPath);
       } else {
         // Redirect to a default route such as the home page
-        router.push('/compare-cars'); // Replace '/' with the route you want to redirect to
+        router.push("/compare-cars"); // Replace '/' with the route you want to redirect to
       }
     }
   };
-
-  
+  const handleModal = () => {};
 
   return (
-    <div className={`col-md-3 col-6 mt-0`}>
-      <div className="product-card style-2 compare">
-        <div className="close-btn" onClick={handleRemoveCar}>
-          <i className="bi bi-x" />
+    <div className={`md:tw-col-span-3 tw-col-span-6 `}>
+      <div className="tw-relative tw-border-solid tw-border tw-border-gray-200 tw-rounded-lg tw-p-4 tw-h-[340px]">
+        <div
+          className="tw-flex tw-justify-end tw-cursor-pointer"
+          onClick={handleRemoveCar}
+        >
+          <CloseIcon />
         </div>
-        <div className="product-img d-flex justify-content-center">
+        <div className="tw-flex tw-justify-center tw-h-[160px] tw-my-4">
           <img
-            src={carData?.featuredImage?.data?.attributes?.url === undefined ? "/assets/img/car-placeholder.png" : carData?.featuredImage?.data?.attributes?.url}
+            src={
+              carData?.featuredImage?.data?.attributes?.url === undefined
+                ? "/assets/img/car-placeholder.png"
+                : carData?.featuredImage?.data?.attributes?.url
+            }
             alt={carData?.name}
+            className="tw-object-contain"
           />
         </div>
-        <div className="product-content">
-          <div className="content-top">
-            <div className="price-and-title">
-              <h5 className="price">
-                <Price data={carData?.price} />
-              </h5>
-              <h6 style={{"height" : "25px"}}>
-                <Link href="/car-details" className="fw-bold text-black">
-                  <>
-                    {carData?.car_brands?.data[0]?.attributes?.name}{" "}
-                    {carData?.car_models?.data[0]?.attributes?.name}{" "}
-                    {carData?.name}
-                  </>
-                </Link>
-              </h6>
-            </div>
-            <div className="company-logo">
-              <img
-                src={
-                  carData?.car_brands?.data[0]?.attributes?.brandLogo?.data
-                    ?.attributes?.url
-                }
-                alt="car logo"
-              />
-            </div>
-          </div>
-  
-          <MultiStepCarSelection carData={carData?.mainSlug} mode={"update"}/>
+        <div>
+          <h6 className="tw-text-blue-600 tw-font-bold">
+            {carData?.car_brands?.data[0]?.attributes?.name}
+          </h6>
+          <h5 className="tw-font-semibold">
+            {carData?.car_models?.data[0]?.attributes?.name} {carData?.name}
+          </h5>
+          <h4 className="tw-font-bold">
+            <Price data={carData?.price} />
+          </h4>
+
+          <MultiStepCarSelection
+            carData={carData?.mainSlug}
+            mode={"update"}
+            handleModal={handleModal}
+          />
         </div>
       </div>
     </div>

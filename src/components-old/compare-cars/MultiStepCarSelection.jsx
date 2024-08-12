@@ -4,6 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Link from "next/link";
 import LoadingAnimation from "../common/LoadingAnimation";
+import FilterLayout from "../find-car-multi-step-filter/FilterLayout";
+import SearchIcon from "@mui/icons-material/SearchOutlined";
+import Image from "next/image";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
@@ -55,6 +59,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
 
   const [isMobile, setIsMobile] = useState(false);
 
+  console.log(brands, "popopo");
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768); // Adjust the threshold as needed
@@ -80,6 +85,14 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                   attributes {
                     name
                     slug
+                    brandLogo {
+                      data {
+                        id
+                        attributes {
+                          url
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -331,226 +344,284 @@ const MultiStepCarSelection = ({ carData, mode }) => {
     setSearchTerm(""); // Also clear the search term if needed
   };
 
+  const toggleSlideover = () => {
+    setShowModal(!showModal);
+  };
+
+  const DataBadge = ({ iconSrc, label, onClick }) => (
+    <div className="tw-flex tw-bg-blue-100 tw-rounded-full tw-py-1 tw-px-3 tw-items-center tw-gap-1">
+      {iconSrc && (
+        <Image src={iconSrc} alt="brand-icon" height={20} width={20} />
+      )}
+      <div className="tw-capitalize tw-text-black tw-text-xs">{label}</div>
+      <Image
+        src={"/carLoanPage/edit-icon.svg"}
+        width={25}
+        height={20}
+        className="tw-cursor-pointer"
+        alt="edit-icon"
+        onClick={onClick}
+      />
+    </div>
+  );
+
+  console.log(selectedModel, "selectedModel");
   return (
     <>
       {mode === "add" ? (
-        <div
-          className="col-lg-12 cursor_pointer"
-          onClick={() => setShowModal(true)}
-        >
-          <div className="product-upload-area text-center ">
-            <div
-              className={`upload-area ${
-                !isMobile && isSticky && "setStyleForAdd"
-              }`}
-            >
-              <i
-                className={`bi bi-plus ${!isMobile && isSticky && "plusIcon"}`}
-              />
-            </div>
-            <div className="comparea-content">
-              <h6>Add to Compare</h6>
-              <p>
-                {/* <Link legacyBehavior href="/single-brand-category">
-                  <a>24,342</a>
-                </Link>{" "} */}
-                {/* Available Compare Cars */}
-              </p>
-            </div>
+        <div onClick={() => setShowModal(true)}>
+          <div className="tw-text-center tw-cursor-pointer">
+            <ControlPointIcon className="tw-text-[120px] tw-text-gray-300" />
+
+            <h5 className="tw-text-gray-500">Add to Compare</h5>
           </div>
         </div>
       ) : (
-        <div className="w-100 d-flex ">
+        <div className="tw-absolute tw-top-3 tw-left-3 ">
           <button
-            className="btn mb-0 mb-md-0 btn-round btn-outline btn-block changeCarBtn"
+            className="tw-bg-white tw-font-semibold"
             onClick={() => setShowModal(true)}
           >
-            <>
-              Change Car <i class="bi bi-pencil"></i>{" "}
-            </>
+            <i class="bi bi-pencil tw-bg-gray-200 tw-p-2 tw-text-[11px] tw-rounded-md "></i>{" "}
+            Change Car{" "}
           </button>
         </div>
       )}
 
       {/* Bootstrap Modal */}
-      <div
-        className={`modal compareModalMainContainer  ${
-          showModal ? "show modal-overlay " : ""
-        }`}
-        style={{ display: showModal ? "block " : "none " }}
-        tabIndex="-1"
-      >
+      <div className="tw-flex tw-items-center tw-justify-center ">
         <div
-          className={`modal-dialog modal-dialog-centered modal-lg compareModalWidth  ${
-            showModal ? "showCompareModal" : "hideCompareModal"
+          id="slideover-container"
+          className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${
+            showModal ? "tw-visible" : "tw-invisible"
           }`}
         >
-          <div className="modal-content compareModelContainer">
-            <div className="modal-header border-0 mx-md-4  mt-3 mb-0">
-              <h5 className="modal-title fw-bold">
-                {" "}
-                Select Your Car For Compare
-              </h5>
-              <button
-                type="button"
-                className="btn-close compareModalCloseBtn cursor-pointer"
-                onClick={handleCloseModal}
-              ></button>
+          <div
+            onClick={toggleSlideover}
+            id="slideover-bg"
+            className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${
+              showModal ? "tw-opacity-50" : "tw-opacity-0"
+            }`}
+          />
+          <div
+            id="slideover"
+            className={`tw-w-full md:tw-w-[60%]  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${
+              showModal ? "tw-translate-x-0" : "tw-translate-x-full"
+            }`}
+          >
+            <div
+              onClick={toggleSlideover}
+              className="tw-z-[999] tw-absolute tw-cursor-pointer tw-text-gray-600 tw-top-0 tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-right-0 tw-mt-1 tw-mr-1"
+            >
+              <svg
+                className="tw-w-6 tw-h-6"
+                fill="none"
+                stroke="white"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </div>
-            <div className="mx-md-5 mx-3">
-              <input
-                type="search"
-                className="modalSearchInputField mt-0 mb-3 "
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
+            <div className="tw-col-span-12 sm:tw-rounded-tl-2xl tw-bg-blue-500 tw-w-full tw-p-8 tw-flex tw-justify-between tw-text-3xl tw-text-white tw-bg-stripes">
+              <div className=" ">Select Your Brand, Model and Variant</div>
+              <div
+                onClick={toggleSlideover}
+                className="tw-z-[999] tw-absolute tw-cursor-pointer tw-text-gray-600 tw-top-0 tw-w-8 tw-h-8 tw-flex tw-items-center tw-justify-center tw-right-0 tw-mt-1 tw-mr-1"
+              >
+                <svg
+                  className="tw-w-6 tw-h-6"
+                  fill="none"
+                  stroke="white"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
             </div>
-            <div className="sticky-tab mx-md-5 mx-2 ">
-              <ul className="nav nav-tabs modalNavTab">
-                <li className="nav-item compareModelNav">
-                  <a
-                    className={`nav-link compareModelNavLink ${
-                      currentStep === "brand"
-                        ? "active compareModelNavLinkActive"
-                        : ""
-                    }`}
-                    href="#brand"
+            <div className="tw-p-6">
+              <h2 className=" tw-my-2 tw-capitalize tw-font-semibold">
+                Choose {currentStep}
+              </h2>
+              <div className="tw-flex gap-3">
+                <Link
+                  className={` ${
+                    currentStep === "brand" && selectedBrand === ""
+                      ? "tw-hidden "
+                      : "tw-block"
+                  }`}
+                  href="#brand"
+                  onClick={() => {
+                    setCurrentStep("brand");
+                    setSearchTerm("");
+                  }}
+                >
+                  <DataBadge
+                    iconSrc={null}
+                    label={selectedBrand}
                     onClick={() => {
                       setCurrentStep("brand");
                       setSearchTerm("");
                     }}
-                  >
-                    Brand
-                  </a>
-                </li>
-                <li className="nav-item compareModelNav">
-                  <a
-                    className={`nav-link compareModelNavLink ${
-                      currentStep === "model"
-                        ? "active compareModelNavLinkActive"
-                        : ""
-                    } ${!selectedBrand ? "disabled" : ""}`}
-                    href="#model"
-                    onClick={() => {
-                      selectedBrand && setCurrentStep("model"),
-                        setSearchTerm("");
-                    }}
-                  >
-                    Model
-                  </a>
-                </li>
-                <li className="nav-item compareModelNav">
-                  <a
-                    className={`nav-link compareModelNavLink ${
-                      currentStep === "year"
-                        ? "active compareModelNavLinkActive"
-                        : ""
-                    } ${!selectedModel ? "disabled" : ""}`}
-                    href="#year"
-                    onClick={() => {
-                      selectedModel && setCurrentStep("year"),
-                        setSearchTerm("");
-                    }}
-                  >
-                    Year
-                  </a>
-                </li>
-                <li className="nav-item compareModelNav">
-                  <a
-                    className={`nav-link compareModelNavLink ${
-                      currentStep === "variant"
-                        ? "active compareModelNavLinkActive"
-                        : ""
-                    } ${!selectedYear ? "disabled" : ""}`}
-                    href="#variant"
-                    onClick={() => {
-                      selectedYear && setCurrentStep("variant"),
-                        setSearchTerm("");
-                    }}
-                  >
-                    Variant
-                  </a>
-                </li>
-              </ul>
-            </div>
+                  />
+                </Link>
 
-            <div
-              className="modal-body mt-3 mx-md-4 mx-0 mb-4"
-              style={{ maxHeight: "400px", overflowY: "auto" }}
-            >
-              {currentStep === "brand" && (
-                <>
-                  {
-                    <div className="list-group">
-                      {filterBrands().map((brand) => (
-                        <button
-                          key={brand.id}
-                          className="list-group-item list-group-item-action border-0  modalCompareTxt"
-                          onClick={() =>
-                            handleBrandSelect(brand.attributes.slug)
-                          }
-                        >
-                          {brand.attributes.name}
-                        </button>
-                      ))}
+                <Link
+                  className={` ${
+                    selectedModel === "" ? "tw-hidden " : "tw-block"
+                  }`}
+                  href="#model"
+                >
+                  <DataBadge
+                    iconSrc={null}
+                    label={selectedModel}
+                    onClick={() => {
+                      setCurrentStep("model"), setSearchTerm("");
+                    }}
+                  />
+                </Link>
+
+                <Link
+                  className={` ${
+                    selectedYear === "" ? "tw-hidden " : "tw-block"
+                  }`}
+                  href="#year"
+                >
+                  <DataBadge
+                    iconSrc={null}
+                    label={selectedYear}
+                    onClick={() => {
+                      setCurrentStep("year"), setSearchTerm("");
+                    }}
+                  />
+                </Link>
+
+                <Link
+                  className={` ${
+                    selectedVariant === "" ? "tw-hidden " : "tw-block"
+                  }`}
+                  href="#variant"
+                >
+                  <DataBadge
+                    iconSrc={null}
+                    label={selectedVariant}
+                    onClick={() => {
+                      setCurrentStep("variant"), setSearchTerm("");
+                    }}
+                  />
+                </Link>
+              </div>
+              <div className=" tw-relative tw-rounded-md tw-shadow-sm tw-my-6">
+                <div className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-3 tw-flex tw-items-center tw-pointer-events-none">
+                  <SearchIcon />
+                </div>
+                <input
+                  type="text"
+                  className="tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-block tw-p-2 tw-border tw-rounded-full tw-w-full tw-mb-4 sm:tw-text-sm tw-border-gray-300 tw-px-10"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  placeholder={`Search ${currentStep}`}
+                />
+              </div>
+              <div className="">
+                <div>
+                  {currentStep === "brand" && (
+                    <div className="tw-overflow-auto tw-h-[650px]">
+                      {
+                        <div className=" tw-grid tw-gap-6 tw-grid-cols-12 ">
+                          {filterBrands().map((brand) => (
+                            <button
+                              key={brand.id}
+                              className="tw-bg-white sm:tw-col-span-2 tw-col-span-3"
+                              onClick={() =>
+                                handleBrandSelect(brand.attributes.slug)
+                              }
+                            >
+                              <Image
+                                src={
+                                  brand.attributes.brandLogo.data.attributes.url
+                                }
+                                alt="icon-brand"
+                                width={70}
+                                height={70}
+                                className="tw-cursor-pointer"
+                              />
+                              <div className="tw-capitalize tw-text-center tw-my-1 tw-text-xs">
+                                {brand.attributes.name}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      }
+                      {filterBrands().length == 0 && <LoadingAnimation />}
                     </div>
-                  }
-                  {filterBrands().length == 0 && <LoadingAnimation />}
-                </>
-              )}
-              {currentStep === "model" && selectedBrand && (
-                <>
-                  <div className="list-group">
-                    {/* Check if models is an array before calling map */}
-                    {filterModels().map((model) => (
-                      <button
-                        key={model.slug}
-                        className="list-group-item list-group-item-action border-0 modalCompareTxt"
-                        onClick={() => {
-                          setSelectedModel(model.slug);
-                          setCurrentStep("year");
-                        }}
-                      >
-                        {model.name}
-                      </button>
-                    ))}
-                  </div>
-                  {filterModels().length <= 0 && <LoadingAnimation />}
-                </>
-              )}
-              {currentStep === "year" && selectedModel && (
-                <>
-                  <div className="list-group">
-                    {filterYears().map((year) => (
-                      <button
-                        key={year}
-                        className="list-group-item list-group-item-action border-0 modalCompareTxt"
-                        onClick={() => handleYearSelect(year)}
-                      >
-                        {year}
-                      </button>
-                    ))}
-                  </div>
-                  {filterYears().length <= 0 && <LoadingAnimation />}
-                </>
-              )}
-              {currentStep === "variant" && selectedYear && (
-                <>
-                  <div className="list-group">
-                    {filterVariants().map((variant) => (
-                      <button
-                        key={variant.mainSlug}
-                        className="list-group-item list-group-item-action border-0 modalCompareTxt"
-                        onClick={() => handleVariantSelect(variant.mainSlug)}
-                      >
-                        {variant.name}
-                      </button>
-                    ))}
-                  </div>
-                  {filterVariants().length <= 0 && <LoadingAnimation />}
-                </>
-              )}
+                  )}
+                  {currentStep === "model" && selectedBrand && (
+                    <>
+                      <div className="tw-flex tw-flex-col ">
+                        {filterModels().map((model) => (
+                          <button
+                            key={model.slug}
+                            className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
+                            onClick={() => {
+                              setSelectedModel(model.slug);
+                              setCurrentStep("year");
+                            }}
+                          >
+                            {model.name}
+                          </button>
+                        ))}
+                      </div>
+                      {filterModels().length <= 0 && <LoadingAnimation />}
+                    </>
+                  )}
+                  {currentStep === "year" && selectedModel && (
+                    <>
+                      <div className="tw-flex tw-flex-col ">
+                        {filterYears().map((year) => (
+                          <button
+                            key={year}
+                            className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
+                            onClick={() => handleYearSelect(year)}
+                          >
+                            {year}
+                          </button>
+                        ))}
+                      </div>
+                      {filterYears().length <= 0 && <LoadingAnimation />}
+                    </>
+                  )}
+                  {currentStep === "variant" && selectedYear && (
+                    <>
+                      <div className="tw-flex tw-flex-col ">
+                        {filterVariants().map((variant) => (
+                          <button
+                            key={variant.mainSlug}
+                            className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
+                            onClick={() =>
+                              handleVariantSelect(variant.mainSlug)
+                            }
+                          >
+                            {variant.name}
+                          </button>
+                        ))}
+                      </div>
+                      {filterVariants().length <= 0 && <LoadingAnimation />}
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

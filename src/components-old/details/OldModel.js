@@ -70,7 +70,7 @@ export default function OldModel({ model }) {
           />
 
           <button className="p-2 white_bg_wrapper">
-          <i class="bi bi-chevron-double-right"/>
+            <i class="bi bi-chevron-double-right" />
           </button>
         </div>
       </Link>
@@ -93,15 +93,12 @@ export default function OldModel({ model }) {
 
   return (
     <>
+      <h2 className="tw-font-semibold tw-mb-5">
+        Looking for an older {model?.brand?.name} {model?.name}?
+      </h2>
       {sortedYears?.length === 0 ? null : (
-        <div className="my-3">
-          <div className="white_bg_wrapper position-relative">
-     
-            <h2 className={`w-100 fw-bold`}>
-              Looking for an older {model?.brand?.name} {model?.name}?
-            </h2>
-            <hr className="my-2 heading-bottom " />
-
+        <div className="tw-border-solid tw-border tw-border-gray-300 tw-rounded-lg tw-p-5">
+          <div className=" position-relative">
             <div className="tab-content mb-2">{tabs}</div>
 
             <div className="year_tab">
