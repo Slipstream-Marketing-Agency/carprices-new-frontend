@@ -539,7 +539,7 @@ export default function index({
             <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-5">
               <div className="lg:tw-col-span-3">
                 <Slider {...sliderSettings}>
-                  {featuredcars?.carModels.map((car, index) => (
+                  {featuredcars?.carModels?.map((car, index) => (
                     <Link
                       key={car.id}
                       href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
@@ -690,7 +690,7 @@ export default function index({
               </div>
               <div className="md:tw-flex tw-hidden tw-flex-col tw-w-3/4 max-md:tw-w-full featured-news-card tw-mt-5">
                 <Slider ref={featuredSliderRef} {...settings}>
-                  {FeaturedData.map((car, index) => (
+                  {FeaturedData?.map((car, index) => (
                     <Link href={car.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
                         <img
@@ -711,7 +711,7 @@ export default function index({
               </div>
               <div className="md:tw-hidden tw-block">
                 <Slider {...settings}>
-                  {FeaturedData.map((item, index) => (
+                  {FeaturedData?.map((item, index) => (
                     <Link href={item.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
                         <img
@@ -746,7 +746,7 @@ export default function index({
 
             <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-mt-3 tw-w-full tw-text-base tw-leading-4 tw-text-center tw-text-neutral-900 max-md:tw-flex-wrap max-md:tw-max-w-full">
               <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-px-5 max-md:tw-flex-wrap max-md:tw-max-w-full">
-                {categories.map((category, index) => (
+                {categories?.map((category, index) => (
                   <div
                     key={index}
                     className="tw-flex tw-flex-col tw-justify-center"
@@ -786,7 +786,7 @@ export default function index({
               </div>
             ) : ( */}
               <Slider key={selectedTab} {...categorysliderSettings}>
-                {filterCars(selectedTab).map((car, index) => (
+                {filterCars(selectedTab)?.map((car, index) => (
                   <Link
                     key={car.id}
                     href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
@@ -911,7 +911,7 @@ export default function index({
 
               <div className="lg:tw-col-span-10">
                 <Slider ref={sliderRef} {...settingsupcoming}>
-                  {cars.map((item, index) => (
+                  {cars?.map((item, index) => (
                     <div
                       key={index}
                       className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-bg-black"
@@ -1020,7 +1020,7 @@ export default function index({
               </div>
               <div className="tw-flex tw-flex-col tw-justify-center tw-col-span-3 max-md:tw-w-full ">
                 <div className="tw-grid md:tw-grid-cols-6 tw-grid-cols-3 tw-gap-5 md:tw-pr-20 max-md:tw-pr-5">
-                  {brand.map((item, index) => (
+                  {brand?.map((item, index) => (
                     <Link
                       href={`/brands/${item?.slug}`}
                       key={index}
@@ -1082,7 +1082,7 @@ export default function index({
             </div>
 
             <div className="tw-grid md:tw-grid-cols-5 tw-grid-cols-3 md:tw-gap-10 tw-gap-8 md:tw-mt-10 tw-mt-5 tw-max-w-full">
-              {bodyTypes.map((item, index) => (
+              {bodyTypes?.map((item, index) => (
                 <Link href={`/category/${item?.slug}`} key={index}>
                   <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black">
                     <div className="tw-w-full md:tw-h-32 tw-h-24 tw-overflow-hidden">
@@ -1219,7 +1219,7 @@ export default function index({
                   name: "2024 Toyota Land Cruiser Prado 🤜VS🤛 2023 Land Cruiser 300 Series | The Most Iconic SUV Battle💪!",
                   url: "https://www.youtube.com/watch?v=_yy4xm_p5fU",
                 },
-              ].map((item, index) => (
+              ]?.map((item, index) => (
                 <Link
                   href={item.url}
                   target="_blank"
@@ -1265,35 +1265,35 @@ export default function index({
             <div className="tw-mt-7 tw-w-full">
               <div className="tw-grid tw-grid-cols-3 tw-gap-5 max-md:tw-grid-cols-1">
                 <Link
-                  href={`/news/${articles.news[0]?.slug}`}
+                  href={`/news/${articles?.news[0]?.slug}`}
                   className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
                   style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
+                    backgroundImage: `url('${articles?.news[0].coverImage}')`,
                   }}
                 >
                   <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
                     <div className="tw-px-6">
                       <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
-                        {articles.news[0].title}
+                        {articles?.news[0].title}
                       </div>
                       <div className="tw-mt-1 tw-text-base tw-line-clamp-2 tw-text-white">
-                        {articles.news[0].summary}
+                        {articles?.news[0].summary}
                       </div>
                     </div>
                   </div>
                 </Link>
 
                 <Link
-                  href={`/news/${articles.news[0]?.slug}`}
+                  href={`/news/${articles?.news[0]?.slug}`}
                   key={index}
                   className="md:tw-hidden tw-flex tw-relative tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
                   style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
+                    backgroundImage: `url('${articles?.news[0].coverImage}')`,
                   }}
                 >
                   <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
                     <div className="tw-text-lg tw-text-white">
-                      {articles.news[0].title}
+                      {articles?.news[0].title}
                     </div>
                     {/* <div className="tw-flex tw-mt-1 tw-text-sm">
             <div className="tw-uppercase">Carprices Team - </div>
@@ -1303,7 +1303,7 @@ export default function index({
                 </Link>
 
                 <div className="tw-grid tw-grid-rows-3 tw-gap-4">
-                  {articles.news.slice(1, 4).map((item, index) => (
+                  {articles?.news.slice(1, 4)?.map((item, index) => (
                     <Link href={`/news/${item?.slug}`}>
                       <div
                         key={index}

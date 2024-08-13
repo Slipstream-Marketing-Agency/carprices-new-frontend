@@ -23,7 +23,7 @@ function BodyTypes({ bodyTypeList }) {
           </div>
         </div>
         <div className="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-2 g-4 justify-content-center mb-2">
-          {bodyTypeList.map((item, idx) => {
+          {bodyTypeList?.map((item, idx) => {
             return (
               <div className="col wow fadeInUp" data-wow-delay="200ms">
                 <Link legacyBehavior href={`/category/${item?.slug}`} key={idx}>

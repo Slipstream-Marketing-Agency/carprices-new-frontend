@@ -129,7 +129,7 @@ function CarLeftSidebar({
   }, [router]);
 
   const brandSlugToIdMap = React.useMemo(() => {
-    return brandoptions.reduce((acc, brand) => {
+    return brandoptions?.reduce((acc, brand) => {
       acc[brand.value] = parseInt(brand.id, 10); // 'value' is the slug, 'id' is the brand ID
       return acc;
     }, {});
@@ -344,7 +344,7 @@ function CarLeftSidebar({
   };
 
   const sortOptions = (options, selected) => {
-    return options.slice().sort((a, b) => {
+    return options?.slice().sort((a, b) => {
       const aSelected = selected.includes(a.value);
       const bSelected = selected.includes(b.value);
       return aSelected === bSelected ? 0 : aSelected ? -1 : 1;
@@ -353,7 +353,7 @@ function CarLeftSidebar({
 
   const filteredAndSortedBrandOptions = useMemo(() => {
     // First, filter the brand options based on the search text
-    const filtered = brandoptions.filter((option) =>
+    const filtered = brandoptions?.filter((option) =>
       option.label.toLowerCase().includes(searchText.toLowerCase())
     );
 
@@ -403,11 +403,11 @@ function CarLeftSidebar({
     const optionMin = option.range.min;
     const optionMax = option.range.max;
     const withinMin =
-      optionMin >= totalpricerange.min && optionMin <= totalpricerange.max;
+      optionMin >= totalpricerange?.min && optionMin <= totalpricerange.max;
     const withinMax =
-      optionMax >= totalpricerange.min && optionMax <= totalpricerange.max;
+      optionMax >= totalpricerange?.min && optionMax <= totalpricerange.max;
     const encompasses =
-      optionMin <= totalpricerange.min && optionMax >= totalpricerange.max;
+      optionMin <= totalpricerange?.min && optionMax >= totalpricerange.max;
 
     return withinMin || withinMax || encompasses;
   });
@@ -449,11 +449,11 @@ function CarLeftSidebar({
     const optionMin = option.range.min;
     const optionMax = option.range.max;
     const withinMin =
-      optionMin >= totalpowerrange.min && optionMin <= totalpowerrange.max;
+      optionMin >= totalpowerrange?.min && optionMin <= totalpowerrange.max;
     const withinMax =
-      optionMax >= totalpowerrange.min && optionMax <= totalpowerrange.max;
+      optionMax >= totalpowerrange?.min && optionMax <= totalpowerrange.max;
     const encompasses =
-      optionMin <= totalpowerrange.min && optionMax >= totalpowerrange.max;
+      optionMin <= totalpowerrange?.min && optionMax >= totalpowerrange.max;
 
     return withinMin || withinMax || encompasses;
   });
@@ -485,13 +485,13 @@ function CarLeftSidebar({
     const optionMin = option.range.min;
     const optionMax = option.range.max;
     const withinMin =
-      optionMin >= totaldisplacementrange.min &&
+      optionMin >= totaldisplacementrange?.min &&
       optionMin <= totaldisplacementrange.max;
     const withinMax =
-      optionMax >= totaldisplacementrange.min &&
+      optionMax >= totaldisplacementrange?.min &&
       optionMax <= totaldisplacementrange.max;
     const encompasses =
-      optionMin <= totaldisplacementrange.min &&
+      optionMin <= totaldisplacementrange?.min &&
       optionMax >= totaldisplacementrange.max;
 
     return withinMin || withinMax || encompasses;
@@ -979,7 +979,7 @@ function CarLeftSidebar({
                     />
                   </div>
                   <ul className="py-4 px-2">
-                    {filteredAndSortedBrandOptions.map((item, idx) => (
+                    {filteredAndSortedBrandOptions?.map((item, idx) => (
                       <li key={idx}>
                         <label className="containerss">
                           <input
@@ -1007,7 +1007,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className="show">
                   <div className="row g-xl-2 gy-2 ">
-                    {bodyoptions.map((item, idx) => (
+                    {bodyoptions?.map((item, idx) => (
                       <div className="col-xl-4 col-4">
                         <button
                           key={idx}
@@ -1106,7 +1106,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="pt-2 pb-4 ">
-                    {fuelTypeList.map((option, idx) => (
+                    {fuelTypeList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1134,7 +1134,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="pt-2 pb-4 ">
-                    {cylinderList.map((option, idx) => (
+                    {cylinderList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1162,7 +1162,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="pt-2 pb-4 ">
-                    {transmissionList.map((option, idx) => (
+                    {transmissionList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1192,7 +1192,7 @@ function CarLeftSidebar({
               <div className="check-box-item">
                 <div className={`checkbox-container show`}>
                   <ul className="pt-2 pb-4 ">
-                    {driveList.map((option, idx) => (
+                    {driveList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1339,7 +1339,7 @@ function CarLeftSidebar({
                       />
                     </div>
                     <ul className="overflow-list tw-pt-4 tw-pb-4">
-                      {filteredAndSortedBrandOptions.map((item, idx) => (
+                      {filteredAndSortedBrandOptions?.map((item, idx) => (
                         <li key={idx}>
                           <label className="containerss">
                             <input
@@ -1377,7 +1377,7 @@ function CarLeftSidebar({
                   </h4>
                   <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                     <div className="row g-xl-2 gy-2 tw-mt-4">
-                      {bodyoptions.map((item, idx) => (
+                      {bodyoptions?.map((item, idx) => (
                         <div className="col-xl-4 col-4">
                           <button
                             key={idx}
@@ -1509,7 +1509,7 @@ function CarLeftSidebar({
                   }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                    {fuelTypeList.map((option, idx) => (
+                    {fuelTypeList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1547,7 +1547,7 @@ function CarLeftSidebar({
                   }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                    {cylinderList.map((option, idx) => (
+                    {cylinderList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1585,7 +1585,7 @@ function CarLeftSidebar({
                   }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                    {transmissionList.map((option, idx) => (
+                    {transmissionList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1625,7 +1625,7 @@ function CarLeftSidebar({
                   }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                    {driveList.map((option, idx) => (
+                    {driveList?.map((option, idx) => (
                       <li key={idx}>
                         <label className="containerss" key={idx}>
                           <input
@@ -1998,7 +1998,7 @@ function CarLeftSidebar({
                     />
                   </div>
                   <ul className="overflow-list tw-pt-4 tw-pb-4">
-                    {filteredAndSortedBrandOptions.map((item, idx) => (
+                    {filteredAndSortedBrandOptions?.map((item, idx) => (
                       <li key={idx}>
                         <label className="containerss">
                           <input
@@ -2034,7 +2034,7 @@ function CarLeftSidebar({
                 </h4>
                 <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                   <div className="row g-xl-2 gy-2 tw-mt-4">
-                    {bodyoptions.map((item, idx) => (
+                    {bodyoptions?.map((item, idx) => (
                       <div className="col-xl-4 col-4">
                         <button
                           key={idx}
@@ -2159,7 +2159,7 @@ function CarLeftSidebar({
                 }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                  {fuelTypeList.map((option, idx) => (
+                  {fuelTypeList?.map((option, idx) => (
                     <li key={idx}>
                       <label className="containerss" key={idx}>
                         <input
@@ -2197,7 +2197,7 @@ function CarLeftSidebar({
                 }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                  {cylinderList.map((option, idx) => (
+                  {cylinderList?.map((option, idx) => (
                     <li key={idx}>
                       <label className="containerss" key={idx}>
                         <input
@@ -2235,7 +2235,7 @@ function CarLeftSidebar({
                 }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                  {transmissionList.map((option, idx) => (
+                  {transmissionList?.map((option, idx) => (
                     <li key={idx}>
                       <label className="containerss" key={idx}>
                         <input
@@ -2271,7 +2271,7 @@ function CarLeftSidebar({
                 }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
-                  {driveList.map((option, idx) => (
+                  {driveList?.map((option, idx) => (
                     <li key={idx}>
                       <label className="containerss" key={idx}>
                         <input

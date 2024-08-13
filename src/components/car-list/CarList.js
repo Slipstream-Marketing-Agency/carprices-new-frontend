@@ -116,7 +116,7 @@ const CarList = ({ cars, totalCars }) => {
         </div>
       </div>
       <div className="tw-grid tw-gap-4 tw-mt-4 tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-3">
-        {cars.map((car, index) => (
+        {cars?.map((car, index) => (
           <CarCard key={index} car={car} />
         ))}
       </div>

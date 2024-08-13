@@ -33,7 +33,7 @@ export default function FilterLayout() {
     bodyTypes: [],
   });
 
-  console.log(filterData, "filterData");
+  // console.log(filterData, "filterData");
 
   const [bodyTypeList, setBodyTypeList] = useState([]);
   const [seatList, setSeatList] = useState([]);
@@ -170,7 +170,7 @@ export default function FilterLayout() {
         filterData.bodyTypes.length > 0
           ? `bodyTypes=${encodeURIComponent(bodyTypesJSON)}`
           : "";
-
+      
       const responsePrice = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
       );
