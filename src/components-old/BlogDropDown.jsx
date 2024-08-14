@@ -170,7 +170,7 @@ export default function BlogDropDown({searchSlug,news,initialFocus}) {
 
     return (
         <div className="inputSearchContainer mt-4 position-relative">
-            <i class="bi bi-search searchIcon"></i>
+            <i className="bi bi-search searchIcon"></i>
             <input type="text"
               ref={inputRef}
               className={`newsInputSearch ${isRtl && 'inputFieldPlaceholderTxtRight'}`}

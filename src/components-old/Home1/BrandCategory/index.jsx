@@ -25,7 +25,7 @@ function BrandCategory({ brandDetails }) {
         <div className="row row-cols-xl-6 row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-3 g-4 justify-content-center mb-15">
           {brandDetails?.map((item, idx) => {
             return (
-              <div className="col wow fadeInUp" data-wow-delay="200ms">
+              <div key={idx} className="col wow fadeInUp" data-wow-delay="200ms">
                 <Link legacyBehavior href={`/brands/${item?.slug}`} key={idx}>
                   <a className="single-category1">
                     <div className="brand-icon ">

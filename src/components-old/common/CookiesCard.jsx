@@ -22,8 +22,8 @@ export default function CookiesCard() {
 <div className="cookie-warning">
   <h4 className="cookie-title ">We use cookies 🍪</h4>
     <div className="cookie-text">This website uses cookies in order to offer you the most relevant information.Please accept cookies for optimal performance.Read our <a className='text-primary' href="/privacy">Privacy Policy</a>.</div>
-    <div class="cookie-btn-wrapper d-flex justify-content-center">
-      <button onClick={acceptCookies} class="cookie-btn">Accept All Cookies</button>
+    <div className="cookie-btn-wrapper d-flex justify-content-center">
+      <button onClick={acceptCookies} className="cookie-btn">Accept All Cookies</button>
       <button onClick={()=>{setShowBanner(false)}} className="cookie-btn cookieDeclineBtn">Reject All</button>
     </div>
 </div>

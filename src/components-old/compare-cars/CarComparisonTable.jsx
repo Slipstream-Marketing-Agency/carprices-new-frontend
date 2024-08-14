@@ -68,9 +68,9 @@ export default function CarComparisonTable({ tableData }) {
             height="30"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="2" x2="12" y2="6" />
@@ -820,7 +820,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -831,7 +831,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -870,7 +870,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -881,7 +881,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -920,7 +920,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -931,7 +931,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -970,7 +970,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -981,7 +981,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1020,7 +1020,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1031,7 +1031,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1070,7 +1070,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1081,7 +1081,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1120,7 +1120,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1131,7 +1131,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1170,7 +1170,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1181,7 +1181,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1220,7 +1220,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1231,7 +1231,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1270,7 +1270,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1281,7 +1281,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1634,7 +1634,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1645,7 +1645,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1684,7 +1684,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1695,7 +1695,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1733,7 +1733,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1744,7 +1744,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1783,7 +1783,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1794,7 +1794,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1832,7 +1832,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1843,7 +1843,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1908,7 +1908,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1919,7 +1919,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="red"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />
@@ -1958,7 +1958,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="green"
-                        class="bi bi-check2"
+                        className="bi bi-check2"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11.742 4.344a1 1 0 0 1 1.415 1.415l-6.4 6.4a1 1 0 0 1-1.415 0l-3.2-3.2a1 1 0 0 1 1.415-1.415L5 10.586l5.327-5.327a1 1 0 0 1 1.415 0z" />
@@ -1969,7 +1969,7 @@ export default function CarComparisonTable({ tableData }) {
                         width="25"
                         height="25"
                         fill="black"
-                        class="bi bi-x"
+                        className="bi bi-x"
                         viewBox="0 0 16 16"
                       >
                         <path d="M12.354 3.646a.5.5 0 0 0-.708 0L8 7.293 3.354 2.646a.5.5 0 1 0-.708.708L7.293 8l-4.647 4.646a.5.5 0 0 0 .708.708L8 8.707l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 8l4.647-4.646a.5.5 0 0 0 0-.708z" />

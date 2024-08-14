@@ -501,7 +501,7 @@ export default function index({
                   muted
                   loop
                   playsInline
-                  poster="/path/to/poster.jpg"
+                  // poster="/path/to/poster.jpg"
                   className="banner-video"
                 >
                   <source
@@ -1304,7 +1304,7 @@ export default function index({
 
                 <div className="tw-grid tw-grid-rows-3 tw-gap-4">
                   {articles?.news.slice(1, 4)?.map((item, index) => (
-                    <Link href={`/news/${item?.slug}`}>
+                    <Link key={index} href={`/news/${item?.slug}`}>
                       <div
                         key={index}
                         className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"

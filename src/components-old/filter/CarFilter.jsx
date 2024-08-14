@@ -749,7 +749,7 @@ export default function CarFilter({
                     {router.pathname === "/brands/[brandname]" && (
                       <>
                         <div className="white_bg_wrapper">
-                          <h1 class="fw-bold">
+                          <h1 className="fw-bold">
                             {branddetails?.attributes?.name} UAE Cars
                           </h1>
                           <hr className="my-0 mt-2 heading-bottom " />

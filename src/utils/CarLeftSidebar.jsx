@@ -51,7 +51,7 @@ function CarLeftSidebar({
   displaynone,
   toggleModal,
 }) {
-  console.log(toggleModal, "toggleModal");
+  // console.log(toggleModal, "toggleModal");
   const router = useRouter();
 
   const [isSticky, setIsSticky] = useState(false);
@@ -340,7 +340,7 @@ function CarLeftSidebar({
     setCurrentPage(1);
 
     // Optionally, you can also redirect to the base page without filters
-    router.push("/search-cars");
+    // router.push("/search-cars");
   };
 
   const sortOptions = (options, selected) => {
@@ -612,7 +612,7 @@ function CarLeftSidebar({
     });
   };
 
-  console.log(tempSelectedPrice, "tempSelectedPrice");
+  // console.log(tempSelectedPrice, "tempSelectedPrice");
   // Step 3: Apply changes when "Apply Filter" is clicked
   const applyPriceFilter = () => {
     setSelectedPrice(tempSelectedPrice);
@@ -826,7 +826,7 @@ function CarLeftSidebar({
     }
   }, [showDriveModal, selectedDrive]);
 
-  console.log(tempSelectedDrive, "tempSelectedDrive");
+  // console.log(tempSelectedDrive, "tempSelectedDrive");
 
   // Handle changes in the drive modal
   const handleModalDriveChange = (driveValue) => {
@@ -1008,7 +1008,7 @@ function CarLeftSidebar({
                 <div className="show">
                   <div className="row g-xl-2 gy-2 ">
                     {bodyoptions?.map((item, idx) => (
-                      <div className="col-xl-4 col-4">
+                      <div key={idx} className="col-xl-4 col-4">
                         <button
                           key={idx}
                           className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
@@ -1228,7 +1228,7 @@ function CarLeftSidebar({
                       showPriceDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1322,7 +1322,7 @@ function CarLeftSidebar({
                         showBrandDropdown ? "open" : ""
                       }`}
                     >
-                      <i class="bi bi-chevron-down" />
+                      <i className="bi bi-chevron-down" />
                     </span>
                   </h4>
                   <div
@@ -1372,13 +1372,13 @@ function CarLeftSidebar({
                         showBodyDropdown ? "open" : ""
                       }`}
                     >
-                      <i class="bi bi-chevron-down" />
+                      <i className="bi bi-chevron-down" />
                     </span>
                   </h4>
                   <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                     <div className="row g-xl-2 gy-2 tw-mt-4">
                       {bodyoptions?.map((item, idx) => (
-                        <div className="col-xl-4 col-4">
+                        <div key={idx} className="col-xl-4 col-4">
                           <button
                             key={idx}
                             className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${
@@ -1416,7 +1416,7 @@ function CarLeftSidebar({
                       showPowerDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1456,7 +1456,7 @@ function CarLeftSidebar({
                       showDisplacementDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1500,7 +1500,7 @@ function CarLeftSidebar({
                       showFuelTypeDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1538,7 +1538,7 @@ function CarLeftSidebar({
                       showCylindersDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1576,7 +1576,7 @@ function CarLeftSidebar({
                       showTransmissionsDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1616,7 +1616,7 @@ function CarLeftSidebar({
                       showDriveDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -1656,7 +1656,7 @@ function CarLeftSidebar({
   const [maxPrice, setMaxPrice] = useState(33660000);
   const [initialValues, setInitialValues] = useState([]); // Default values for initial slider range
 
-  console.log(initialValues,"initialprice");
+  // console.log(initialValues,"initialprice");
   useEffect(() => {
     if (price) {
       const [min, max] = price.split("-").map(Number);
@@ -1802,7 +1802,7 @@ function CarLeftSidebar({
                       <PrimaryButton
                         label="Apply Filter"
                         onClick={() => {
-                          console.log("llllllllllllll");
+                          // console.log("llllllllllllll");
                           const applyFilterFunction =
                             filterFunctions[filter.id];
                           if (applyFilterFunction) {
@@ -1890,7 +1890,7 @@ function CarLeftSidebar({
                 <span
                   className={`dropdown-icon ${showPriceDropdown ? "open" : ""}`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -1981,7 +1981,7 @@ function CarLeftSidebar({
                       showBrandDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
@@ -2029,13 +2029,13 @@ function CarLeftSidebar({
                       showBodyDropdown ? "open" : ""
                     }`}
                   >
-                    <i class="bi bi-chevron-down" />
+                    <i className="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                   <div className="row g-xl-2 gy-2 tw-mt-4">
                     {bodyoptions?.map((item, idx) => (
-                      <div className="col-xl-4 col-4">
+                      <div key={idx} className="col-xl-4 col-4">
                         <button
                           key={idx}
                           className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${
@@ -2070,7 +2070,7 @@ function CarLeftSidebar({
                 <span
                   className={`dropdown-icon ${showPowerDropdown ? "open" : ""}`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -2110,7 +2110,7 @@ function CarLeftSidebar({
                     showDisplacementDropdown ? "open" : ""
                   }`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -2150,7 +2150,7 @@ function CarLeftSidebar({
                     showFuelTypeDropdown ? "open" : ""
                   }`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -2188,7 +2188,7 @@ function CarLeftSidebar({
                     showCylindersDropdown ? "open" : ""
                   }`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -2226,7 +2226,7 @@ function CarLeftSidebar({
                     showTransmissionsDropdown ? "open" : ""
                   }`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
@@ -2262,7 +2262,7 @@ function CarLeftSidebar({
                 <span
                   className={`dropdown-icon ${showDriveDropdown ? "open" : ""}`}
                 >
-                  <i class="bi bi-chevron-down" />
+                  <i className="bi bi-chevron-down" />
                 </span>
               </h4>
               <div

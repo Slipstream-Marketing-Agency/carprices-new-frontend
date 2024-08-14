@@ -19,7 +19,7 @@ export default function Pagination({
     return null; // Or handle the error scenario for invalid inputs
   }
 
-  console.log(type,"popop");
+  // console.log(type,"popop");
 
   const router = useRouter();
 
@@ -136,5 +136,5 @@ Pagination.propTypes = {
   totalPages: PropTypes.number.isRequired,
   currentPageZero: PropTypes.number.isRequired,
   totalPagesZero: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(["default", 1]).isRequired,
+  type: PropTypes.oneOf(["default", 0]).isRequired,
 };

@@ -213,7 +213,7 @@ function ProductCard({ subTitle, heading, carDetails }) {
                             >
                               <span className="view-btn2">
                                 {t.viewDetails}
-                                <i class="bi bi-chevron-double-right"></i>
+                                <i className="bi bi-chevron-double-right"></i>
                               </span>
                               <div className="brand ">
                                 <Link legacyBehavior href="">

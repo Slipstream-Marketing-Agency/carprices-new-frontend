@@ -382,7 +382,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
             className="tw-bg-white tw-font-semibold"
             onClick={() => setShowModal(true)}
           >
-            <i class="bi bi-pencil tw-bg-gray-200 tw-p-2 tw-text-[11px] tw-rounded-md "></i>{" "}
+            <i className="bi bi-pencil tw-bg-gray-200 tw-p-2 tw-text-[11px] tw-rounded-md "></i>{" "}
             Change Car{" "}
           </button>
         </div>

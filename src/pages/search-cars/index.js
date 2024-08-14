@@ -166,7 +166,7 @@ const CarsPage = ({
   const [allTrims, setAllTrims] = useState(filteredTrims);
   const [allTrimsZero, setAllTrimsZero] = useState(filteredTrimsZero);
   const [totalCars, setTotalCars] = useState(totalFilteredCars);
-  console.log(filteredTrimsZero, "filteredTrimsZero");
+  // console.log(filteredTrimsZero, "filteredTrimsZero");
   const [allFilter, setAllFilter] = useState();
   const [fuelTypeListRes, setFuelTypeListRes] = useState(fuelTypeList);
   const [cylinderListres, setCylinderListres] = useState(cylinderList);
@@ -776,7 +776,7 @@ const CarsPage = ({
 
   const [selectedOption, setSelectedOption] = useState(query.sort);
 
-  console.log(selectedOption, "selectedOption");
+  // console.log(selectedOption, "selectedOption");
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -828,7 +828,7 @@ const CarsPage = ({
     }
   };
 
-  console.log(toggleModalFunction, "toggleModalFunction");
+  // console.log(toggleModalFunction, "toggleModalFunction");
 
   const PopupComponent = ({ open, onClose, onSelect }) => (
     <Dialog open={open} onClose={onClose}>

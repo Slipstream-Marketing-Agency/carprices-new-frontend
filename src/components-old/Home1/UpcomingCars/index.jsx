@@ -263,7 +263,7 @@ function index({ subTitle, heading, carDetails }) {
                                       ?.attributes?.slug}/${car?.attributes?.year}/${car?.attributes?.slug}`}>
                               <a className="view-btn2">
                                 View Details
-                                <i class="bi bi-chevron-double-right"></i>
+                                <i className="bi bi-chevron-double-right"></i>
                               </a>
                             </Link>
                             <div className="brand">

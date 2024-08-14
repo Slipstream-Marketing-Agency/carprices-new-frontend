@@ -163,11 +163,11 @@ const LiveSearch = ({
 
 
 
-                {/* <div class="input-group form-group has-search">
-                    <i class="bi bi-search form-control-feedback"></i>
+                {/* <div className="input-group form-group has-search">
+                    <i className="bi bi-search form-control-feedback"></i>
                    
                     <div className="form-inner">
-                        <input type="text" placeholder={t.searchForBrandandCars} autocomplete="off" class="SearchInputField   rounded " value={defaultValue}
+                        <input type="text" placeholder={t.searchForBrandandCars} autocomplete="off" className="SearchInputField   rounded " value={defaultValue}
                             onChange={handleChange} id="example-search-input" onClick={(e)=>{handleInputClick(e.target.value)}}/>
                         <button type="submit">
                             <i className="bi bi-search" />
