@@ -585,7 +585,9 @@ export async function getServerSideProps(context) {
   const year = context.params.year;
   const brandname = context.params.brandname;
   const modelSlug = context.params.model;
-  const trimSlug = context.params.trim;
+  const trimSlug = decodeURIComponent(context.params.trim);
+
+  console.log(trimSlug,"trimSlug");
 
   try {
     const response = await axios.get(
@@ -599,7 +601,7 @@ export async function getServerSideProps(context) {
 
     // Redirect to a custom error page or return notFound: true
     return {
-      // notFound: true,
+      notFound: true,
     };
   }
 }
