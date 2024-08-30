@@ -10997,12 +10997,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/gac/2024/emkoo</loc>
+          <loc>https://carprices.ae/brands/bmw/2024/2-series-gran-coupe</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/2-series-gran-coupe</loc>
+          <loc>https://carprices.ae/brands/gac/2024/emkoo</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11502,12 +11502,22 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/gac/2025/emkoo</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/bmw/2024/ix1</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/mclaren/2024/senna</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/creta-grand</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
