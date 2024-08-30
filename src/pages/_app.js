@@ -42,27 +42,32 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-
+  
     const setCanonical = async () => {
       const pathSegments = router.asPath.split("?")[0].split("/");
       const slug = pathSegments[4]; // Adjust based on your path structure
       const yearSegment = pathSegments.find(segment => /^\d{4}$/.test(segment));
-
+      
+      // Parse the yearSegment to an integer
+      const year = yearSegment ? parseInt(yearSegment, 10) : null;
+  
       if (slug) {
         const latestYear = await fetchLatestYear(slug);
-
-        if (latestYear && yearSegment && parseInt(yearSegment, 10) < latestYear) {
+  
+        // Update the year only if it's less than 2024
+        if (latestYear && year && year < 2024) {
           pathSegments[pathSegments.indexOf(yearSegment)] = latestYear.toString();
         }
-
+  
         setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
       } else {
         setCanonicalUrl("https://carprices.ae" + router.asPath.split("?")[0]);
       }
     };
-
+  
     setCanonical();
   }, [router.asPath]);
+  
 
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
