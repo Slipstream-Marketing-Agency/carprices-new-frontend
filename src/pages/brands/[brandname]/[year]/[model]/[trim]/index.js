@@ -678,7 +678,7 @@ export async function getServerSideProps(context) {
 
     // Redirect to a custom error page or return notFound: true
     return {
-      notFound: true,
+      // notFound: true,
     };
   }
 }
