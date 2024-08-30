@@ -807,15 +807,33 @@ export async function getServerSideProps(context) {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
     );
+    
+    const trimData = response?.data?.data;
+
+    // Check if trimData is not available
+    if (!trimData) {
+      // Return a custom message or a different page data instead of 404
+      return {
+        props: {
+          trimData: null, // Indicate that data is missing
+          notFound: true, // Optionally indicate that the trim is not found
+        },
+      };
+    }
+
     return {
-      props: { trimData: response?.data?.data },
+      props: { trimData },
     };
   } catch (error) {
     console.error("Failed to fetch trim data:", error);
 
-    // Redirect to a custom error page or return notFound: true
+    // Instead of returning notFound, handle the error gracefully
     return {
-      notFound: true,
+      props: {
+        trimData: null,
+        error: "Failed to fetch data.", // You can pass an error message if needed
+      },
     };
   }
 }
+
