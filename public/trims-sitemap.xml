@@ -458,7 +458,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2023/1500/3.6l-classic-st-(crew-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2023/1500/3.6l-classic-st-(crew-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:32:31.322Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -2852,7 +2852,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2022/1500/3.6l-classic-st-(regular-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2022/1500/3.6l-classic-st-(regular-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:20:18.850Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -19658,13 +19658,13 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2020/1500/3.6l-classic-st-(crew-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2020/1500/3.6l-classic-st-(crew-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:21:13.848Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2020/1500/3.6l-classic-st-(regular-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2020/1500/3.6l-classic-st-(regular-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:21:16.029Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -21284,7 +21284,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2022/1500/3.6l-classic-st-(crew-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2022/1500/3.6l-classic-st-(crew-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:11:22.660Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -21830,7 +21830,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2023/1500/3.6l-classic-st-(regular-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2023/1500/3.6l-classic-st-(regular-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:32:29.100Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -32114,7 +32114,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2024/1500/3.6l-classic-st-(crew-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2024/1500/3.6l-classic-st-(crew-cab)-&quot;4x4</loc>
           <lastmod>2024-04-25T10:11:21.869Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -33362,12 +33362,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/gac/2024/emkoo/gl</loc>
-          <lastmod>2024-07-27T15:03:43.087Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/corvette-z06/3lz-convertible</loc>
           <lastmod>2024-05-27T18:03:47.142Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33382,6 +33376,12 @@
         <url>
           <loc>https://carprices.ae/brands/bmw/2024/2-series-gran-coupe/220i-xdrive</loc>
           <lastmod>2024-04-25T09:15:27.211Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/gac/2024/emkoo/gl</loc>
+          <lastmod>2024-08-30T06:33:50.105Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -34502,7 +34502,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2024/1500/3.6l-classic-st-(regular-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2024/1500/3.6l-classic-st-(regular-cab)-&quot;4x4</loc>
           <lastmod>2024-04-25T10:11:26.814Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -36002,6 +36002,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/gac/2025/emkoo/1.5l-gl</loc>
+          <lastmod>2024-08-30T06:50:43.974Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/suzuki/2024/jimny/1.5l</loc>
           <lastmod>2024-05-27T18:22:20.485Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -36082,6 +36088,12 @@
         <url>
           <loc>https://carprices.ae/brands/suzuki/2023/baleno/1.4l-gl</loc>
           <lastmod>2024-02-22T13:30:06.706Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/creta-grand/smartstream-g2-0</loc>
+          <lastmod>2024-08-30T10:14:52.265Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -36220,6 +36232,12 @@
         <url>
           <loc>https://carprices.ae/brands/bentley/2024/flying-spur/s</loc>
           <lastmod>2024-08-09T14:22:41.977Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/creta-grand/smartstream-g2-0-mt</loc>
+          <lastmod>2024-08-30T10:16:05.949Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -37820,7 +37838,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2021/1500/3.6l-classic-st-(regular-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2021/1500/3.6l-classic-st-(regular-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:20:38.694Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -37832,7 +37850,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ram/2021/1500/3.6l-classic-st-(crew-cab)-"4x4</loc>
+          <loc>https://carprices.ae/brands/ram/2021/1500/3.6l-classic-st-(crew-cab)-&quot;4x4</loc>
           <lastmod>2024-02-22T13:20:56.173Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -38192,7 +38210,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/skoda/2024/superb/lk</loc>
+          <loc>https://carprices.ae/brands/skoda/2024/superb/l&amp;k</loc>
           <lastmod>2024-05-21T06:27:26.240Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
