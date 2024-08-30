@@ -7,15 +7,10 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Link from "next/link";
-import Marquee from "react-fast-marquee";
+
 import MainLayout from "@/src/layout/MainLayout";
-import SelectComponent from "@/src/utils/SelectComponent";
 import Ad728x90 from "@/src/components-old/ads/Ad728x90";
-import Ad300x250 from "@/src/components-old/ads/Ad300x250";
 import Image from "next/image";
-import CarDetailsNav from "@/src/components-old/details/CarDetailsNav";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import Ad300x600 from "@/src/components-old/ads/Ad300x600";
@@ -26,7 +21,6 @@ import DetailedSpecification from "@/src/components-old/trim-details/DetailedSpe
 import VehicleGallery from "@/src/components-old/trim-details/VehicleGallery";
 import VehicleReview from "@/src/components-old/trim-details/VehicleReview";
 import VehicleFaq from "@/src/components-old/trim-details/VehicleFaq";
-import NewShareBtns from "@/src/components-old/common/NewShareBtns";
 import Price from "@/src/utils/Price";
 import CarTestDriveForm from "@/src/components-old/CarTestDriveForm";
 
@@ -36,17 +30,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField,
-  MenuItem,
   ToggleButton,
   ToggleButtonGroup,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   Slider,
-  Typography,
   Box,
 } from "@mui/material";
 import { styled } from "@mui/system";
@@ -152,14 +138,14 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
     // Extract all non-zero prices, calculate EMI for each, and find the minimum EMI
     const emis = car
-      ?.filter((trim) => trim.attributes.price > 0)
-      .map((trim) => calculateEMI(trim.attributes.price));
+      ?.filter((trim) => trim?.attributes.price > 0)
+      .map((trim) => calculateEMI(trim?.attributes?.price));
 
     const minEMI = Math.min(...emis);
 
     // Format the minimum EMI for display
     const emiString = minEMI
-      ? `AED ${minEMI.toLocaleString("en-AE", {
+      ? `AED ${minEMI?.toLocaleString("en-AE", {
           minimumFractionDigits: 0,
           maximumFractionDigits: 2,
         })}*`
@@ -167,129 +153,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
 
     return <span>{emiString}</span>;
   };
-
-  const carSlide = useMemo(() => {
-    return {
-      speed: 1500,
-      spaceBetween: 40,
-      autoplay: {
-        delay: 2500, // Autoplay duration in milliseconds
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".next-2",
-        prevEl: ".prev-2",
-      },
-
-      breakpoints: {
-        280: {
-          slidesPerView: 1,
-        },
-        420: {
-          slidesPerView: 1,
-          spaceBetween: 15,
-        },
-        576: {
-          slidesPerView: 2,
-          spaceBetween: 15,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        992: {
-          slidesPerView: 2,
-        },
-        1200: {
-          slidesPerView: 2,
-        },
-        1400: {
-          slidesPerView: 2,
-        },
-      },
-    };
-  });
-  const upcommingSlide = useMemo(() => {
-    return {
-      slidesPerView: 3,
-      speed: 1500,
-      spaceBetween: 25,
-      navigation: {
-        nextEl: ".next-2",
-        prevEl: ".prev-2",
-      },
-
-      breakpoints: {
-        280: {
-          slidesPerView: 1,
-        },
-        386: {
-          slidesPerView: 1,
-        },
-        576: {
-          slidesPerView: 1,
-          spaceBetween: 15,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 15,
-        },
-        992: {
-          slidesPerView: 3,
-          spaceBetween: 15,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 24,
-        },
-        1400: {
-          slidesPerView: 3,
-        },
-      },
-    };
-  });
-  const slideSettings = useMemo(() => {
-    return {
-      slidesPerView: "auto",
-      speed: 1500,
-      spaceBetween: 25,
-      loop: true,
-      autoplay: {
-        delay: 2500, // Autoplay duration in milliseconds
-      },
-      navigation: {
-        nextEl: ".next-4",
-        prevEl: ".prev-4",
-      },
-
-      breakpoints: {
-        280: {
-          slidesPerView: 1,
-        },
-        386: {
-          slidesPerView: 1,
-        },
-        576: {
-          slidesPerView: 1,
-          spaceBetween: 15,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 15,
-        },
-        992: {
-          slidesPerView: 2,
-          spaceBetween: 15,
-        },
-        1200: {
-          slidesPerView: 2,
-          spaceBetween: 24,
-        },
-        1400: {
-          slidesPerView: 2,
-        },
-      },
-    };
-  });
   const slideSetting = useMemo(() => {
     return {
       slidesPerView: "auto",
@@ -769,7 +632,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                 <TrimDescription trim={trimData} />
                 <Ad728x90 dataAdSlot="5962627056" />
                 <DetailedSpecification trim={trimData} />
-                {trimData.galleryImages.length > 0 && (
+                {trimData?.galleryImages?.length > 0 && (
                   <>
                     {" "}
                     <Ad728x90 dataAdSlot="5962627056" />
@@ -807,33 +670,15 @@ export async function getServerSideProps(context) {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
     );
-    
-    const trimData = response?.data?.data;
-
-    // Check if trimData is not available
-    if (!trimData) {
-      // Return a custom message or a different page data instead of 404
-      return {
-        props: {
-          trimData: null, // Indicate that data is missing
-          notFound: true, // Optionally indicate that the trim is not found
-        },
-      };
-    }
-
     return {
-      props: { trimData },
+      props: { trimData: response?.data?.data },
     };
   } catch (error) {
     console.error("Failed to fetch trim data:", error);
 
-    // Instead of returning notFound, handle the error gracefully
+    // Redirect to a custom error page or return notFound: true
     return {
-      props: {
-        trimData: null,
-        error: "Failed to fetch data.", // You can pass an error message if needed
-      },
+      notFound: true,
     };
   }
 }
-
