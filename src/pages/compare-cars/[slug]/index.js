@@ -172,7 +172,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
           <CompareCarCard carData={car2Data} />
           <CompareCarCard carData={car3Data} />
           <CompareCarCard carData={car4Data} />
-          {canAddMoreCars &&
+          {/* {canAddMoreCars &&
             toBeAddedLength.map((item, index) => (
               <div
                 className={` ${
@@ -190,7 +190,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
                   <MultiStepCarSelection mode="add" />
                 </div>
               </div>
-            ))}
+            ))} */}
         </div>
         </div>
         
