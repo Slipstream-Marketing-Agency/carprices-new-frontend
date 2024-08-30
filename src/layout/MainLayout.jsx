@@ -38,9 +38,6 @@ function MainLayout({ children, pageMeta }) {
 
   const isSearchCarsPage = router.asPath.startsWith("/search-cars");
 
-  const canonicalUrl = isSearchCarsPage
-    ? "https://carprices.ae/search-cars"
-    : "https://carprices.ae" + router.asPath.split("?")[0];
 
   const currentYear = new Date().getFullYear();
 
@@ -342,7 +339,6 @@ function MainLayout({ children, pageMeta }) {
         <meta name="description" content={meta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
       {/* <Topbar />
       <Header /> */}
