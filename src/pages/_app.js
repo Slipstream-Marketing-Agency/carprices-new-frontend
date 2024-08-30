@@ -11,21 +11,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import "@/styles/tailwind.css";
-// import Script from "next/script";
-// import Preloader from "../components/common/Preloader";
-// import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { useRouter } from "next/router";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Provider } from "react-redux";
 import store from "../store";
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
+  const [canonicalUrl, setCanonicalUrl] = useState("");
+
+  const router = useRouter();
+  const { locale } = router;
 
   const handlePreloaderClose = () => {
     setLoading(false);
+  };
+
+  const fetchLatestYear = async (slug) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-models/latest-year/${slug}`);
+
+    console.log(response,"response");
+    const data = await response.json();
+    return data?.data?.latestYear;
   };
 
   useEffect(() => {
@@ -33,16 +42,34 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, []);
 
-  const router = useRouter();
-  const { locale } = router;
+    const setCanonical = async () => {
+      const pathSegments = router.asPath.split("?")[0].split("/");
+      const slug = pathSegments[4]; // Adjust based on your path structure
+      const yearSegment = pathSegments.find(segment => /^\d{4}$/.test(segment));
+
+      if (slug) {
+        const latestYear = await fetchLatestYear(slug);
+
+        if (latestYear && yearSegment && parseInt(yearSegment, 10) < latestYear) {
+          pathSegments[pathSegments.indexOf(yearSegment)] = latestYear.toString();
+        }
+
+        setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
+      } else {
+        setCanonicalUrl("https://carprices.ae" + router.asPath.split("?")[0]);
+      }
+    };
+
+    setCanonical();
+  }, [router.asPath]);
 
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
 
   return (
-    <div style={isArabicLocale ? { direction: "rtl", textAlign: "right" } : {}}>
+    // <div style={isArabicLocale ? { direction: "rtl", textAlign: "right" } : {}}>
+    <div>
       <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -53,67 +80,15 @@ function MyApp({ Component, pageProps }) {
           type="image/gif"
           sizes="20x20"
         />
-        {/* {router.pathname === "/" ? (
-          <>
-            <script src="https://cdn.tailwindcss.com"></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-              tailwind.config = {
-                theme: {
-                  extend: {
-                    fontFamily: {
-                      gilroy: ['Gilroy', 'sans-serif'],
-                    },
-                  },
-                },
-              };
-            `,
-              }}
-            ></script>
-          </>
-        ) : (
-          <>
-            {" "}
-            <link rel="stylesheet" href="/assets/css/bootstrap-icons.css" />
-            <link rel="stylesheet" href="/assets/css/boxicons.min.css" />
-            <link rel="stylesheet" href="/assets/css/fontawesome.min.css" />
-            <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
-            <link rel="stylesheet" href="/assets/css/nice-select.css" />
-            <link rel="stylesheet" href="/assets/css/style.css" />
-            <script src="/assets/js/bootstrap.min.js"></script>
-          </>
-        )} */}
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       </Head>
       <Provider store={store}>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
       </Provider>
       <Analytics />
       <SpeedInsights/>
-      <style jsx global>
-        {`
-          /* Define global styles for right-to-left (rtl) layout */
-          .rtl {
-            direction: rtl;
-            text-align: right;
-          }
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          p,
-          li,
-          ul {
-            text-align: right !impoprtant;
-          }
-        `}
-      </style>
+     
     </div>
-    //   )}
-    // </div>
   );
 }
 
