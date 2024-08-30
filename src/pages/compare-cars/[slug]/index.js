@@ -165,35 +165,36 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
     >
       <div className="">
         <div className="tw-container">
-        <div className="tw-grid tw-grid-cols-12 tw-gap-3">
-          {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
-          
-          <CompareCarCard carData={car1Data} />
-          <CompareCarCard carData={car2Data} />
-          <CompareCarCard carData={car3Data} />
-          <CompareCarCard carData={car4Data} />
-          {/* {canAddMoreCars &&
-            toBeAddedLength.map((item, index) => (
-              <div
-                className={` ${
-                  !isMobile && isSticky
-                    ? "md:tw-col-span-3 tw-col-span-6"
-                    : "md:tw-col-span-3 tw-col-span-6"
-                }`}
-                style={{
-                  position: !isMobile && isSticky && "fixed",
-                  bottom: !isMobile && "20px",
-                  right: !isMobile && "0px",
-                }}
-              >
-                <div className="tw-flex tw-justify-center tw-items-center tw-border-solid tw-border tw-border-gray-200 tw-rounded-lg tw-h-[340px]">
-                  <MultiStepCarSelection mode="add" />
+          <div className="tw-grid tw-grid-cols-12 tw-gap-3">
+            {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
+
+            <CompareCarCard carData={car1Data} />
+            <CompareCarCard carData={car2Data} />
+            <CompareCarCard carData={car3Data} />
+            <CompareCarCard carData={car4Data} />
+            {canAddMoreCars &&
+              toBeAddedLength.map((item, index) => (
+                <div
+                  // className={` ${
+                  //   !isMobile && isSticky
+                  //     ? "md:tw-col-span-3 tw-col-span-6"
+                  //     : "md:tw-col-span-3 tw-col-span-6"
+                  // }`}
+                  // style={{
+                  //   position: !isMobile && isSticky && "fixed",
+                  //   bottom: !isMobile && "20px",
+                  //   right: !isMobile && "0px",
+                  // }}
+                  className="md:tw-col-span-3 tw-col-span-6"
+                >
+                  <div className="tw-flex tw-justify-center tw-items-center tw-border-solid tw-border tw-border-gray-200 tw-rounded-lg tw-h-[340px]">
+                    <MultiStepCarSelection mode="add" />
+                  </div>
                 </div>
-              </div>
-            ))} */}
+              ))}
+          </div>
         </div>
-        </div>
-        
+
         {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
