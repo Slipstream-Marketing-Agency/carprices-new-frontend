@@ -54,10 +54,9 @@ const CarsPage = ({
   driveList,
   bodyTypes,
   brand,
-  branddetails
+  branddetails,
 }) => {
-
-  console.log(branddetails,"branddetails");
+  console.log(branddetails, "branddetails");
   const currentYear = new Date().getFullYear();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -694,8 +693,10 @@ const CarsPage = ({
     query.page,
     query.pageZero,
     query.sort,
+    query.brandname,
   ]);
 
+  console.log(query, "ttttttttttttttttt");
   const brandoptions = brandListres?.map((brand) => ({
     label: brand.name,
     value: brand.slug,
@@ -779,7 +780,7 @@ const CarsPage = ({
   const minPrice = prices && prices[0] ? parseInt(prices[0]) : null; // Convert to integer
   const maxPrice = prices && prices[1] ? parseInt(prices[1]) : null;
 
-  const [selectedOption, setSelectedOption] = useState(query.sort);
+  const [selectedOption, setSelectedOption] = useState(query.sort || "");
 
   console.log(selectedOption, "selectedOption");
 
@@ -791,16 +792,24 @@ const CarsPage = ({
   useEffect(() => {
     const updateQuery = () => {
       const currentParams = { ...router.query };
-      currentParams.sort = selectedOption;
-      const queryString = new URLSearchParams(currentParams).toString();
-      router.replace(`${router.pathname}?${queryString}`, undefined, {
-        shallow: true,
-      });
+
+      if (selectedOption) {
+        currentParams.sort = selectedOption;
+      } else {
+        delete currentParams.sort;
+      }
+
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: currentParams,
+        },
+        undefined,
+        { shallow: true }
+      );
     };
 
-    if (selectedOption !== "") {
-      updateQuery();
-    }
+    updateQuery();
   }, [selectedOption]);
 
   const [showModal, setShowModal] = useState(false);
@@ -981,31 +990,31 @@ const CarsPage = ({
             </aside>
             <main className="tw-w-full md:tw-w-3/4">
               <div>
-              {router.pathname === "/brands/[brandname]" && (
-                      <>
-                        <div >
-                          <h1 class="fw-bold">
-                            {branddetails?.attributes?.name} UAE Cars
-                          </h1>
-                          <hr className="my-0 mt-2 heading-bottom " />
-                          <div className="read-more-less" id="dynamic-content">
-                            <div
-                              className={`info ${
-                                expanded ? "" : "height-hidden"
-                              } dynamic-content content-hidden`}
-                            >
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: branddetails?.attributes?.description,
-                                }}
-                              ></div>
-                              <h2 className="fw-bold mt-4">
-                                {branddetails?.attributes?.name} Cars{" "}
-                                {moment().format("MMMM YYYY")} Price List in UAE
-                              </h2>
-                              <hr className="mb-3 mt-2 heading-bottom " />
+                {router.pathname === "/brands/[brandname]" && (
+                  <>
+                    <div>
+                      <h1 class="fw-bold">
+                        {branddetails?.attributes?.name} UAE Cars
+                      </h1>
+                      <hr className="my-0 mt-2 heading-bottom " />
+                      <div className="read-more-less" id="dynamic-content">
+                        <div
+                          className={`info ${
+                            expanded ? "" : "height-hidden"
+                          } dynamic-content content-hidden`}
+                        >
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: branddetails?.attributes?.description,
+                            }}
+                          ></div>
+                          <h2 className="fw-bold mt-4">
+                            {branddetails?.attributes?.name} Cars{" "}
+                            {moment().format("MMMM YYYY")} Price List in UAE
+                          </h2>
+                          <hr className="mb-3 mt-2 heading-bottom " />
 
-                              {/* <p>
+                          {/* <p>
                                 You can choose from{" "}
                                 <b>
                                   {
@@ -1096,35 +1105,35 @@ const CarsPage = ({
                                 is the most powerful model in the brand's
                                 line-up.
                               </p> */}
-                              <br />
+                          <br />
 
-                              <PriceListTable
-                                data={
-                                  branddetails?.attributes?.modelsWithPriceRange
-                                }
-                                brand={branddetails?.attributes?.name}
-                              />
-                            </div>
-                            <span
-                              className={`read-more ${
-                                expanded ? "hide" : ""
-                              } text-primary fw-bold tw-mb-[-3px]`}
-                              onClick={() => setExpanded(true)}
-                            >
-                              Read More
-                            </span>
-                            <span
-                              className={`read-less scroll-to-parent-pos content-read-less ${
-                                expanded ? "" : "hide"
-                              } text-primary fw-bold`}
-                              onClick={() => setExpanded(false)}
-                            >
-                              Read Less
-                            </span>
-                          </div>
+                          <PriceListTable
+                            data={
+                              branddetails?.attributes?.modelsWithPriceRange
+                            }
+                            brand={branddetails?.attributes?.name}
+                          />
                         </div>
-                      </>
-                    )}
+                        <span
+                          className={`read-more ${
+                            expanded ? "hide" : ""
+                          } text-primary fw-bold tw-mb-[-3px]`}
+                          onClick={() => setExpanded(true)}
+                        >
+                          Read More
+                        </span>
+                        <span
+                          className={`read-less scroll-to-parent-pos content-read-less ${
+                            expanded ? "" : "hide"
+                          } text-primary fw-bold`}
+                          onClick={() => setExpanded(false)}
+                        >
+                          Read Less
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
                 <div className="tw-hidden md:tw-flex tw-gap-4 tw-justify-between tw-px-5 tw-py-4 tw-text-base tw-tracking-normal tw-rounded-2xl tw-bg-blue-100 max-md:tw-flex-wrap tw-my-4">
                   <div className="tw-my-auto tw-text-black tw-leading-[150%] max-md:tw-max-w-full">
                     Need help finding the right vehicle?{" "}
@@ -1202,12 +1211,12 @@ const CarsPage = ({
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderRadius: "30px",
                         },
-                        "& .MuiSelect-select": {
-                          paddingTop: "10px", // reduce padding above
-                          paddingBottom: "10px", // reduce padding below
-                          paddingLeft: "12px", // adjust padding left if needed
-                          paddingRight: "12px", // adjust padding right if needed
-                        },
+                        // "& .MuiSelect-select": {
+                        //   paddingTop: "10px", // reduce padding above
+                        //   paddingBottom: "10px", // reduce padding below
+                        //   paddingLeft: "12px", // adjust padding left if needed
+                        //   paddingRight: "12px", // adjust padding right if needed
+                        // },
                       }}
                     >
                       <MenuItem value="price-desc">

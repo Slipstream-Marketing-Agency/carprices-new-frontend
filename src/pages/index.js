@@ -492,9 +492,7 @@ export default function index({
         }}
       >
         <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
-          <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
-           
-
+          <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full">
             <div className="tw-row-span-1 md:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-full tw-h-[230px] md:tw-order-1 tw-order-2">
               <div className="video-container">
                 <video
@@ -632,7 +630,7 @@ export default function index({
 
           <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8 tw-overflow-hidden">
             <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
-              <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full tw-justify-center">
+              <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full tw-my-3">
                 <div className="tw-flex tw-flex-col max-md:tw-mt-10">
                   {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
@@ -1333,7 +1331,7 @@ export default function index({
             </div>
           </div>
 
-          <SeoLinksHome/>
+          <SeoLinksHome />
         </main>
       </MainLayout>
     </>

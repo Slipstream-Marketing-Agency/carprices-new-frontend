@@ -3324,3 +3324,29 @@ a,
 .modal-content {
   height: 95% !important;
 }
+
+
+.car-detail-slider .slick-dots{
+  display: flex !important;
+  gap: 70px;
+  overflow: scroll;
+}
+
+.car-detail-main-slider .slick-track{
+  height: 290px  !important;
+}
+
+.car-detail-main-slider .slick-list{
+  height: 360px  !important;
+
+}
+@media (max-width:728px){
+  .car-detail-main-slider .slick-list{
+    height: 250px  !important;
+  
+  }
+}
+
+
+
+.car-detail-main-slider .slick-list{padding: 0px !important;}

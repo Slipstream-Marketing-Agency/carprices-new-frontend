@@ -1,3 +1,101 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .heading-blue {
+    @apply tw-text-blue-600 tw-font-bold tw-text-xs tw-uppercase tw-leading-5 tw-tracking-widest;
+  }
+  .heading {
+    @apply sm:tw-text-3xl tw-leading-9 tw-mb-6 tw-text-2xl;
+  }
+  .error-text {
+    @apply tw-text-red-500 tw-font-semibold tw-text-xs;
+  }
+  .label-radio-btn {
+    @apply tw-text-sm tw-inline-flex tw-justify-center tw-w-full tw-p-2 tw-text-black tw-bg-white 
+      tw-border-gray-300 tw-rounded-lg tw-cursor-pointer dark:hover:tw-text-gray-300 
+      tw-border hover:tw-text-gray-100 hover:tw-bg-gray-100 tw-border-solid dark:tw-text-gray-400 
+      dark:hover:tw-bg-gray-100;
+  }
+
+  .label-radio-btn-active {
+    @apply tw-text-sm tw-inline-flex tw-justify-center tw-w-full tw-p-2 tw-text-black tw-bg-white 
+      tw-rounded-lg tw-cursor-pointer
+      tw-border tw-border-solid 
+      dark:hover:tw-bg-gray-100;
+  }
+
+  .label-radio-btn:hover {
+    @apply hover:tw-bg-gray-100 peer-checked:hover:tw-bg-gray-200;
+  }
+
+  .input-label {
+    @apply tw-border tw-border-gray-200 tw-rounded-md tw-p-2.5 tw-w-full tw-text-sm;
+  }
+
+  .input-date {
+    @apply tw-border tw-border-gray-200 tw-rounded-md tw-p-2.5 tw-w-full tw-text-sm;
+  }
+  .diagonal-stripes {
+    /* background: linear-gradient(
+        45deg,
+        rgb(33, 12, 223) 0%,
+        transparent 25%,
+        transparent 50%,
+        rgb(17, 207, 11) 90%,
+        rgb(167, 20, 20) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 40px 40px;  */
+  }
+  .bg-stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.1) 3px,
+      rgba(0, 0, 0, 0.1) 10px
+        /* rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2) 10px,
+        transparent 10px,
+        transparent 20px */
+    );
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .para {
+    @apply tw-text-base tw-pr-4;
+  }
+  .p-50 {
+    padding-inline: 12.5rem;
+  }
+  .custom-gradient {
+    background: linear-gradient(to right, #3563e9 0%, #1a3da5 100%);
+  }
+
+  /*comparison, cardetail */
+  .brand-label {
+    @apply tw-text-blue-500 tw-text-sm tw-font-semibold tw-tracking-widest;
+  }
+  .model-label {
+    @apply tw-text-lg tw-font-semibold tw-my-1 tw-text-gray-600;
+  }
+
+  .model-label-comparison {
+    @apply tw-text-lg tw-font-semibold tw-my-1 tw-text-gray-600;
+  }
+}

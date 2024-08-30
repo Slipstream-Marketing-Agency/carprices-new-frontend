@@ -16,7 +16,6 @@ import MultiStepCarSelection from "@/src/components-old/compare-cars/MultiStepCa
 import CarComparisonTable from "@/src/components-old/compare-cars/CarComparisonTable";
 import dynamic from "next/dynamic";
 
-
 const CompareCarLazy = dynamic(
   () => import("../../../components-old/Home1/CompareCar/index"),
   {
@@ -164,75 +163,38 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
         type: "Car Review Website",
       }}
     >
-      <div className="mt-3">
-        <Ad728x90 dataAdSlot="5962627056" />
-      </div>
-
-      <div className="compare-page pt-30 mb-100">
-        <div className="container">
-          <div
-            className={`row justify-content-center`}
-            // style={{
-            //   position: isSticky && "fixed",
-            //   top: isMobile ? "-90px" : "-167px",
-            //   background: "white",
-            //   width:
-            //     !isMobile && !isSticky ? "" : !isMobile && isSticky && "82%",
-            // }}
-          >
-            <div className={`row g-4 mb-15`}>
-              <div className="col-lg-12">
-                <div className="uploded-product-group">
-                  <div className="row g-4">
-                    {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
-                    <CompareCarCard carData={car1Data} />
-                    <CompareCarCard carData={car2Data} />
-                    <CompareCarCard carData={car3Data} />
-                    <CompareCarCard carData={car4Data} />
-                    {canAddMoreCars &&
-                      toBeAddedLength.map((item, index) => (
-                        <div
-                          className={` ${
-                            !isMobile && isSticky ? "col-2 " : "col-6 col-lg-3 mt-0"
-                          }`}
-                          style={{
-                            position: !isMobile && isSticky && "fixed",
-                            bottom: !isMobile && "20px",
-                            right: !isMobile && "0px",
-                          }}
-                        >
-                          <div
-                            className="product-card style-2 compare"
-                            style={{
-                              background: !isMobile && isSticky && "unset",
-                              boxShadow: !isMobile && isSticky && "unset",
-                              border: !isMobile && isSticky && "none",
-                            }}
-                          >
-                            <div
-                              className="product-upload-area"
-                              style={{
-                                padding:
-                                  !isMobile && isSticky && " 0px 20px 0px",
-                              }}
-                            >
-                              {/* <div className="upload-area">
-                          <i className="bi bi-plus" />
-                        </div> */}
-                              <div className="comparea-content">
-                                {/* <h6>Add to Compare</h6> */}
-                                <MultiStepCarSelection mode="add" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
+      <div className="">
+        <div className="tw-container">
+        <div className="tw-grid tw-grid-cols-12 tw-gap-3">
+          {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
+          
+          <CompareCarCard carData={car1Data} />
+          <CompareCarCard carData={car2Data} />
+          <CompareCarCard carData={car3Data} />
+          <CompareCarCard carData={car4Data} />
+          {canAddMoreCars &&
+            toBeAddedLength.map((item, index) => (
+              <div
+                className={` ${
+                  !isMobile && isSticky
+                    ? "md:tw-col-span-3 tw-col-span-6"
+                    : "md:tw-col-span-3 tw-col-span-6"
+                }`}
+                style={{
+                  position: !isMobile && isSticky && "fixed",
+                  bottom: !isMobile && "20px",
+                  right: !isMobile && "0px",
+                }}
+              >
+                <div className="tw-flex tw-justify-center tw-items-center tw-border-solid tw-border tw-border-gray-200 tw-rounded-lg tw-h-[340px]">
+                  <MultiStepCarSelection mode="add" />
                 </div>
               </div>
-            </div>
-          </div>
-          {/* <div className="row mb-50">
+            ))}
+        </div>
+        </div>
+        
+        {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
                 <nav id="navbar-example2" className="navbar">
@@ -282,26 +244,9 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
               </div>
             </div>
           </div> */}
-          <div className="row">
-            <div className="col-lg-12">
-              <div
-                data-bs-spy="scroll"
-                data-bs-target="#navbar-example2"
-                data-bs-offset={0}
-                className="scrollspy-example"
-                tabIndex={0}
-              >
-                {
-                  <CarComparisonTable
-                    tableData={tableData}
-                  />
-                }
-              </div>
-            </div>
-          </div>
-        </div>
+
+        {<CarComparisonTable tableData={tableData} />}
       </div>
-      {/* <CompareCarLazy compare={compare} /> */}
     </MainLayout>
   );
 }

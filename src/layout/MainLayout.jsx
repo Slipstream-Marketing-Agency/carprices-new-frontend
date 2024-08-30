@@ -387,7 +387,7 @@ function MainLayout({ children, pageMeta }) {
           </div>
         </div>
       </div>
-      <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden">
+      <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden tw-border-solid tw-border-b-[1px] tw-border-gray-200">
         <div>
           <div
             className="tw-grid tw-grid-cols-1 md:tw-grid-cols-[50%_50%] tw-gap-5 tw-px-10 tw-py-4 tw-w-full max-md:tw-flex-wrap max-md:tw-px-5 max-md:tw-max-w-full"
@@ -671,7 +671,7 @@ function MainLayout({ children, pageMeta }) {
           </Dialog>
         </div>
       </div>
-      <div className="tw-gap-5 tw-justify-between tw-bg-white tw-w-full md:tw-hidden tw-flex">
+      <div className="tw-gap-5 tw-justify-between tw-bg-white tw-w-full md:tw-hidden tw-flex ">
         {searchClicked ? (
           <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
             <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-bg-white tw-border tw-border-solid tw-border-neutral-200 tw-rounded-full tw-w-full max-md:tw-max-w-full">
@@ -846,7 +846,7 @@ function MainLayout({ children, pageMeta }) {
         )}
       </div>
       {/* <Breadcrumb /> */}
-      <main> {children}</main>
+      <main className="tw-mt-6"> {children}</main>
       {/* <Footer1 /> */}
 
       <footer>
