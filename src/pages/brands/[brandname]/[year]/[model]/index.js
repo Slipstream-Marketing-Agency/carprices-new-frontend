@@ -325,6 +325,22 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     swipeToSlide: true,
     infinite: false,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 768, // at 768px screen width
+        settings: {
+          vertical: false, // Horizontal scrolling on mobile
+          verticalSwiping: false,
+        },
+      },
+      {
+        breakpoint: 1024, // at 1024px and above screen width
+        settings: {
+          vertical: true, // Vertical scrolling on desktop
+          verticalSwiping: true,
+        },
+      },
+    ],
   };
 
   const [activeLink, setActiveLink] = useState("#overview");
@@ -352,403 +368,403 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
         type: "Car Review Website",
       }}
     >
-      <div className=" tw-mt-8">
-        <div className="">
-          <div className="tw-grid tw-grid-cols-12 tw-gap-4 tw-mx-auto tw-container">
-            <div className="tw-col-span-12 lg:tw-col-span-6">
-              <div className="tw-grid tw-grid-cols-12 tw-gap-4">
-                <div className="tw-col-span-2 tw-h-[333px]">
-                  <Slider {...thumbSettings}>
-                    <div>
-                      <Image
-                        src={
-                          mainTrim?.featuredImage === null
-                            ? "/assets/img/car-placeholder.png"
-                            : mainTrim?.featuredImage
-                        }
-                        alt="thumbnail image"
-                        width={80}
-                        height={80}
-                        className="tw-object-contain tw-w-20 tw-h-20 tw-rounded-[10px]"
-                      />
-                    </div>
-                    {mainTrim?.galleryImages?.map((item, index) => (
-                      <div key={index}>
-                        <Image
-                          src={
-                            item === null
-                              ? "/assets/img/car-placeholder.png"
-                              : item
-                          }
-                          alt={`thumbnail image ${index + 1}`}
-                          width={80}
-                          height={80}
-                          className="tw-object-cover tw-w-20 tw-h-20 tw-rounded-[10px]"
-                        />
-                      </div>
-                    ))}
-                  </Slider>
-                </div>
-
-                <div className="tw-col-span-10  tw-border-solid tw-border-[1px] tw-border-gray-300 tw-rounded-[30px] car-detail-main-slider  tw-p-0">
-                  <Slider {...mainSettings} className="tw-h-full">
-                    <div className="tw-flex tw-items-center">
-                      <Image
-                        src={
-                          mainTrim?.featuredImage === null
-                            ? "/assets/img/car-placeholder.png"
-                            : mainTrim?.featuredImage
-                        }
-                        alt="product image"
-                        width={800}
-                        height={450}
-                        className="tw-object-cover tw-w-full tw-h-[333px] tw-rounded-[30px]"
-                      />
-                    </div>
-                    {mainTrim?.galleryImages?.map((item, index) => (
-                      <div key={index} className="tw-flex tw-items-center">
-                        <Image
-                          src={
-                            item === null
-                              ? "/assets/img/car-placeholder.png"
-                              : item
-                          }
-                          alt={`product image ${index + 1}`}
-                          width={800}
-                          height={450}
-                          className="tw-object-cover tw-w-full tw-h-[333px] tw-rounded-[30px]"
-                        />
-                      </div>
-                    ))}
-                  </Slider>
-                </div>
-              </div>
-            </div>
-
-            <div className="tw-col-span-12 lg:tw-col-span-6 tw-pl-10">
-              <div className="tw-relative">
-                <h1 className="tw-g tw-font-medium tw-mb-1">
-                  {mainTrim?.year} {brand?.name} {model?.name}{" "}
-                  <span className="tw-text-[18px] tw-font-light">
-                    Variants ({allTrims?.length})
-                  </span>
-                </h1>
-              </div>
-              <span class="tw-inline-flex tw-items-center tw-rounded-full tw-bg-green-500 tw-px-2 tw-py-1 tw-text-xs tw-font-semibold tw-text-white tw-ring-1 tw-ring-inset tw-ring-green-600/20">
-                4.2 <StarIcon className="tw-text-[14px] tw-ml-1" />
-              </span>
-              <span className="tw-text-[14px] tw-mx-2">
-                182 Ratings & Reviews
-              </span>
-              <span className="tw-text-[14px] tw-font-semibold tw-underline">
-                Rate Now
-              </span>
-              <div className="my-3">
-                <h2 className="tw-font-medium ">
-                  <CarPriceRange />
-                </h2>
-                <p className="tw-font-medium tw-text-gray-500">
-                  <CarEMIDisplay />
-                  /Monthly EMI*{" "}
-                  <span className="tw-underline ">
-                    <Link href="">Details</Link>
-                  </span>
-                </p>
-              </div>
-
-              <div className="tw-my-10">
-                <div className="tw-grid tw-grid-cols-3 tw-gap-4 tw-w-[70%]">
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {mainTrimFuelType === "Electric"
-                          ? "Motor Type"
-                          : t.NoOfCylinders}
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {mainTrimFuelType === "Electric"
-                          ? motorTypes
-                          : cylinderList}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {t.transmission}
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {transmissionList}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {t.power} (hp)
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {minPower === maxPower
-                          ? minPower
-                          : `${minPower} to ${maxPower}`}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {t.torque} (Nm)
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {minTorque === maxTorque
-                          ? minTorque
-                          : `${minTorque} to ${maxTorque}`}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {t.seats}
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {seatList}
-                      </h5>
-                    </div>
-                  </div>
-
-                  <div className="tw-flex tw-items-center">
-                    <div>
-                      <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
-                        {t.fuelType}
-                      </h6>
-                      <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
-                        {mainTrimFuelType}
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <PrimaryButton label="View All Variants" href={"#variants"} />
-            </div>
-          </div>
-          <div className=" tw-sticky tw-top-0">
-            <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-16  tw-mb-10">
-              <div className="tw-mx-auto tw-container tw-flex tw-flex-wrap tw-gap-7 tw-items-center">
-                <Link
-                  href="#overview"
-                  onClick={() => handleLinkClick("#overview")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#overview"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Overview
-                </Link>
-                <Link
-                  href="#variants"
-                  onClick={() => handleLinkClick("#variants")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#variants"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Variants
-                </Link>
-                <Link
-                  href="#price"
-                  onClick={() => handleLinkClick("#price")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#price"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Price
-                </Link>
-                <Link
-                  href="#key-features"
-                  onClick={() => handleLinkClick("#key-features")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#key-features"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Key Features
-                </Link>
-                <Link
-                  href="#compare"
-                  onClick={() => handleLinkClick("#compare")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#compare"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Compare
-                </Link>
-                <Link
-                  href="#news"
-                  onClick={() => handleLinkClick("#news")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#news"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  News
-                </Link>
-                <Link
-                  href="#user-reviews"
-                  onClick={() => handleLinkClick("#user-reviews")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#user-reviews"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  User Reviews
-                </Link>
-                <Link
-                  href="#faq"
-                  onClick={() => handleLinkClick("#faq")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#faq"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  FAQ
-                </Link>
-                <Link
-                  href="#similar-cars"
-                  onClick={() => handleLinkClick("#similar-cars")}
-                  className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-border-0 tw-border-b-2 tw-border-solid ${
-                    activeLink === "#similar-cars"
-                      ? "tw-border-b-blue-600 tw-text-black"
-                      : "tw-border-transparent tw-text-gray-500"
-                  }`}
-                >
-                  Similar Cars
-                </Link>
-              </div>
-            </nav>
-          </div>
-
-          <div
-            className="tw-container tw-mx-auto tw-grid tw-grid-cols-12"
-            id="overview"
-          >
-            <div className="tw-col-span-9">
-              <ModelDescription
-                year={year}
-                brand={brand}
-                model={model}
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                minFuelConsumption={minFuelConsumption}
-                maxFuelConsumption={maxFuelConsumption}
-                engineTypes={engineTypes}
-                transmissionList={transmissionList}
-                motorTypes={motorTypes}
-                mainTrimFuelType={mainTrimFuelType}
-                allTrims={allTrims}
-                mainTrim={mainTrim}
-                getTransmissionType={getTransmissionType}
-              />
-              <Ad728x90 dataAdSlot="7369694604" />
-            </div>
-            <div className="tw-col-span-3">
-              <Ad300x600 dataAdSlot="3792539533" />
-            </div>
-          </div>
-          <div className="tw-container tw-mx-auto tw-mt-10" id="variants">
-            <VariantsListing
-              year={year}
-              brand={brand}
-              model={model}
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              minFuelConsumption={minFuelConsumption}
-              maxFuelConsumption={maxFuelConsumption}
-              engineTypes={engineTypes}
-              transmissionList={transmissionList}
-              motorTypes={motorTypes}
-              mainTrimFuelType={mainTrimFuelType}
-              allTrims={allTrims}
-              mainTrim={mainTrim}
-            />
-            <div className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-10">
-              <div className="tw-col-span-9">
-                <OldModel model={oldModel} />
-                <div className="tw-mt-14">
-                  {" "}
-                  <Ad728x90 dataAdSlot="7369694604" />
-                </div>
-              </div>
-              <div className="tw-col-span-3">
-                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                <Ad300x600 dataAdSlot="3792539533" />
-              </div>
-            </div>
-
-            <section className="tw-grid tw-grid-cols-12  tw-mt-12">
-              <div className="tw-col-span-9 tw-overflow-hidden tw-rounded-2xl tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-border tw-border-solid tw-border-gray-300">
-                <div className="tw-flex tw-flex-col tw-w-full md:tw-w-7/12 tw-text-white tw-bg-neutral-900 tw-h-full  tw-py-20 tw-px-10">
-                  <ul className=" tw-space-y-8 tw-text-2xl tw-list-none tw-font-thin">
-                    <p className=" tw-text-[36px] tw-text-white tw-font-light">
-                      Things We Like in {mainTrim?.year} {brand?.name}{" "}
-                      {model?.name}{" "}
-                    </p>
-                    <li>
-                      Amazing performance
-                      <div className="tw-h-[1px] tw-bg-gradient-to-r tw-from-teal-600 tw-to-black-100 tw-mt-2 "></div>
-                    </li>
-
-                    <li>
-                      Wonderful styling
-                      <div className="tw-h-[1px] tw-bg-gradient-to-r tw-from-teal-600 tw-to-black-100 tw-mt-2 "></div>
-                    </li>
-                    <li>
-                      Powerful and efficient powertrain
-                      <div className="tw-h-[1px] tw-bg-gradient-to-r tw-from-teal-600 tw-to-black-100 tw-mt-2 "></div>
-                    </li>
-                    <li>
-                      Top-notch quality and features
-                      <div className="tw-h-[1px] tw-bg-gradient-to-r tw-from-teal-600 tw-to-black-100 tw-mt-2 "></div>
-                    </li>
-                  </ul>
-                </div>
-                <div className="tw-w-full md:tw-w-5/12 tw-mt-10 md:tw-mt-0">
-                  <img
+      <div className="tw-grid tw-grid-cols-12 tw-gap-4 tw-mx-auto tw-container">
+        <div className="tw-col-span-12 lg:tw-col-span-5">
+          <div className="tw-grid tw-grid-cols-12 tw-gap-4">
+            <div className="tw-order-2 md:tw-order-1 md:tw-col-span-2 tw-col-span-12 md:tw-h-[333px]">
+              <Slider {...thumbSettings}>
+                <div>
+                  <Image
                     src={
                       mainTrim?.featuredImage === null
                         ? "/assets/img/car-placeholder.png"
                         : mainTrim?.featuredImage
                     }
-                    alt="Volvo XC40"
-                    className="tw-w-full tw-rounded-2xl tw-object-cover"
+                    alt="thumbnail image"
+                    width={80}
+                    height={80}
+                    className="tw-object-contain tw-w-20 tw-h-20 tw-rounded-[10px]"
+                  />
+                </div>
+                {mainTrim?.galleryImages?.map((item, index) => (
+                  <div key={index}>
+                    <Image
+                      src={
+                        item === null ? "/assets/img/car-placeholder.png" : item
+                      }
+                      alt={`thumbnail image ${index + 1}`}
+                      width={80}
+                      height={80}
+                      className="tw-object-cover tw-w-20 tw-h-20 tw-rounded-[10px]"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            <div className="tw-order-1 md:tw-order-2 md:tw-col-span-10 tw-col-span-12 tw-border-solid tw-border-[1px] tw-border-gray-300 tw-rounded-[30px] car-detail-main-slider  tw-p-0">
+              <Slider {...mainSettings} className="tw-h-full">
+                <div className="tw-flex tw-items-center">
+                  <Image
+                    src={
+                      mainTrim?.featuredImage === null
+                        ? "/assets/img/car-placeholder.png"
+                        : mainTrim?.featuredImage
+                    }
+                    alt="product image"
+                    width={800}
+                    height={6000}
+                    className="tw-object-contain tw-w-full md:tw-h-[360px] tw-h-[250px] tw-rounded-[30px]"
+                  />
+                </div>
+                {mainTrim?.galleryImages?.map((item, index) => (
+                  <div key={index} className="tw-flex tw-items-center">
+                    <Image
+                      src={
+                        item === null ? "/assets/img/car-placeholder.png" : item
+                      }
+                      alt={`product image ${index + 1}`}
+                      width={800}
+                      height={600}
+                      className="tw-object-cover tw-w-full md:tw-h-[360px] tw-h-[250px] tw-rounded-[30px]"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </div>
+
+        <div className="tw-col-span-12 lg:tw-col-span-6 md:tw-pl-10">
+          <div className="tw-relative">
+            <h1 className="tw-g tw-font-semibold tw-mb-1">
+              {mainTrim?.year} {brand?.name} {model?.name}{" "}
+              <span className="tw-text-[18px] tw-font-light">
+                Variants ({allTrims?.length})
+              </span>
+            </h1>
+          </div>
+          {/* <span class="tw-inline-flex tw-items-center tw-rounded-full tw-bg-green-500 tw-px-2 tw-py-1 tw-text-xs tw-font-semibold tw-text-white tw-ring-1 tw-ring-inset tw-ring-green-600/20">
+            4.2 <StarIcon className="tw-text-[14px] tw-ml-1" />
+          </span>
+          <span className="tw-text-[14px] tw-mx-2">182 Ratings & Reviews</span>
+          <span className="tw-text-[14px] tw-font-semibold tw-underline">
+            Rate Now
+          </span> */}
+          <div className="md:tw-my-3 tw-my-3">
+            <h2 >
+              <CarPriceRange />
+            </h2>
+            <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
+              <CarEMIDisplay />
+              /Monthly EMI*{" "}
+              <span className="tw-underline ">
+                <Link href="">Details</Link>
+              </span>
+            </p>
+          </div>
+
+          <div className="md:tw-my-10 tw-my-7">
+            <div className="tw-grid tw-grid-cols-3 tw-gap-4 md:tw-w-[70%]">
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {mainTrimFuelType === "Electric"
+                      ? "Motor Type"
+                      : t.NoOfCylinders}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {mainTrimFuelType === "Electric"
+                      ? motorTypes
+                      : cylinderList}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.transmission}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {transmissionList}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.power} (hp)
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {minPower === maxPower
+                      ? minPower
+                      : `${minPower} to ${maxPower}`}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.torque} (Nm)
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {minTorque === maxTorque
+                      ? minTorque
+                      : `${minTorque} to ${maxTorque}`}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.seats}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {seatList}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.fuelType}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {mainTrimFuelType}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <PrimaryButton label="View All Variants" href={"#variants"} />
+        </div>
+      </div>
+      <div className=" tw-sticky tw-top-0">
+        <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
+          <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
+            <Link
+              href="#overview"
+              onClick={() => handleLinkClick("#overview")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#overview"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Overview
+            </Link>
+            <Link
+              href="#variants"
+              onClick={() => handleLinkClick("#variants")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#variants"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Variants
+            </Link>
+            <Link
+              href="#price"
+              onClick={() => handleLinkClick("#price")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#price"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Price
+            </Link>
+            <Link
+              href="#key-features"
+              onClick={() => handleLinkClick("#key-features")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#key-features"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Key Features
+            </Link>
+            <Link
+              href="#compare"
+              onClick={() => handleLinkClick("#compare")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#compare"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Compare
+            </Link>
+            <Link
+              href="#news"
+              onClick={() => handleLinkClick("#news")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#news"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              News
+            </Link>
+            <Link
+              href="#user-reviews"
+              onClick={() => handleLinkClick("#user-reviews")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#user-reviews"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              User Reviews
+            </Link>
+            <Link
+              href="#faq"
+              onClick={() => handleLinkClick("#faq")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#faq"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              FAQ
+            </Link>
+            <Link
+              href="#similar-cars"
+              onClick={() => handleLinkClick("#similar-cars")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#similar-cars"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Similar Cars
+            </Link>
+          </div>
+        </nav>
+      </div>
+
+      <div
+        className="tw-container tw-mx-auto tw-grid tw-grid-cols-12"
+        id="overview"
+      >
+        <div className="md:tw-col-span-9 tw-col-span-12">
+          <ModelDescription
+            year={year}
+            brand={brand}
+            model={model}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            minFuelConsumption={minFuelConsumption}
+            maxFuelConsumption={maxFuelConsumption}
+            engineTypes={engineTypes}
+            transmissionList={transmissionList}
+            motorTypes={motorTypes}
+            mainTrimFuelType={mainTrimFuelType}
+            allTrims={allTrims}
+            mainTrim={mainTrim}
+            getTransmissionType={getTransmissionType}
+          />
+          <Ad728x90 dataAdSlot="7369694604" />
+        </div>
+        <div className="md:tw-col-span-3 tw-col-span-12">
+          <Ad300x600 dataAdSlot="3792539533" />
+        </div>
+      </div>
+      <div className="tw-container tw-mx-auto tw-mt-10" id="variants">
+        <VariantsListing
+          year={year}
+          brand={brand}
+          model={model}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          minFuelConsumption={minFuelConsumption}
+          maxFuelConsumption={maxFuelConsumption}
+          engineTypes={engineTypes}
+          transmissionList={transmissionList}
+          motorTypes={motorTypes}
+          mainTrimFuelType={mainTrimFuelType}
+          allTrims={allTrims}
+          mainTrim={mainTrim}
+        />
+        <div className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-10">
+          <div className="md:tw-col-span-9 tw-col-span-12">
+            <OldModel model={oldModel} />
+            <div className="tw-mt-14">
+              {" "}
+              <Ad728x90 dataAdSlot="7369694604" />
+            </div>
+          </div>
+          <div className="md:tw-col-span-3 tw-col-span-12">
+            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+            <Ad300x600 dataAdSlot="3792539533" />
+          </div>
+        </div>
+
+        {currentmodel?.highlightsList?.length > 0 && (
+          <section className="tw-grid tw-grid-cols-12  tw-mt-12  tw-rounded-xl ">
+            <div className="md:tw-col-span-9 tw-col-span-12 tw-flex md:tw-flex-row tw-flex-col tw-rounded-xl  tw-border tw-border-solid tw-border-gray-300">
+              <div
+                className="tw-flex tw-flex-col md:tw-w-7/12 tw-text-white  md:tw-h-full  md:tw-py-20 tw-py-10 md:tw-px-10 tw-px-4"
+                style={{
+                  background:
+                    "linear-gradient(to right, #143529 0.8%, #000000 90%)",
+                }}
+              >
+                <ul className=" tw-p-0 tw-space-y-8 tw-text-2xl tw-list-none tw-font-thin">
+                  <p className=" tw-text-[36px] tw-text-white tw-font-light">
+                    Things We Like in {mainTrim?.year} {brand?.name}{" "}
+                    {model?.name}{" "}
+                  </p>
+                  {currentmodel?.highlightsList?.map((item, index) => (
+                    <li>
+                      {item.list}
+                      <div className="tw-h-[2px] tw-bg-gradient-to-r tw-from-teal-600 tw-to-black-100 tw-mt-2 "></div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="tw-w-full md:tw-h-full md:tw-w-5/12  tw-mt-0">
+                <div className="tw-flex tw-flex-col tw-w-full tw-h-full">
+                  <img
+                    src={
+                      currentmodel?.highlightsExteriorImage === null
+                        ? "/assets/img/car-placeholder.png"
+                        : currentmodel?.highlightsExteriorImage
+                    }
+                    alt=""
+                    className="tw-w-full tw-h-full tw-object-cover"
+                  />
+                  <img
+                    src={
+                      currentmodel?.highlightsImage === null
+                        ? "/assets/img/car-placeholder.png"
+                        : currentmodel?.highlightsInteriorImage
+                    }
+                    alt=""
+                    className="tw-w-full tw-h-full tw-object-cover"
                   />
                 </div>
               </div>
-              <div className="tw-col-span-3">
-                <Ad300x600 dataAdSlot="3792539533" />
-              </div>
-            </section>
-
-            <div id="key-features">
-              <KeyFeatures />
             </div>
+            <div className="md:tw-col-span-3 tw-col-span-12">
+              <Ad300x600 dataAdSlot="3792539533" />
+            </div>
+          </section>
+        )}
 
-            {/* {gallery && (
+        <div id="key-features">
+          <KeyFeatures data={currentmodel.key_features} />
+        </div>
+
+        {/* {gallery && (
                 <>
                   <Ad728x90 dataAdSlot="7369694604" />
 
@@ -770,41 +786,39 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                 </>
               )} */}
 
-            {/* <Ad728x90 dataAdSlot="7369694604" /> */}
-            <div
-              className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-14"
-              id="faq"
-            >
-              <div className="tw-col-span-9">
-                <VehicleFaq
-                  year={year}
-                  brand={brand}
-                  model={model}
-                  minPrice={minPrice}
-                  maxPrice={maxPrice}
-                  minFuelConsumption={minFuelConsumption}
-                  maxFuelConsumption={maxFuelConsumption}
-                  engineTypes={engineTypes}
-                  transmissionList={transmissionList}
-                  motorTypes={motorTypes}
-                  mainTrimFuelType={mainTrimFuelType}
-                  allTrims={allTrims}
-                  mainTrim={mainTrim}
-                  CarPriceRange={CarPriceRange}
-                  getTransmissionType={getTransmissionType}
-                />
-              </div>
-              <div className="tw-col-span-3">
-                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                <Ad300x600 dataAdSlot="3792539533" />
-              </div>
-            </div>
-            {/* <Ad300x250 dataAdSlot="5772723668" />{" "}
+        {/* <Ad728x90 dataAdSlot="7369694604" /> */}
+        <div
+          className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-14"
+          id="faq"
+        >
+          <div className="md:tw-col-span-9 tw-col-span-12">
+            <VehicleFaq
+              year={year}
+              brand={brand}
+              model={model}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              minFuelConsumption={minFuelConsumption}
+              maxFuelConsumption={maxFuelConsumption}
+              engineTypes={engineTypes}
+              transmissionList={transmissionList}
+              motorTypes={motorTypes}
+              mainTrimFuelType={mainTrimFuelType}
+              allTrims={allTrims}
+              mainTrim={mainTrim}
+              CarPriceRange={CarPriceRange}
+              getTransmissionType={getTransmissionType}
+            />
+          </div>
+          <div className="md:tw-col-span-3 tw-col-span-9">
+            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+            <Ad300x600 dataAdSlot="3792539533" />
+          </div>
+        </div>
+        {/* <Ad300x250 dataAdSlot="5772723668" />{" "}
             <div className="car-details-sidebar positionStickyAd mt-4">
               <Ad300x600 dataAdSlot="3792539533" />
             </div> */}
-          </div>
-        </div>
       </div>
       <div className="tw-container tw-mx-auto">
         {" "}

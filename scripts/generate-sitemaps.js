@@ -1,0 +1,55 @@
+const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
+
+async function generateSitemaps() {
+  // Step 1: Trigger the backend API to generate the sitemaps
+  const apiEndpoints = [
+    'https://apis.carprices.ae/api/articles/generateSitemap',
+    'https://apis.carprices.ae/api/car-body-type/generateSitemap',
+    'https://apis.carprices.ae/api/car-trims/generate',
+    // If the trims API generates models and brands, no need to call them separately
+  ];
+
+  console.log('Triggering API to generate sitemaps...');
+
+  for (const endpoint of apiEndpoints) {
+    try {
+      const response = await fetch(endpoint); // GET request to trigger the generation
+      if (!response.ok) {
+        throw new Error(`Failed to trigger API at ${endpoint}`);
+      }
+      console.log(`Successfully triggered ${endpoint}`);
+    } catch (error) {
+      console.error(`Error triggering ${endpoint}:`, error);
+    }
+  }
+
+  // Step 2: Fetch the generated sitemap files and save them in the frontend's public directory
+  const sitemaps = [
+    { name: 'articles-sitemap.xml', url: 'https://apis.carprices.ae/articles-sitemap.xml' },
+    { name: 'bodytypes-sitemap.xml', url: 'https://apis.carprices.ae/bodytypes-sitemap.xml' },
+    { name: 'trims-sitemap.xml', url: 'https://apis.carprices.ae/trims-sitemap.xml' },
+    { name: 'models-sitemap.xml', url: 'https://apis.carprices.ae/models-sitemap.xml' },
+    { name: 'brands-sitemap.xml', url: 'https://apis.carprices.ae/brands-sitemap.xml' },
+  ];
+
+  console.log('Fetching and saving sitemaps...');
+
+  for (const sitemap of sitemaps) {
+    try {
+      const response = await fetch(sitemap.url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch ${sitemap.name}`);
+      }
+      const xmlContent = await response.text();
+
+      fs.writeFileSync(path.join(__dirname, '..', 'public', sitemap.name), xmlContent, 'utf8');
+      console.log(`${sitemap.name} saved successfully.`);
+    } catch (error) {
+      console.error(`Error fetching ${sitemap.name}:`, error);
+    }
+  }
+}
+
+generateSitemaps();

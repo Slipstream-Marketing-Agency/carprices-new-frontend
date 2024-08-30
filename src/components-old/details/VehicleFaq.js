@@ -234,7 +234,7 @@ export default function VehicleFaq({
       <h2 className="tw-font-semibold tw-mb-5">
         FAQs (Frequently Asked Questions) on {year} {brand.name} {model.name}
       </h2>
-      <div className="tw-shadow-lg tw-p-10 tw-rounded-2xl" id="faqs">
+      <div className="tw-shadow-lg md:tw-p-10 tw-rounded-2xl" id="faqs">
         <div className="tw-w-full  tw-mx-auto tw-space-y-2 ">
           {faq.map((item, index) => (
             <>

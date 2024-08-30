@@ -163,7 +163,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
         type: "Car Review Website",
       }}
     >
-      <div className="tw-container mx-auto">
+      <div className="">
+        <div className="tw-container">
         <div className="tw-grid tw-grid-cols-12 tw-gap-3">
           {/* {(car1Data && car2Data  ) &&(!car3Data && !car4Data) && !isMobile &&       <div className="col-6 col-lg-3"></div>} */}
           
@@ -191,6 +192,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, compare }) {
               </div>
             ))}
         </div>
+        </div>
+        
         {/* <div className="row mb-50">
             <div className="col-lg-12 position-relative">
               <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>

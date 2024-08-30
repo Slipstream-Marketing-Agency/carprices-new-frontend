@@ -846,7 +846,7 @@ function MainLayout({ children, pageMeta }) {
         )}
       </div>
       {/* <Breadcrumb /> */}
-      <main className="tw-mt-10"> {children}</main>
+      <main className="tw-mt-6"> {children}</main>
       {/* <Footer1 /> */}
 
       <footer>

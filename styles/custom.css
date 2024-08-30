@@ -3337,9 +3337,16 @@ a,
 }
 
 .car-detail-main-slider .slick-list{
-  height: 333px  !important;
+  height: 360px  !important;
 
 }
+@media (max-width:728px){
+  .car-detail-main-slider .slick-list{
+    height: 250px  !important;
+  
+  }
+}
+
 
 
 .car-detail-main-slider .slick-list{padding: 0px !important;}
