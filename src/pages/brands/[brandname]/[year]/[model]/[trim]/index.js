@@ -220,7 +220,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
         type: "Car Review Website",
       }}
     >
-      {/* <div className="car-details-area mt-15 mb-15">
+      <div className="car-details-area mt-15 mb-15">
         <div className="container">
           <div className="row ">
             <div className="col-lg-9">
@@ -574,7 +574,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </MainLayout>
   );
 }
