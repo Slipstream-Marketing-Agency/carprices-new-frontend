@@ -68,7 +68,8 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function CarDeatilsPage({ model, trimList, trimData }) {
+function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
+  console.log(trimSlug,"trimSlugtrimSlugtrimSlug");
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
   const [isSticky, setIsSticky] = useState(false);
@@ -587,14 +588,14 @@ export async function getServerSideProps(context) {
   const modelSlug = context.params.model;
   const trimSlug = decodeURIComponent(context.params.trim);
 
-  console.log(trimSlug,"trimSlug");
+  console.log(trimSlug, "trimSlug");
 
   try {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${modelSlug}/${trimSlug}/${year}`
     );
     return {
-      props: { trimData: response?.data?.data },
+      props: { trimData: response?.data?.data, trimSlug: trimSlug },
     };
   } catch (error) {
     console.error("Failed to fetch trim data:", error);
