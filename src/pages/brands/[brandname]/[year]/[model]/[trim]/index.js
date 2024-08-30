@@ -220,15 +220,8 @@ function CarDeatilsPage({ model, trimList, trimData }) {
         type: "Car Review Website",
       }}
     >
-      <div className="car-details-area mt-15 mb-15">
+      {/* <div className="car-details-area mt-15 mb-15">
         <div className="container">
-          {/* <div className="row mb-50">
-            <div className="col-lg-12 position-relative">
-              <div className={`car-details-menu ${isSticky ? "sticky" : ""}`}>
-                <CarDetailsNav />
-              </div>
-            </div>
-          </div> */}
           <div className="row ">
             <div className="col-lg-9">
               <Ad728x90 dataAdSlot="5962627056" />
@@ -308,9 +301,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                       {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
                       {trimData?.name}
                     </h1>{" "}
-                    {/* <div className="shareBtnMobile">
-                      <NewShareBtns />
-                    </div> */}
                   </div>
                   <h2 className="fw-bold text-primary mb-2">
                     <Price data={trimData.price} />
@@ -359,26 +349,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                     ) : (
                       <Box className=" tw-mt-2">
                         <Box className="">
-                          {/* <FormControl component="fieldset" className="tw-mb-4">
-              <FormLabel component="legend">Loan Years</FormLabel>
-              <RadioGroup
-                row
-                aria-label="loan-years"
-                name="loan-years"
-                value={years}
-                onChange={(e) => setYears(e.target.value)}
-              >
-                {["1", "2", "3", "4", "5"].map((year) => (
-                  <FormControlLabel
-                    key={year}
-                    value={year}
-                    control={<Radio />}
-                    label={`${year} Year${year > 1 ? "s" : ""}`}
-                  />
-                ))}
-              </RadioGroup>
-            </FormControl> */}
-
                           <Box className="tw-w-full tw-mb-2 tw-flex tw-items-center">
                             <p className="tw-font-bold tw-text-[13px] tw-mb-0 tw-mr-2">
                               Loan Years
@@ -492,10 +462,13 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                                     <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                                       <h5 className="tw-font-bold">
                                         AED{" "}
-                                        {totalCostResult.toLocaleString("en-AE", {
-                                          minimumFractionDigits: 0,
-                                          maximumFractionDigits: 2,
-                                        })}
+                                        {totalCostResult.toLocaleString(
+                                          "en-AE",
+                                          {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}
                                       </h5>
                                       <h5>Total Cost</h5>
                                     </div>
@@ -534,37 +507,6 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                               </DialogActions>
                             </Dialog>
                           </Box>
-
-                          {/* {monthlyRepaymentResult !== 0 &&
-              downPaymentResult !== 0 &&
-              totalCostResult !== 0 && (
-                <Box className="tw-mt-4">
-                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
-                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
-                      Monthly Repayment (EMI):
-                    </Typography>
-                    <Typography variant="body1" className="tw-font-bold">
-                      <Price data={monthlyRepaymentResult} />
-                    </Typography>
-                  </Box>
-                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
-                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
-                      Total Interest Payment:
-                    </Typography>
-                    <Typography variant="body1" className="tw-font-bold">
-                      <Price data={downPaymentResult} />
-                    </Typography>
-                  </Box>
-                  <Box className="tw-white_bg_wrapper tw-py-1 tw-px-2 tw-mt-1">
-                    <Typography variant="body2" className="tw-font-bold tw-mb-1">
-                      Total Amount to Pay:
-                    </Typography>
-                    <Typography variant="body1" className="tw-font-bold">
-                      <Price data={totalCostResult} />
-                    </Typography>
-                  </Box>
-                </Box>
-              )} */}
                         </Box>
                       </Box>
                     )}
@@ -605,28 +547,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
                 <div className="single-item" id="car-info">
                   <KeySpec trim={trimData} />
                 </div>
-                {/* <div className="single-item mb-50" id="kye-features">
-                  <div className="kye-features">
-                    <div className="title mb-20">
-                      <h5>Key Features</h5>
-                    </div>
-                    <ul>
-                      <li>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={12}
-                          height={12}
-                          viewBox="0 0 12 12"
-                        >
-                          <path d="M6 11.25C4.60761 11.25 3.27226 10.6969 2.28769 9.71231C1.30312 8.72774 0.75 7.39239 0.75 6C0.75 4.60761 1.30312 3.27226 2.28769 2.28769C3.27226 1.30312 4.60761 0.75 6 0.75C7.39239 0.75 8.72774 1.30312 9.71231 2.28769C10.6969 3.27226 11.25 4.60761 11.25 6C11.25 7.39239 10.6969 8.72774 9.71231 9.71231C8.72774 10.6969 7.39239 11.25 6 11.25ZM6 12C7.5913 12 9.11742 11.3679 10.2426 10.2426C11.3679 9.11742 12 7.5913 12 6C12 4.4087 11.3679 2.88258 10.2426 1.75736C9.11742 0.632141 7.5913 0 6 0C4.4087 0 2.88258 0.632141 1.75736 1.75736C0.632141 2.88258 0 4.4087 0 6C0 7.5913 0.632141 9.11742 1.75736 10.2426C2.88258 11.3679 4.4087 12 6 12Z" />
-                          <path d="M8.22751 3.72747C8.22217 3.73264 8.21716 3.73816 8.21251 3.74397L5.60776 7.06272L4.03801 5.49222C3.93138 5.39286 3.79034 5.33876 3.64462 5.34134C3.49889 5.34391 3.35985 5.40294 3.25679 5.506C3.15373 5.60906 3.0947 5.7481 3.09213 5.89382C3.08956 6.03955 3.14365 6.18059 3.24301 6.28722L5.22751 8.27247C5.28097 8.32583 5.34463 8.36788 5.4147 8.39611C5.48476 8.42433 5.5598 8.43816 5.63532 8.43676C5.71084 8.43536 5.78531 8.41876 5.85428 8.38796C5.92325 8.35716 5.98531 8.31278 6.03676 8.25747L9.03076 4.51497C9.13271 4.40796 9.18845 4.26514 9.18593 4.11737C9.18341 3.9696 9.12284 3.82875 9.0173 3.72529C8.91177 3.62182 8.76975 3.56405 8.62196 3.56446C8.47417 3.56486 8.33247 3.62342 8.22751 3.72747Z" />
-                        </svg>{" "}
-                        Premium Wheel
-                      </li>
-                      
-                    </ul>
-                  </div>
-                </div> */}
+
                 <Ad728x90 dataAdSlot="5962627056" />
 
                 <TrimDescription trim={trimData} />
@@ -653,7 +574,7 @@ function CarDeatilsPage({ model, trimList, trimData }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </MainLayout>
   );
 }
