@@ -11,7 +11,6 @@ async function fetchAllRedirects() {
   let totalRedirects = 0;
 
   try {
-    // Fetch the first page to get the total count
     let response = await fetch(`https://apis.carprices.ae/api/redirects?pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch page ${page}: ${response.statusText}`);
@@ -20,16 +19,13 @@ async function fetchAllRedirects() {
     let data = await response.json();
     totalRedirects = data.total;
 
-    // Calculate the total number of pages
     const totalPages = Math.ceil(totalRedirects / PAGE_SIZE);
 
-    // Process the first page
     data.redirects.forEach(redirect => {
-      const normalizedFromPath = redirect.from.toLowerCase().replace(/\/+$/, ''); // Normalize the 'from' path
+      const normalizedFromPath = redirect.from.toLowerCase().replace(/\/+$/, '');
       redirectsMap.set(normalizedFromPath, redirect);
     });
 
-    // Fetch remaining pages
     for (page = 2; page <= totalPages; page++) {
       response = await fetch(`https://apis.carprices.ae/api/redirects?pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}`);
       if (!response.ok) {
@@ -38,16 +34,14 @@ async function fetchAllRedirects() {
 
       data = await response.json();
       data.redirects.forEach(redirect => {
-        const normalizedFromPath = redirect.from.toLowerCase().replace(/\/+$/, ''); // Normalize the 'from' path
+        const normalizedFromPath = redirect.from.toLowerCase().replace(/\/+$/, '');
         redirectsMap.set(normalizedFromPath, redirect);
       });
-      console.log(`Fetched ${data.redirects.length} redirects from page ${page}`);
     }
   } catch (error) {
     console.error(`Error fetching redirects on page ${page}:`, error);
   }
 
-  console.log(`Total redirects fetched: ${redirectsMap.size}`); // Debugging: Log total redirects fetched
   return redirectsMap;
 }
 
@@ -56,17 +50,19 @@ async function updateCache() {
   cacheTime = Date.now();
 }
 
+function shouldUpdateCache() {
+  const now = Date.now();
+  return redirectsCache.size === 0 || now - cacheTime > CACHE_DURATION;
+}
+
 async function middleware(request) {
   try {
-    const now = Date.now();
-
-    // Check if cache is empty or expired
-    if (redirectsCache.size === 0 || now - cacheTime > CACHE_DURATION) {
-      await updateCache();
+    // Check if cache is empty or expired, but don't block the request
+    if (shouldUpdateCache()) {
+      updateCache().catch(console.error); // Update the cache in the background
     }
 
-    const requestPath = request.nextUrl.pathname.toLowerCase().replace(/\/+$/, ''); // Normalize request path
-    console.log(`Request path: ${requestPath}`); // Debugging: Log the request path
+    const requestPath = request.nextUrl.pathname.toLowerCase().replace(/\/+$/, '');
     const matchedRedirect = redirectsCache.get(requestPath);
 
     if (matchedRedirect) {
@@ -88,20 +84,17 @@ async function middleware(request) {
           statusCode = 451;
           break;
         default:
-          statusCode = 307; // Temporary redirect as a fallback
+          statusCode = 307;
       }
 
       if (statusCode === 410 || statusCode === 451) {
-        console.log(`Returning status ${statusCode} for ${matchedRedirect.from}`);
         return new NextResponse(null, { status: statusCode });
       }
 
       const destination = new URL(matchedRedirect.to, request.nextUrl.origin);
-      console.log(`Redirecting from ${matchedRedirect.from} to ${matchedRedirect.to} with status ${statusCode}`);
       return NextResponse.redirect(destination, statusCode);
     }
 
-    console.log('No redirect match found, proceeding to next handler');
     return NextResponse.next();
   } catch (error) {
     console.error('Error in middleware:', error);

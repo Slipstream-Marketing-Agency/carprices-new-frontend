@@ -9,7 +9,7 @@
 }
 
 :root {
-  --font-gilroy: "Gilroy", sans-serif;
+  --font-gilroy: "Gilroy", sans-serif ;
   --font-open-sans: "Open Sans", sans-serif;
   --white-color: #fff;
   --black-color: #000;
@@ -162,6 +162,7 @@
 html {
   font-size: 100%;
   scroll-behavior: smooth;
+  
 }
 
 .text-black {
