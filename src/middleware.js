@@ -3,7 +3,7 @@ const { NextResponse } = require('next/server');
 let redirectsCache = new Map();
 let cacheTime = 0;
 const CACHE_DURATION = 10 * 60 * 1000; // Cache for 10 minutes
-const PAGE_SIZE = 500; // The number of redirects per page as per your API
+const PAGE_SIZE = 2701; // The number of redirects per page as per your API
 
 async function fetchAllRedirects() {
   const redirectsMap = new Map();
