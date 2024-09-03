@@ -35,6 +35,8 @@ import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
+
+  console.log(currentmodel,"currentmodel");
   // const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const [currentURL, setCurrentURL] = useState("");
 
@@ -846,6 +848,13 @@ export async function getServerSideProps(context) {
     const currentmodel = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
     );
+
+    if (!currentmodel || currentmodel?.data?.data?.model?.trims.length  === 0) {
+      return {
+        notFound: true, // This will automatically render the 404 page
+      };
+    }
+  
 
     return {
       props: {
