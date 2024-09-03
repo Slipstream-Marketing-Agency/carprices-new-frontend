@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import SwiperCore, { Autoplay, EffectFade, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Pagination from "@/src/utils/Pagination";
+
 import MainLayout from "@/src/layout/MainLayout";
 import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import Ad300x250 from "@/src/components-old/ads/Ad300x250";
@@ -17,6 +17,7 @@ import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import Ad970x250 from "@/src/components-old/ads/Ad970x250";
 import axios from "axios";
 import moment from "moment";
+import Pagination from "@/src/components/common/Pagination";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 

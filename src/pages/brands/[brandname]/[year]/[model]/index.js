@@ -452,7 +452,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             Rate Now
           </span> */}
           <div className="md:tw-my-3 tw-my-3">
-            <h2 >
+            <h2>
               <CarPriceRange />
             </h2>
             <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
@@ -760,9 +760,11 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
           </section>
         )}
 
-        <div id="key-features">
-          <KeyFeatures data={currentmodel.key_features} />
-        </div>
+        {currentmodel?.key_features?.length > 0 && (
+          <div id="key-features">
+            <KeyFeatures data={currentmodel.key_features} />
+          </div>
+        )}
 
         {/* {gallery && (
                 <>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MainLayout from '@/src/layout/MainLayout';
-import Pagination from "@/src/utils/Pagination";
 import moment from 'moment';
 import Image from 'next/image';
 import altImage from '../../../public/assets/images/blog-alt-image.png';
@@ -10,6 +9,7 @@ import Ad300x250 from '@/src/components-old/ads/Ad300x250';
 import Ad300x600 from '@/src/components-old/ads/Ad300x600';
 import Ad728x90 from '@/src/components-old/ads/Ad728x90';
 import { useRouter } from 'next/router';
+import Pagination from '@/src/components/common/Pagination';
 
 const SkeletonArticle = () => (
   <div className="skeleton-article">
