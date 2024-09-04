@@ -357,17 +357,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/polestar</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/exeed</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/mahindra</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/polestar</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
