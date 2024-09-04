@@ -116,6 +116,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/news/2025-nissan-patrol-uae-details-launch</loc>
+          <lastmod>2024-09-03T12:27:20.736Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/news/mercedes-amg-brings-formula-1-technology-to-the-road</loc>
           <lastmod>2023-12-09T13:10:41.584Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -6028,6 +6034,12 @@
         <url>
           <loc>https://carprices.ae/news/the-2024-all-new-bmw-1-series-with-the-latest-bmw-design-language</loc>
           <lastmod>2024-06-05T10:37:14.530Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/news/2025-nissan-patrol-launch-uae</loc>
+          <lastmod>2024-09-03T12:35:32.714Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>

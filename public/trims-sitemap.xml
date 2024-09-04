@@ -1004,6 +1004,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe-suv/amg-53-4matic+</loc>
+          <lastmod>2024-09-02T16:34:28.992Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/cadillac/2023/ct5/3.0t-v-series</loc>
           <lastmod>2024-02-22T14:12:14.438Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -1460,6 +1466,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/peugeot/2024/2008/e-2008</loc>
+          <lastmod>2024-09-02T16:37:28.627Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/opel/2022/zafira-life/2.0t-9-seater</loc>
           <lastmod>2024-02-22T11:10:58.035Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -1568,12 +1580,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/q8-sportback-e-tron/progress-black</loc>
-          <lastmod>2024-05-27T17:55:45.719Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/ram/2023/2500/6.4l-power-wagon</loc>
           <lastmod>2024-02-22T13:32:26.893Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -1606,6 +1612,12 @@
         <url>
           <loc>https://carprices.ae/brands/ford/2023/taurus/2.0l-ecoboost-ambient</loc>
           <lastmod>2024-02-22T14:04:34.275Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/audi/2024/q8-sportback-e-tron/progress-black</loc>
+          <lastmod>2024-09-02T16:09:25.883Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -1978,12 +1990,6 @@
         <url>
           <loc>https://carprices.ae/brands/cadillac/2023/ct5/v-blackwing-6.2l</loc>
           <lastmod>2024-02-22T14:12:16.703Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe-suv/amg-53-4matic+</loc>
-          <lastmod>2024-05-27T18:15:41.037Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -5630,6 +5636,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/polestar/2024/3-1/long-range-performance</loc>
+          <lastmod>2024-09-02T16:39:18.597Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/honda/2021/pilot/3.5-ex-l-(awd)</loc>
           <lastmod>2024-02-22T11:49:34.721Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -5734,6 +5746,12 @@
         <url>
           <loc>https://carprices.ae/brands/kia/2024/telluride/3.8l-v6-sx-(awd)</loc>
           <lastmod>2024-07-27T12:41:39.209Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/porsche/2024/macan-electric/4</loc>
+          <lastmod>2024-09-02T16:39:43.468Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -15200,12 +15218,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/e-tron-gt-quattro/83.7-kwh</loc>
-          <lastmod>2024-05-27T17:56:12.322Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/maserati/2022/quattroporte/3.0t-v6-s-gransport</loc>
           <lastmod>2024-02-22T11:46:50.439Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -15982,12 +15994,6 @@
         <url>
           <loc>https://carprices.ae/brands/chevrolet/2022/corvette/6.2l-2lt-convertible</loc>
           <lastmod>2024-02-22T12:57:21.406Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev/</loc>
-          <lastmod>2024-05-27T18:03:09.468Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -20234,12 +20240,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/polestar/2024/3-1/long-range-performance</loc>
-          <lastmod>2024-05-27T18:20:09.359Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/skoda/2024/kamiq/1.6l-style</loc>
           <lastmod>2024-05-27T18:21:21.183Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -20661,7 +20661,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/tesla/2024/model-3/performance-(awd)</loc>
-          <lastmod>2024-05-28T04:40:35.359Z</lastmod>
+          <lastmod>2024-09-02T16:54:01.550Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -22394,6 +22394,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/genesis/2024/gv-70-ev/advance</loc>
+          <lastmod>2024-09-02T16:23:00.497Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/toyota/2023/corolla-cross-hybrid/xl</loc>
           <lastmod>2024-02-22T11:07:08.854Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -22486,12 +22492,6 @@
         <url>
           <loc>https://carprices.ae/brands/audi/2023/a5-coupe/40-tfsi-s-line-(190-hp)</loc>
           <lastmod>2024-02-22T14:21:20.388Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/genesis/2024/gv-70-ev/advance</loc>
-          <lastmod>2024-07-27T14:10:26.811Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -23030,12 +23030,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/sq-8-sportback-e-tron/114kwh</loc>
-          <lastmod>2024-05-27T17:55:49.691Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/lamborghini/2023/urus/performance</loc>
           <lastmod>2024-05-19T13:45:45.204Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -23134,6 +23128,12 @@
         <url>
           <loc>https://carprices.ae/brands/geely/2023/azkarra/1.5td-comfort-(2wd)</loc>
           <lastmod>2024-02-22T14:03:14.983Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/audi/2024/sq-8-sportback-e-tron/114kwh</loc>
+          <lastmod>2024-09-02T16:10:06.913Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -23246,12 +23246,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/genesis/2024/g80-ev/advanced-awd</loc>
-          <lastmod>2024-05-27T16:24:49.770Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/suzuki/2023/jimny/1.5l</loc>
           <lastmod>2024-02-22T13:29:51.317Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -23350,6 +23344,12 @@
         <url>
           <loc>https://carprices.ae/brands/mg/2023/5/1.5l-com</loc>
           <lastmod>2024-02-22T13:41:37.879Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/genesis/2024/g80-ev/advanced-awd</loc>
+          <lastmod>2024-09-02T16:21:49.458Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -23895,7 +23895,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/porsche/2024/taycan/turbo-gt</loc>
-          <lastmod>2024-05-27T18:20:14.992Z</lastmod>
+          <lastmod>2024-09-02T16:41:51.445Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -25017,7 +25017,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/maserati/2024/gran-turismo-ev/folgore</loc>
-          <lastmod>2024-05-27T18:14:23.458Z</lastmod>
+          <lastmod>2024-09-02T16:31:37.852Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -25544,12 +25544,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/g-class-ev/g-580</loc>
-          <lastmod>2024-05-27T18:15:49.928Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/porsche/2023/718/cayman</loc>
           <lastmod>2024-02-22T13:34:52.579Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -25642,6 +25636,12 @@
         <url>
           <loc>https://carprices.ae/brands/ford/2023/transit/3.5l-t-350-high-roof-(long-wheelbase)</loc>
           <lastmod>2024-02-22T14:04:23.245Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/g-class-ev/g-580</loc>
+          <lastmod>2024-09-02T16:35:44.711Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -26660,14 +26660,14 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/cadillac/2024/lyriq/base</loc>
-          <lastmod>2024-07-11T15:39:51.652Z</lastmod>
+          <loc>https://carprices.ae/brands/genesis/2025/g80/3.5t-awd</loc>
+          <lastmod>2024-07-26T15:43:11.038Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/genesis/2025/g80/3.5t-awd</loc>
-          <lastmod>2024-07-26T15:43:11.038Z</lastmod>
+          <loc>https://carprices.ae/brands/cadillac/2024/lyriq/base</loc>
+          <lastmod>2024-09-02T16:16:46.095Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -26780,12 +26780,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev/lt-fwd</loc>
-          <lastmod>2024-05-27T18:03:12.399Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/chery/2024/arrizo-3/1.5l-comfort</loc>
           <lastmod>2024-05-27T16:18:19.684Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -26876,6 +26870,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev/lt-fwd</loc>
+          <lastmod>2024-09-02T16:17:36.866Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/captiva/1.5T LS</loc>
           <lastmod>2024-05-25T04:34:52.568Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -26948,14 +26948,14 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/byd/2024/han-1/85-4-kwh</loc>
-          <lastmod>2024-05-27T18:01:51.771Z</lastmod>
+          <loc>https://carprices.ae/brands/kia/2024/picanto/gt-line</loc>
+          <lastmod>2024-07-27T13:11:46.471Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia/2024/picanto/gt-line</loc>
-          <lastmod>2024-07-27T13:11:46.471Z</lastmod>
+          <loc>https://carprices.ae/brands/byd/2024/han-1/85-4-kwh</loc>
+          <lastmod>2024-09-02T16:15:59.620Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -27062,12 +27062,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/genesis/2024/g80-ev/prestige-awd</loc>
-          <lastmod>2024-07-27T13:54:28.091Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/trailblazer/active-awd</loc>
           <lastmod>2024-04-25T09:23:38.005Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -27093,7 +27087,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/seres/2024/seres-s5-sf/4wd-flagship</loc>
-          <lastmod>2024-07-09T12:40:42.973Z</lastmod>
+          <lastmod>2024-09-02T16:52:43.566Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -27254,12 +27248,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/byd/2024/seal/performance</loc>
-          <lastmod>2024-05-27T18:01:54.379Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/citroen/2024/c5-aircross/1.6t-live</loc>
           <lastmod>2024-04-25T09:24:40.391Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -27274,6 +27262,12 @@
         <url>
           <loc>https://carprices.ae/brands/dodge/2024/charger/3.6l-sxt-(base)</loc>
           <lastmod>2024-04-25T09:25:05.241Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/byd/2024/seal/performance</loc>
+          <lastmod>2024-09-02T16:16:18.709Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -27406,12 +27400,6 @@
         <url>
           <loc>https://carprices.ae/brands/ford/2024/explorer/2.3l-ecoboost-xlt-200a</loc>
           <lastmod>2024-04-25T09:27:43.051Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/fiat/2024/500e/la-prima</loc>
-          <lastmod>2024-05-27T18:05:24.307Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -27556,12 +27544,6 @@
         <url>
           <loc>https://carprices.ae/brands/ford/2024/mustang/5.0l-v8-fastback-gt</loc>
           <lastmod>2024-04-25T09:28:17.728Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/ford/2024/mustang-mach-e/75.7-kwh-(258-hp)-select</loc>
-          <lastmod>2024-07-01T10:37:31.425Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -27944,12 +27926,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-pickup/edition-1</loc>
-          <lastmod>2024-05-27T18:08:01.349Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/genesis/2024/gv70/2.5t-premium-sport</loc>
           <lastmod>2024-04-25T09:32:23.908Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -28016,8 +27992,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-suv/edition-1</loc>
-          <lastmod>2024-07-09T12:59:33.896Z</lastmod>
+          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-pickup/edition-1</loc>
+          <lastmod>2024-09-02T16:23:52.350Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28130,8 +28106,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix2/xdrive30</loc>
-          <lastmod>2024-05-27T17:59:55.924Z</lastmod>
+          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-suv/edition-1</loc>
+          <lastmod>2024-09-02T16:24:12.290Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28346,14 +28322,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hongqi/2024/e-hs9/deluxe-(6-seats)</loc>
-          <lastmod>2024-05-27T18:09:21.830Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/hongqi/2024/e-qm5/t3-edition</loc>
-          <lastmod>2024-05-27T18:09:24.611Z</lastmod>
+          <lastmod>2024-09-02T16:24:50.900Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28408,6 +28378,12 @@
         <url>
           <loc>https://carprices.ae/brands/hongqi/2024/e-hs9/flagship-(4-seats)</loc>
           <lastmod>2024-04-25T09:35:37.546Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hongqi/2024/e-hs9/deluxe-(6-seats)</loc>
+          <lastmod>2024-09-02T16:24:31.052Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28568,12 +28544,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/nexo/base</loc>
-          <lastmod>2024-05-27T18:09:53.246Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/x5/x5-m50i</loc>
           <lastmod>2024-05-28T06:03:59.450Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -28586,8 +28556,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/kona-electric/standard</loc>
-          <lastmod>2024-05-27T18:09:44.673Z</lastmod>
+          <loc>https://carprices.ae/brands/hyundai/2024/nexo/base</loc>
+          <lastmod>2024-09-02T16:27:24.459Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28654,6 +28624,12 @@
         <url>
           <loc>https://carprices.ae/brands/hyundai/2024/kona/2.0l-smart-plus</loc>
           <lastmod>2024-04-25T09:37:42.689Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/kona-electric/standard</loc>
+          <lastmod>2024-09-02T16:26:59.464Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -28958,12 +28934,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/jaguar/2024/i-pace/ev400-s-(awd)</loc>
-          <lastmod>2024-05-27T18:11:04.504Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/jaguar/2024/e-pace/2.0t-se</loc>
           <lastmod>2024-04-25T09:40:07.984Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -28990,6 +28960,12 @@
         <url>
           <loc>https://carprices.ae/brands/undefined/2025/cla-coupe/250-4matic</loc>
           <lastmod>2024-08-14T05:20:45.758Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/jaguar/2024/i-pace/ev400-s-(awd)</loc>
+          <lastmod>2024-09-02T16:29:50.554Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -29882,12 +29858,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/i5/m60-xdrive</loc>
-          <lastmod>2024-05-27T17:59:59.249Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/land-rover/2024/range-rover-velar/dynamic-se-p340</loc>
           <lastmod>2024-04-25T09:48:44.111Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -29950,6 +29920,12 @@
         <url>
           <loc>https://carprices.ae/brands/lexus/2024/es/350-f-sport</loc>
           <lastmod>2024-04-25T09:49:04.068Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/i5/m60-xdrive</loc>
+          <lastmod>2024-09-02T05:40:13.215Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30075,13 +30051,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/lotus/2024/evija/2000-kw-(type-130)</loc>
-          <lastmod>2024-05-27T18:14:12.200Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/lotus/2024/eletre/r</loc>
-          <lastmod>2024-05-27T18:14:09.299Z</lastmod>
+          <lastmod>2024-09-02T16:31:23.270Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30590,32 +30560,32 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe/eqe-53-4matic+</loc>
-          <lastmod>2024-05-27T18:16:29.269Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqc/400-4matic</loc>
-          <lastmod>2024-05-27T18:16:32.078Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs/eqs-53-4matic+</loc>
-          <lastmod>2024-05-27T18:16:37.809Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs-suv/580-4matic</loc>
-          <lastmod>2024-05-27T18:16:18.979Z</lastmod>
+          <lastmod>2024-09-02T16:35:09.676Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/mercedes-benz/2024/eqa/350-4matic</loc>
-          <lastmod>2024-05-27T18:16:34.929Z</lastmod>
+          <lastmod>2024-09-02T16:32:30.374Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqb/350-4matic</loc>
+          <lastmod>2024-09-02T16:33:13.387Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqc/400-4matic</loc>
+          <lastmod>2024-09-02T16:33:37.917Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe/eqe-53-4matic+</loc>
+          <lastmod>2024-09-02T16:33:56.795Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30626,8 +30596,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqb/350-4matic</loc>
-          <lastmod>2024-05-27T18:16:24.679Z</lastmod>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs/eqs-53-4matic+</loc>
+          <lastmod>2024-09-02T16:34:48.286Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30801,7 +30771,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/peugeot/2024/e-partner/long-50kwh</loc>
-          <lastmod>2024-05-27T18:19:31.112Z</lastmod>
+          <lastmod>2024-09-02T16:38:39.775Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30874,12 +30844,6 @@
         <url>
           <loc>https://carprices.ae/brands/mg/2024/zst/1.5l-std</loc>
           <lastmod>2024-04-25T10:00:29.053Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/peugeot/2024/e-expert/l3-at</loc>
-          <lastmod>2024-05-27T18:19:34.048Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -30970,6 +30934,12 @@
         <url>
           <loc>https://carprices.ae/brands/mini/2024/clubman/john-cooper-works-all4</loc>
           <lastmod>2024-05-27T18:17:56.757Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/peugeot/2024/e-expert/l3-at</loc>
+          <lastmod>2024-09-02T16:38:20.698Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -31070,7 +31040,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross/h-l</loc>
+          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross-1/h-l</loc>
           <lastmod>2024-05-24T15:19:30.001Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -31238,7 +31208,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross/premium</loc>
+          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross-1/premium</loc>
           <lastmod>2024-05-27T18:18:24.957Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -31562,6 +31532,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/peugeot/2024/208/e-208</loc>
+          <lastmod>2024-09-02T16:37:11.722Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/opel/2024/crossland/1.2t-ultimate</loc>
           <lastmod>2024-05-27T18:19:16.344Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -31586,12 +31562,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/peugeot/2024/208/e-208</loc>
-          <lastmod>2024-05-27T18:19:40.306Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/peugeot/2024/508/1.6t-gt</loc>
           <lastmod>2024-05-27T18:19:43.151Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -31606,12 +31576,6 @@
         <url>
           <loc>https://carprices.ae/brands/peugeot/2024/traveller/l3-vip</loc>
           <lastmod>2024-05-27T18:19:54.777Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/peugeot/2024/2008/e-2008</loc>
-          <lastmod>2024-05-27T18:19:51.942Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32157,7 +32121,7 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/rolls-royce/2024/spectre/100-kwh</loc>
-          <lastmod>2024-05-27T18:21:03.683Z</lastmod>
+          <lastmod>2024-09-02T16:42:16.483Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32540,8 +32504,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/tesla/2024/model-s/plaid-(awd)</loc>
-          <lastmod>2024-05-27T18:22:34.349Z</lastmod>
+          <loc>https://carprices.ae/brands/tesla/2024/model-x/p100d</loc>
+          <lastmod>2024-09-02T16:42:58.466Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32552,14 +32516,14 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/tesla/2024/model-x/p100d</loc>
-          <lastmod>2024-05-27T18:22:37.175Z</lastmod>
+          <loc>https://carprices.ae/brands/tesla/2024/model-x/100d</loc>
+          <lastmod>2024-04-25T10:15:57.250Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/tesla/2024/model-x/100d</loc>
-          <lastmod>2024-04-25T10:15:57.250Z</lastmod>
+          <loc>https://carprices.ae/brands/tesla/2024/model-s/plaid-(awd)</loc>
+          <lastmod>2024-09-02T16:42:30.217Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32792,6 +32756,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/toyota/2024/land-cruiser/4.0l-exr-(4wd)</loc>
+          <lastmod>2024-09-03T04:40:18.115Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/toyota/2024/yaris/1.5-e</loc>
           <lastmod>2024-05-25T07:44:27.282Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -32800,12 +32770,6 @@
         <url>
           <loc>https://carprices.ae/brands/toyota/2024/rav4-hybrid/2.5l-exr-hev</loc>
           <lastmod>2024-05-26T08:45:44.841Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/toyota/2024/land-cruiser/4.0l-exr-(4wd)</loc>
-          <lastmod>2024-04-25T10:18:07.165Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32858,6 +32822,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/volvo/2024/c40/p8-awd</loc>
+          <lastmod>2024-09-02T16:43:34.974Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/volkswagen/2024/teramont/2.0l-trendline-(awd)</loc>
           <lastmod>2024-04-25T10:20:01.834Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -32878,12 +32848,6 @@
         <url>
           <loc>https://carprices.ae/brands/volvo/2024/s90/b5-mild-hybrid-core</loc>
           <lastmod>2024-05-27T18:24:19.190Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/volvo/2024/c40/p8-awd</loc>
-          <lastmod>2024-05-27T18:24:21.873Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32990,12 +32954,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/volvo/2024/xc40-recharge/plus</loc>
-          <lastmod>2024-05-27T18:24:30.254Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/baic/2024/x35/1.5l-luxury</loc>
           <lastmod>2024-04-25T09:13:26.951Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33010,6 +32968,12 @@
         <url>
           <loc>https://carprices.ae/brands/zotye/2024/t300/royal</loc>
           <lastmod>2024-04-25T10:21:33.551Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/volvo/2024/xc40-recharge/plus</loc>
+          <lastmod>2024-09-02T16:44:38.364Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33266,6 +33230,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/mg/2024/zs-ev/long-range</loc>
+          <lastmod>2024-09-02T16:36:49.387Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/mclaren/2024/artura/3.0t-phev</loc>
           <lastmod>2024-05-27T18:15:26.611Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33280,12 +33250,6 @@
         <url>
           <loc>https://carprices.ae/brands/mclaren/2024/720s/4.0t-spider</loc>
           <lastmod>2024-05-27T18:15:29.490Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mg/2024/zs-ev/long-range</loc>
-          <lastmod>2024-05-27T18:17:37.247Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33362,6 +33326,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/audi/2024/q8-e-tron/advanced</loc>
+          <lastmod>2024-09-02T16:04:24.619Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/corvette-z06/3lz-convertible</loc>
           <lastmod>2024-05-27T18:03:47.142Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33416,12 +33386,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/q8-e-tron/advanced</loc>
-          <lastmod>2024-05-27T17:56:39.650Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/m2-coupe/m-steptronic</loc>
           <lastmod>2024-05-27T18:01:16.551Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33464,12 +33428,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/volvo/2024/ex30/ultra</loc>
-          <lastmod>2024-05-27T18:24:38.576Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/ford/2024/f-150/3.5l-ecoboost</loc>
           <lastmod>2024-05-28T05:51:03.559Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33482,8 +33440,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix3/m-sport</loc>
-          <lastmod>2024-05-27T18:00:17.052Z</lastmod>
+          <loc>https://carprices.ae/brands/volvo/2024/ex30/ultra</loc>
+          <lastmod>2024-09-02T16:43:51.703Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33512,6 +33470,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/bmw/2024/ix3/m-sport</loc>
+          <lastmod>2024-09-02T16:13:01.084Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/bmw/2024/5-series-sedan/530i</loc>
           <lastmod>2024-04-25T09:16:19.982Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33536,12 +33500,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/polestar/2024/2/long-range-dual-motor-performance</loc>
-          <lastmod>2024-05-27T18:20:12.164Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/exeed/2024/txl/1.6t-flagship</loc>
           <lastmod>2024-06-12T05:49:32.158Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33550,6 +33508,12 @@
         <url>
           <loc>https://carprices.ae/brands/gac/2024/ga-4/</loc>
           <lastmod>2024-07-02T05:42:54.396Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/polestar/2024/2/long-range-dual-motor-performance</loc>
+          <lastmod>2024-09-02T16:38:59.648Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33668,12 +33632,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/genesis/2024/gv-60/</loc>
-          <lastmod>2024-07-27T13:57:47.264Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/4-series-gran-coupe/420i</loc>
           <lastmod>2024-05-16T06:50:24.199Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33688,6 +33646,12 @@
         <url>
           <loc>https://carprices.ae/brands/exeed/2024/vx/2.0t-flagship</loc>
           <lastmod>2024-04-25T09:26:00.147Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/genesis/2024/gv-60/</loc>
+          <lastmod>2024-09-02T16:22:07.515Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33872,12 +33836,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/i4/m50</loc>
-          <lastmod>2024-05-27T18:00:45.219Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/ix/xdrive40</loc>
           <lastmod>2024-04-25T09:17:26.359Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -33896,14 +33854,14 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/i7/xdrive60</loc>
-          <lastmod>2024-05-27T18:00:32.313Z</lastmod>
+          <loc>https://carprices.ae/brands/bmw/2024/m8-convertible/4.4t-v8-competition</loc>
+          <lastmod>2024-08-12T10:39:09.826Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/m8-convertible/4.4t-v8-competition</loc>
-          <lastmod>2024-08-12T10:39:09.826Z</lastmod>
+          <loc>https://carprices.ae/brands/bmw/2024/i4/m50</loc>
+          <lastmod>2024-09-02T16:10:34.659Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -33922,6 +33880,12 @@
         <url>
           <loc>https://carprices.ae/brands/bmw/2024/m5-sedan/m550i-xdrive</loc>
           <lastmod>2024-05-16T04:44:29.007Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/i7/xdrive60</loc>
+          <lastmod>2024-09-02T16:11:17.803Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -34550,12 +34514,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/tesla/2024/model-y/long-range-(awd)</loc>
-          <lastmod>2024-05-27T18:22:39.968Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/toyota/2024/c-hr/1.8l-gx-hybrid</loc>
           <lastmod>2024-05-25T04:43:54.161Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -34576,6 +34534,12 @@
         <url>
           <loc>https://carprices.ae/brands/bmw/2024/7-series-sedan/750e-xdrive</loc>
           <lastmod>2024-04-25T09:16:47.005Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/tesla/2024/model-y/long-range-(awd)</loc>
+          <lastmod>2024-09-02T16:43:15.751Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -34724,12 +34688,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/ioniq/ev-72.6-kwh</loc>
-          <lastmod>2024-05-27T18:10:10.640Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/polestar/2024/2/standard-range-single-motor</loc>
           <lastmod>2024-04-25T10:07:34.106Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -34802,6 +34760,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/ioniq/ev-72.6-kwh</loc>
+          <lastmod>2024-09-02T16:26:42.047Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/captiva/1.5t-lt</loc>
           <lastmod>2024-05-25T04:35:21.238Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -34868,12 +34832,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/byd/2024/atto-3/60.5kwh</loc>
-          <lastmod>2024-05-27T18:02:01.481Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/alfa-romeo/2024/stelvio/estrema</loc>
           <lastmod>2024-08-09T05:23:42.326Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -34900,6 +34858,12 @@
         <url>
           <loc>https://carprices.ae/brands/undefined/2025/groove/lt</loc>
           <lastmod>2024-08-29T10:41:23.411Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/byd/2024/atto-3/60.5kwh</loc>
+          <lastmod>2024-09-02T16:15:40.676Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -35054,12 +35018,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/rs-e-tron-gt/93.4-kwh</loc>
-          <lastmod>2024-05-27T17:57:54.442Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/audi/2024/s6/tfsi-tiptronic</loc>
           <lastmod>2024-05-27T17:58:15.944Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -35104,6 +35062,12 @@
         <url>
           <loc>https://carprices.ae/brands/audi/2024/q8/55-tfsi-quattro-(340-hp)</loc>
           <lastmod>2024-06-20T05:49:06.474Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/audi/2024/rs-e-tron-gt/93.4-kwh</loc>
+          <lastmod>2024-09-02T16:09:48.165Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -35264,14 +35228,14 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix/xdrive50</loc>
-          <lastmod>2024-05-27T18:01:35.992Z</lastmod>
+          <loc>https://carprices.ae/brands/bmw/2024/x3/sdrive20i</loc>
+          <lastmod>2024-04-25T09:18:57.083Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/x3/sdrive20i</loc>
-          <lastmod>2024-04-25T09:18:57.083Z</lastmod>
+          <loc>https://carprices.ae/brands/bmw/2024/ix/xdrive50</loc>
+          <lastmod>2024-09-02T16:11:37.585Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -36020,12 +35984,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix1/xdrive30</loc>
-          <lastmod>2024-05-27T18:01:43.935Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/zotye/2024/t700/flagship</loc>
           <lastmod>2024-05-28T16:36:44.386Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -36106,6 +36064,12 @@
         <url>
           <loc>https://carprices.ae/brands/mg/2024/mg3/lux</loc>
           <lastmod>2024-05-27T18:17:48.482Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/ix1/xdrive30</loc>
+          <lastmod>2024-09-02T16:12:04.273Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -36386,6 +36350,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/changan/2025/cs35-plus/trend</loc>
+          <lastmod>2024-08-30T16:58:31.646Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/bugatti/2023/chiron/sport-110-ans</loc>
           <lastmod>2024-02-22T11:06:47.134Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -36416,6 +36386,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/changan/2025/cs35-plus/limited</loc>
+          <lastmod>2024-08-30T17:05:54.954Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/bmw/2023/8-series-coupe/m850i-heritage-edition</loc>
           <lastmod>2024-02-22T11:07:20.044Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -36442,6 +36418,12 @@
         <url>
           <loc>https://carprices.ae/brands/mercedes-benz/2023/e-class-coupe/e-300</loc>
           <lastmod>2024-02-22T11:07:58.775Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan/2025/eado-plus/trend</loc>
+          <lastmod>2024-08-31T06:11:22.892Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -36646,6 +36628,12 @@
         <url>
           <loc>https://carprices.ae/brands/mitsubishi/2023/outlander-phev/2.4l-awd-hl</loc>
           <lastmod>2024-02-22T11:10:37.928Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan/2025/eado-plus/smart</loc>
+          <lastmod>2024-08-31T06:16:34.545Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38114,8 +38102,20 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/changan/2025/eado-plus/limited</loc>
+          <lastmod>2024-08-31T06:22:21.342Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/mazda/2024/cx-60/skyactiv-g-rwd</loc>
           <lastmod>2024-04-25T09:54:00.412Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan/2025/uni-k/limited</loc>
+          <lastmod>2024-08-31T06:49:39.147Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38132,8 +38132,20 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/audi/2024/e-tron-gt-quattro/83.7-kwh</loc>
+          <lastmod>2024-09-02T16:03:37.790Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/volvo/2024/ex-90/single-motor</loc>
           <lastmod>2024-04-25T10:20:49.541Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/ix2/xdrive30</loc>
+          <lastmod>2024-09-02T16:12:24.824Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38150,8 +38162,14 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev/</loc>
+          <lastmod>2024-09-02T16:17:16.277Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/volvo/2024/ex-90/twin-motor-performance</loc>
-          <lastmod>2024-05-27T18:24:41.418Z</lastmod>
+          <lastmod>2024-09-02T16:44:20.568Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38192,8 +38210,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/porsche/2024/macan-electric/4</loc>
-          <lastmod>2024-05-27T18:20:31.774Z</lastmod>
+          <loc>https://carprices.ae/brands/fiat/2024/500e/la-prima</loc>
+          <lastmod>2024-09-02T16:20:18.062Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38300,12 +38318,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/maybach-eqs-suv/680</loc>
-          <lastmod>2024-05-27T18:17:20.721Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mg/2024/t60-pick-up/4x4</loc>
           <lastmod>2024-05-27T18:17:51.238Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -38314,6 +38326,18 @@
         <url>
           <loc>https://carprices.ae/brands/mg/2024/whale/luxury</loc>
           <lastmod>2024-05-27T18:17:53.979Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/ford/2024/mustang-mach-e/75.7-kwh-(258-hp)-select</loc>
+          <lastmod>2024-09-02T16:20:41.350Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/maybach-eqs-suv/680</loc>
+          <lastmod>2024-09-02T16:36:03.293Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38396,8 +38420,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia/2024/ev-9/base</loc>
-          <lastmod>2024-07-27T11:48:26.913Z</lastmod>
+          <loc>https://carprices.ae/brands/kia/2024/ev-9/gt-line</loc>
+          <lastmod>2024-09-02T16:55:04.253Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38420,8 +38444,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia/2024/ev-9/gt-line</loc>
-          <lastmod>2024-07-27T11:55:25.368Z</lastmod>
+          <loc>https://carprices.ae/brands/genesis/2024/g80-ev/prestige-awd</loc>
+          <lastmod>2024-09-02T16:21:31.188Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38492,8 +38516,8 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia/2024/ev-6/gt-line-awd</loc>
-          <lastmod>2024-07-27T11:44:48.690Z</lastmod>
+          <loc>https://carprices.ae/brands/kia/2024/ev-9/base</loc>
+          <lastmod>2024-09-02T16:30:37.410Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38524,12 +38548,6 @@
         <url>
           <loc>https://carprices.ae/brands/ford/2024/everest/limited</loc>
           <lastmod>2024-06-20T05:56:17.237Z</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/geely/2024/geometry-c/550-gf</loc>
-          <lastmod>2024-07-02T10:39:40.975Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -38600,6 +38618,18 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/geely/2024/geometry-c/550-gf</loc>
+          <lastmod>2024-09-02T16:21:05.440Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/kia/2024/ev-6/gt-line-awd</loc>
+          <lastmod>2024-09-02T16:30:20.546Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/geely/2024/tugella/gl-2wd</loc>
           <lastmod>2024-04-25T09:31:26.200Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -38650,6 +38680,12 @@
         <url>
           <loc>https://carprices.ae/brands/baic/2024/x55-1/1.5t</loc>
           <lastmod>2024-08-09T05:55:09.169Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/lotus/2024/eletre/r</loc>
+          <lastmod>2024-09-02T16:31:03.655Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>

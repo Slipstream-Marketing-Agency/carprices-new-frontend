@@ -627,6 +627,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe-suv</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/cadillac/2023/ct5</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -867,6 +872,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/peugeot/2024/2008</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/opel/2022/zafira-life</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -922,11 +932,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/q8-sportback-e-tron</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/ram/2023/2500</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -953,6 +958,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/ford/2023/taurus</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/audi/2024/q8-sportback-e-tron</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -1133,11 +1143,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/gac/2023/gs8</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe-suv</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -2787,6 +2792,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/polestar/2024/3-1</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/honda/2021/pilot</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -2853,6 +2863,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/kia/2024/telluride</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/porsche/2024/macan-electric</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -3878,11 +3893,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/ford/2023/territory</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/polestar/2024/3-1</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -6282,11 +6292,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/e-tron-gt-quattro</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/maserati/2021/quattroporte</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -6538,11 +6543,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/haval/2022/dargo</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -8232,11 +8232,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/sq-8-sportback-e-tron</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/lamborghini/2023/urus</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -8257,17 +8252,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/audi/2024/sq-8-sportback-e-tron</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/maserati/2023/mc20-cielo</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/bmw/2024/m3-sedan</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/genesis/2024/g80-ev</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -8283,6 +8278,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/opel/2023/zafira-life</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/genesis/2024/g80-ev</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9042,6 +9042,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/chevrolet/2024/bolt-ev</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/chevrolet/2024/equinox</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -9057,12 +9062,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/byd/2024/han-1</loc>
+          <loc>https://carprices.ae/brands/kia/2024/picanto</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia/2024/picanto</loc>
+          <loc>https://carprices.ae/brands/byd/2024/han-1</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9217,11 +9222,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/fiat/2024/500e</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/ford/2024/expedition</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -9243,11 +9243,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/ford/2024/mustang</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/ford/2024/mustang-mach-e</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9402,17 +9397,17 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-pickup</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/gmc/2024/canyon</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/genesis/2024/gv80</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/gmc/2024/hummer-ev-pickup</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9433,11 +9428,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/gac/2025/m8-1</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix2</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9512,11 +9502,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hongqi/2024/e-hs9</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/hongqi/2024/e-qm5</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -9533,6 +9518,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/hongqi/2024/hs5</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hongqi/2024/e-hs9</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9562,17 +9552,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/nexo</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/hyundai/2024/elantra-n</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/kona-electric</loc>
+          <loc>https://carprices.ae/brands/hyundai/2024/nexo</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9603,6 +9588,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/hyundai/2024/kona</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/hyundai/2024/kona-electric</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9692,11 +9682,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/jaguar/2024/i-pace</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/x6</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -9708,6 +9693,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/undefined/2025/cla-coupe</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/jaguar/2024/i-pace</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -9997,11 +9987,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/lotus/2024/eletre</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/lincoln/2024/navigator</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -10013,6 +9998,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/maserati/2024/levante</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/lotus/2024/eletre</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -10157,21 +10147,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqc</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs-suv</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -10183,6 +10158,21 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/mercedes-benz/2024/eqb</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqc</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqe</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/eqs</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -10252,11 +10242,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/peugeot/2024/e-expert</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mini/2024/clubman</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -10287,6 +10272,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/peugeot/2024/e-expert</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/mitsubishi/2024/l200</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -10307,7 +10297,7 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross</loc>
+          <loc>https://carprices.ae/brands/mitsubishi/2024/xpander-cross-1</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -10413,11 +10403,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/peugeot/2024/408</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/peugeot/2024/2008</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -10812,17 +10797,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/volvo/2024/c40</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/volkswagen/2024/touareg</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/volvo/2024/s90</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/volvo/2024/c40</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -10942,17 +10927,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/mg/2024/zs-ev</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/mclaren/2024/artura</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/mclaren/2024/720s</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mg/2024/zs-ev</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11042,12 +11027,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/polestar/2024/2</loc>
+          <loc>https://carprices.ae/brands/exeed/2024/txl</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/exeed/2024/txl</loc>
+          <loc>https://carprices.ae/brands/polestar/2024/2</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11142,17 +11127,17 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/i4</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/bmw/2024/ix</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/bmw/2024/m4-coupe</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/i4</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11287,12 +11272,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai/2024/ioniq</loc>
+          <loc>https://carprices.ae/brands/abarth/2024/695</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/abarth/2024/695</loc>
+          <loc>https://carprices.ae/brands/hyundai/2024/ioniq</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11317,12 +11302,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/byd/2024/atto-3</loc>
+          <loc>https://carprices.ae/brands/undefined/2025/groove</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/undefined/2025/groove</loc>
+          <loc>https://carprices.ae/brands/byd/2024/atto-3</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11367,11 +11352,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/audi/2024/rs-e-tron-gt</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/audi/2024/s6</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -11398,6 +11378,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/audi/2024/q8</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/audi/2024/rs-e-tron-gt</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11507,11 +11492,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bmw/2024/ix1</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mclaren/2024/senna</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -11523,6 +11503,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/audi/2024/q5-sportback</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/ix1</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11568,6 +11553,16 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/audi/2024/s7-sportback</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan/2025/cs35-plus</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan/2025/eado-plus</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11822,6 +11817,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/changan/2025/uni-k</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/skoda/2024/kushaq</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -11832,22 +11832,27 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/audi/2024/e-tron-gt-quattro</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bmw/2024/ix2</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/volkswagen/2024/amarok</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/porsche/2024/macan-electric</loc>
+          <loc>https://carprices.ae/brands/fiat/2024/500e</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/mclaren/2024/gts-1</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/mercedes-benz/2024/maybach-eqs-suv</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -11858,6 +11863,16 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/mg/2024/whale</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/ford/2024/mustang-mach-e</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/mercedes-benz/2024/maybach-eqs-suv</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
