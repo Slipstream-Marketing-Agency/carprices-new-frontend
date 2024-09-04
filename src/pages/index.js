@@ -1,5 +1,6 @@
 import { AddBox } from "@mui/icons-material";
 import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
+import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
@@ -109,37 +110,37 @@ export default function index({
 
   const FeaturedData = [
     {
-      model: "2024",
-      brand: "Volkswagen",
-      name: "All-New Geely Starray Launched In UAE At AED 84,900!",
+      model: "2025",
+      brand: "Audi",
+      name: "2025 All-New Audi e-tron GT! New Variants and More Power",
       description:
-        "AGMC, UAE's Geely distributor, introduces the 2024 Geely Starray, priced at AED 84,900. This SUV blends luxury, technology, and modern design, promising an unparalleled driving experience.",
-      createdOn: "11th April 2024",
-      url: "/news/all-new-geely-starray-launched-in-uae-at-aed-84900",
-      image: "/all-new-geely-starray-launched-in-uae-at-aed-84900.jpg",
+      "The 2025 Audi e-tron GT features a facelift, new variants, improved range, performance, and charging. The lineup includes the first fully electric RS performance model, the RS e-tron GT Performance, with striking design and advanced technology." ,
+      createdOn: "09th September 2024",
+      url: "https://carprices.ae/news/2025-all-new-audi-e-tron-gt-new-variants-and-more-power",
+      image: "https://cdn.carprices.ae/assets/Audi_RS_E_Tron_2e8984e401.jpg",
     },
     {
       model: "2024",
-      brand: "Chery",
-      name: "Aston Martin Revives Its Twin-Turbo V12 Engine! The new Vanquish Will Be The First Car To Get.",
+      brand: "Toyota",
+      name: "All-New 2024 Toyota Land Cruiser Prado Returns To Rule The Off-Roads!",
       description:
-        "Aston Martin unveils a pioneering V12 engine, boasting 835hp and 1000Nm torque, heralding a new era of luxury and performance. Handcrafted and destined for the Vanquish, it redefines ultra-luxury driving.",
-      createdOn: "12th April 2024",
-      url: "/news/aston-martin-revives-its-twin-turbo-v12-engine-the-new-vanquish-will-be-the-first-car-to-get",
+       "The new Land Cruiser Prado features a body-on-frame design and is a more capable off-roader than before.",
+      createdOn: "09th September 2024",
+      url: "https://carprices.ae/news/2024-toyota-land-cruiser-prado",
       image:
-        "/aston-martin-revives-its-twin-turbo-v12-engine-the-new-vanquish-will-be-the-first-car-to-get.jpg",
+        "https://cdn.carprices.ae/assets/LC_Prado_6286422331.jpg",
     },
 
     {
       model: "2024",
-      brand: "Volkswagen",
-      name: "Refreshed Land Rover Defender Lineup Unveiled With Extra Features And Power!",
+      brand: "Porsche",
+      name: "Development Of The 2025 Porsche 911 Hybrid Came To An End | To Debut On May 28!",
       description:
-        "The latest Land Rover Defender offers luxury and adventure with upgrades overseen by Mark Cameron, ensuring refinement and innovation. Signature interior packs, Sedona Editions, simplified specs, and enhanced power redefine exploration.",
-      createdOn: "11th April 2024",
-      url: "/news/refreshed-land-rover-defender-lineup-unveiled-with-extra-features-and-power",
+      "Porsche has concluded the testing of the first-ever hybrid model of the iconic 992 Gen 911. The 7:16.934 lap time at Nürburgring showcases its enhanced capabilities. A milestone in Porsche's history, it sets new standards for automotive excellence.",
+      createdOn: "09th September 2024",
+      url: "https://carprices.ae/news/development-of-the-2025-porsche-911-hybrid-came-to-an-end-to-debut-on-may-28",
       image:
-        "/refreshed-land-rover-defender-lineup-unveiled-with-extra-features-and-power.jpg",
+        "https://cdn.carprices.ae/assets/Porsche_Hybrid_911_dc05da8cdd.jpg",
     },
 
     {
@@ -211,29 +212,29 @@ export default function index({
 
   const cars = [
     {
-      imgSrc: "/2024_Lexus_GX_Overtrail_NoriGreen.png",
-      title: "2024 Lexus GX",
-      price: "AED 185,850* - 299,145*",
-    },
-    {
-      imgSrc: "/2024-Kia-Sorento.png",
-      title: "2024 Kia Sorento",
+      imgSrc: "https://cdn.carprices.ae/assets/Nissan_Patrol_2025_0f06f3dee1.jpg",
+      title: "2025 Nissan Patrol",
       price: "Visit Site",
     },
     {
-      imgSrc: "/2024-Land-Cruiser-Prado.png",
-      title: "2024 Toyota Land Cruiser Prado",
-      price: "AED 185,850* - 299,145*",
+      imgSrc: "https://cdn.carprices.ae/assets/Mercedes_Benz_AMG_CLE_e7e6c9c59b.jpg",
+      title: "2024 Mercedes Benz AMG CLE",
+      price: "Visit Site",
     },
     {
-      imgSrc: "/hyundai-new-tucson-korean-specs.png",
-      title: "2024 Hyundai Tucson",
-      price: "AED 185,850* - 299,145*",
+      imgSrc: "https://cdn.carprices.ae/assets/BMW_M5_e2c0b94f35.jpg",
+      title: "2024 BMW M5",
+      price: "Visit Site",
     },
     {
-      imgSrc: "/New-Mercedes-Benz-G-Class.png",
-      title: "2024 Mercedes G-Class",
-      price: "AED 185,850* - 299,145*",
+      imgSrc: "https://cdn.carprices.ae/assets/Nissan_GTR_ba369e591d.jpg",
+      title: "2024 Nissan GTR",
+      price: "Visit Site",
+    },
+    {
+      imgSrc: "https://cdn.carprices.ae/assets/Wagoneer_23cdadfe7b.jpg",
+      title: "2024 Jeep Wagoneer",
+      price: "Visit Site",
     },
     // {
     //   imgSrc: "/Lexus.jpg",
@@ -635,7 +636,6 @@ export default function index({
                   {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
                 </h5> */}
-
                   <h2 className="tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900">
                     Featured car news
                   </h2>
@@ -916,13 +916,13 @@ export default function index({
                       key={index}
                       className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-bg-black"
                     >
-                      <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-w-full tw-min-h-[400px]">
-                        <img
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-min-h-[290px]">
+                        <Image
                           loading="lazy"
-                          srcSet={`${item.imgSrc} 480w, ${item.imgSrc} 800w, ${item.imgSrc} 1200w`}
-                          sizes="(max-width: 600px) 480px, (max-width: 960px) 800px, 1200px"
+                          width={0}
+                          height={0}
+                          layout="fill"
                           src={`${item.imgSrc}`}
-                          className="tw-object-cover tw-absolute tw-inset-0 tw-w-full tw-h-full"
                           alt={item.title}
                         />
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10 max-md:tw-max-w-full">
@@ -1205,19 +1205,19 @@ export default function index({
             <div className="tw-grid tw-gap-5 md:tw-mt-7 tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3">
               {[
                 {
-                  imgSrc: "/10-Facts-About-The-LC.png",
-                  name: "10 Historic Facts & Milestones That Toyota Land Cruiser Achieved In Its 70 Years Of Existence!",
-                  url: "https://www.youtube.com/watch?v=hZnYCpjc744&t=12s",
+                  imgSrc: "https://cdn.carprices.ae/assets/LC_2024_280082ac3e.jpg",
+                  name: "The 2024 Toyota Land Cruiser Prado Arrives In UAE 🤩 | Prices and Variants Discussed!",
+                  url: "https://www.youtube.com/watch?v=_xLXi8Si2f8",
                 },
                 {
-                  imgSrc: "/2024-GX-VS-2024-Prado.png",
-                  name: "Battle Between Brothers From Same Mother | 2024 Lexus GX🤜 VS 🤛2024 Toyota Land Cruiser Prado!",
-                  url: "https://www.youtube.com/watch?v=CpuigJn1tkA&t=42s",
+                  imgSrc: "https://cdn.carprices.ae/assets/Lexus_GX_vs_Patrol_a903e1ef66.jpg",
+                  name: "2024 Lexus GX 🤜VS🤛 2024 Nissan Patrol! Ultimate Battle Of Luxury and Off-Road Dynamics 💪",
+                  url: "https://www.youtube.com/watch?v=4MbZpuqDXrM&t=190s",
                 },
                 {
-                  imgSrc: "/2024-Prado-VS-LC300.png",
-                  name: "2024 Toyota Land Cruiser Prado 🤜VS🤛 2023 Land Cruiser 300 Series | The Most Iconic SUV Battle💪!",
-                  url: "https://www.youtube.com/watch?v=_yy4xm_p5fU",
+                  imgSrc: "https://cdn.carprices.ae/assets/BYD_Shark_vs_Hilux_fe36d1aad2.jpg",
+                  name: "BYD Shark PHEV VS Toyota Hilux 🤜🤛: Which Will Dominate the Trails, China or Japan?",
+                  url: "https://www.youtube.com/watch?v=R5cXg7E416U",
                 },
               ].map((item, index) => (
                 <Link
@@ -1226,11 +1226,13 @@ export default function index({
                   key={index}
                   className="tw-flex tw-flex-col tw-bg-white tw-rounded-2xl tw-shadow-sm tw-pb-7 max-md:tw-mt-5"
                 >
-                  <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-justify-center tw-w-full tw-rounded-2xl md:tw-min-h-[250px] tw-min-h-[200px]">
-                    <img
+                  <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-justify-center tw-w-full tw-rounded-2xl md:tw-min-h-[177px] tw-min-h-[188px] xl:tw-min-h-[240px]">
+                    <Image
                       loading="lazy"
-                      srcSet={item?.imgSrc}
-                      className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-full tw-h-[200px]"
+                      width={0}
+                      height={0}
+                      layout="fill"
+                      src={item?.imgSrc}
                     />
                   </div>
                   <div className="tw-relative tw-flex tw-flex-col tw-pl-7 tw-mt-7 tw-text-neutral-900 max-md:tw-pl-5">
