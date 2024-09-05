@@ -8234,6 +8234,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/nissan/2025/patrol/se-v6-3-8l</loc>
+          <lastmod>2024-09-04T07:29:21.945Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/baic/2022/x7-suv/1.5t-premium</loc>
           <lastmod>2024-02-22T11:21:06.454Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -8768,6 +8774,12 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/nissan/2025/patrol/le-platinum</loc>
+          <lastmod>2024-09-04T10:25:19.373Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/gmc/2023/canyon/at4x</loc>
           <lastmod>2024-03-13T15:16:27.994Z</lastmod>
           <changefreq>monthly</changefreq>
@@ -8854,6 +8866,12 @@
         <url>
           <loc>https://carprices.ae/brands/ram/2023/1500/5.7l-rebel-(double-cab)</loc>
           <lastmod>2024-02-22T13:32:44.760Z</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/suzuki/2025/ertiga/1-5l-gl</loc>
+          <lastmod>2024-09-04T14:27:15.713Z</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
