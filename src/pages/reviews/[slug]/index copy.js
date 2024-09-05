@@ -16,7 +16,6 @@ import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 import altImage from "../../../../public/assets/images/blog-alt-image.png";
 import Ad160x600 from "@/src/components-old/ads/Ad160x600";
-import EastIcon from "@mui/icons-material/East";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -47,8 +46,6 @@ import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import Ad300x250 from "@/src/components-old/ads/Ad300x250";
 import AdBlog from "@/src/components-old/ads/AdBlog";
 import axios from "axios";
-import ShareButton from "@/src/components/common/ShareButton";
-import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -63,7 +60,7 @@ function BlogDetailsPage({
   articlesThisWeek,
   article,
 }) {
-  console.log(recentBlog, "articlesThisWeek");
+  
   const [activeTab, setActiveTab] = useState("tab1");
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -204,19 +201,19 @@ function BlogDetailsPage({
 
     const currentUrl = router.pathname; // Get the current URL of the website
 
-    const content = article?.content;
-    // .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
-    // .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
-    // .replace(
-    //   /<h3>(.*?)<\/h3>/g,
-    //   '<h3 style="padding-top: 10px !important;">$1</h3>'
-    // )
-    // .replace(/<div>\s*<br\s*\/?>/, "<div>")
-    // .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, "<p><br></p>")
-    // .replace(
-    //   /<p><img(.*?)width="100%"(.*?)><\/p>/g,
-    //   '<p><img$1style="width: 100%; height: 421px;"$2></p>'
-    // );
+    const content = article?.content
+      .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
+      .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
+      .replace(
+        /<h3>(.*?)<\/h3>/g,
+        '<h3 style="padding-top: 10px !important;">$1</h3>'
+      )
+      .replace(/<div>\s*<br\s*\/?>/, "<div>")
+      .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, "<p><br></p>")
+      .replace(
+        /<p><img(.*?)width="100%"(.*?)><\/p>/g,
+        '<p><img$1style="width: 100%; height: 421px;"$2></p>'
+      );
 
     if (!content) return null;
 
@@ -264,34 +261,6 @@ function BlogDetailsPage({
     return renderedContent;
   };
 
-  function stripHtmlTags(htmlContent) {
-    return htmlContent.replace(/<\/?[^>]+>/gi, '');
-  }
-  
-  function countWords(htmlContent) {
-    const textContent = stripHtmlTags(htmlContent);
-    const words = textContent.split(/\s+/);
-    return words.length;
-  }
-  
-  function countCharacters(htmlContent) {
-    const textContent = stripHtmlTags(htmlContent);
-    return textContent.length;
-  }
-  
-  // Example usage
-  const articleContent = article?.content;  
-
-  function estimateReadTime(htmlContent) {
-    const wordCount = countWords(htmlContent);
-    const wordsPerMinute = 200; // Average reading speed
-    const minutes = wordCount / wordsPerMinute;
-    return Math.ceil(minutes);
-  }
-
-  const readTime = estimateReadTime(article?.content);
-  
-
   const extractYouTubeVideoId = (url) => {
     const youtubeRegex =
       /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/(.+)$/;
@@ -328,240 +297,195 @@ function BlogDetailsPage({
         type: "Car review Website",
       }}
     >
-      {/* <div className="hidemobile">
+      <div className="hidemobile">
         <Ad970x250 dataAdSlot="5962627056" />
       </div>
       <div className="hidedesktop">
         <Ad300x250 dataAdSlot="9351332409" />
-      </div> */}
+      </div>
 
-      <section className="tw-container">
-        <div className="sm:tw-grid tw-gap-10 tw-grid-cols-12 tw-my-6 ">
-          <div className="sm:tw-col-span-9 tw-space-y-6">
-            <div className="tw-mb-20">
-              <div className="tw-capitalize tw-font-bold tw-text-2xl sm:tw-text-5xl">
-                {article?.title}
-              </div>
-              <div className="tw-flex tw-justify-between tw-items-center tw-my-2 sm:tw-my-4  tw-text-xs sm:tw-text-sm">
-                <span className="tw-text-gray-400  tw-space-x-3">
-                  <span>{article?.author}</span>
-                  <span>|</span>
-                  <span>
-                    {moment(article?.publishedAt).format("MMMM Do YYYY")}
-                  </span>
-                  <span>|</span>
-                  <span>{readTime} minute(s) read</span>
-                </span>
-                <div className="sm:tw-mr-6">
-                  <ShareButton
-                    url={fullURL}
-                    title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
-                  />
-                </div>
-              </div>
-              <div className="tw-my-4 sm:tw-my-4">
-                {article?.summary !== "" && (
-                  <p className="tw-font-semibold tw-my-4">{article?.summary}</p>
-                )}
-                <div className="tw-flex tw-gap-4">
-                  <Image
-                    src={
-                      article?.coverImage
-                        ? article?.coverImage
-                        : "/assets/img/car-placeholder.png"
-                    }
-                    alt=""
-                    width={300}
-                    height={205}
-                    className="tw-object-contain tw-w-full"
-                  />
-                </div>
-                <p className="tw-mt-4  article-content">{renderContent()}</p>
-              </div>
-            </div>
-
-            <div className="tw-my-6">
-              <h6 className="tw-text-blue-600 tw-font-semibold tw-text-xs tw-uppercase tw-leading-5 tw-tracking-wider">
-                Trending automotive review
-              </h6>
-              <div className="tw-flex tw-items-center tw-justify-between tw-font-semibold tw-mt-1">
-                <h2 className="tw-capitalize tw-text-lg sm:tw-text-xl">
-                  Latest Automotive News
-                </h2>
-                <div className="sm:tw-mr-6 tw-text-xs sm:tw-text-sm">
-                  View more
-                </div>
-              </div>
-            </div>
-            <div className="tw-grid tw-gap-4 tw-grid-cols-12">
-              {recentBlog.map((blog, index) => (
-                <Link
-                  legacyBehavior
-                  href={`/review/${blog?.attributes?.slug}`}
-                  key={blog?.id}
-                >
+      <div className="blog-details-page mt-4">
+        <div className="container">
+          <div className="row g-2 ">
+            <div className="col-lg-9 pb-2">
+              <div className="row g-1">
+                <div className="col-lg-1 d-md-none d-lg-block">
                   <div
-                    key={index}
-                    className="tw-relative tw-col-span-6 md:tw-col-span-4 tw-rounded-[14px] tw-shadow-lg"
+                    className={`sticky_scroll mt-4  social-area d-flex flex-column align-items-center  gap-3 ${
+                      isRtl && "flex-row-reverse"
+                    } ${isMobile && "d-none"} `}
                   >
-                    {/* <div className="tw-bg-button-bg tw-text-white tw-rounded-e-xl tw-absolute tw-top-2 sm:tw-top-3 tw-left-0 tw-px-1 sm:tw-px-4 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-sm">
-                    Trending
-                  </div> */}
-                    <Image
-                      src={
-                        blog?.attributes?.coverImage?.data?.attributes?.url ||
-                        altImage
-                      }
-                      alt="image"
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
-                      // style={{ width: "100%", height: "60%" }}
-                    />
-                    <div className="tw-p-2">
-                      <div className="sm:tw-text-base 4xl:tw-text-2xl tw-text-sm tw-truncate md:tw-whitespace-normal tw-font-semibold">
-                        {`${
-                          blog?.attributes?.title?.length > 20
-                            ? `${blog?.attributes?.title?.slice(0, 50)}... `
-                            : `${blog?.attributes?.title}`
-                        }`}
-                      </div>
-                      <div className="tw-flex tw-flex-col tw-justify-between">
-                        <div>
-                          <div className="tw-text-xs tw-leading-9 tw-text-gray-700">
-                            <span className="tw-hidden sm:tw-inline">
-                              {blog?.attributes?.author?.data?.attributes?.name}{" "}
-                              &mdash;
-                            </span>{" "}
-                            {moment(
-                              blog?.attributes?.author?.data?.attributes
-                                ?.publishedAt
-                            ).format("MMMM Do YYYY")}
-                          </div>
-                          <div className="tw-line-clamp-3 tw-text-xs tw-text-gray-500 ">
-                            {blog?.attributes?.summary}
-                          </div>
-                        </div>{" "}
-                        <Link
-                          legacyBehavior
-                          href={`/review/${blog?.attributes?.slug}`}
-                          key={blog?.id}
-                        >
-                          <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
-                            Know More
-                            <EastIcon className="tw-text-lg tw-ml-2" />
-                          </button>
-                        </Link>
-                      </div>
+                    {/* {<h5 className="mb-0 shareTxt ">{t.share} </h5>} */}
+                    <ul className="social-link d-flex flex-column  gap-2  ps-2 m-auto  ">
+                      <FacebookShareButton url={fullURL}>
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={fullURL}>
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+
+                      <LinkedinShareButton url={fullURL}>
+                        <LinkedinIcon size={32} round />
+                      </LinkedinShareButton>
+                      <TwitterShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                      <TelegramShareButton
+                        url={fullURL}
+                        title={`CarPrices.ae : UAE Fastest Growing New Car Buyers' Guide`}
+                      >
+                        <TelegramIcon size={32} round />
+                      </TelegramShareButton>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-lg-11  white_bg_wrapper mt-0">
+                  <h1 className="post-title  mt-1">{article?.title}</h1>
+                  <div className="d-flex align-items-center gap-3">
+                    {/* <div className="author-img">
+                          <span className="border rounded-circle px-2 py-1">C</span>
+                        </div> */}
+
+                    <div className="author-content">
+                      <h6 className="mt-0">
+                        {article?.author} /{" "}
+                        <span className="postedOnStyle">
+                          {isRtl && " - "}
+                          {t.postedOn}
+                          {!isRtl && " - "}
+                        </span>{" "}
+                        <span className="postedOnStyle">
+                          {moment(article?.publishedAt).format("MMMM Do YYYY")}
+                        </span>
+                      </h6>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className=" sm:tw-col-span-3 tw-space-y-6">
-            <div className="tw-my-6 tw-border-solid tw-border tw-p-4 tw-rounded-[15px] tw-border-gray-300">
-              <div className="tw-flex tw-place-items-center tw-space-x-3 tw-mb-4">
-                <Image
-                  src={
-                    "https://cdn.carprices.ae/assets/Martin_Alva_7e01cef081.jpg"
-                  }
-                  width={80}
-                  height={80}
-                  className="tw-object-cover tw-rounded-full tw-w-[70px] tw-h-[70px]"
-                />
-                <div>
-                  <h6 className="tw-text-blue-600 tw-font-semibold tw-text-xs tw-uppercase tw-mb-0 ">
-                    Author
-                  </h6>
-                  <h4 className=" tw-text-lg sm:tw-text-xl tw-font-bold ">
-                    Martin V Alva
-                  </h4>
+
+                  {article?.summary !== "" && (
+                    <p className="summary_box">{article?.summary}</p>
+                  )}
+
+                  <div className="d-flex d-md-none d-flex justify-content-end align-items-center mb-2">
+                    {" "}
+                    <SocialButtons fullURL={currentURL} />{" "}
+                  </div>
+                  <div className="post-thumb">
+                    {/* <img className="" src={detailData.coverImage.data.attributes.url}  alt="blog image" /> */}
+                    <div className="position-relative ">
+                      <Image
+                        src={
+                          article?.coverImage
+                            ? article?.coverImage
+                            : "/assets/img/car-placeholder.png"
+                        }
+                        alt=""
+                        width={300}
+                        height={205}
+                        className=" object-contain"
+                      />
+                    </div>
+                    {/* <div className="date">
+                            <span className="text-white p-1">Buying Advice</span>
+                        </div> */}
+                  </div>
+
+                  {/* <div className="author-area"> */}
+
+                  {/* <div dangerouslySetInnerHTML={{ __html: detailData?.content }} /> */}
+                  <div
+                    // dangerouslySetInnerHTML={{ __html: dynamicHTML }}
+                    className="article-content"
+                  >
+                    {" "}
+                    {renderContent()}
+                  </div>
                 </div>
               </div>
-
-              <div className="tw-space-y-4">
-                <p className="tw-text-sm">
-                  Martin Victor Alva is a an experienced automotive journalist
-                  and a features writer with over 16 years of experience in the
-                  industry. He has contributed to well known automotive print
-                  and digital publications worldwide, including Overdrive
-                  Magazine, Top Gear magazine, DriveArabia, Auto Middle East,
-                  Gulf News, Khaleej times, Silodrome, AMENA, and Auto Data
-                  Middle East.
-                </p>
-                <p className="tw-text-sm">
-                  Martin’s expertise extends beyond journalism; he has a rich
-                  background in marketing and advertising for brands like
-                  General Motors and NWTN Inc. As a consultant, he has worked
-                  with brands such as Mercedes-Benz, Toyota, Jeep, Honda, Lexus,
-                  and Alfa Romeo.
-                </p>
-                <p className="tw-text-sm">
-                  An avid car enthusiast and budding collector, Martin has a
-                  particular passion for Porsche 911s, old-school mechanical
-                  4x4s, and off-road campers. His love for automobiles is not
-                  just professional but deeply personal.
-                </p>
-              </div>
             </div>
-            {articlesThisWeek?.length > 0 && (
-              <div>
-                <h4 className="tw-font-bold">From This week</h4>
-                <hr className="tw-my-2" />
-                {articlesThisWeek?.map((blog) => (
-                  <Link
-                    legacyBehavior
-                    href={`/review/${blog?.slug}`}
-                    key={blog?.id}
-                  >
-                    <div className="tw-w-full">
-                      <div className="tw-flex tw-my-2">
-                        <Image
-                          src={blog?.coverImage}
-                          alt=""
-                          width={40}
-                          height={40}
-                          className="tw-object-cover"
-                        />
-                        <p className="tw-text-sm tw-mx-2  tw-text-gray-600 tw-line-clamp-2">
-                          {`${blog?.title}`}
-                        </p>
-                      </div>
-                      <hr className="my-0" />
+            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3 hideOnSmallScreen mt-0 ">
+              <div className="blog-sidebar mb-3">
+                {detailData?.article_categories?.data.length > 0 && (
+                  <div className="white_bg_wrapper  px-1 py-3">
+                    <h4 className="px-2">
+                      Related review <hr className="my-2" />
+                    </h4>
+                    <div>
+                      <BlogRelated
+                        disableMarginTop={true}
+                        disableBorder={true}
+                        blogs={detailData?.article_categories?.data}
+                        heading={"Related review"}
+                        tab1={"Trending"}
+                        tab2={"Recent"}
+                      />
                     </div>
-                  </Link>
-                ))}
+                  </div>
+                )}
+
+                {/* <MoreBrands /> */}
+                <div className="my-3">
+                  <Ad300x250 dataAdSlot="3792539533" />
+                </div>
               </div>
-            )}
-            <Ad300x600 dataAdSlot="3792539533" />
+              {articlesThisWeek?.length > 0 && (
+                <div className="white_bg_wrapper my-3">
+                  <h4 className="fw-bold">FROM LAST TWO WEEK</h4>
+                  <div className="cursorPointer">
+                    {articlesThisWeek?.map((blog) => (
+                      <Link
+                        className="cursorPointer"
+                        legacyBehavior
+                        href={`/reviews/${blog?.slug}`}
+                        key={blog?.id}
+                      >
+                        <div className="fs-6 py-1">
+                          <div className="">
+                            <h6 className="text-bold blogFont fw-bold mb-0">{`${blog?.title}`}</h6>
+                            <span className="postedOnStyle">
+                              {moment(blog?.publishedAt).format("MMMM Do YYYY")}
+                            </span>
+                          </div>
+                          <hr className="my-2" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-            <div>
-              <h4 className="tw-font-bold">Latest News</h4>
-              <hr className="tw-my-2" />
-              <BlogRecent blogs={recentBlog} disableHeading={true} />
+              <div className=" sticky_scroll">
+                <Ad300x600 dataAdSlot="3792539533" />
+              </div>
+
+              {/* <div className="single-widgets sidebar-banner">
+                                <div className="product-content">
+                                    <div className="text">
+                                    <h4><a href="#">Mercedes-Benz <span>( Model-S13)</span></a></h4>
+                                    <h6>For Summer Offer</h6>
+                                    </div>
+                                    <div className="offer-batch">
+                                    <h3>30%</h3>
+                                    <span>Discount</span>
+                                    </div>
+                                </div>
+                                <div className="product-img">
+                                    <img src="assets/img/inner-page/sb-banner-img.png" alt="" />
+                                </div>
+                                </div> */}
             </div>
-
-            {/* <div>
-              <h4 className="tw-font-bold">Related News</h4>
-              <hr className="tw-my-2" />
-              <BlogRecent
-                blogs={detailData?.article_categories?.data}
-                disableHeading={true}
-              />
-            </div> */}
           </div>
         </div>
-
-        {/* <NewsFeeds /> */}
-      </section>
-
-      {/* <div className="container">
+      </div>
+      <Ad728x90 dataAdSlot="5962627056" />
+      <div className="container">
         <div className="row g-2 mt-3 white_bg_wrapper ">
           <h4 className="fw-bold mt-2 box_header mb-3">Popular News</h4>
 
           {popularArticles?.map((reviewItem, index) => {
+            // Adjust index to account for the first item displayed separately
 
             return (
               <React.Fragment key={`review`}>
@@ -571,7 +495,7 @@ function BlogDetailsPage({
                 >
                   <div className="review-card">
                     <div className="review-img list-article">
-                      <Link legacyBehavior href={`/review/${reviewItem.slug}`}>
+                      <Link legacyBehavior href={`/reviews/${reviewItem.slug}`}>
                         <a>
                           <div className="position-relative imageContainer">
                             <Image
@@ -594,6 +518,7 @@ function BlogDetailsPage({
                       <h6 className="mt-2 mb-1 blog_title_list_truncate">
                         {reviewItem.title}
                       </h6>
+                      {/* Similar details for rest of the articles */}
                     </div>
                   </div>
                 </div>
@@ -601,12 +526,8 @@ function BlogDetailsPage({
             );
           })}
         </div>
-      </div> */}
-      {/* <Ad728x90 dataAdSlot="5962627056" /> */}
-      <div className="tw-container tw-mx-auto">
-        {" "}
-        <SeoLinksFilter />
       </div>
+      {/* <Ad728x90 dataAdSlot="5962627056" /> */}
     </MainLayout>
   );
 }
@@ -621,6 +542,8 @@ export async function getServerSideProps(context) {
 
   const apolloClient = createApolloClient();
   // Fetch data based on the slug (e.g., from a database)
+  
+  
 
   try {
     const { data } = await apolloClient.query({
@@ -694,7 +617,7 @@ export async function getServerSideProps(context) {
       query: gql`
         query {
           articles(
-            filters: { article_type: { type: { eq: "News" } } }
+            filters: { article_type: { type: { eq: "review" } } }
             pagination: { limit: 6 }
             sort: "createdAt:desc"
           ) {
@@ -703,7 +626,6 @@ export async function getServerSideProps(context) {
                 title
                 slug
                 content
-                summary
                 createdAt
                 author {
                   data {

@@ -2096,7 +2096,7 @@ input[type="color"]:focus,
   margin: 40px 0px;
   width: 100% !important;
   text-align: center;
-  border-radius: 20px !important;
+  object-fit: contain;
 }
 .article-content p {
   line-height: 30px !important;
@@ -2567,7 +2567,6 @@ input[type="color"]:focus,
   .article-content img {
     margin: 20px 0px;
     width: 100% !important;
-    border-radius: 10px;
     height: auto !important;
     object-fit: contain;
     text-align: center;
