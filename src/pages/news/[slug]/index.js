@@ -264,16 +264,23 @@ function BlogDetailsPage({
     return renderedContent;
   };
 
+  function stripHtmlTags(htmlContent) {
+    return htmlContent.replace(/<\/?[^>]+>/gi, '');
+  }
+  
   function countWords(htmlContent) {
-    const textContent = new DOMParser().parseFromString(
-      htmlContent,
-      "text/html"
-    ).body.textContent;
+    const textContent = stripHtmlTags(htmlContent);
     const words = textContent.split(/\s+/);
     return words.length;
   }
-
-  const wordCount = countWords(article?.content);
+  
+  function countCharacters(htmlContent) {
+    const textContent = stripHtmlTags(htmlContent);
+    return textContent.length;
+  }
+  
+  // Example usage
+  const articleContent = article?.content;  
 
   function estimateReadTime(htmlContent) {
     const wordCount = countWords(htmlContent);
