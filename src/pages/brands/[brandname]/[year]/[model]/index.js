@@ -35,6 +35,8 @@ import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
+
+  console.log(currentmodel,"currentmodel");
   // const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const [currentURL, setCurrentURL] = useState("");
 
@@ -452,7 +454,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             Rate Now
           </span> */}
           <div className="md:tw-my-3 tw-my-3">
-            <h2 >
+            <h2>
               <CarPriceRange />
             </h2>
             <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
@@ -760,9 +762,11 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
           </section>
         )}
 
-        <div id="key-features">
-          <KeyFeatures data={currentmodel.key_features} />
-        </div>
+        {currentmodel?.key_features?.length > 0 && (
+          <div id="key-features">
+            <KeyFeatures data={currentmodel.key_features} />
+          </div>
+        )}
 
         {/* {gallery && (
                 <>
@@ -844,6 +848,13 @@ export async function getServerSideProps(context) {
     const currentmodel = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
     );
+
+    if (!currentmodel || currentmodel?.data?.data?.model?.trims.length  === 0) {
+      return {
+        notFound: true, // This will automatically render the 404 page
+      };
+    }
+  
 
     return {
       props: {

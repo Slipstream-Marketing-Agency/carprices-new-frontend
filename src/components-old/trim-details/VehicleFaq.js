@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AccordionFaq from "../common/AccordionFaq";
 import { formatNumberWithCommas } from "@/src/utils/formatNumber";
 
@@ -17,8 +17,6 @@ export default function VehicleFaq({ trim }) {
   //     return "Unknown";
   //   }
   // }
-
-  
 
   const faq = [
     {
@@ -110,7 +108,13 @@ export default function VehicleFaq({ trim }) {
     {
       question: ` What are the exterior dimensions of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?
       `,
-      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} has dimensions of ${formatNumberWithCommas(trim?.length)}mm length, ${formatNumberWithCommas(trim?.width)}mm width, and ${formatNumberWithCommas(trim?.height)}mm height.
+      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${
+        trim?.name
+      } has dimensions of ${formatNumberWithCommas(
+        trim?.length
+      )}mm length, ${formatNumberWithCommas(
+        trim?.width
+      )}mm width, and ${formatNumberWithCommas(trim?.height)}mm height.
       `,
       id: 7,
       condition: true,
@@ -149,24 +153,71 @@ export default function VehicleFaq({ trim }) {
       condition: true,
     },
   ];
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
   return (
     <div id="faq" className="my-3">
-      <div className="white_bg_wrapper mt-3">
-    
-        <h2 className={`w-100 fw-bold`}>
-          {trim?.year} {trim?.brand} {trim?.model} {trim?.name} FAQs
+      <>
+        <h2 className="tw-font-semibold tw-mb-5">
+          FAQs (Frequently Asked Questions) on {trim?.year} {trim?.brand}{" "}
+          {trim?.model} {trim?.name}
         </h2>
-        <hr className="my-2 heading-bottom mb-3" />
-        {faq.map((item, index) => (
-          <div key={index}>
-            <AccordionFaq
-              question={item.question}
-              answer={item.answer}
-              condition={item?.condition}
-            />
+        <div className="tw-shadow-lg md:tw-p-10 tw-rounded-2xl" id="faqs">
+          <div className="tw-w-full  tw-mx-auto tw-space-y-2 ">
+            {faq.map((item, index) => (
+              <>
+                {item.condition && (
+                  <div key={index} className="tw-border tw-rounded tw-bg-white">
+                    <button
+                      onClick={() => toggleAccordion(index)}
+                      className="tw-text-xl tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
+                    >
+                      <span
+                        className={`${
+                          activeIndex === index ? "tw-text-blue-700" : ""
+                        }`}
+                      >
+                        {item.question}
+                      </span>
+                      <svg
+                        className={`tw-w-6 tw-h-6 tw-transform ${
+                          activeIndex === index
+                            ? "tw-rotate-180 tw-text-blue-700"
+                            : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    <div
+                      className={`tw-overflow-hidden tw-transition-[max-height] tw-duration-500 ${
+                        activeIndex === index
+                          ? "tw-max-h-96 tw-p-0"
+                          : "tw-max-h-0 tw-p-0"
+                      }`}
+                    >
+                      <p className="tw-text-gray-700 tw-p-4">{item.answer}</p>
+                    </div>
+                  </div>
+                )}
+              </>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      </>
     </div>
   );
 }

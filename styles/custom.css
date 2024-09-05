@@ -9,8 +9,8 @@
   font-size: 12px !important;
 }
 
-.text-primary{
-  color: var(--primary)
+.text-primary {
+  color: var(--primary);
 }
 @media (max-width: 1280px) {
   .container,
@@ -269,7 +269,6 @@ button:focus {
   width: 100%;
   overflow: hidden;
 }
-
 
 .modal-body {
   overflow-y: scroll;
@@ -2094,13 +2093,17 @@ input[type="color"]:focus,
 }
 
 .article-content img {
-  margin: 10px 0px;
+  margin: 40px 0px;
   width: 100% !important;
-  border-radius: 10px;
-  height: 300px !important;
-  object-fit: contain;
   text-align: center;
-  border-radius: 10px !important;
+  border-radius: 20px !important;
+}
+.article-content p {
+  line-height: 30px !important;
+}
+
+.article-content li {
+  line-height: 30px !important;
 }
 
 .mainarticle img {
@@ -2562,7 +2565,7 @@ input[type="color"]:focus,
   }
 
   .article-content img {
-    margin: 13px 0px;
+    margin: 20px 0px;
     width: 100% !important;
     border-radius: 10px;
     height: auto !important;
@@ -3131,8 +3134,6 @@ a,
   }
 }
 
-
-
 .filter-sorting-sec span {
   list-style: none !important;
 }
@@ -3245,17 +3246,16 @@ a,
   display: none;
 }
 
-.banner-header{
+.banner-header {
   font-size: 32px !important;
 }
 
 @media (max-width: 768px) {
-
   .featured-news-card .slick-list {
     height: 600px !important;
   }
 
-  .banner-header{
+  .banner-header {
     font-size: 20px !important;
   }
 }
@@ -3264,10 +3264,9 @@ a,
   width: 5px !important;
   height: 8px !important;
 }
-.loan-disclaimer{
+.loan-disclaimer {
   font-size: 10px !important;
 }
-
 
 .video-container {
   position: relative;
@@ -3286,34 +3285,32 @@ a,
   transform: translate(-50%, -50%);
 }
 
-
-
-.car-filter-card h3{
+.car-filter-card h3 {
   font-size: 15px !important;
 }
 
-.car-filter-card h4{
+.car-filter-card h4 {
   font-size: 20px !important;
 }
 
-.car-filter-card p{
+.car-filter-card p {
   font-size: 24px !important;
 }
 
-.car-filter-card-spec  .spec-head{
+.car-filter-card-spec .spec-head {
   font-size: 13px;
 }
 
-.car-filter-card-spec .spec-value{
+.car-filter-card-spec .spec-value {
   font-size: 16px;
   margin-top: 4px;
 }
 
-.primary-delete{
-  color: #FF541E;
+.primary-delete {
+  color: #ff541e;
 }
 
-.emi-text{
+.emi-text {
   font-size: 12px;
 }
 
@@ -3325,28 +3322,25 @@ a,
   height: 95% !important;
 }
 
-
-.car-detail-slider .slick-dots{
+.car-detail-slider .slick-dots {
   display: flex !important;
   gap: 70px;
   overflow: scroll;
 }
 
-.car-detail-main-slider .slick-track{
-  height: 290px  !important;
+.car-detail-main-slider .slick-track {
+  height: 290px !important;
 }
 
-.car-detail-main-slider .slick-list{
-  height: 360px  !important;
-
+.car-detail-main-slider .slick-list {
+  height: 360px !important;
 }
-@media (max-width:728px){
-  .car-detail-main-slider .slick-list{
-    height: 250px  !important;
-  
+@media (max-width: 728px) {
+  .car-detail-main-slider .slick-list {
+    height: 250px !important;
   }
 }
 
-
-
-.car-detail-main-slider .slick-list{padding: 0px !important;}
+.car-detail-main-slider .slick-list {
+  padding: 0px !important;
+}

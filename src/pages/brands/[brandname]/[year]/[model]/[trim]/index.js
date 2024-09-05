@@ -23,6 +23,16 @@ import VehicleReview from "@/src/components-old/trim-details/VehicleReview";
 import VehicleFaq from "@/src/components-old/trim-details/VehicleFaq";
 import Price from "@/src/utils/Price";
 import CarTestDriveForm from "@/src/components-old/CarTestDriveForm";
+import Slider from "react-slick/lib/slider";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import {
   Button,
@@ -32,12 +42,17 @@ import {
   DialogTitle,
   ToggleButton,
   ToggleButtonGroup,
-  Slider,
   Box,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import BuyForm from "@/src/components-old/BuyForm";
 import LoanEnquireForm from "@/src/components-old/LoanEnquireForm";
+import Link from "next/link";
+import PrimaryButton from "@/src/components/buttons/PrimaryButton";
+import OutlinedButton from "@/src/components/buttons/OutlinedButton";
+import KeyFeatures from "@/src/components-old/details/KeyFeatures";
+import VariantsListing from "@/src/components/variant/VariantListing";
+import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {
@@ -69,7 +84,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
-  console.log(trimSlug,"trimSlugtrimSlugtrimSlug");
+  console.log(trimSlug, "trimSlugtrimSlugtrimSlug");
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
   const [isSticky, setIsSticky] = useState(false);
@@ -200,6 +215,82 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
   const handleBuyClose = () => setBuyOpen(false);
   const handleLoanClose = () => setLoanOpen(false);
 
+  const [sliderRef, setSliderRef] = useState(null);
+
+  const mainSettings = {
+    dots: false,
+    dotsClass: "slick-dots slick-thumb",
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    ref: (slider) => setSliderRef(slider),
+    arrows: false,
+  };
+
+  const thumbSettings = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    asNavFor: sliderRef,
+    vertical: true, // Enable vertical scrolling
+    verticalSwiping: true, // Enable vertical swiping
+    focusOnSelect: true,
+    swipeToSlide: true,
+    infinite: false,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 768, // at 768px screen width
+        settings: {
+          vertical: false, // Horizontal scrolling on mobile
+          verticalSwiping: false,
+        },
+      },
+      {
+        breakpoint: 1024, // at 1024px and above screen width
+        settings: {
+          vertical: true, // Vertical scrolling on desktop
+          verticalSwiping: true,
+        },
+      },
+    ],
+  };
+
+  const [selectedTrim, setSelectedTrim] = React.useState("");
+
+  useEffect(() => {
+    // Get the current trim from the URL
+    const { trim } = router.query;
+    if (trim) {
+      setSelectedTrim(trim);
+    }
+  }, [router.query]);
+
+  const handleChange = (event) => {
+    const selectedSlug = event.target.value;
+    setSelectedTrim(selectedSlug);
+
+    if (selectedSlug) {
+      const { brandname, year, model } = router.query;
+      // Navigate to the new URL with the updated trim
+      router.push(`/brands/${brandname}/${year}/${model}/${selectedSlug}`);
+    }
+  };
+
+  console.log(trimData, "trimDatatrimData");
+
+  const [activeLink, setActiveLink] = useState("#overview");
+
+  const handleLinkClick = (href) => {
+    setActiveLink(href);
+  };
+
+  const modelslug = router.query.model;
+  const brandslug = router.query.brandname;
+  const trimslug = router.query.trim;
+
+  console.log(modelslug, brandslug, trimslug, "modelslug");
+
   return (
     <MainLayout
       pageMeta={{
@@ -221,130 +312,480 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         type: "Car Review Website",
       }}
     >
-      <div className="car-details-area mt-15 mb-15">
-        <div className="container">
-          <div className="row ">
-            <div className="col-lg-9">
-              <Ad728x90 dataAdSlot="5962627056" />
-              <div className="row trim-content  white_bg_wrapper">
-                <div className="col-lg-6 pe-3">
-                  <div className="single-item mb-50" id="car-img">
-                    <div className="car-img-area">
-                      <div
-                        className="tab-content mb-30 trim-content"
-                        id="myTab5Content"
-                      >
-                        <div
-                          className="tab-pane fade show active"
-                          id="exterior"
-                          role="tabpanel"
-                          aria-labelledby="exterior-tab"
-                        >
-                          <div className="product-img">
-                            <div className="slider-btn-group">
-                              <div className="product-stand-next swiper-arrow pb-1">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="24"
-                                  height="20"
-                                >
-                                  <path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z" />
-                                </svg>
-                              </div>
-                              <div className="product-stand-prev swiper-arrow pb-1">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="18"
-                                  height="20"
-                                >
-                                  <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
-                                </svg>
-                              </div>
-                            </div>
-                            <Swiper
-                              {...slideSetting}
-                              className="swiper product-img-slider"
-                            >
-                              <div className="swiper-wrapper">
-                                <SwiperSlide className="swiper-slide">
-                                  <Image
-                                    src={
-                                      trimData?.featuredImage === null
-                                        ? "/assets/img/car-placeholder.png"
-                                        : trimData?.featuredImage
-                                    }
-                                    alt="product image"
-                                    fill
-                                    className="object-contain"
-                                  />
-                                </SwiperSlide>
-                                {trimData?.galleryImages?.map((item, idx) => (
-                                  <SwiperSlide className="swiper-slide">
-                                    <Image
-                                      src={item}
-                                      alt="product image"
-                                      fill
-                                      className="object-contain"
-                                    />
-                                  </SwiperSlide>
-                                ))}
-                              </div>
-                            </Swiper>
-                          </div>
-                        </div>
-                      </div>
+      <div className="tw-grid tw-grid-cols-12 tw-gap-4 tw-mx-auto tw-container">
+        <div className="tw-col-span-12 lg:tw-col-span-5">
+          <div className="tw-grid tw-grid-cols-12 tw-gap-4">
+            <div className="tw-order-2 md:tw-order-1 md:tw-col-span-2 tw-col-span-12 md:tw-h-[333px]">
+              <Slider {...thumbSettings}>
+                <div>
+                  <Image
+                    src={
+                      trimData?.featuredImage === null
+                        ? "/assets/img/car-placeholder.png"
+                        : trimData?.featuredImage
+                    }
+                    alt="thumbnail image"
+                    width={80}
+                    height={80}
+                    className="tw-object-contain tw-w-20 tw-h-20 tw-rounded-[10px]"
+                  />
+                </div>
+                {trimData?.galleryImages?.map((item, index) => (
+                  <div key={index}>
+                    <Image
+                      src={
+                        item === null ? "/assets/img/car-placeholder.png" : item
+                      }
+                      alt={`thumbnail image ${index + 1}`}
+                      width={80}
+                      height={80}
+                      className="tw-object-cover tw-w-20 tw-h-20 tw-rounded-[10px]"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            <div className="tw-order-1 md:tw-order-2 md:tw-col-span-10 tw-col-span-12 tw-border-solid tw-border-[1px] tw-border-gray-300 tw-rounded-[30px] car-detail-main-slider  tw-p-0">
+              <Slider {...mainSettings} className="tw-h-full">
+                <div className="tw-flex tw-items-center">
+                  <Image
+                    src={
+                      trimData?.featuredImage === null
+                        ? "/assets/img/car-placeholder.png"
+                        : trimData?.featuredImage
+                    }
+                    alt="product image"
+                    width={800}
+                    height={6000}
+                    className="tw-object-contain tw-w-full md:tw-h-[360px] tw-h-[250px] tw-rounded-[30px]"
+                  />
+                </div>
+                {trimData?.galleryImages?.map((item, index) => (
+                  <div key={index} className="tw-flex tw-items-center">
+                    <Image
+                      src={
+                        item === null ? "/assets/img/car-placeholder.png" : item
+                      }
+                      alt={`product image ${index + 1}`}
+                      width={800}
+                      height={600}
+                      className="tw-object-cover tw-w-full md:tw-h-[360px] tw-h-[250px] tw-rounded-[30px]"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </div>
+
+        <div className="tw-col-span-12 lg:tw-col-span-6 md:tw-pl-10">
+          <div className="tw-relative">
+            <h1 className="tw-g tw-font-semibold tw-mb-1">
+              {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
+              {trimData?.name}
+            </h1>
+          </div>
+          {/* <span class="tw-inline-flex tw-items-center tw-rounded-full tw-bg-green-500 tw-px-2 tw-py-1 tw-text-xs tw-font-semibold tw-text-white tw-ring-1 tw-ring-inset tw-ring-green-600/20">
+            4.2 <StarIcon className="tw-text-[14px] tw-ml-1" />
+          </span>
+          <span className="tw-text-[14px] tw-mx-2">182 Ratings & Reviews</span>
+          <span className="tw-text-[14px] tw-font-semibold tw-underline">
+            Rate Now
+          </span> */}
+          <div className="md:tw-my-3 tw-my-3">
+            <h2>
+              <Price data={trimData.price} />
+            </h2>
+            <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
+              <Price
+                data={Math.round(
+                  ((trimData.price - trimData.price * (downPayment / 100)) *
+                    (interestRate / 100 / 12) *
+                    Math.pow(1 + interestRate / 100 / 12, years * 12)) /
+                    (Math.pow(1 + interestRate / 100 / 12, years * 12) - 1)
+                )}
+              />
+              /Monthly EMI*{" "}
+              <span className="tw-underline ">
+                <Link href="">Details</Link>
+              </span>
+            </p>
+          </div>
+
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel id="trim-select-label">Choose Trim</InputLabel>
+            <Select
+              labelId="trim-select-label"
+              id="trim-select"
+              value={selectedTrim}
+              onChange={handleChange}
+              IconComponent={ArrowDropDownIcon}
+              label="Choose Trim"
+              className="tw-flex tw-items-center tw-h-14 "
+              sx={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                minWidth: "300px",
+                "& .MuiSelect-select": {
+                  display: "flex",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    maxWidth: "300px",
+                  },
+                },
+              }}
+            >
+              {trimData?.relatedTrims?.map((trim, index) => (
+                <MenuItem key={index} value={trim.slug} className="tw-flex">
+                  <ListItemIcon>
+                    <img
+                      src={trim.featuredImage}
+                      alt={trim.name}
+                      style={{ width: "60px" }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={trim.name}
+                    className="tw-inline-flex tw-items-center tw-pl-4 tw-m-0"
+                  />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <div className="md:tw-my-5 tw-my-7">
+            <div className="tw-grid tw-grid-cols-3 tw-gap-4 md:tw-w-[70%]">
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {trimData?.fuelType === "Electric"
+                      ? "Motor Type"
+                      : "Engine Type"}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.fuelType === "Electric"
+                      ? trimData?.motor?.split(" ")[0]
+                      : `${(trimData?.displacement / 1000).toFixed(1)}L ${
+                          trimData?.engine
+                        }`}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.transmission}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.transmission}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.power} (hp)
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.power}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.torque} (Nm)
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.torque}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {t.seats}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.seatingCapacity}
+                  </h5>
+                </div>
+              </div>
+
+              <div className="tw-flex tw-items-center">
+                <div>
+                  <h6 className="tw-font-medium tw-mb-0 tw-text-gray-500">
+                    {trimData?.fuelType === "Electric"
+                      ? "Range"
+                      : "Fuel Efficiency"}
+                  </h6>
+                  <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
+                    {trimData?.fuelType === "Electric" &&
+                    trimData?.fuelConsumption === null &&
+                    trimData?.range !== 0
+                      ? trimData?.range
+                      : trimData?.fuelConsumption + "kmpl"}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="tw-flex md:tw-my-5 tw-my-7 tw-space-x-2">
+            <PrimaryButton label="Reserve Online" onClick={handleBuyOpen} />
+            <OutlinedButton label="Book a Test Drive" onClick={handleOpen} />
+          </div>
+        </div>
+      </div>
+
+      <div className=" tw-sticky tw-top-0">
+        <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
+          <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
+            <Link
+              href="#overview"
+              onClick={() => handleLinkClick("#overview")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#overview"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Overview
+            </Link>
+            <Link
+              href="#variants"
+              onClick={() => handleLinkClick("#variants")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#variants"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Variants
+            </Link>
+            <Link
+              href="#price"
+              onClick={() => handleLinkClick("#price")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#price"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Price
+            </Link>
+            <Link
+              href="#key-features"
+              onClick={() => handleLinkClick("#key-features")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#key-features"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Key Features
+            </Link>
+            <Link
+              href="#compare"
+              onClick={() => handleLinkClick("#compare")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#compare"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Compare
+            </Link>
+            <Link
+              href="#news"
+              onClick={() => handleLinkClick("#news")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#news"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              News
+            </Link>
+            <Link
+              href="#user-reviews"
+              onClick={() => handleLinkClick("#user-reviews")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#user-reviews"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              User Reviews
+            </Link>
+            <Link
+              href="#faq"
+              onClick={() => handleLinkClick("#faq")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#faq"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              FAQ
+            </Link>
+            <Link
+              href="#similar-cars"
+              onClick={() => handleLinkClick("#similar-cars")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
+                activeLink === "#similar-cars"
+                  ? "tw-border-b-blue-600 tw-text-black"
+                  : "tw-border-transparent tw-text-gray-500"
+              }`}
+            >
+              Similar Cars
+            </Link>
+          </div>
+        </nav>
+      </div>
+
+      <div
+        className="tw-container tw-mx-auto tw-grid tw-grid-cols-12"
+        id="overview"
+      >
+        <div className="md:tw-col-span-9 tw-col-span-12">
+          <TrimDescription trim={trimData} />
+          <Ad728x90 dataAdSlot="7369694604" />
+        </div>
+        <div className="md:tw-col-span-3 tw-col-span-12">
+          {/* <Ad300x600 dataAdSlot="3792539533" /> */}
+        </div>
+      </div>
+
+      {trimData?.key_features?.length > 0 && (
+        <div id="key-features" className="tw-container">
+          <KeyFeatures data={trimData?.key_features} />
+
+          <div className="tw-my-10">
+            <Ad728x90 dataAdSlot="5962627056" />
+          </div>
+        </div>
+      )}
+
+      <div id="vehicle-details" className="tw-container">
+        <DetailedSpecification trim={trimData} />
+      </div>
+      
+      <div className="tw-my-10">
+        <Ad728x90 dataAdSlot="5962627056" />
+      </div>
+      <div id="vehicle-details" className="tw-container">
+        <VehicleReview trim={trimData} />
+        <div className="tw-my-10">
+          <Ad728x90 dataAdSlot="5962627056" />
+        </div>
+        {trimData?.galleryImages?.length > 0 && (
+          <>
+            {" "}
+            <Ad728x90 dataAdSlot="5962627056" />
+            <VehicleGallery trim={trimData.galleryImages} />
+          </>
+        )}
+
+        <VehicleFaq trim={trimData} />
+      </div>
+
+      <div id="vehicle-details" className="tw-container">
+        <div className="tw-my-10">
+          <Ad728x90 dataAdSlot="5962627056" />
+        </div>
+        <VariantsListing
+          data={trimData}
+          brandslug={brandslug}
+          modelslug={modelslug}
+          trimslug={trimslug}
+        />
+      </div>
+      <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container tw-px-5 tw-my-10">
+            <div className="tw-flex tw-flex-col tw-w-full">
+              <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
+                <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
+                  <img
+                    src="/emi.jpg"
+                    alt=""
+                    className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
+                  />
+                  <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+
+                  <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
+                    <div>
+                      <h2 className="tw-text-white">
+                        Calculate Your Car Loan EMI
+                      </h2>
+                      <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                        Fill in the details and find out what the installment
+                        will be for your new car. Our car loan calculator is
+                        interactive and accurate.
+                      </p>
+                    </div>
+                    <div className="tw-flex tw-items-center tw-gap-2 md:tw-mt-10 tw-mt-3">
+                      <p className="tw-text-white tw-font-bold">
+                        Calculate Now
+                      </p>
+                      <span className="material-symbols-outlined tw-text-white">
+                        arrow_forward
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6">
-                  <div className="d-flex justify-content-between align-items-center position-relative">
-                    <h1 className="fw-bold mb-0">
-                      {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
-                      {trimData?.name}
-                    </h1>{" "}
-                  </div>
-                  <h2 className="fw-bold text-primary mb-2">
-                    <Price data={trimData.price} />
-                  </h2>
-
-                  <div className="tw-space-x-2 tw-mb-1 tw-ml-[-3px]">
-                    <Button
-                      variant="contained"
-                      color="success"
-                      onClick={handleBuyOpen}
-                    >
-                      <strong>Reserve Online</strong>
-                    </Button>
-                    <Button variant="outlined" onClick={handleOpen}>
-                      <strong>Book a Test Drive</strong>
-                    </Button>
-                  </div>
-                  <div className="d-flex gap-2 align-items-center w-100  py-1 rounded justify-content-start ">
-                    <p className="p-0 m-0 ">
-                      Monthly EMI starting from{" "}
-                      <strong>
-                        {" "}
-                        <Price
-                          data={Math.round(
-                            ((trimData.price -
-                              trimData.price * (downPayment / 100)) *
-                              (interestRate / 100 / 12) *
-                              Math.pow(
-                                1 + interestRate / 100 / 12,
-                                years * 12
-                              )) /
-                              (Math.pow(
-                                1 + interestRate / 100 / 12,
-                                years * 12
-                              ) -
-                                1)
-                          )}
-                        />
-                      </strong>
+              </Link>
+            </div>
+            <div className="tw-flex tw-flex-col tw-w-full">
+              <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
+                <img
+                  src="/car-value.jpg"
+                  alt=""
+                  className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
+                />
+                <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+                <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
+                  <div>
+                    <h2 className="tw-text-white">
+                      Find out the value of your current car
+                    </h2>
+                    <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                      Our car valuation calculator helps you find out what you
+                      can expect for your current car. Fill in the details and
+                      get an estimated current value for your used car.
                     </p>
                   </div>
 
-                  <div className="tw-mt-2 key_spec">
+                  <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
+                    <p className="tw-font-bold">Coming Soon</p>
+                    {/* <span className="material-symbols-outlined">
+                    arrow_forward
+                  </span> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <div className="tw-container tw-mx-auto">
+        {" "}
+        <SeoLinksFilter/>
+      </div>
+
+      <div className="car-details-area mt-15 mb-15">
+        {/* <div className="tw-mt-2 key_spec">
                     {trimData.price === null ? (
                       ""
                     ) : (
@@ -511,70 +952,38 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                         </Box>
                       </Box>
                     )}
-                  </div>
-                  <LoanEnquireForm
-                    carName={trimData?.name}
-                    brand={trimData?.brand}
-                    model={trimData?.model}
-                    year={trimData?.year}
-                    loanOpen={loanOpen}
-                    onClose={handleLoanClose}
-                  />
-                  <BuyForm
-                    carName={trimData?.name}
-                    brand={trimData?.brand}
-                    model={trimData?.model}
-                    year={trimData?.year}
-                    buyOpen={buyOpen}
-                    onClose={handleBuyClose}
-                  />
-                  <CarTestDriveForm
-                    carName={trimData?.name}
-                    brand={trimData?.brand}
-                    model={trimData?.model}
-                    year={trimData?.year}
-                    open={open}
-                    onClose={handleClose}
-                  />
-                </div>
-              </div>
-              <div
-                data-bs-spy="scroll"
-                data-bs-target="#navbar-example2"
-                data-bs-offset={0}
-                className="scrollspy-example"
-                tabIndex={0}
-              >
-                <div className="single-item" id="car-info">
-                  <KeySpec trim={trimData} />
-                </div>
-
-                <Ad728x90 dataAdSlot="5962627056" />
-
-                <TrimDescription trim={trimData} />
-                <Ad728x90 dataAdSlot="5962627056" />
-                <DetailedSpecification trim={trimData} />
-                {trimData?.galleryImages?.length > 0 && (
-                  <>
-                    {" "}
-                    <Ad728x90 dataAdSlot="5962627056" />
-                    <VehicleGallery trim={trimData.galleryImages} />
-                  </>
-                )}
-
-                <Ad728x90 dataAdSlot="5962627056" />
-                <VehicleReview trim={trimData} />
-                <Ad728x90 dataAdSlot="5962627056" />
-                <VehicleFaq trim={trimData} />
-              </div>
-            </div>
-            <div className="col-lg-3  ">
-              <div className="positionStickyAd">
-                <Ad300x600 />
-              </div>
-            </div>
-          </div>
-        </div>
+                  </div> */}
+        <LoanEnquireForm
+          carName={trimData?.name}
+          brand={trimData?.brand}
+          model={trimData?.model}
+          year={trimData?.year}
+          loanOpen={loanOpen}
+          onClose={handleLoanClose}
+        />
+        <BuyForm
+          carName={trimData?.name}
+          brand={trimData?.brand}
+          model={trimData?.model}
+          year={trimData?.year}
+          buyOpen={buyOpen}
+          onClose={handleBuyClose}
+        />
+        <CarTestDriveForm
+          carName={trimData?.name}
+          brand={trimData?.brand}
+          model={trimData?.model}
+          year={trimData?.year}
+          open={open}
+          onClose={handleClose}
+        />
+        <div
+          data-bs-spy="scroll"
+          data-bs-target="#navbar-example2"
+          data-bs-offset={0}
+          className="scrollspy-example"
+          tabIndex={0}
+        ></div>
       </div>
     </MainLayout>
   );
@@ -591,7 +1000,7 @@ export async function getServerSideProps(context) {
   let trimSlug = decodeURIComponent(context.params.trim);
 
   // Replace any spaces with '+'
-  trimSlug = trimSlug.replace(/ /g, '+');
+  trimSlug = trimSlug.replace(/ /g, "+");
 
   console.log(trimSlug, "Final trimSlug");
 
@@ -611,4 +1020,3 @@ export async function getServerSideProps(context) {
     };
   }
 }
-

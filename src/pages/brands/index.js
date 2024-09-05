@@ -6,7 +6,7 @@ import ProductSearch from "@/src/components-old/common/ProductSearch";
 import ProductCategory from "@/src/utils/ProductCategory";
 import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import Pagination from "@/src/utils/Pagination";
+import Pagination from "@/src/components/common/Pagination";
 
 
 

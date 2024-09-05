@@ -101,35 +101,38 @@ export default function ModelDescription({
 
   const outputString = `${safetyFeature}`;
 
-  const variableText = allTrims
-    .map((trim, index) => (
-      <Link
-        href={`/brands/${brand?.slug}/${trim.year}/${model?.slug}/${trim.slug}`}
-        key={trim.id}
-      >
-        <b>{trim.name}</b>
-      </Link>
-    ))
-    .reduce((acc, curr, index, array) => {
-      if (index === 0) {
-        // If it's the first item, just return it
-        return curr;
-      } else if (index === array.length - 1) {
-        // If it's the last item, prepend with 'and ' if there are more than one items
-        return (
-          <>
-            {acc} and {curr}
-          </>
-        );
-      } else {
-        // For all other items, append with ', '
-        return (
-          <>
-            {acc}, {curr}
-          </>
-        );
-      }
-    });
+  const variableText = allTrims.length > 0 
+  ? allTrims
+      .map((trim, index) => (
+        <Link
+          href={`/brands/${brand?.slug}/${trim.year}/${model?.slug}/${trim.slug}`}
+          key={trim.id}
+        >
+          <b>{trim.name}</b>
+        </Link>
+      ))
+      .reduce((acc, curr, index, array) => {
+        if (index === 0) {
+          // If it's the first item, just return it
+          return curr;
+        } else if (index === array.length - 1) {
+          // If it's the last item, prepend with 'and ' if there are more than one items
+          return (
+            <>
+              {acc} and {curr}
+            </>
+          );
+        } else {
+          // For all other items, append with ', '
+          return (
+            <>
+              {acc}, {curr}
+            </>
+          );
+        }
+      }, null) // Provide an initial value
+  : null;
+
 
   return (
     <>
