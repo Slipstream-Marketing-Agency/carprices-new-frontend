@@ -32,7 +32,7 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
         />
-        
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -49,6 +49,7 @@ export default function Document() {
             `,
           }}
         />
+        
         <noscript>
           <img
             height="1"
