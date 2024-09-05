@@ -386,7 +386,7 @@ function BlogDetailsPage({
               </h6>
               <div className="tw-flex tw-items-center tw-justify-between tw-font-semibold tw-mt-1">
                 <h2 className="tw-capitalize tw-text-lg sm:tw-text-xl">
-                  Latest Automotive News
+                  Latest Automotive Reviews
                 </h2>
                 <div className="sm:tw-mr-6 tw-text-xs sm:tw-text-sm">
                   View more
@@ -538,7 +538,7 @@ function BlogDetailsPage({
             <Ad300x600 dataAdSlot="3792539533" />
 
             <div>
-              <h4 className="tw-font-bold">Latest News</h4>
+              <h4 className="tw-font-bold">Latest Reviews</h4>
               <hr className="tw-my-2" />
               <BlogRecent blogs={recentBlog} disableHeading={true} />
             </div>
@@ -694,7 +694,7 @@ export async function getServerSideProps(context) {
       query: gql`
         query {
           articles(
-            filters: { article_type: { type: { eq: "News" } } }
+            filters: { article_type: { type: { eq: "Review" } } }
             pagination: { limit: 6 }
             sort: "createdAt:desc"
           ) {
