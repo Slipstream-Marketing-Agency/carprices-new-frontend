@@ -863,33 +863,31 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    return {
-      notFound: true, // This will trigger Next.js to render the 404 page
-    };
+    console.error('Error fetching model data:', error);
 
-    // if (error) {
-    //   try {
-    //     let redirectModel = await axios.get(
-    //       process.env.NEXT_PUBLIC_API_URL_OLD + "model/old-slug/" + modelSlug
-    //     );
-    //     return {
-    //       redirect: {
-    //         permanent: true,
-    //         destination: `/brands/${brandname}/${year}/${redirectModel.data.model.slug}`,
-    //       },
-    //       props: {},
-    //     };
-    //   } catch (error) {
-    //     if (error.response && error.response.status !== 200) {
-    //       return {
-    //         notFound: true, // Treat non-200 responses as 404 errors
-    //       };
-    //     }
-    //   }
-    // } else {
-    //   return {
-    //     notFound: true, // Treat non-200 responses as 404 errors
-    //   };
-    // }
+    if (error.response && error.response.status === 404) {
+      try {
+        // Attempt to fetch a redirect model
+        const redirectModel = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}model/old-slug/${modelSlug}`
+        );
+
+        return {
+          redirect: {
+            permanent: false,
+            destination: `/brands/${brandname}/${year}/${redirectModel.data.model.slug}`,
+          },
+          props: {},
+        };
+      } catch (redirectError) {
+        console.error('Error fetching redirect model:', redirectError);
+      }
+    }
+
+    // If all else fails, return 404
+    return {
+      notFound: true,
+    };
   }
 }
+
