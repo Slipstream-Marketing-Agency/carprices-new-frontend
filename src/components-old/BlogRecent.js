@@ -12,46 +12,35 @@ export default function BlogRecent({
 }) {
   return (
     <>
-      {" "}
       {blogs && (
-        <div
-          className={` ${disableMarginTop ? "" : "mt-4"} ${
-            disableBorder ? "" : "border"
-          } `}
-        >
-          {disableHeading ? "" : <h5 className="text-bold mb-4">{heading}</h5>}
-          <div className="cursorPointer">
-            {blogs?.map((blog) => (
-              <Link
-                className="cursorPointer"
-                legacyBehavior
-                href={`/news/${blog?.attributes?.slug}`}
-                key={blog?.id}
-              >
-                <div className="fs-6 blog_wrapper px-2 py-1">
-                  <div className="d-flex align-items-start gap-2">
-                    <div className="latest_listing">
-                      <Image
-                        src={
-                          blog?.attributes?.coverImage?.data?.attributes?.url ||
-                          altImage
-                        }
-                        width={100}
-                        height={100}
-                        className="h-100 img-no-max-width"
-                      />
-                    </div>
-                    <small className="text-bold blogFont  me-4">{`${
-                      blog?.attributes?.title?.length > 20
-                        ? `${blog?.attributes?.title?.slice(0, 50)}... `
-                        : `${blog?.attributes?.title}`
-                    }`}</small>
-                  </div>
-                  
+        <div className="tw-cursor-pointer">
+          {blogs?.map((blog) => (
+            <Link
+              legacyBehavior
+              href={`/news/${blog?.attributes?.slug}`}
+              key={blog?.id}
+            >
+              <div className="tw-w-full">
+                <div className="tw-flex tw-my-2">
+                  <Image
+                    src={
+                      blog?.attributes?.coverImage?.data?.attributes?.url ||
+                      altImage
+                    }
+                    width={40}
+                    height={40}
+                    className="tw-object-cover"
+                  />
+                  <p className="tw-text-sm tw-mx-2  tw-text-gray-600 tw-line-clamp-2">{`${
+                    blog?.attributes?.title?.length > 20
+                      ? `${blog?.attributes?.title?.slice(0, 50)}... `
+                      : `${blog?.attributes?.title}`
+                  }`}</p>
                 </div>
-              </Link>
-            ))}
-          </div>
+                <hr className="tw-my-2" />
+              </div>
+            </Link>
+          ))}
         </div>
       )}
     </>

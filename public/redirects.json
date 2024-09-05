@@ -1,5 +1,13 @@
 [
   {
+    "id": 2733,
+    "from": "/news/2025-Nissan-Patrol-launch-UAE",
+    "to": "/news/2025-nissan-patrol-launch-uae",
+    "type": "moved_permanently_301",
+    "createdAt": "2024-09-04T04:39:06.379Z",
+    "updatedAt": "2024-09-04T04:39:06.379Z"
+  },
+  {
     "id": 2731,
     "from": "/brands/borgward/2024/bx7/2.0t-fwd-base-(5-seater)",
     "to": "/brands/borgward",

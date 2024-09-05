@@ -4197,6 +4197,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/nissan/2025/patrol</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/baic/2022/x7-suv</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -4438,6 +4443,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/toyota/2020/land-cruiser-pick-up</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/suzuki/2025/ertiga</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
