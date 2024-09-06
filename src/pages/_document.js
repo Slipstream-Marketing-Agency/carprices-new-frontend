@@ -1,8 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
-
-
 export default function Document() {
   return (
     <Html>
@@ -49,12 +47,12 @@ export default function Document() {
             `,
           }}
         />
-        
+
         <noscript>
           <img
             height="1"
             width="1"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1194042761803181&ev=PageView&noscript=1"
           />
         </noscript>
