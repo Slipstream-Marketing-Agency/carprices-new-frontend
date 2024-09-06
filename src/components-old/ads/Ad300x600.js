@@ -1,29 +1,24 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-export default function Ad300x600(props) {
-  const router = useRouter()
-
-  useEffect(() => {
-
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    }
-
-    catch (e) {
-
-    }
-
-  }, [router.query]);
-
+import Image from "next/image";
+import Link from "next/link";
+export default function Ad300x600({ dataAdSlot }) {
+  const url = dataAdSlot === 'corvette' ? "https://bit.ly/3VW1VZu" : dataAdSlot === 'blazer' ? "https://bit.ly/3zixsMz" : "https://bit.ly/4cyUAEN";
   return (
     <div className="Ad300x600">
-
-        <ins className="adsbygoogle responsive_vertical_ad_desktop"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4857144107996534"
-          data-ad-slot={props?.dataAdSlot}
-        >
-        </ins>
+      <Link href={url}>
+        <Image
+          // src={"/ads/Tahoe/300X600-TAHOE.jpg"}
+          src={dataAdSlot === 'corvette'
+            ? "/ads/Corvette/300x600-Corvette.jpg"
+            : dataAdSlot === 'blazer'
+              ? "/ads/Blazer/300x600-BLAZER.jpg"
+              : "/ads/Tahoe/300x600-Tahoe.jpg"}
+          alt="ad-image"
+          // layout="fill"
+          // objectFit="cover"
+          width={300}
+          height={600}
+        />
+      </Link>
     </div>
   )
 }

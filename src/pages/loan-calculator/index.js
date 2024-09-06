@@ -1,4 +1,4 @@
-import Ad728x90 from "@/src/components-old/ads/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads-old/Ad728x90";
 import MainLayout from "@/src/layout/MainLayout";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
@@ -9,7 +9,7 @@ import Price from "@/src/components-old/common/Price";
 import FeaturedImage from "@/src/components-old/featuredImage";
 import StarRating from "@/src/components-old/common/StarRating";
 import Image from "next/image";
-import Ad300x600 from "@/src/components-old/ads/Ad300x600";
+import Ad300x600 from "@/src/components-old/ads-old/Ad300x600";
 import axios from "axios";
 
 function loanCalculator() {
