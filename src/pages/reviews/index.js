@@ -112,7 +112,7 @@ function BlogStandardPage() {
               {articles.slice(0, 1).map((article, index) => (
                 <div>
                   <Link
-                    href={`/review/${article?.slug}`}
+                    href={`/reviews/${article?.slug}`}
                     key={article?.id}
                     className="tw-flex  tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl md:tw-min-h-[500px] tw-min-h-[200px]"
                     style={{
@@ -133,7 +133,7 @@ function BlogStandardPage() {
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/review/${article?.slug}`} key={article?.id}>
+                  <Link href={`/reviews/${article?.slug}`} key={article?.id}>
                     <div className="md:tw-hidden tw-relative tw-mt-3">
                       <div className="md:tw-px-6 tw-px-2">
                         <h2 className="tw-text-4xl tw-line-clamp-2 md:tw-leading-none tw-leading-6">
@@ -152,7 +152,7 @@ function BlogStandardPage() {
                 {articles.slice(1, 10).map((article, index) => (
                   <Link
                     legacyBehavior
-                    href={`/review/${article.slug}`}
+                    href={`/reviews/${article.slug}`}
                     key={article?.id}
                   >
                     <div
@@ -194,7 +194,7 @@ function BlogStandardPage() {
                           </div>{" "}
                           <Link
                             legacyBehavior
-                            href={`/review/${article?.slug}`}
+                            href={`/reviews/${article?.slug}`}
                             key={article?.id}
                           >
                             <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
@@ -235,7 +235,7 @@ function BlogStandardPage() {
                 {articlesThisWeek?.map((blog) => (
                   <Link
                     legacyBehavior
-                    href={`/review/${blog?.slug}`}
+                    href={`/reviews/${blog?.slug}`}
                     key={blog?.id}
                   >
                     <div className="tw-w-full">
@@ -282,7 +282,7 @@ function BlogStandardPage() {
             popularArticles.map((article, index) => (
               <Link
                 legacyBehavior
-                href={`/review/${article.slug}`}
+                href={`/reviews/${article.slug}`}
                 key={article?.id}
               >
                 <div
@@ -322,7 +322,7 @@ function BlogStandardPage() {
                       </div>{" "}
                       <Link
                         legacyBehavior
-                        href={`/review/${article?.slug}`}
+                        href={`/reviews/${article?.slug}`}
                         key={article?.id}
                       >
                         <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
