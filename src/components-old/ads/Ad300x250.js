@@ -4,15 +4,16 @@ export default function Ad300X250() {
   return (
     <div className="Ad300X250">
       <Link href="https://bit.ly/3zixsMz">
-        <Image src={"ads/Blazer/300X250-Blazer.jpg"}
+        <Image
+          src={"https://cdn.carprices.ae/assets/300x250_Blazer_757e816cd3.jpg"}
           alt="ad-image1"
           width={300}
           height={250}
-        // layout="fill"
-        objectFit="cover"
-        layout="responsive"
+          // layout="fill"
+          objectFit="cover"
+          layout="responsive"
         />
       </Link>
     </div>
-  )
+  );
 }
