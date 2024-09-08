@@ -674,10 +674,10 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             mainTrim={mainTrim}
             getTransmissionType={getTransmissionType}
           />
-          <Ad728x90 dataAdSlot="7369694604" />
+          <Ad728x90 dataAdSlot={"tahoe"} />
         </div>
         <div className="md:tw-col-span-3 tw-col-span-12">
-          <Ad300x600 dataAdSlot="3792539533" />
+          <Ad300x600 dataAdSlot={"blazer"} />
         </div>
       </div>
       <div className="tw-container tw-mx-auto tw-mt-10" id="variants">
@@ -700,13 +700,12 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
           <div className="md:tw-col-span-9 tw-col-span-12">
             <OldModel model={oldModel} />
             <div className="tw-mt-14">
-              {" "}
-              <Ad728x90 dataAdSlot="7369694604" />
+              <Ad728x90 dataAdSlot={"blazer"} />
             </div>
           </div>
           <div className="md:tw-col-span-3 tw-col-span-12">
             {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-            <Ad300x600 dataAdSlot="3792539533" />
+            <Ad300x600 dataAdSlot={"corvette"} />
           </div>
         </div>
 
@@ -757,7 +756,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               </div>
             </div>
             <div className="md:tw-col-span-3 tw-col-span-12">
-              <Ad300x600 dataAdSlot="3792539533" />
+              <Ad300x600 dataAdSlot={"tahoe"} />
             </div>
           </section>
         )}

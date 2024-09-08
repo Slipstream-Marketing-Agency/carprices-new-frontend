@@ -1,28 +1,19 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
-
-export default function Ad300x250(props) {
-  const router = useRouter()
-
-  useEffect(() => {
-
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    }
-
-    catch (e) {
-
-    }
-
-  }, [router.query]);
+import Image from "next/image";
+import Link from "next/link";
+export default function Ad300X250() {
   return (
-    <div className="Ad300x250">
-        <ins className="adsbygoogle responsive_desktop_square_300x250"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4857144107996534"
-          data-ad-slot={props?.dataAdSlot}
-        >
-        </ins>
+    <div className="Ad300X250">
+      <Link href="https://bit.ly/3zixsMz">
+        <Image
+          src={"https://cdn.carprices.ae/assets/300x250_Blazer_757e816cd3.jpg"}
+          alt="ad-image1"
+          width={300}
+          height={250}
+          // layout="fill"
+          objectFit="cover"
+          layout="responsive"
+        />
+      </Link>
     </div>
-  )
+  );
 }
