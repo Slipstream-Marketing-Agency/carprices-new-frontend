@@ -26,7 +26,7 @@ function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
 
       <ProductCategory brands={brands} />
       <Pagination currentPage={currentPage} totalPages={totalPages} />
-      <Ad728x90 dataAdSlot="5962627056" />
+      <Ad728x90 dataAdSlot={"tahoe"} />
     </MainLayout>
   );
 }

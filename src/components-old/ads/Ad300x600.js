@@ -1,29 +1,31 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-export default function Ad300x600(props) {
-  const router = useRouter()
-
-  useEffect(() => {
-
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    }
-
-    catch (e) {
-
-    }
-
-  }, [router.query]);
-
+import Image from "next/image";
+import Link from "next/link";
+export default function Ad300x600({ dataAdSlot }) {
+  const url =
+    dataAdSlot === "corvette"
+      ? "https://bit.ly/3VW1VZu"
+      : dataAdSlot === "blazer"
+      ? "https://bit.ly/3zixsMz"
+      : "https://bit.ly/4cyUAEN";
   return (
     <div className="Ad300x600">
-
-        <ins className="adsbygoogle responsive_vertical_ad_desktop"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-4857144107996534"
-          data-ad-slot={props?.dataAdSlot}
-        >
-        </ins>
+      <Link href={url}>
+        <Image
+          // src={"/ads/Tahoe/300X600-TAHOE.jpg"}
+          src={
+            dataAdSlot === "corvette"
+              ? "https://cdn.carprices.ae/assets/300x600_Corvette_f392c8f6cb.jpg"
+              : dataAdSlot === "blazer"
+              ? "https://cdn.carprices.ae/assets/300x600_BLAZER_de9c90f335.jpg"
+              : "https://cdn.carprices.ae/assets/300x600_TAHOE_980d12cd1b.jpg"
+          }
+          alt="ad-image"
+          // layout="fill"
+          // objectFit="cover"
+          width={300}
+          height={600}
+        />
+      </Link>
     </div>
-  )
+  );
 }
