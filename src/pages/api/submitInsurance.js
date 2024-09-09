@@ -32,11 +32,11 @@ const handler = async (req, res) => {
     const { formData, recaptchaToken } = req.body;
 
     // Validate reCAPTCHA token
-    const isValidCaptcha = await validateCaptcha(recaptchaToken);
-    if (!isValidCaptcha) {
-      console.log('Invalid reCAPTCHA');  // Log for debugging
-      return res.status(400).json({ message: 'Invalid reCAPTCHA' });
-    }
+    // const isValidCaptcha = await validateCaptcha(recaptchaToken);
+    // if (!isValidCaptcha) {
+    //   console.log('Invalid reCAPTCHA');  // Log for debugging
+    //   return res.status(400).json({ message: 'Invalid reCAPTCHA' });
+    // }
 
     try {
       // Map the frontend form data to Strapi's expected field names
