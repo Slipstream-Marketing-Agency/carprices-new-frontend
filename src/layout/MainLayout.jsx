@@ -22,7 +22,6 @@ import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import Ad970x250 from "../components-old/ads/Ad970x250";
 import Ad300x250 from "../components-old/ads/Ad300x250";
-import LoginModal from "../components/login-modal/LoginModal";
 import Image from "next/image";
 
 function MainLayout({ children, pageMeta }) {
@@ -38,7 +37,7 @@ function MainLayout({ children, pageMeta }) {
   };
 
   const isSearchCarsPage = router.asPath.startsWith("/search-cars");
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
 
   const currentYear = new Date().getFullYear();
 
@@ -51,7 +50,7 @@ function MainLayout({ children, pageMeta }) {
   const links = [
     { href: "/search-cars", label: "Search New Cars" },
     { href: "/compare-cars", label: "Compare New Cars" },
-    // { href: "/insurance-calculator", label: "Insurance Calculator" },
+    { href: "/insurance-calculator", label: "Insurance Calculator" },
     { href: "/loan-calculator", label: "Car Loan Calculator" },
     { href: "/news", label: "News" },
     { href: "/reviews", label: "Reviews" },
@@ -336,6 +335,7 @@ function MainLayout({ children, pageMeta }) {
   return (
     <>
       <Head>
+        {" "}
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -521,7 +521,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4">
-              <div className="tw-items-center tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
+              <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
                 <Link
                   href="/search-cars"
                   className="tw-justify-center tw-font-semibold"
@@ -534,12 +534,12 @@ function MainLayout({ children, pageMeta }) {
                 >
                   Compare New Cars
                 </Link>
-                {/* <Link
+                <Link
                   href="/insurance-calculator"
                   className="tw-justify-center tw-font-semibold"
                 >
                   Insurance Calculator
-                </Link> */}
+                </Link>
                 <Link
                   href="/loan-calculator"
                   className="tw-justify-center tw-font-semibold"
@@ -557,13 +557,6 @@ function MainLayout({ children, pageMeta }) {
                   className="tw-justify-center tw-font-semibold"
                 >
                   Reviews
-                </Link>
-                <Link
-                  href="/"
-                  onClick={()=> setIsLoginModalOpen(true)}
-                  className="tw-justify-center  tw-bg-black tw-text-white tw-p-2 tw-rounded-full tw-px-4"
-                >
-                  Sign In
                 </Link>
               </div>
             </div>
@@ -620,9 +613,9 @@ function MainLayout({ children, pageMeta }) {
                 <ListItem button component="a" href="/compare-cars">
                   <ListItemText primary="Compare New Cars" />
                 </ListItem>
-                {/* <ListItem button component="a" href="/insurance-calculator">
+                <ListItem button component="a" href="/insurance-calculator">
                   <ListItemText primary="Insurance Calculator" />
-                </ListItem> */}
+                </ListItem>
                 <ListItem button component="a" href="/loan-calculator">
                   <ListItemText primary="Car Loan Calculator" />
                 </ListItem>
@@ -859,7 +852,6 @@ function MainLayout({ children, pageMeta }) {
         )}
       </div>
       {/* <Breadcrumb /> */}
-      <LoginModal modal={isLoginModalOpen} setIsOpen={setIsLoginModalOpen}/>
       <main className="tw-mt-6"> {children}</main>
       {/* <Footer1 /> */}
 
