@@ -34,6 +34,7 @@ const handler = async (req, res) => {
     // Validate reCAPTCHA token
     const isValidCaptcha = await validateCaptcha(recaptchaToken);
     if (!isValidCaptcha) {
+      console.log('Invalid reCAPTCHA');  // Log for debugging
       return res.status(400).json({ message: 'Invalid reCAPTCHA' });
     }
 
@@ -68,17 +69,26 @@ const handler = async (req, res) => {
       const strapiResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}insurance-calculator-enquiries`, data, {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+          'Content-Type': 'application/json',  // Add content type
         },
       });
 
-      if (strapiResponse.status !== 200 && strapiResponse.status !== 201) {
-        throw new Error('Failed to store the form data in Strapi');
+      // Check for any non-2xx response
+      if (strapiResponse.status < 200 || strapiResponse.status >= 300) {
+        throw new Error(`Strapi response error: ${strapiResponse.status} ${strapiResponse.statusText}`);
       }
+
+      // Log the successful response
+      console.log('Strapi response:', strapiResponse.data);  // Add this for debugging
 
       // Send a success response
       res.status(200).json({ message: 'Insurance quote submitted successfully' });
     } catch (error) {
-      console.error('Error processing request:', error.message || error);
+      console.error('Error processing request:', {
+        message: error.message || 'Unknown error',
+        response: error.response ? error.response.data : 'No response data',
+        stack: error.stack || 'No stack trace',
+      });
       res.status(500).json({ message: 'Error occurred while processing your request' });
     }
   } else {
