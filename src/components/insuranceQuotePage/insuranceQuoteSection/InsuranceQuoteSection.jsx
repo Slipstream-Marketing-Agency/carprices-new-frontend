@@ -8,6 +8,7 @@ import Select from "react-select";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import * as Yup from "yup";
+import debounce from "lodash/debounce";
 
 function InsuranceQuote() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,32 @@ function InsuranceQuote() {
   const datePickerId = new Date().toISOString().split("T")[0];
   const [currentStep, setCurrentStep] = useState(0);
 
+  const [brandsList, setBrandsList] = useState([]);
+  const [modelsList, setModelsList] = useState([]);
+  const [yearList, setYearList] = useState([]);
+  const [trimList, setTrimList] = useState([]);
+
+  console.log(modelsList, "modelsList");
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_API_URL + "car-brands/names"
+        );
+        const brandsData = response.data.map((brand) => ({
+          value: brand.id,
+          label: brand.attributes.name,
+        }));
+        setBrandsList(brandsData);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+      }
+    };
+
+    fetchBrands();
+  }, []);
+
   useEffect(() => {
     const loadRecaptcha = () => {
       if (window.grecaptcha) {
@@ -63,9 +90,9 @@ function InsuranceQuote() {
     const formik = useFormik({
       initialValues: {
         car_year: "",
-        car_brand: "",
-        model: "",
-        variant: "",
+        car_brand: null, // Update: null by default
+        model: null,
+        variant: null,
         is_fully_comprehensive: "",
         brand_new_car: "",
         car_first_registered: "",
@@ -76,9 +103,9 @@ function InsuranceQuote() {
       },
       validationSchema: Yup.object({
         car_year: Yup.string().required("This field is required."),
-        car_brand: Yup.string().required("This field is required."),
-        model: Yup.string().required("This field is required."),
-        variant: Yup.string().required("This field is required."),
+        car_brand: Yup.object().nullable().required("This field is required."), // Ensure car_brand is an object (as expected by Select)
+        model: Yup.object().nullable().required("This field is required."),
+        variant: Yup.object().nullable().required("This field is required."),
         is_fully_comprehensive: Yup.string().required(
           "This field is required."
         ),
@@ -94,96 +121,153 @@ function InsuranceQuote() {
       },
     });
 
+    console.log(formik.values,"lllllllll");
+
+    const handleMakeChange = (selectedOption) => {
+
+      console.log(selectedOption,"selectedOption");
+      // Update: Ensure the selected option is passed as object
+      formik.setFieldValue("car_brand", selectedOption);
+      formik.setFieldValue("model", null); // Reset model on brand change
+      formik.setFieldValue("car_year", null); // Reset year on brand change
+      formik.setFieldValue("variant", null); // Reset variant on brand change
+      setModelsList([]);
+      setYearList([]);
+      setTrimList([]);
+
+      // Fetch models for the selected brand
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
+        )
+        .then((response) => {
+          const data = response.data.attributes.models.map((item) => ({
+            value: item.id,
+            label: item.name,
+          }));
+          setModelsList(data); // Populate the models list
+        })
+        .catch((error) => {
+          console.error("Error fetching models:", error);
+        });
+    };
+
+    const handleModelChange = (selectedOption) => {
+      formik.setFieldValue("model", selectedOption);
+      formik.setFieldValue("car_year", null); // Reset year on model change
+      formik.setFieldValue("variant", null); // Reset variant on model change
+      setYearList([]);
+      setTrimList([]);
+
+      // Fetch years for the selected model
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}car-models/${selectedOption.value}/years-under-trims`
+        )
+        .then((response) => {
+          const data = response.data.map((item) => ({
+            value: item,
+            label: item,
+          }));
+          setYearList(data); // Populate the year list
+        })
+        .catch((error) => {
+          console.error("Error fetching years:", error);
+        });
+    };
+
+    const handleYearChange = (selectedOption) => {
+      formik.setFieldValue("car_year", selectedOption);
+      formik.setFieldValue("variant", null); // Reset variant on year change
+      setTrimList([]);
+
+      // Fetch trims for the selected model and year
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}car-models/${formik.values.model.value}/trims/${selectedOption.value}`
+        )
+        .then((response) => {
+          const data = response.data.data.trims.map((item) => ({
+            value: item.name,
+            label: item.name,
+            price: item.price,
+            image: item.featuredImage,
+          }));
+          setTrimList(data); // Populate the trims list
+        })
+        .catch((error) => {
+          console.error("Error fetching trims:", error);
+        });
+    };
+
+    const handleVariantChange = (selectedOption) => {
+      formik.setFieldValue("variant", selectedOption);
+    };
+    console.log(formik.values.car_brand,"oooooooooooooooo")
+
     return (
       <form onSubmit={formik.handleSubmit}>
         <div className="tw-lg:m-0 sm:tw-my-6 sm:tw-p-2 tw-text-sm">
           <div className="tw-grid tw-gap-x-12 tw-gap-6 sm:tw-grid-cols-12">
+            {/* Car Brand Select */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
-              <p className="input-label 4xl:tw-text-sm">Car Year</p>
+              <p className="input-label 4xl:tw-text-sm">Car Brand</p>
               <Select
-                options={[
-                  { value: "2024", label: "2024" },
-                  { value: "2023", label: "2023" },
-                  { value: "2022", label: "2022" },
-                  { value: "2021", label: "2021" },
-                  { value: "2020", label: "2020" },
-                ]}
-                value={
-                  formik.values.car_year
-                    ? {
-                        value: formik.values.car_year,
-                        label: formik.values.car_year,
-                      }
-                    : null
-                }
-                onChange={(value) =>
-                  formik.setFieldValue("car_year", value.value)
-                }
-                placeholder={"Choose Year"}
-                isSearchable
-              />
-              {formik.errors.car_year ? (
-                <div className="tw-error-text">{formik.errors.car_year}</div>
-              ) : null}
-            </div>
-            <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block ">
-              <p className="input-label 4xl:tw-text-sm">Brand</p>
-              <Select
-                value={
-                  formik.values.car_brand
-                    ? {
-                        value: formik.values.car_brand,
-                        label: formik.values.car_brand,
-                      }
-                    : null
-                }
-                onChange={(value) =>
-                  formik.setFieldValue("car_brand", value.value)
-                }
-                options={carData?.optionsBrand}
+                value={formik.values.car_brand}
+                onChange={handleMakeChange}
+                options={brandsList}
                 placeholder={"Choose Brand"}
                 isSearchable
               />
-              {formik.errors.car_brand ? (
+              {formik.errors.car_brand && formik.touched.car_brand ? (
                 <div className="tw-error-text">{formik.errors.car_brand}</div>
               ) : null}
             </div>
+
+            {/* Model Select */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Model</p>
               <Select
-                value={
-                  formik.values.model
-                    ? { value: formik.values.model, label: formik.values.model }
-                    : null
-                }
-                onChange={(value) => formik.setFieldValue("model", value.value)}
-                options={carData?.optionsModels}
+                value={formik.values.model}
+                onChange={handleModelChange}
+                options={modelsList}
                 placeholder={"Choose Model"}
                 isSearchable
+                isDisabled={!formik.values.car_brand} // Disabled if no brand selected
               />
-              {formik.errors.model ? (
+              {formik.errors.model && formik.touched.model ? (
                 <div className="tw-error-text">{formik.errors.model}</div>
               ) : null}
             </div>
+
+            {/* Year Select */}
+            <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
+              <p className="input-label 4xl:tw-text-sm">Year</p>
+              <Select
+                value={formik.values.car_year}
+                onChange={handleYearChange}
+                options={yearList}
+                placeholder={"Choose Year"}
+                isSearchable
+                isDisabled={!formik.values.model} // Disabled if no model selected
+              />
+              {formik.errors.car_year && formik.touched.car_year ? (
+                <div className="tw-error-text">{formik.errors.car_year}</div>
+              ) : null}
+            </div>
+
+            {/* Variant Select */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Variant</p>
               <Select
-                value={
-                  formik.values.variant
-                    ? {
-                        value: formik.values.variant,
-                        label: formik.values.variant,
-                      }
-                    : null
-                }
-                onChange={(value) =>
-                  formik.setFieldValue("variant", value.value)
-                }
-                options={carData?.optionsVariants}
+                value={formik.values.variant}
+                onChange={handleVariantChange}
+                options={trimList}
                 placeholder={"Choose Variant"}
                 isSearchable
+                isDisabled={!formik.values.car_year} // Disabled if no year selected
               />
-              {formik.errors.variant ? (
+              {formik.errors.variant && formik.touched.variant ? (
                 <div className="tw-error-text">{formik.errors.variant}</div>
               ) : null}
             </div>
@@ -748,22 +832,22 @@ function InsuranceQuote() {
     setCurrentStep(0);
     try {
       setLoading(true);
-  
+
       // Get the reCAPTCHA token
       const token = await window.grecaptcha.execute(
         process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, // Use your site key
         { action: "submit" }
       );
-  
+
       // Log the token for debugging purposes
       console.log("reCAPTCHA token:", token);
-  
+
       // Send the form data along with the reCAPTCHA token to the API
       const response = await axios.post("/api/submitInsurance", {
         formData,
-        recaptchaToken: token,  // Include the reCAPTCHA token
+        recaptchaToken: token, // Include the reCAPTCHA token
       });
-  
+
       if (response.status === 200) {
         console.log("Form submitted successfully:", response);
         setIsOpen(true);
@@ -771,13 +855,14 @@ function InsuranceQuote() {
         console.error("Error submitting form:", response.status);
       }
     } catch (error) {
-      console.error("Error submitting form:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error submitting form:",
+        error.response ? error.response.data : error.message
+      );
     } finally {
       setLoading(false);
     }
   };
-  
-  
 
   const handleNextStep = (newData, final) => {
     setData((prev) => ({ ...prev, ...newData }));
