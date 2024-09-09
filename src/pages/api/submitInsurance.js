@@ -42,10 +42,10 @@ const handler = async (req, res) => {
       // Map the frontend form data to Strapi's expected field names
       const data = {
         data: {
-          year: formData.car_year,
-          brand: formData.car_brand,
-          model: formData.model,
-          variant: formData.variant,
+          year: formData.car_year.label,
+          brand: formData.car_brand.label,
+          model: formData.model.label,
+          variant: formData.variant.label,
           insuranceType: formData.insurance,
           is_the_current_policy_fully_comprehensive:
             formData.is_fully_comprehensive === "Yes", // Boolean mapping
