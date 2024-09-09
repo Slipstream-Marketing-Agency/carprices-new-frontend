@@ -1,29 +1,19 @@
-"use client"
-import { useState } from 'react';
 import Select from 'react-select';
-// // import { carData } from '@/app/mocks/mock';
-// const options = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' },
-// ];
 
-// selectedOptionBrand={selectedOptionBrand}
-// setSelectedOptionBrand={setSelectedOptionBrand}
-// options={carData.Brands}
-// placeholder={"Choose Brand"}
-
-export default function SelectComponent({selectedOption, setSelectedOption, selectOptions,placeholder}) {
-//   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption,"selected");
-
+export default function SelectComponent({
+  selectedOption,
+  setSelectedOption,
+  selectOptions,
+  placeholder
+}) {
   return (
     <div className='w-full'>
       <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
+        value={selectOptions.find(option => option.value === selectedOption)} // Make sure value is selected correctly
+        onChange={(option) => setSelectedOption(option)}  // Pass selected option to parent
         placeholder={placeholder}
         options={selectOptions}
+        isSearchable
       />
     </div>
   );

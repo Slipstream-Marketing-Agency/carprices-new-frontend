@@ -1,4 +1,4 @@
-import Ad728x90 from "@/src/components-old/ads-old/Ad728x90";
+import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import MainLayout from "@/src/layout/MainLayout";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
@@ -9,11 +9,10 @@ import Price from "@/src/components-old/common/Price";
 import FeaturedImage from "@/src/components-old/featuredImage";
 import StarRating from "@/src/components-old/common/StarRating";
 import Image from "next/image";
-import Ad300x600 from "@/src/components-old/ads-old/Ad300x600";
+import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import axios from "axios";
 
 function loanCalculator() {
-
   const [showCarAnimImage, setShowCarAnimImage] = useState(false);
   const [loanFilter, setLoanFilter] = useState({
     make: "",
@@ -23,8 +22,6 @@ function loanCalculator() {
     image: "", // Example image URL
   });
 
-  
-
   const [brandsList, setBrandsList] = useState([]);
 
   const [modelsList, setModelsList] = useState([]);
@@ -32,8 +29,6 @@ function loanCalculator() {
   const [yearList, setYearList] = useState([]);
 
   const [trimList, setTrimList] = useState([]);
-
-  
 
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -105,7 +100,6 @@ function loanCalculator() {
         `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
       )
       .then((response) => {
-        
         const data = response.data.attributes.models.map((item) => ({
           value: item.id,
           label: item.name,
@@ -177,7 +171,6 @@ function loanCalculator() {
   };
 
   const handleTrimChange = (selectedOption) => {
-    
     setSelectedTrim(selectedOption);
     setLoanAmount(selectedOption.price);
     setLoanFilter({
@@ -373,8 +366,6 @@ function loanCalculator() {
       condition: true,
     },
   ];
-
-  
 
   return (
     <MainLayout
