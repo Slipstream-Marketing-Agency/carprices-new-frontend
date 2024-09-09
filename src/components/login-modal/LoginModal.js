@@ -82,7 +82,7 @@ function LoginModal({ modal, setIsOpen }) {
                     Welcome to{" "}
                     <span className="tw-font-semibold">CarPrice.ae</span>
                   </div>
-                  <div className="tw-font-semibold tw-text-4xl">Sign in</div>
+                  <div className="tw-font-semibold tw-text-4xl">Sign up</div>
                 </div>
                 <div className="tw-bg-blue-100 tw-space-x-4 tw-p-2 tw-py-3 tw-rounded-xl tw-mb-8 tw-mt-6 tw-items-center tw-text-center tw-cursor-pointer">
                   <Image
@@ -92,7 +92,7 @@ function LoginModal({ modal, setIsOpen }) {
                     height={20}
                   />
                   <span className="tw-text-sm tw-text-blue-800 tw-font-semibold">
-                    Sign in with Google
+                    Sign up with Google
                   </span>
                 </div>
                 <label className="tw-text-sm tw-font-semibold">
