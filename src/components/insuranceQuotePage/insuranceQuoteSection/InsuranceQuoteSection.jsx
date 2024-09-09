@@ -1,16 +1,18 @@
 "use client";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Stepper from "../3stepper/Stepper";
 import Modal from "../modal/Modal";
 import { carData } from "@/src/mocks/mock";
-import SelectComponent from "../selectComponent/selectComponent";
+import Select from "react-select";
+import axios from "axios";
+import { CircularProgress } from "@mui/material";
+import * as Yup from "yup";
 
 function InsuranceQuote() {
-
-
   const [isOpen, setIsOpen] = useState(false);
-  const dataInitialValues = {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({
     car_year: "",
     car_brand: "",
     model: "",
@@ -31,52 +33,33 @@ function InsuranceQuote() {
     mobile_number: "",
     email: "",
     dob: "",
-  };
-  const [data, setData] = useState(dataInitialValues);
-  const datePickerId = new Date().toISOString().split("T")[0];
+  });
 
-  // StepOne
+  const datePickerId = new Date().toISOString().split("T")[0];
+  const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          console.log("reCAPTCHA ready");
+        });
+      }
+    };
+
+    if (!window.grecaptcha) {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = loadRecaptcha;
+      document.body.appendChild(script);
+    } else {
+      loadRecaptcha();
+    }
+  }, []);
+
   const StepOne = (props) => {
-    const handleSubmit = (values) => {
-      props.next(values, false);
-    };
-    const validate = (values) => {
-      const errors = {};
-      if (!values.car_year) {
-        errors.car_year = "This field is required.";
-      }
-      if (!values.car_brand) {
-        errors.car_brand = "This field is required.";
-      }
-      if (!values.model) {
-        errors.model = "This field is required.";
-      }
-      if (!values.variant) {
-        errors.variant = "This field is required.";
-      }
-      if (!values.is_fully_comprehensive) {
-        errors.is_fully_comprehensive = "This field is required.";
-      }
-      if (!values.brand_new_car) {
-        errors.brand_new_car = "This field is required.";
-      }
-      if (!values.car_first_registered) {
-        errors.car_first_registered = "This field is required.";
-      }
-      if (!values.first_car) {
-        errors.first_car = "This field is required.";
-      }
-      if (!values.city) {
-        errors.city = "This field is required.";
-      }
-      if (!values.gcc_spec) {
-        errors.gcc_spec = "This field is required.";
-      }
-      if (!values.agency_repair) {
-        errors.agency_repair = "This field is required.";
-      }
-      return errors;
-    };
     const formik = useFormik({
       initialValues: {
         car_year: "",
@@ -91,26 +74,48 @@ function InsuranceQuote() {
         gcc_spec: "",
         agency_repair: "",
       },
-      validate,
-      onSubmit: (value) => {
-        handleSubmit(value);
+      validationSchema: Yup.object({
+        car_year: Yup.string().required("This field is required."),
+        car_brand: Yup.string().required("This field is required."),
+        model: Yup.string().required("This field is required."),
+        variant: Yup.string().required("This field is required."),
+        is_fully_comprehensive: Yup.string().required(
+          "This field is required."
+        ),
+        brand_new_car: Yup.string().required("This field is required."),
+        car_first_registered: Yup.string().required("This field is required."),
+        first_car: Yup.string().required("This field is required."),
+        city: Yup.string().required("This field is required."),
+        gcc_spec: Yup.string().required("This field is required."),
+        agency_repair: Yup.string().required("This field is required."),
+      }),
+      onSubmit: (values) => {
+        props.next(values, false);
       },
     });
-
-
-    console.log(formik?.values,"ppppppppppppppppppp");
 
     return (
       <form onSubmit={formik.handleSubmit}>
         <div className="tw-lg:m-0 sm:tw-my-6 sm:tw-p-2 tw-text-sm">
-          {/* inputs div */}
           <div className="tw-grid tw-gap-x-12 tw-gap-6 sm:tw-grid-cols-12">
-            {/* Row1 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Car Year</p>
-              <SelectComponent
-                selectOptions={carData?.optionsYears}
-                value={formik.values.car_year}
+              <Select
+                options={[
+                  { value: "2024", label: "2024" },
+                  { value: "2023", label: "2023" },
+                  { value: "2022", label: "2022" },
+                  { value: "2021", label: "2021" },
+                  { value: "2020", label: "2020" },
+                ]}
+                value={
+                  formik.values.car_year
+                    ? {
+                        value: formik.values.car_year,
+                        label: formik.values.car_year,
+                      }
+                    : null
+                }
                 onChange={(value) =>
                   formik.setFieldValue("car_year", value.value)
                 }
@@ -121,15 +126,21 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.car_year}</div>
               ) : null}
             </div>
-            {/* 1.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block ">
               <p className="input-label 4xl:tw-text-sm">Brand</p>
-              <SelectComponent
-                value={formik.values.car_brand}
+              <Select
+                value={
+                  formik.values.car_brand
+                    ? {
+                        value: formik.values.car_brand,
+                        label: formik.values.car_brand,
+                      }
+                    : null
+                }
                 onChange={(value) =>
                   formik.setFieldValue("car_brand", value.value)
                 }
-                selectOptions={carData?.optionsBrand}
+                options={carData?.optionsBrand}
                 placeholder={"Choose Brand"}
                 isSearchable
               />
@@ -137,13 +148,16 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.car_brand}</div>
               ) : null}
             </div>
-            {/* Row2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Model</p>
-              <SelectComponent
-                value={formik.values.model}
+              <Select
+                value={
+                  formik.values.model
+                    ? { value: formik.values.model, label: formik.values.model }
+                    : null
+                }
                 onChange={(value) => formik.setFieldValue("model", value.value)}
-                selectOptions={carData?.optionsModels}
+                options={carData?.optionsModels}
                 placeholder={"Choose Model"}
                 isSearchable
               />
@@ -151,15 +165,21 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.model}</div>
               ) : null}
             </div>
-            {/* 2.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Variant</p>
-              <SelectComponent
-                value={formik.values.variant}
+              <Select
+                value={
+                  formik.values.variant
+                    ? {
+                        value: formik.values.variant,
+                        label: formik.values.variant,
+                      }
+                    : null
+                }
                 onChange={(value) =>
                   formik.setFieldValue("variant", value.value)
                 }
-                selectOptions={carData?.optionsVariants}
+                options={carData?.optionsVariants}
                 placeholder={"Choose Variant"}
                 isSearchable
               />
@@ -167,13 +187,10 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.variant}</div>
               ) : null}
             </div>
-
-            {/* Row3 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Is your car brand new?
               </p>
-
               <div className="tw-grid tw-gap-4 tw-grid-cols-2">
                 <div>
                   <input
@@ -222,14 +239,12 @@ function InsuranceQuote() {
                   </label>
                 </div>
               </div>
-
               {formik.errors.brand_new_car ? (
                 <div className="tw-error-text">
                   {formik.errors.brand_new_car}
                 </div>
               ) : null}
             </div>
-            {/* 3.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Are you buying your first car?
@@ -282,13 +297,10 @@ function InsuranceQuote() {
                   </label>
                 </div>
               </div>
-
               {formik.errors.first_car ? (
                 <div className="tw-error-text">{formik.errors.first_car}</div>
               ) : null}
             </div>
-
-            {/* Row4 date*/}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 When was your car first registered?
@@ -307,15 +319,18 @@ function InsuranceQuote() {
                 </div>
               ) : null}
             </div>
-            {/* 4.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 In which city do you want to register this car?
               </p>
-              <SelectComponent
-                value={formik.values.city}
+              <Select
+                value={
+                  formik.values.city
+                    ? { value: formik.values.city, label: formik.values.city }
+                    : null
+                }
                 onChange={(value) => formik.setFieldValue("city", value.value)}
-                selectOptions={carData?.optionsCities}
+                options={carData?.optionsCities}
                 placeholder={"Choose City"}
                 isSearchable
               />
@@ -323,8 +338,6 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.city}</div>
               ) : null}
             </div>
-
-            {/* Row5 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Is this car GCC spec AND unmodified?
@@ -381,7 +394,6 @@ function InsuranceQuote() {
                 <div className="tw-error-text">{formik.errors.gcc_spec}</div>
               ) : null}
             </div>
-            {/* 5.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Is the current policy fully comprehensive?
@@ -440,12 +452,10 @@ function InsuranceQuote() {
                 </div>
               ) : null}
             </div>
-            {/* row6.1 */}
-            <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block ">
+            <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Does the current policy of this car include agency repair?
               </p>
-
               <div className="tw-grid tw-gap-4 tw-grid-cols-2">
                 <div>
                   <input
@@ -501,7 +511,6 @@ function InsuranceQuote() {
               ) : null}
             </div>
           </div>
-          {/* continue Button */}
           <button
             className="tw-mt-8 tw-mx-10 lg:tw-mx-6 tw-w-3/4 lg:tw-w-auto tw-py-3 tw-px-12 tw-text-xs tw-bg-blue-600 tw-rounded-3xl sm:tw-float-right tw-text-white"
             type="submit"
@@ -513,42 +522,7 @@ function InsuranceQuote() {
     );
   };
 
-  // StepTwo
   const StepTwo = (props) => {
-    const handleSubmit = (values) => {
-      props.next(values, true);
-    };
-    const validate = (values) => {
-      const errors = {};
-      if (!values.nationality) {
-        errors.nationality = "This field is required.";
-      }
-      if (!values.country) {
-        errors.country = "This field is required.";
-      }
-      if (!values.experience) {
-        errors.experience = "This field is required.";
-      }
-      if (!values.duration) {
-        errors.duration = "This field is required.";
-      }
-      if (!values.full_name) {
-        errors.full_name = "This field is required.";
-      }
-      if (!values.mobile_number) {
-        errors.mobile_number = "This field is required.";
-      }
-      if (!values.email) {
-        errors.email = "This field is required.";
-      }
-      if (!values.dob) {
-        errors.dob = "This field is required.";
-      }
-      if (!values.insurance) {
-        errors.insurance = "This field is required.";
-      }
-      return errors;
-    };
     const formik = useFormik({
       initialValues: {
         nationality: "",
@@ -561,22 +535,41 @@ function InsuranceQuote() {
         dob: "",
         insurance: "",
       },
-      validate,
-      onSubmit: (value) => {
-        handleSubmit(value);
+      validationSchema: Yup.object({
+        nationality: Yup.string().required("This field is required."),
+        country: Yup.string().required("This field is required."),
+        experience: Yup.string().required("This field is required."),
+        duration: Yup.string().required("This field is required."),
+        full_name: Yup.string().required("This field is required."),
+        mobile_number: Yup.string().required("This field is required."),
+        email: Yup.string()
+          .email("Invalid email address")
+          .required("This field is required."),
+        dob: Yup.string().required("This field is required."),
+        insurance: Yup.string().required("This field is required."),
+      }),
+      onSubmit: (values) => {
+        props.next(values, true);
       },
     });
+
     return (
       <form onSubmit={formik.handleSubmit}>
         <div className="tw-lg:m-0 sm:tw-my-6 sm:tw-p-2">
           <div className="tw-grid tw-gap-x-12 tw-gap-6 sm:tw-grid-cols-12">
-            {/* Row1 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">Nationality</p>
               <div>
-                <SelectComponent
-                  selectOptions={carData?.optionsNationalities}
-                  value={formik.values.nationality}
+                <Select
+                  options={carData?.optionsNationalities}
+                  value={
+                    formik.values.nationality
+                      ? {
+                          value: formik.values.nationality,
+                          label: formik.values.nationality,
+                        }
+                      : null
+                  }
                   onChange={(value) =>
                     formik.setFieldValue("nationality", value.value)
                   }
@@ -590,18 +583,24 @@ function InsuranceQuote() {
                 ) : null}
               </div>
             </div>
-            {/* 1.2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Which country issued your first driving license?
               </p>
               <div className="">
-                <SelectComponent
-                  value={formik.values.country}
+                <Select
+                  value={
+                    formik.values.country
+                      ? {
+                          value: formik.values.country,
+                          label: formik.values.country,
+                        }
+                      : null
+                  }
                   onChange={(value) =>
                     formik.setFieldValue("country", value.value)
                   }
-                  selectOptions={carData?.optionsCountry}
+                  options={carData?.optionsCountry}
                   placeholder={"Choose Country"}
                   isSearchable
                 />
@@ -610,8 +609,6 @@ function InsuranceQuote() {
                 ) : null}
               </div>
             </div>
-
-            {/* ROW2 */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 How many years of international driving experience do you have?
@@ -629,7 +626,7 @@ function InsuranceQuote() {
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
-                How long you have been driving in the UAE?
+                How long have you been driving in the UAE?
               </p>
               <input
                 type="text"
@@ -701,12 +698,19 @@ function InsuranceQuote() {
               <p className="input-label 4xl:tw-text-sm">
                 Are you looking for Fully Comprehensive insurance, or other?
               </p>
-              <SelectComponent
-                value={formik.values.insurance}
+              <Select
+                value={
+                  formik.values.insurance
+                    ? {
+                        value: formik.values.insurance,
+                        label: formik.values.insurance,
+                      }
+                    : null
+                }
                 onChange={(value) =>
                   formik.setFieldValue("insurance", value.value)
                 }
-                selectOptions={carData?.optionsInsurance}
+                options={carData?.optionsInsurance}
                 placeholder={"Choose"}
                 isSearchable
               />
@@ -715,8 +719,6 @@ function InsuranceQuote() {
               ) : null}
             </div>
           </div>
-
-          {/* //buttons div */}
           <div className="tw-m-4 tw-gap-4 sm:tw-grid-cols-12">
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <button
@@ -741,15 +743,46 @@ function InsuranceQuote() {
     );
   };
 
-  const makeRequest = (formData) => {
+  const makeRequest = async (formData) => {
     setIsOpen(true);
     setCurrentStep(0);
-    console.log(formData, "Form submitted");
+    try {
+      setLoading(true);
+  
+      // Get the reCAPTCHA token
+      const token = await window.grecaptcha.execute(
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, // Use your site key
+        { action: "submit" }
+      );
+  
+      // Log the token for debugging purposes
+      console.log("reCAPTCHA token:", token);
+  
+      // Send the form data along with the reCAPTCHA token to the API
+      const response = await axios.post("/api/submitInsurance", {
+        formData,
+        recaptchaToken: token,  // Include the reCAPTCHA token
+      });
+  
+      if (response.status === 200) {
+        console.log("Form submitted successfully:", response);
+        setIsOpen(true);
+      } else {
+        console.error("Error submitting form:", response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error.response ? error.response.data : error.message);
+    } finally {
+      setLoading(false);
+    }
   };
+  
+  
+
   const handleNextStep = (newData, final) => {
     setData((prev) => ({ ...prev, ...newData }));
     if (final) {
-      makeRequest(data);
+      makeRequest({ ...data, ...newData });
       return;
     }
     setCurrentStep((prev) => prev + 1);
@@ -759,17 +792,23 @@ function InsuranceQuote() {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);
   };
-  const [currentStep, setCurrentStep] = useState(0);
+
   const steps = [
     <StepOne next={handleNextStep} data={data} />,
     <StepTwo next={handleNextStep} prev={handlePrevStep} data={data} />,
   ];
+
   return (
     <>
+      {loading && (
+        <div className="tw-absolute tw-inset-0 tw-bg-white tw-bg-opacity-75 tw-flex tw-justify-center tw-items-center tw-z-50">
+          <CircularProgress />
+        </div>
+      )}
       <Modal modal={isOpen} setIsOpen={setIsOpen} />
       <div className="tw-border tw-rounded-xl tw-h-auto tw-contain-content md:tw-p-8">
         <div className="tw-items-center tw-justify-between">
-          <div className="tw-text-center tw-mt-6 tw-text-3xl tw-leading-tight tw-text-lightgray">
+          <div className="tw-text-center tw-text-3xl tw-leading-tight tw-text-lightgray">
             Get Your Insurance Quote
           </div>
           <div className="tw-text-center tw-font-normal tw-text-3xl tw-text-lightgray">

@@ -51,6 +51,7 @@ function MainLayout({ children, pageMeta }) {
   const links = [
     { href: "/search-cars", label: "Search New Cars" },
     { href: "/compare-cars", label: "Compare New Cars" },
+    // { href: "/insurance-calculator", label: "Insurance Calculator" },
     { href: "/loan-calculator", label: "Car Loan Calculator" },
     { href: "/news", label: "News" },
     { href: "/reviews", label: "Reviews" },
@@ -533,6 +534,12 @@ function MainLayout({ children, pageMeta }) {
                 >
                   Compare New Cars
                 </Link>
+                {/* <Link
+                  href="/insurance-calculator"
+                  className="tw-justify-center tw-font-semibold"
+                >
+                  Insurance Calculator
+                </Link> */}
                 <Link
                   href="/loan-calculator"
                   className="tw-justify-center tw-font-semibold"
@@ -613,6 +620,9 @@ function MainLayout({ children, pageMeta }) {
                 <ListItem button component="a" href="/compare-cars">
                   <ListItemText primary="Compare New Cars" />
                 </ListItem>
+                {/* <ListItem button component="a" href="/insurance-calculator">
+                  <ListItemText primary="Insurance Calculator" />
+                </ListItem> */}
                 <ListItem button component="a" href="/loan-calculator">
                   <ListItemText primary="Car Loan Calculator" />
                 </ListItem>
