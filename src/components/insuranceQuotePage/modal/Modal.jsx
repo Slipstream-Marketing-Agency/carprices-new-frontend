@@ -22,7 +22,7 @@ function Modal({ modal, setIsOpen }) {
                   <h4 className="tw-font-light  tw-text-slate-600 tw-my-1">
                     Thank You for Your Submission!
                   </h4>
-                  <p className="tw-text-xs tw-font-thin tw-text-gray-400 tw-leading-5">
+                  <p className="tw-text-xs tw-font-medium tw-text-gray-400 tw-leading-5">
                     We have received your request for a car insurance quote. Our
                     team is processing your information and will send your quote
                     to your email shortly.
