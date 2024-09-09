@@ -1,6 +1,6 @@
 "use client";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import Stepper from "../3stepper/Stepper";
 import Modal from "../modal/Modal";
 import { carData } from "@/src/mocks/mock";
@@ -85,14 +85,18 @@ function InsuranceQuote() {
       loadRecaptcha();
     }
   }, []);
-
   const StepOne = (props) => {
+    const [modelsList, setModelsList] = useState([]);
+    const [yearList, setYearList] = useState([]);
+    const [trimList, setTrimList] = useState([]);
+
+    // Memoized formik configuration to avoid unnecessary re-renders
     const formik = useFormik({
       initialValues: {
         car_year: "",
-        car_brand: null, // Update: null by default
-        model: null,
-        variant: null,
+        car_brand: "",
+        model: "",
+        variant: "",
         is_fully_comprehensive: "",
         brand_new_car: "",
         car_first_registered: "",
@@ -102,13 +106,11 @@ function InsuranceQuote() {
         agency_repair: "",
       },
       validationSchema: Yup.object({
-        car_year: Yup.string().required("This field is required."),
-        car_brand: Yup.object().nullable().required("This field is required."), // Ensure car_brand is an object (as expected by Select)
+        car_year: Yup.object().required("This field is required."),
+        car_brand: Yup.object().nullable().required("This field is required."),
         model: Yup.object().nullable().required("This field is required."),
         variant: Yup.object().nullable().required("This field is required."),
-        is_fully_comprehensive: Yup.string().required(
-          "This field is required."
-        ),
+        is_fully_comprehensive: Yup.string().required("This field is required."),
         brand_new_car: Yup.string().required("This field is required."),
         car_first_registered: Yup.string().required("This field is required."),
         first_car: Yup.string().required("This field is required."),
@@ -117,93 +119,94 @@ function InsuranceQuote() {
         agency_repair: Yup.string().required("This field is required."),
       }),
       onSubmit: (values) => {
+        console.log("clicked submit step one")
         props.next(values, false);
       },
     });
 
-    console.log(formik.values,"lllllllll");
+    const handleMakeChange = useCallback((selectedOption) => {
+      if (formik.values.car_brand !== selectedOption) {
+        formik.setFieldValue("car_brand", selectedOption);
+        formik.setFieldValue("model", null);
+        formik.setFieldValue("car_year", null);
+        formik.setFieldValue("variant", null);
+        setModelsList([]);
+        setYearList([]);
+        setTrimList([]);
 
-    const handleMakeChange = (selectedOption) => {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
+          )
+          .then((response) => {
+            const data = response.data.attributes.models.map((item) => ({
+              value: item.id,
+              label: item.name,
+            }));
+            setModelsList(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching models:", error);
+          });
+      }
+    }, [formik]);
 
-      console.log(selectedOption,"selectedOption");
-      // Update: Ensure the selected option is passed as object
-      formik.setFieldValue("car_brand", selectedOption);
-      formik.setFieldValue("model", null); // Reset model on brand change
-      formik.setFieldValue("car_year", null); // Reset year on brand change
-      formik.setFieldValue("variant", null); // Reset variant on brand change
-      setModelsList([]);
-      setYearList([]);
-      setTrimList([]);
+    const handleModelChange = useCallback((selectedOption) => {
+      if (formik.values.model !== selectedOption) {
+        formik.setFieldValue("model", selectedOption);
+        formik.setFieldValue("car_year", null);
+        formik.setFieldValue("variant", null);
+        setYearList([]);
+        setTrimList([]);
 
-      // Fetch models for the selected brand
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-brands/${selectedOption.value}/with-models`
-        )
-        .then((response) => {
-          const data = response.data.attributes.models.map((item) => ({
-            value: item.id,
-            label: item.name,
-          }));
-          setModelsList(data); // Populate the models list
-        })
-        .catch((error) => {
-          console.error("Error fetching models:", error);
-        });
-    };
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_API_URL}car-models/${selectedOption.value}/years-under-trims`
+          )
+          .then((response) => {
+            const data = response.data.map((item) => ({
+              value: item,
+              label: item,
+            }));
+            setYearList(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching years:", error);
+          });
+      }
+    }, [formik]);
 
-    const handleModelChange = (selectedOption) => {
-      formik.setFieldValue("model", selectedOption);
-      formik.setFieldValue("car_year", null); // Reset year on model change
-      formik.setFieldValue("variant", null); // Reset variant on model change
-      setYearList([]);
-      setTrimList([]);
+    const handleYearChange = useCallback((selectedOption) => {
+      if (formik.values.car_year !== selectedOption) {
+        formik.setFieldValue("car_year", selectedOption);
+        formik.setFieldValue("variant", null);
+        setTrimList([]);
 
-      // Fetch years for the selected model
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-models/${selectedOption.value}/years-under-trims`
-        )
-        .then((response) => {
-          const data = response.data.map((item) => ({
-            value: item,
-            label: item,
-          }));
-          setYearList(data); // Populate the year list
-        })
-        .catch((error) => {
-          console.error("Error fetching years:", error);
-        });
-    };
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_API_URL}car-models/${formik.values.model.value}/trims/${selectedOption.value}`
+          )
+          .then((response) => {
+            const data = response.data.data.trims.map((item) => ({
+              value: item.name,
+              label: item.name,
+              price: item.price,
+              image: item.featuredImage,
+            }));
+            setTrimList(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching trims:", error);
+          });
+      }
+    }, [formik]);
 
-    const handleYearChange = (selectedOption) => {
-      formik.setFieldValue("car_year", selectedOption);
-      formik.setFieldValue("variant", null); // Reset variant on year change
-      setTrimList([]);
-
-      // Fetch trims for the selected model and year
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}car-models/${formik.values.model.value}/trims/${selectedOption.value}`
-        )
-        .then((response) => {
-          const data = response.data.data.trims.map((item) => ({
-            value: item.name,
-            label: item.name,
-            price: item.price,
-            image: item.featuredImage,
-          }));
-          setTrimList(data); // Populate the trims list
-        })
-        .catch((error) => {
-          console.error("Error fetching trims:", error);
-        });
-    };
-
-    const handleVariantChange = (selectedOption) => {
+    const handleVariantChange = useCallback((selectedOption) => {
       formik.setFieldValue("variant", selectedOption);
-    };
-    console.log(formik.values.car_brand,"oooooooooooooooo")
+    }, [formik]);
+
+    // Memoize options so they are recalculated only when necessary
+    const cityOptions = useMemo(() => carData?.optionsCities, [carData]);
 
     return (
       <form onSubmit={formik.handleSubmit}>
@@ -220,7 +223,7 @@ function InsuranceQuote() {
                 isSearchable
               />
               {formik.errors.car_brand && formik.touched.car_brand ? (
-                <div className="tw-error-text">{formik.errors.car_brand}</div>
+                <div className="error-text">{formik.errors.car_brand}</div>
               ) : null}
             </div>
 
@@ -233,10 +236,10 @@ function InsuranceQuote() {
                 options={modelsList}
                 placeholder={"Choose Model"}
                 isSearchable
-                isDisabled={!formik.values.car_brand} // Disabled if no brand selected
+                isDisabled={!formik.values.car_brand}
               />
               {formik.errors.model && formik.touched.model ? (
-                <div className="tw-error-text">{formik.errors.model}</div>
+                <div className="error-text">{formik.errors.model}</div>
               ) : null}
             </div>
 
@@ -249,10 +252,10 @@ function InsuranceQuote() {
                 options={yearList}
                 placeholder={"Choose Year"}
                 isSearchable
-                isDisabled={!formik.values.model} // Disabled if no model selected
+                isDisabled={!formik.values.model}
               />
               {formik.errors.car_year && formik.touched.car_year ? (
-                <div className="tw-error-text">{formik.errors.car_year}</div>
+                <div className="error-text">{formik.errors.car_year}</div>
               ) : null}
             </div>
 
@@ -265,12 +268,14 @@ function InsuranceQuote() {
                 options={trimList}
                 placeholder={"Choose Variant"}
                 isSearchable
-                isDisabled={!formik.values.car_year} // Disabled if no year selected
+                isDisabled={!formik.values.car_year}
               />
               {formik.errors.variant && formik.touched.variant ? (
-                <div className="tw-error-text">{formik.errors.variant}</div>
+                <div className="error-text">{formik.errors.variant}</div>
               ) : null}
             </div>
+
+            {/* Additional Form Fields */}
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
               <p className="input-label 4xl:tw-text-sm">
                 Is your car brand new?
@@ -288,11 +293,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="brand_new_car_yes"
-                    className={`${
-                      formik.values.brand_new_car === "Yes"
+                    className={`${formik.values.brand_new_car === "Yes"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">Yes</div>
@@ -311,11 +315,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="brand_new_car_no"
-                    className={`${
-                      formik.values.brand_new_car === "No"
+                    className={`${formik.values.brand_new_car === "No"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">No</div>
@@ -324,7 +327,7 @@ function InsuranceQuote() {
                 </div>
               </div>
               {formik.errors.brand_new_car ? (
-                <div className="tw-error-text">
+                <div className="error-text">
                   {formik.errors.brand_new_car}
                 </div>
               ) : null}
@@ -346,11 +349,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="first_car_yes"
-                    className={`${
-                      formik.values.first_car === "Yes"
+                    className={`${formik.values.first_car === "Yes"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">Yes</div>
@@ -369,11 +371,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="first_car_no"
-                    className={`${
-                      formik.values.first_car === "No"
+                    className={`${formik.values.first_car === "No"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">No</div>
@@ -382,7 +383,7 @@ function InsuranceQuote() {
                 </div>
               </div>
               {formik.errors.first_car ? (
-                <div className="tw-error-text">{formik.errors.first_car}</div>
+                <div className="error-text">{formik.errors.first_car}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -398,7 +399,7 @@ function InsuranceQuote() {
                 placeholder="Choose Date"
               />
               {formik.errors.car_first_registered ? (
-                <div className="tw-error-text">
+                <div className="error-text">
                   {formik.errors.car_first_registered}
                 </div>
               ) : null}
@@ -419,7 +420,7 @@ function InsuranceQuote() {
                 isSearchable
               />
               {formik.errors.city ? (
-                <div className="tw-error-text">{formik.errors.city}</div>
+                <div className="error-text">{formik.errors.city}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -439,11 +440,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="gcc_spec_yes"
-                    className={`${
-                      formik.values.gcc_spec === "Yes"
+                    className={`${formik.values.gcc_spec === "Yes"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">Yes</div>
@@ -462,11 +462,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="gcc_spec_no"
-                    className={`${
-                      formik.values.gcc_spec === "No"
+                    className={`${formik.values.gcc_spec === "No"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">No</div>
@@ -475,7 +474,7 @@ function InsuranceQuote() {
                 </div>
               </div>
               {formik.errors.gcc_spec ? (
-                <div className="tw-error-text">{formik.errors.gcc_spec}</div>
+                <div className="error-text">{formik.errors.gcc_spec}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -495,11 +494,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="is_fully_comprehensive_yes"
-                    className={`${
-                      formik.values.is_fully_comprehensive === "Yes"
+                    className={`${formik.values.is_fully_comprehensive === "Yes"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">Yes</div>
@@ -518,11 +516,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="is_fully_comprehensive_no"
-                    className={`${
-                      formik.values.is_fully_comprehensive === "No"
+                    className={`${formik.values.is_fully_comprehensive === "No"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">No</div>
@@ -531,7 +528,7 @@ function InsuranceQuote() {
                 </div>
               </div>
               {formik.errors.is_fully_comprehensive ? (
-                <div className="tw-error-text">
+                <div className="error-text">
                   {formik.errors.is_fully_comprehensive}
                 </div>
               ) : null}
@@ -553,11 +550,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="agency_repair_yes"
-                    className={`${
-                      formik.values.agency_repair === "Yes"
+                    className={`${formik.values.agency_repair === "Yes"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">Yes</div>
@@ -576,11 +572,10 @@ function InsuranceQuote() {
                   />
                   <label
                     htmlFor="agency_repair_no"
-                    className={`${
-                      formik.values.agency_repair === "No"
+                    className={`${formik.values.agency_repair === "No"
                         ? "label-radio-btn-active"
                         : "label-radio-btn"
-                    }`}
+                      }`}
                   >
                     <div className="tw-block">
                       <div className="tw-w-full">No</div>
@@ -589,11 +584,12 @@ function InsuranceQuote() {
                 </div>
               </div>
               {formik.errors.agency_repair ? (
-                <div className="tw-error-text">
+                <div className="error-text">
                   {formik.errors.agency_repair}
                 </div>
               ) : null}
             </div>
+            {/* Radio Inputs, Date Input, City Select, etc. */}
           </div>
           <button
             className="tw-mt-8 tw-mx-10 lg:tw-mx-6 tw-w-3/4 lg:tw-w-auto tw-py-3 tw-px-12 tw-text-xs tw-bg-blue-600 tw-rounded-3xl sm:tw-float-right tw-text-white"
@@ -605,6 +601,7 @@ function InsuranceQuote() {
       </form>
     );
   };
+
 
   const StepTwo = (props) => {
     const formik = useFormik({
@@ -649,9 +646,9 @@ function InsuranceQuote() {
                   value={
                     formik.values.nationality
                       ? {
-                          value: formik.values.nationality,
-                          label: formik.values.nationality,
-                        }
+                        value: formik.values.nationality,
+                        label: formik.values.nationality,
+                      }
                       : null
                   }
                   onChange={(value) =>
@@ -661,7 +658,7 @@ function InsuranceQuote() {
                   isSearchable
                 />
                 {formik.errors.nationality ? (
-                  <div className="tw-error-text">
+                  <div className="error-text">
                     {formik.errors.nationality}
                   </div>
                 ) : null}
@@ -676,9 +673,9 @@ function InsuranceQuote() {
                   value={
                     formik.values.country
                       ? {
-                          value: formik.values.country,
-                          label: formik.values.country,
-                        }
+                        value: formik.values.country,
+                        label: formik.values.country,
+                      }
                       : null
                   }
                   onChange={(value) =>
@@ -689,7 +686,7 @@ function InsuranceQuote() {
                   isSearchable
                 />
                 {formik.errors.country ? (
-                  <div className="tw-error-text">{formik.errors.country}</div>
+                  <div className="error-text">{formik.errors.country}</div>
                 ) : null}
               </div>
             </div>
@@ -705,7 +702,7 @@ function InsuranceQuote() {
                 placeholder="Enter Years of Experience"
               />
               {formik.errors.experience ? (
-                <div className="tw-error-text">{formik.errors.experience}</div>
+                <div className="error-text">{formik.errors.experience}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -720,7 +717,7 @@ function InsuranceQuote() {
                 placeholder="Enter Duration in Years"
               />
               {formik.errors.duration ? (
-                <div className="tw-error-text">{formik.errors.duration}</div>
+                <div className="error-text">{formik.errors.duration}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -733,7 +730,7 @@ function InsuranceQuote() {
                 placeholder=" Enter Full Name"
               />
               {formik.errors.full_name ? (
-                <div className="tw-error-text">{formik.errors.full_name}</div>
+                <div className="error-text">{formik.errors.full_name}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -746,7 +743,7 @@ function InsuranceQuote() {
                 placeholder="Enter Mobile Number"
               />
               {formik.errors.mobile_number ? (
-                <div className="tw-error-text">
+                <div className="error-text">
                   {formik.errors.mobile_number}
                 </div>
               ) : null}
@@ -761,7 +758,7 @@ function InsuranceQuote() {
                 placeholder=" Enter Email"
               />
               {formik.errors.email ? (
-                <div className="tw-error-text">{formik.errors.email}</div>
+                <div className="error-text">{formik.errors.email}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -775,7 +772,7 @@ function InsuranceQuote() {
                 placeholder="Choose Date of birth"
               />
               {formik.errors.dob ? (
-                <div className="tw-error-text">{formik.errors.dob}</div>
+                <div className="error-text">{formik.errors.dob}</div>
               ) : null}
             </div>
             <div className="tw-rounded-lg sm:tw-col-span-6 sm:tw-block">
@@ -786,20 +783,20 @@ function InsuranceQuote() {
                 value={
                   formik.values.insurance
                     ? {
-                        value: formik.values.insurance,
-                        label: formik.values.insurance,
-                      }
+                      value: formik.values.insurance,
+                      label: formik.values.insurance,
+                    }
                     : null
                 }
                 onChange={(value) =>
-                  formik.setFieldValue("insurance", value.value)
+                  formik.setFieldValue("insurance", value.label)
                 }
                 options={carData?.optionsInsurance}
                 placeholder={"Choose"}
                 isSearchable
               />
               {formik.errors.insurance ? (
-                <div className="tw-error-text">{formik.errors.insurance}</div>
+                <div className="error-text">{formik.errors.insurance}</div>
               ) : null}
             </div>
           </div>
@@ -829,6 +826,7 @@ function InsuranceQuote() {
 
   const makeRequest = async (formData) => {
     setIsOpen(true);
+    console.log(formData, "formData");
     setCurrentStep(0);
     try {
       setLoading(true);
