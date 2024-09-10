@@ -199,70 +199,60 @@ function BlogDetailsPage({
       ? metaDescription.substring(0, 160) + "..."
       : metaDescription;
 
-  const renderContent = () => {
-    const router = useRouter();
-
-    const currentUrl = router.pathname; // Get the current URL of the website
-
-    const content = article?.content;
-    // .replace(/(<h1>[^<]*<\/h1>)<br\s*\/?>/g, "$1")
-    // .replace(/(<h2>[^<]*<\/h2>)<br\s*\/?>/g, "$1")
-    // .replace(
-    //   /<h3>(.*?)<\/h3>/g,
-    //   '<h3 style="padding-top: 10px !important;">$1</h3>'
-    // )
-    // .replace(/<div>\s*<br\s*\/?>/, "<div>")
-    // .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/g, "<p><br></p>")
-    // .replace(
-    //   /<p><img(.*?)width="100%"(.*?)><\/p>/g,
-    //   '<p><img$1style="width: 100%; height: 421px;"$2></p>'
-    // );
-
-    if (!content) return null;
-
-    const youtubeRegex =
-      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-    const paragraphs = content.split("<br>");
-
-    const renderedContent = [];
-
-    paragraphs.forEach((paragraph, index) => {
-      if (youtubeRegex.test(paragraph)) {
-        const videoId = extractYouTubeVideoId(paragraph);
-        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-
-        renderedContent.push(
-          <div key={index}>
-            <iframe
-              width="100%"
-              height="315"
-              src={embedUrl}
-              title="YouTube video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        );
-      }
-
-      renderedContent.push(
-        <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
-      );
-      if (
-        index === 1 ||
-        index === 4 ||
-        index === 7 ||
-        index === 10 ||
-        index === 13 ||
-        index === 15 ||
-        index === 18
-      ) {
-        renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
-      }
-    });
-    return renderedContent;
-  };
+      const renderContent = () => {
+        let content = article?.content;
+        if (!content) return null;
+      
+        // Replace all <p>&nbsp;</p> with <br> tags
+        content = content.replace(/<p>(&nbsp;|\s*)<\/p>/g, '<br />');
+      
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+        const paragraphs = content.split("<br>");
+      
+        const renderedContent = [];
+      
+        paragraphs.forEach((paragraph, index) => {
+          // Handle YouTube links
+          if (youtubeRegex.test(paragraph)) {
+            const videoId = extractYouTubeVideoId(paragraph);
+            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      
+            renderedContent.push(
+              <div key={index}>
+                <iframe
+                  width="100%"
+                  height="315"
+                  src={embedUrl}
+                  title="YouTube video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            );
+          } else {
+            // Add the paragraph to the content
+            renderedContent.push(
+              <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
+            );
+          }
+      
+          // Optionally, inject ads after certain paragraphs
+          if (
+            index === 1 ||
+            index === 4 ||
+            index === 7 ||
+            index === 10 ||
+            index === 13 ||
+            index === 15 ||
+            index === 18
+          ) {
+            renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
+          }
+        });
+      
+        return renderedContent;
+      };
 
   function stripHtmlTags(htmlContent) {
     return htmlContent.replace(/<\/?[^>]+>/gi, '');
