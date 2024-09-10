@@ -98,7 +98,7 @@ function BlogStandardPage() {
       }}
     >
       <section>
-      <div className="tw-container tw-grid tw-grid-cols-12">
+      <div className="tw-container tw-grid sm:tw-gap-10 tw-grid-cols-12">
           <div className="sm:tw-col-span-9 tw-col-span-12 tw-space-y-6">
             <div className="">
               <h1 className="sm:tw-text-3xl ">Latest Car Reviews in UAE</h1>
