@@ -98,9 +98,9 @@ function BlogStandardPage() {
       }}
     >
       <section>
-        <div className="tw-container tw-grid md:tw-gap-10 tw-grid-cols-12 tw-my-6 ">
-          <div className="md:tw-col-span-9 tw-col-span-12 tw-space-y-6">
-            <div className="tw-">
+      <div className="tw-container tw-grid tw-grid-cols-12">
+          <div className="sm:tw-col-span-9 tw-col-span-12 tw-space-y-6">
+            <div className="">
               <h1 className="sm:tw-text-3xl ">Latest Car Reviews in UAE</h1>
               <p className="mb-4">
                 Stay up-to-date with the latest review and updates on the UAE
