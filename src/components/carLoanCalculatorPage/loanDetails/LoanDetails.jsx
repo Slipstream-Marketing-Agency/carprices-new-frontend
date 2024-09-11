@@ -2,94 +2,107 @@ import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Image from "next/image";
+import Price from "@/src/utils/Price";
 Chart.register(...registerables);
 
-const LoanDetails = ({ setIsOpen }) => {
-  const [P, setP] = useState(33100);
-  const [R, setR] = useState(1.9);
-  const [N, setN] = useState(1);
+const LoanDetails = ({
+  setShowModal,
+  selectedBrand,
+  selectedModel,
+  selectedYear,
+  selectedVariant,
+  price, // this comes from the parent
+}) => {
+  const [P, setP] = useState(0); // Start with 0 until price is available
+  const [R, setR] = useState(2.5); // Interest rate default is 2.5%
+  const [N, setN] = useState(5); // Tenure in years
+  const [downPayment, setDownPayment] = useState(20); // Default down payment
   const [emi, setEmi] = useState(0);
+  const [downPaymentResult, setDownPaymentResult] = useState(0);
   const [payableInterest, setPayableInterest] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
   const [pieData, setPieData] = useState({
     labels: ["Principal", "Interest"],
     datasets: [
       {
         data: [0, 0],
-        backgroundColor: ["#EEF0FF", " blue"],
+        backgroundColor: ["#EEF0FF", "blue"],
         radius: "80%",
       },
     ],
   });
 
+  // Effect to handle when price updates from the parent component
   useEffect(() => {
-    const calculateLoanDetails = (p, r, emi) => {
-      let totalInterest = 0;
-      let yearlyInterest = [];
-      let yearPrincipal = [];
-      let years = [];
-      let year = 1;
-      let [counter, principal, interes] = [0, 0, 0];
-      while (p > 0) {
-        let interest = parseFloat(p) * parseFloat(r);
-        p = parseFloat(p) - (parseFloat(emi) - interest);
-        totalInterest += interest;
-        principal += parseFloat(emi) - interest;
-        interes += interest;
-        if (++counter === 12) {
-          years.push(year++);
-          yearlyInterest.push(parseInt(interes));
-          yearPrincipal.push(parseInt(principal));
-          counter = 0;
-        }
+    if (price !== null && price !== undefined) {
+      setP(price); // When price becomes available, update P
+    }
+  }, [price]);
+
+  useEffect(() => {
+    const calculateEMI = () => {
+      if (P > 0) {
+        // Calculate principal after down payment
+        const principalAmount = P - (downPayment / 100) * P;
+        const r = R / 100 / 12; // Monthly interest rate
+        const n = N * 12; // Loan tenure in months
+
+        // EMI calculation formula
+        const emiValue =
+          (principalAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        setEmi(emiValue);
+
+        const totalRepayment = emiValue * n; // Total repayment over the period
+        const downPaymentAmount = (downPayment / 100) * P; // Calculate down payment
+        const totalCostValue = totalRepayment + downPaymentAmount; // Total cost including down payment
+        setDownPaymentResult(downPaymentAmount);
+        setTotalCost(totalCostValue);
+        setPayableInterest(totalRepayment - principalAmount); // Interest payable is total repayment minus principal
+
+        // Update the pie chart data
+        setPieData({
+          labels: ["Principal Amount", "Interest Amount"],
+          datasets: [
+            {
+              data: [
+                principalAmount, // Principal amount
+                totalRepayment - principalAmount, // Interest amount
+              ],
+              backgroundColor: ["#EEF0FF", "blue"],
+            },
+          ],
+        });
       }
-      return totalInterest;
     };
 
-    const displayDetails = () => {
-      let r = parseFloat(R) / 1200;
-      let n = parseFloat(N) * 12;
-      let num = parseFloat(P) * r * Math.pow(1 + r, n);
-      let denom = Math.pow(1 + r, n) - 1;
-      let emi = parseFloat(num) / parseFloat(denom);
-      setEmi(emi);
-
-      let payabaleInterest = calculateLoanDetails(P, r, emi);
-      setPayableInterest(payabaleInterest);
-
-      setPieData({
-        labels: ["Principal Amount ", "Interest Amount"],
-        datasets: [
-          {
-            data: [P, payabaleInterest],
-            // backgroundColor: ["#EEF0FF", " blue"],
-            // borderWidth:1,
-            // radius:"50%",
-          },
-        ],
-      });
-    };
-
-    displayDetails();
-  }, [P, R, N]);
+    if (P > 0 && R && N) {
+      calculateEMI(); // Only calculate if values are valid
+    }
+  }, [P, R, N, downPayment]);
 
   return (
     <>
       <div className="tw-my-2 tw-p-4 tw-bg-slate-200 tw-rounded-lg sm:tw-flex tw-justify tw-justify-between">
-        <div className="tw-flex">
-          <Image
+        <div className="tw-flex tw-items-center">
+          {/* <Image
             src={"/carLoanPage/bmw_change_car_icon.png"}
             alt="car-icon"
             width={90}
             height={90}
-          />
+            className="tw-object-contain"
+          /> */}
           <div className="tw-mx-4">
-            <div className="tw-text-blue-500 tw-text-sm tw-font-semibold">BMW</div>
-            <div className="tw-text-md tw-font-semibold">M2 Coupe M Septronic</div>
+            <div className="tw-text-blue-500 tw-text-sm tw-font-semibold tw-capitalize">
+              {selectedYear} {selectedBrand}
+            </div>
+            <div className="tw-text-md tw-font-semibold">
+              {selectedModel} {selectedVariant}
+            </div>
           </div>
         </div>
         <div className="tw-mt-4">
           <button
-            onClick={setIsOpen}
+            onClick={setShowModal}
             className="tw-py-4 tw-px-12 tw-text-sm tw-bg-blue-700 tw-rounded-3xl tw-text-white tw-w-full"
           >
             Change Car
@@ -97,7 +110,7 @@ const LoanDetails = ({ setIsOpen }) => {
         </div>
       </div>
       <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-mt-6">
-        <div className="tw-w-full tw-p-8 tw-bg-white tw-rounded-2xl tw-border">
+        <div className="tw-w-full  tw-bg-white tw-rounded-2xl tw-border">
           <div className="tw-flex tw-justify-between tw-items-center tw-mb-10">
             <h1 className="tw-text-2xl tw-font-semibold">
               Car Loan EMI Calculator
@@ -108,8 +121,11 @@ const LoanDetails = ({ setIsOpen }) => {
               <div className="tw-mb-12">
                 <div>
                   <p className="tw-opacity-70 tw-text-md">Loan Amount</p>
-                  <p id="loan-amt-text" className="tw-text-2xl tw-font-semibold tw-mb-3">
-                    AED {P.toLocaleString("en-US")}
+                  <p
+                    id="loan-amt-text"
+                    className="tw-text-2xl tw-font-semibold tw-mb-3"
+                  >
+                    {P ? <Price data={price} /> : 0}
                   </p>
                 </div>
                 <input
@@ -123,15 +139,19 @@ const LoanDetails = ({ setIsOpen }) => {
                   className="tw-w-full"
                 />
                 <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
-                  <p>33,100</p>
-                  <p id="loan-amt-text">165,500</p>
+                  <p>0</p>
+                  <p id="loan-amt-text">
+                    <Price data={price} />
+                  </p>
                 </div>
               </div>
 
-              {/* tenure */}
+              {/* Tenure */}
               <div className="tw-mb-12">
                 <p className="tw-opacity-70 tw-text-md">Tenure</p>
-                <p className="tw-text-2xl tw-font-semibold tw-mb-3">{N} years</p>
+                <p className="tw-text-2xl tw-font-semibold tw-mb-3">
+                  {N ? N : "0"} years
+                </p>
                 <input
                   type="range"
                   id="loan-period"
@@ -148,11 +168,14 @@ const LoanDetails = ({ setIsOpen }) => {
                 </div>
               </div>
 
-              {/* interest rate */}
+              {/* Interest rate */}
               <div className="tw-mb-12">
                 <p className="tw-opacity-70 tw-text-md">Interest Rate</p>
-                <p id="interest-rate-text" className="tw-text-2xl tw-font-semibold tw-mb-3">
-                  {R}%
+                <p
+                  id="interest-rate-text"
+                  className="tw-text-2xl tw-font-semibold tw-mb-3"
+                >
+                  {R ? R : "0"}%
                 </p>
                 <input
                   type="range"
@@ -169,8 +192,31 @@ const LoanDetails = ({ setIsOpen }) => {
                   <p id="loan-amt-text">8%</p>
                 </div>
               </div>
+
+              {/* Down Payment */}
+              <div className="tw-mb-12">
+                <p className="tw-opacity-70 tw-text-md">Down Payment (%)</p>
+                <p className="tw-text-2xl tw-font-semibold tw-mb-3">
+                  {downPayment ? downPayment : "0"}%
+                </p>
+                <input
+                  type="range"
+                  id="down-payment"
+                  min="20"
+                  max="80"
+                  step="1"
+                  value={downPayment}
+                  onChange={(e) => setDownPayment(parseFloat(e.target.value))}
+                  className="tw-w-full"
+                />
+                <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
+                  <p>20%</p>
+                  <p>80%</p>
+                </div>
+              </div>
             </div>
-            {/* doughnut chart*/}
+
+            {/* Doughnut Chart */}
             <div className="sm:tw-col-span-6 sm:tw-block">
               <Doughnut className="tw-w-2/3" data={pieData} />
               <div className="tw-flex tw-text-sm sm:tw-text-base tw-justify-between tw-w-full tw-my-4">
@@ -179,20 +225,28 @@ const LoanDetails = ({ setIsOpen }) => {
                     Monthly EMI
                   </p>
                   <span id="price" className="tw-mx-2 tw-font-semibold">
-                    AED {emi.toFixed(2).toLocaleString("en-US")}*
+                    AED {emi ? emi.toFixed(2).toLocaleString("en-US") : "0"}*
                   </span>
                 </div>
                 <div className="tw-flex tw-justify-between">
                   <p className="tw-opacity-70 tw-mt-0">Total Interest</p>
                   <span id="ci" className="tw-mx-2 tw-font-semibold">
-                    AED {payableInterest.toLocaleString("en-US")}*
+                    AED{" "}
+                    {payableInterest
+                      ? payableInterest.toLocaleString("en-US")
+                      : "0"}
+                    *
                   </span>
                 </div>
               </div>
               <div className="tw-text-center tw-text-sm sm:tw-text-base tw-font-semibold tw-flex tw-justify-between tw-bg-gray-100 tw-rounded-lg tw-p-6">
                 <div>Total Amount Payable:</div>
                 <div id="ct" className="tw-text-gray-800">
-                  AED {(P + payableInterest).toLocaleString("en-US")}*
+                  AED{" "}
+                  {P && payableInterest
+                    ? (P + payableInterest).toLocaleString("en-US")
+                    : "0"}
+                  *
                 </div>
               </div>
             </div>

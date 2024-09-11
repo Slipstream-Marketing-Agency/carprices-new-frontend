@@ -14,13 +14,12 @@ function InsuranceCalculatorPage() {
         <div className="tw-grid sm:tw-grid-cols-12 tw-gap-8 ">
           <div className="tw-h-1/2 sm:tw-col-span-3 tw-block tw-space-y-10">
             <Ad300x600 dataAdSlot="3792539533" />
-            <div className="md:tw-hidden tw-block tw-mt-10" >
+            <div className="md:tw-hidden tw-block tw-mt-10">
               <Ad300X250 dataAdSlot="9351332409" />
             </div>
           </div>
           <div className="sm:tw-col-span-9">
             <InsuranceQuote />
-      
 
             {/* <ChooseCarDiv />
           <ChooseYourBrand />
