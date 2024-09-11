@@ -254,7 +254,7 @@ export default function index({
   const categorysliderSettings = {
     dots: false,
     infinite: true,
-    speed: 2000,
+    // speed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
@@ -1106,7 +1106,7 @@ export default function index({
                 <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                   <img
                     src="/emi.jpg"
-                    alt=""
+                    alt="emi-Icon"
                     className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
                   />
                   <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
@@ -1116,7 +1116,7 @@ export default function index({
                       <h2 className="tw-text-white">
                         Calculate Your Car Loan EMI
                       </h2>
-                      <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                      <p className="tw-text-sm sm:tw-text-base md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                         Fill in the details and find out what the installment
                         will be for your new car. Our car loan calculator is
                         interactive and accurate.
@@ -1138,7 +1138,7 @@ export default function index({
               <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                 <img
                   src="/car-value.jpg"
-                  alt=""
+                  alt="value-of-car Icon"
                   className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
                 />
                 <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
@@ -1147,7 +1147,7 @@ export default function index({
                     <h2 className="tw-text-white">
                       Find out the value of your current car
                     </h2>
-                    <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                    <p className="tw-text-sm sm:tw-text-base md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                       Our car valuation calculator helps you find out what you
                       can expect for your current car. Fill in the details and
                       get an estimated current value for your used car.
@@ -1298,7 +1298,7 @@ export default function index({
                   }}
                 >
                   <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                    <div className="tw-text-lg tw-text-white">
+                    <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                       {articles.news[0].title}
                     </div>
                     {/* <div className="tw-flex tw-mt-1 tw-text-sm">
@@ -1321,7 +1321,7 @@ export default function index({
                         }}
                       >
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                          <div className="tw-text-lg tw-text-white">
+                          <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                             {item.title}
                           </div>
                           {/* <div className="tw-flex tw-mt-1 tw-text-sm">
