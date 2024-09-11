@@ -111,7 +111,15 @@ export default function CarLoanCalculatorPage() {
   ];
 
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title:
+          "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
+        description:
+          "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
+        type: "Car Review Website",
+      }}
+    >
       <div className="tw-grid sm:tw-grid-cols-12 tw-my-4 tw-gap-16 tw-px-6 sm:tw-px-24 md:tw-px-16 lg:tw-p-50">
         <div className="sm:tw-col-span-9">
           <MainSection />
