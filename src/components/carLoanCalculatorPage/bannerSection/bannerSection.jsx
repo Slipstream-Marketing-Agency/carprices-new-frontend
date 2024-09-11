@@ -14,7 +14,7 @@ export default function BannerSection({ setShowModal }) {
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="tw-border-solid tw-border  tw-font-bold tw-bg-white tw-rounded-3xl tw-p-2 tw-px-6 tw-my-4"
+          className="tw-border-solid tw-border tw-bg-transparent tw-text-white tw-rounded-3xl tw-p-2 tw-px-6 tw-my-4"
         >
           Choose Car Now
         </button>

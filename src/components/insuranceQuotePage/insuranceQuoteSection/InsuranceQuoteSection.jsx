@@ -9,6 +9,7 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import * as Yup from "yup";
 import debounce from "lodash/debounce";
+import countryList from "react-select-country-list";
 
 function InsuranceQuote() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,13 +39,13 @@ function InsuranceQuote() {
 
   const datePickerId = new Date().toISOString().split("T")[0];
   const [currentStep, setCurrentStep] = useState(0);
-
+  
   const [brandsList, setBrandsList] = useState([]);
   const [modelsList, setModelsList] = useState([]);
   const [yearList, setYearList] = useState([]);
   const [trimList, setTrimList] = useState([]);
 
-  console.log(modelsList, "modelsList");
+  // console.log(modelsList, "modelsList");
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -633,7 +634,7 @@ function InsuranceQuote() {
         props.next(values, true);
       },
     });
-
+    const countryListOptions = useMemo(() => countryList().getData(), [])
     return (
       <form onSubmit={formik.handleSubmit}>
         <div className="tw-lg:m-0 sm:tw-my-6 sm:tw-p-2">
@@ -679,9 +680,9 @@ function InsuranceQuote() {
                       : null
                   }
                   onChange={(value) =>
-                    formik.setFieldValue("country", value.value)
+                    formik.setFieldValue("country", value.label)
                   }
-                  options={carData?.optionsCountry}
+                  options={countryListOptions}
                   placeholder={"Choose Country"}
                   isSearchable
                 />

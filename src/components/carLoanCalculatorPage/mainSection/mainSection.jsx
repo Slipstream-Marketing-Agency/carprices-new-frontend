@@ -607,13 +607,13 @@ function MainSection() {
             financial commitment, and that's where a car loan can make all the
             difference.
           </p>
-          <h2 className="tw-mt-1 tw-font-medium">
+          <h2 className="tw-mt-6 tw-font-medium">
             Car Loan EMI and Downpayment
           </h2>
           <h4 className="tw-mt-1 tw-font-medium">
             Interest Rate and Monthly Installment
           </h4>
-          <p className="tw-mt-2">
+          <p className="">
             Interest rates play a pivotal role in determining the cost of your
             car loan. Typically, car loan interest rates in the UAE can vary
             depending on the lender and the prevailing market conditions.
@@ -624,10 +624,10 @@ function MainSection() {
             research and finding the best interest rate, you can optimize your
             car loan for affordability.
           </p>
-          <h4 className="tw-mt-1 tw-font-medium">
+          <h4 className=" tw-mt-3 tw-font-medium">
             Loan Installment and Downpayment Variability on Car Finance
           </h4>
-          <p className="tw-mt-2">
+          <p className="">
             Car loan providers in the UAE offer various loan tenures and down
             payment options, allowing you to choose the one that aligns with
             your financial goals. Whether you prefer a shorter loan tenure with
@@ -637,16 +637,16 @@ function MainSection() {
             situation. Moreover, the down payment amount can also vary, giving
             you the freedom to decide how much you can contribute upfront.
           </p>
-          <h4 className="tw-mt-1 tw-font-medium">
+          <h4 className="tw-mt-3 tw-font-medium">
             Monthly Budgeting with Car Loans
           </h4>
-          <p className="tw-mt-2">
+          <p className="">
             A significant advantage of opting for a car loan in the UAE is the
             ability to plan your monthly budget effectively. With a fixed EMI
             amount, you can confidently allocate your resources and manage your
             finances without unexpected surprises. This predictability allows
             you to strike a balance between fulfilling your car ownership dreams
-            and maintainin
+            and maintaining.
           </p>
         </div>
       </div>
