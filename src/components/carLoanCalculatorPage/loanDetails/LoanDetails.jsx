@@ -128,24 +128,7 @@ const LoanDetails = ({
                     {P ? <Price data={price} /> : 0}
                   </p>
                 </div>
-                <input
-                  type="range"
-                  id="loan-amount"
-                  min="33100"
-                  max="165500"
-                  step="100"
-                  value={P}
-                  onChange={(e) => setP(parseFloat(e.target.value))}
-                  className="tw-w-full"
-                />
-                <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
-                  <p>0</p>
-                  <p id="loan-amt-text">
-                    <Price data={price} />
-                  </p>
-                </div>
               </div>
-
               {/* Tenure */}
               <div className="tw-mb-12">
                 <p className="tw-opacity-70 tw-text-md">Tenure</p>
