@@ -529,7 +529,7 @@ export default function index({
             <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What’s trending in the new car market?
             </h5>
-            <h2 className=" tw-font-semibold">
+            <h2 className=" tw-font-semibold tw-capitalize">
               Here are some of the featured new cars in the UAE
             </h2>
             {/* <a href="#" className="tw-text-blue-600 tw-hover:tw-underline">
@@ -634,7 +634,7 @@ export default function index({
                   {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
                 </h5> */}
-                  <h2 className="sm:tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900">
+                  <h2 className="sm:tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900 tw-capitalize">
                     Featured car news
                   </h2>
                   <p className="md:tw-mt-4 tw-text-base tw-leading-6 tw-text-neutral-900">
@@ -733,10 +733,10 @@ export default function index({
 
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-14 tw-mt-8">
             <div className="tw-flex tw-flex-col tw-self-start tw-px-5 max-md:tw-max-w-full">
-              <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+              <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold ">
                 Most popular new cars in the UAE
               </h5>
-              <h2 className=" tw-font-semibold">
+              <h2 className=" tw-font-semibold tw-capitalize">
                 Here are some of the most popular new cars users look for in the
                 UAE
               </h2>
@@ -1000,7 +1000,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Choose your Brand
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Shop by car brands available in the UAE
                 </h2>
               </div>
@@ -1069,7 +1069,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Choose by body type
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Explore new cars based on body type
                 </h2>
               </div>
@@ -1191,7 +1191,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Trending videos
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Here are some of the trending videos from our YouTube channel
                 </h2>
               </div>
@@ -1258,7 +1258,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Trending automotive news
                 </h5>
-                <h2 className=" tw-font-semibold">Latest Automotive News</h2>
+                <h2 className=" tw-font-semibold tw-capitalize">Latest Automotive News</h2>
               </div>
               {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
       View More
@@ -1278,7 +1278,7 @@ export default function index({
                       <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                         {articles.news[0].title}
                       </div>
-                      <div className="tw-mt-1 tw-text-base tw-line-clamp-2 tw-text-white">
+                      <div className="tw-mt-1 tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
                         {articles.news[0].summary}
                       </div>
                     </div>

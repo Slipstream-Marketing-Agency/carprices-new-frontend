@@ -1113,7 +1113,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
-              <div className="tw-my-auto">
+              <div className="tw-my-auto tw-text-gray-400">
                 *CarPrices.ae does not guarantee the accuracy of any brand,
                 vehicle or specification information shown on our website.
                 Models and specifications and vehicle availability are subject
@@ -1123,7 +1123,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
-              <div className="tw-my-auto">
+              <div className="tw-my-auto ">
                 ©2017 - {currentYear} CarPrices.ae. All rights reserved.
               </div>
             </div>
