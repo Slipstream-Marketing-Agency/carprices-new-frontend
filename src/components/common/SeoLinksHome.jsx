@@ -3,7 +3,15 @@ import React from "react";
 
 export default function SeoLinksHome() {
   return (
-    <div className="tw-mt-12 tw-w-full max-md:tw-pr-5 max-md:tw-mt-10 max-md:tw-max-w-full tw-container tw-px-5">
+    <div className="sm:tw-mt-12 tw-w-full max-md:tw-pr-5 max-md:tw-mt-10 max-md:tw-max-w-full tw-container">
+      <div className="tw-flex tw-flex-col tw-self-start max-md:tw-max-w-full sm:tw-mb-10 ">
+        <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+          Frequently Searched
+        </h5>
+        <h2 className=" tw-font-semibold">
+          What Others Are Searching For?
+        </h2>
+      </div>
       <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
         <div className="tw-flex tw-flex-col tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full">
           <div className="max-md:tw-mt-10">
@@ -209,7 +217,7 @@ export default function SeoLinksHome() {
             </div>
           </div>
         </div>
-        <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full tw-mb-10">
+        <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[33%] max-md:tw-ml-0 max-md:tw-w-full sm:tw-mb-10">
           <div className="tw-flex tw-flex-col tw-grow tw-px-8 tw-py-8 tw-w-full tw-bg-sky-100 tw-rounded-2xl max-md:tw-px-5 max-md:tw-mt-10 max-md:tw-max-w-full">
             <div className="tw-text-2xl tw-leading-9 tw-text-neutral-900 tw-font-bold">
               Why CarPrices.ae?

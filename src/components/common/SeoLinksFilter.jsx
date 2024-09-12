@@ -3,8 +3,8 @@ import React from "react";
 
 export default function SeoLinksFilter() {
   return (
-    <div className="tw-mt-12 tw-w-full max-md:tw-pr-5 max-md:tw-mt-10 max-md:tw-max-w-full tw-container tw-px-5">
-      <div className="tw-flex tw-flex-col tw-self-start max-md:tw-max-w-full tw-mb-4">
+    <div className="tw-mt-12 tw-w-full max-md:tw-pr-5 max-md:tw-mt-10 max-md:tw-max-w-full tw-container">
+      <div className="tw-flex tw-flex-col tw-self-start max-md:tw-max-w-full sm:tw-mb-10 ">
         <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
           Frequently Searched
         </h5>

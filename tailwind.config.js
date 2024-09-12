@@ -23,6 +23,7 @@ module.exports = {
           xl: '1280px',
           '2xl': '1360px',
         },
+        padding:"14px",
       },
       backgroundImage: theme => ({
         'stripes': 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
