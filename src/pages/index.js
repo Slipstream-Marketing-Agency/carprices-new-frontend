@@ -31,6 +31,7 @@ import Ad300x250 from "../components-old/ads/Ad300x250";
 import Ad970x250 from "../components-old/ads/Ad970x250";
 import MainLayout from "../layout/MainLayout";
 import SeoLinksHome from "../components/common/SeoLinksHome";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function index({
   bannerImage,
@@ -158,7 +159,7 @@ export default function index({
 
   const settings = {
     dots: false,
-    autoplaySpeed:2000,
+    autoplaySpeed: 2000,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -621,19 +622,16 @@ export default function index({
                   <Ad728x90 dataAdSlot="4367254600" />
                 </div>
               </div>
-              <div className=" md:tw-hidden tw-block tw-mb-4">
+              <div className=" md:tw-hidden tw-block sm:tw-mb-4">
                 <Ad300x250 dataAdSlot="8451638145" />
               </div>
             </div>
           </div>
           {/* featured cars */}
-          <div className="tw-container md:tw-py-8 tw-overflow-hidden">
+          <div className="tw-container md:tw-py-8 tw-overflow-hidden ">
             <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
               <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full sm:tw-my-3">
                 <div className="tw-flex tw-flex-col max-md:tw-mt-10">
-                  {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
-                  Featured car news
-                </h5> */}
                   <h2 className="sm:tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900 tw-capitalize">
                     Featured car news
                   </h2>
@@ -730,8 +728,8 @@ export default function index({
               </div>
             </div>
           </div>
-
-          <div className="tw-flex tw-flex-col tw-container md:tw-mt-14 tw-mt-8">
+          {/* popular new cars */}
+          <div className="tw-flex tw-flex-col tw-container md:tw-mt-12 tw-mt-6">
             <div className="tw-flex tw-flex-col tw-self-start tw-px-5 max-md:tw-max-w-full">
               <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold ">
                 Most popular new cars in the UAE
@@ -871,41 +869,38 @@ export default function index({
               {/* )} */}
             </div>
           </div>
-
-          <div className="tw-container tw-mt-12 tw-mb-8">
+          {/* notable upcoming cars */}
+          {/* new */}
+          <div className="tw-container sm:tw-mt-12  tw-mt-6">
             <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-12 w-full">
+              {/* Sidebar for title and navigation buttons */}
+
               <div className="tw-pt-3 lg:tw-col-span-2">
-                <div className="tw-flex tw-flex-col tw-h-full tw-py-5">
-                  <div className="tw-flex md:tw-flex-col tw-justify-between tw-h-full md:tw-p-4 md:tw-px-0 tw-px-5">
-                    {/* <div className="tw-self-end tw-text-7xl tw-leading-[96px] max-md:tw-text-4xl">
-          20+
-        </div> */}
-                    <div className="md:tw-text-3xl md:tw-text-left tw-text-xl tw-font-bold md:px-0 px-2">
+                <div className="tw-flex tw-flex-col tw-h-full sm:tw-py-5">
+                  <div className="tw-flex md:tw-flex-col tw-justify-between tw-h-full md:tw-p-4 tw-px-5">
+                    <div className="md:tw-text-3xl tw-text-xl tw-font-bold">
                       Notable
                       <br /> Upcoming Cars
                     </div>
-                    <div className="tw-flex tw-justify-center items-center tw-gap-4 py-2">
+                    <div className="tw-flex tw-justify-center tw-items-center tw-gap-4 py-2">
                       <button
                         className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                         onClick={() => sliderRef.current.slickPrev()}
                       >
-                        <span className="material-symbols-outlined">
-                          chevron_left
-                        </span>
+                        <span className="material-symbols-outlined">chevron_left</span>
                       </button>
                       <button
                         className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                         onClick={() => sliderRef.current.slickNext()}
                       >
-                        <span className="material-symbols-outlined">
-                          chevron_right
-                        </span>
+                        <span className="material-symbols-outlined">chevron_right</span>
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Carousel Section */}
               <div className="lg:tw-col-span-10">
                 <Slider ref={sliderRef} {...settingsupcoming}>
                   {cars.map((item, index) => (
@@ -916,18 +911,12 @@ export default function index({
                       <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-min-h-[290px]">
                         <Image
                           loading="lazy"
-                          width={0}
-                          height={0}
                           layout="fill"
-                          src={`${item.imgSrc}`}
+                          src={item.imgSrc}
                           alt={item.title}
                         />
-                        <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10 max-md:tw-max-w-full">
-                          <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
-                            <h4 className="tw-text-white tw-self-start tw-font-bold">
-                              {item.title}
-                            </h4>
-                          </div>
+                        <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10">
+                          <h4 className="tw-text-white tw-font-bold">{item.title}</h4>
                         </div>
                       </div>
                     </div>
@@ -936,6 +925,7 @@ export default function index({
               </div>
             </div>
           </div>
+
 
           {/* <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
           <div className="tw-flex tw-gap-5 tw-justify-between tw-px-5 tw-w-full tw-max-w-[718px] max-md:tw-flex-wrap max-md:tw-max-w-full">
@@ -994,7 +984,7 @@ export default function index({
           </div>
         </div> */}
 
-          <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-14">
+          <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-flex-col tw-justify-center container">
               <div className="tw-flex tw-flex-col tw-justify-center">
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
@@ -1028,7 +1018,7 @@ export default function index({
                         src={`${item?.logo}`}
                         className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] md:tw-grayscale hover:tw-filter-none"
                       />
-                      <div className="md:tw-mt-6 tw-font-semibold tw-whitespace-nowrap">
+                      <div className="md:tw-mt-6 tw-mt-2 tw-font-semibold tw-whitespace-nowrap tw-text-xs md:tw-text-base">
                         {item.name}
                       </div>
                     </Link>
@@ -1074,30 +1064,31 @@ export default function index({
                 </h2>
               </div>
               {/* <button className="tw-px-6 tw-py-3 tw-mt-4 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
-      View More
-    </button> */}
+                  View More
+                </button> */}
             </div>
 
             <div className="tw-grid md:tw-grid-cols-5 tw-grid-cols-3 md:tw-gap-10 tw-gap-8 md:tw-mt-10 tw-mt-5 tw-max-w-full">
               {bodyTypes.map((item, index) => (
                 <Link href={`/category/${item?.slug}`} key={index}>
                   <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black">
-                    <div className="tw-w-full md:tw-h-32 tw-h-24 tw-overflow-hidden">
+                    <div className="tw-w-full md:tw-h-32 sm:tw-h-24 tw-overflow-hidden">
                       <img
                         loading="lazy"
                         src={`${item?.image}`}
                         className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                       />
                     </div>
-                    <div className=" tw-font-semibold">{item.name}</div>
+                    <div className=" tw-font-semibold tw-text-xs md:tw-text-base">{item.name}</div>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-
+          {/* image section */}
           <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
-            <div className="tw-flex tw-flex-col tw-w-full">
+            {/* calculate your car loan EMI */}
+            {/* <div className="tw-flex tw-flex-col tw-w-full">
               <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
                 <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                   <img
@@ -1129,8 +1120,9 @@ export default function index({
                   </div>
                 </div>
               </Link>
-            </div>
-            <div className="tw-flex tw-flex-col tw-w-full">
+            </div> */}
+            {/* value of  current car */}
+            {/* <div className="tw-flex tw-flex-col tw-w-full">
               <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                 <img
                   src="/car-value.jpg"
@@ -1152,15 +1144,69 @@ export default function index({
 
                   <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
                     <p className="tw-font-bold">Coming Soon</p>
-                    {/* <span className="material-symbols-outlined">
-                    arrow_forward
-                  </span> */}
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
+
+          {/* image section NEw */}
+          <div className=" tw-container sm:tw-grid tw-grid-cols-2 tw-w-full tw-gap-4 tw-space-y-4 sm:tw-space-y-0">
+            <div className="tw-bg-gradient-to-tl tw-from-blue-800 tw-via-blue-600 tw-to-blue-700  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
+              <div>
+                <div className="tw-font-semibold sm:tw-text-2xl  tw-capitalize">
+                  calculate your car loan EMI
+                </div>
+                <div className="  tw-text-xs sm:tw-text-sm tw-mb-6 tw-w-[60%] sm:tw-w-2/3 tw-opacity-80 tw-mt-1">
+                  Input your loan amount, interest rate, and loan term to get instant results.
+                </div>
+                <Link href="/loan-calculator">
+                  <button
+                    className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16"
+                  >
+                    Calculate Now
+                  </button>
+                </Link>
+                <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
+              </div>
+              <Image
+                className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
+                src={"https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"}
+                alt="car_Loan_EMI-icon"
+                height={200}
+                width={200}
+              // layout="responsive"
+              />
+            </div>
+            <div className="tw-bg-gradient-to-tl tw-from-gray-700 tw-via-gray-800 tw-to-black  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
+              <div>
+                <div className=" tw-font-semibold sm:tw-text-2xl  tw-capitalize ">
+                  Know your car's worth
+                </div>
+                <div className="  tw-text-xs sm:tw-text-sm tw-mb-6 tw-w-[60%] sm:tw-w-2/3 tw-opacity-80 tw-mt-1">
+                  Input your car's details to receive an instant valuation based on real-time market data.
+                </div>
+                <Link href="/insurance-calculator">
+
+                  <button
+                    className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16"
+                  >
+                    Value My Car
+                  </button>
+                </Link>
+                <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
+              </div>
+              <Image
+                className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-52 tw-bottom-10 tw-left-36 tw-w-[65%] tw-h-[65%] xl:tw-w-[80%] xl:tw-h-[80%]"
+                src={"https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"}
+                alt="car_worth-icon"
+                height={200}
+                width={200}
+              // layout="responsive"
+              />
+            </div>
+          </div>
           {/* <div className="container">
         <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
           <div className="flex flex-col w-full">
@@ -1242,9 +1288,9 @@ export default function index({
                       className=" tw-absolute tw-right-5 tw-top-[-53px] tw-w-[47px]"
                     />
                     <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 ">
-                      <h4 className=" tw-text-black tw-font-semibold line-clamp-2">
+                      <h5 className=" tw-text-black  tw-font-semibold line-clamp-2">
                         {item.name}
-                      </h4>
+                      </h5>
                     </div>
                   </div>
                 </Link>
