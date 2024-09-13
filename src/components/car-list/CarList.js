@@ -5,15 +5,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 
 const CarList = ({ cars, totalCars }) => {
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
-
   const router = useRouter();
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
-    // Define keys to exclude
+    // Define keys to exclude by default
     const excludeKeys = [
       "sort",
       "page",
@@ -45,8 +41,23 @@ const CarList = ({ cars, totalCars }) => {
       "initialprice",
     ];
 
+    // Check if the user is on the "/brands" page
+    const isBrandPage = router.pathname === "/brands/[brandname]";
+    const isCategoryPage = router.pathname === "/category/[categoryname]";
+
+    // Exclude 'brandname' when on the brands page
+    if (isCategoryPage) {
+      excludeKeys.push("categoryname");
+    }
+
+    if (isBrandPage) {
+      excludeKeys.push("brandname");
+    }
+
     // Extract filters from query and set initial state
     const { query } = router;
+    console.log(query, "query");
+
     const initialFilters = [];
 
     Object.keys(query).forEach((key) => {
@@ -59,7 +70,7 @@ const CarList = ({ cars, totalCars }) => {
     });
 
     setFilters(initialFilters);
-  }, [router.query]);
+  }, [router.query, router.pathname]); // Add router.pathname to dependencies
 
   const removeFilter = (type, value) => {
     const updatedFilters = filters.filter(
@@ -68,12 +79,14 @@ const CarList = ({ cars, totalCars }) => {
     setFilters(updatedFilters);
 
     const updatedQuery = { ...router.query };
-    const values = updatedQuery[type].split(",").filter((v) => v !== value);
-    if (values.length > 0) {
+    const values = updatedQuery[type]?.split(",").filter((v) => v !== value);
+
+    if (values && values.length > 0) {
       updatedQuery[type] = values.join(",");
     } else {
       delete updatedQuery[type];
     }
+
     router.push({ pathname: router.pathname, query: updatedQuery });
   };
 
