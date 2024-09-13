@@ -41,7 +41,7 @@ const CarList = ({ cars, totalCars }) => {
       "initialprice",
     ];
 
-    // Check if the user is on the "/brands" page
+    // Check if the user is on the "/brands" or "/category" page
     const isBrandPage = router.pathname === "/brands/[brandname]";
     const isCategoryPage = router.pathname === "/category/[categoryname]";
 
@@ -91,8 +91,19 @@ const CarList = ({ cars, totalCars }) => {
   };
 
   const clearFilters = () => {
-    setFilters([]);
-    router.push({ pathname: router.pathname, query: {} });
+    const updatedQuery = { ...router.query };
+    
+    // Retain brandname or categoryname in query if on brand or category page
+    if (router.pathname === "/brands/[brandname]") {
+      const { brandname } = router.query; // Retain brandname
+      router.push({ pathname: `/brands/${brandname}`, query: {} });
+    } else if (router.pathname === "/category/[categoryname]") {
+      const { categoryname } = router.query; // Retain categoryname
+      router.push({ pathname: `/category/${categoryname}`, query: {} });
+    } else {
+      // If not on brand or category page, clear all filters
+      router.push({ pathname: router.pathname, query: {} });
+    }
   };
 
   return (
