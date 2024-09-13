@@ -126,7 +126,7 @@ function About() {
           </div>
         </div>
 
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 tw-p-6 ">
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6 tw-p-6 tw-pt-0 sm:tw-pt-6">
           <div className="tw-flex tw-flex-col tw-justify-center tw-space-y-4">
             <p className=" tw-text-gray-600">
               Established in 2017 in Dubai, UAE, CarPrices.ae is a fast-growing
@@ -141,75 +141,77 @@ function About() {
               information on all new cars in the UAE and allowing them to find a
               right car that suits their needs.
             </p>
-            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
-              What We Offer
-            </h2>
-            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
-              {[
-                "A ‘World’s First’ truly interactive new car research platform which recommends cars based on buyers’ preferences and requirements.",
-                "Extensive new car database maintained by our automotive experts.",
-                "New car buyers can compare a wide range of vehicles side-by-side for a comprehensive pricing and feature overview.",
-                "Equipping users with tools and insights to find the perfect car aligned with their needs, preferences, and budget.",
-              ].map((point, index) => (
-                <li key={index} className=" tw-text-gray-700 tw-ml-4">
-                  {index === 0 ? (
-                    <>
-                      A <span className="tw-font-bold">‘World’s First’</span>{" "}
-                      truly interactive new car research platform which
-                      recommends cars based on buyers’ preferences and
-                      requirements.
-                    </>
-                  ) : (
-                    point
-                  )}
-                </li>
-              ))}
-            </ul>
-            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
-              Our Commitment
-            </h2>
-            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
-              {[
-                "Ensuring accuracy, reliability, and authenticity in the information provided, fostering trust among our platform users.",
-                "Maintaining transparency in our operations, processes, and data sources, enabling users to make well-informed decisions confidently.",
-                "Commitment to continual enhancement of our platform, incorporating user feedback and technological advancements for an optimized user experience.",
-                "Fostering a supportive and interactive community environment where users can share, learn, and engage with fellow car enthusiasts and experts.",
-              ].map((point, index) => (
-                <li key={index} className=" tw-text-gray-700 tw-ml-4">
-                  {point}
-                </li>
-              ))}
-            </ul>
-            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
-              Continuous Updates
-            </h2>
-            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
-              {[
-                "Regularly updated platform keeping pace with the dynamic automotive industry.",
-                "Timely incorporation of the latest car models, ensuring users have access to current information.",
-                "Industry news and trends regularly added to keep users informed about the evolving automotive landscape.",
-                "Ensuring that users have access to the freshest details to aid their decision-making process when buying a car.",
-              ].map((point, index) => (
-                <li key={index} className=" tw-text-gray-700 tw-ml-4">
-                  {point}
-                </li>
-              ))}
-            </ul>{" "}
-            <h2 className="tw-text-2xl tw-font-semibold tw-text-gray-800">
-              Additional Resources
-            </h2>
-            <ul className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
-              {[
-                "A user-friendly tool aiding in financial planning for car purchases by calculating potential loan amounts, interest rates, and repayment periods.",
-                "An organized and easily navigable sitemap ensuring effortless access to our diverse range of resources, including car specifications, reviews, and comparison tools.",
-                "Detailed guides and tips on vehicle maintenance, ownership, insurance, and more, providing valuable insights for both new and experienced car owners.",
-                "In-depth articles and analyses on industry trends, market forecasts, and emerging technologies, fostering a deeper understanding of the automotive world.",
-              ].map((point, index) => (
-                <li key={index} className=" tw-text-gray-700 tw-ml-4">
-                  {point}
-                </li>
-              ))}
-            </ul>
+            <div className="tw-space-y-5">
+              <h4 className=" tw-font-semibold tw-text-gray-800">
+                What We Offer
+              </h4>
+              <ul className="tw-bg-white tw-p-6 tw-pt-0 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+                {[
+                  "A ‘World’s First’ truly interactive new car research platform which recommends cars based on buyers’ preferences and requirements.",
+                  "Extensive new car database maintained by our automotive experts.",
+                  "New car buyers can compare a wide range of vehicles side-by-side for a comprehensive pricing and feature overview.",
+                  "Equipping users with tools and insights to find the perfect car aligned with their needs, preferences, and budget.",
+                ].map((point, index) => (
+                  <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                    {index === 0 ? (
+                      <>
+                        A <span className="tw-font-bold">‘World’s First’</span>{" "}
+                        truly interactive new car research platform which
+                        recommends cars based on buyers’ preferences and
+                        requirements.
+                      </>
+                    ) : (
+                      point
+                    )}
+                  </li>
+                ))}
+              </ul>
+              <h4 className=" tw-font-semibold tw-text-gray-800">
+                Our Commitment
+              </h4>
+              <ul className="tw-bg-white tw-p-6 tw-pt-0 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+                {[
+                  "Ensuring accuracy, reliability, and authenticity in the information provided, fostering trust among our platform users.",
+                  "Maintaining transparency in our operations, processes, and data sources, enabling users to make well-informed decisions confidently.",
+                  "Commitment to continual enhancement of our platform, incorporating user feedback and technological advancements for an optimized user experience.",
+                  "Fostering a supportive and interactive community environment where users can share, learn, and engage with fellow car enthusiasts and experts.",
+                ].map((point, index) => (
+                  <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <h4 className=" tw-font-semibold tw-text-gray-800">
+                Continuous Updates
+              </h4>
+              <ul className="tw-bg-white tw-p-6 tw-pt-0 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+                {[
+                  "Regularly updated platform keeping pace with the dynamic automotive industry.",
+                  "Timely incorporation of the latest car models, ensuring users have access to current information.",
+                  "Industry news and trends regularly added to keep users informed about the evolving automotive landscape.",
+                  "Ensuring that users have access to the freshest details to aid their decision-making process when buying a car.",
+                ].map((point, index) => (
+                  <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                    {point}
+                  </li>
+                ))}
+              </ul>{" "}
+              <h4 className=" tw-font-semibold tw-text-gray-800">
+                Additional Resources
+              </h4>
+              <ul className="tw-bg-white tw-p-6 tw-pt-0 tw-rounded-lg tw-shadow-md tw-space-y-4 tw-list-disc tw-pl-5">
+                {[
+                  "A user-friendly tool aiding in financial planning for car purchases by calculating potential loan amounts, interest rates, and repayment periods.",
+                  "An organized and easily navigable sitemap ensuring effortless access to our diverse range of resources, including car specifications, reviews, and comparison tools.",
+                  "Detailed guides and tips on vehicle maintenance, ownership, insurance, and more, providing valuable insights for both new and experienced car owners.",
+                  "In-depth articles and analyses on industry trends, market forecasts, and emerging technologies, fostering a deeper understanding of the automotive world.",
+                ].map((point, index) => (
+                  <li key={index} className=" tw-text-gray-700 tw-ml-4">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <p>
               For inquiries, suggestions, or feedback, reach out through our
               <Link href="/contact-us" className="tw-font-semibold">

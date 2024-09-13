@@ -242,7 +242,7 @@ export default function VehicleFaq({
                 <div key={index} className="tw-border tw-rounded tw-bg-white">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="tw-text-xl tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
+                    className="sm:tw-text-xl tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
                   >
                     <span
                       className={`${

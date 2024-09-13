@@ -158,12 +158,13 @@ export default function index({
 
   const settings = {
     dots: false,
+    autoplaySpeed:2000,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
     centerPadding: "0",
-    autoplay: false,
+    autoplay: true,
     focusOnSelect: true,
     variableWidth: true,
     draggable: false,
@@ -254,7 +255,7 @@ export default function index({
   const categorysliderSettings = {
     dots: false,
     infinite: true,
-    speed: 2000,
+    // speed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
@@ -371,9 +372,9 @@ export default function index({
     // Format the minimum EMI for display
     const emiString = minEMI
       ? `AED ${minEMI.toLocaleString("en-AE", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })}*`
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      })}*`
       : "Not Available";
 
     return (
@@ -524,11 +525,11 @@ export default function index({
             </div>
           </div>
 
-          <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8 tw-relative ">
+          <div className="tw-container tw-mx-auto tw-py-8 tw-relative ">
             <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What’s trending in the new car market?
             </h5>
-            <h2 className=" tw-font-semibold">
+            <h2 className=" tw-font-semibold tw-capitalize">
               Here are some of the featured new cars in the UAE
             </h2>
             {/* <a href="#" className="tw-text-blue-600 tw-hover:tw-underline">
@@ -616,28 +617,24 @@ export default function index({
                     </Link>
                   ))}
                 </Slider>
-                <div className=" md:tw-block tw-hidden">
+                <div className="md:tw-block tw-hidden">
                   <Ad728x90 dataAdSlot="4367254600" />
                 </div>
               </div>
-              <div className="tw-top-0 tw-right-0">
-                <div className="tw-flex tw-flex-col tw-h-full tw-py-5 ">
-                  <div className="md:tw-hidden tw-block">
-                    <Ad300x250 dataAdSlot="8451638145" />
-                  </div>
-                </div>
+              <div className=" md:tw-hidden tw-block tw-mb-4">
+                <Ad300x250 dataAdSlot="8451638145" />
               </div>
             </div>
           </div>
-
-          <div className="tw-container tw-mx-auto tw-px-4 md:tw-py-8 tw-overflow-hidden">
+          {/* featured cars */}
+          <div className="tw-container md:tw-py-8 tw-overflow-hidden">
             <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
-              <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full tw-my-3">
+              <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full sm:tw-my-3">
                 <div className="tw-flex tw-flex-col max-md:tw-mt-10">
                   {/* <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Featured car news
                 </h5> */}
-                  <h2 className="tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900">
+                  <h2 className="sm:tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900 tw-capitalize">
                     Featured car news
                   </h2>
                   <p className="md:tw-mt-4 tw-text-base tw-leading-6 tw-text-neutral-900">
@@ -711,7 +708,7 @@ export default function index({
                 </Slider>
               </div>
               <div className="md:tw-hidden tw-block">
-                <Slider {...settings}>
+                <Slider ref={featuredSliderRefMob} {...settings}>
                   {FeaturedData.map((item, index) => (
                     <Link href={item.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
@@ -736,10 +733,10 @@ export default function index({
 
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-14 tw-mt-8">
             <div className="tw-flex tw-flex-col tw-self-start tw-px-5 max-md:tw-max-w-full">
-              <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+              <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold ">
                 Most popular new cars in the UAE
               </h5>
-              <h2 className=" tw-font-semibold">
+              <h2 className=" tw-font-semibold tw-capitalize">
                 Here are some of the most popular new cars users look for in the
                 UAE
               </h2>
@@ -753,11 +750,10 @@ export default function index({
                     className="tw-flex tw-flex-col tw-justify-center"
                   >
                     <div
-                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${
-                        selectedTab === index
-                          ? "tw-bg-neutral-900 tw-text-white"
-                          : "tw-bg-violet-100 tw-border-violet-100"
-                      }`}
+                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${selectedTab === index
+                        ? "tw-bg-neutral-900 tw-text-white"
+                        : "tw-bg-violet-100 tw-border-violet-100"
+                        }`}
                       onClick={() => setSelectedTab(index)}
                     >
                       {category}
@@ -1004,7 +1000,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Choose your Brand
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Shop by car brands available in the UAE
                 </h2>
               </div>
@@ -1073,7 +1069,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Choose by body type
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Explore new cars based on body type
                 </h2>
               </div>
@@ -1100,13 +1096,13 @@ export default function index({
             </div>
           </div>
 
-          <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container tw-px-5">
+          <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
             <div className="tw-flex tw-flex-col tw-w-full">
               <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
                 <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                   <img
                     src="/emi.jpg"
-                    alt=""
+                    alt="emi-Icon"
                     className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
                   />
                   <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
@@ -1116,7 +1112,7 @@ export default function index({
                       <h2 className="tw-text-white">
                         Calculate Your Car Loan EMI
                       </h2>
-                      <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                      <p className="tw-text-sm sm:tw-text-base md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                         Fill in the details and find out what the installment
                         will be for your new car. Our car loan calculator is
                         interactive and accurate.
@@ -1138,7 +1134,7 @@ export default function index({
               <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                 <img
                   src="/car-value.jpg"
-                  alt=""
+                  alt="value-of-car Icon"
                   className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
                 />
                 <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
@@ -1147,7 +1143,7 @@ export default function index({
                     <h2 className="tw-text-white">
                       Find out the value of your current car
                     </h2>
-                    <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                    <p className="tw-text-sm sm:tw-text-base md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
                       Our car valuation calculator helps you find out what you
                       can expect for your current car. Fill in the details and
                       get an estimated current value for your used car.
@@ -1195,7 +1191,7 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Trending videos
                 </h5>
-                <h2 className=" tw-font-semibold">
+                <h2 className=" tw-font-semibold tw-capitalize">
                   Here are some of the trending videos from our YouTube channel
                 </h2>
               </div>
@@ -1256,13 +1252,13 @@ export default function index({
             </div>
           </div>
 
-          <div className="tw-flex tw-flex-col tw-container tw-px-5 md:tw-mt-8 tw-mt-0">
+          <div className="tw-flex tw-flex-col tw-container md:tw-mt-8 tw-mt-0">
             <div className="tw-flex tw-justify-between tw-gap-5 tw-px-px tw-w-full max-md:tw-flex-wrap">
               <div className="">
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Trending automotive news
                 </h5>
-                <h2 className=" tw-font-semibold">Latest Automotive News</h2>
+                <h2 className=" tw-font-semibold tw-capitalize">Latest Automotive News</h2>
               </div>
               {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
       View More
@@ -1282,7 +1278,7 @@ export default function index({
                       <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                         {articles.news[0].title}
                       </div>
-                      <div className="tw-mt-1 tw-text-base tw-line-clamp-2 tw-text-white">
+                      <div className="tw-mt-1 tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
                         {articles.news[0].summary}
                       </div>
                     </div>
@@ -1298,7 +1294,7 @@ export default function index({
                   }}
                 >
                   <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                    <div className="tw-text-lg tw-text-white">
+                    <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                       {articles.news[0].title}
                     </div>
                     {/* <div className="tw-flex tw-mt-1 tw-text-sm">
@@ -1315,13 +1311,12 @@ export default function index({
                         key={index}
                         className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
                         style={{
-                          backgroundImage: `url('${
-                            item?.coverImage ? item?.coverImage : altImage
-                          }')`,
+                          backgroundImage: `url('${item?.coverImage ? item?.coverImage : altImage
+                            }')`,
                         }}
                       >
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                          <div className="tw-text-lg tw-text-white">
+                          <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                             {item.title}
                           </div>
                           {/* <div className="tw-flex tw-mt-1 tw-text-sm">
@@ -1336,7 +1331,6 @@ export default function index({
               </div>
             </div>
           </div>
-
           <SeoLinksHome />
         </main>
       </MainLayout>
