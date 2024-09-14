@@ -144,6 +144,7 @@ const CarList = ({ cars, totalCars }) => {
           <CarCard key={index} car={car} />
         ))}
       </div>
+      
     </>
   );
 };
