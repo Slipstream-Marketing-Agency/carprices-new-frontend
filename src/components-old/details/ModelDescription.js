@@ -212,20 +212,20 @@ export default function ModelDescription({
               <td className="tw-py-4 tw-px-6">
                 {isRtl ? (
                   allTrims?.length === 1 ? (
-                    <p>
+                    <>
                       <b>{allTrims.map((trim) => trim.name)}</b>.
-                    </p>
+                    </>
                   ) : (
-                    <p>
+                    <>
                       <b>{allTrims?.length}</b>
                       {variableText}.
-                    </p>
+                    </>
                   )
                 ) : allTrims?.length === 1 ? (
-                  <p>
+                  <>
                     It is only available in one variant:{" "}
                     <b>{allTrims.map((trim) => trim.name)}</b>.
-                  </p>
+                  </>
                 ) : (
                   <>
                     It is available in <b>{allTrims?.length}</b> variants:{" "}
@@ -356,7 +356,7 @@ export default function ModelDescription({
                     {minFuelConsumption !== ""
                       ? minFuelConsumption
                       : maxFuelConsumption}
-                    kmpl
+                    &nbsp;kmpl
                   </b>
                   .
                 </td>
@@ -426,7 +426,7 @@ export default function ModelDescription({
                 <td className="tw-py-4 tw-px-6">
                   Key features include{" "}
                   {features.map((feature, index) => (
-                    <b key={feature}>
+                    <b key={feature} className="tw-capitalize">
                       {index > 0 && index < features.length - 1 ? ", " : ""}
                       {index > 0 && index === features.length - 1
                         ? " and "
