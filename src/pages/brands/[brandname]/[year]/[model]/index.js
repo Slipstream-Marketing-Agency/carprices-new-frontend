@@ -572,7 +572,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             >
               Variants
             </Link>
-            <Link
+            {/* <Link
               href="#price"
               onClick={() => handleLinkClick("#price")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -626,7 +626,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               }`}
             >
               User Reviews
-            </Link>
+            </Link> */}
             <Link
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
@@ -638,7 +638,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             >
               FAQ
             </Link>
-            <Link
+            {/* <Link
               href="#similar-cars"
               onClick={() => handleLinkClick("#similar-cars")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -648,7 +648,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               }`}
             >
               Similar Cars
-            </Link>
+            </Link> */}
           </div>
         </nav>
       </div>
