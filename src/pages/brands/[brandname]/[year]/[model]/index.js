@@ -548,7 +548,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
         </div>
       </div>
       <div className=" tw-sticky tw-top-0">
-        <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
+        <nav className="tw-text-base sm:tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
           <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
             <Link
               href="#overview"
