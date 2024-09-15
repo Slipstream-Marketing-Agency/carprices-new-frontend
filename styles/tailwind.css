@@ -19,14 +19,14 @@
   .label-radio-btn {
     @apply tw-text-sm tw-inline-flex tw-justify-center tw-w-full tw-p-2 tw-text-black tw-bg-white 
       tw-border-gray-300 tw-rounded-lg tw-cursor-pointer dark:hover:tw-text-gray-300 
-      tw-border hover:tw-text-gray-100 hover:tw-bg-gray-100 tw-border-solid dark:tw-text-gray-400 
+      tw-border hover:tw-bg-gray-100 tw-border-solid dark:tw-text-gray-400 
       dark:hover:tw-bg-gray-100;
   }
 
   .label-radio-btn-active {
     @apply tw-text-sm tw-inline-flex tw-justify-center tw-w-full tw-p-2 tw-text-black tw-bg-white 
       tw-rounded-lg tw-cursor-pointer
-      tw-border tw-border-solid 
+      tw-border-2 tw-border-solid 
       dark:hover:tw-bg-gray-100;
   }
 

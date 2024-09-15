@@ -22,7 +22,6 @@ import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import Ad970x250 from "../components-old/ads/Ad970x250";
 import Ad300x250 from "../components-old/ads/Ad300x250";
-import LoginModal from "../components/login-modal/LoginModal";
 import Image from "next/image";
 
 function MainLayout({ children, pageMeta }) {
@@ -38,7 +37,7 @@ function MainLayout({ children, pageMeta }) {
   };
 
   const isSearchCarsPage = router.asPath.startsWith("/search-cars");
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
 
   const currentYear = new Date().getFullYear();
 
@@ -51,6 +50,7 @@ function MainLayout({ children, pageMeta }) {
   const links = [
     { href: "/search-cars", label: "Search New Cars" },
     { href: "/compare-cars", label: "Compare New Cars" },
+    { href: "/insurance-calculator", label: "Insurance Calculator" },
     { href: "/loan-calculator", label: "Car Loan Calculator" },
     { href: "/news", label: "News" },
     { href: "/reviews", label: "Reviews" },
@@ -335,6 +335,7 @@ function MainLayout({ children, pageMeta }) {
   return (
     <>
       <Head>
+        {" "}
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -520,7 +521,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4">
-              <div className="tw-items-center tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
+              <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
                 <Link
                   href="/search-cars"
                   className="tw-justify-center tw-font-semibold"
@@ -532,6 +533,12 @@ function MainLayout({ children, pageMeta }) {
                   className="tw-justify-center tw-font-semibold"
                 >
                   Compare New Cars
+                </Link>
+                <Link
+                  href="/insurance-calculator"
+                  className="tw-justify-center tw-font-semibold"
+                >
+                  Insurance Calculator
                 </Link>
                 <Link
                   href="/loan-calculator"
@@ -550,13 +557,6 @@ function MainLayout({ children, pageMeta }) {
                   className="tw-justify-center tw-font-semibold"
                 >
                   Reviews
-                </Link>
-                <Link
-                  href="/"
-                  onClick={()=> setIsLoginModalOpen(true)}
-                  className="tw-justify-center  tw-bg-black tw-text-white tw-p-2 tw-rounded-full tw-px-4"
-                >
-                  Sign In
                 </Link>
               </div>
             </div>
@@ -612,6 +612,9 @@ function MainLayout({ children, pageMeta }) {
                 </ListItem>
                 <ListItem button component="a" href="/compare-cars">
                   <ListItemText primary="Compare New Cars" />
+                </ListItem>
+                <ListItem button component="a" href="/insurance-calculator">
+                  <ListItemText primary="Insurance Calculator" />
                 </ListItem>
                 <ListItem button component="a" href="/loan-calculator">
                   <ListItemText primary="Car Loan Calculator" />
@@ -849,7 +852,6 @@ function MainLayout({ children, pageMeta }) {
         )}
       </div>
       {/* <Breadcrumb /> */}
-      <LoginModal modal={isLoginModalOpen} setIsOpen={setIsLoginModalOpen}/>
       <main className="tw-mt-6"> {children}</main>
       {/* <Footer1 /> */}
 
@@ -884,15 +886,15 @@ function MainLayout({ children, pageMeta }) {
                   </span>
                 </div>
               </div> */}
-              <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-12 tw-w-full max-md:tw-flex-wrap md:tw-mt-10 tw-mt-0 max-md:tw-max-w-full">
+              <div className="tw-flex tw-gap-5 tw-justify-between sm:tw-mt-12 tw-w-full max-md:tw-flex-wrap md:tw-mt-10 max-md:tw-max-w-full">
                 <div className="max-md:tw-max-w-full">
                   <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
                     <div className="tw-flex tw-flex-col tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
                       <div className="tw-flex tw-flex-col tw-grow tw-text-sm tw-leading-5 tw-text-white">
-                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                        <h4 className=" tw-text-gray-400 tw-tracking-wide tw-uppercase tw-font-semibold">
                           Top 10s
                         </h4>
-                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                        <div className="tw-flex tw-flex-col tw-mt-3 tw-space-y-2">
                           <Link
                             href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
                             className="text-white"
@@ -934,10 +936,10 @@ function MainLayout({ children, pageMeta }) {
                     </div>
                     <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[29%] max-md:tw-ml-0 max-md:tw-w-full">
                       <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
-                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                        <h4 className=" tw-text-gray-400 tw-tracking-wide tw-uppercase tw-font-semibold">
                           Comparisons
                         </h4>
-                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                        <div className="tw-flex tw-flex-col tw-mt-3 tw-space-y-2">
                           <Link
                             href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
                             className="text-white"
@@ -973,10 +975,10 @@ function MainLayout({ children, pageMeta }) {
                     </div>
                     <div className="tw-flex tw-flex-col tw-ml-5 tw-w-[22%] max-md:tw-ml-0 max-md:tw-w-full">
                       <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
-                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                        <h4 className=" tw-text-gray-400 tw-tracking-wide tw-uppercase tw-font-semibold">
                           Quick Search
                         </h4>
-                        <div className="tw-flex tw-flex-col tw-mt-6 tw-space-y-2">
+                        <div className="tw-flex tw-flex-col tw-mt-3 tw-space-y-2">
                           <Link
                             href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
                             className="text-white"
@@ -1012,10 +1014,10 @@ function MainLayout({ children, pageMeta }) {
                     </div>
                     <div className="tw-flex tw-flex-col tw-ml-5 tw-w-1/5 max-md:tw-ml-0 max-md:tw-w-full">
                       <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
-                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                        <h4 className=" tw-text-gray-400 tw-tracking-wide tw-uppercase tw-font-semibold">
                           Legal Bits
                         </h4>
-                        <div className="tw-flex tw-flex-col tw-mt-6">
+                        <div className="tw-flex tw-flex-col tw-mt-3">
                           <Link href="/about" className="text-white">
                             About us
                           </Link>
@@ -1048,10 +1050,10 @@ function MainLayout({ children, pageMeta }) {
                     </div>
                     <div className="tw-flex tw-flex-col tw-ml-5 tw-w-1/5 max-md:tw-ml-0 max-md:tw-w-full">
                       <div className="tw-flex tw-flex-col tw-text-sm tw-leading-5 tw-text-white max-md:tw-mt-10">
-                        <h4 className=" tw-text-white tw-tracking-wide tw-uppercase tw-font-semibold">
+                        <h4 className=" tw-text-gray-400 tw-tracking-wide tw-uppercase tw-font-semibold">
                           Media
                         </h4>
-                        <div className="tw-flex tw-flex-col tw-mt-6">
+                        <div className="tw-flex tw-flex-col tw-mt-3">
                           <Link href="/press-releases" className="text-white">
                            Press Releases
                           </Link>
@@ -1111,7 +1113,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
-              <div className="tw-my-auto">
+              <div className="tw-my-auto tw-text-gray-400">
                 *CarPrices.ae does not guarantee the accuracy of any brand,
                 vehicle or specification information shown on our website.
                 Models and specifications and vehicle availability are subject
@@ -1121,7 +1123,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-gap-5 tw-justify-between tw-mt-14 tw-text-sm tw-leading-5 tw-text-white max-md:tw-flex-wrap max-md:tw-mt-10 max-md:tw-max-w-full">
-              <div className="tw-my-auto">
+              <div className="tw-my-auto ">
                 ©2017 - {currentYear} CarPrices.ae. All rights reserved.
               </div>
             </div>

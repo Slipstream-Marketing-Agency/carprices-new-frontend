@@ -2093,17 +2093,21 @@ input[type="color"]:focus,
 }
 
 .article-content img {
-  margin: 40px 0px;
+  margin: 20px 0px;
   width: 100% !important;
   text-align: center;
   object-fit: contain;
 }
 .article-content p {
-  line-height: 30px !important;
+  line-height: 25px !important;
+}
+
+.article-content ul {
+ margin: 0px !important;
 }
 
 .article-content li {
-  line-height: 30px !important;
+  line-height: 25px !important;
 }
 
 .mainarticle img {

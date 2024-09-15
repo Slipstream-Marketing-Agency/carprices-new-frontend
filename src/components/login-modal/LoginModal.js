@@ -33,7 +33,7 @@ function LoginModal({ modal, setIsOpen }) {
                 </div>
                 <div className="tw-bg-blue-100 tw-space-x-4 tw-p-2 tw-py-3 tw-rounded-xl tw-mb-10 tw-mt-6 tw-items-center tw-text-center tw-cursor-pointer">
                   <Image
-                    src={"assets/icons/google.svg"}
+                    src={"https://cdn.carprices.ae/assets/google_8cfba8cae1.svg"}
                     alt="google-icon"
                     width={20}
                     height={20}
@@ -82,17 +82,17 @@ function LoginModal({ modal, setIsOpen }) {
                     Welcome to{" "}
                     <span className="tw-font-semibold">CarPrice.ae</span>
                   </div>
-                  <div className="tw-font-semibold tw-text-4xl">Sign in</div>
+                  <div className="tw-font-semibold tw-text-4xl">Sign up</div>
                 </div>
                 <div className="tw-bg-blue-100 tw-space-x-4 tw-p-2 tw-py-3 tw-rounded-xl tw-mb-8 tw-mt-6 tw-items-center tw-text-center tw-cursor-pointer">
                   <Image
-                    src={"assets/icons/google.svg"}
+                    src={"https://cdn.carprices.ae/assets/google_8cfba8cae1.svg"}
                     alt="google-icon"
                     width={20}
                     height={20}
                   />
                   <span className="tw-text-sm tw-text-blue-800 tw-font-semibold">
-                    Sign in with Google
+                    Sign up with Google
                   </span>
                 </div>
                 <label className="tw-text-sm tw-font-semibold">

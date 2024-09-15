@@ -98,11 +98,11 @@ function BlogStandardPage() {
       }}
     >
       <section>
-        <div className="tw-container tw-grid md:tw-gap-10 tw-grid-cols-12 tw-my-6 ">
-          <div className="md:tw-col-span-9 tw-col-span-12 tw-space-y-6">
-            <div className="tw-">
-              <h1 className="sm:tw-text-3xl ">Latest Car Reviews in UAE</h1>
-              <p className="mb-4">
+        <div className="tw-container tw-grid sm:tw-gap-10 tw-grid-cols-12">
+          <div className="sm:tw-col-span-9 tw-col-span-12 tw-space-y-6">
+            <div className="">
+              <h1 className="sm:tw-text-3xl tw-capitalize tw-font-semibold tw-mb-3">Latest Car Reviews in UAE </h1>
+              <p className="tw-mb-8">
                 Stay up-to-date with the latest review and updates on the UAE
                 car industry, including new car launches, launch dates, car
                 images, expos and events, price updates, latest discounts,
@@ -127,7 +127,7 @@ function BlogStandardPage() {
                         <h2 className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                           {article?.title}
                         </h2>
-                        <p className="tw-mt-1 tw-text-base tw-line-clamp-2 tw-text-white">
+                        <p className="tw-mt-1 tw-text-base tw-opacity-70 tw-line-clamp-2 tw-text-white">
                           {article?.summary}
                         </p>
                       </div>
@@ -136,10 +136,10 @@ function BlogStandardPage() {
                   <Link href={`/reviews/${article?.slug}`} key={article?.id}>
                     <div className="md:tw-hidden tw-relative tw-mt-3">
                       <div className="md:tw-px-6 tw-px-2">
-                        <h2 className="tw-text-4xl tw-line-clamp-2 md:tw-leading-none tw-leading-6">
+                        <h3 className="tw-text-base sm:tw-text-4xl tw-line-clamp-2 md:tw-leading-none tw-leading-6">
                           {article?.title}
-                        </h2>
-                        <p className="tw-mt-1 tw-text-base tw-line-clamp-2 ">
+                        </h3>
+                        <p className="tw-my-1 tw-text-sm sm:tw-text-base tw-opacity-70 tw-line-clamp-2 ">
                           {article?.summary}
                         </p>
                       </div>
@@ -151,65 +151,59 @@ function BlogStandardPage() {
               <div className="tw-grid tw-gap-4 tw-grid-cols-12 tw-mt-6">
                 {articles.slice(1, 10).map((article, index) => (
                   <Link
-                    legacyBehavior
                     href={`/reviews/${article.slug}`}
                     key={article?.id}
+                    className="tw-relative tw-col-span-6 md:tw-col-span-4 tw-rounded-[14px] tw-shadow-lg"
                   >
-                    <div
-                      key={index}
-                      className="tw-relative tw-col-span-6 md:tw-col-span-4 tw-rounded-[14px] tw-shadow-lg"
-                    >
-                      {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
+                    {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
                         Trending
                       </div> */}
-                      <Image
-                        src={article.coverImage || altImage}
-                        alt=""
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
-                      />
-                      <div className="tw-p-2">
-                        <div className="sm:tw-text-base 4xl:tw-text-2xl tw-text-sm tw-truncate md:tw-whitespace-normal tw-font-semibold">
-                          {`${
-                            article?.title?.length > 20
-                              ? `${article?.title?.slice(0, 50)}... `
-                              : `${article?.title}`
+                    <Image
+                      src={article.coverImage || altImage}
+                      alt=""
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
+                    />
+                    <div className="tw-p-2">
+                      <div className="sm:tw-text-base 4xl:tw-text-2xl tw-text-sm tw-truncate md:tw-whitespace-normal tw-font-semibold">
+                        {`${article?.title?.length > 20
+                            ? `${article?.title?.slice(0, 50)}... `
+                            : `${article?.title}`
                           }`}
-                        </div>
-                        <div className="tw-flex tw-flex-col tw-justify-between">
-                          <div>
-                            <div className="tw-text-xs tw-leading-9 tw-text-gray-700">
-                              <span className="tw-hidden sm:tw-inline">
-                                {article?.author} &mdash;
-                              </span>{" "}
-                              {moment(article?.publishedAt).format(
-                                "MMMM Do YYYY"
-                              )}
-                            </div>
-                            <div className="tw-line-clamp-2 tw-text-xs tw-text-gray-500 ">
-                              {article?.summary}
-                            </div>
-                          </div>{" "}
-                          <Link
-                            legacyBehavior
-                            href={`/reviews/${article?.slug}`}
-                            key={article?.id}
-                          >
-                            <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
-                              Know More
-                              <EastIcon className="tw-text-lg tw-ml-2" />
-                            </button>
-                          </Link>
-                        </div>
+                      </div>
+                      <div className="tw-flex tw-flex-col tw-justify-between">
+                        <div>
+                          <div className="tw-text-xs tw-leading-9 tw-text-gray-700">
+                            <span className="tw-hidden sm:tw-inline">
+                              {article?.author} &mdash;
+                            </span>{" "}
+                            {moment(article?.publishedAt).format(
+                              "MMMM Do YYYY"
+                            )}
+                          </div>
+                          {/* <div className="tw-line-clamp-2 tw-text-xs tw-text-gray-500 ">
+                            {article?.summary}
+                          </div> */}
+                        </div>{" "}
+                        <Link
+                          legacyBehavior
+                          href={`/reviews/${article?.slug}`}
+                          key={article?.id}
+                        >
+                          <button className="tw-bg-transparent tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
+                            Know More
+                            <EastIcon className="tw-text-lg tw-ml-2" />
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </Link>
                 ))}
               </div>
               {!loading && !pageLoading && (
-                <div className="mt-4">
+                <div className="my-4">
                   <Pagination
                     currentPage={page}
                     totalPages={totalPage}
@@ -230,7 +224,7 @@ function BlogStandardPage() {
             <Ad300x250 />
             {articlesThisWeek?.length > 0 && (
               <div>
-                <h4 className="tw-font-bold">From This week</h4>
+                <h2 className="tw-font-bold tw-capitalize">From This week</h2>
                 <hr className="tw-my-2" />
                 {articlesThisWeek?.map((blog) => (
                   <Link
@@ -266,12 +260,12 @@ function BlogStandardPage() {
         </div>
       </section>
 
-      <div className="my-1">
+      <div className="my-2">
         <Ad728x90 />
       </div>
 
       <div className="tw-container">
-        <h2>Popular News</h2>
+        <h2 className="tw-font-semibold tw-capitalize">Popular News</h2>
         <div className="tw-grid tw-gap-4 tw-grid-cols-12 tw-mt-6">
           {loading || pageLoading ? (
             <>
@@ -302,11 +296,10 @@ function BlogStandardPage() {
                   />
                   <div className="tw-p-2">
                     <div className="sm:tw-text-base 4xl:tw-text-2xl tw-text-sm tw-truncate md:tw-whitespace-normal tw-font-semibold">
-                      {`${
-                        article?.title?.length > 20
+                      {`${article?.title?.length > 20
                           ? `${article?.title?.slice(0, 50)}... `
                           : `${article?.title}`
-                      }`}
+                        }`}
                     </div>
                     <div className="tw-flex tw-flex-col tw-justify-between">
                       <div>
@@ -316,16 +309,16 @@ function BlogStandardPage() {
                           </span>{" "}
                           {moment(article?.publishedAt).format("MMMM Do YYYY")}
                         </div>
-                        <div className="tw-line-clamp-2 tw-text-xs tw-text-gray-500 ">
+                        {/* <div className="tw-line-clamp-2 tw-text-xs tw-text-gray-500 ">
                           {article?.summary}
-                        </div>
+                        </div> */}
                       </div>{" "}
                       <Link
                         legacyBehavior
                         href={`/reviews/${article?.slug}`}
                         key={article?.id}
                       >
-                        <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
+                        <button className="tw-bg-transparent tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
                           Know More
                           <EastIcon className="tw-text-lg tw-ml-2" />
                         </button>

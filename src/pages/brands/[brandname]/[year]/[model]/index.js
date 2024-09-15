@@ -825,7 +825,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
       </div>
       <div className="tw-container tw-mx-auto">
         {" "}
-        <SeoLinksFilter />v
+        <SeoLinksFilter />
       </div>
     </MainLayout>
   );
