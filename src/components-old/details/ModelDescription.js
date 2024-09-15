@@ -100,39 +100,38 @@ export default function ModelDescription({
   }
 
   const outputString = `${safetyFeature}`;
-
-  const variableText = allTrims.length > 0 
-  ? allTrims
-      .map((trim, index) => (
-        <Link
-          href={`/brands/${brand?.slug}/${trim.year}/${model?.slug}/${trim.slug}`}
-          key={trim.id}
-        >
-          <b>{trim.name}</b>
-        </Link>
-      ))
-      .reduce((acc, curr, index, array) => {
-        if (index === 0) {
-          // If it's the first item, just return it
-          return curr;
-        } else if (index === array.length - 1) {
-          // If it's the last item, prepend with 'and ' if there are more than one items
-          return (
-            <>
-              {acc} and {curr}
-            </>
-          );
-        } else {
-          // For all other items, append with ', '
-          return (
-            <>
-              {acc}, {curr}
-            </>
-          );
-        }
-      }, null) // Provide an initial value
-  : null;
-
+  const variableText =
+    allTrims.length > 0
+      ? allTrims
+          .map((trim, index) => (
+            <Link
+              href={`/brands/${brand?.slug}/${trim.year}/${model?.slug}/${trim.slug}`}
+              key={trim.id}
+            >
+              <b>{trim.name}</b>
+            </Link>
+          ))
+          .reduce((acc, curr, index, array) => {
+            if (index === 0) {
+              // If it's the first item, just return it
+              return curr;
+            } else if (index === array.length - 1) {
+              // If it's the last item, prepend with 'and ' if there are more than one items
+              return (
+                <>
+                  {acc} and {curr}
+                </>
+              );
+            } else {
+              // For all other items, append with ', '
+              return (
+                <>
+                  {acc}, {curr}
+                </>
+              );
+            }
+          }, null) // Provide an initial value
+      : null;
 
   return (
     <>
@@ -228,10 +227,10 @@ export default function ModelDescription({
                     <b>{allTrims.map((trim) => trim.name)}</b>.
                   </p>
                 ) : (
-                  <p>
+                  <>
                     It is available in <b>{allTrims?.length}</b> variants:{" "}
-                    {variableText}.
-                  </p>
+                    <span className="tw-capitalize">{variableText}</span>.
+                  </>
                 )}
               </td>
             </tr>
@@ -364,10 +363,10 @@ export default function ModelDescription({
               </tr>
             )}
 
-            {mainTrimFuelType === "Electric" ||
-            (mainTrimFuelType === "Hybrid" &&
+            {mainTrimFuelType === "Hybrid" && mainTrimFuelType === "Electric"  ||
+            (
               minRange !== "" &&
-              minRange !== null) ? (
+              minRange !== undefined) ? (
               minRange === maxRange ? (
                 <tr className="tw-border-b tw-border-gray-200">
                   <td className="tw-py-4 tw-px-6 tw-font-semibold tw-border-r tw-border-gray-200">
