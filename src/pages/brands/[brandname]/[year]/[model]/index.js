@@ -460,9 +460,9 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
               <CarEMIDisplay />
               /Monthly EMI*{" "}
-              <span className="tw-underline ">
+              {/* <span className="tw-underline ">
                 <Link href="">Details</Link>
-              </span>
+              </span> */}
             </p>
           </div>
 
