@@ -460,9 +460,9 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             <p className="tw-font-medium tw-text-gray-500 tw-mt-3">
               <CarEMIDisplay />
               /Monthly EMI*{" "}
-              <span className="tw-underline ">
+              {/* <span className="tw-underline ">
                 <Link href="">Details</Link>
-              </span>
+              </span> */}
             </p>
           </div>
 
@@ -548,7 +548,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
         </div>
       </div>
       <div className=" tw-sticky tw-top-0">
-        <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
+        <nav className="tw-text-base sm:tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
           <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
             <Link
               href="#overview"
@@ -572,7 +572,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             >
               Variants
             </Link>
-            <Link
+            {/* <Link
               href="#price"
               onClick={() => handleLinkClick("#price")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -626,7 +626,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               }`}
             >
               User Reviews
-            </Link>
+            </Link> */}
             <Link
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
@@ -638,7 +638,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             >
               FAQ
             </Link>
-            <Link
+            {/* <Link
               href="#similar-cars"
               onClick={() => handleLinkClick("#similar-cars")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -648,7 +648,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               }`}
             >
               Similar Cars
-            </Link>
+            </Link> */}
           </div>
         </nav>
       </div>
