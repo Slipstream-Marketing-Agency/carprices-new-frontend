@@ -1278,10 +1278,10 @@ function CarLeftSidebar({
                     />
                   </div>
                   <div className="tw-flex tw-justify-between">
-                    <p className="tw-border tw-rounded-full tw-px-3 tw-py-2 tw-mr-1 tw-border-solid tw-w-[50%] tw-border-gray-300 tw-whitespace-nowrap">
+                    <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid tw-border-gray-300 tw-whitespace-nowrap">
                       <strong>min:</strong> <Price data={minPrice} />
                     </p>
-                    <p className="tw-border tw-rounded-full tw-px-3 tw-py-2 tw-ml-1 tw-border-solid tw-w-[50%] tw-border-gray-300 tw-whitespace-nowrap">
+                    <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-ml-1 tw-border-solid tw-border-gray-300 tw-whitespace-nowrap">
                       <strong>max:</strong> <Price data={maxPrice} />
                     </p>
                   </div>
@@ -1939,12 +1939,12 @@ function CarLeftSidebar({
                     }}
                   />
                 </div>
-                <div className="tw-flex tw-justify-between">
-                  <p className="tw-border tw-rounded-full tw-px-3 tw-py-2 tw-mr-1 tw-border-solid tw-w-[50%] tw-border-gray-300 tw-whitespace-nowrap">
-                    <strong>min:</strong> <span className="tw-text-[13px]"><Price data={minPrice} /></span>
+                <div className="tw-flex tw-justify-between tw-flex-wrap">
+                  <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
+                    <strong>min:</strong> <span className="tw-text-[12px]"><Price data={minPrice} /></span>
                   </p>
-                  <p className="tw-border tw-rounded-full tw-px-3 tw-py-2 tw-ml-1 tw-border-solid tw-w-[50%] tw-border-gray-300 tw-whitespace-nowrap">
-                    <strong>max:</strong> <span className="tw-text-[13px]"><Price data={maxPrice} /></span>
+                  <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
+                    <strong>max:</strong> <span className="tw-text-[12px]"><Price data={maxPrice} /></span>
                   </p>
                 </div>
                 {router.pathname !== "/find-your-car" && (

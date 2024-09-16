@@ -957,8 +957,8 @@ const CarsPage = ({
           </div>
         </div> */}
 
-          <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-2">
-            <aside className="tw-w-full md:tw-w-1/4 tw-bg-white">
+          <div className="tw-flex tw-flex-col lg:tw-flex-row tw-gap-2">
+            <aside className="tw-w-full lg:tw-w-1/4 tw-bg-white">
               <CarLeftSidebar
                 brandoptions={brandoptions}
                 bodyoptions={bodyoptions}
@@ -973,7 +973,7 @@ const CarsPage = ({
                 toggleModal={toggleModalFunction}
               />
             </aside>
-            <main className="tw-w-full md:tw-w-3/4">
+            <main className="tw-w-full lg:tw-w-3/4">
               <div>
                 {/* <h1 className="fw-bold">New Car Buyer's Guide</h1>
                 <p>

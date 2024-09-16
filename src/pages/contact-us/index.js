@@ -184,7 +184,7 @@ function ContactPage() {
       </Dialog>
       <div className="tw-container mx-auto">
         <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
-          <div className="tw-row-span-1 md:tw-col-span-12 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden md:tw-h-[400px] tw-h-[200px]">
+          <div className="tw-row-span-1 md:tw-col-span-12 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden !sm:tw-h-auto md:tw-h-[400px] tw-pb-4">
             <img
               loading="lazy"
               src="/Contact-Us.jpg"
