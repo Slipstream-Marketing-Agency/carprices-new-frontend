@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CarCard from "./CarCard";
+import UsedCarCard from "./UsedCarCard";
 import { Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 
-const CarList = ({ cars, totalCars }) => {
+const CarList = ({ cars, totalCars, isUsedCar = false }) => {
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
   };
@@ -117,7 +118,7 @@ const CarList = ({ cars, totalCars }) => {
       </div>
       <div className="tw-grid tw-gap-4 tw-mt-4 tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-3">
         {cars.map((car, index) => (
-          <CarCard key={index} car={car} />
+          isUsedCar ? <UsedCarCard key={index} car={car} /> : <CarCard key={index} car={car} />
         ))}
       </div>
     </>
