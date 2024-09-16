@@ -4447,11 +4447,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/suzuki/2025/ertiga</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/cadillac/2023/xt6</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -4463,6 +4458,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/aston-martin/2024/db12</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/suzuki/2025/ertiga</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -4693,6 +4693,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/jetour/2023/x70-fl</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/toyota/2025/urban-cruiser</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -6232,6 +6237,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/renault/2024/arkana</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/porsche/2022/panamera-sport-turismo</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -6818,6 +6828,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/changan/2022/cs35-plus</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/byd/2024/qin-plus</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -7472,6 +7487,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/byd/2025/seal</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/hyundai/2022/santa-fe</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -7753,6 +7773,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/rolls-royce/2021/phantom</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/ford/2025/explorer</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -8377,6 +8402,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/gac/2025/empow</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/porsche/2024/taycan</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -8662,6 +8692,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/gac/2025/emzoom</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/toyota/2024/land-cruiser-prado</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -8873,6 +8908,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/maxus/2021/v80</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/gac/2025/gs8</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
