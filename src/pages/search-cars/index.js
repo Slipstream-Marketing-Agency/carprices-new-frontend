@@ -1066,12 +1066,12 @@ const CarsPage = ({
                         "& .MuiOutlinedInput-notchedOutline": {
                           borderRadius: "30px",
                         },
-                        "& .MuiSelect-select": {
-                          paddingTop: "10px", // reduce padding above
-                          paddingBottom: "10px", // reduce padding below
-                          paddingLeft: "12px", // adjust padding left if needed
-                          paddingRight: "12px", // adjust padding right if needed
-                        },
+                        // "& .MuiSelect-select": {
+                        //   paddingTop: "10px", // reduce padding above
+                        //   paddingBottom: "10px", // reduce padding below
+                        //   paddingLeft: "12px", // adjust padding left if needed
+                        //   paddingRight: "12px", // adjust padding right if needed
+                        // },
                       }}
                     >
                       <MenuItem value="price-desc">
