@@ -1651,12 +1651,12 @@ function CarLeftSidebar({
   };
 
   const { price, ...restQuery } = router.query;
-  const { initialprice } = router.query ;
+  const { initialprice } = router.query;
   const [minPrice, setMinPrice] = useState(43758);
   const [maxPrice, setMaxPrice] = useState(33660000);
   const [initialValues, setInitialValues] = useState([]); // Default values for initial slider range
 
-  console.log(initialValues,"initialprice");
+  console.log(initialValues, "initialprice");
   useEffect(() => {
     if (price) {
       const [min, max] = price.split("-").map(Number);
@@ -1669,11 +1669,10 @@ function CarLeftSidebar({
     if (initialprice !== undefined) {
       const [min, max] = initialprice.split("-").map(Number);
       setInitialValues([min, max]);
-    }else{
+    } else {
       setInitialValues([priceRange.min, priceRange.max]);
     }
-  }, [initialprice,priceRange]);
-
+  }, [initialprice, priceRange]);
 
   const handleSliderChange = (event, newValue) => {
     setMinPrice(newValue[0]);
@@ -1939,12 +1938,18 @@ function CarLeftSidebar({
                     }}
                   />
                 </div>
-                <div className="tw-flex tw-justify-between tw-flex-wrap">
+                <div className="tw-flex tw-justify-between tw-flex-wrap tw-space-y-2 tw-mb-4">
                   <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
-                    <strong>min:</strong> <span className="tw-text-[12px]"><Price data={minPrice} /></span>
+                    <strong>Min:</strong>{" "}
+                    <span>
+                      <Price data={minPrice} />
+                    </span>
                   </p>
                   <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
-                    <strong>max:</strong> <span className="tw-text-[12px]"><Price data={maxPrice} /></span>
+                    <strong>Max:</strong>{" "}
+                    <span>
+                      <Price data={maxPrice} />
+                    </span>
                   </p>
                 </div>
                 {router.pathname !== "/find-your-car" && (
