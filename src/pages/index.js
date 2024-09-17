@@ -499,9 +499,9 @@ export default function index({
             <div className="tw-flex tw-gap-5 max-md:tw-flex-col max-md:tw-gap-0">
               <div className="tw-flex tw-flex-col  tw-justify-between tw-w-1/4 max-md:tw-w-full sm:tw-my-3">
                 <div className="tw-flex tw-flex-col max-md:tw-mt-10">
-                  <h2 className="sm:tw-mt-2 tw-text-4xl tw-leading-8 tw-font-semibold tw-text-neutral-900 tw-capitalize">
+                  <h1 className="sm:tw-mt-2 !tw-text-[1.6rem] tw-leading-8 tw-font-semibold tw-text-neutral-900 tw-capitalize">
                     Featured car news
-                  </h2>
+                  </h1>
                   <p className="md:tw-mt-4 tw-text-base tw-leading-6 tw-text-neutral-900">
                     CarPrices.ae brings car buyers and enthusiasts automotive
                     news coverage with high-res images and video from car shows

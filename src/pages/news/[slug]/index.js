@@ -466,9 +466,9 @@ function BlogDetailsPage({
                   <h6 className="tw-text-blue-600 tw-font-semibold tw-text-xs tw-uppercase tw-mb-0 ">
                     Author
                   </h6>
-                  <h4 className=" tw-text-lg sm:tw-text-xl tw-font-bold ">
+                  <h1 className="tw-text-lg !tw-text-[1.2rem] sm:tw-text-xl tw-font-bold ">
                     Martin V Alva
-                  </h4>
+                  </h1>
                 </div>
               </div>
 

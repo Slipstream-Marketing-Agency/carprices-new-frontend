@@ -1881,8 +1881,8 @@ function CarLeftSidebar({
           {/* Price filter UI */}
           <div className="product-widget tw-mb-3">
             <div className="check-box-item">
-              <h4
-                className="product-widget-title tw-cursor-pointer tw-pb-3"
+              <h1
+                className="product-widget-title !tw-text-[1.2rem] tw-cursor-pointer tw-pb-3"
                 onClick={togglePriceDropdown}
               >
                 Price
@@ -1891,7 +1891,7 @@ function CarLeftSidebar({
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
-              </h4>
+              </h1>
               <div
                 className={`checkbox-container ${
                   showPriceDropdown ? "show" : "hide"
