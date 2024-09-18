@@ -321,7 +321,7 @@ export default function FilterLayout() {
 
   const steps = [
     {
-      title: `Pick the top 3 things you need from your new car`,
+      title: `Pick The Top 3 Must Have Features In Your New Car`,
       component: (
         <StepOne filterData={filterData} setFilterData={setFilterData} />
       ),

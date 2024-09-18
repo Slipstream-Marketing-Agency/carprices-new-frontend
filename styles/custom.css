@@ -3347,3 +3347,13 @@ a,
 .car-detail-main-slider .slick-list {
   padding: 0px !important;
 }
+
+/* Hide scrollbar for the custom-scrollbar class */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none; /* Hides the scrollbar in IE and Edge */
+  scrollbar-width: none; /* Hides the scrollbar in Firefox */
+}

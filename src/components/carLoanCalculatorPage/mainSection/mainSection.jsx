@@ -592,7 +592,7 @@ function MainSection() {
       )}
       {/* section2 */}
       <div>
-        <h2 className="tw-mt-8 tw-mb-3 tw-font-semibold tw-text-2xl  tw-text-lightgray">
+        <h2 className="tw-mt-8 tw-mb-3 tw-font-semibold tw-text-2xl  tw-text-lightgray tw-capitalize">
           {carLoanPage.Heading2}
         </h2>
         <div className="tw-grid tw-para tw-gap-2">
@@ -608,10 +608,10 @@ function MainSection() {
             financial commitment, and that's where a car loan can make all the
             difference.
           </p>
-          <h2 className="tw-mt-6 tw-font-semibold">
+          <h2 className="tw-mt-6 tw-font-semibold tw-capitalize">
             Car Loan EMI and Downpayment
           </h2>
-          <h4 className="tw-mt-1 tw-font-semibold">
+          <h4 className="tw-mt-1 tw-font-semibold tw-capitalize">
             Interest Rate and Monthly Installment
           </h4>
           <p className="">
@@ -625,7 +625,7 @@ function MainSection() {
             research and finding the best interest rate, you can optimize your
             car loan for affordability.
           </p>
-          <h4 className=" tw-mt-3  tw-font-semibold">
+          <h4 className=" tw-mt-3  tw-font-semibold tw-capitalize">
             Loan Installment and Downpayment Variability on Car Finance
           </h4>
           <p className="">
@@ -638,7 +638,7 @@ function MainSection() {
             situation. Moreover, the down payment amount can also vary, giving
             you the freedom to decide how much you can contribute upfront.
           </p>
-          <h4 className="tw-mt-3  tw-font-semibold">
+          <h4 className="tw-mt-3  tw-font-semibold tw-capitalize">
             Monthly Budgeting with Car Loans
           </h4>
           <p className="">

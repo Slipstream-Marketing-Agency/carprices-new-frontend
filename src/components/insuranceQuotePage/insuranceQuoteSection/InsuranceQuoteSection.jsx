@@ -892,7 +892,7 @@ function InsuranceQuote() {
       <Modal modal={isOpen} setIsOpen={setIsOpen} />
       <div className="tw-border tw-rounded-xl tw-h-auto tw-contain-content md:tw-p-8">
         <div className="tw-items-center tw-justify-between">
-          <h1 className="tw-text-center tw-text-2xl sm:tw-text-3xl tw-leading-tight tw-text-lightgray">
+          <h1 className="tw-text-center tw-font-normal tw-text-2xl sm:tw-text-3xl tw-leading-tight tw-text-lightgray">
             Get Your Insurance Quote
           </h1>
           <div className="tw-text-center tw-font-normal  tw-text-2xl sm:tw-text-3xl tw-text-lightgray">

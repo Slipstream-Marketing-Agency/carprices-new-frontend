@@ -474,19 +474,24 @@ export default function index({
               <Ad300x600 dataAdSlot="3792539533" />
             </div>
             <div className="tw-grid tw-grid-cols-1 xl:tw-grid-cols-4 tw-gap-5">
-              <div className="xl:tw-col-span-3 tw-relative">
+              <div className="xl:tw-col-span-3 tw-relative tw-half-card-slider tw-hidden sm:tw-block">
                 <Slider {...sliderSettings}>
                   {featuredcars?.carModels.map((car) => (
-                    <Link
-                      key={car.id}
-                      href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
-                    >
-                      <CarCard car={car} loading={loading} />
-                    </Link>
+                    <CarCard car={car} loading={false} key={car.id} />
                   ))}
                 </Slider>
                 <div className="md:tw-block tw-hidden tw-mt-4"> {/* Added margin-top */}
                   <Ad728x90 dataAdSlot="4367254600" />
+                </div>
+              </div>
+              {/* Horizontal scrolling for screens 720px and smaller */}
+              <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
+                <div className="tw-flex tw-nowrap tw-pr-1">
+                  {featuredcars?.carModels.map((car) => (
+                    <div className="tw-inline-block tw-pr-2" style={{ minWidth: '75%' }} key={car.id}>
+                      <CarCard car={car} loading={false} />
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="md:tw-hidden tw-block sm:tw-mb-4 tw-w-full">
@@ -508,14 +513,14 @@ export default function index({
                     and reveals around the world.
                   </p>
                   <Link href="/news">
-                    <button className="tw-self-start md:tw-px-14 tw-px-8 md:tw-py-5 tw-py-2 md:tw-mt-9 tw-mt-4 tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-rounded-full max-md:tw-px-5">
+                    <button className="md:tw-block tw-hidden tw-self-start md:tw-px-14 tw-px-8 md:tw-py-5 tw-py-2 md:tw-mt-9 tw-mt-4 tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-rounded-full max-md:tw-px-5 active:tw-bg-blue-700">
                       View More
                     </button>
                   </Link>
                 </div>
-                <div className="md:tw-flex tw-hidden tw-justify-end items-center tw-gap-4 py-2 ">
+                <div className="md:tw-flex tw-hidden tw-justify-end items-center tw-gap-4 py-2">
                   <button
-                    className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                    className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center hover:tw-shadow-md active:tw-shadow-md focus:tw-shadow-md"
                     onClick={() => featuredSliderRef.current.slickPrev()}
                   >
                     <span className="material-symbols-outlined">
@@ -523,7 +528,7 @@ export default function index({
                     </span>
                   </button>
                   <button
-                    className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
+                    className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center hover:tw-shadow-md active:tw-shadow-md focus:tw-shadow-md"
                     onClick={() => featuredSliderRef.current.slickNext()}
                   >
                     <span className="material-symbols-outlined">
@@ -531,8 +536,7 @@ export default function index({
                     </span>
                   </button>
                 </div>
-
-                <div className="md:tw-hidden tw-flex tw-justify-end items-center tw-gap-4 py-2">
+                {/* <div className="md:tw-hidden tw-flex tw-justify-end items-center tw-gap-4 py-2">
                   <button
                     className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                     onClick={() => featuredSliderRefMob.current.slickPrev()}
@@ -549,7 +553,7 @@ export default function index({
                       chevron_right
                     </span>
                   </button>
-                </div>
+                </div> */}
               </div>
               <div className="md:tw-flex tw-hidden tw-flex-col tw-w-3/4 max-md:tw-w-full featured-news-card tw-mt-5">
                 <Slider ref={featuredSliderRef} {...settings}>
@@ -563,9 +567,6 @@ export default function index({
                         />
                         <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
                           <h6 className="tw-text-white tw-mb-0">{car.name}</h6>
-                          {/* <small className="tw-mt-1 tw-text-white">
-                Created on: {car.createdOn}
-              </small> */}
                         </div>
                       </div>
                     </Link>
@@ -573,31 +574,36 @@ export default function index({
                 </Slider>
               </div>
               <div className="md:tw-hidden tw-block">
-                <Slider ref={featuredSliderRefMob} {...settings}>
+                <div className="tw-grid tw-grid-cols-2 tw-gap-4">
                   {FeaturedData.map((item, index) => (
                     <Link href={item.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
                         <img
                           src={item.image}
                           alt={`${item.brand} ${item.name}`}
-                          className="tw-object-cover tw-w-full tw-h-96"
+                          className="tw-object-cover tw-w-full tw-h-52"
                         />
-                        <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-rounded-xl tw-border tw-border-solid tw-backdrop-blur-[4px] tw-bg-zinc-500 tw-bg-opacity-10 tw-border-white tw-border-opacity-10 max-md:tw-mt-10 tw-text-white">
+                        <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-48 tw-rounded-xl tw-bg-zinc-900 tw-bg-opacity-50 tw-text-white">
                           <h6 className="tw-text-white">{item.name}</h6>
-                          {/* <small className="tw-mt-1 tw-text-white">
-              Created on: {car.createdOn}
-            </small> */}
                         </div>
                       </div>
                     </Link>
                   ))}
-                </Slider>
+                </div>
+                <div className="tw-text-center tw-mt-4">
+                  <Link href="/news">
+                    <button className="tw-self-start md:tw-px-14 tw-px-8 md:tw-py-5 tw-py-2 md:tw-mt-9 tw-mt-4 tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-rounded-full max-md:tw-px-5 active:tw-bg-blue-700">
+                      View More
+                    </button>
+                  </Link>
+                </div>
               </div>
+
             </div>
           </div>
           {/* popular new cars */}
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-12 tw-mt-6">
-            <div className="tw-flex tw-flex-col tw-self-start tw-px-5 max-md:tw-max-w-full">
+            <div className="tw-flex tw-flex-col tw-self-start sm:tw-px-5 max-md:tw-max-w-full">
               <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold ">
                 Most popular new cars in the UAE
               </h5>
@@ -608,7 +614,7 @@ export default function index({
             </div>
 
             <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-mt-3 tw-w-full tw-text-base tw-leading-4 tw-text-center tw-text-neutral-900 max-md:tw-flex-wrap max-md:tw-max-w-full">
-              <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-px-5 max-md:tw-flex-wrap max-md:tw-max-w-full">
+              <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between sm:tw-px-5 max-md:tw-flex-wrap max-md:tw-max-w-full">
                 {categories.map((category, index) => (
                   <div
                     key={index}
@@ -628,36 +634,23 @@ export default function index({
               </div>
             </div>
 
-            <div className="tw-px-4">
-              {/* {loading ? (
-              <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4">
-                {Array.from(new Array(6)).map((_, index) => (
-                  <div key={index} className="tw-px-2">
-                    <Skeleton variant="rectangular" width="100%" height={250} />
-                    <Skeleton width="60%" height={30} className="tw-mt-2" />
-                    <Skeleton width="80%" height={30} className="tw-mt-2" />
-                    <Skeleton width="40%" height={30} className="tw-mt-2" />
-                    <Skeleton
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                      className="tw-mt-4"
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : ( */}
+            <div className="tw-px-4 tw-hidden sm:tw-block">
               <Slider key={selectedTab} {...categorysliderSettings}>
                 {filterCars(selectedTab).map((car, index) => (
-                  <Link
-                    key={car.id}
-                    href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}
-                  >
-                    <CarCard car={car} loading={loading} />
-                  </Link>
+                  <CarCard car={car} key={index} loading={loading} />
                 ))}
               </Slider>
               {/* )} */}
+            </div>
+            {/* Horizontal scrolling for screens 720px and smaller */}
+            <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
+              <div className="tw-flex tw-nowrap tw-pr-1">
+                {filterCars(selectedTab).map((car) => (
+                  <div className="tw-inline-block tw-pr-2" style={{ minWidth: '75%' }} key={car.id}>
+                    <CarCard car={car} loading={loading} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           {/* notable upcoming cars */}
@@ -797,7 +790,7 @@ export default function index({
                 </div>
               </div>
               <div className="tw-flex tw-flex-col tw-justify-center tw-col-span-3 max-md:tw-w-full ">
-                <div className="tw-grid md:tw-grid-cols-6 tw-grid-cols-3 tw-gap-5 md:tw-pr-20 max-md:tw-pr-5">
+                <div className="tw-grid md:tw-grid-cols-6 tw-grid-cols-3 tw-gap-5">
                   {brand.map((item, index) => (
                     <Link
                       href={`/brands/${item?.slug}`}
@@ -816,7 +809,7 @@ export default function index({
                   ))}
                 </div>
                 <Link href="/brands">
-                  <button className="tw-flex tw-justify-center tw-items-center tw-px-16 md:tw-py-5 tw-py-3 tw-mt-14 tw-max-w-full tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-rounded-[73px] md:tw-w-[300px] tw-w-full max-md:tw-px-5 max-md:tw-mt-10">
+                  <button className="tw-flex tw-justify-center tw-items-center tw-px-16 md:tw-py-5 tw-py-3 tw-mt-14 tw-max-w-full tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 active:tw-bg-blue-700 tw-border-solid tw-rounded-[73px] md:tw-w-[300px] tw-w-full max-md:tw-px-5 max-md:tw-mt-10">
                     View All
                   </button>
                 </Link>
@@ -1097,9 +1090,6 @@ export default function index({
                 </h5>
                 <h2 className=" tw-font-semibold tw-capitalize">Latest Automotive News</h2>
               </div>
-              {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
-      View More
-    </div> */}
             </div>
             <div className="tw-mt-7 tw-w-full">
               <div className="tw-grid tw-grid-cols-3 tw-gap-5 max-md:tw-grid-cols-1">
@@ -1134,10 +1124,6 @@ export default function index({
                     <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                       {articles.news[0].title}
                     </div>
-                    {/* <div className="tw-flex tw-mt-1 tw-text-sm">
-            <div className="tw-uppercase">Carprices Team - </div>
-            <div>12th April 2024</div>
-          </div> */}
                   </div>
                 </Link>
 
@@ -1156,10 +1142,6 @@ export default function index({
                           <div className="tw-text-sm sm:tw-text-lg tw-text-white">
                             {item.title}
                           </div>
-                          {/* <div className="tw-flex tw-mt-1 tw-text-sm">
-                  <div className="tw-uppercase">Carprices Team - </div>
-                  <div>12th April 2024</div>
-                </div> */}
                         </div>
                       </div>
                     </Link>

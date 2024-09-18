@@ -123,7 +123,7 @@ export default function CarLoanCalculatorPage() {
       <div className="tw-grid sm:tw-grid-cols-12 tw-my-4 tw-gap-16 tw-px-6 sm:tw-px-24 md:tw-px-16 lg:tw-p-50">
         <div className="sm:tw-col-span-9">
           <MainSection />
-          <h2 className="tw-mt-8 tw-mb-3 tw-font-semibold tw-text-2xl  tw-text-lightgray">
+          <h2 className="tw-mt-8 tw-mb-3 tw-font-semibold tw-text-2xl  tw-text-lightgray tw-capitalize">
             FAQs (Frequently Asked Questions) on car loan in UAE
           </h2>
           <div className="tw-w-full  tw-mx-auto tw-space-y-2 tw-mt-6">

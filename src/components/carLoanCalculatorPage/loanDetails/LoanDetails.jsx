@@ -82,154 +82,136 @@ const LoanDetails = ({
 
   return (
     <>
-      <div className="tw-my-2 tw-p-4 tw-bg-slate-200 tw-rounded-lg sm:tw-flex tw-justify tw-justify-between">
-        <div className="tw-flex tw-items-center">
-          {/* <Image
-            src={"/carLoanPage/bmw_change_car_icon.png"}
-            alt="car-icon"
-            width={90}
-            height={90}
-            className="tw-object-contain"
-          /> */}
-          <div className="tw-mx-4">
-            <div className="tw-text-blue-500 tw-text-sm tw-font-semibold tw-capitalize">
-              {selectedYear} {selectedBrand}
-            </div>
-            <div className="tw-text-md tw-font-semibold">
-              {selectedModel} {selectedVariant}
-            </div>
+      {/* Car Details Section */}
+      <div className="tw-my-6 tw-bg-gradient-to-r tw-from-blue-500 tw-to-purple-600 tw-rounded-lg tw-p-6 tw-flex tw-justify-between tw-items-center tw-w-full tw-shadow-lg">
+        <div>
+          <div className="tw-text-white tw-uppercase tw-text-sm tw-font-bold">
+            {selectedYear} {selectedBrand}
+          </div>
+          <div className="tw-text-2xl lg:tw-text-3xl tw-font-semibold tw-text-white">
+            {selectedModel} {selectedVariant}
           </div>
         </div>
-        <div className="tw-mt-4">
-          <button
-            onClick={setShowModal}
-            className="tw-py-4 tw-px-12 tw-text-sm tw-bg-blue-700 tw-rounded-3xl tw-text-white tw-w-full"
-          >
-            Change Car
-          </button>
-        </div>
+        <button
+          onClick={setShowModal}
+          className="tw-py-2 tw-px-6 tw-text-blue-600 tw-bg-white tw-rounded-lg tw-shadow-md tw-text-sm hover:tw-bg-gray-100 tw-transition-all"
+        >
+          Change Car
+        </button>
       </div>
-      <div className="tw-flex tw-flex-col tw-items-center tw-justify-center tw-mt-6">
-        <div className="tw-w-full  tw-bg-white tw-rounded-2xl tw-border">
-          <div className="tw-flex tw-justify-between tw-items-center tw-mb-10">
-            <h1 className="tw-text-2xl tw-font-semibold">
-              Car Loan EMI Calculator
-            </h1>
-          </div>
-          <div className="tw-grid tw-gap-16 sm:tw-grid-cols-12">
-            <div className="sm:tw-col-span-6 sm:tw-block">
-              <div className="tw-mb-12">
-                <div>
-                  <p className="tw-opacity-70 tw-text-md">Loan Amount</p>
-                  <p
-                    id="loan-amt-text"
-                    className="tw-text-2xl tw-font-semibold tw-mb-3"
-                  >
-                    {P ? <Price data={price} /> : 0}
-                  </p>
-                </div>
-              </div>
-              {/* Tenure */}
-              <div className="tw-mb-12">
-                <p className="tw-opacity-70 tw-text-md">Tenure</p>
-                <p className="tw-text-2xl tw-font-semibold tw-mb-3">
-                  {N ? N : "0"} years
-                </p>
-                <input
-                  type="range"
-                  id="loan-period"
-                  min="1"
-                  max="5"
-                  step="1"
-                  value={N}
-                  onChange={(e) => setN(parseFloat(e.target.value))}
-                  className="tw-w-full"
-                />
-                <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
-                  <p>1</p>
-                  <p>5</p>
-                </div>
-              </div>
 
-              {/* Interest rate */}
-              <div className="tw-mb-12">
-                <p className="tw-opacity-70 tw-text-md">Interest Rate</p>
-                <p
-                  id="interest-rate-text"
-                  className="tw-text-2xl tw-font-semibold tw-mb-3"
-                >
-                  {R ? R : "0"}%
-                </p>
-                <input
-                  type="range"
-                  id="interest-rate"
-                  min="1.9"
-                  max="8"
-                  step="0.1"
-                  value={R}
-                  onChange={(e) => setR(parseFloat(e.target.value))}
-                  className="tw-w-full"
-                />
-                <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
-                  <p>1.9%</p>
-                  <p id="loan-amt-text">8%</p>
-                </div>
-              </div>
+      {/* Loan Calculator Section */}
+      <div className="tw-mt-8 tw-p-10 tw-bg-white tw-shadow-xl tw-rounded-3xl tw-w-full tw-max-w-6xl tw-mx-auto">
+        <h1 className="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-gray-800 tw-mb-8 tw-text-center">
+          Car Loan EMI Calculator
+        </h1>
 
-              {/* Down Payment */}
-              <div className="tw-mb-12">
-                <p className="tw-opacity-70 tw-text-md">Down Payment (%)</p>
-                <p className="tw-text-2xl tw-font-semibold tw-mb-3">
-                  {downPayment ? downPayment : "0"}%
+        <div className="tw-grid tw-gap-8 lg:tw-grid-cols-2 tw-items-start">
+          {/* Input Section (Left Side) */}
+          <div className="tw-space-y-6">
+            {/* Loan Amount */}
+            <div className="tw-flex tw-justify-between tw-items-center tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
+              <div>
+                <label className="tw-text-gray-500 tw-text-sm">Loan Amount</label>
+                <p className="tw-text-2xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mt-2">
+                  AED {P ? <Price data={price} /> : 0}
                 </p>
-                <input
-                  type="range"
-                  id="down-payment"
-                  min="20"
-                  max="80"
-                  step="1"
-                  value={downPayment}
-                  onChange={(e) => setDownPayment(parseFloat(e.target.value))}
-                  className="tw-w-full"
-                />
-                <div className="tw-flex tw-justify-between tw-text-sm tw-font-thin">
-                  <p>20%</p>
-                  <p>80%</p>
-                </div>
               </div>
             </div>
 
-            {/* Doughnut Chart */}
-            <div className="sm:tw-col-span-6 sm:tw-block">
-              <Doughnut className="tw-w-2/3" data={pieData} />
-              <div className="tw-flex tw-text-sm sm:tw-text-base tw-justify-between tw-w-full tw-my-4">
-                <div className="tw-flex tw-justify-between">
-                  <p id="price-container" className="tw-opacity-70 tw-mt-0">
-                    Monthly EMI
-                  </p>
-                  <span id="price" className="tw-mx-2 tw-font-semibold">
-                    AED {emi ? emi.toFixed(2).toLocaleString("en-US") : "0"}*
-                  </span>
-                </div>
-                <div className="tw-flex tw-justify-between">
-                  <p className="tw-opacity-70 tw-mt-0">Total Interest</p>
-                  <span id="ci" className="tw-mx-2 tw-font-semibold">
-                    AED{" "}
-                    {payableInterest
-                      ? payableInterest.toLocaleString("en-US")
-                      : "0"}
-                    *
-                  </span>
-                </div>
+            {/* Tenure */}
+            <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
+              <label className="tw-text-gray-500 tw-text-sm">Tenure (Years)</label>
+              <input
+                type="range"
+                min="1"
+                max="5"
+                step="1"
+                value={N}
+                onChange={(e) => setN(parseFloat(e.target.value))}
+                className="tw-w-full tw-h-2 tw-rounded-full tw-bg-blue-200 tw-cursor-pointer"
+              />
+              <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
+                <span>1 year</span>
+                <span>{N} years</span>
+                <span>5 years</span>
               </div>
-              <div className="tw-text-center tw-text-sm sm:tw-text-base tw-font-semibold tw-flex tw-justify-between tw-bg-gray-100 tw-rounded-lg tw-p-6">
-                <div>Total Amount Payable:</div>
-                <div id="ct" className="tw-text-gray-800">
-                  AED{" "}
-                  {P && payableInterest
-                    ? (P + payableInterest).toLocaleString("en-US")
-                    : "0"}
-                  *
+            </div>
+
+            {/* Interest Rate */}
+            <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
+              <label className="tw-text-gray-500 tw-text-sm">Interest Rate (%)</label>
+              <input
+                type="range"
+                min="1.9"
+                max="8"
+                step="0.1"
+                value={R}
+                onChange={(e) => setR(parseFloat(e.target.value))}
+                className="tw-w-full tw-h-2 tw-rounded-full tw-bg-blue-200 tw-cursor-pointer"
+              />
+              <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
+                <span>1.9%</span>
+                <span>{R}%</span>
+                <span>8%</span>
+              </div>
+            </div>
+
+            {/* Down Payment */}
+            <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
+              <label className="tw-text-gray-500 tw-text-sm">Down Payment (%)</label>
+              <input
+                type="range"
+                min="20"
+                max="80"
+                step="1"
+                value={downPayment}
+                onChange={(e) => setDownPayment(parseFloat(e.target.value))}
+                className="tw-w-full tw-h-2 tw-rounded-full tw-bg-blue-200 tw-cursor-pointer"
+              />
+              <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
+                <span>20%</span>
+                <span>{downPayment}%</span>
+                <span>80%</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Doughnut Chart + Summary Section (Right Side) */}
+          <div className="tw-flex tw-flex-col tw-space-y-6 tw-items-center">
+            {/* Doughnut Chart */}
+            <div className="tw-w-full tw-max-w-xs tw-mx-auto tw-shadow-md tw-rounded-full tw-p-6 tw-bg-white">
+              <Doughnut className="tw-w-full tw-h-full" data={pieData} />
+            </div>
+
+            {/* EMI Summary */}
+            <div className="tw-bg-blue-50 tw-p-8 tw-rounded-xl tw-shadow-lg tw-text-center">
+              <h2 className="tw-text-xl lg:tw-text-2xl tw-font-bold tw-text-gray-700 tw-mb-6">
+                Loan Summary
+              </h2>
+              <div className="tw-space-y-4">
+                {/* Monthly EMI */}
+                <div className="tw-flex tw-justify-between tw-items-center tw-text-sm lg:tw-text-base tw-text-gray-600">
+                  <span>Monthly EMI</span>
+                  <span className="tw-font-bold tw-text-lg lg:tw-text-xl tw-text-gray-800">
+                    AED {emi ? emi.toFixed(0).toLocaleString("en-US") : "0"}*
+                  </span>
+                </div>
+
+                {/* Total Interest */}
+                <div className="tw-flex tw-justify-between tw-items-center tw-text-sm lg:tw-text-base tw-text-gray-600">
+                  <span>Total Interest</span>
+                  <span className="tw-font-bold tw-text-lg lg:tw-text-xl tw-text-gray-800">
+                    AED {payableInterest ? payableInterest.toFixed(0).toLocaleString("en-US") : "0"}*
+                  </span>
+                </div>
+
+                {/* Total Amount Payable */}
+                <div className="tw-bg-blue-100 tw-rounded-md tw-py-2 tw-px-4 tw-text-sm lg:tw-text-base tw-font-semibold tw-text-gray-700 tw-mt-4">
+                  Total Amount Payable
+                  <span className="tw-text-blue-600 tw-text-lg lg:tw-text-xl tw-block tw-font-bold">
+                    AED {P && payableInterest ? (P + payableInterest).toFixed(0).toLocaleString("en-US") : "0"}*
+                  </span>
                 </div>
               </div>
             </div>

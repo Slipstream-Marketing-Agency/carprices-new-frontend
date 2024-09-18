@@ -242,7 +242,7 @@ export default function VehicleFaq({
                 <div key={index} className="tw-border tw-rounded tw-bg-white">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="sm:tw-text-xl tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
+                    className="tw-text-base sm:tw-text-lg tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
                   >
                     <span
                       className={`${
@@ -277,7 +277,7 @@ export default function VehicleFaq({
                         : "tw-max-h-0 tw-p-0"
                     }`}
                   >
-                    <p className="tw-text-gray-700 tw-p-4">{item.answer}</p>
+                    <p className="tw-text-gray-700 tw-text-sm sm:tw-text-base tw-p-4">{item.answer}</p>
                   </div>
                 </div>
               )}

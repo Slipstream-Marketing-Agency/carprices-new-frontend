@@ -7,6 +7,9 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import EmailIcon from '@mui/icons-material/Email';
+import InstagramIconMui from '@mui/icons-material/Instagram';
+import TwitterIconMui from '@mui/icons-material/Twitter';
 import MainLayout from "@/src/layout/MainLayout";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "@/src/lib/apolloClient";
@@ -199,79 +202,79 @@ function BlogDetailsPage({
       ? metaDescription.substring(0, 160) + "..."
       : metaDescription;
 
-      const renderContent = () => {
-        let content = article?.content;
-        if (!content) return null;
-      
-        // Replace all <p>&nbsp;</p> with <br> tags
-        content = content.replace(/<p>(&nbsp;|\s*)<\/p>/g, '<br />');
-      
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-        const paragraphs = content.split("<br>");
-      
-        const renderedContent = [];
-      
-        paragraphs.forEach((paragraph, index) => {
-          // Handle YouTube links
-          if (youtubeRegex.test(paragraph)) {
-            const videoId = extractYouTubeVideoId(paragraph);
-            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      
-            renderedContent.push(
-              <div key={index}>
-                <iframe
-                  width="100%"
-                  height="315"
-                  src={embedUrl}
-                  title="YouTube video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            );
-          } else {
-            // Add the paragraph to the content
-            renderedContent.push(
-              <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
-            );
-          }
-      
-          // Optionally, inject ads after certain paragraphs
-          if (
-            index === 1 ||
-            index === 4 ||
-            index === 7 ||
-            index === 10 ||
-            index === 13 ||
-            index === 15 ||
-            index === 18
-          ) {
-            renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
-          }
-        });
-      
-        return renderedContent;
-      };
-      
+  const renderContent = () => {
+    let content = article?.content;
+    if (!content) return null;
+
+    // Replace all <p>&nbsp;</p> with <br> tags
+    content = content.replace(/<p>(&nbsp;|\s*)<\/p>/g, '<br />');
+
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    const paragraphs = content.split("<br>");
+
+    const renderedContent = [];
+
+    paragraphs.forEach((paragraph, index) => {
+      // Handle YouTube links
+      if (youtubeRegex.test(paragraph)) {
+        const videoId = extractYouTubeVideoId(paragraph);
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+        renderedContent.push(
+          <div key={index}>
+            <iframe
+              width="100%"
+              height="315"
+              src={embedUrl}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        );
+      } else {
+        // Add the paragraph to the content
+        renderedContent.push(
+          <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }}></div>
+        );
+      }
+
+      // Optionally, inject ads after certain paragraphs
+      if (
+        index === 1 ||
+        index === 4 ||
+        index === 7 ||
+        index === 10 ||
+        index === 13 ||
+        index === 15 ||
+        index === 18
+      ) {
+        renderedContent.push(<AdBlog dataAdSlot="4742766924" />);
+      }
+    });
+
+    return renderedContent;
+  };
+
 
   function stripHtmlTags(htmlContent) {
     return htmlContent.replace(/<\/?[^>]+>/gi, '');
   }
-  
+
   function countWords(htmlContent) {
     const textContent = stripHtmlTags(htmlContent);
     const words = textContent.split(/\s+/);
     return words.length;
   }
-  
+
   function countCharacters(htmlContent) {
     const textContent = stripHtmlTags(htmlContent);
     return textContent.length;
   }
-  
+
   // Example usage
-  const articleContent = article?.content;  
+  const articleContent = article?.content;
 
   function estimateReadTime(htmlContent) {
     const wordCount = countWords(htmlContent);
@@ -281,7 +284,7 @@ function BlogDetailsPage({
   }
 
   const readTime = estimateReadTime(article?.content);
-  
+
 
   const extractYouTubeVideoId = (url) => {
     const youtubeRegex =
@@ -408,15 +411,14 @@ function BlogDetailsPage({
                       height={0}
                       sizes="100vw"
                       className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
-                      // style={{ width: "100%", height: "60%" }}
+                    // style={{ width: "100%", height: "60%" }}
                     />
                     <div className="tw-p-2">
                       <div className="sm:tw-text-base 4xl:tw-text-2xl tw-text-sm tw-truncate md:tw-whitespace-normal tw-font-semibold">
-                        {`${
-                          blog?.attributes?.title?.length > 20
-                            ? `${blog?.attributes?.title?.slice(0, 50)}... `
-                            : `${blog?.attributes?.title}`
-                        }`}
+                        {`${blog?.attributes?.title?.length > 20
+                          ? `${blog?.attributes?.title?.slice(0, 50)}... `
+                          : `${blog?.attributes?.title}`
+                          }`}
                       </div>
                       <div className="tw-flex tw-flex-col tw-justify-between">
                         <div>
@@ -455,46 +457,52 @@ function BlogDetailsPage({
             <div className="tw-my-6 tw-border-solid tw-border tw-p-4 tw-rounded-[15px] tw-border-gray-300">
               <div className="tw-flex tw-place-items-center tw-space-x-3 tw-mb-4">
                 <Image
-                  src={
-                    "https://cdn.carprices.ae/assets/Martin_Alva_7e01cef081.jpg"
-                  }
+                  src={"https://cdn.carprices.ae/assets/Martin_Alva_7e01cef081.jpg"}
                   width={80}
                   height={80}
                   className="tw-object-cover tw-rounded-full tw-w-[70px] tw-h-[70px]"
                 />
                 <div>
-                  <h6 className="tw-text-blue-600 tw-font-semibold tw-text-xs tw-uppercase tw-mb-0 ">
+                  <h6 className="tw-text-blue-600 tw-font-semibold tw-text-xs tw-uppercase tw-mb-0">
                     Author
                   </h6>
-                  <h1 className="tw-text-lg !tw-text-[1.2rem] sm:tw-text-xl tw-font-bold ">
+                  <h1 className="tw-text-lg !tw-text-[1.2rem] sm:tw-text-xl tw-font-bold">
                     Martin V Alva
                   </h1>
                 </div>
               </div>
 
               <div className="tw-space-y-4">
-                <p className="tw-text-sm">
-                  Martin Victor Alva is a an experienced automotive journalist
-                  and a features writer with over 16 years of experience in the
-                  industry. He has contributed to well known automotive print
-                  and digital publications worldwide, including Overdrive
-                  Magazine, Top Gear magazine, DriveArabia, Auto Middle East,
-                  Gulf News, Khaleej times, Silodrome, AMENA, and Auto Data
-                  Middle East.
-                </p>
-                <p className="tw-text-sm">
-                  Martin’s expertise extends beyond journalism; he has a rich
-                  background in marketing and advertising for brands like
-                  General Motors and NWTN Inc. As a consultant, he has worked
-                  with brands such as Mercedes-Benz, Toyota, Jeep, Honda, Lexus,
-                  and Alfa Romeo.
-                </p>
-                <p className="tw-text-sm">
-                  An avid car enthusiast and budding collector, Martin has a
-                  particular passion for Porsche 911s, old-school mechanical
-                  4x4s, and off-road campers. His love for automobiles is not
-                  just professional but deeply personal.
-                </p>
+                <div className="tw-text-sm">
+                  Martin Victor Alva is an automotive journalist with 16 years of experience. He has contributed to renowned publications like Overdrive, Top Gear, and DriveArabia.
+                </div>
+                <div className="tw-text-sm">
+                  His expertise extends to marketing with brands like Mercedes-Benz. A passionate car enthusiast, Martin loves Porsche 911s and off-road campers.
+                </div>
+
+                {/* Social Links */}
+                <div className="tw-flex tw-space-x-4">
+                  <a
+                    href="mailto:martin.v.alva@gmail.com"
+                    className="tw-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-border tw-border-blue-600 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-blue-600 hover:tw-text-white"
+                  >
+                    <EmailIcon className=" tw-h-5 tw-w-5" />
+                  </a>
+                  <a
+                    href="https://instagram.com/motorbikeman"
+                    target="_blank"
+                    className="tw-flex tw-items-center tw-text-pink-500 tw-font-semibold tw-border tw-border-pink-500 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-pink-500 hover:tw-text-white"
+                  >
+                    <InstagramIconMui className=" tw-h-5 tw-w-5" />
+                  </a>
+                  <a
+                    href="https://twitter.com/motorbikeman"
+                    target="_blank"
+                    className="tw-flex tw-items-center tw-text-blue-400 tw-font-semibold tw-border tw-border-blue-400 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-blue-400 hover:tw-text-white"
+                  >
+                    <TwitterIconMui className=" tw-h-5 tw-w-5" />
+                  </a>
+                </div>
               </div>
             </div>
             {articlesThisWeek?.length > 0 && (
