@@ -19,7 +19,6 @@ function CarListingLeftSidebar({
   driveList,
   bodyTypes,
   brand,
-  
 }) {
   return (
     <>
