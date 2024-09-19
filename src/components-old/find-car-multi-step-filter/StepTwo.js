@@ -35,12 +35,8 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
         {bodyTypeList.map((item, index) => (
           <button
             key={index}
-            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px]         ${
-          filterData.bodyTypes.includes(item.slug)
-          ? "bg-light"
-          : ""
-        }
-        tw-border-zinc-100 hover:tw-bg-blue-100`}
+            className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[80px] ${filterData.bodyTypes.includes(item.slug) ? "bg-light" : "tw-grayscale"} hover:tw-grayscale-0 hover:tw-bg-blue-100 tw-transition-all tw-duration-300`}
+
             onClick={() => handlePreferencesClick(item.slug)}
           >
             <div className="tw-w-[50px] tw-h-[50px] tw-flex tw-justify-center tw-items-center">

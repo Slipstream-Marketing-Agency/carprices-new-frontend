@@ -3357,3 +3357,8 @@ a,
   -ms-overflow-style: none; /* Hides the scrollbar in IE and Edge */
   scrollbar-width: none; /* Hides the scrollbar in Firefox */
 }
+
+
+.article-content a {
+  color: #0d6efd !important;
+}

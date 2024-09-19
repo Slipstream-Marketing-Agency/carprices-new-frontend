@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import EmailIcon from '@mui/icons-material/Email';
 import InstagramIconMui from '@mui/icons-material/Instagram';
 import TwitterIconMui from '@mui/icons-material/Twitter';
+import LinkedInIconMui from '@mui/icons-material/LinkedIn';
 import MainLayout from "@/src/layout/MainLayout";
 import { gql } from "@apollo/client";
 import { createApolloClient } from "@/src/lib/apolloClient";
@@ -474,33 +475,37 @@ function BlogDetailsPage({
 
               <div className="tw-space-y-4">
                 <div className="tw-text-sm">
-                  Martin Victor Alva is an automotive journalist with 16 years of experience. He has contributed to renowned publications like Overdrive, Top Gear, and DriveArabia.
-                </div>
-                <div className="tw-text-sm">
-                  His expertise extends to marketing with brands like Mercedes-Benz. A passionate car enthusiast, Martin loves Porsche 911s and off-road campers.
+                I began my writing career in 2007 with Overdrive, India’s largest automotive magazine, where I worked as a photojournalist covering motorsports events and conducting car and motorcycle reviews. My expertise in content creation later led me to corporate roles as a marketing specialist for renowned brands such as Royal Enfield, General Motors, Toyota, Mercedes-Benz, Lexus, and Jeep. Driven by my passion for both writing and the automotive industry, I have also contributed to prominent local and regional publications, including Silodrome, Top Gear, Drive Arabia, Auto Middle East, Motorcycle UAE, Bike Nation, Gulf News, and more.
                 </div>
 
                 {/* Social Links */}
-                <div className="tw-flex tw-space-x-4">
+                <div className="tw-flex tw-space-x-2">
                   <a
-                    href="mailto:martin.v.alva@gmail.com"
-                    className="tw-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-border tw-border-blue-600 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-blue-600 hover:tw-text-white"
+                    href="mailto:martin@slipstream.agency"
+                    className="tw-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-border tw-border-blue-600 tw-rounded-full tw-py-1 tw-px-2 tw-text-sm tw-transition-all hover:tw-bg-blue-600 hover:tw-text-white"
                   >
                     <EmailIcon className=" tw-h-5 tw-w-5" />
                   </a>
                   <a
                     href="https://instagram.com/motorbikeman"
                     target="_blank"
-                    className="tw-flex tw-items-center tw-text-pink-500 tw-font-semibold tw-border tw-border-pink-500 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-pink-500 hover:tw-text-white"
+                    className="tw-flex tw-items-center tw-text-pink-500 tw-font-semibold tw-border tw-border-pink-500 tw-rounded-full tw-py-1 tw-px-2 tw-text-sm tw-transition-all hover:tw-bg-pink-500 hover:tw-text-white"
                   >
                     <InstagramIconMui className=" tw-h-5 tw-w-5" />
                   </a>
                   <a
                     href="https://twitter.com/motorbikeman"
                     target="_blank"
-                    className="tw-flex tw-items-center tw-text-blue-400 tw-font-semibold tw-border tw-border-blue-400 tw-rounded-full tw-py-1 tw-px-4 tw-text-sm tw-transition-all hover:tw-bg-blue-400 hover:tw-text-white"
+                    className="tw-flex tw-items-center tw-text-blue-400 tw-font-semibold tw-border tw-border-blue-400 tw-rounded-full tw-py-1 tw-px-2 tw-text-sm tw-transition-all hover:tw-bg-blue-400 hover:tw-text-white"
                   >
                     <TwitterIconMui className=" tw-h-5 tw-w-5" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/martin-victor-alva"
+                    target="_blank"
+                    className="tw-flex tw-items-center tw-text-blue-400 tw-font-semibold tw-border tw-border-blue-400 tw-rounded-full tw-py-1 tw-px-2 tw-text-sm tw-transition-all hover:tw-bg-blue-400 hover:tw-text-white"
+                  >
+                    <LinkedInIconMui className=" tw-h-5 tw-w-5" />
                   </a>
                 </div>
               </div>

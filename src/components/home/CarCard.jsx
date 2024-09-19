@@ -76,7 +76,7 @@ const CarCard = ({ car, loading }) => {
                     <img
                         loading="lazy"
                         src={car?.highTrim?.featuredImage}
-                        className="tw-w-full tw-h-32 tw-object-cover tw-rounded-lg xl:tw-h-48 xl:tw-object-contain"
+                        className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48"
                         alt=""
                     />
                 )}

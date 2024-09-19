@@ -116,8 +116,8 @@ export default function StepOne({ filterData, setFilterData }) {
           <button
             key={item.label}
             className={`tw-flex tw-flex-col tw-items-center tw-p-2 tw-rounded-xl tw-border tw-border-2 tw-border-solid tw-bg-white tw-border-zinc-100 tw-h-[90px] ${
-              filterData.preferences.includes(item.value) ? "bg-light" : ""
-            }`}
+              filterData.preferences.includes(item.value) ? "bg-light" : "tw-grayscale"
+            } hover:tw-grayscale-0 hover:tw-text-zinc-900 tw-transition-all tw-duration-300`}
             onClick={() => handlePreferencesClick(item.value)}
           >
             <div className="tw-w-[40px] tw-h-[40px] tw-flex tw-justify-center tw-items-center">
@@ -131,10 +131,11 @@ export default function StepOne({ filterData, setFilterData }) {
               />
             </div>
             <span
-              className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold"
+              className="tw-text-xs tw-text-center tw-text-zinc-600 tw-font-bold hover:tw-text-zinc-900"
               dangerouslySetInnerHTML={{ __html: item.label }}
             ></span>
           </button>
+
         </Tooltip>
       ))}
     </div>

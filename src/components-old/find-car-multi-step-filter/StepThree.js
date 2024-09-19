@@ -121,8 +121,8 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
               className={`cursor-pointer tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-4 tw-rounded-xl tw-border-2 tw-border-solid ${
                 isFilterActive(item.group)
                   ? "bg-light tw-border-blue-300"
-                  : "bg-white tw-border-zinc-100"
-              }`}
+                  : "bg-white tw-border-zinc-100 tw-grayscale"
+              } hover:tw-grayscale-0 hover:tw-bg-blue-100 tw-transition-all tw-duration-300`}
               onClick={() => handleSeatingClick(item.group)}
             >
               <img src={item.img} alt={item.label} className="tw-mb-1" />

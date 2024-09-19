@@ -33,6 +33,7 @@ import MainLayout from "../layout/MainLayout";
 import SeoLinksHome from "../components/common/SeoLinksHome";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CarCard from "../components/home/CarCard";
+import SearchForTheBest from "../components/home/SearchForTheBest";
 
 export default function index({
   bannerImage,
@@ -461,7 +462,8 @@ export default function index({
               <FilterLayout />
             </div>
           </div>
-
+          {/* Search for the Best */}
+          <SearchForTheBest />
           <div className="tw-container tw-mx-auto tw-py-8 tw-relative ">
             <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What’s trending in the new car market?
@@ -477,7 +479,9 @@ export default function index({
               <div className="xl:tw-col-span-3 tw-relative tw-half-card-slider tw-hidden sm:tw-block">
                 <Slider {...sliderSettings}>
                   {featuredcars?.carModels.map((car) => (
-                    <CarCard car={car} loading={false} key={car.id} />
+                    <div className="tw-px-2" key={car.id}>
+                      <CarCard car={car} loading={false} />
+                    </div>
                   ))}
                 </Slider>
                 <div className="md:tw-block tw-hidden tw-mt-4"> {/* Added margin-top */}
@@ -573,23 +577,25 @@ export default function index({
                   ))}
                 </Slider>
               </div>
-              <div className="md:tw-hidden tw-block">
+              <div className="md:tw-hidden tw-block tw-mt-4">
                 <div className="tw-grid tw-grid-cols-2 tw-gap-4">
                   {FeaturedData.map((item, index) => (
-                    <Link href={item.url} key={index} className="tw-p-2">
-                      <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
+                    <Link href={item.url} key={index}>
+                      <div className="tw-flex tw-flex-col tw-h-full tw-overflow-hidden tw-rounded-2xl tw-shadow-lg tw-transition-transform tw-duration-500 tw-bg-white">
                         <img
                           src={item.image}
                           alt={`${item.brand} ${item.name}`}
-                          className="tw-object-cover tw-w-full tw-h-52"
+                          className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl"
                         />
-                        <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-48 tw-rounded-xl tw-bg-zinc-900 tw-bg-opacity-50 tw-text-white">
-                          <h6 className="tw-text-white">{item.name}</h6>
+                        <div className="tw-p-4 tw-flex tw-flex-col tw-flex-grow">
+                          <h6 className="tw-text-lg tw-font-semibold tw-leading-4 tw-text-gray-800">{item.name}</h6>
+                          <p className="tw-text-sm tw-text-gray-600 tw-mt-1">{item.brand}</p>
                         </div>
                       </div>
                     </Link>
                   ))}
                 </div>
+
                 <div className="tw-text-center tw-mt-4">
                   <Link href="/news">
                     <button className="tw-self-start md:tw-px-14 tw-px-8 md:tw-py-5 tw-py-2 md:tw-mt-9 tw-mt-4 tw-text-base tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-rounded-full max-md:tw-px-5 active:tw-bg-blue-700">
@@ -637,7 +643,9 @@ export default function index({
             <div className="tw-px-4 tw-hidden sm:tw-block">
               <Slider key={selectedTab} {...categorysliderSettings}>
                 {filterCars(selectedTab).map((car, index) => (
-                  <CarCard car={car} key={index} loading={loading} />
+                  <div className="tw-px-2" key={car.id}>
+                    <CarCard car={car} loading={loading} />
+                  </div>
                 ))}
               </Slider>
               {/* )} */}
