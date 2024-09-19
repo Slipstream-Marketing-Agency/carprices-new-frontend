@@ -462,8 +462,8 @@ export default function index({
               <FilterLayout />
             </div>
           </div>
-          {/* Search for the Best */}
-          <SearchForTheBest />
+          {/* Search for the Best 
+          <SearchForTheBest />*/}
           <div className="tw-container tw-mx-auto tw-py-8 tw-relative ">
             <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
               What’s trending in the new car market?
