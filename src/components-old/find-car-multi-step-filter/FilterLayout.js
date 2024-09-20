@@ -33,11 +33,8 @@ export default function FilterLayout() {
     bodyTypes: [],
   });
 
-  console.log(filterData, "filterData");
-
   const [bodyTypeList, setBodyTypeList] = useState([]);
   const [seatList, setSeatList] = useState([]);
-
   const [specificVehicleFilter, setSpecificVehicleFilter] = useState({
     image: null,
     make: null,
@@ -69,11 +66,6 @@ export default function FilterLayout() {
 
     handleRouteChange();
   }, [router.query]);
-
-  const bodyTypesParam =
-    filterData.bodyTypes.length > 0
-      ? `bodyTypes=${filterData.bodyTypes.join(",")}`
-      : "";
 
   const filterOptions = {
     haveMusic: filterData.preferences.includes("premium-sound") ? 1 : 0,
@@ -138,32 +130,6 @@ export default function FilterLayout() {
       query += filterOptions.isNineSeat === 1 ? "&isNineSeat=1" : "";
       query += filterOptions.isNinePlusSeat === 1 ? "&isNinePlusSeat=1" : "";
 
-      let queryWithoutSeating = `${filterOptions.haveMusic === 1 ? "haveMusic=1" : ""
-        }`;
-      queryWithoutSeating += filterOptions.isLuxury === 1 ? "&isLuxury=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isPremiumLuxury === 1 ? "&isPremiumLuxury=1" : "";
-      queryWithoutSeating +=
-        filterOptions.haveTechnology === 1 ? "&haveTechnology=1" : "";
-      queryWithoutSeating +=
-        filterOptions.havePerformance === 1 ? "&havePerformance=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isSpacious === 1 ? "&isSpacious=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isElectric === 1 ? "&isElectric=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isFuelEfficient === 1 ? "&isFuelEfficient=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isOffRoad === 1 ? "&isOffRoad=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isAffordableLuxury === 1 ? "&isAffordableLuxury=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isDuneBashing === 1 ? "&isDuneBashing=1" : "";
-      queryWithoutSeating += filterOptions.isSafety === 1 ? "&isSafety=1" : "";
-      queryWithoutSeating +=
-        filterOptions.isManualTransmission === 1
-          ? "&isManualTransmission=1"
-          : "";
       const bodyTypesJSON = JSON.stringify(filterData.bodyTypes);
       const bodyTypesParam =
         filterData.bodyTypes.length > 0
@@ -174,80 +140,76 @@ export default function FilterLayout() {
         `${process.env.NEXT_PUBLIC_API_URL}car-trims/priceRange?${query}&${bodyTypesParam}`
       );
 
+      const updatedBudget = [
+        responsePrice.data.price.min !== null
+          ? responsePrice.data.price.min
+          : null,
+        responsePrice.data.price.max !== null
+          ? responsePrice.data.price.max
+          : null,
+      ];
+
+      if (updatedBudget[0] === null || updatedBudget[1] === null) {
+        setError("No cars available for the selected preferences");
+        setOpenErrorDialog(true);
+        setLoading(false); // Stop loader if there's an error
+        return false; // Early return to halt further execution
+      }
+
       setFilterData((prevState) => ({
         ...prevState,
-        budget: [
-          responsePrice.data.price.min !== null
-            ? responsePrice?.data?.price.min
-            : null,
-          responsePrice.data.price.max !== null
-            ? responsePrice?.data?.price.max
-            : null,
-        ],
+        budget: updatedBudget,
       }));
 
       const responseBodyType = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${queryWithoutSeating}`
+        `${process.env.NEXT_PUBLIC_API_URL}car-trims/bodyList?${query}`
       );
 
       setBodyTypeList(responseBodyType?.data?.bodyTypes);
 
       const responseSeat = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${queryWithoutSeating}&${bodyTypesParam}`
+        `${process.env.NEXT_PUBLIC_API_URL}car-trims/getSeatList?${query}&${bodyTypesParam}`
       );
 
       setSeatList(responseSeat?.data?.seats);
+
+      return true; // Success
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error fetching data:", error);
+      setLoading(false);
+      return false;
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false); // Stop loader in any case
     }
   };
 
   const handleNextStep = async () => {
     setLoading(true); // Start loader on next step
+
+    const dataFetchSuccess = await fetchData();
+
+    if (!dataFetchSuccess) {
+      // Fetch failed or budget is null
+      return;
+    }
+
     if (filterData.preferences.length === 0) {
       setError(
         "Looks like your selection is too narrow and no vehicle can truly tick those boxes. Please broaden your preferences."
       );
       setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
+      setLoading(false);
     } else if (currentStep === 1 && filterData.bodyTypes.length === 0) {
       setError("Select at least one body type");
       setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
-    } else if (
-      currentStep === 0 &&
-      filterData?.budget[0] === null &&
-      filterData?.budget[1] === null
-    ) {
-      setError("No cars available for the selected preferences");
-      setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
-    } else if (
-      currentStep === 1 &&
-      filterData?.budget[0] === null &&
-      filterData?.budget[1] === null
-    ) {
-      setError("No cars available for the selected body types");
-      setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
-    } else if (
-      currentStep === 2 &&
-      filterData?.budget[0] === null &&
-      filterData?.budget[1] === null
-    ) {
-      setError("No cars available for the selected seats");
-      setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
+      setLoading(false);
     } else if (currentStep === 2 && filterData.seating.length === 0) {
       setError("Select at least one seating option");
       setOpenErrorDialog(true);
-      setLoading(false); // Stop loader if there's an error
+      setLoading(false);
     } else {
-      await fetchData(); // Fetch data when moving to the next step
       setCurrentStep(currentStep + 1);
-      setLoading(false); // Stop loader after step change
+      setLoading(false);
     }
   };
 
@@ -273,6 +235,7 @@ export default function FilterLayout() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true); // Start loader on submit
+
     let query = `${filterOptions.haveMusic == 1 ? "haveMusic=1" : ""}`;
     query += filterOptions.isLuxury ? "&isLuxury=1" : "";
     query += filterOptions.isPremiumLuxury ? "&isPremiumLuxury=1" : "";
@@ -366,7 +329,7 @@ export default function FilterLayout() {
           },
         }}
       >
-        <DialogContent dividers>
+        <DialogContent >
           <DialogContentText>
             <div className="tw-text-center">
               <h2 className="tw-font-bold tw-text-red-400">
@@ -376,7 +339,7 @@ export default function FilterLayout() {
             </div>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="tw-flex tw-justify-center">
           <Button
             onClick={handleErrorClose}
             variant="contained"
