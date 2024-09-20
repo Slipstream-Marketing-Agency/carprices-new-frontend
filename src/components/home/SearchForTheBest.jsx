@@ -23,19 +23,19 @@ const searchBestCar = [
   {
     imageUrl: "/assets/img/home-search-for-best/car-dealers.png",
     label: "Car Dealers",
-    linkUrl: "/search-cars",
+    linkUrl: "#",
     bgColor: "#FFF8E8",
   },
   {
     imageUrl: "/assets/img/home-search-for-best/car-videos.png",
     label: "Car Videos",
-    linkUrl: "/search-cars",
+    linkUrl: "#",
     bgColor: "#FFE8E8",
   },
   {
     imageUrl: "/assets/img/home-search-for-best/car-promo.png",
     label: "Car Promos",
-    linkUrl: "/search-cars",
+    linkUrl: "#",
     bgColor: "#FFE8F3",
   },
 ];
