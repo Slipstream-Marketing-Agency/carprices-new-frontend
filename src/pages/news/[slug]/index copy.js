@@ -81,6 +81,7 @@ function BlogDetailsPage({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  
 
   useEffect(() => {
     const styleTag = document.createElement("style");
