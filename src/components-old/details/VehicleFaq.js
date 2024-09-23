@@ -2,6 +2,7 @@ import Price from "@/src/utils/Price";
 import React, { useEffect, useState } from "react";
 import AccordionFaq from "../common/AccordionFaq";
 import { formatNumberWithCommas } from "@/src/utils/formatNumber";
+import Head from "next/head";
 
 export default function VehicleFaq({
   year,
@@ -47,9 +48,8 @@ export default function VehicleFaq({
     connectivity += "Android Auto, ";
   }
 
-  const seamlessConnectivity = `${
-    connectivity ? connectivity.slice(0, -2) : ""
-  } compatibility for seamless connectivity`;
+  const seamlessConnectivity = `${connectivity ? connectivity.slice(0, -2) : ""
+    } compatibility for seamless connectivity`;
 
   const rearSeatEntertainment = mainTrim?.haveRearSeatEntertainment
     ? "and rear seat entertainment"
@@ -69,9 +69,8 @@ export default function VehicleFaq({
     ? "lane change assist"
     : "";
 
-  const safetyFeature = `${cruiseControl ? cruiseControl.slice(0, -2) : ""}${
-    cruiseControl && laneChangeAssist ? ", " : ""
-  }${laneChangeAssist}`;
+  const safetyFeature = `${cruiseControl ? cruiseControl.slice(0, -2) : ""}${cruiseControl && laneChangeAssist ? ", " : ""
+    }${laneChangeAssist}`;
 
   const outputSafetyString = `${safetyFeature}`;
 
@@ -81,30 +80,13 @@ export default function VehicleFaq({
       answer: (
         <>
           The {year} {brand.name} {model.name}{" "}
-          {minPrice === maxPrice && minPrice !== null && minPrice !== null ? (
-            <>
-              {" "}
-              is priced at <Price data={minPrice} />
-            </>
-          ) : (
-            ""
-          )}
-          {minPrice !== maxPrice && minPrice !== null && minPrice !== null ? (
-            <>
-              is priced within the range of <Price data={minPrice} /> -{" "}
-              <Price data={maxPrice} />
-            </>
-          ) : (
-            ""
-          )}
-          {minPrice === null && maxPrice === null ? (
-            <>
-              {" "}
-              is priced at <Price data={minPrice} />
-            </>
-          ) : (
-            ""
-          )}
+          {minPrice === maxPrice && minPrice !== null ? (
+            <> is priced at <Price data={minPrice} /></>
+          ) : minPrice !== maxPrice && minPrice !== null ? (
+            <>is priced within the range of <Price data={minPrice} /> - <Price data={maxPrice} /></>
+          ) : minPrice === null && maxPrice === null ? (
+            <> is priced at <Price data={minPrice} /></>
+          ) : ""}
         </>
       ),
       id: 1,
@@ -118,20 +100,17 @@ export default function VehicleFaq({
     },
     {
       question: `What is the range of the ${year} ${brand.name} ${model.name}?`,
-      answer: `The ${year} ${brand.name} ${model.name} has a claimed range of ${
-        minRange === maxRange ? minRange : minRange + "km - " + maxRange
-      }km.`,
+      answer: `The ${year} ${brand.name} ${model.name} has a claimed range of ${minRange === maxRange ? minRange : minRange + "km - " + maxRange
+        }km.`,
       id: 3,
       condition:
         mainTrim?.fuelType === "Electric" || mainTrim?.fuelType === "Hybrid",
     },
     {
       question: `What is the fuel efficiency of the ${year} ${brand.name} ${model.name}?`,
-      answer: `The ${year} ${brand.name} ${
-        model.name
-      } has a claimed fuel efficiency of ${mainTrim?.fuelConsumption} kmpl${
-        mainTrim?.range ? " and a range of " + mainTrim?.range + " km" : ""
-      }.`,
+      answer: `The ${year} ${brand.name} ${model.name
+        } has a claimed fuel efficiency of ${mainTrim?.fuelConsumption} kmpl${mainTrim?.range ? " and a range of " + mainTrim?.range + " km" : ""
+        }.`,
       id: 11,
       condition:
         mainTrim?.fuelType === "Hybrid" ||
@@ -163,26 +142,20 @@ export default function VehicleFaq({
     },
     {
       question: `What safety features are included in the ${year} ${brand.name} ${model.name}?`,
-      answer: `Safety components of the ${year} ${brand.name} ${
-        model.name
-      } include ${
-        mainTrim?.airbags ? mainTrim?.airbags + " airbags, " : ""
-      }ABS, ${mainTrim?.haveFrontParkAssist ? "front park assist, " : ""}${
-        mainTrim?.haveRearParkAssist ? "rear park assist, " : ""
-      }${mainTrim?.have360ParkingCamera ? "360° parking camera, " : ""}${
-        mainTrim?.haveAdaptiveCuriseControl ? "adaptive cruise control, " : ""
-      }${mainTrim?.haveLaneChangeAssist ? "lane change assist" : ""}.`,
+      answer: `Safety components of the ${year} ${brand.name} ${model.name
+        } include ${mainTrim?.airbags ? mainTrim?.airbags + " airbags, " : ""
+        }ABS, ${mainTrim?.haveFrontParkAssist ? "front park assist, " : ""}${mainTrim?.haveRearParkAssist ? "rear park assist, " : ""
+        }${mainTrim?.have360ParkingCamera ? "360° parking camera, " : ""}${mainTrim?.haveAdaptiveCuriseControl ? "adaptive cruise control, " : ""
+        }${mainTrim?.haveLaneChangeAssist ? "lane change assist" : ""}.`,
       id: 5,
       condition: true,
     },
     {
       question: `How many passengers can the ${year} ${brand.name} ${model.name} accommodate?
       `,
-      answer: `The ${year} ${brand.name} ${
-        model.name
-      } has a seating capacity of ${
-        mainTrim?.seatingCapacity && mainTrim?.seatingCapacity.split(" ")[0]
-      } passengers.
+      answer: `The ${year} ${brand.name} ${model.name
+        } has a seating capacity of ${mainTrim?.seatingCapacity && mainTrim?.seatingCapacity.split(" ")[0]
+        } passengers.
       `,
       id: 6,
       condition: true,
@@ -190,13 +163,12 @@ export default function VehicleFaq({
     {
       question: ` What are the exterior dimensions of the ${year} ${brand.name} ${model.name}?
       `,
-      answer: `The ${year} ${brand.name} ${
-        model.name
-      } has dimensions of ${formatNumberWithCommas(
-        mainTrim?.length
-      )}mm length, ${formatNumberWithCommas(
-        mainTrim?.width
-      )}mm width, and ${formatNumberWithCommas(mainTrim?.height)}mm height.
+      answer: `The ${year} ${brand.name} ${model.name
+        } has dimensions of ${formatNumberWithCommas(
+          mainTrim?.length
+        )}mm length, ${formatNumberWithCommas(
+          mainTrim?.width
+        )}mm width, and ${formatNumberWithCommas(mainTrim?.height)}mm height.
       `,
       id: 7,
       condition: true,
@@ -224,6 +196,25 @@ export default function VehicleFaq({
     },
   ];
 
+  // Function to generate the schema.org FAQ JSON-LD
+  const generateFAQSchema = (faqData) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          // The answer should be plain text here
+          "text": typeof item.answer === "string" ? item.answer : item.answer.toString().replace(/(<([^>]+)>)/gi, "")
+        }
+      }))
+    };
+  };
+
+  const faqSchema = generateFAQSchema(faq);
+
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -231,6 +222,10 @@ export default function VehicleFaq({
   };
   return (
     <>
+      <Head>
+        {/* Add structured data for FAQPage */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      </Head>
       <h2 className="tw-font-semibold tw-mb-5">
         FAQs (Frequently Asked Questions) on {year} {brand.name} {model.name}
       </h2>
@@ -245,18 +240,16 @@ export default function VehicleFaq({
                     className="tw-text-base sm:tw-text-lg tw-font-medium tw-w-full tw-px-4 tw-py-2 tw-text-left tw-flex tw-justify-between tw-items-center tw-bg-white tw-rounded-t"
                   >
                     <span
-                      className={`${
-                        activeIndex === index ? "tw-text-blue-700" : ""
-                      }`}
+                      className={`${activeIndex === index ? "tw-text-blue-700" : ""
+                        }`}
                     >
                       {item.question}
                     </span>
                     <svg
-                      className={`tw-w-6 tw-h-6 tw-transform ${
-                        activeIndex === index
-                          ? "tw-rotate-180 tw-text-blue-700"
-                          : ""
-                      }`}
+                      className={`tw-w-6 tw-h-6 tw-transform ${activeIndex === index
+                        ? "tw-rotate-180 tw-text-blue-700"
+                        : ""
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -271,11 +264,10 @@ export default function VehicleFaq({
                     </svg>
                   </button>
                   <div
-                    className={`tw-overflow-hidden tw-transition-[max-height] tw-duration-500 ${
-                      activeIndex === index
-                        ? "tw-max-h-96 tw-p-0"
-                        : "tw-max-h-0 tw-p-0"
-                    }`}
+                    className={`tw-overflow-hidden tw-transition-[max-height] tw-duration-500 ${activeIndex === index
+                      ? "tw-max-h-96 tw-p-0"
+                      : "tw-max-h-0 tw-p-0"
+                      }`}
                   >
                     <p className="tw-text-gray-700 tw-text-sm sm:tw-text-base tw-p-4">{item.answer}</p>
                   </div>

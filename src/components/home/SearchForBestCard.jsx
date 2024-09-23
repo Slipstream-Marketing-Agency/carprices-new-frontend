@@ -8,7 +8,6 @@ const SearchForBestCard = ({
   linkUrl,
   bgColor = "bg-blue-200",
 }) => {
-    console.log(bgColor);
 
   return (
     <div
