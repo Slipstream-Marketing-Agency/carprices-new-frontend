@@ -640,6 +640,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                 CarPriceRange={CarPriceRange}
                 getTransmissionType={getTransmissionType}
               />
+              
             </div>
             <div className="col-3">
               {" "}
