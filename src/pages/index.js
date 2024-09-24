@@ -34,6 +34,8 @@ import SeoLinksHome from "../components/common/SeoLinksHome";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
+import CompareCars from "../components/home/CompareCars";
+import WebStories from "../components/home/WebStories";
 
 export default function index({
   bannerImage,
@@ -717,7 +719,22 @@ export default function index({
             </div>
           </div>
 
-
+          {/* <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
+            <div className="tw-relative tw-flex tw-justify-between container">
+              <div className="tw-flex tw-flex-col tw-justify-center">
+                <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+                  What's the Best ?
+                </h5>
+                <h2 className=" tw-font-semibold tw-capitalize">
+                  Popular Car Comparison
+                </h2>
+              </div>
+              <Link href="/compare-cars">
+                <span className="tw-capitalize tw-font-semibold">Compare Cars</span>
+              </Link>
+            </div>
+            <CompareCars />
+          </div> */}
           {/* <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
           <div className="tw-flex tw-gap-5 tw-justify-between tw-px-5 tw-w-full tw-max-w-[718px] max-md:tw-flex-wrap max-md:tw-max-w-full">
             <div className="tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-w-[150px] tw-h-[150px]">
@@ -1022,6 +1039,22 @@ export default function index({
           </div>
         </div>
       </div> */}
+          {/* <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
+            <div className="tw-relative tw-flex tw-justify-between container">
+              <div className="tw-flex tw-flex-col tw-justify-center">
+                <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
+                  What's the News
+                </h5>
+                <h2 className=" tw-font-semibold tw-capitalize">
+                  Web Stories
+                </h2>
+              </div>
+              <Link href="#">
+                <span className="tw-capitalize tw-font-semibold">View More</span>
+              </Link>
+            </div>
+            <WebStories />
+          </div> */}
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-10 tw-my-6 tw-px-5">
             <div className="tw-flex tw-flex-wrap tw-justify-between tw-w-full tw-gap-5">
               <div className="tw-flex tw-flex-col tw-max-w-full">
