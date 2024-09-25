@@ -76,7 +76,7 @@ export default function VehicleFaq({
 
   const faq = [
     {
-      question: `What is the price range of the ${year} ${brand.name} ${model.name}?`,
+      question: `What is the price range of the ${year} ${brand.name} ${model.name} in UAE?`,
       answer: (
         <>
           The {year} {brand.name} {model.name}{" "}
@@ -89,6 +89,22 @@ export default function VehicleFaq({
           ) : ""}
         </>
       ),
+      plainAnswer: minPrice === maxPrice && minPrice !== null
+        ? `The ${year} ${brand.name} ${model.name} is priced at AED ${minPrice.toLocaleString("en-AE", {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 2,
+        })}.`
+        : minPrice !== maxPrice && minPrice !== null
+          ? `The ${year} ${brand.name} ${model.name} is priced within the range of AED ${minPrice.toLocaleString("en-AE", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })} - AED ${maxPrice.toLocaleString("en-AE", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })}.`
+          : minPrice === null && maxPrice === null
+            ? `The ${year} ${brand.name} ${model.name} is priced at TBD.`
+            : "",
       id: 1,
       condition: true,
     },
@@ -99,7 +115,7 @@ export default function VehicleFaq({
       condition: true,
     },
     {
-      question: `What is the range of the ${year} ${brand.name} ${model.name}?`,
+      question: `What is the range of the ${year} ${brand.name} ${model.name} in UAE?`,
       answer: `The ${year} ${brand.name} ${model.name} has a claimed range of ${minRange === maxRange ? minRange : minRange + "km - " + maxRange
         }km.`,
       id: 3,
@@ -134,14 +150,14 @@ export default function VehicleFaq({
         mainTrim?.fuelType === "Diesel",
     },
     {
-      question: `What type of motor the ${year} ${brand.name} ${model.name} has?`,
+      question: `What type of motor the ${year} ${brand.name} ${model.name} in UAE has?`,
       answer: `The ${year} ${brand.name} ${model.name} is equipped with a ${motorTypes}.`,
       id: 12,
       condition:
         mainTrim?.fuelType === "Electric" || mainTrim?.fuelType === "Hybrid",
     },
     {
-      question: `What safety features are included in the ${year} ${brand.name} ${model.name}?`,
+      question: `What safety features are included in the ${year} ${brand.name} ${model.name} in UAE?`,
       answer: `Safety components of the ${year} ${brand.name} ${model.name
         } include ${mainTrim?.airbags ? mainTrim?.airbags + " airbags, " : ""
         }ABS, ${mainTrim?.haveFrontParkAssist ? "front park assist, " : ""}${mainTrim?.haveRearParkAssist ? "rear park assist, " : ""
@@ -151,7 +167,7 @@ export default function VehicleFaq({
       condition: true,
     },
     {
-      question: `How many passengers can the ${year} ${brand.name} ${model.name} accommodate?
+      question: `How many passengers can the ${year} ${brand.name} ${model.name} in UAE accommodate?
       `,
       answer: `The ${year} ${brand.name} ${model.name
         } has a seating capacity of ${mainTrim?.seatingCapacity && mainTrim?.seatingCapacity.split(" ")[0]
@@ -207,7 +223,7 @@ export default function VehicleFaq({
         "acceptedAnswer": {
           "@type": "Answer",
           // The answer should be plain text here
-          "text": typeof item.answer === "string" ? item.answer : item.answer.toString().replace(/(<([^>]+)>)/gi, "")
+          "text": item.plainAnswer ? item.plainAnswer : (typeof item.answer === "string" ? item.answer : item.answer.toString().replace(/(<([^>]+)>)/gi, ""))
         }
       }))
     };

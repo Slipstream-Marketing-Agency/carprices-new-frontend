@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
   const fetchLatestYear = async (slug) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-models/latest-year/${slug}`);
 
-    console.log(response,"response");
+    console.log(response, "response");
     const data = await response.json();
     return data?.data?.latestYear;
   };
@@ -42,32 +42,32 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  
+
     const setCanonical = async () => {
       const pathSegments = router.asPath.split("?")[0].split("/");
       const slug = pathSegments[4]; // Adjust based on your path structure
       const yearSegment = pathSegments.find(segment => /^\d{4}$/.test(segment));
-      
+
       // Parse the yearSegment to an integer
       const year = yearSegment ? parseInt(yearSegment, 10) : null;
-  
+
       if (slug) {
         const latestYear = await fetchLatestYear(slug);
-  
+
         // Update the year only if it's less than 2024
         if (latestYear && year && year < 2024) {
           pathSegments[pathSegments.indexOf(yearSegment)] = latestYear.toString();
         }
-  
+
         setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
       } else {
         setCanonicalUrl("https://carprices.ae" + router.asPath.split("?")[0]);
       }
     };
-  
+
     setCanonical();
   }, [router.asPath]);
-  
+
 
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
@@ -85,14 +85,33 @@ function MyApp({ Component, pageProps }) {
           type="image/gif"
           sizes="20x20"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Carprices",
+              "url": "https://carprices.ae/",
+              "logo": "https://carprices.ae/assets/img/car-prices-logo.png",
+              "sameAs": [
+                "https://www.facebook.com/carprices.ae/",
+                "https://www.instagram.com/carprices.ae/?igsh=bnE4cnpudjFwMHg1",
+                "https://www.youtube.com/@carpricesuae?feature=shared",
+                "https://www.linkedin.com/company/car-prices-ae/",
+                "https://x.com/CarPricesAe?t=_IgNE0J6jf5r1ZiiKrkaYw&s=09"
+              ]
+            })
+          }}
+        />
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       </Head>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
       <Analytics />
-      <SpeedInsights/>
-     
+      <SpeedInsights />
+
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
 
   return (
     <div className="tw-my-3" id="variant_listing">
-      <h2 className="tw-font-semibold tw-mb-5">Variants</h2>
+      <h2 className="tw-font-semibold tw-mb-5">{brand.name} {model.name} {year} Variants & Price in UAE</h2>
       <div className="tw-bg-white tw-shadow-sm tw-p-4 tw-rounded-xl tw-border tw-border-solid tw-border-gray-200 ">
         {allTrims?.map((item, index) => (
           <div key={index} className="tw-mb-3 tw-mt-3 ">

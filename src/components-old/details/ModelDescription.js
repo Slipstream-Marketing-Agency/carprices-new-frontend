@@ -136,7 +136,7 @@ export default function ModelDescription({
   return (
     <>
       <div className="tw-mb-10">
-        <h2 className="tw-font-semibold tw-mb-5">Overview</h2>
+        <h2 className="tw-font-semibold tw-mb-5">{brand?.name} {model?.name} {year} in UAE Specs</h2>
         <table className="tw-min-w-full tw-rounded-full tw-bg-white tw-border tw-border-solid  tw-border-gray-200">
           <tbody className="tw-text-gray-800 tw-text-sm ">
             <tr className="tw-border-b tw-border-gray-200">

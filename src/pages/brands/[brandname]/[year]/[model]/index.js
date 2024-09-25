@@ -304,7 +304,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     };
   });
 
-  const [activeLink, setActiveLink] = useState("#overview");
+  const [activeLink, setActiveLink] = useState("#specs");
 
   const handleLinkClick = (href) => {
     setActiveLink(href);
@@ -441,33 +441,33 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             </div>
           </div>
 
-          <PrimaryButton label="View All Variants" href={"#variants"} />
+          <PrimaryButton label="View All Variants" href={"#variants&prices"} />
         </div>
       </div>
       <div className=" tw-sticky tw-top-0 tw-z-10">
         <nav className="tw-text-base sm:tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
           <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
             <Link
-              href="#overview"
-              onClick={() => handleLinkClick("#overview")}
+              href="#specs"
+              onClick={() => handleLinkClick("#specs")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#overview"
+                activeLink === "#specs"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
               }`}
             >
-              Overview
+              Specs
             </Link>
             <Link
-              href="#variants"
-              onClick={() => handleLinkClick("#variants")}
+              href="#variants&prices"
+              onClick={() => handleLinkClick("#variants&prices")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#variants"
+                activeLink === "#variants&prices"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
               }`}
             >
-              Variants
+              Variants & prices
             </Link>
             {/* <Link
               href="#price"
@@ -552,7 +552,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
 
       <div
         className="tw-container tw-mx-auto tw-grid tw-grid-cols-12"
-        id="overview"
+        id="specs"
       >
         <div className="md:tw-col-span-9 tw-col-span-12">
           <ModelDescription
@@ -577,7 +577,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
           <Ad300x600 dataAdSlot={"blazer"} />
         </div>
       </div>
-      <div className="tw-container tw-mx-auto tw-mt-10" id="variants">
+      <div className="tw-container tw-mx-auto tw-mt-10" id="variants&prices">
         <VariantsListing
           year={year}
           brand={brand}
