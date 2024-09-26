@@ -53,6 +53,7 @@ import OutlinedButton from "@/src/components/buttons/OutlinedButton";
 import KeyFeatures from "@/src/components-old/details/KeyFeatures";
 import VariantsListing from "@/src/components/variant/VariantListing";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
+import Head from "next/head";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {
@@ -312,6 +313,51 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         type: "Car Review Website",
       }}
     >
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["Product", "Car"],
+              "brand": {
+                "@type": "Brand",
+                "name": trimData?.brand || "Unknown Brand",
+              },
+              "url": `/brands/${router?.query?.brandname || "unknown"}/${router?.query?.year || "unknown"}/${router?.query?.model || "unknown"}/${trimData?.slug || "unknown"}`,
+              "description": trimData?.price
+                ? `${trimData?.name} is priced at AED ${trimData?.price}.`
+                : `${trimData?.name} price information is not available.`,
+              "itemCondition": "NewCondition",
+              "manufacturer": trimData?.brand || "Unknown Manufacturer",
+              "model": trimData?.name || "Unknown Model",
+              "name": `${trimData?.year} ${trimData?.brand || "Unknown"} ${trimData?.model || "unknown"} ${trimData?.name || "Unknown"}`,
+              "image": trimData?.featuredImage || "/default-car-image.jpg", // Fallback to a default image
+              "vehicleModelDate": trimData?.year,
+              "offers": {
+                "@type": "Offer",
+                "price": trimData?.price || "N/A",
+                "availability": "http://schema.org/InStock",
+                "priceCurrency": "AED",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "minPrice": trimData?.price || "N/A",
+                  "maxPrice": trimData?.price || "N/A",
+                  "price": trimData?.price || "N/A",
+                  "priceCurrency": "AED",
+                },
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue":0, 
+                "reviewCount": 0, 
+                "worstRating": 0,
+                "bestRating": 0,
+              },
+            }),
+          }}
+        />
+      </Head>
       <div className="tw-grid tw-grid-cols-12 tw-gap-4 tw-mx-auto tw-container">
         <div className="tw-col-span-12 lg:tw-col-span-5">
           <div className="tw-grid tw-grid-cols-12 tw-gap-4">

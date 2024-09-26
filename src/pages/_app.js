@@ -89,6 +89,17 @@ function MyApp({ Component, pageProps }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "name": "carprices",
+              "url": "https://carprices.ae/"
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Carprices",

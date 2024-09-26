@@ -31,12 +31,13 @@ import PrimaryButton from "@/src/components/buttons/PrimaryButton";
 import KeyFeatures from "@/src/components-old/details/KeyFeatures";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import ImageSlider from "@/src/components/car-detail/ImageSlider";
+import Head from "next/head";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 function CarDeatilsPage({ oldModel, currentmodel }) {
 
-  console.log(currentmodel,"currentmodel");
+  console.log(currentmodel, "currentmodel");
   // const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const [currentURL, setCurrentURL] = useState("");
 
@@ -158,9 +159,9 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     // Format the minimum EMI for display
     const emiString = minEMI
       ? `AED ${minEMI.toLocaleString("en-AE", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })}*`
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      })}*`
       : "Not Available";
 
     return <span>{emiString}</span>;
@@ -314,21 +315,64 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
     <MainLayout
       pageMeta={{
         title: `${brand?.name} ${model?.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
-        description: `Explore the ${year} ${brand?.name} ${
-          model?.name
-        } starting at ${
-          minPrice <= 0
+        description: `Explore the ${year} ${brand?.name} ${model?.name
+          } starting at ${minPrice <= 0
             ? "TBD"
             : "AED" +
-              " " +
-              minPrice?.toLocaleString("en-AE", {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2,
-              })
-        }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
+            " " +
+            minPrice?.toLocaleString("en-AE", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 2,
+            })
+          }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
         type: "Car Review Website",
       }}
     >
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["Product", "Car"],
+              "brand": {
+                "@type": "Brand",
+                "name": currentmodel?.brand?.name || "Unknown Brand",
+              },
+              "url": `/brands/${currentmodel?.brand?.slug || "unknown"}/${mainTrim?.year || "unknown"}/${currentmodel?.slug || "unknown"}`,
+              "description": currentmodel?.price
+                ? `${currentmodel?.name} is priced between AED ${currentmodel?.price?.min} and AED ${currentmodel?.price?.max}.`
+                : `${currentmodel?.name} price information is not available.`,
+              "itemCondition": "NewCondition",
+              "manufacturer": currentmodel?.brand?.name || "Unknown Manufacturer",
+              "model": currentmodel?.name || "Unknown Model",
+              "name": `${mainTrim?.year} ${currentmodel?.brand?.name || "Unknown"} ${currentmodel?.name || "Unknown"}`,
+              "image": currentmodel?.image || "/default-car-image.jpg", // Fallback to a default image
+              "vehicleModelDate": mainTrim?.year,
+              "offers": {
+                "@type": "Offer",
+                "price": currentmodel?.price?.min || "N/A",
+                "availability": "http://schema.org/InStock",
+                "priceCurrency": "AED",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "minPrice": currentmodel?.price?.min || "N/A",
+                  "maxPrice": currentmodel?.price?.max || "N/A",
+                  "price": currentmodel?.price?.min || "N/A",
+                  "priceCurrency": "AED",
+                },
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue":0, 
+                "reviewCount": 0, 
+                "worstRating": 0,
+                "bestRating": 0,
+              },
+            }),
+          }}
+        />
+      </Head>
       <div className="tw-grid tw-grid-cols-12 tw-gap-4 tw-mx-auto tw-container">
         <div className="tw-col-span-12 lg:tw-col-span-5">
           <ImageSlider mainTrim={mainTrim} />
@@ -450,22 +494,20 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             <Link
               href="#specs"
               onClick={() => handleLinkClick("#specs")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#specs"
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#specs"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
-              }`}
+                }`}
             >
               Specs
             </Link>
             <Link
               href="#variants&prices"
               onClick={() => handleLinkClick("#variants&prices")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#variants&prices"
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#variants&prices"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
-              }`}
+                }`}
             >
               Variants & prices
             </Link>
@@ -527,11 +569,10 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             <Link
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#faq"
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#faq"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
-              }`}
+                }`}
             >
               FAQ
             </Link>
@@ -653,7 +694,7 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
               </div>
             </div>
             <div className="md:tw-col-span-3 tw-col-span-12">
-              <Ad300x600 dataAdSlot={"tahoe"} />
+              <Ad300x600 dataAdSlot={"8615289670"} />
             </div>
           </section>
         )}
@@ -745,12 +786,12 @@ export async function getServerSideProps(context) {
       `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${modelSlug}/${year}`
     );
 
-    if (!currentmodel || currentmodel?.data?.data?.model?.trims.length  === 0) {
+    if (!currentmodel || currentmodel?.data?.data?.model?.trims.length === 0) {
       return {
         notFound: true, // This will automatically render the 404 page
       };
     }
-  
+
 
     return {
       props: {

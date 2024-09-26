@@ -38,7 +38,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                 <div className="md:tw-w-1/2">
                   <div className="tw-card-body">
                     <h4 className="tw-text-lg tw-font-semibold">
-                      {year} {brand.name} {model.name} {item?.name}
+                      {year} {brand.name} {model.name} {item?.name} Price in UAE
                     </h4>
                     <p className="tw-text-xs sm:tw-text-sm tw-uppercase tw-font-semibold tw-text-gray-500">
                       <span>{item?.transmission}</span>,{" "}

@@ -193,8 +193,7 @@ const CarsPage = ({
 
       try {
         const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
+          `${process.env.NEXT_PUBLIC_API_URL
           }car-trims/homefilter?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -229,8 +228,7 @@ const CarsPage = ({
 
       try {
         const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
+          `${process.env.NEXT_PUBLIC_API_URL
           }car-trims/homefilter?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -266,8 +264,7 @@ const CarsPage = ({
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
+          `${process.env.NEXT_PUBLIC_API_URL
           }car-trims/price-range-by-brands?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -300,8 +297,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/fuelList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -338,8 +334,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/cylinderList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -374,8 +369,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/transmissionList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -410,8 +404,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/driveList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -448,8 +441,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/priceRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -486,8 +478,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/displacementRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -524,8 +515,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/powerRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -562,8 +552,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/brandList?bodyTypes=${JSON.stringify(
               bodyTypeSlugs
             )}&fuelType=${JSON.stringify(
@@ -600,8 +589,7 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${
-              process.env.NEXT_PUBLIC_API_URL
+            `${process.env.NEXT_PUBLIC_API_URL
             }car-trims/bodyList?brands=${JSON.stringify(
               brandSlugs
             )}&fuelType=${JSON.stringify(
@@ -856,6 +844,37 @@ const CarsPage = ({
 
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Carprices",
+              "url": "https://carprices.ae/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://carprices.ae/search-cars?brand={brand}&price={price}&bodytype={bodytype}&power={power}&displacement={displacement}&fuelType={fuelType}&drive={drive}&transmission={transmission}&cylinders={cylinders}"
+                },
+                "query-input": [
+                  "optional name=brand",
+                  "optional name=price",
+                  "optional name=bodytype",
+                  "optional name=power",
+                  "optional name=displacement",
+                  "optional name=fuelType",
+                  "optional name=drive",
+                  "optional name=transmission",
+                  "optional name=cylinders"
+                ]
+              }
+            })
+          }}
+        />
+      </Head>
       <PopupComponent
         open={open}
         onClose={handleClose}
@@ -1001,22 +1020,19 @@ const CarsPage = ({
                 <div className="tw-flex tw-items-center tw-justify-center ">
                   <div
                     id="slideover-container"
-                    className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${
-                      isVisible ? "tw-visible" : "tw-invisible"
-                    }`}
+                    className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${isVisible ? "tw-visible" : "tw-invisible"
+                      }`}
                   >
                     <div
                       onClick={toggleSlideover}
                       id="slideover-bg"
-                      className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${
-                        isVisible ? "tw-opacity-50" : "tw-opacity-0"
-                      }`}
+                      className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${isVisible ? "tw-opacity-50" : "tw-opacity-0"
+                        }`}
                     />
                     <div
                       id="slideover"
-                      className={`tw-w-full md:tw-w-96  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${
-                        isVisible ? "tw-translate-x-0" : "tw-translate-x-full"
-                      }`}
+                      className={`tw-w-full md:tw-w-96  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${isVisible ? "tw-translate-x-0" : "tw-translate-x-full"
+                        }`}
                     >
                       <div
                         onClick={toggleSlideover}
@@ -1115,9 +1131,9 @@ const CarsPage = ({
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
                   <BrandCategory brandDetails={brand} />
-                  <Ad728x90 dataAdSlot={"corvette"}/>
+                  <Ad728x90 dataAdSlot={"corvette"} />
                   <BodyTypes bodyTypeList={bodyTypes} />
-                  <Ad728x90 dataAdSlot={"tahoe"}/>
+                  <Ad728x90 dataAdSlot={"tahoe"} />
                   {/* <div className="row ">
                     <h2 className="mt-4">Automotive News</h2>
                     {articleslist?.map((newsItem, index) => {
@@ -1294,8 +1310,7 @@ export async function getServerSideProps(context) {
   }
 
   const filteredTrims = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
+    `${process.env.NEXT_PUBLIC_API_URL
     }car-trims/homefilter?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1314,8 +1329,7 @@ export async function getServerSideProps(context) {
   );
 
   const filteredTrimsZero = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
+    `${process.env.NEXT_PUBLIC_API_URL
     }car-trims/homefilter?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1338,8 +1352,7 @@ export async function getServerSideProps(context) {
   console.log(filteredTrims, "allTrimsZero");
 
   const fullFilter = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
+    `${process.env.NEXT_PUBLIC_API_URL
     }car-trims/price-range-by-brands?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1369,8 +1382,7 @@ export async function getServerSideProps(context) {
 
   if (fuelTypeSlugs.length > 0) {
     const fuelTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/fuelList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
@@ -1390,8 +1402,7 @@ export async function getServerSideProps(context) {
 
   if (cylinderSlugs.length > 0) {
     const cylinderList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/cylinderList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1411,8 +1422,7 @@ export async function getServerSideProps(context) {
 
   if (transmissionSlugs.length > 0) {
     const transmissionSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/transmissionList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1432,8 +1442,7 @@ export async function getServerSideProps(context) {
 
   if (driveSlugs.length > 0) {
     const driveSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/driveList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1455,8 +1464,7 @@ export async function getServerSideProps(context) {
 
   if (priceRange.length > 0) {
     const priceranges = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/priceRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1476,8 +1484,7 @@ export async function getServerSideProps(context) {
 
   if (displacementRange.length > 0) {
     const totaldisplacementrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/displacementRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1495,8 +1502,7 @@ export async function getServerSideProps(context) {
 
   if (powerRange.length > 0) {
     const totalpowerrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/powerRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1516,8 +1522,7 @@ export async function getServerSideProps(context) {
 
   if (brandSlugs.length > 0) {
     const brandList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/brandList?bodyTypes=${JSON.stringify(
         bodyTypeSlugs
       )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
@@ -1537,8 +1542,7 @@ export async function getServerSideProps(context) {
 
   if (bodyTypeSlugs.length > 0) {
     const bodyTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
+      `${process.env.NEXT_PUBLIC_API_URL
       }car-trims/bodyList?brands=${JSON.stringify(
         brandSlugs
       )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(

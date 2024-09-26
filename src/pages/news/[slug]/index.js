@@ -53,6 +53,7 @@ import AdBlog from "@/src/components-old/ads/AdBlog";
 import axios from "axios";
 import ShareButton from "@/src/components/common/ShareButton";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
+import Head from "next/head";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -323,6 +324,38 @@ function BlogDetailsPage({
         type: "Car news Website",
       }}
     >
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location
+              },
+              "headline": article?.title || "Default Title",
+              "description": article?.description || "Default Description",
+              "author": {
+                "@type": "Person",
+                "name": article?.author || "Unknown Author",
+                "url": "https://twitter.com/motorbikeman",
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Carprices",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://carprices.ae/assets/img/car-prices-logo.png"
+                }
+              },
+              "datePublished": moment(article?.publishedAt).format("Y-M-D") || "y-m-d",
+              "dateModified": moment(article?.publishedAt).format("Y-M-D") || "y-m-d"
+            })
+          }}
+        />
+      </Head>
       {/* <div className="hidemobile">
         <Ad970x250 dataAdSlot="5962627056" />
       </div>
@@ -475,7 +508,7 @@ function BlogDetailsPage({
 
               <div className="tw-space-y-4">
                 <div className="tw-text-sm">
-                I began my writing career in 2007 with Overdrive, India’s largest automotive magazine, where I worked as a photojournalist covering motorsports events and conducting car and motorcycle reviews. My expertise in content creation later led me to corporate roles as a marketing specialist for renowned brands such as Royal Enfield, General Motors, Toyota, Mercedes-Benz, Lexus, and Jeep. Driven by my passion for both writing and the automotive industry, I have also contributed to prominent local and regional publications, including Silodrome, Top Gear, Drive Arabia, Auto Middle East, Motorcycle UAE, Bike Nation, Gulf News, and more.
+                  I began my writing career in 2007 with Overdrive, India’s largest automotive magazine, where I worked as a photojournalist covering motorsports events and conducting car and motorcycle reviews. My expertise in content creation later led me to corporate roles as a marketing specialist for renowned brands such as Royal Enfield, General Motors, Toyota, Mercedes-Benz, Lexus, and Jeep. Driven by my passion for both writing and the automotive industry, I have also contributed to prominent local and regional publications, including Silodrome, Top Gear, Drive Arabia, Auto Middle East, Motorcycle UAE, Bike Nation, Gulf News, and more.
                 </div>
 
                 {/* Social Links */}
