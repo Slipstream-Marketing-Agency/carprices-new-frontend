@@ -333,7 +333,7 @@ function BlogDetailsPage({
               "@type": "BlogPosting",
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": window.location
+                "@id": `https://carprices.ae/news/${router.query?.slug}`
               },
               "headline": article?.title || "Default Title",
               "description": article?.description || "Default Description",
@@ -475,7 +475,7 @@ function BlogDetailsPage({
                           href={`/news/${blog?.attributes?.slug}`}
                           key={blog?.id}
                         >
-                          <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
+                          <button className="tw-bg-transparent tw-text-[#0d6efd] tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
                             Know More
                             <EastIcon className="tw-text-lg tw-ml-2" />
                           </button>

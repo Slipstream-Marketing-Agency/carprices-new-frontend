@@ -193,7 +193,7 @@ function BlogStandardPage() {
                           href={`/news/${article?.slug}`}
                           key={article?.id}
                         >
-                          <button className="tw-bg-transparent tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
+                          <button className="tw-bg-transparent tw-text-[#0d6efd] tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
                             Know More
                             <EastIcon className="tw-text-lg tw-ml-2" />
                           </button>
@@ -321,7 +321,7 @@ function BlogStandardPage() {
                         href={`/news/${article?.slug}`}
                         key={article?.id}
                       >
-                        <button className="tw-bg-transparent tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
+                        <button className="tw-bg-transparent tw-text-[#0d6efd] tw-text-sm 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
                           Know More
                           <EastIcon className="tw-text-lg tw-ml-2" />
                         </button>
