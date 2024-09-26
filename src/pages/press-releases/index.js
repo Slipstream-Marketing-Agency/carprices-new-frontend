@@ -18,6 +18,7 @@ export default function index({ initialPressReleases }) {
       const sortedPressReleases = await response.json();
       setPressReleases(sortedPressReleases.data);
     };
+    
     fetchSortedPressReleases();
   }, [sortOrder]);
 
