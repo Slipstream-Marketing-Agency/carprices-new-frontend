@@ -21,7 +21,6 @@ export default function index({ initialPressReleases }) {
     fetchSortedPressReleases();
   }, [sortOrder]);
 
-
   return (
     <MainLayout
       pageMeta={{
