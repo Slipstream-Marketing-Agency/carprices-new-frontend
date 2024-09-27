@@ -295,8 +295,8 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
   return (
     <MainLayout
       pageMeta={{
-        title: `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
-        description: `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${
+        title: trimData?.seo?.metaTitle ? trimData.seo.metaTitle : `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+        description: trimData?.seo?.metaDescription ? trimData.seo.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${
           trimData?.name
         } price in UAE starts at ${
           trimData.price <= 0
@@ -311,6 +311,8 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
           trimData?.model
         } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
         type: "Car Review Website",
+        ...(trimData?.seo?.metaRobots && { robots: trimData.seo.metaRobots }),
+        ...(trimData?.seo?.canonicalURL && { canonical: trimData.seo.canonicalURL }),
       }}
     >
       <Head>
@@ -347,13 +349,13 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                   "priceCurrency": "AED",
                 },
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue":0, 
-                "reviewCount": 0, 
-                "worstRating": 0,
-                "bestRating": 0,
-              },
+              // "aggregateRating": {
+              //   "@type": "AggregateRating",
+              //   "ratingValue":0, 
+              //   "reviewCount": 0, 
+              //   "worstRating": 0,
+              //   "bestRating": 0,
+              // },
             }),
           }}
         />

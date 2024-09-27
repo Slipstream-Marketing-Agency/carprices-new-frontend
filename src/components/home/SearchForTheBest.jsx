@@ -15,7 +15,7 @@ const searchBestCar = [
     bgColor: "#E8FEFF",
   },
   {
-    imageUrl: "/assets/img/home-search-for-best/news-and-reviews.png",
+    imageUrl: "/assets/img/home-search-for-best/news-and-reviews-icon.png",
     label: "News & Reviews",
     linkUrl: "/news",
     bgColor: "#F3FFE8",

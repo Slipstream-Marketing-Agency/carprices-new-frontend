@@ -23,6 +23,7 @@ import axios from "axios";
 import Ad970x250 from "../components-old/ads/Ad970x250";
 import Ad300x250 from "../components-old/ads/Ad300x250";
 import Image from "next/image";
+import { fetchMetaData } from "../lib/fetchMetaData";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -222,8 +223,7 @@ function MainLayout({ children, pageMeta }) {
 
     try {
       const response = await axios.get(
-        `${
-          process.env.NEXT_PUBLIC_API_URL
+        `${process.env.NEXT_PUBLIC_API_URL
         }car-models/search?searchTerm=${encodeURIComponent(searchTerm)}`
       );
 
@@ -338,15 +338,20 @@ function MainLayout({ children, pageMeta }) {
         {" "}
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
+
+        {/* Conditionally render robots meta tag */}
+        {meta.robots && <meta name="robots" content={meta.robots} />}
+
+        {/* Conditionally render canonical link tag */}
+        {meta.canonical && <link rel="canonical" href={meta.canonical} />}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <Topbar />
       <Header /> */}
       <div
-        className={`tw-fixed tw-top-0 tw-left-0 tw-z-[9999] tw-w-3/4 tw-max-w-[480px] tw-h-full tw-bg-white tw-shadow-lg tw-transform tw-transition-transform tw-duration-300 ${
-          isOpen ? "tw-translate-x-0" : "-tw-translate-x-full"
-        }`}
+        className={`tw-fixed tw-top-0 tw-left-0 tw-z-[9999] tw-w-3/4 tw-max-w-[480px] tw-h-full tw-bg-white tw-shadow-lg tw-transform tw-transition-transform tw-duration-300 ${isOpen ? "tw-translate-x-0" : "-tw-translate-x-full"
+          }`}
       >
         <div className="tw-flex tw-flex-col tw-pb-20 tw-mx-auto tw-w-full tw-max-w-[480px]">
           <div className="tw-flex tw-flex-col tw-px-4 tw-pt-2 tw-w-full">
@@ -841,11 +846,10 @@ function MainLayout({ children, pageMeta }) {
             </div>
 
             <div
-              className={`tw-fixed tw-top-0 tw-left-0 tw-z-10 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-50 tw-transition-opacity tw-duration-300 ${
-                isOpen
+              className={`tw-fixed tw-top-0 tw-left-0 tw-z-10 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-50 tw-transition-opacity tw-duration-300 ${isOpen
                   ? "tw-opacity-100"
                   : "tw-opacity-0 tw-pointer-events-none"
-              }`}
+                }`}
               onClick={toggleNavigation}
             ></div>
           </div>
@@ -1055,9 +1059,9 @@ function MainLayout({ children, pageMeta }) {
                         </h4>
                         <div className="tw-flex tw-flex-col tw-mt-3">
                           <Link href="/press-releases" className="text-white">
-                           Press Releases
+                            Press Releases
                           </Link>
-                          
+
                           {/* <Link
                             href="/terms-and-conditions"
                             className="tw-mt-1 tw-text-white"

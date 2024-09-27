@@ -36,6 +36,7 @@ import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
 import WebStories from "../components/home/WebStories";
+import { fetchMetaData } from "../lib/fetchMetaData";
 
 export default function index({
   bannerImage,
@@ -52,10 +53,12 @@ export default function index({
   articles,
   error,
   errorMessage,
+  metaData,
 }) {
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
   const featuredSliderRefMob = useRef(null);
+  console.log(metaData, "metaData")
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -1199,11 +1202,12 @@ export default function index({
 
 export async function getStaticProps() {
   try {
-    const [carSection, home, articles, compare] = await Promise.all([
+    const [carSection, home, articles, compare, metaData] = await Promise.all([
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
+      fetchMetaData('home'),
     ]);
 
     return {
@@ -1219,6 +1223,7 @@ export async function getStaticProps() {
         performance: carSection?.data[4],
         compare: compare?.data,
         articles: articles?.data?.data,
+        metaData: metaData
       },
       revalidate: 60, // Regenerate the page at most once per minute
     };

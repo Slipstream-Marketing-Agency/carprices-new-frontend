@@ -35,9 +35,10 @@ import Head from "next/head";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function CarDeatilsPage({ oldModel, currentmodel }) {
+function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
 
   console.log(currentmodel, "currentmodel");
+  console.log(seoData, "seoData");
   // const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const [currentURL, setCurrentURL] = useState("");
 
@@ -314,8 +315,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
   return (
     <MainLayout
       pageMeta={{
-        title: `${brand?.name} ${model?.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
-        description: `Explore the ${year} ${brand?.name} ${model?.name
+        title: seoData?.metaTitle ? seoData.metaTitle : `${brand?.name} ${model?.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
+        description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${brand?.name} ${model?.name
           } starting at ${minPrice <= 0
             ? "TBD"
             : "AED" +
@@ -326,6 +327,8 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
             })
           }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
         type: "Car Review Website",
+        ...(seoData?.metaRobots && { robots: seoData.metaRobots }),
+        ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
       }}
     >
       <Head>
@@ -362,13 +365,13 @@ function CarDeatilsPage({ oldModel, currentmodel }) {
                   "priceCurrency": "AED",
                 },
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue":0, 
-                "reviewCount": 0, 
-                "worstRating": 0,
-                "bestRating": 0,
-              },
+              // "aggregateRating": {
+              //   "@type": "AggregateRating",
+              //   "ratingValue":0, 
+              //   "reviewCount": 0, 
+              //   "worstRating": 0,
+              //   "bestRating": 0,
+              // },
             }),
           }}
         />
@@ -796,6 +799,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         oldModel: oldModels?.data?.data,
+        seoData: currentmodel?.data?.data?.seo,
         currentmodel: currentmodel?.data?.data?.model,
       },
     };
