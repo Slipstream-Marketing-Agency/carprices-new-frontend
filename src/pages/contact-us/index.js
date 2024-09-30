@@ -15,8 +15,9 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
-function ContactPage() {
+function ContactPage({metaData}) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -138,8 +139,8 @@ function ContactPage() {
   return (
     <MainLayout
       pageMeta={{
-        title: "Contact Us - Carprices.ae",
-        description:
+        title: metaData?.title ? metaData.title : "Contact Us - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.",
         type: "Car Review Website",
       }}
@@ -317,3 +318,22 @@ function ContactPage() {
 }
 
 export default ContactPage;
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
+}

@@ -7,18 +7,19 @@ import ProductCategory from "@/src/utils/ProductCategory";
 import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Pagination from "@/src/components/common/Pagination";
+import { useRouter } from "next/router";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
 
 
-function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
-  
+function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages, metaData }) {
 
   return (
     <MainLayout
       pageMeta={{
-        title: "Explore the Top Car Brands in the UAE - Carprices",
+        title: metaData?.title ? metaData.title : "Explore the Top Car Brands in the UAE - Carprices",
         description:
-          "Stay informed on the best car brands available in the UAE market with comprehensive reviews and insights from Carprices. Find the top brands and make an informed decision.",
+          metaData?.description ? metaData.description : "Stay informed on the best car brands available in the UAE market with comprehensive reviews and insights from Carprices. Find the top brands and make an informed decision.",
         type: "Car Review Website",
       }}
     >
@@ -34,6 +35,17 @@ function BrandCategoryPage({ brands, totalBrands, currentPage, totalPages }) {
 export default BrandCategoryPage;
 
 export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+
+  const metaData = await fetchMetaData(path)
   
   const page = context.query.page || 1; // Get the current page from the query, defaulting to 1
   const pageSize = 24; // Set the number of items per page
@@ -95,6 +107,7 @@ export async function getServerSideProps(context) {
         totalBrands: brandsData?.data?.carBrands?.meta?.pagination?.total,
         totalPages: brandsData?.data?.carBrands?.meta?.pagination?.pageCount,
         currentPage: page,
+        metaData,
       },
     };
   } catch (error) {

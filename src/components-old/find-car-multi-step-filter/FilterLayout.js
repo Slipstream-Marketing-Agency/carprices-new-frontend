@@ -367,6 +367,7 @@ export default function FilterLayout() {
               <img
                 loading="lazy"
                 src="/gradiend-lines.svg"
+                alt="gradiend-lines"
                 className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-rounded-tr-2xl tw-rounded-tl-2xl"
               />
               <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">

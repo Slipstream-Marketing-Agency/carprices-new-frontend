@@ -5,10 +5,18 @@ import Sidebar2 from "@/src/components/insuranceQuotePage/sidebar2/Sidebar2";
 import MainLayout from "@/src/layout/MainLayout";
 import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import Ad300X250 from "@/src/components-old/ads/Ad300x250";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
-function InsuranceCalculatorPage() {
+function InsuranceCalculatorPage({ metaData }) {
   return (
-    <MainLayout>
+    <MainLayout
+      pageMeta={{
+        title: metaData?.title ? metaData.title : "Insurance Calculation - Carprices.ae",
+        description: metaData?.description ? metaData.description :
+          "Get you insurance quote",
+        type: "Car Review Website",
+      }}
+    >
       <section className="tw-container">
         {/* <Header /> */}
         <div className="tw-grid sm:tw-grid-cols-12 tw-gap-8 ">
@@ -33,3 +41,23 @@ function InsuranceCalculatorPage() {
 }
 
 export default InsuranceCalculatorPage;
+
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
+}

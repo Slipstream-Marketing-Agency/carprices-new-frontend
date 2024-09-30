@@ -17,11 +17,12 @@ import MainLayout from "@/src/layout/MainLayout";
 import Ad728x90 from "@/src/components-old/ads/Ad728x90";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
-function About() {
+function About({metaData}) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -102,8 +103,8 @@ function About() {
   return (
     <MainLayout
       pageMeta={{
-        title: "About Us - Carprices.ae",
-        description:
+        title: metaData?.title ? metaData.title : "About Us - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "Discover the automotive world with CarPrices.ae - your trusted portal for comprehensive car research in the UAE. Compare vehicles, stay updated with the latest models and industry trends. Join our car-loving community today!",
         type: "Car Review Website",
       }}
@@ -240,3 +241,23 @@ function About() {
 }
 
 export default About;
+
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
+}

@@ -58,7 +58,6 @@ export default function index({
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
   const featuredSliderRefMob = useRef(null);
-  console.log(metaData, "metaData")
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -435,9 +434,9 @@ export default function index({
 
       <MainLayout
         pageMeta={{
-          title:
+          title: metaData?.title ? metaData.title :
             "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-          description:
+          description: metaData?.description ? metaData.description :
             "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
           type: "Car Review Website",
         }}
@@ -568,9 +567,12 @@ export default function index({
                   {FeaturedData.map((car, index) => (
                     <Link href={car.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
-                        <img
+                        <Image
                           src={car.image}
                           alt={`${car.brand} ${car.name}`}
+                          width={0}
+                          height={0}
+                          sizes="100vw"
                           className="tw-object-cover tw-w-full tw-h-96"
                         />
                         <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
@@ -586,9 +588,12 @@ export default function index({
                   {FeaturedData.map((item, index) => (
                     <Link href={item.url} key={index}>
                       <div className="tw-flex tw-flex-col tw-h-full tw-overflow-hidden tw-rounded-2xl tw-shadow-lg tw-transition-transform tw-duration-500 tw-bg-white">
-                        <img
+                        <Image
                           src={item.image}
                           alt={`${item.brand} ${item.name}`}
+                          width={0}
+                          height={0}
+                          sizes="100vw"
                           className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl"
                         />
                         <div className="tw-p-4 tw-flex tw-flex-col tw-flex-grow">
@@ -809,9 +814,13 @@ export default function index({
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-5 max-md:tw-gap-0">
               <div className="tw-flex tw-flex-col max-md:tw-w-full">
                 <div className="tw-relative tw-flex tw-flex-col tw-grow md:tw-items-end md:tw-px-16 md:tw-pb-20 md:tw-min-h-[519px] ">
-                  <img
+                  <Image
                     loading="lazy"
-                    srcSet="/car-side.png"
+                    alt="car-side"
+                    src="/car-side.png"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
                     className="tw-object-contain tw-absolute tw-inset-0 tw-w-full tw-h-full md:tw-block tw-hidden"
                   />
                 </div>
@@ -824,9 +833,13 @@ export default function index({
                       key={index}
                       className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black tw-p-4"
                     >
-                      <img
+                      <Image
                         loading="lazy"
+                        alt={`brand-${item?.name}`}
                         src={`${item?.logo}`}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
                         className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] md:tw-grayscale hover:tw-filter-none"
                       />
                       <div className="md:tw-mt-6 tw-mt-2 tw-font-semibold tw-whitespace-nowrap tw-text-xs md:tw-text-base">
@@ -847,9 +860,14 @@ export default function index({
             href="/news/Ferrari-V12-has-arrived-again-with-the-12cilindri-redlines-at-9500rpm"
             className="tw-w-full tw-h-full md:tw-block tw-hidden"
           >
-            <img
+            <Image
               loading="lazy"
+              alt="Banner-Sponsored-Desktop"
+              src="/Banner-Sponsored-Desktop.jpg"
               srcSet="/Banner-Sponsored-Desktop.jpg"
+              width={0}
+              height={0}
+              sizes="100vw"
               className="tw-object-contain tw-w-full tw-h-full md:tw-block tw-hidden tw-mt-10 "
             />
           </Link>
@@ -857,9 +875,14 @@ export default function index({
             href="/news/Ferrari-V12-has-arrived-again-with-the-12cilindri-redlines-at-9500rpm"
             className="tw-w-full tw-h-full md:tw-hidden tw-block"
           >
-            <img
+            <Image
               loading="lazy"
-              srcSet="/Banner-Sponsored-Mobile.jpg"
+              alt="Banner-Sponsored-Desktop"
+              src="/Banner-Sponsored-Desktop.jpg"
+              srcSet="/Banner-Sponsored-Desktop.jpg"
+              width={0}
+              height={0}
+              sizes="100vw"
               className="tw-object-contain tw-w-full tw-h-full md:tw-hidden tw-block tw-mt-10 tw-mb-3"
             />
           </Link>
@@ -884,9 +907,13 @@ export default function index({
                 <Link href={`/category/${item?.slug}`} key={index}>
                   <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black">
                     <div className="tw-w-full md:tw-h-32 sm:tw-h-24 tw-overflow-hidden">
-                      <img
+                      <Image
                         loading="lazy"
                         src={`${item?.image}`}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        alt={`category-${item?.name}`}
                         className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                       />
                     </div>
