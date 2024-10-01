@@ -344,7 +344,6 @@ function MainLayout({ children, pageMeta }) {
 
         {/* Conditionally render canonical link tag */}
         {meta.canonical && <link rel="canonical" href={meta.canonical} />}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <Topbar />

@@ -11,34 +11,31 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import "@/styles/tailwind.css";
-import 'react-horizontal-scrolling-menu/dist/styles.css';
+import "react-horizontal-scrolling-menu/dist/styles.css";
 import { useRouter } from "next/router";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Provider } from "react-redux";
 import store from "../store";
+import { useAmp } from "next/amp"; // AMP hook for detection
 
 function MyApp({ Component, pageProps }) {
+  const isAmp = useAmp(); // Detect AMP mode
   const [loading, setLoading] = useState(true);
   const [canonicalUrl, setCanonicalUrl] = useState("");
 
   const router = useRouter();
   const { locale } = router;
 
-  const handlePreloaderClose = () => {
-    setLoading(false);
-  };
-
   const fetchLatestYear = async (slug) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-models/latest-year/${slug}`);
-
-    console.log(response, "response");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}car-models/latest-year/${slug}`
+    );
     const data = await response.json();
     return data?.data?.latestYear;
   };
 
   useEffect(() => {
-    // Simulate loading for 3 seconds (adjust as needed)
     setTimeout(() => {
       setLoading(false);
     }, 3000);
@@ -46,7 +43,9 @@ function MyApp({ Component, pageProps }) {
     const setCanonical = async () => {
       const pathSegments = router.asPath.split("?")[0].split("/");
       const slug = pathSegments[4]; // Adjust based on your path structure
-      const yearSegment = pathSegments.find(segment => /^\d{4}$/.test(segment));
+      const yearSegment = pathSegments.find((segment) =>
+        /^\d{4}$/.test(segment)
+      );
 
       // Parse the yearSegment to an integer
       const year = yearSegment ? parseInt(yearSegment, 10) : null;
@@ -56,7 +55,8 @@ function MyApp({ Component, pageProps }) {
 
         // Update the year only if it's less than 2024
         if (latestYear && year && year < 2024) {
-          pathSegments[pathSegments.indexOf(yearSegment)] = latestYear.toString();
+          pathSegments[pathSegments.indexOf(yearSegment)] =
+            latestYear.toString();
         }
 
         setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
@@ -68,62 +68,119 @@ function MyApp({ Component, pageProps }) {
     setCanonical();
   }, [router.asPath]);
 
-
   // Check if the locale is set to Arabic
   const isArabicLocale = locale === "ar";
 
   return (
-    // <div style={isArabicLocale ? { direction: "rtl", textAlign: "right" } : {}}>
-    <div>
+    <>
       <Head>
         <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="" content="width=device-width, initial-scale=1.0" />
         <link
           rel="icon"
           href="/assets/img/favicon.ico"
           type="image/gif"
           sizes="20x20"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "http://schema.org",
-              "@type": "WebSite",
-              "name": "carprices",
-              "url": "https://carprices.ae/"
-            })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Carprices",
-              "url": "https://carprices.ae/",
-              "logo": "https://carprices.ae/assets/img/car-prices-logo.png",
-              "sameAs": [
-                "https://www.facebook.com/carprices.ae/",
-                "https://www.instagram.com/carprices.ae/?igsh=bnE4cnpudjFwMHg1",
-                "https://www.youtube.com/@carpricesuae?feature=shared",
-                "https://www.linkedin.com/company/car-prices-ae/",
-                "https://x.com/CarPricesAe?t=_IgNE0J6jf5r1ZiiKrkaYw&s=09"
-              ]
-            })
-          }}
-        />
+
+        {/* Canonical URL */}
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+        {isAmp && (
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+            rel="stylesheet"
+          />
+        )}
+
+        {/* Scripts and tags that should not appear on AMP pages */}
+        {!isAmp && (
+          <>
+            {/* Google Tag Manager */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-W564HNC');`,
+              }}
+            />
+
+            {/* AdSense */}
+            <script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
+              crossOrigin="anonymous"
+            ></script>
+
+            {/* Custom Font */}
+            <link
+              rel="stylesheet"
+              href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css"
+              crossOrigin="anonymous"
+            />
+
+            {/* Facebook Pixel */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `!function(f,b,e,v,n,t,s)
+                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(window, document,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  fbq('init', '1194042761803181');
+                  fbq('track', 'PageView');`,
+              }}
+            />
+
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                src="https://www.facebook.com/tr?id=1194042761803181&ev=PageView&noscript=1"
+              />
+            </noscript>
+          </>
+        )}
+
+        {/* Common styles and assets for AMP and non-AMP */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        />
       </Head>
+
+      {/* Content */}
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
-      <Analytics />
-      <SpeedInsights />
 
-    </div>
+      {/* Conditionally render GTM for non-AMP */}
+      {!isAmp && (
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W564HNC"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+      )}
+
+      {/* Analytics and Speed Insights */}
+      {!isAmp && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
+    </>
   );
 }
 

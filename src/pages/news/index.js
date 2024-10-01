@@ -42,7 +42,7 @@ const SkeletonArticle = () => (
   }
 `}</style>;
 
-function BlogStandardPage({metaData}) {
+function BlogStandardPage({ metaData }) {
   const [articles, setArticles] = useState([]);
   const [articlesThisWeek, setArticlesThisWeek] = useState([]);
   const [popularArticles, setPopularArticles] = useState([]);
@@ -91,10 +91,12 @@ function BlogStandardPage({metaData}) {
   return (
     <MainLayout
       pageMeta={{
-        title:metaData?.title ? metaData.title : 
-          "Latest Car News UAE: New Models, Launches, and Industry Insights - Carprices.ae",
-        description: metaData?.description ? metaData.description :
-          "Stay informed with the latest car news in UAE. Explore upcoming car model prices, specifications, and features. Get the inside scoop on the automotive industry and stay ahead of the curve.",
+        title: metaData?.title
+          ? metaData.title
+          : "Latest Car News UAE: New Models, Launches, and Industry Insights - Carprices.ae",
+        description: metaData?.description
+          ? metaData.description
+          : "Stay informed with the latest car news in UAE. Explore upcoming car model prices, specifications, and features. Get the inside scoop on the automotive industry and stay ahead of the curve.",
         type: "Car Review Website",
       }}
     >
@@ -102,7 +104,9 @@ function BlogStandardPage({metaData}) {
         <div className="tw-container tw-grid sm:tw-gap-10 tw-grid-cols-12">
           <div className="sm:tw-col-span-9 tw-col-span-12 tw-space-y-6">
             <div className="">
-              <h1 className="sm:tw-text-3xl tw-capitalize tw-font-semibold tw-mb-3">Latest Car News in UAE</h1>
+              <h1 className="sm:tw-text-3xl tw-capitalize tw-font-semibold tw-mb-3">
+                Latest Car News in UAE
+              </h1>
               <p className="tw-mb-8">
                 Stay up-to-date with the latest news and updates on the UAE car
                 industry, including new car launches, launch dates, car images,
@@ -111,30 +115,28 @@ function BlogStandardPage({metaData}) {
                 the happenings in the UAE automotive industry.
               </p>
               {articles.slice(0, 1).map((article, index) => (
-                <div>
+                <div key={`article-${article?.id}-${index}`}>
+                  {" "}
+                  {/* Add index to key */}
                   <Link
                     href={`/news/${article?.slug}`}
-                    key={article?.id}
-                    className="tw-flex  tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl md:tw-min-h-[500px] tw-min-h-[200px]"
+                    className="tw-flex tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl md:tw-min-h-[500px] tw-min-h-[200px]"
                     style={{
                       backgroundImage: `url('${article?.coverImage}')`,
                     }}
                   >
-                    {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
-                    Trending
-                  </div> */}
                     <div className="tw-hidden tw-relative md:tw-flex tw-flex-col tw-justify-center md:tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
                       <div className="md:tw-px-6 tw-px-2">
                         <h2 className="tw-text-4xl tw-line-clamp-2 tw-text-white">
                           {article?.title}
                         </h2>
-                        <p className="tw-my-1  tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
+                        <p className="tw-my-1 tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
                           {article?.summary}
                         </p>
                       </div>
                     </div>
                   </Link>
-                  <Link href={`/news/${article?.slug}`} key={article?.id}>
+                  <Link href={`/news/${article?.slug}`}>
                     <div className="md:tw-hidden tw-relative tw-mt-3">
                       <div className="md:tw-px-6 tw-px-2">
                         <h2 className="tw-text-base sm:tw-text-4xl tw-line-clamp-2 md:tw-leading-none tw-leading-6">
@@ -346,20 +348,19 @@ function BlogStandardPage({metaData}) {
 export default BlogStandardPage;
 
 export async function getServerSideProps(context) {
-
   // Get the full path and query string from the URL (e.g., 'brands?type=1')
   const { resolvedUrl } = context;
 
   // Split the URL at the "?" to remove query parameters
-  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+  const pathWithQuery = resolvedUrl.split("?")[0]; // Only take the path (e.g., 'brands')
 
   // Extract the last part of the path
-  const path = pathWithQuery.split('/').filter(Boolean).pop();
-  const metaData = await fetchMetaData(path)
+  const path = pathWithQuery.split("/").filter(Boolean).pop();
+  const metaData = await fetchMetaData(path);
 
   return {
     props: {
       metaData,
-    }
-  }
+    },
+  };
 }
