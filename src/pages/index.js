@@ -36,8 +36,6 @@ import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
 import { fetchMetaData } from "../lib/fetchMetaData";
-<<<<<<< HEAD
-import { FidgetSpinner } from "react-loader-spinner";
 
 const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
   ssr: false,
@@ -52,10 +50,8 @@ const HeroSectionComponent = dynamic(() => import('../components/home/HeroSectio
     </div>
   </div>
 });
-=======
 import { getAllWebStories } from "../lib/api";
 import StorySlider from "../components/web-stories/StorySlider";
->>>>>>> 46cbc520338e70f1dd89b5ebe675c58f265c04d8
 
 export default function index({
   bannerImage,
