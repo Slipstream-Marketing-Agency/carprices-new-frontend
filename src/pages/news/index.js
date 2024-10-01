@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import Pagination from "@/src/components/common/Pagination";
 import EastIcon from "@mui/icons-material/East";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
 const SkeletonArticle = () => (
   <div className="skeleton-article">
@@ -41,7 +42,7 @@ const SkeletonArticle = () => (
   }
 `}</style>;
 
-function BlogStandardPage() {
+function BlogStandardPage({metaData}) {
   const [articles, setArticles] = useState([]);
   const [articlesThisWeek, setArticlesThisWeek] = useState([]);
   const [popularArticles, setPopularArticles] = useState([]);
@@ -90,9 +91,9 @@ function BlogStandardPage() {
   return (
     <MainLayout
       pageMeta={{
-        title:
+        title:metaData?.title ? metaData.title : 
           "Latest Car News UAE: New Models, Launches, and Industry Insights - Carprices.ae",
-        description:
+        description: metaData?.description ? metaData.description :
           "Stay informed with the latest car news in UAE. Explore upcoming car model prices, specifications, and features. Get the inside scoop on the automotive industry and stay ahead of the curve.",
         type: "Car Review Website",
       }}
@@ -345,3 +346,22 @@ function BlogStandardPage() {
 }
 
 export default BlogStandardPage;
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
+}

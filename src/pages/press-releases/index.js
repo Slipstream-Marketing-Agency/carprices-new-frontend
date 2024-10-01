@@ -5,8 +5,9 @@ import MainLayout from "@/src/layout/MainLayout";
 import { useState, useEffect } from "react";
 import Ad300x600 from "@/src/components-old/ads/Ad300x600";
 import SubscribeForm from "@/src/components-old/press-releases/SubscribeForm";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
-export default function index({ initialPressReleases }) {
+export default function index({ initialPressReleases, metaData }) {
   const [pressReleases, setPressReleases] = useState(initialPressReleases);
   const [sortOrder, setSortOrder] = useState("Trending");
 
@@ -25,8 +26,8 @@ export default function index({ initialPressReleases }) {
   return (
     <MainLayout
       pageMeta={{
-        title: " CarPrices.ae - Latest Automotive News and Updates",
-        description:
+        title: metaData?.title ? metaData.title : " CarPrices.ae - Latest Automotive News and Updates",
+        description: metaData?.description ? metaData.description :
           "Stay informed with CarPrices.ae for the latest in the automotive industry. Get updates on new car launches, industry trends, and company announcements. Your one-stop source for automotive news and insights.",
         type: "Car Review Website",
       }}
@@ -75,13 +76,38 @@ export default function index({ initialPressReleases }) {
   );
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+//   const response = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_URL}press-releases?populate=*`
+//   );
+//   const initialPressReleases = await response.json();
+
+//   return {
+//     props: { initialPressReleases: initialPressReleases.data },
+//   };
+// }
+
+export async function getServerSideProps(context) {
+
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}press-releases?populate=*`
   );
   const initialPressReleases = await response.json();
 
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
   return {
-    props: { initialPressReleases: initialPressReleases.data },
-  };
+    props: {
+      metaData,
+      initialPressReleases: initialPressReleases.data
+    }
+  }
 }

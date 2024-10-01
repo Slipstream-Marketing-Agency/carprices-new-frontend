@@ -13,8 +13,9 @@ import axios from "axios";
 import Price from "@/src/utils/Price";
 import CompareCarCard from "@/src/components-old/compare-cars/CompareCarCard";
 import MultiStepCarSelection from "@/src/components-old/compare-cars/MultiStepCarSelection";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
-function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
+function ComparePage({ car1Data, car2Data, car3Data, car4Data, metaData }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -146,8 +147,8 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data }) {
     <MainLayout
       pageMeta={{
         title:
-          "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae",
-        description:
+          metaData?.title ? metaData.title : "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "Find your perfect car match. Compare side by side, explore detailed specs, features, and pricing options. Make informed decisions with our easy car comparison tool.",
         type: "Car Review Website",
       }}
@@ -192,6 +193,16 @@ export default ComparePage;
 export async function getServerSideProps(context) {
   const slug = context.query.slug;
   let car1Data, car2Data, car3Data, car4Data;
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
 
   if (slug) {
     const [mainSlug1, mainSlug2, mainSlug3, mainSlug4] = slug.split("-vs-");
@@ -382,6 +393,7 @@ export async function getServerSideProps(context) {
       car2Data: car2Data || null,
       car3Data: car3Data || null,
       car4Data: car4Data || null,
+      metaData,
     },
   };
 }

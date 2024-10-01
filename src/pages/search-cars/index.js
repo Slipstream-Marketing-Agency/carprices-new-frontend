@@ -32,6 +32,7 @@ import {
 import TuneIcon from "@mui/icons-material/Tune";
 import SortIcon from "@mui/icons-material/Sort";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
 const CarsPage = ({
   currentPage,
@@ -52,6 +53,7 @@ const CarsPage = ({
   driveList,
   bodyTypes,
   brand,
+  metaData
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -923,9 +925,9 @@ const CarsPage = ({
       <LoaderOverlay isVisible={isLoading} />
       <MainLayout
         pageMeta={{
-          title:
+          title: metaData?.title ? metaData.title : 
             "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-          description:
+          description: metaData?.description ? metaData.description :
             "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
           type: "Car Review Website",
         }}
@@ -1562,6 +1564,16 @@ export async function getServerSideProps(context) {
 
   const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
 
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
   try {
     return {
       props: {
@@ -1614,6 +1626,7 @@ export async function getServerSideProps(context) {
         brand: home?.data?.data?.brand,
         totalFilteredCars: filteredTrims?.data?.data?.totalFilteredCars,
         type: type,
+        metaData
       },
     };
   } catch (error) {

@@ -15,8 +15,10 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
+import Image from "next/image";
 
-function ContactPage() {
+function ContactPage({ metaData }) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -88,7 +90,7 @@ function ContactPage() {
 
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
-    
+
   };
 
   const handleSubmit = async (e) => {
@@ -138,8 +140,8 @@ function ContactPage() {
   return (
     <MainLayout
       pageMeta={{
-        title: "Contact Us - Carprices.ae",
-        description:
+        title: metaData?.title ? metaData.title : "Contact Us - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.",
         type: "Car Review Website",
       }}
@@ -185,8 +187,11 @@ function ContactPage() {
       <div className="tw-container mx-auto">
         <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
           <div className="tw-row-span-1 md:tw-col-span-12 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden !sm:tw-h-auto md:tw-h-[400px] tw-pb-4">
-            <img
+            <Image
               loading="lazy"
+              alt="contact-us-banner"
+              width={0}
+              height={0}
               src="/Contact-Us.jpg"
               className="tw-object-cover tw-w-full tw-h-full tw-absolute tw-inset-0"
             />
@@ -317,3 +322,22 @@ function ContactPage() {
 }
 
 export default ContactPage;
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
+}

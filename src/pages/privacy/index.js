@@ -1,17 +1,18 @@
 import MainLayout from "@/src/layout/MainLayout";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 import useTranslate from "@/src/utils/useTranslate";
 import { useRouter } from "next/router";
 import React from "react";
 
-export default function privacy() {
+export default function privacy({metaData}) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
   return (
     <MainLayout
       pageMeta={{
-        title: "Privacy Policy - Carprices.ae",
-        description:
+        title: metaData?.title ? metaData.title : "Privacy Policy - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "Protecting your privacy is our top priority. Read our privacy policy to understand how we collect, use, and safeguard your personal information. Your trust is important to us, and we are committed to maintaining the confidentiality of your data.",
         type: "Car Review Website",
       }}
@@ -254,4 +255,24 @@ export default function privacy() {
       </div>
     </MainLayout>
   );
+}
+
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
 }

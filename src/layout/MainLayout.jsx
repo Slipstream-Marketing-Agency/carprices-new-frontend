@@ -359,17 +359,23 @@ function MainLayout({ children, pageMeta }) {
                 href="/"
                 className="tw-flex tw-items-center tw-gap-1.5 tw-mt-2 cursor-pointer"
               >
-                <img
+                <Image
                   loading="lazy"
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
+                  alt="logo"
+                  width={0}
+                  height={0}
                 />
               </Link>
               <div onClick={toggleNavigation}>
-                <img
+                <Image
                   loading="lazy"
                   src="/close-button.svg"
                   className="tw-shrink-0 tw-w-6 tw-aspect-[0.8]"
+                  alt={`close`}
+                  width={0}
+                  height={0}
                 />
               </div>
             </div>
@@ -396,10 +402,13 @@ function MainLayout({ children, pageMeta }) {
           >
             <div className="tw-flex tw-gap-5 tw-text-base tw-leading-5 tw-text-zinc-500 tw-w-full max-md:tw-flex-wrap">
               <Link href="/" className="tw-flex tw-items-center">
-                <img
+                <Image
                   loading="lazy"
-                  srcSet="/assets/img/car-prices-logo.png"
+                  src="/assets/img/car-prices-logo.png"
                   className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
+                  alt={`logo`}
+                  width={0}
+                  height={0}
                 />
               </Link>
               <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
@@ -569,20 +578,26 @@ function MainLayout({ children, pageMeta }) {
             <div className="tw-flex tw-gap-2 tw-text-xl tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
               <Link href="/">
                 {" "}
-                <img
+                <Image
                   loading="lazy"
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
+                  alt={`logo`}
+                  width={0}
+                  height={0}
                 />
               </Link>
               <div className="tw-my-auto"></div>
             </div>
             <div className="tw-flex tw-gap-4 tw-justify-center tw-my-auto">
-              <img
+              <Image
                 loading="lazy"
                 src="/search.svg"
                 className="tw-shrink-0 tw-w-5 tw-aspect-square"
                 onClick={toggleSearch}
+                alt={`search`}
+                width={0}
+                height={0}
               />
               <IconButton onClick={toggleDrawer}>
                 <MenuIcon />
@@ -599,10 +614,13 @@ function MainLayout({ children, pageMeta }) {
             >
               <div className="tw-flex tw-justify-between tw-items-center">
                 <Link href="/">
-                  <img
+                  <Image
                     loading="lazy"
                     src="/assets/img/car-prices-logo.png"
                     className="tw-w-[150px] tw-object-contain"
+                    alt={`logo`}
+                    width={0}
+                    height={0}
                   />
                 </Link>
                 <IconButton onClick={toggleDrawer}>
@@ -819,35 +837,44 @@ function MainLayout({ children, pageMeta }) {
           <div className="tw-gap-5 tw-justify-between tw-px-5 tw-py-4 tw-bg-white tw-w-full md:tw-hidden tw-flex">
             <div className="tw-flex tw-gap-2 tw-text-xl tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
               <Link href="/">
-                <img
+                <Image
                   loading="lazy"
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
+                  alt={`logo`}
+                  width={0}
+                  height={0}
                 />
               </Link>
               <div className="tw-my-auto"></div>
             </div>
             <div className="tw-flex tw-gap-4 tw-justify-center tw-my-auto">
-              <img
+              <Image
                 loading="lazy"
                 src="/search.svg"
                 className="tw-shrink-0 tw-w-5 tw-aspect-square"
                 onClick={() => setSearchClcked(true)}
+                alt={`search-icon`}
+                width={0}
+                height={0}
               />
 
               <div onClick={toggleNavigation}>
-                <img
+                <Image
                   loading="lazy"
                   src="/menu.svg"
                   className="tw-shrink-0 tw-self-start tw-w-6 tw-aspect-[1.27]"
+                  alt={`menu-icon`}
+                  width={0}
+                  height={0}
                 />
               </div>
             </div>
 
             <div
               className={`tw-fixed tw-top-0 tw-left-0 tw-z-10 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-50 tw-transition-opacity tw-duration-300 ${isOpen
-                  ? "tw-opacity-100"
-                  : "tw-opacity-0 tw-pointer-events-none"
+                ? "tw-opacity-100"
+                : "tw-opacity-0 tw-pointer-events-none"
                 }`}
               onClick={toggleNavigation}
             ></div>

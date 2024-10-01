@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from "@mui/material/Skeleton";
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 const CarPriceRange = ({ minPrice, maxPrice }) => {
@@ -73,11 +74,14 @@ const CarCard = ({ car, loading }) => {
                 {loading ? (
                     <Skeleton variant="rectangular" width="100%" height={160} />
                 ) : (
-                    <img
+                    <Image
                         loading="lazy"
                         src={car?.highTrim?.featuredImage}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
                         className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48"
-                        alt=""
+                        alt={car.name}
                     />
                 )}
             </div>

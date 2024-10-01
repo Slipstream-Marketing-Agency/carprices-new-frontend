@@ -66,7 +66,7 @@ export default function OldModel({ model }) {
                 ? "/assets/img/car-placeholder.png"
                 : car?.featuredImage
             }
-            alt=""
+            alt={model.name}
           />
 
           <button className="p-2 white_bg_wrapper">

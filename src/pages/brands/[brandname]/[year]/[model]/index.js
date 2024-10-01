@@ -498,8 +498,8 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
               href="#specs"
               onClick={() => handleLinkClick("#specs")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#specs"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
                 }`}
             >
               Specs
@@ -508,8 +508,8 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
               href="#variants&prices"
               onClick={() => handleLinkClick("#variants&prices")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#variants&prices"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
                 }`}
             >
               Variants & prices
@@ -573,8 +573,8 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#faq"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
                 }`}
             >
               FAQ
@@ -675,22 +675,26 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
               </div>
               <div className="tw-w-full md:tw-h-full md:tw-w-5/12  tw-mt-0">
                 <div className="tw-flex tw-flex-col tw-w-full tw-h-full">
-                  <img
+                  <Image
                     src={
                       currentmodel?.highlightsExteriorImage === null
                         ? "/assets/img/car-placeholder.png"
                         : currentmodel?.highlightsExteriorImage
                     }
-                    alt=""
+                    alt={`exterior-image`}
+                    width={0}
+                    height={0}
                     className="tw-w-full tw-h-full tw-object-cover"
                   />
-                  <img
+                  <Image
                     src={
                       currentmodel?.highlightsImage === null
                         ? "/assets/img/car-placeholder.png"
                         : currentmodel?.highlightsInteriorImage
                     }
-                    alt=""
+                    alt={`interior-image`}
+                    width={0}
+                    height={0}
                     className="tw-w-full tw-h-full tw-object-cover"
                   />
                 </div>

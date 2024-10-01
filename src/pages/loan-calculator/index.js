@@ -5,10 +5,11 @@ import MainSection from "@/src/components/carLoanCalculatorPage/mainSection/main
 import Sidebar1 from "@/src/components/carLoanCalculatorPage/sidebar1/Sidebar1";
 import Sidebar2 from "@/src/components/carLoanCalculatorPage/sidebar2/Sidebar2";
 import MainLayout from "@/src/layout/MainLayout";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function CarLoanCalculatorPage() {
+export default function CarLoanCalculatorPage({metaData}) {
   const faq = [
     {
       question: <>Can I get a car loan in the UAE if I'm not a UAE national?</>,
@@ -113,9 +114,9 @@ export default function CarLoanCalculatorPage() {
   return (
     <MainLayout
       pageMeta={{
-        title:
+        title: metaData?.title ? metaData.title :
           "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
-        description:
+        description: metaData?.description ? metaData.description :
           "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
         type: "Car Review Website",
       }}
@@ -173,4 +174,24 @@ export default function CarLoanCalculatorPage() {
       </div>
     </MainLayout>
   );
+}
+
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
 }

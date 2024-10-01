@@ -494,6 +494,7 @@ function BlogDetailsPage({
                   src={"https://cdn.carprices.ae/assets/Martin_Alva_7e01cef081.jpg"}
                   width={80}
                   height={80}
+                  alt="author-martin"
                   className="tw-object-cover tw-rounded-full tw-w-[70px] tw-h-[70px]"
                 />
                 <div>

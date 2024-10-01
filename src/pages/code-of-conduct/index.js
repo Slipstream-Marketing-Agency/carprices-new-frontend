@@ -1,19 +1,20 @@
 import MainLayout from "@/src/layout/MainLayout";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 import useTranslate from "@/src/utils/useTranslate";
 import { useRouter } from "next/router";
 import React from "react";
 
 
 
-export default function codeOfConduct() {
+export default function codeOfConduct({metaData}) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
   return (
     <MainLayout
       pageMeta={{
-        title: "Code of Conduct - Carprices.ae",
-        description:
+        title: metaData?.title ? metaData.title : "Code of Conduct - Carprices.ae",
+        description: metaData?.description ? metaData.description :
           "We adhere to a strict code of conduct to ensure a positive and respectful experience for all users. Read our code of conduct to understand the guidelines and expectations we have in place.",
         type: "Car Review Website",
       }}
@@ -112,4 +113,23 @@ export default function codeOfConduct() {
       </div>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(context) {
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split('?')[0];  // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split('/').filter(Boolean).pop();
+  const metaData = await fetchMetaData(path)
+
+  return {
+    props: {
+      metaData,
+    }
+  }
 }

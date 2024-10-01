@@ -27,6 +27,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                   <Image
                     width={200}
                     height={200}
+                    alt={item?.name}
                     src={
                       item?.featuredImage
                         ? item?.featuredImage
@@ -45,9 +46,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                       <span>{item?.seatingCapacity}</span>,{" "}
                       {item?.fuelType === "Electric"
                         ? item?.motor
-                        : `${(item?.displacement / 1000).toFixed(1)}L ${
-                            item?.engine
-                          } ${item?.drive}`}
+                        : `${(item?.displacement > 0 ? (item.displacement / 1000).toFixed(1) + 'L ' : '')} ${item?.engine} ${item?.drive}`}
                       ,<span> {item?.torque}Nm</span>,{" "}
                       <span> {item?.power}hp</span>
                     </p>

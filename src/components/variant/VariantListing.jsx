@@ -30,6 +30,7 @@ export default function VariantsListing({ data, brandslug, modelslug, trimslug }
                   <Image
                     width={200}
                     height={200}
+                    alt={trim?.name}
                     src={
                       trim?.featuredImage
                         ? trim?.featuredImage
