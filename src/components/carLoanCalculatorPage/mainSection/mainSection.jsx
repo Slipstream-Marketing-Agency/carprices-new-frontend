@@ -325,7 +325,7 @@ function MainSection() {
   return (
     <div className="">
       <h1 className="tw-text-2xl tw-mb-4 sm:tw-text-3xl tw-leading-loose tw-text-lightgray ">
-        Car Loan Calculator
+        Car Loan Calculator UAE
       </h1>
       {/* <div className="tw-para tw-text-lightgray">{carLoanPage.para1}</div> */}
       {/* {showModal && (
@@ -626,7 +626,7 @@ function MainSection() {
             car loan for affordability.
           </p>
           <h4 className=" tw-mt-3  tw-font-semibold tw-capitalize">
-            Loan Installment and Downpayment Variability on Car Finance
+            Loan Installment and Downpayment Variability on Car Finance Dubai
           </h4>
           <p className="">
             Car loan providers in the UAE offer various loan tenures and down

@@ -37,6 +37,21 @@ import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
 import WebStories from "../components/home/WebStories";
 import { fetchMetaData } from "../lib/fetchMetaData";
+import { FidgetSpinner } from "react-loader-spinner";
+
+const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
+  ssr: false,
+  loading: () => <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
+    <div className="video-container tw-relative tw-w-full tw-h-full">
+      <Skeleton
+        variant="rectangular"
+        width="100%"
+        height="100%"
+        className="tw-absolute tw-top-0 tw-left-0"
+      />
+    </div>
+  </div>
+});
 
 export default function index({
   bannerImage,
@@ -443,25 +458,7 @@ export default function index({
       >
         <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
           <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full">
-            <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
-              <div className="video-container tw-relative tw-w-full tw-h-full">
-                <video
-                  preload="metadata"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/path/to/poster.jpg"
-                  className="banner-video tw-w-full tw-h-full object-cover"
-                >
-                  <source
-                    src="https://cdn.carprices.ae/assets/Promo_Web_1_103eaf6dea.mp4"
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
+            <HeroSectionComponent />
             <div className="tw-row-span-1 lg:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-border tw-border-neutral-100 lg:tw-order-2 tw-order-1">
               <FilterLayout />
             </div>

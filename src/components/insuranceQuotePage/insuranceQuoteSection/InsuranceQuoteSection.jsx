@@ -896,7 +896,7 @@ function InsuranceQuote() {
             Get Your Insurance Quote
           </h1>
           <div className="tw-text-center tw-font-normal  tw-text-2xl sm:tw-text-3xl tw-text-lightgray">
-            In A Few Clicks!
+            In Just A Few Clicks!
           </div>
           <Stepper step={currentStep + 1} setCurrentStep={setCurrentStep} />
           {steps[currentStep]}

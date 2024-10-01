@@ -5,7 +5,7 @@ export default function BannerSection({ setShowModal }) {
   return (
     <div className="tw-bg-gradient-to-tl tw-from-blue-800 tw-via-blue-600 tw-to-blue-700  tw-rounded-2xl md:tw-p-10 tw-p-8 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
       <div>
-        <div className="tw-text-4xl sm:tw-w-1/2 ">
+        <div className="tw-text-4xl sm:tw-w-1/2 tw-capitalize">
           Choose the car to calculate loan EMI
         </div>
         <div className=" tw-mb-6 md:tw-w-2/3 tw-opacity-80 tw-mt-3">

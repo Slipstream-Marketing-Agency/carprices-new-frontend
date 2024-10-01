@@ -43,8 +43,8 @@ const searchBestCar = [
 const SearchForTheBest = () => {
   return (
     <div className="tw-flex tw-flex-col tw-px-3 md:tw-container md:tw-mt-12 tw-mt-6 md:tw-mb-6 tw-mb-1">
-      <div className="tw-flex tw-flex-col tw-self-start sm:tw-px-5 max-md:tw-max-w-full">
-        <h2 className=" tw-font-semibold tw-capitalize">Search For The Best</h2>
+      <div className="tw-flex tw-flex-col tw-self-start max-md:tw-max-w-full tw-mb-2">
+        <h1 className=" tw-font-semibold tw-capitalize">Explore the Best Car Prices in the UAE</h1>
       </div>
 
       <div className="tw-grid tw-grid-cols-3 md:tw-grid-cols-6 tw-gap-4">

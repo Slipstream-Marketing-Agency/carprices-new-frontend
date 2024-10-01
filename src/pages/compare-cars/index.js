@@ -155,7 +155,7 @@ function ComparePage({ car1Data, car2Data, car3Data, car4Data, metaData }) {
     >
       <div>
         <div className="tw-container tw-mx-auto">
-          <h1>Compare Cars</h1>
+          <h1>Compare Cars in UAE</h1>
           <p>
             Simplifying Your Decision-Making Process. Compare Your Ideal Cars
             with Our Comprehensive Tool – Price, Features, Specifications, Fuel
