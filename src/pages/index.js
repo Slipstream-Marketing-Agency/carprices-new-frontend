@@ -31,12 +31,13 @@ import Ad300x250 from "../components-old/ads/Ad300x250";
 import Ad970x250 from "../components-old/ads/Ad970x250";
 import MainLayout from "../layout/MainLayout";
 import SeoLinksHome from "../components/common/SeoLinksHome";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
-import WebStories from "../components/home/WebStories";
 import { fetchMetaData } from "../lib/fetchMetaData";
+import { getAllWebStories } from "../lib/api";
+import StorySlider from "../components/web-stories/StorySlider";
 
 export default function index({
   bannerImage,
@@ -54,11 +55,12 @@ export default function index({
   error,
   errorMessage,
   metaData,
+  stories,
 }) {
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
   const featuredSliderRefMob = useRef(null);
-  console.log(metaData, "metaData")
+  console.log(metaData, "metaData");
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
@@ -488,7 +490,9 @@ export default function index({
                     </div>
                   ))}
                 </Slider>
-                <div className="md:tw-block tw-hidden tw-mt-4"> {/* Added margin-top */}
+                <div className="md:tw-block tw-hidden tw-mt-4">
+                  {" "}
+                  {/* Added margin-top */}
                   <Ad728x90 dataAdSlot="4367254600" />
                 </div>
               </div>
@@ -496,7 +500,11 @@ export default function index({
               <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
                 <div className="tw-flex tw-nowrap tw-pr-1">
                   {featuredcars?.carModels.map((car) => (
-                    <div className="tw-inline-block tw-pr-2" style={{ minWidth: '75%' }} key={car.id}>
+                    <div
+                      className="tw-inline-block tw-pr-2"
+                      style={{ minWidth: "75%" }}
+                      key={car.id}
+                    >
                       <CarCard car={car} loading={false} />
                     </div>
                   ))}
@@ -592,8 +600,12 @@ export default function index({
                           className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl"
                         />
                         <div className="tw-p-4 tw-flex tw-flex-col tw-flex-grow">
-                          <h6 className="tw-text-lg tw-font-semibold tw-leading-4 tw-text-gray-800">{item.name}</h6>
-                          <p className="tw-text-sm tw-text-gray-600 tw-mt-1">{item.brand}</p>
+                          <h6 className="tw-text-lg tw-font-semibold tw-leading-4 tw-text-gray-800">
+                            {item.name}
+                          </h6>
+                          <p className="tw-text-sm tw-text-gray-600 tw-mt-1">
+                            {item.brand}
+                          </p>
                         </div>
                       </div>
                     </Link>
@@ -608,7 +620,6 @@ export default function index({
                   </Link>
                 </div>
               </div>
-
             </div>
           </div>
           {/* popular new cars */}
@@ -631,10 +642,11 @@ export default function index({
                     className="tw-flex tw-flex-col tw-justify-center"
                   >
                     <div
-                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${selectedTab === index
-                        ? "tw-bg-neutral-900 tw-text-white"
-                        : "tw-bg-violet-100 tw-border-violet-100"
-                        }`}
+                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${
+                        selectedTab === index
+                          ? "tw-bg-neutral-900 tw-text-white"
+                          : "tw-bg-violet-100 tw-border-violet-100"
+                      }`}
                       onClick={() => setSelectedTab(index)}
                     >
                       {category}
@@ -658,7 +670,11 @@ export default function index({
             <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
               <div className="tw-flex tw-nowrap tw-pr-1">
                 {filterCars(selectedTab).map((car) => (
-                  <div className="tw-inline-block tw-pr-2" style={{ minWidth: '75%' }} key={car.id}>
+                  <div
+                    className="tw-inline-block tw-pr-2"
+                    style={{ minWidth: "75%" }}
+                    key={car.id}
+                  >
                     <CarCard car={car} loading={loading} />
                   </div>
                 ))}
@@ -683,13 +699,17 @@ export default function index({
                         className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                         onClick={() => sliderRef.current.slickPrev()}
                       >
-                        <span className="material-symbols-outlined">chevron_left</span>
+                        <span className="material-symbols-outlined">
+                          chevron_left
+                        </span>
                       </button>
                       <button
                         className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                         onClick={() => sliderRef.current.slickNext()}
                       >
-                        <span className="material-symbols-outlined">chevron_right</span>
+                        <span className="material-symbols-outlined">
+                          chevron_right
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -712,7 +732,9 @@ export default function index({
                           alt={item.title}
                         />
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-px-4 tw-py-5 max-md:tw-mt-10">
-                          <h4 className="tw-text-white tw-font-bold">{item.title}</h4>
+                          <h4 className="tw-text-white tw-font-bold">
+                            {item.title}
+                          </h4>
                         </div>
                       </div>
                     </div>
@@ -890,7 +912,9 @@ export default function index({
                         className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                       />
                     </div>
-                    <div className=" tw-font-semibold tw-text-xs md:tw-text-base">{item.name}</div>
+                    <div className=" tw-font-semibold tw-text-xs md:tw-text-base">
+                      {item.name}
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -961,7 +985,6 @@ export default function index({
             </div> */}
           </div>
 
-
           {/* image section NEw */}
           <div className=" tw-container sm:tw-grid tw-grid-cols-2 tw-w-full tw-gap-4 tw-space-y-4 sm:tw-space-y-0">
             <div className="tw-bg-gradient-to-tl tw-from-blue-800 tw-via-blue-600 tw-to-blue-700  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
@@ -970,12 +993,11 @@ export default function index({
                   calculate your car loan EMI
                 </div>
                 <div className="  tw-text-xs sm:tw-text-sm tw-mb-6 tw-w-[60%] sm:tw-w-2/3 tw-opacity-80 tw-mt-1">
-                  Input your loan amount, interest rate, and loan term to get instant results.
+                  Input your loan amount, interest rate, and loan term to get
+                  instant results.
                 </div>
                 <Link href="/loan-calculator">
-                  <button
-                    className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16"
-                  >
+                  <button className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16">
                     Calculate Now
                   </button>
                 </Link>
@@ -983,11 +1005,13 @@ export default function index({
               </div>
               <Image
                 className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
-                src={"https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"}
+                src={
+                  "https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
+                }
                 alt="car_Loan_EMI-icon"
                 height={200}
                 width={200}
-              // layout="responsive"
+                // layout="responsive"
               />
             </div>
             <div className="tw-bg-gradient-to-tl tw-from-gray-700 tw-via-gray-800 tw-to-black  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
@@ -996,13 +1020,11 @@ export default function index({
                   Know your car's worth
                 </div>
                 <div className="  tw-text-xs sm:tw-text-sm tw-mb-6 tw-w-[60%] sm:tw-w-2/3 tw-opacity-80 tw-mt-1">
-                  Input your car's details to receive an instant valuation based on real-time market data.
+                  Input your car's details to receive an instant valuation based
+                  on real-time market data.
                 </div>
                 <Link href="/insurance-calculator">
-
-                  <button
-                    className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16"
-                  >
+                  <button className=" tw-text-sm tw-capitalize  tw-bg-transparent tw-text-white tw-mt-16">
                     Value My Car
                   </button>
                 </Link>
@@ -1010,11 +1032,13 @@ export default function index({
               </div>
               <Image
                 className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-52 tw-bottom-10 tw-left-36 tw-w-[65%] tw-h-[65%] xl:tw-w-[80%] xl:tw-h-[80%]"
-                src={"https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"}
+                src={
+                  "https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"
+                }
                 alt="car_worth-icon"
                 height={200}
                 width={200}
-              // layout="responsive"
+                // layout="responsive"
               />
             </div>
           </div>
@@ -1042,22 +1066,22 @@ export default function index({
           </div>
         </div>
       </div> */}
-          {/* <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
-            <div className="tw-relative tw-flex tw-justify-between container">
+          <div className="tw-w-full tw-container md:tw-mt-12 tw-mt-6">
+            <div className="tw-relative tw-flex tw-justify-between ">
               <div className="tw-flex tw-flex-col tw-justify-center">
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
-                  What's the News
-                </h5>
-                <h2 className=" tw-font-semibold tw-capitalize">
                   Web Stories
-                </h2>
+                </h5>
+                <h2 className=" tw-font-semibold tw-capitalize">Web Stories</h2>
               </div>
-              <Link href="#">
-                <span className="tw-capitalize tw-font-semibold">View More</span>
+              <Link href="/web-stories">
+                <span className="tw-capitalize tw-font-semibold">
+                  View More
+                </span>
               </Link>
             </div>
-            <WebStories />
-          </div> */}
+            <StorySlider stories={stories} />
+          </div>
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-10 tw-my-6 tw-px-5">
             <div className="tw-flex tw-flex-wrap tw-justify-between tw-w-full tw-gap-5">
               <div className="tw-flex tw-flex-col tw-max-w-full">
@@ -1131,7 +1155,9 @@ export default function index({
                 <h5 className="tw-text-xs tw-tracking-wider tw-leading-5 tw-text-blue-600 tw-uppercase tw-font-bold">
                   Trending automotive news
                 </h5>
-                <h2 className=" tw-font-semibold tw-capitalize">Latest Automotive News</h2>
+                <h2 className=" tw-font-semibold tw-capitalize">
+                  Latest Automotive News
+                </h2>
               </div>
             </div>
             <div className="tw-mt-7 tw-w-full">
@@ -1177,8 +1203,9 @@ export default function index({
                         key={index}
                         className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
                         style={{
-                          backgroundImage: `url('${item?.coverImage ? item?.coverImage : altImage
-                            }')`,
+                          backgroundImage: `url('${
+                            item?.coverImage ? item?.coverImage : altImage
+                          }')`,
                         }}
                       >
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
@@ -1207,8 +1234,9 @@ export async function getStaticProps() {
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
-      fetchMetaData('home'),
+      fetchMetaData("home"),
     ]);
+    const stories = await getAllWebStories();
 
     return {
       props: {
@@ -1223,7 +1251,8 @@ export async function getStaticProps() {
         performance: carSection?.data[4],
         compare: compare?.data,
         articles: articles?.data?.data,
-        metaData: metaData
+        metaData: metaData,
+        stories,
       },
       revalidate: 60, // Regenerate the page at most once per minute
     };

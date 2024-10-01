@@ -13,7 +13,7 @@ export async function middleware(req) {
       if (!res.ok) throw new Error('Failed to fetch redirects.json');
       redirects = await res.json();
     } catch (error) {
-      console.error('Error fetching redirects:', error);
+      // console.error('Error fetching redirects:', error);
       return NextResponse.next(); // If there's an error, continue without redirecting
     }
   }
@@ -25,10 +25,10 @@ export async function middleware(req) {
     const statusCode = getStatusCode(redirect.type);
     const targetUrl = redirect.to.startsWith('http') ? redirect.to : `${req.nextUrl.origin}${redirect.to}`;
 
-    console.log(`Redirecting from ${pathname} to ${targetUrl} with status ${statusCode}`);
+    // console.log(`Redirecting from ${pathname} to ${targetUrl} with status ${statusCode}`);
     return NextResponse.redirect(targetUrl, statusCode);
   } else {
-    console.log(`No redirect found for ${pathname}`);
+    // console.log(`No redirect found for ${pathname}`);
   }
 
   return NextResponse.next();

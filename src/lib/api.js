@@ -1,27 +1,65 @@
-// Fetch all web stories
-export async function getAllWebStories(page = 1, pageSize = 10, sort = 'createdAt:desc') {
-  const res = await fetch(`${API_URL}/web-stories?page=${page}&pageSize=${pageSize}&sort=${sort}`);
-  const stories = await res.json();
-  return stories;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// Helper function to handle errors gracefully
+const fetchWithErrorHandling = async (url) => {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Error fetching data from ${url}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("API Fetch Error: ", error);
+    return null; // Return null or an empty array depending on your preference
+  }
+};
+
+// Fetch all web stories with pagination and sorting
+export async function getAllWebStories(
+  page = 1,
+  pageSize = 10,
+  sort = "createdAt:desc"
+) {
+  const url = `${API_URL}web-stories?page=${page}&pageSize=${pageSize}&sort=${sort}`;
+  return await fetchWithErrorHandling(url);
 }
 
 // Fetch a specific web story by slug
 export async function getWebStoryData(slug) {
-  const res = await fetch(`${API_URL}/web-stories/${slug}`);
-  const story = await res.json();
-  return story;
+  const url = `${API_URL}web-stories/${slug}`;
+  return await fetchWithErrorHandling(url);
 }
 
-// Fetch all categories
+// Fetch all categories that have web stories associated with them
 export async function getCategories() {
-  const res = await fetch(`${API_URL}/web-story-categories`);
-  const categories = await res.json();
-  return categories;
+  const url = `${API_URL}web-story-categories`;
+  return await fetchWithErrorHandling(url);
 }
 
 // Fetch stories by category slug
-export async function getStoriesByCategory(categorySlug) {
-  const res = await fetch(`${API_URL}/web-stories/category/${categorySlug}`);
-  const stories = await res.json();
-  return stories;
+export async function getStoriesByCategory(
+  categorySlug,
+  page = 1,
+  pageSize = 10,
+  sort = "createdAt:desc"
+) {
+  const url = `${API_URL}web-stories/category/${categorySlug}?page=${page}&pageSize=${pageSize}&sort=${sort}`;
+  return await fetchWithErrorHandling(url);
+}
+
+// Fetch all tags used for web stories
+export async function getTags() {
+  const url = `${API_URL}web-story-tags`;
+  return await fetchWithErrorHandling(url);
+}
+
+// Fetch stories by tag slug
+export async function getStoriesByTag(
+  tagSlug,
+  page = 1,
+  pageSize = 10,
+  sort = "createdAt:desc"
+) {
+  const url = `${API_URL}web-stories/tag/${tagSlug}?page=${page}&pageSize=${pageSize}&sort=${sort}`;
+  return await fetchWithErrorHandling(url);
 }

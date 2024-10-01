@@ -1,21 +1,29 @@
-import Link from 'next/link'
+import Link from "next/link";
+import Image from "next/image";
+import React from "react";
+import Slider from "react-slick";
+import moment from "moment";
 
 export default function StoryCard({ story }) {
   return (
-    <Link href={`/web-stories/${story.slug}`}>
-      <a className="block group">
-        <div className="relative h-64 bg-gray-100 overflow-hidden rounded-lg shadow-md">
-          <img
-            src={story.coverImage}
-            alt={story.title}
-            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-75" />
-          <h2 className="absolute bottom-4 left-4 text-white text-xl font-semibold">
-            {story.title}
-          </h2>
-        </div>
-      </a>
+    <Link
+      href={`/web-stories/${story.slug}`}
+      className="tw-relative tw-rounded-2xl"
+    >
+      <Image
+        width="0"
+        height="0"
+        sizes="100vw"
+        src={story.coverImage.url}
+        alt={story.title}
+        className="tw-object-cover tw-w-full md:tw-h-96 tw-h-76 tw-rounded-2xl"
+      />
+      <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-p-2 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl tw-text-white">
+        <h6 className="tw-text-white tw-font-bold tw-mb-0"> {story.title}</h6>
+        <p className="tw-text-xs tw-font-light tw-mt-1">
+          {moment(story.publishedAt).format("MMMM Do YYYY")}
+        </p>
+      </div>
     </Link>
-  )
+  );
 }

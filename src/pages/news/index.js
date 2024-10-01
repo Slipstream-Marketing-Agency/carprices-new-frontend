@@ -101,7 +101,9 @@ function BlogStandardPage() {
         <div className="tw-container tw-grid sm:tw-gap-10 tw-grid-cols-12">
           <div className="sm:tw-col-span-9 tw-col-span-12 tw-space-y-6">
             <div className="">
-              <h1 className="sm:tw-text-3xl tw-capitalize tw-font-semibold tw-mb-3">Latest Car News in UAE</h1>
+              <h1 className="sm:tw-text-3xl tw-capitalize tw-font-semibold tw-mb-3">
+                Latest Car News in UAE
+              </h1>
               <p className="tw-mb-8">
                 Stay up-to-date with the latest news and updates on the UAE car
                 industry, including new car launches, launch dates, car images,
