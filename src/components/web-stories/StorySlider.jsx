@@ -16,8 +16,8 @@ const settings = {
 };
 
 const StorySlider = ({ stories }) => {
-    console.log(stories,"fgfg");
-    
+  console.log(stories, "fgfg");
+
   return (
     <div className="tw-relative tw-flex tw-justify-between">
       <div className="tw-overflow-x-auto tw-space-x-4 tw-my-4 custom-scrollbar tw-flex lg:tw-hidden">
@@ -52,7 +52,11 @@ const StorySlider = ({ stories }) => {
       <div className="tw-container tw-p-0 tw-hidden lg:tw-block">
         <Slider {...settings}>
           {stories.map((story, index) => (
-            <div key={index} className="tw-px-2">
+            <Link
+              href={`/web-stories/${story.slug}`}
+              key={index}
+              className="tw-px-2"
+            >
               <div className="tw-flex-shrink-0 tw-relative tw-w-full tw-h-[30rem] tw-rounded-2xl">
                 <Image
                   width="0"
@@ -72,7 +76,7 @@ const StorySlider = ({ stories }) => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </Slider>
       </div>
