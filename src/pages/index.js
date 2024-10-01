@@ -1132,12 +1132,16 @@ export default function index({
                       width={0}
                       height={0}
                       layout="fill"
+                      alt={item.name}
                       src={item?.imgSrc}
                     />
                   </div>
                   <div className="tw-relative tw-flex tw-flex-col tw-pl-7 tw-mt-7 tw-text-neutral-900 max-md:tw-pl-5">
-                    <img
+                    <Image
                       loading="lazy"
+                      alt="playbutton-icon"
+                      width={0}
+                      height={0}
                       src="/playbutton.svg"
                       className=" tw-absolute tw-right-5 tw-top-[-53px] tw-w-[47px]"
                     />

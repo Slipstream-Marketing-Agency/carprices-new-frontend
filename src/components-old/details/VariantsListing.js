@@ -27,6 +27,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                   <Image
                     width={200}
                     height={200}
+                    alt={item?.name}
                     src={
                       item?.featuredImage
                         ? item?.featuredImage

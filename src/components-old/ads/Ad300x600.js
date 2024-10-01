@@ -43,7 +43,7 @@ export default function Ad300x600({ dataAdSlot }) {
         style={{ display: "inline-block", width: "300px", height: "600px" }}
         data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID} // Use environment variable for AdSense client ID
         data-ad-slot={dataAdSlot} // Pass the dynamic ad slot ID
-        data-ad-format="rectangle"
+        // data-ad-format="rectangle"
         data-full-width-responsive="true"
       ></ins>
     </div>

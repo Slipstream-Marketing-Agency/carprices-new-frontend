@@ -20,6 +20,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import Image from "next/image";
 
 export default function FilterLayout() {
   const router = useRouter();
@@ -364,10 +365,12 @@ export default function FilterLayout() {
                   : "tw-relative tw-flex tw-flex-col tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[120px]"
                 }`}
             >
-              <img
+              <Image
                 loading="lazy"
                 src="/gradiend-lines.svg"
                 alt="gradiend-lines"
+                width={0}
+                height={0}
                 className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-rounded-tr-2xl tw-rounded-tl-2xl"
               />
               <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">

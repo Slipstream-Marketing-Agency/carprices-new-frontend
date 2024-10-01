@@ -16,8 +16,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { fetchMetaData } from "@/src/lib/fetchMetaData";
+import Image from "next/image";
 
-function ContactPage({metaData}) {
+function ContactPage({ metaData }) {
   const router = useRouter();
   const t = useTranslate();
   let isRtl = router.locale === "ar";
@@ -89,7 +90,7 @@ function ContactPage({metaData}) {
 
     setErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
-    
+
   };
 
   const handleSubmit = async (e) => {
@@ -186,8 +187,11 @@ function ContactPage({metaData}) {
       <div className="tw-container mx-auto">
         <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full tw-container">
           <div className="tw-row-span-1 md:tw-col-span-12 tw-col-span-12 tw-flex tw-flex-col md:tw-justify-start tw-text-white tw-rounded-2xl tw-leading-[100%] tw-relative tw-overflow-hidden !sm:tw-h-auto md:tw-h-[400px] tw-pb-4">
-            <img
+            <Image
               loading="lazy"
+              alt="contact-us-banner"
+              width={0}
+              height={0}
               src="/Contact-Us.jpg"
               className="tw-object-cover tw-w-full tw-h-full tw-absolute tw-inset-0"
             />
