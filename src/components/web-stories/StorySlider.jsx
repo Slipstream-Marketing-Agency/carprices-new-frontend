@@ -78,6 +78,7 @@ const StorySlider = ({ stories }) => {
               </div>
             </Link>
           ))}
+          
         </Slider>
       </div>
     </div>
