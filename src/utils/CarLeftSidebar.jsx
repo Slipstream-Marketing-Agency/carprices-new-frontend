@@ -1675,8 +1675,11 @@ function CarLeftSidebar({
   }, [initialprice, priceRange]);
 
   const handleSliderChange = (event, newValue) => {
-    setMinPrice(newValue[0]);
-    setMaxPrice(newValue[1]);
+    const minPrice = isNaN(newValue[0]) ? priceRange.min : newValue[0];
+    const maxPrice = isNaN(newValue[1]) ? priceRange.max : newValue[1];
+
+    setMinPrice(minPrice);
+    setMaxPrice(maxPrice);
   };
 
   const handleSliderChangeCommitted = (event, newValue) => {
@@ -1938,14 +1941,14 @@ function CarLeftSidebar({
                     }}
                   />
                 </div>
-                <div className="tw-flex tw-justify-between tw-flex-wrap tw-space-y-2 tw-mb-4">
-                  <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
+                <div className="tw-flex tw-justify-between tw-flex-wrap tw-flex-col tw-mb-4">
+                  <p className="tw-border tw-rounded-lg tw-px-2 tw-py-3 tw-border-solid my-1 tw-border-gray-300 tw-whitespace-nowrap">
                     <strong>Min:</strong>{" "}
                     <span>
                       <Price data={minPrice} />
                     </span>
                   </p>
-                  <p className="tw-border tw-rounded-full tw-px-2 tw-py-2 tw-border-solid  tw-border-gray-300 tw-whitespace-nowrap">
+                  <p className="tw-border tw-rounded-lg tw-px-2 tw-py-3 tw-border-solid my-1 tw-border-gray-300 tw-whitespace-nowrap">
                     <strong>Max:</strong>{" "}
                     <span>
                       <Price data={maxPrice} />

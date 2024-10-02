@@ -151,7 +151,7 @@ export default function FilterLayout() {
       ];
 
       if (updatedBudget[0] === null || updatedBudget[1] === null) {
-        setError("No cars available for the selected preferences");
+        setError("No cars available for the selected preferences. Please try an alternate combination.");
         setOpenErrorDialog(true);
         setLoading(false); // Stop loader if there's an error
         return false; // Early return to halt further execution

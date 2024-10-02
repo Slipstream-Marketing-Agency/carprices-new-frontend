@@ -925,7 +925,7 @@ const CarsPage = ({
       <LoaderOverlay isVisible={isLoading} />
       <MainLayout
         pageMeta={{
-          title: metaData?.title ? metaData.title : 
+          title: metaData?.title ? metaData.title :
             "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
           description: metaData?.description ? metaData.description :
             "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",

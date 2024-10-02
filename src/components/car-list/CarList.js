@@ -56,7 +56,6 @@ const CarList = ({ cars, totalCars }) => {
 
     // Extract filters from query and set initial state
     const { query } = router;
-    console.log(query, "query");
 
     const initialFilters = [];
 
@@ -92,7 +91,7 @@ const CarList = ({ cars, totalCars }) => {
 
   const clearFilters = () => {
     const updatedQuery = { ...router.query };
-    
+
     // Retain brandname or categoryname in query if on brand or category page
     if (router.pathname === "/brands/[brandname]") {
       const { brandname } = router.query; // Retain brandname
@@ -108,24 +107,49 @@ const CarList = ({ cars, totalCars }) => {
 
   return (
     <>
-      <div className="tw-mt-3">
-        {filters.map((filter, index) => (
-          <Chip
-            key={index}
-            label={filter.label}
-            variant="outlined"
-            size="small"
-            className="tw-mr-3 tw-my-1"
-            deleteIcon={<CloseIcon />}
-            onDelete={() => removeFilter(filter.type, filter.value)}
-          />
-        ))}
+      <div className="tw-mt-3 tw-flex tw-items-center tw-flex-wrap">
+      {filters.map((filter, index) => (
+        <Chip
+          key={index}
+          label={
+            filter.type === "price"
+              ? `AED ${filter.label
+                  .split("-")
+                  .map(price => new Intl.NumberFormat().format(price))
+                  .join(" - ")}`
+              : filter.label
+          }
+          variant="outlined"
+          size="small"
+          className="tw-mr-3 tw-my-1 tw-px-1 tw-py-1 tw-border-2 tw-capitalize tw-text-sm tw-font-medium tw-rounded-md tw-transition-all tw-bg-blue-100 hover:tw-bg-blue-200 hover:tw-text-blue-700 tw-border-none tw-shadow-sm"
+          deleteIcon={
+            <CloseIcon
+              className="tw-rounded-full tw-p-[1px] tw-font-bold tw-bg-white tw-h-4 tw-w-4"
+            />
+          }
+          onDelete={() => removeFilter(filter.type, filter.value)}
+        />
+      ))}
 
         {filters.length > 0 && (
           <span
-            className="primary-delete tw-text-xs tw-underline tw-underline-offset-2 tw-ml-3 cursor-pointer"
+            className="primary-delete tw-text-sm tw-ml-3 tw-font-semibold tw-inline-flex tw-items-center tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105 hover:tw-text-blue-700 hover:tw-bg-blue-200 tw-cursor-pointer tw-px-3 tw-py-1 tw-rounded-md tw-bg-blue-50 active:tw-bg-blue-200"
             onClick={clearFilters}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="tw-h-4 tw-w-4 tw-mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
             Clear All Filters
           </span>
         )}
@@ -144,7 +168,7 @@ const CarList = ({ cars, totalCars }) => {
           <CarCard key={index} car={car} />
         ))}
       </div>
-      
+
     </>
   );
 };

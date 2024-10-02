@@ -21,7 +21,7 @@ const TabSwitch = ({ categories, selectedTab, setSelectedTab, isAvailable }) => 
   };
 
   return (
-    <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-mt-0 tw-w-full tw-text-base tw-leading-4 tw-text-center tw-text-neutral-900 max-md:tw-flex-wrap max-md:tw-max-w-full">
+    <div className="tw-flex tw-hidden md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-mt-0 tw-w-full tw-text-base tw-leading-4 tw-text-center tw-text-neutral-900 max-md:tw-flex-wrap max-md:tw-max-w-full">
       <div className="tw-flex md:tw-gap-5 tw-gap-2 md:tw-justify-between tw-px-0 max-md:tw-flex-wrap max-md:tw-max-w-full">
         {categories.map((category, index) => {
           if (index === 1 && isAvailable === 0) {
