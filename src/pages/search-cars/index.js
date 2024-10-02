@@ -1329,6 +1329,7 @@ export async function getServerSideProps(context) {
       powerRange
     )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(sorting)}`
   );
+  
 
   const filteredTrimsZero = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL
