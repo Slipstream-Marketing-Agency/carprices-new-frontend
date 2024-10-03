@@ -1037,7 +1037,7 @@ const CarsPage = ({
                     </div>
                   </div>
                 </div>
-                <div className="tw-flex tw-my-3">
+                <div className="tw-flex tw-justify-end tw-my-3">
                   <TabSwitch
                     categories={categories}
                     selectedTab={selectedTab}

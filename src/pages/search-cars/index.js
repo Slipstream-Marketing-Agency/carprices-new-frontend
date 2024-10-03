@@ -1061,7 +1061,7 @@ const CarsPage = ({
                     </div>
                   </div>
                 </div>
-                <div className="tw-flex tw-my-3">
+                <div className="tw-flex tw-justify-end tw-my-3">
                   <TabSwitch
                     categories={categories}
                     selectedTab={selectedTab}
@@ -1329,6 +1329,7 @@ export async function getServerSideProps(context) {
       powerRange
     )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(sorting)}`
   );
+
 
   const filteredTrimsZero = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL
