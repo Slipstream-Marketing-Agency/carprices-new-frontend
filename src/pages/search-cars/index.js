@@ -1171,29 +1171,18 @@ export async function getServerSideProps(context) {
 
   const queryParams = {};
 
-  if (brandSlugs.length > 0) {
-    queryParams.brands = JSON.stringify(brandSlugs);
-  }
+  queryParams.brands = JSON.stringify(brandSlugs);
 
-  if (bodyTypeSlugs.length > 0) {
-    queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
-  }
+  queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
 
-  if (fuelTypeSlugs.length > 0) {
-    queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
-  }
+  queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
 
-  if (cylinderSlugs.length > 0) {
-    queryParams.cylinders = JSON.stringify(cylinderSlugs);
-  }
+  queryParams.cylinders = JSON.stringify(cylinderSlugs);
 
-  if (driveSlugs.length > 0) {
-    queryParams.drive = JSON.stringify(driveSlugs);
-  }
+  queryParams.drive = JSON.stringify(driveSlugs);
 
-  if (transmissionSlugs.length > 0) {
-    queryParams.transmission = JSON.stringify(transmissionSlugs);
-  }
+  queryParams.transmission = JSON.stringify(transmissionSlugs);
+
   // Parse ranges
   const parseRanges = (rangeStr) => {
     return rangeStr.split(",").map((range) => {
@@ -1268,194 +1257,174 @@ export async function getServerSideProps(context) {
     brandListres,
     bodyTypeListres;
 
-  if (fuelTypeSlugs.length > 0) {
-    const fuelTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/fuelList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    fuelTypeListres = fuelTypeList;
-  }
+  const fuelTypeList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/fuelList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  fuelTypeListres = fuelTypeList;
 
-  if (cylinderSlugs.length > 0) {
-    const cylinderList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/cylinderList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    cylinderListres = cylinderList;
-  }
+  const cylinderList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/cylinderList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  cylinderListres = cylinderList;
 
-  if (transmissionSlugs.length > 0) {
-    const transmissionSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/transmissionList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    transmissionListres = transmissionSlugs;
-  }
+  const transmissionList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/transmissionList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  transmissionListres = transmissionList;
 
-  if (driveSlugs.length > 0) {
-    const driveSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/driveList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    driveListres = driveSlugs;
-  }
+  const driveList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/driveList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  driveListres = driveList;
 
-  if (priceRange.length > 0) {
-    const priceranges = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/priceRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    pricerangesres = priceranges;
-  }
+  const pricerangesList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/priceRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  pricerangesres = pricerangesList;
 
-  if (displacementRange.length > 0) {
-    const totaldisplacementrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/displacementRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totaldisplacementrangeres = totaldisplacementrange;
-  }
+  const totaldisplacementrange = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/displacementRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  totaldisplacementrangeres = totaldisplacementrange;
 
-  if (powerRange.length > 0) {
-    const totalpowerrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/powerRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totalpowerrangeres = totalpowerrange;
-  }
+  const totalpowerrange = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/powerRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  totalpowerrangeres = totalpowerrange;
 
-  if (brandSlugs.length > 0) {
-    const brandList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/brandList?bodyTypes=${JSON.stringify(
-        bodyTypeSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    brandListres = brandList;
-  }
+  const brandList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/brandList?bodyTypes=${JSON.stringify(
+      bodyTypeSlugs
+    )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  brandListres = brandList;
 
-  if (bodyTypeSlugs.length > 0) {
-    const bodyTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/bodyList?brands=${JSON.stringify(
-        brandSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    bodyTypeListres = bodyTypeList;
-  }
+  const bodyTypeList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/bodyList?brands=${JSON.stringify(
+      brandSlugs
+    )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  bodyTypeListres = bodyTypeList;
 
   const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
 
