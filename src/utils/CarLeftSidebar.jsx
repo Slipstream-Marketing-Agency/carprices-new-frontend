@@ -1659,7 +1659,18 @@ function CarLeftSidebar({
   console.log(initialValues, "initialprice");
   useEffect(() => {
     if (price) {
-      const [min, max] = price.split("-").map(Number);
+      // Split by commas to handle multiple ranges
+      const ranges = price.split(",").map(range => range.split("-").map(Number));
+      
+      // Flatten the array to get all the individual values
+      const allPrices = ranges.flat();
+
+      // Get the minimum and maximum prices from all the ranges
+      const min = Math.min(...allPrices);
+      const max = Math.max(...allPrices);
+
+      console.log(price, 'inside useEffect price');
+
       setMinPrice(min);
       setMaxPrice(max);
     }
