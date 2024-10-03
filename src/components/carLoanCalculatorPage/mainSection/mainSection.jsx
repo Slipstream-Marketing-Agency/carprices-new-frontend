@@ -21,6 +21,7 @@ function MainSection() {
   const [currentStep, setCurrentStep] = useState("brand");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
+  const [selectedModelName, setSelectedModelName] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedVariant, setSelectedVariant] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -281,6 +282,7 @@ function MainSection() {
     setCurrentStep("brand");
     setSelectedBrand("");
     setSelectedModel("");
+    setSelectedModelName("");
     setSelectedYear("");
     setSelectedVariant("");
     setSearchTerm(""); // Also clear the search term if needed
@@ -313,6 +315,7 @@ function MainSection() {
       setCurrentStep("brand");
       setSelectedBrand("");
       setSelectedModel("");
+      setSelectedModelName("");
       setSelectedYear("");
       setSelectedVariant("");
       setSearchTerm("");
@@ -524,6 +527,7 @@ function MainSection() {
                             className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
                             onClick={() => {
                               setSelectedModel(model.slug);
+                              setSelectedModelName(model.name);
                               setCurrentStep("year");
                             }}
                           >
@@ -579,6 +583,7 @@ function MainSection() {
           setShowModal={setShowModal}
           selectedBrand={selectedBrand}
           selectedModel={selectedModel}
+          selectedModelName={selectedModelName}
           selectedYear={selectedYear}
           selectedVariant={selectedVariant}
           price={price}

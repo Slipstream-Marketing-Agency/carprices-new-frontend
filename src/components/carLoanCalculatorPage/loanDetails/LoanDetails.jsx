@@ -9,6 +9,7 @@ const LoanDetails = ({
   setShowModal,
   selectedBrand,
   selectedModel,
+  selectedModelName,
   selectedYear,
   selectedVariant,
   price, // this comes from the parent
@@ -89,7 +90,7 @@ const LoanDetails = ({
             {selectedYear} {selectedBrand}
           </div>
           <div className="tw-text-2xl lg:tw-text-3xl tw-font-semibold tw-text-white">
-            {selectedModel} {selectedVariant}
+            {selectedModelName} {selectedVariant}
           </div>
         </div>
         <button
@@ -112,9 +113,9 @@ const LoanDetails = ({
             {/* Loan Amount */}
             <div className="tw-flex tw-justify-between tw-items-center tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
               <div>
-                <label className="tw-text-gray-500 tw-text-sm">Loan Amount</label>
+                <label className="tw-text-gray-500 tw-text-sm">Total Car Price</label>
                 <p className="tw-text-2xl lg:tw-text-3xl tw-font-bold tw-text-gray-800 tw-mt-2">
-                  AED {P ? <Price data={price} /> : 0}
+                  {P ? <Price data={price} /> : 0}
                 </p>
               </div>
             </div>
@@ -152,7 +153,9 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>1.9%</span>
-                <span>{R}%</span>
+                <span>
+                  {R}% 
+                </span>
                 <span>8%</span>
               </div>
             </div>
@@ -171,7 +174,9 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>20%</span>
-                <span>{downPayment}%</span>
+                <span>
+                  {downPayment}% ({P ? <Price data={(price * (downPayment / 100))} /> : 0})
+                </span>
                 <span>80%</span>
               </div>
             </div>
