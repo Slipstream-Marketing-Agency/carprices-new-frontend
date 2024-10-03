@@ -50,6 +50,7 @@ function CarLeftSidebar({
   driveList,
   displaynone,
   toggleModal,
+  setIsLoading
 }) {
   console.log(toggleModal, "toggleModal");
   const router = useRouter();
@@ -277,6 +278,7 @@ function CarLeftSidebar({
 
   // Function to update selected filters
   const updateSelectedFilters = (type, value) => {
+    setIsLoading(true)
     setSelectedFilters((prevFilters) => {
       // Check if filter is already selected
       const isFilterSelected = prevFilters.some(
@@ -936,9 +938,8 @@ function CarLeftSidebar({
             <div className="product-widget ">
               <div className="check-box-item">
                 <div
-                  className={`checkbox-container ${
-                    showPriceDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showPriceDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="py-4 px-2">
                     {filteredPriceOptions.map((option, idx) => (
@@ -1011,11 +1012,10 @@ function CarLeftSidebar({
                       <div className="col-xl-4 col-4">
                         <button
                           key={idx}
-                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${
-                            tempSelectedBodyTypes.includes(item.value)
+                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${tempSelectedBodyTypes.includes(item.value)
                               ? "text-secondary fw-bold bg-white border border-2"
                               : "bg-white border border-2 border-white fw-bold"
-                          }`}
+                            }`}
                           onClick={() => handleModalBodyTypeChange(item.value)}
                         >
                           <img
@@ -1224,17 +1224,15 @@ function CarLeftSidebar({
                 >
                   Price
                   <span
-                    className={`dropdown-icon ${
-                      showPriceDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showPriceDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showPriceDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showPriceDropdown ? "show" : "hide"
+                    }`}
                 >
                   <div className="tw-px-4 tw-mt-6 tw-mb-3">
                     <Slider
@@ -1318,17 +1316,15 @@ function CarLeftSidebar({
                     Brand
                     {/* Add an icon for dropdown indicator */}
                     <span
-                      className={`dropdown-icon ${
-                        showBrandDropdown ? "open" : ""
-                      }`}
+                      className={`dropdown-icon ${showBrandDropdown ? "open" : ""
+                        }`}
                     >
                       <i class="bi bi-chevron-down" />
                     </span>
                   </h4>
                   <div
-                    className={`checkbox-container tw-overflow-y-scroll tw-mt-5 ${
-                      showBrandDropdown ? "show" : "hide"
-                    }`}
+                    className={`checkbox-container tw-overflow-y-scroll tw-mt-5 ${showBrandDropdown ? "show" : "hide"
+                      }`}
                   >
                     <div className="form-inner">
                       <input
@@ -1368,9 +1364,8 @@ function CarLeftSidebar({
                   >
                     Body Type
                     <span
-                      className={`dropdown-icon ${
-                        showBodyDropdown ? "open" : ""
-                      }`}
+                      className={`dropdown-icon ${showBodyDropdown ? "open" : ""
+                        }`}
                     >
                       <i class="bi bi-chevron-down" />
                     </span>
@@ -1381,11 +1376,10 @@ function CarLeftSidebar({
                         <div className="col-xl-4 col-4">
                           <button
                             key={idx}
-                            className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${
-                              tempSelectedBodyTypes.includes(item.value)
+                            className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${tempSelectedBodyTypes.includes(item.value)
                                 ? "text-secondary tw-font-semibold "
                                 : "bg-white tw-font-semibold"
-                            }`}
+                              }`}
                             onClick={() =>
                               handleModalBodyTypeChange(item.value)
                             }
@@ -1412,17 +1406,15 @@ function CarLeftSidebar({
                 >
                   Power
                   <span
-                    className={`dropdown-icon ${
-                      showPowerDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showPowerDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showPowerDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showPowerDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {filterPower.map((option, idx) => (
@@ -1452,17 +1444,15 @@ function CarLeftSidebar({
                 >
                   Displacement
                   <span
-                    className={`dropdown-icon ${
-                      showDisplacementDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showDisplacementDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showDisplacementDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showDisplacementDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {filtereDisplacement.map((option, idx) => (
@@ -1496,17 +1486,15 @@ function CarLeftSidebar({
                 >
                   Fuel Type
                   <span
-                    className={`dropdown-icon ${
-                      showFuelTypeDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showFuelTypeDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showFuelTypeDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showFuelTypeDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {fuelTypeList.map((option, idx) => (
@@ -1534,17 +1522,15 @@ function CarLeftSidebar({
                 >
                   Cylinders
                   <span
-                    className={`dropdown-icon ${
-                      showCylindersDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showCylindersDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showCylindersDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showCylindersDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {cylinderList.map((option, idx) => (
@@ -1572,17 +1558,15 @@ function CarLeftSidebar({
                 >
                   Transmissions
                   <span
-                    className={`dropdown-icon ${
-                      showTransmissionsDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showTransmissionsDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showTransmissionsDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showTransmissionsDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {transmissionList.map((option, idx) => (
@@ -1612,17 +1596,15 @@ function CarLeftSidebar({
                 >
                   Drive
                   <span
-                    className={`dropdown-icon ${
-                      showDriveDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showDriveDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container ${
-                    showDriveDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container ${showDriveDropdown ? "show" : "hide"
+                    }`}
                 >
                   <ul className="tw-pt-4 tw-pb-4 overflow-list">
                     {driveList.map((option, idx) => (
@@ -1661,7 +1643,7 @@ function CarLeftSidebar({
     if (price) {
       // Split by commas to handle multiple ranges
       const ranges = price.split(",").map(range => range.split("-").map(Number));
-      
+
       // Flatten the array to get all the individual values
       const allPrices = ranges.flat();
 
@@ -1712,12 +1694,12 @@ function CarLeftSidebar({
     return price <= 0
       ? "TBD"
       : "AED" +
-          " " +
-          price?.toLocaleString("en-AE", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-          }) +
-          "*";
+      " " +
+      price?.toLocaleString("en-AE", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }) +
+      "*";
   };
   return (
     <>
@@ -1888,9 +1870,8 @@ function CarLeftSidebar({
       </div> */}
 
         <div
-          className={`${
-            isSticky ? "sticky product-sidebar" : "product-sidebar"
-          }`}
+          className={`${isSticky ? "sticky product-sidebar" : "product-sidebar"
+            }`}
         >
           {/* Price filter UI */}
           <div className="product-widget tw-mb-3">
@@ -1907,9 +1888,8 @@ function CarLeftSidebar({
                 </span>
               </h1>
               <div
-                className={`checkbox-container ${
-                  showPriceDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showPriceDropdown ? "show" : "hide"
+                  }`}
               >
                 <div className="tw-px-4 tw-mt-6 tw-mb-3">
                   <Slider
@@ -1996,17 +1976,15 @@ function CarLeftSidebar({
                   Brand
                   {/* Add an icon for dropdown indicator */}
                   <span
-                    className={`dropdown-icon ${
-                      showBrandDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showBrandDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
                 </h4>
                 <div
-                  className={`checkbox-container tw-overflow-hidden tw-mt-5 ${
-                    showBrandDropdown ? "show" : "hide"
-                  }`}
+                  className={`checkbox-container tw-overflow-hidden tw-mt-5 ${showBrandDropdown ? "show" : "hide"
+                    }`}
                 >
                   <div className="form-inner">
                     <input
@@ -2044,9 +2022,8 @@ function CarLeftSidebar({
                 >
                   Body Type
                   <span
-                    className={`dropdown-icon ${
-                      showBodyDropdown ? "open" : ""
-                    }`}
+                    className={`dropdown-icon ${showBodyDropdown ? "open" : ""
+                      }`}
                   >
                     <i class="bi bi-chevron-down" />
                   </span>
@@ -2057,11 +2034,10 @@ function CarLeftSidebar({
                       <div className="col-xl-4 col-4">
                         <button
                           key={idx}
-                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${
-                            selectedBody.includes(item.value)
+                          className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${selectedBody.includes(item.value)
                               ? "text-secondary tw-font-semibold "
                               : "bg-white tw-font-semibold"
-                          }`}
+                            }`}
                           onClick={() => handleBodyChange(item.value)}
                         >
                           <img
@@ -2093,9 +2069,8 @@ function CarLeftSidebar({
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showPowerDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showPowerDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {filterPower.map((option, idx) => (
@@ -2125,17 +2100,15 @@ function CarLeftSidebar({
               >
                 Displacement
                 <span
-                  className={`dropdown-icon ${
-                    showDisplacementDropdown ? "open" : ""
-                  }`}
+                  className={`dropdown-icon ${showDisplacementDropdown ? "open" : ""
+                    }`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showDisplacementDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showDisplacementDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {filtereDisplacement.map((option, idx) => (
@@ -2165,17 +2138,15 @@ function CarLeftSidebar({
               >
                 Fuel Type
                 <span
-                  className={`dropdown-icon ${
-                    showFuelTypeDropdown ? "open" : ""
-                  }`}
+                  className={`dropdown-icon ${showFuelTypeDropdown ? "open" : ""
+                    }`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showFuelTypeDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showFuelTypeDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {fuelTypeList.map((option, idx) => (
@@ -2203,17 +2174,15 @@ function CarLeftSidebar({
               >
                 Cylinders
                 <span
-                  className={`dropdown-icon ${
-                    showCylindersDropdown ? "open" : ""
-                  }`}
+                  className={`dropdown-icon ${showCylindersDropdown ? "open" : ""
+                    }`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showCylindersDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showCylindersDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {cylinderList.map((option, idx) => (
@@ -2241,17 +2210,15 @@ function CarLeftSidebar({
               >
                 Transmissions
                 <span
-                  className={`dropdown-icon ${
-                    showTransmissionsDropdown ? "open" : ""
-                  }`}
+                  className={`dropdown-icon ${showTransmissionsDropdown ? "open" : ""
+                    }`}
                 >
                   <i class="bi bi-chevron-down" />
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showTransmissionsDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showTransmissionsDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {transmissionList.map((option, idx) => (
@@ -2285,9 +2252,8 @@ function CarLeftSidebar({
                 </span>
               </h4>
               <div
-                className={`checkbox-container ${
-                  showDriveDropdown ? "show" : "hide"
-                }`}
+                className={`checkbox-container ${showDriveDropdown ? "show" : "hide"
+                  }`}
               >
                 <ul className="tw-pt-4 tw-pb-4 overflow-list">
                   {driveList.map((option, idx) => (

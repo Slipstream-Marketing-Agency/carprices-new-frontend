@@ -4,7 +4,7 @@ import { Chip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 
-const CarList = ({ cars, totalCars }) => {
+const CarList = ({ cars, totalCars, setIsLoading }) => {
   const router = useRouter();
   const [filters, setFilters] = useState([]);
 
@@ -72,6 +72,7 @@ const CarList = ({ cars, totalCars }) => {
   }, [router.query, router.pathname]); // Add router.pathname to dependencies
 
   const removeFilter = (type, value) => {
+    setIsLoading(true)
     const updatedFilters = filters.filter(
       (filter) => !(filter.type === type && filter.value === value)
     );
@@ -90,6 +91,7 @@ const CarList = ({ cars, totalCars }) => {
   };
 
   const clearFilters = () => {
+    setIsLoading(true)
     const updatedQuery = { ...router.query };
 
     // Retain brandname or categoryname in query if on brand or category page

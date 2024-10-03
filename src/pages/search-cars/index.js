@@ -928,6 +928,7 @@ const CarsPage = ({
                 driveList={driveListres}
                 displaynone={true}
                 toggleModal={toggleModalFunction}
+                setIsLoading={setIsLoading}
               />
             </aside>
             <main className="tw-w-full lg:tw-w-3/4">
@@ -1034,7 +1035,7 @@ const CarsPage = ({
                     </Select>
                   </FormControl>
                 </div>{" "}
-                <CarList cars={allTrims} totalCars={totalCars} />
+                <CarList cars={allTrims} totalCars={totalCars} setIsLoading={setIsLoading} />
                 <Pagination currentPage={currentPage} totalPages={totalPages} />
               </div>
               <div className="row">

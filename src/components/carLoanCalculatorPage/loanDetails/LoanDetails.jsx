@@ -154,7 +154,7 @@ const LoanDetails = ({
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>1.9%</span>
                 <span>
-                  {R}% 
+                  {R}% ({P ? <Price data={(price - (price * (downPayment / 100))) * (R / 100)} /> : 0} per year)
                 </span>
                 <span>8%</span>
               </div>
