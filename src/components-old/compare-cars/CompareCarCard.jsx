@@ -51,9 +51,9 @@ function CompareCarCard({ carData }) {
         <div className="tw-flex tw-justify-center tw-h-[160px] tw-my-4">
           <img
             src={
-              carData?.featuredImage?.data?.attributes?.url === undefined
+              carData?.featuredImage === undefined
                 ? "/assets/img/car-placeholder.png"
-                : carData?.featuredImage?.data?.attributes?.url
+                : carData?.featuredImage
             }
             alt={carData?.name}
             className="tw-object-contain"
@@ -61,10 +61,10 @@ function CompareCarCard({ carData }) {
         </div>
         <div>
           <h6 className="tw-text-blue-600 tw-font-bold">
-            {carData?.car_brands?.data[0]?.attributes?.name}
+            {carData?.brand}
           </h6>
           <h5 className="tw-font-semibold">
-            {carData?.car_models?.data[0]?.attributes?.name} {carData?.name}
+            {carData?.model} {carData?.name}
           </h5>
           <h4 className="tw-font-bold">
             <Price data={carData?.price} />
