@@ -38,15 +38,12 @@ import PriceListTable from "@/src/components-old/common/PriceListTable";
 const CarsPage = ({
   currentPage,
   totalPages,
-  totalPagesZero,
-  currentPageZero,
   brandList,
   bodyTypeList,
   totalpricerange,
   totaldisplacementrange,
   totalpowerrange,
   filteredTrims,
-  filteredTrimsZero,
   totalFilteredCars,
   fuelTypeList,
   cylinderList,
@@ -67,8 +64,6 @@ const CarsPage = ({
   const page = parseInt(query.page) || 1;
   const type = parseInt(query.type) || 0;
   const pageSize = 12;
-  const pageZero = parseInt(query.pageZero) || 1;
-  const pageSizeZero = 12;
   const sorting = query.sort ? query.sort : "price-asc";
   const brandSlugs = query.brandname ? [query.brandname] : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
@@ -168,9 +163,7 @@ const CarsPage = ({
   }
 
   const [allTrims, setAllTrims] = useState(filteredTrims);
-  const [allTrimsZero, setAllTrimsZero] = useState(filteredTrimsZero);
   const [totalCars, setTotalCars] = useState(totalFilteredCars);
-  console.log(filteredTrimsZero, "filteredTrimsZero");
   const [allFilter, setAllFilter] = useState();
   const [fuelTypeListRes, setFuelTypeListRes] = useState(fuelTypeList);
   const [cylinderListres, setCylinderListres] = useState(cylinderList);
@@ -198,7 +191,8 @@ const CarsPage = ({
 
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL
+          `${
+            process.env.NEXT_PUBLIC_API_URL
           }car-trims/homefilter?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -228,48 +222,14 @@ const CarsPage = ({
       }
     };
 
-    const fetchFilteredTrimsZero = async () => {
-      setIsLoading(true); // Set loading to true while we fetch data
-
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL
-          }car-trims/homefilter?brands=${JSON.stringify(
-            brandSlugs
-          )}&bodyTypes=${JSON.stringify(
-            bodyTypeSlugs
-          )}&fuelType=${JSON.stringify(
-            fuelTypeSlugs
-          )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-            driveSlugs
-          )}&transmission=${JSON.stringify(
-            transmissionSlugs
-          )}&priceRanges=${JSON.stringify(
-            priceRange
-          )}&displacementRanges=${JSON.stringify(
-            displacementRange
-          )}&powerRanges=${JSON.stringify(
-            powerRange
-          )}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-            sorting
-          )}&priceZero=true`
-        );
-        setTotal(response?.data?.data?.pagination?.pageCount);
-        setCurrent(page);
-        setAllTrimsZero(response?.data?.data?.listWithPriceZero); // Set the data to state
-        setTotalCars(response?.data?.data?.totalFilteredCars);
-      } catch (error) {
-        console.error("Failed to fetch filtered trims:", error);
-      } finally {
-        setIsLoading(false); // Ensure loading is false after fetching
-      }
-    };
+    
 
     const fetchAllFilter = async () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL
+          `${
+            process.env.NEXT_PUBLIC_API_URL
           }car-trims/price-range-by-brands?brands=${JSON.stringify(
             brandSlugs
           )}&bodyTypes=${JSON.stringify(
@@ -302,7 +262,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/fuelList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -339,7 +300,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/cylinderList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -374,7 +336,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/transmissionList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -409,7 +372,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/driveList?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -446,7 +410,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/priceRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -483,7 +448,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/displacementRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -520,7 +486,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/powerRange?brands=${JSON.stringify(
               brandSlugs
             )}&bodyTypes=${JSON.stringify(
@@ -557,7 +524,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/brandList?bodyTypes=${JSON.stringify(
               bodyTypeSlugs
             )}&fuelType=${JSON.stringify(
@@ -594,7 +562,8 @@ const CarsPage = ({
         setIsLoading(true);
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL
+            `${
+              process.env.NEXT_PUBLIC_API_URL
             }car-trims/bodyList?brands=${JSON.stringify(
               brandSlugs
             )}&fuelType=${JSON.stringify(
@@ -626,8 +595,7 @@ const CarsPage = ({
       }
     };
 
-    fetchFilteredTrims(); // Call the fetch function
-    fetchFilteredTrimsZero();
+    fetchFilteredTrims(); 
     fetchFuelTypeList();
     fetchAllFilter();
     fetchCylinderList();
@@ -679,7 +647,6 @@ const CarsPage = ({
     query.power,
     query.displacement,
     query.page,
-    query.pageZero,
     query.sort,
     query.brandname,
   ]);
@@ -905,11 +872,19 @@ const CarsPage = ({
       <LoaderOverlay isVisible={isLoading} />
       <MainLayout
         pageMeta={{
-          title: branddetails?.seo?.metaTitle ? branddetails.seo.metaTitle : `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE  - Carprices.ae`,
-          description: branddetails?.seo?.metaDescription ? branddetails.seo.metaDescription : `Explore a wide selection of ${branddetails?.attributes?.name} ${currentYear} cars at competitive prices in the UAE. Discover expert reviews, specifications, and find authorized dealers near you for a seamless car buying experience.`,
+          title: branddetails?.seo?.metaTitle
+            ? branddetails.seo.metaTitle
+            : `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE  - Carprices.ae`,
+          description: branddetails?.seo?.metaDescription
+            ? branddetails.seo.metaDescription
+            : `Explore a wide selection of ${branddetails?.attributes?.name} ${currentYear} cars at competitive prices in the UAE. Discover expert reviews, specifications, and find authorized dealers near you for a seamless car buying experience.`,
           type: "Car Review Website",
-          ...(branddetails?.seo?.metaRobots && { robots: branddetails.seo.metaRobots }),
-          ...(branddetails?.seo?.canonicalURL && { canonical: branddetails.seo.canonicalURL }),
+          ...(branddetails?.seo?.metaRobots && {
+            robots: branddetails.seo.metaRobots,
+          }),
+          ...(branddetails?.seo?.canonicalURL && {
+            canonical: branddetails.seo.canonicalURL,
+          }),
         }}
       >
         <div className="tw-container tw-mx-auto tw-px-4">
@@ -985,8 +960,9 @@ const CarsPage = ({
                       <hr className="my-0 mt-2 heading-bottom " />
                       <div className="read-more-less" id="dynamic-content">
                         <div
-                          className={`info ${expanded ? "" : "height-hidden"
-                            } dynamic-content content-hidden`}
+                          className={`info ${
+                            expanded ? "" : "height-hidden"
+                          } dynamic-content content-hidden`}
                         >
                           <div
                             dangerouslySetInnerHTML={{
@@ -1100,15 +1076,17 @@ const CarsPage = ({
                           />
                         </div>
                         <span
-                          className={`read-more ${expanded ? "hide" : ""
-                            } text-primary fw-bold tw-mb-[-3px]`}
+                          className={`read-more ${
+                            expanded ? "hide" : ""
+                          } text-primary fw-bold tw-mb-[-3px]`}
                           onClick={() => setExpanded(true)}
                         >
                           Read More
                         </span>
                         <span
-                          className={`read-less scroll-to-parent-pos content-read-less ${expanded ? "" : "hide"
-                            } text-primary fw-bold`}
+                          className={`read-less scroll-to-parent-pos content-read-less ${
+                            expanded ? "" : "hide"
+                          } text-primary fw-bold`}
                           onClick={() => setExpanded(false)}
                         >
                           Read Less
@@ -1129,19 +1107,22 @@ const CarsPage = ({
                 <div className="tw-flex tw-items-center tw-justify-center ">
                   <div
                     id="slideover-container"
-                    className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${isVisible ? "tw-visible" : "tw-invisible"
-                      }`}
+                    className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${
+                      isVisible ? "tw-visible" : "tw-invisible"
+                    }`}
                   >
                     <div
                       onClick={toggleSlideover}
                       id="slideover-bg"
-                      className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${isVisible ? "tw-opacity-50" : "tw-opacity-0"
-                        }`}
+                      className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${
+                        isVisible ? "tw-opacity-50" : "tw-opacity-0"
+                      }`}
                     />
                     <div
                       id="slideover"
-                      className={`tw-w-full md:tw-w-96  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${isVisible ? "tw-translate-x-0" : "tw-translate-x-full"
-                        }`}
+                      className={`tw-w-full md:tw-w-96  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${
+                        isVisible ? "tw-translate-x-0" : "tw-translate-x-full"
+                      }`}
                     >
                       <div
                         onClick={toggleSlideover}
@@ -1169,12 +1150,7 @@ const CarsPage = ({
                   </div>
                 </div>
                 <div className="tw-flex tw-my-3">
-                  <TabSwitch
-                    categories={categories}
-                    selectedTab={selectedTab}
-                    setSelectedTab={setSelectedTab}
-                    isAvailable={allTrimsZero.length}
-                  />
+                  
 
                   <FormControl className="tw-hidden md:tw-block">
                     <InputLabel id="sorting-select-label">Sort by</InputLabel>
@@ -1211,31 +1187,14 @@ const CarsPage = ({
                   </FormControl>
                 </div>
 
-                {selectedTab === 0 ? (
-                  <>
-                    {" "}
-                    <CarList cars={allTrims} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <CarList cars={allTrimsZero} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                )}
+                <>
+                  {" "}
+                  <CarList cars={allTrims} totalCars={totalCars} />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                  />
+                </>
               </div>
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
@@ -1324,9 +1283,7 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const type = parseInt(query.type) || 0;
   const page = parseInt(query.page) || 1;
-  const pageZero = parseInt(query.pageZero) || 1;
   const pageSize = 12;
-  const pageSizeZero = 12;
   const sorting = query.sort ? query.sort : "";
   const brandSlugs = query.brandname ? [query.brandname] : [];
   const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
@@ -1419,7 +1376,8 @@ export async function getServerSideProps(context) {
   }
 
   const filteredTrims = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL
+    `${
+      process.env.NEXT_PUBLIC_API_URL
     }car-trims/homefilter?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1437,30 +1395,10 @@ export async function getServerSideProps(context) {
     )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(sorting)}`
   );
 
-  const filteredTrimsZero = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL
-    }car-trims/homefilter?brands=${JSON.stringify(
-      brandSlugs
-    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-      fuelTypeSlugs
-    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-      driveSlugs
-    )}&transmission=${JSON.stringify(
-      transmissionSlugs
-    )}&priceRanges=${JSON.stringify(
-      priceRange
-    )}&displacementRanges=${JSON.stringify(
-      displacementRange
-    )}&powerRanges=${JSON.stringify(
-      powerRange
-    )}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-      sorting
-    )}&priceZero=true`
-  );
-
 
   const fullFilter = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL
+    `${
+      process.env.NEXT_PUBLIC_API_URL
     }car-trims/price-range-by-brands?brands=${JSON.stringify(
       brandSlugs
     )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1490,7 +1428,8 @@ export async function getServerSideProps(context) {
 
   if (fuelTypeSlugs.length > 0) {
     const fuelTypeList = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/fuelList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
@@ -1510,7 +1449,8 @@ export async function getServerSideProps(context) {
 
   if (cylinderSlugs.length > 0) {
     const cylinderList = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/cylinderList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1530,7 +1470,8 @@ export async function getServerSideProps(context) {
 
   if (transmissionSlugs.length > 0) {
     const transmissionSlugs = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/transmissionList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1550,7 +1491,8 @@ export async function getServerSideProps(context) {
 
   if (driveSlugs.length > 0) {
     const driveSlugs = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/driveList?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1572,7 +1514,8 @@ export async function getServerSideProps(context) {
 
   if (priceRange.length > 0) {
     const priceranges = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/priceRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1592,7 +1535,8 @@ export async function getServerSideProps(context) {
 
   if (displacementRange.length > 0) {
     const totaldisplacementrange = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/displacementRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1610,7 +1554,8 @@ export async function getServerSideProps(context) {
 
   if (powerRange.length > 0) {
     const totalpowerrange = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/powerRange?brands=${JSON.stringify(
         brandSlugs
       )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
@@ -1630,7 +1575,8 @@ export async function getServerSideProps(context) {
 
   if (brandSlugs.length > 0) {
     const brandList = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/brandList?bodyTypes=${JSON.stringify(
         bodyTypeSlugs
       )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
@@ -1650,7 +1596,8 @@ export async function getServerSideProps(context) {
 
   if (bodyTypeSlugs.length > 0) {
     const bodyTypeList = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL
+      `${
+        process.env.NEXT_PUBLIC_API_URL
       }car-trims/bodyList?brands=${JSON.stringify(
         brandSlugs
       )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
@@ -1679,9 +1626,6 @@ export async function getServerSideProps(context) {
         totalBrands: filteredTrims?.data?.data?.pagination?.total,
         totalPages: filteredTrims?.data?.data?.pagination?.pageCount,
         currentPage: page,
-        totalPagesZero:
-          filteredTrimsZero?.data?.data?.paginationZero?.pageCount,
-        currentPageZero: pageZero,
         brandList:
           brandSlugs.length > 0
             ? brandListres?.data.brands
@@ -1703,7 +1647,6 @@ export async function getServerSideProps(context) {
             ? totalpowerrangeres?.data.power
             : fullFilter?.data.power,
         filteredTrims: filteredTrims?.data?.data?.list,
-        filteredTrimsZero: filteredTrimsZero?.data?.data?.listWithPriceZero,
         fuelTypeList:
           fuelTypeSlugs.length > 0
             ? fuelTypeListres?.data.fuelTypes

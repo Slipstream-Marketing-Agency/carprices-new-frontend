@@ -32,19 +32,17 @@ import {
 import TuneIcon from "@mui/icons-material/Tune";
 import SortIcon from "@mui/icons-material/Sort";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import { fetchMetaData } from "@/src/lib/fetchMetaData";
 
 const CarsPage = ({
   currentPage,
   totalPages,
-  totalPagesZero,
-  currentPageZero,
   brandList,
   bodyTypeList,
   totalpricerange,
   totaldisplacementrange,
   totalpowerrange,
   filteredTrims,
-  filteredTrimsZero,
   totalFilteredCars,
   fuelTypeList,
   cylinderList,
@@ -52,8 +50,11 @@ const CarsPage = ({
   driveList,
   bodyTypes,
   brand,
+  metaData,
 }) => {
   const router = useRouter();
+  const [hasMounted, setHasMounted] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [activeClass, setActiveClass] = useState("grid-group-wrapper"); // Initial class is "grid-group-wrapper"
   const [total, setTotal] = useState(totalPages);
@@ -64,9 +65,9 @@ const CarsPage = ({
   const pageSize = 12;
   const pageZero = parseInt(query.pageZero) || 1;
   const pageSizeZero = 12;
-  const sorting = query.sort ? query.sort : "price-asc";
-  const brandSlugs = query.brandname ? [query.brandname] : [];
-  const bodyTypeSlugs = [query.categoryname ? query.categoryname : []];
+  const sorting = query.sort ? query.sort : "";
+  const brandSlugs = query.brand ? query.brand.split(",") : [];
+  const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
   const driveSlugs = query.drive ? query.drive.split(",") : [];
@@ -163,9 +164,7 @@ const CarsPage = ({
   }
 
   const [allTrims, setAllTrims] = useState(filteredTrims);
-  const [allTrimsZero, setAllTrimsZero] = useState(filteredTrimsZero);
   const [totalCars, setTotalCars] = useState(totalFilteredCars);
-  console.log(filteredTrimsZero, "filteredTrimsZero");
   const [allFilter, setAllFilter] = useState();
   const [fuelTypeListRes, setFuelTypeListRes] = useState(fuelTypeList);
   const [cylinderListres, setCylinderListres] = useState(cylinderList);
@@ -179,7 +178,11 @@ const CarsPage = ({
   );
   const [totalpowerrangeres, setTotalpowerrangeres] = useState(totalpowerrange);
   const [brandListres, setBrandListres] = useState(brandList);
+  console.log(brandListres, "brandListres");
+
   const [bodyTypeListres, setBodyTypeListres] = useState(bodyTypeList);
+  console.log(bodyTypeListres, "bodyTypeListres");
+
   const [listType, setListType] = useState(type);
 
   useEffect(() => {
@@ -188,115 +191,83 @@ const CarsPage = ({
 
   useEffect(() => {
     // Function to fetch filtered trims
-    const fetchFilteredTrims = async () => {
-      setIsLoading(true); // Set loading to true while we fetch data
+    if (hasMounted) {
+      const fetchFilteredTrims = async () => {
+        setIsLoading(true); // Set loading to true while we fetch data
 
-      try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }car-trims/homefilter?brands=${JSON.stringify(
-            brandSlugs
-          )}&bodyTypes=${JSON.stringify(
-            bodyTypeSlugs
-          )}&fuelType=${JSON.stringify(
-            fuelTypeSlugs
-          )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-            driveSlugs
-          )}&transmission=${JSON.stringify(
-            transmissionSlugs
-          )}&priceRanges=${JSON.stringify(
-            priceRange
-          )}&displacementRanges=${JSON.stringify(
-            displacementRange
-          )}&powerRanges=${JSON.stringify(
-            powerRange
-          )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(sorting)}`
-        );
-        setTotal(response?.data?.data?.pagination?.pageCount);
-        setCurrent(page);
-        setAllTrims(response?.data?.data?.list); // Set the data to state
-        setTotalCars(response?.data?.data?.totalFilteredCars);
-      } catch (error) {
-        console.error("Failed to fetch filtered trims:", error);
-      } finally {
-        setIsLoading(false); // Ensure loading is false after fetching
-      }
-    };
+        try {
+          const response = await axios.get(
+            `${
+              process.env.NEXT_PUBLIC_API_URL
+            }car-trims/homefilter?brands=${JSON.stringify(
+              brandSlugs
+            )}&bodyTypes=${JSON.stringify(
+              bodyTypeSlugs
+            )}&fuelType=${JSON.stringify(
+              fuelTypeSlugs
+            )}&cylinders=${JSON.stringify(
+              cylinderSlugs
+            )}&drive=${JSON.stringify(
+              driveSlugs
+            )}&transmission=${JSON.stringify(
+              transmissionSlugs
+            )}&priceRanges=${JSON.stringify(
+              priceRange
+            )}&displacementRanges=${JSON.stringify(
+              displacementRange
+            )}&powerRanges=${JSON.stringify(
+              powerRange
+            )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(
+              sorting
+            )}`
+          );
+          setTotal(response?.data?.data?.pagination?.pageCount);
+          setCurrent(page);
+          setAllTrims(response?.data?.data?.list); // Set the data to state
+          setTotalCars(response?.data?.data?.totalFilteredCars);
+        } catch (error) {
+          console.error("Failed to fetch filtered trims:", error);
+        } finally {
+          setIsLoading(false); // Ensure loading is false after fetching
+        }
+      };
 
-    const fetchFilteredTrimsZero = async () => {
-      setIsLoading(true); // Set loading to true while we fetch data
+      const fetchAllFilter = async () => {
+        setIsLoading(true);
+        try {
+          const response = await axios.get(
+            `${
+              process.env.NEXT_PUBLIC_API_URL
+            }car-trims/price-range-by-brands?brands=${JSON.stringify(
+              brandSlugs
+            )}&bodyTypes=${JSON.stringify(
+              bodyTypeSlugs
+            )}&fuelType=${JSON.stringify(
+              fuelTypeSlugs
+            )}&cylinders=${JSON.stringify(
+              cylinderSlugs
+            )}&drive=${JSON.stringify(
+              driveSlugs
+            )}&transmission=${JSON.stringify(
+              transmissionSlugs
+            )}&priceRanges=${JSON.stringify(
+              priceRange
+            )}&displacementRanges=${JSON.stringify(
+              displacementRange
+            )}&powerRanges=${JSON.stringify(
+              powerRange
+            )}&page=${page}&pageSize=${pageSize}`
+          );
 
-      try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }car-trims/homefilter?brands=${JSON.stringify(
-            brandSlugs
-          )}&bodyTypes=${JSON.stringify(
-            bodyTypeSlugs
-          )}&fuelType=${JSON.stringify(
-            fuelTypeSlugs
-          )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-            driveSlugs
-          )}&transmission=${JSON.stringify(
-            transmissionSlugs
-          )}&priceRanges=${JSON.stringify(
-            priceRange
-          )}&displacementRanges=${JSON.stringify(
-            displacementRange
-          )}&powerRanges=${JSON.stringify(
-            powerRange
-          )}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-            sorting
-          )}&priceZero=true`
-        );
-        setTotal(response?.data?.data?.pagination?.pageCount);
-        setCurrent(page);
-        setAllTrimsZero(response?.data?.data?.listWithPriceZero); // Set the data to state
-        setTotalCars(response?.data?.data?.totalFilteredCars);
-      } catch (error) {
-        console.error("Failed to fetch filtered trims:", error);
-      } finally {
-        setIsLoading(false); // Ensure loading is false after fetching
-      }
-    };
+          setAllFilter(response?.data);
+        } catch (error) {
+          console.error("Failed to fetch fuel type list:", error);
+        } finally {
+          setIsLoading(false); // Ensure loading is false after fetching
+        }
+      };
 
-    const fetchAllFilter = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }car-trims/price-range-by-brands?brands=${JSON.stringify(
-            brandSlugs
-          )}&bodyTypes=${JSON.stringify(
-            bodyTypeSlugs
-          )}&fuelType=${JSON.stringify(
-            fuelTypeSlugs
-          )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-            driveSlugs
-          )}&transmission=${JSON.stringify(
-            transmissionSlugs
-          )}&priceRanges=${JSON.stringify(
-            priceRange
-          )}&displacementRanges=${JSON.stringify(
-            displacementRange
-          )}&powerRanges=${JSON.stringify(
-            powerRange
-          )}&page=${page}&pageSize=${pageSize}`
-        );
-
-        setAllFilter(response?.data);
-      } catch (error) {
-        console.error("Failed to fetch fuel type list:", error);
-      } finally {
-        setIsLoading(false); // Ensure loading is false after fetching
-      }
-    };
-
-    const fetchFuelTypeList = async () => {
-      if (fuelTypeSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchFuelTypeList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -320,21 +291,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (fuelTypeSlugs.length > 0) {
-            setFuelTypeListRes(response?.data?.fuelTypes);
-          } else {
-            setFuelTypeListRes(allFilter.fuelTypes);
-          }
+          setFuelTypeListRes(response?.data?.fuelTypes);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchCylinderList = async () => {
-      if (cylinderSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchCylinderList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -356,21 +321,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (cylinderSlugs.length > 0) {
-            setCylinderListres(response?.data?.cylinders);
-          } else {
-            setCylinderListres(allFilter?.cylinders);
-          }
+          setCylinderListres(response?.data?.cylinders);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchTransmissionList = async () => {
-      if (transmissionSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchTransmissionList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -392,21 +351,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (transmissionSlugs.length > 0) {
-            setTransmissionListres(response?.data?.transmission);
-          } else {
-            setTransmissionListres(allFilter.transmission);
-          }
+          setTransmissionListres(response?.data?.transmission);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchDriveList = async () => {
-      if (driveSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchDriveList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -430,21 +383,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (driveSlugs.length > 0) {
-            setDriveListres(response?.data?.drive);
-          } else {
-            setDriveListres(allFilter.drive);
-          }
+          setDriveListres(response?.data?.drive);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchPriceRange = async () => {
-      if (priceRange.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchPriceRange = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -468,21 +415,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (priceRange.length > 0) {
-            setTotalPricerangesres(response?.data?.price);
-          } else {
-            setTotalPricerangesres(allFilter.fuelTypes?.price);
-          }
+          setTotalPricerangesres(response?.data?.price);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchDisplacementRange = async () => {
-      if (displacementRange.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchDisplacementRange = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -506,21 +447,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (displacementRange.length > 0) {
-            setTotaldisplacementrangeres(response?.data?.displacement);
-          } else {
-            setTotaldisplacementrangeres(allFilter.displacement);
-          }
+          setTotaldisplacementrangeres(response?.data?.displacement);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchPowerRange = async () => {
-      if (powerRange.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchPowerRange = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -544,21 +479,15 @@ const CarsPage = ({
               displacementRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (powerRange.length > 0) {
-            setTotalpowerrangeres(response?.data?.power);
-          } else {
-            setTotalpowerrangeres(allFilter.power);
-          }
+          setTotalpowerrangeres(response?.data?.power);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchBrandList = async () => {
-      if (brandSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchBrandList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -582,21 +511,15 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (brandSlugs.length > 0) {
-            setBrandListres(response?.data?.brands);
-          } else {
-            setBrandListres(allFilter.brands);
-          }
+          setBrandListres(response?.data?.brands);
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    const fetchBodyTypeList = async () => {
-      if (bodyTypeSlugs.length > 0 && process.env.NEXT_PUBLIC_API_URL) {
+      const fetchBodyTypeList = async () => {
         setIsLoading(true);
         try {
           const response = await axios.get(
@@ -620,31 +543,31 @@ const CarsPage = ({
               powerRange
             )}&page=${page}&pageSize=${pageSize}`
           );
-          if (bodyTypeSlugs.length > 0) {
-            setBodyTypeListres(response?.data?.bodyTypes);
-          } else {
-            setBodyTypeListres(allFilter.bodyTypes);
-          }
+
+          setBodyTypeListres(response?.data?.bodyTypes);
+          console.log(response?.data?.bodyTypes, "response?.data?.bodyTypes)");
         } catch (error) {
           console.error("Failed to fetch fuel type list:", error);
         } finally {
           setIsLoading(false); // Ensure loading is false after fetching
         }
-      }
-    };
+      };
 
-    fetchFilteredTrims(); // Call the fetch function
-    fetchFilteredTrimsZero();
-    fetchFuelTypeList();
-    fetchAllFilter();
-    fetchCylinderList();
-    fetchTransmissionList();
-    fetchDriveList();
-    fetchPriceRange();
-    fetchDisplacementRange();
-    fetchPowerRange();
-    fetchBrandList();
-    fetchBodyTypeList();
+      fetchFilteredTrims();
+      fetchFuelTypeList();
+      fetchAllFilter();
+      fetchCylinderList();
+      fetchTransmissionList();
+      fetchDriveList();
+      fetchPriceRange();
+      fetchDisplacementRange();
+      fetchPowerRange();
+      fetchBrandList();
+      fetchBodyTypeList();
+    } else {
+      // On initial render, set the flag to true
+      setHasMounted(true);
+    }
   }, [
     query.haveMusic,
     query.isLuxury,
@@ -856,6 +779,38 @@ const CarsPage = ({
 
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Carprices",
+              url: "https://carprices.ae/",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://carprices.ae/search-cars?brand={brand}&price={price}&bodytype={bodytype}&power={power}&displacement={displacement}&fuelType={fuelType}&drive={drive}&transmission={transmission}&cylinders={cylinders}",
+                },
+                "query-input": [
+                  "optional name=brand",
+                  "optional name=price",
+                  "optional name=bodytype",
+                  "optional name=power",
+                  "optional name=displacement",
+                  "optional name=fuelType",
+                  "optional name=drive",
+                  "optional name=transmission",
+                  "optional name=cylinders",
+                ],
+              },
+            }),
+          }}
+        />
+      </Head>
       <PopupComponent
         open={open}
         onClose={handleClose}
@@ -904,10 +859,12 @@ const CarsPage = ({
       <LoaderOverlay isVisible={isLoading} />
       <MainLayout
         pageMeta={{
-          title:
-            "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-          description:
-            "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
+          title: metaData?.title
+            ? metaData.title
+            : "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
+          description: metaData?.description
+            ? metaData.description
+            : "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
           type: "Car Review Website",
         }}
       >
@@ -957,8 +914,8 @@ const CarsPage = ({
           </div>
         </div> */}
 
-          <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-2">
-            <aside className="tw-w-full md:tw-w-1/4 tw-bg-white">
+          <div className="tw-flex tw-flex-col lg:tw-flex-row tw-gap-2">
+            <aside className="tw-w-full lg:tw-w-1/4 tw-bg-white">
               <CarLeftSidebar
                 brandoptions={brandoptions}
                 bodyoptions={bodyoptions}
@@ -973,9 +930,9 @@ const CarsPage = ({
                 toggleModal={toggleModalFunction}
               />
             </aside>
-            <main className="tw-w-full md:tw-w-3/4">
+            <main className="tw-w-full lg:tw-w-3/4">
               <div>
-                <h1 className="fw-bold">New Car Buyer's Guide</h1>
+                {/* <h1 className="fw-bold">New Car Buyer's Guide</h1>
                 <p>
                   Here is a list of shortlisted cars priced between{" "}
                   <span className="tw-font-bold">
@@ -988,7 +945,7 @@ const CarsPage = ({
                   and based on your selection. If you want to see more options,
                   please expand your search by using the “Restart Search”
                   button. Happy car shopping!
-                </p>
+                </p> */}
                 <div className="tw-hidden md:tw-flex tw-gap-4 tw-justify-between tw-px-5 tw-py-4 tw-text-base tw-tracking-normal tw-rounded-2xl tw-bg-blue-100 max-md:tw-flex-wrap tw-my-4">
                   <div className="tw-my-auto tw-text-black tw-leading-[150%] max-md:tw-max-w-full">
                     Need help finding the right vehicle?{" "}
@@ -997,7 +954,6 @@ const CarsPage = ({
                   </div>
                   <PrimaryButton label="Search Now" onClick={toggleSlideover} />
                 </div>
-
                 <div className="tw-flex tw-items-center tw-justify-center ">
                   <div
                     id="slideover-container"
@@ -1043,14 +999,7 @@ const CarsPage = ({
                     </div>
                   </div>
                 </div>
-                <div className="tw-flex tw-my-3">
-                  <TabSwitch
-                    categories={categories}
-                    selectedTab={selectedTab}
-                    setSelectedTab={setSelectedTab}
-                    isAvailable={allTrimsZero.length}
-                  />
-
+                <div className="tw-flex tw-justify-end tw-my-3">
                   <FormControl className="tw-hidden md:tw-block">
                     <InputLabel id="sorting-select-label">Sort by</InputLabel>
                     <Select
@@ -1084,40 +1033,16 @@ const CarsPage = ({
                       </MenuItem>
                     </Select>
                   </FormControl>
-                </div>
-
-                {selectedTab === 0 ? (
-                  <>
-                    {" "}
-                    <CarList cars={allTrims} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <CarList cars={allTrimsZero} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                )}
+                </div>{" "}
+                <CarList cars={allTrims} totalCars={totalCars} />
+                <Pagination currentPage={currentPage} totalPages={totalPages} />
               </div>
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
                   <BrandCategory brandDetails={brand} />
-                  <Ad728x90 dataAdSlot="5962627056" />
+                  <Ad728x90 dataAdSlot={"corvette"} />
                   <BodyTypes bodyTypeList={bodyTypes} />
-                  <Ad728x90 dataAdSlot="3488506956" />
+                  <Ad728x90 dataAdSlot={"tahoe"} />
                   {/* <div className="row ">
                     <h2 className="mt-4">Automotive News</h2>
                     {articleslist?.map((newsItem, index) => {
@@ -1203,8 +1128,8 @@ export async function getServerSideProps(context) {
   const pageSize = 12;
   const pageSizeZero = 12;
   const sorting = query.sort ? query.sort : "";
-  const brandSlugs = query.brandname ? [query.brandname] : [];
-  const bodyTypeSlugs = [query.categoryname ? query.categoryname : []];
+  const brandSlugs = query.brand ? query.brand.split(",") : [];
+  const bodyTypeSlugs = query.bodytype ? query.bodytype.split(",") : [];
   const fuelTypeSlugs = query.fuelType ? query.fuelType.split(",") : [];
   const cylinderSlugs = query.cylinders ? query.cylinders.split(",") : [];
   const driveSlugs = query.drive ? query.drive.split(",") : [];
@@ -1246,29 +1171,18 @@ export async function getServerSideProps(context) {
 
   const queryParams = {};
 
-  if (brandSlugs.length > 0) {
-    queryParams.brands = JSON.stringify(brandSlugs);
-  }
+  queryParams.brands = JSON.stringify(brandSlugs);
 
-  if (bodyTypeSlugs.length > 0) {
-    queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
-  }
+  queryParams.bodyTypeIds = [JSON.stringify(bodyTypeSlugs)];
 
-  if (fuelTypeSlugs.length > 0) {
-    queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
-  }
+  queryParams.fuelTypes = JSON.stringify(fuelTypeSlugs);
 
-  if (cylinderSlugs.length > 0) {
-    queryParams.cylinders = JSON.stringify(cylinderSlugs);
-  }
+  queryParams.cylinders = JSON.stringify(cylinderSlugs);
 
-  if (driveSlugs.length > 0) {
-    queryParams.drive = JSON.stringify(driveSlugs);
-  }
+  queryParams.drive = JSON.stringify(driveSlugs);
 
-  if (transmissionSlugs.length > 0) {
-    queryParams.transmission = JSON.stringify(transmissionSlugs);
-  }
+  queryParams.transmission = JSON.stringify(transmissionSlugs);
+
   // Parse ranges
   const parseRanges = (rangeStr) => {
     return rangeStr.split(",").map((range) => {
@@ -1313,30 +1227,6 @@ export async function getServerSideProps(context) {
     )}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(sorting)}`
   );
 
-  const filteredTrimsZero = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
-    }car-trims/homefilter?brands=${JSON.stringify(
-      brandSlugs
-    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-      fuelTypeSlugs
-    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-      driveSlugs
-    )}&transmission=${JSON.stringify(
-      transmissionSlugs
-    )}&priceRanges=${JSON.stringify(
-      priceRange
-    )}&displacementRanges=${JSON.stringify(
-      displacementRange
-    )}&powerRanges=${JSON.stringify(
-      powerRange
-    )}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-      sorting
-    )}&priceZero=true`
-  );
-
-  console.log(filteredTrims, "allTrimsZero");
-
   const fullFilter = await axios.get(
     `${
       process.env.NEXT_PUBLIC_API_URL
@@ -1367,196 +1257,186 @@ export async function getServerSideProps(context) {
     brandListres,
     bodyTypeListres;
 
-  if (fuelTypeSlugs.length > 0) {
-    const fuelTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/fuelList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    fuelTypeListres = fuelTypeList;
-  }
+  const fuelTypeList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/fuelList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  fuelTypeListres = fuelTypeList;
 
-  if (cylinderSlugs.length > 0) {
-    const cylinderList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/cylinderList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    cylinderListres = cylinderList;
-  }
+  const cylinderList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/cylinderList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  cylinderListres = cylinderList;
 
-  if (transmissionSlugs.length > 0) {
-    const transmissionSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/transmissionList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    transmissionListres = transmissionSlugs;
-  }
+  const transmissionList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/transmissionList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  transmissionListres = transmissionList;
 
-  if (driveSlugs.length > 0) {
-    const driveSlugs = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/driveList?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    driveListres = driveSlugs;
-  }
+  const driveList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/driveList?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  driveListres = driveList;
 
-  if (priceRange.length > 0) {
-    const priceranges = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/priceRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    pricerangesres = priceranges;
-  }
+  const pricerangesList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/priceRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  pricerangesres = pricerangesList;
 
-  if (displacementRange.length > 0) {
-    const totaldisplacementrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/displacementRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totaldisplacementrangeres = totaldisplacementrange;
-  }
+  const totaldisplacementrange = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/displacementRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(priceRange)}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  totaldisplacementrangeres = totaldisplacementrange;
 
-  if (powerRange.length > 0) {
-    const totalpowerrange = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/powerRange?brands=${JSON.stringify(
-        brandSlugs
-      )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-        fuelTypeSlugs
-      )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-        driveSlugs
-      )}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    totalpowerrangeres = totalpowerrange;
-  }
+  const totalpowerrange = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/powerRange?brands=${JSON.stringify(
+      brandSlugs
+    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
+      fuelTypeSlugs
+    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
+      driveSlugs
+    )}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  totalpowerrangeres = totalpowerrange;
 
-  if (brandSlugs.length > 0) {
-    const brandList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/brandList?bodyTypes=${JSON.stringify(
-        bodyTypeSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    brandListres = brandList;
-  }
+  const brandList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/brandList?bodyTypes=${JSON.stringify(
+      bodyTypeSlugs
+    )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  brandListres = brandList;
 
-  if (bodyTypeSlugs.length > 0) {
-    const bodyTypeList = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }car-trims/bodyList?brands=${JSON.stringify(
-        brandSlugs
-      )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-        cylinderSlugs
-      )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-        transmissionSlugs
-      )}&priceRanges=${JSON.stringify(
-        priceRange
-      )}&displacementRanges=${JSON.stringify(
-        displacementRange
-      )}&powerRanges=${JSON.stringify(
-        powerRange
-      )}&page=${page}&pageSize=${pageSize}`
-    );
-    bodyTypeListres = bodyTypeList;
-  }
+  const bodyTypeList = await axios.get(
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }car-trims/bodyList?brands=${JSON.stringify(
+      brandSlugs
+    )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
+      cylinderSlugs
+    )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
+      transmissionSlugs
+    )}&priceRanges=${JSON.stringify(
+      priceRange
+    )}&displacementRanges=${JSON.stringify(
+      displacementRange
+    )}&powerRanges=${JSON.stringify(
+      powerRange
+    )}&page=${page}&pageSize=${pageSize}`
+  );
+  bodyTypeListres = bodyTypeList;
 
   const home = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`);
+
+  // Get the full path and query string from the URL (e.g., 'brands?type=1')
+  const { resolvedUrl } = context;
+
+  // Split the URL at the "?" to remove query parameters
+  const pathWithQuery = resolvedUrl.split("?")[0]; // Only take the path (e.g., 'brands')
+
+  // Extract the last part of the path
+  const path = pathWithQuery.split("/").filter(Boolean).pop();
+  const metaData = await fetchMetaData(path);
 
   try {
     return {
@@ -1565,9 +1445,6 @@ export async function getServerSideProps(context) {
         totalBrands: filteredTrims?.data?.data?.pagination?.total,
         totalPages: filteredTrims?.data?.data?.pagination?.pageCount,
         currentPage: page,
-        totalPagesZero:
-          filteredTrimsZero?.data?.data?.paginationZero?.pageCount,
-        currentPageZero: pageZero,
         brandList:
           brandSlugs.length > 0
             ? brandListres?.data.brands
@@ -1589,7 +1466,6 @@ export async function getServerSideProps(context) {
             ? totalpowerrangeres?.data.power
             : fullFilter?.data.power,
         filteredTrims: filteredTrims?.data?.data?.list,
-        filteredTrimsZero: filteredTrimsZero?.data?.data?.listWithPriceZero,
         fuelTypeList:
           fuelTypeSlugs.length > 0
             ? fuelTypeListres?.data.fuelTypes
@@ -1610,6 +1486,7 @@ export async function getServerSideProps(context) {
         brand: home?.data?.data?.brand,
         totalFilteredCars: filteredTrims?.data?.data?.totalFilteredCars,
         type: type,
+        metaData,
       },
     };
   } catch (error) {

@@ -15,6 +15,8 @@ const client = new ApolloClient({
 });
 
 const MultiStepCarSelection = ({ carData, mode }) => {
+  console.log(carData, "carData");
+
   const [isSticky, setIsSticky] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -455,13 +457,12 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                 Choose {currentStep}
               </h2>
               <div className="tw-flex gap-3">
-                <Link
+                <div
                   className={` ${
                     currentStep === "brand" && selectedBrand === ""
                       ? "tw-hidden "
                       : "tw-block"
                   }`}
-                  href="#brand"
                   onClick={() => {
                     setCurrentStep("brand");
                     setSearchTerm("");
@@ -475,13 +476,12 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                       setSearchTerm("");
                     }}
                   />
-                </Link>
+                </div>
 
-                <Link
+                <div
                   className={` ${
                     selectedModel === "" ? "tw-hidden " : "tw-block"
                   }`}
-                  href="#model"
                 >
                   <DataBadge
                     iconSrc={null}
@@ -490,13 +490,12 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                       setCurrentStep("model"), setSearchTerm("");
                     }}
                   />
-                </Link>
+                </div>
 
-                <Link
+                <div
                   className={` ${
                     selectedYear === "" ? "tw-hidden " : "tw-block"
                   }`}
-                  href="#year"
                 >
                   <DataBadge
                     iconSrc={null}
@@ -505,13 +504,12 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                       setCurrentStep("year"), setSearchTerm("");
                     }}
                   />
-                </Link>
+                </div>
 
-                <Link
+                <div
                   className={` ${
                     selectedVariant === "" ? "tw-hidden " : "tw-block"
                   }`}
-                  href="#variant"
                 >
                   <DataBadge
                     iconSrc={null}
@@ -520,7 +518,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                       setCurrentStep("variant"), setSearchTerm("");
                     }}
                   />
-                </Link>
+                </div>
               </div>
               <div className=" tw-relative tw-rounded-md tw-shadow-sm tw-my-6">
                 <div className="tw-absolute tw-inset-y-0 tw-left-0 tw-pl-3 tw-flex tw-items-center tw-pointer-events-none">
