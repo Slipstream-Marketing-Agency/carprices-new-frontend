@@ -36,15 +36,12 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 const CarsPage = ({
   currentPage,
   totalPages,
-  totalPagesZero,
-  currentPageZero,
   brandList,
   bodyTypeList,
   totalpricerange,
   totaldisplacementrange,
   totalpowerrange,
   filteredTrims,
-  filteredTrimsZero,
   totalFilteredCars,
   fuelTypeList,
   cylinderList,
@@ -163,9 +160,7 @@ const CarsPage = ({
   }
 
   const [allTrims, setAllTrims] = useState(filteredTrims);
-  const [allTrimsZero, setAllTrimsZero] = useState(filteredTrimsZero);
   const [totalCars, setTotalCars] = useState(totalFilteredCars);
-  console.log(filteredTrimsZero, "filteredTrimsZero");
   const [allFilter, setAllFilter] = useState();
   const [fuelTypeListRes, setFuelTypeListRes] = useState(fuelTypeList);
   const [cylinderListres, setCylinderListres] = useState(cylinderList);
@@ -218,44 +213,6 @@ const CarsPage = ({
         setTotal(response?.data?.data?.pagination?.pageCount);
         setCurrent(page);
         setAllTrims(response?.data?.data?.list); // Set the data to state
-        setTotalCars(response?.data?.data?.totalFilteredCars);
-      } catch (error) {
-        console.error("Failed to fetch filtered trims:", error);
-      } finally {
-        setIsLoading(false); // Ensure loading is false after fetching
-      }
-    };
-
-    const fetchFilteredTrimsZero = async () => {
-      setIsLoading(true); // Set loading to true while we fetch data
-
-      try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_API_URL
-          }car-trims/homefilter?brands=${JSON.stringify(
-            brandSlugs
-          )}&bodyTypes=${JSON.stringify(
-            bodyTypeSlugs
-          )}&fuelType=${JSON.stringify(
-            fuelTypeSlugs
-          )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-            driveSlugs
-          )}&transmission=${JSON.stringify(
-            transmissionSlugs
-          )}&priceRanges=${JSON.stringify(
-            priceRange
-          )}&displacementRanges=${JSON.stringify(
-            displacementRange
-          )}&powerRanges=${JSON.stringify(
-            powerRange
-          )}&${additionalQueryString}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-            sorting
-          )}&priceZero=true`
-        );
-        setTotal(response?.data?.data?.pagination?.pageCount);
-        setCurrent(page);
-        setAllTrimsZero(response?.data?.data?.listWithPriceZero); // Set the data to state
         setTotalCars(response?.data?.data?.totalFilteredCars);
       } catch (error) {
         console.error("Failed to fetch filtered trims:", error);
@@ -635,8 +592,7 @@ const CarsPage = ({
       }
     };
 
-    fetchFilteredTrims(); // Call the fetch function
-    fetchFilteredTrimsZero();
+    fetchFilteredTrims();
     fetchFuelTypeList();
     fetchAllFilter();
     fetchCylinderList();
@@ -1038,13 +994,6 @@ const CarsPage = ({
                   </div>
                 </div>
                 <div className="tw-flex tw-justify-end tw-my-3">
-                  <TabSwitch
-                    categories={categories}
-                    selectedTab={selectedTab}
-                    setSelectedTab={setSelectedTab}
-                    isAvailable={allTrimsZero.length}
-                  />
-
                   <FormControl className="tw-hidden md:tw-block">
                     <InputLabel id="sorting-select-label">Sort by</InputLabel>
                     <Select
@@ -1079,32 +1028,14 @@ const CarsPage = ({
                     </Select>
                   </FormControl>
                 </div>
-
-                {selectedTab === 0 ? (
-                  <>
-                    {" "}
-                    <CarList cars={allTrims} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <CarList cars={allTrimsZero} totalCars={totalCars} />
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      currentPageZero={currentPageZero}
-                      totalPagesZero={totalPagesZero}
-                      type={selectedTab}
-                    />
-                  </>
-                )}
+                <>
+                  {" "}
+                  <CarList cars={allTrims} totalCars={totalCars} />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                  />
+                </>
               </div>
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">
@@ -1308,30 +1239,6 @@ export async function getServerSideProps(context) {
       sorting
     )}`
   );
-
-  const filteredTrimsZero = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_API_URL
-    }car-trims/homefilter?brands=${JSON.stringify(
-      brandSlugs
-    )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-      fuelTypeSlugs
-    )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-      driveSlugs
-    )}&transmission=${JSON.stringify(
-      transmissionSlugs
-    )}&priceRanges=${JSON.stringify(
-      priceRange
-    )}&displacementRanges=${JSON.stringify(
-      displacementRange
-    )}&powerRanges=${JSON.stringify(
-      powerRange
-    )}&${additionalQueryString}&pageZero=${pageZero}&pageSizeZero=${pageSizeZero}&sort=${JSON.stringify(
-      sorting
-    )}&priceZero=true`
-  );
-
-  console.log(filteredTrims, "allTrimsZero");
 
   const fullFilter = await axios.get(
     `${
@@ -1561,9 +1468,6 @@ export async function getServerSideProps(context) {
         totalBrands: filteredTrims?.data?.data?.pagination?.total,
         totalPages: filteredTrims?.data?.data?.pagination?.pageCount,
         currentPage: page,
-        totalPagesZero:
-          filteredTrimsZero?.data?.data?.paginationZero?.pageCount,
-        currentPageZero: pageZero,
         brandList:
           brandSlugs.length > 0
             ? brandListres?.data.brands
@@ -1585,7 +1489,6 @@ export async function getServerSideProps(context) {
             ? totalpowerrangeres?.data.power
             : fullFilter?.data.power,
         filteredTrims: filteredTrims?.data?.data?.list,
-        filteredTrimsZero: filteredTrimsZero?.data?.data?.listWithPriceZero,
         fuelTypeList:
           fuelTypeSlugs.length > 0
             ? fuelTypeListres?.data.fuelTypes
