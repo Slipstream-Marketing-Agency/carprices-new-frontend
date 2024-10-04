@@ -505,6 +505,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                     }}
                   />
                 </div>
+                
 
                 <div
                   className={` ${
