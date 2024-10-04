@@ -1036,7 +1036,7 @@ const CarsPage = ({
                   </FormControl>
                 </div>{" "}
                 <CarList cars={allTrims} totalCars={totalCars} setIsLoading={setIsLoading} />
-                <Pagination currentPage={currentPage} totalPages={totalPages} />
+                <Pagination currentPage={currentPage} totalPages={total} />
               </div>
               <div className="row">
                 <div className="col-xl-12 col-lg-8 col-md-12 col-sm-12">

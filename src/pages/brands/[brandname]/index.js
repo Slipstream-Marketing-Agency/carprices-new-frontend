@@ -947,6 +947,7 @@ const CarsPage = ({
                 driveList={driveListres}
                 displaynone={true}
                 toggleModal={toggleModalFunction}
+                setIsLoading={setIsLoading}
               />
             </aside>
             <main className="tw-w-full md:tw-w-3/4">
@@ -1189,10 +1190,10 @@ const CarsPage = ({
 
                 <>
                   {" "}
-                  <CarList cars={allTrims} totalCars={totalCars} />
+                  <CarList cars={allTrims} totalCars={totalCars} setIsLoading={setIsLoading} />
                   <Pagination
                     currentPage={currentPage}
-                    totalPages={totalPages}
+                    totalPages={total}
                   />
                 </>
               </div>
