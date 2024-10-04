@@ -35,6 +35,7 @@ export default function Pagination({ currentPage, totalPages }) {
     // Always include the first and last pages
     pages = [1, totalPages];
 
+    
     // Calculate range of pages to display around the current page
     let startPage = Math.max(2, currentPageNumber - 1);
     let endPage = Math.min(totalPages - 1, currentPageNumber + 1);
