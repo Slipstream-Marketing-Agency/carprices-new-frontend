@@ -355,23 +355,26 @@ export default function FilterLayout() {
         <>
           <div
             className={`${router.pathname === "/"
-                ? "tw-shadow-lg tw-shadow-blue-500/50 tw-rounded-2xl tw-text-center tw-relative"
-                : "tw-text-center tw-relative"
+              ? "tw-shadow-lg tw-shadow-blue-500/50 tw-rounded-2xl tw-text-center tw-relative"
+              : "tw-text-center tw-relative"
               }`}
           >
             <div
               className={`${router.pathname === "/"
-                  ? "tw-relative tw-flex tw-flex-col tw-rounded-tr-2xl tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[120px]"
-                  : "tw-relative tw-flex tw-flex-col tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[120px]"
+                ? "tw-relative tw-flex tw-flex-col tw-rounded-tr-2xl tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[120px]"
+                : "tw-relative tw-flex tw-flex-col tw-rounded-tl-2xl tw-justify-center tw-items-start tw-px-5 tw-py-4 tw-text-2xl  tw-text-white tw-bg-gradient-to-r tw-from-blue-500 tw-to-blue-800 tw-h-[120px]"
                 }`}
             >
-              <Image
+              {/* <Image
                 loading="lazy"
                 src="/gradiend-lines.svg"
                 alt="gradiend-lines"
                 width={0}
                 height={0}
                 className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover tw-rounded-tr-2xl tw-rounded-tl-2xl"
+              /> */}
+              <div
+                className="gradient-filter"
               />
               <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
                 {steps[currentStep].title}

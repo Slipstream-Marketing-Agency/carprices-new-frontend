@@ -75,13 +75,13 @@ const CarCard = ({ car, loading }) => {
                     <Skeleton variant="rectangular" width="100%" height={160} />
                 ) : (
                     <Image
-                        loading="lazy"
-                        src={car?.highTrim?.featuredImage}
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48"
-                        alt={car.name}
+                        loading="lazy" // Lazy loading for improved performance
+                        src={car?.highTrim?.featuredImage} // Ensure this image is optimized
+                        width={600} // Set a fixed width to maintain layout
+                        height={300} // Set a height to maintain aspect ratio
+                        sizes="(max-width: 600px) 100vw, (min-width: 601px) 50vw" // Responsive sizes for better loading
+                        className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48" // Retain existing styling
+                        alt={car.name} // Descriptive alt text for accessibility
                     />
                 )}
             </div>

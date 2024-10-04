@@ -50,6 +50,10 @@ const HeroSectionComponent = dynamic(() => import('../components/home/HeroSectio
     </div>
   </div>
 });
+const TrendingVideosComponent = dynamic(() => import('../components/home/TrendingVideos'), {
+  ssr: false,
+});
+
 import { getAllWebStories } from "../lib/api";
 import StorySlider from "../components/web-stories/StorySlider";
 
@@ -574,10 +578,11 @@ export default function index({
                         <Image
                           src={car.image}
                           alt={`${car.brand} ${car.name}`}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          className="tw-object-cover tw-w-full tw-h-96"
+                          width={600} // Set width to match expected display size
+                          height={384} // Set height to maintain aspect ratio
+                          sizes="(max-width: 600px) 100vw, 600px" // Responsive sizes for better performance
+                          className="tw-object-cover tw-w-full tw-h-96" // Maintain the existing styling
+                          loading="lazy" // Enable lazy loading for images
                         />
                         <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
                           <h6 className="tw-text-white tw-mb-0">{car.name}</h6>
@@ -595,10 +600,11 @@ export default function index({
                         <Image
                           src={item.image}
                           alt={`${item.brand} ${item.name}`}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl"
+                          width={600} // Set a fixed width that matches your layout
+                          height={300} // Set a height that maintains the aspect ratio
+                          sizes="(max-width: 600px) 100vw, 600px" // Responsive sizes for better loading performance
+                          className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl" // Retain existing styling
+                          loading="lazy" // Enable lazy loading to improve performance
                         />
                         <div className="tw-p-4 tw-flex tw-flex-col tw-flex-grow">
                           <h6 className="tw-text-lg tw-font-semibold tw-leading-4 tw-text-gray-800">
@@ -643,11 +649,10 @@ export default function index({
                     className="tw-flex tw-flex-col tw-justify-center"
                   >
                     <div
-                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${
-                        selectedTab === index
-                          ? "tw-bg-neutral-900 tw-text-white"
-                          : "tw-bg-violet-100 tw-border-violet-100"
-                      }`}
+                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${selectedTab === index
+                        ? "tw-bg-neutral-900 tw-text-white"
+                        : "tw-bg-violet-100 tw-border-violet-100"
+                        }`}
                       onClick={() => setSelectedTab(index)}
                     >
                       {category}
@@ -836,9 +841,9 @@ export default function index({
                     loading="lazy"
                     alt="car-side"
                     src="/car-side.png"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
+                    layout="fill" // Optimized for absolute positioning
+                    objectFit="contain" // Adjust image inside the container
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="tw-object-contain tw-absolute tw-inset-0 tw-w-full tw-h-full md:tw-block tw-hidden"
                   />
                 </div>
@@ -855,9 +860,10 @@ export default function index({
                         loading="lazy"
                         alt={`brand-${item?.name}`}
                         src={`${item?.logo}`}
-                        width={0}
-                        height={0}
-                        sizes="100vw"
+                        width={90} // Optimized width for md screens
+                        height={90} // Optimized height for md screens
+                        sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
+                        layout="intrinsic" // Optimized for fixed-size images
                         className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px] md:tw-grayscale hover:tw-filter-none"
                       />
                       <div className="md:tw-mt-6 tw-mt-2 tw-font-semibold tw-whitespace-nowrap tw-text-xs md:tw-text-base">
@@ -876,35 +882,19 @@ export default function index({
           </div>
           <Link
             href="/news/Ferrari-V12-has-arrived-again-with-the-12cilindri-redlines-at-9500rpm"
-            className="tw-w-full tw-h-full md:tw-block tw-hidden"
+            className="tw-w-full tw-h-full"
           >
             <Image
               loading="lazy"
-              alt="Banner-Sponsored-Desktop"
+              alt="Banner-Sponsored"
               src="/Banner-Sponsored-Desktop.jpg"
-              srcSet="/Banner-Sponsored-Desktop.jpg"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="tw-object-contain tw-w-full tw-h-full md:tw-block tw-hidden tw-mt-10 "
+              width={1200} // Adjust according to the actual image size
+              height={400} // Adjust according to the actual image size
+              sizes="(max-width: 768px) 100vw, (min-width: 769px) 1200px"
+              layout="responsive" // Ensures the image scales properly across devices
+              className="tw-object-contain tw-w-full tw-h-full tw-mt-10 md:tw-mb-0 tw-mb-3"
             />
           </Link>
-          <Link
-            href="/news/Ferrari-V12-has-arrived-again-with-the-12cilindri-redlines-at-9500rpm"
-            className="tw-w-full tw-h-full md:tw-hidden tw-block"
-          >
-            <Image
-              loading="lazy"
-              alt="Banner-Sponsored-Desktop"
-              src="/Banner-Sponsored-Desktop.jpg"
-              srcSet="/Banner-Sponsored-Desktop.jpg"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="tw-object-contain tw-w-full tw-h-full md:tw-hidden tw-block tw-mt-10 tw-mb-3"
-            />
-          </Link>
-
           <div className="tw-container md:tw-my-20 tw-my-4 tw-px-5">
             <div className="tw-flex tw-justify-between tw-items-start tw-gap-5 tw-w-full max-md:tw-flex-wrap max-md:tw-max-w-full">
               <div className="tw-flex tw-flex-col max-md:tw-max-w-full">
@@ -927,11 +917,12 @@ export default function index({
                     <div className="tw-w-full md:tw-h-32 sm:tw-h-24 tw-overflow-hidden">
                       <Image
                         loading="lazy"
-                        src={`${item?.image}`}
-                        width={0}
-                        height={0}
-                        sizes="100vw"
+                        src={item?.image}
+                        width={300} // Replace with actual image width
+                        height={200} // Replace with actual image height
+                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 100vw"
                         alt={`category-${item?.name}`}
+                        layout="responsive" // Ensure responsive image scaling
                         className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                       />
                     </div>
@@ -1028,13 +1019,14 @@ export default function index({
               </div>
               <Image
                 className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
-                src={
-                  "https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
-                }
+                src="https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
                 alt="car_Loan_EMI-icon"
-                height={200}
-                width={200}
-                // layout="responsive"
+                width={200}  // Adjust to match your image's original width
+                height={200} // Adjust to match your image's original height
+                // layout="responsive"  // Responsive layout ensures it scales properly
+                objectFit="contain"   // Ensures the image is not cropped and fits within the container
+                loading="lazy"        // Lazy loads the image for performance optimization
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 75vw, 100vw"
               />
             </div>
             <div className="tw-bg-gradient-to-tl tw-from-gray-700 tw-via-gray-800 tw-to-black  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
@@ -1054,14 +1046,17 @@ export default function index({
                 <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
               </div>
               <Image
-                className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-52 tw-bottom-10 tw-left-36 tw-w-[65%] tw-h-[65%] xl:tw-w-[80%] xl:tw-h-[80%]"
                 src={
                   "https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"
                 }
                 alt="car_worth-icon"
-                height={200}
-                width={200}
-                // layout="responsive"
+                className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
+                width={200}  // Adjust to match your image's original width
+                height={200} // Adjust to match your image's original height
+                // layout="responsive"  // Responsive layout ensures it scales properly
+                objectFit="contain"   // Ensures the image is not cropped and fits within the container
+                loading="lazy"        // Lazy loads the image for performance optimization
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 75vw, 100vw"
               />
             </div>
           </div>
@@ -1119,61 +1114,7 @@ export default function index({
       View More
     </div> */}
             </div>
-            <div className="tw-grid tw-gap-5 md:tw-mt-7 tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3">
-              {[
-                {
-                  imgSrc:
-                    "https://cdn.carprices.ae/assets/LC_2024_280082ac3e.jpg",
-                  name: "The 2024 Toyota Land Cruiser Prado Arrives In UAE 🤩 | Prices and Variants Discussed!",
-                  url: "https://www.youtube.com/watch?v=_xLXi8Si2f8",
-                },
-                {
-                  imgSrc:
-                    "https://cdn.carprices.ae/assets/Lexus_GX_vs_Patrol_a903e1ef66.jpg",
-                  name: "2024 Lexus GX 🤜VS🤛 2024 Nissan Patrol! Ultimate Battle Of Luxury and Off-Road Dynamics 💪",
-                  url: "https://www.youtube.com/watch?v=4MbZpuqDXrM&t=190s",
-                },
-                {
-                  imgSrc:
-                    "https://cdn.carprices.ae/assets/BYD_Shark_vs_Hilux_fe36d1aad2.jpg",
-                  name: "BYD Shark PHEV VS Toyota Hilux 🤜🤛: Which Will Dominate the Trails, China or Japan?",
-                  url: "https://www.youtube.com/watch?v=R5cXg7E416U",
-                },
-              ].map((item, index) => (
-                <Link
-                  href={item.url}
-                  target="_blank"
-                  key={index}
-                  className="tw-flex tw-flex-col tw-bg-white tw-rounded-2xl tw-shadow-sm tw-pb-7 max-md:tw-mt-5"
-                >
-                  <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-justify-center tw-w-full tw-rounded-2xl md:tw-min-h-[177px] tw-min-h-[188px] xl:tw-min-h-[240px]">
-                    <Image
-                      loading="lazy"
-                      width={0}
-                      height={0}
-                      layout="fill"
-                      alt={item.name}
-                      src={item?.imgSrc}
-                    />
-                  </div>
-                  <div className="tw-relative tw-flex tw-flex-col tw-pl-7 tw-mt-7 tw-text-neutral-900 max-md:tw-pl-5">
-                    <Image
-                      loading="lazy"
-                      alt="playbutton-icon"
-                      width={0}
-                      height={0}
-                      src="/playbutton.svg"
-                      className=" tw-absolute tw-right-5 tw-top-[-53px] tw-w-[47px]"
-                    />
-                    <div className="tw-flex tw-flex-wrap tw-justify-between tw-gap-5 ">
-                      <h5 className=" tw-text-black  tw-font-semibold line-clamp-2">
-                        {item.name}
-                      </h5>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <TrendingVideosComponent />
           </div>
 
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-8 tw-mt-0">
@@ -1230,9 +1171,8 @@ export default function index({
                         key={index}
                         className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
                         style={{
-                          backgroundImage: `url('${
-                            item?.coverImage ? item?.coverImage : altImage
-                          }')`,
+                          backgroundImage: `url('${item?.coverImage ? item?.coverImage : altImage
+                            }')`,
                         }}
                       >
                         <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">

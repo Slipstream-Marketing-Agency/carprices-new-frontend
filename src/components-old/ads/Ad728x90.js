@@ -42,7 +42,7 @@ export default function Ad728x90({ dataAdSlot }) {
       {/* Google AdSense Ad Unit */}
       <ins
         className="adsbygoogle"
-        style={{ display: "block"}}
+        style={{ display: "block", width: "728px", height: "90px" }}
         data-ad-client={adsenseClientId}
         data-ad-slot={dataAdSlot}
         data-full-width-responsive="true"

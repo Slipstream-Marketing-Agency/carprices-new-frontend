@@ -19,10 +19,11 @@ const SearchForBestCard = ({
           <Image
             src={imageUrl}
             alt={label}
-            loading="lazy"
-            width={40}
-            height={40}
-            className="tw-w-40 md:tw-h-24 tw-h-14 tw-object-contain tw-rounded-md tw-p-2"
+            loading="lazy" // Lazy loading for performance
+            width={160} // Set to a width that matches display size more closely
+            height={100} // Adjust height based on aspect ratio
+            sizes="(max-width: 640px) 14rem, (min-width: 641px) 24rem" // Responsive sizes
+            className="tw-w-40 md:tw-h-24 tw-h-14 tw-object-contain tw-rounded-md tw-p-2" // Ensure it scales properly
           />
           <div className="tw-items-center tw-justify-between tw-w-full tw-hidden md:tw-flex">
             <p className="tw-mt-2 tw-text-center tw-text-sm md:tw-text-base tw-font-semibold">
