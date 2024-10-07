@@ -364,8 +364,9 @@ function MainLayout({ children, pageMeta }) {
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
                   alt="logo"
-                  width={0}
-                  height={0}
+                  width={150}  // Set a valid width
+                  height={50}  // Adjust height based on your logo's aspect ratio
+                  layout="intrinsic"  // Automatically sizes the image based on its intrinsic dimensions
                 />
               </Link>
               <div onClick={toggleNavigation}>
@@ -406,9 +407,10 @@ function MainLayout({ children, pageMeta }) {
                   loading="lazy"
                   src="/assets/img/car-prices-logo.png"
                   className="tw-shrink-0 tw-my-auto tw-max-w-full tw-aspect-[6.25] tw-w-[179px]"
-                  alt={`logo`}
-                  width={0}
-                  height={0}
+                  alt="logo"
+                  width={179}  // Provide explicit width
+                  height={28}  // Adjust this based on your image aspect ratio
+                  layout="intrinsic"
                 />
               </Link>
               <div className="tw-flex tw-flex-col tw-grow tw-shrink tw-justify-center tw-w-full max-md:tw-max-w-full">
@@ -583,8 +585,8 @@ function MainLayout({ children, pageMeta }) {
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
                   alt={`logo`}
-                  width={0}
-                  height={0}
+                  width={150}
+                  height={50}
                 />
               </Link>
               <div className="tw-my-auto"></div>
@@ -619,8 +621,8 @@ function MainLayout({ children, pageMeta }) {
                     src="/assets/img/car-prices-logo.png"
                     className="tw-w-[150px] tw-object-contain"
                     alt={`logo`}
-                    width={0}
-                    height={0}
+                    width={150}
+                    height={50}
                   />
                 </Link>
                 <IconButton onClick={toggleDrawer}>
@@ -842,8 +844,8 @@ function MainLayout({ children, pageMeta }) {
                   src="/assets/img/car-prices-logo.png"
                   className="tw-w-[150px] tw-object-contain"
                   alt={`logo`}
-                  width={0}
-                  height={0}
+                  width={150}
+                  height={50}
                 />
               </Link>
               <div className="tw-my-auto"></div>

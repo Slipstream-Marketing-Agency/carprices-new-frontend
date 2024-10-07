@@ -5,6 +5,7 @@ import SelectComponent from "@/src/utils/SelectComponent";
 import MultiStepCarSelection from "./MultiStepCarSelection";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
+import Image from "next/image";
 
 function CompareCarCard({ carData }) {
   if (!carData) return null;
@@ -37,7 +38,7 @@ function CompareCarCard({ carData }) {
       }
     }
   };
-  const handleModal = () => {};
+  const handleModal = () => { };
 
   return (
     <div className={`md:tw-col-span-3 tw-col-span-6 `}>
@@ -49,14 +50,18 @@ function CompareCarCard({ carData }) {
           <CloseIcon />
         </div>
         <div className="tw-flex tw-justify-center tw-h-[160px] tw-my-4">
-          <img
+          <Image
             src={
               carData?.featuredImage === undefined
                 ? "/assets/img/car-placeholder.png"
                 : carData?.featuredImage
             }
-            alt={carData?.name}
+            alt={carData?.name || 'Car Image'}
+            width={500}  // Set a width that matches the container or your layout needs
+            height={300}  // Set the height based on the aspect ratio you want
             className="tw-object-contain"
+            layout="intrinsic"  // This layout preserves the image's aspect ratio and size
+            loading="lazy"  // Lazy load the image
           />
         </div>
         <div>

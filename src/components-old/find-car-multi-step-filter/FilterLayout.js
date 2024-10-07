@@ -376,7 +376,7 @@ export default function FilterLayout() {
               <div
                 className="gradient-filter"
               />
-              <h3 className="text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
+              <h3 className="tw-text-white tw-relative tw-z-10 tw-text-start tw-font-bold">
                 {steps[currentStep].title}
               </h3>
             </div>
