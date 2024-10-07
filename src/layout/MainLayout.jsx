@@ -379,6 +379,7 @@ function MainLayout({ children, pageMeta }) {
                   height={0}
                 />
               </div>
+              
             </div>
 
             <div className="tw-flex tw-flex-col tw-pt-4">
