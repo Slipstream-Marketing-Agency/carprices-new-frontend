@@ -27,9 +27,8 @@ const storeRedirects = async () => {
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["dev-s3.carprices.ae"],
-    loader: "default",
-    unoptimized: true,
+    domains: ["cdn.carprices.ae"],
+    loader: "default"
   },
   i18n: {
     locales: ["en"],
