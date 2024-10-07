@@ -31,7 +31,7 @@ export default function WebStories({ stories, categories }) {
           </div>
           <div className="md:tw-col-span-3 tw-col-span-12">
             {/* Category Filter Component */}
-            <Ad300x250 />
+            <Ad300x250 dataAdSlot="6764889295"  />
             <div className="tw-my-0 tw-p-2">
               {/* <CategoryFilter categories={categories} /> */}
             </div>

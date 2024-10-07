@@ -66,7 +66,7 @@ export default function index({ initialPressReleases, metaData }) {
             </div>
             <div className="sticky-sidebar">
               <div className="ad-container">
-                <Ad300x600 />
+                <Ad300x600 dataAdSlot="3792539533" />
               </div>
             </div>
           </div>

@@ -1689,7 +1689,9 @@ input[type="color"]:focus,
   }
 
   .Ad970x250 {
-    display: none;
+    width: 100%;
+    height: 250px;
+    margin: auto;
   }
 
   .Ad160x600 {

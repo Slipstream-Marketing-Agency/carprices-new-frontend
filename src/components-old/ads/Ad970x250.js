@@ -15,7 +15,7 @@ export default function Ad970x250({dataAdSlot}) {
   const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
   return (
     //replaced className to Ad728x90 as image with dimension 970X250 not availble from Alghandi Motors"
-    <div className="Ad728x90">
+    <div className="Ad970x250 tw-my-2">
       {/* <Link href="https://bit.ly/3zixsMz">
         <Image
           src={"https://cdn.carprices.ae/assets/728x90_Blazer_d6b13f332e.jpg"}

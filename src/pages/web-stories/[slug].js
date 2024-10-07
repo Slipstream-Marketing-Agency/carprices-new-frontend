@@ -1,7 +1,6 @@
 import { getWebStoryData } from "@/src/lib/api";
 import Head from "next/head";
 import moment from "moment";
-import Link from "next/link";
 
 // Enable AMP
 export const config = { amp: true };
@@ -20,31 +19,6 @@ export default function Webstory({ story }) {
 
         {/* Load AMP-compatible font: Poppins */}
       </Head>
-
-      {/* Back Button */}
-      <div
-        className="back-button"
-        style={{
-          position: "fixed",
-          top: "10px",
-          left: "10px",
-          zIndex: 1000,
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          padding: "8px 15px",
-          borderRadius: "8px",
-          color: "white",
-          fontFamily: "'Poppins', sans-serif",
-          fontSize: "16px",
-          cursor: "pointer",
-        }}
-      >
-        <Link
-          href="/web-stories"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          ← Back
-        </Link>
-      </div>
 
       {/* AMP Story directly inside body */}
       <amp-story

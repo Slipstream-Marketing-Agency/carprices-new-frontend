@@ -225,7 +225,7 @@ function BlogStandardPage({ metaData }) {
             {/* <Categories /> */}
           </div>
           <div className="md:tw-col-span-3 tw-col-span-12 tw-space-y-6">
-            <Ad300x250 />
+            <Ad300x250 dataAdSlot={"2567975821"} />
             {articlesThisWeek?.length > 0 && (
               <div>
                 <h2 className="tw-font-bold tw-capitalize">From This week</h2>
@@ -257,7 +257,7 @@ function BlogStandardPage({ metaData }) {
             )}
             <div className="sticky-sidebar">
               <div className="ad-container">
-                <Ad300x600 />
+                <Ad300x600 dataAdSlot={"4810995789"} />
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ function BlogStandardPage({ metaData }) {
       </section>
 
       <div className="my-2">
-        <Ad728x90 />
+        <Ad728x90 dataAdSlot={"7916642838"} />
       </div>
 
       <div className="tw-container">
