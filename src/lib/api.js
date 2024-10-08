@@ -14,6 +14,11 @@ const fetchWithErrorHandling = async (url) => {
   }
 };
 
+export async function getCarSection(sectionName) {
+  const url = `${API_URL}car-sections/findAll?${sectionName}=1`;
+  return await fetchWithErrorHandling(url);
+}
+
 // Fetch all web stories with pagination and sorting
 export async function getAllWebStories(
   page = 1,

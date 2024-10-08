@@ -398,10 +398,13 @@ function BlogDetailsPage({
                         ? article?.coverImage
                         : "/assets/img/car-placeholder.png"
                     }
-                    alt=""
+                    alt="Cover Image"
                     width={300}
                     height={205}
                     className="tw-object-contain tw-w-full"
+                    layout="responsive"  // Ensure the image is responsive to container size
+                    quality={100}  // Increase image quality to avoid pixelation
+                    loading="lazy"  // Lazy load the image to improve page speed
                   />
                 </div>
                 <p className="tw-mt-4  article-content">{renderContent()}</p>

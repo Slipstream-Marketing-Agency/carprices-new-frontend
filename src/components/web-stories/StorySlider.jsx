@@ -1,7 +1,8 @@
+import { getAllWebStories } from "@/src/lib/api";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 
 const settings = {
@@ -15,8 +16,34 @@ const settings = {
   initialSlide: 0,
 };
 
-const StorySlider = ({ stories }) => {
-  console.log(stories, "fgfg");
+const StorySlider = () => {
+
+  const [stories, setStories] = useState([])
+
+  useEffect(() => {
+    let isMounted = true;  // To prevent setting state on unmounted component
+
+    const fetchData = async () => {
+      try {
+        const fetchedStories = await getAllWebStories();
+        if (isMounted) {
+          setStories(fetchedStories || []);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.log('Failed to fetch stories',err);
+        }
+      } finally {
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function to prevent memory leaks if the component unmounts
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="tw-relative tw-flex tw-justify-between">

@@ -37,6 +37,61 @@ import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
 import { fetchMetaData } from "../lib/fetchMetaData";
 
+const NextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`custom-arrow custom-next-arrow text-black`}
+      onClick={onClick}
+    >
+      <span className="material-symbols-outlined">chevron_right</span>
+    </div>
+  );
+};
+
+// Custom Prev Arrow
+const PrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`custom-arrow custom-prev-arrow text-black`}
+      onClick={onClick}
+    >
+      <span className="material-symbols-outlined">chevron_left</span>
+    </div>
+  );
+};
+
+const sliderSettings = {
+  dots: false,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 4000,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+  draggable: false,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 720,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 1,
+      },
+    },
+  ],
+};
+
 const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
   ssr: false,
   loading: () => <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
@@ -50,12 +105,39 @@ const HeroSectionComponent = dynamic(() => import('../components/home/HeroSectio
     </div>
   </div>
 });
+const StorySliderComponent = dynamic(() => import('../components/web-stories/StorySlider'), {
+  ssr: false,
+});
 const TrendingVideosComponent = dynamic(() => import('../components/home/TrendingVideos'), {
   ssr: false,
+});
+const TrendingCarSectionComponent = dynamic(() => import('../components/home/TrendingCarSection'), {
+  ssr: false,
+  loading: () => <div className="tw-grid tw-grid-cols-1 xl:tw-grid-cols-4 tw-gap-5">
+    <div className="xl:tw-col-span-3 tw-relative tw-half-card-slider tw-hidden sm:tw-block">
+      <Slider {...sliderSettings}>
+        {[1, 2, 3].map((key, index) => (
+          <Skeleton
+            variant="rectangular"
+            height={400}
+            className="tw-h-52"
+          />
+        ))}
+      </Slider>
+      <div className="md:tw-block tw-hidden tw-mt-4">
+        {" "}
+        <Ad728x90 dataAdSlot="4367254600" />
+      </div>
+    </div>
+    <div className="md:tw-hidden tw-block sm:tw-mb-4 tw-w-full">
+      <Ad300X250 dataAdSlot="8451638145" />
+    </div>
+  </div>
 });
 
 import { getAllWebStories } from "../lib/api";
 import StorySlider from "../components/web-stories/StorySlider";
+import Ad300X250 from "../components-old/ads/Ad300x250";
 
 export default function index({
   bannerImage,
@@ -79,60 +161,6 @@ export default function index({
   const featuredSliderRef = useRef(null);
   const featuredSliderRefMob = useRef(null);
 
-  const NextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`custom-arrow custom-next-arrow text-black`}
-        onClick={onClick}
-      >
-        <span className="material-symbols-outlined">chevron_right</span>
-      </div>
-    );
-  };
-
-  // Custom Prev Arrow
-  const PrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`custom-arrow custom-prev-arrow text-black`}
-        onClick={onClick}
-      >
-        <span className="material-symbols-outlined">chevron_left</span>
-      </div>
-    );
-  };
-
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    draggable: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 720,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-    ],
-  };
 
   const FeaturedData = [
     {
@@ -480,39 +508,7 @@ export default function index({
             <div className="tw-absolute tw-top-10 tw-right-0 xl:tw-block tw-hidden">
               <Ad300x600 dataAdSlot="3792539533" />
             </div>
-            <div className="tw-grid tw-grid-cols-1 xl:tw-grid-cols-4 tw-gap-5">
-              <div className="xl:tw-col-span-3 tw-relative tw-half-card-slider tw-hidden sm:tw-block">
-                <Slider {...sliderSettings}>
-                  {featuredcars?.carModels.map((car) => (
-                    <div className="tw-px-2" key={car.id}>
-                      <CarCard car={car} loading={false} />
-                    </div>
-                  ))}
-                </Slider>
-                <div className="md:tw-block tw-hidden tw-mt-4">
-                  {" "}
-                  {/* Added margin-top */}
-                  <Ad728x90 dataAdSlot="4367254600" />
-                </div>
-              </div>
-              {/* Horizontal scrolling for screens 720px and smaller */}
-              <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
-                <div className="tw-flex tw-nowrap tw-pr-1">
-                  {featuredcars?.carModels.map((car) => (
-                    <div
-                      className="tw-inline-block tw-pr-2"
-                      style={{ minWidth: "75%" }}
-                      key={car.id}
-                    >
-                      <CarCard car={car} loading={false} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="md:tw-hidden tw-block sm:tw-mb-4 tw-w-full">
-                <Ad300x250 dataAdSlot="8451638145" />
-              </div>
-            </div>
+            <TrendingCarSectionComponent />
           </div>
           {/* featured cars */}
           <div className="tw-container md:tw-py-8 tw-overflow-hidden ">
@@ -1098,7 +1094,7 @@ export default function index({
                 </span>
               </Link>
             </div>
-            <StorySlider stories={stories} />
+            <StorySliderComponent />
           </div>
           <div className="tw-flex tw-flex-col tw-container md:tw-mt-10 tw-my-6 tw-px-5">
             <div className="tw-flex tw-flex-wrap tw-justify-between tw-w-full tw-gap-5">
@@ -1203,7 +1199,7 @@ export async function getStaticProps() {
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
       fetchMetaData("home"),
     ]);
-    const stories = await getAllWebStories();
+    // const stories = await getAllWebStories();
 
     return {
       props: {
@@ -1219,7 +1215,7 @@ export async function getStaticProps() {
         compare: compare?.data,
         articles: articles?.data?.data,
         metaData: metaData,
-        stories,
+        // stories,
       },
       revalidate: 60, // Regenerate the page at most once per minute
     };
