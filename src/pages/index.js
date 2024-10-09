@@ -36,6 +36,10 @@ import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
 import CompareCars from "../components/home/CompareCars";
 import { fetchMetaData } from "../lib/fetchMetaData";
+import TrendingCarSectionPlaceholder from "../components/home/TrendingCarSectionPlaceholder";
+import MostPopularCarSection from "../components/home/MostPopularCarSection";
+import MostPopularSectionPlaceholder from "../components/home/MostPopularSectionPlaceholder";
+import OptimizedImage from "../components/common/image/OptimisedImage";
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -62,36 +66,6 @@ const PrevArrow = (props) => {
   );
 };
 
-const sliderSettings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 4000,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-  draggable: false,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        infinite: true,
-      },
-    },
-    {
-      breakpoint: 720,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        initialSlide: 1,
-      },
-    },
-  ],
-};
-
 const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
   ssr: false,
   loading: () => <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
@@ -113,31 +87,12 @@ const TrendingVideosComponent = dynamic(() => import('../components/home/Trendin
 });
 const TrendingCarSectionComponent = dynamic(() => import('../components/home/TrendingCarSection'), {
   ssr: false,
-  loading: () => <div className="tw-grid tw-grid-cols-1 xl:tw-grid-cols-4 tw-gap-5">
-    <div className="xl:tw-col-span-3 tw-relative tw-half-card-slider tw-hidden sm:tw-block">
-      <Slider {...sliderSettings}>
-        {[1, 2, 3].map((key, index) => (
-          <Skeleton
-            variant="rectangular"
-            height={400}
-            className="tw-h-52"
-          />
-        ))}
-      </Slider>
-      <div className="md:tw-block tw-hidden tw-mt-4">
-        {" "}
-        <Ad728x90 dataAdSlot="4367254600" />
-      </div>
-    </div>
-    <div className="md:tw-hidden tw-block sm:tw-mb-4 tw-w-full">
-      <Ad300X250 dataAdSlot="8451638145" />
-    </div>
-  </div>
+  loading: () => <TrendingCarSectionPlaceholder />
 });
-
-import { getAllWebStories } from "../lib/api";
-import StorySlider from "../components/web-stories/StorySlider";
-import Ad300X250 from "../components-old/ads/Ad300x250";
+const MostPopularCarSectionComponent = dynamic(() => import('../components/home/MostPopularCarSection'), {
+  ssr: false,
+  loading: () => <MostPopularSectionPlaceholder />
+});
 
 export default function index({
   bannerImage,
@@ -306,39 +261,7 @@ export default function index({
     // },
   ];
 
-  const categorysliderSettings = {
-    dots: false,
-    infinite: true,
-    // speed: 2000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    draggable: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-    ],
-  };
-
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState("popular");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -370,12 +293,35 @@ export default function index({
     }
   };
 
+  // const categories = [
+  //   "Most Popular",
+  //   "Electric Cars",
+  //   "SUVs",
+  //   "Performance Cars",
+  // ];
   const categories = [
-    "Most Popular",
-    "Electric Cars",
-    "SUVs",
-    "Performance Cars",
+    {
+      id: 1,
+      name: "Most Popular",
+      slug: "popular", // Custom key
+    },
+    {
+      id: 2,
+      name: "Electric Cars",
+      slug: "electric",
+    },
+    {
+      id: 3,
+      name: "SUVs",
+      slug: "suvs",
+    },
+    {
+      id: 4,
+      name: "Performance Cars",
+      slug: "performance",
+    },
   ];
+
 
   const t = useTranslate();
 
@@ -571,7 +517,7 @@ export default function index({
                   {FeaturedData.map((car, index) => (
                     <Link href={car.url} key={index} className="tw-p-2">
                       <div className="tw-relative tw-flex tw-flex-col tw-overflow-hidden tw-rounded-2xl tw-transition-transform tw-duration-500 tw-custom-scale">
-                        <Image
+                        <OptimizedImage
                           src={car.image}
                           alt={`${car.brand} ${car.name}`}
                           width={600} // Set width to match expected display size
@@ -593,11 +539,11 @@ export default function index({
                   {FeaturedData.map((item, index) => (
                     <Link href={item.url} key={index}>
                       <div className="tw-flex tw-flex-col tw-h-full tw-overflow-hidden tw-rounded-2xl tw-shadow-lg tw-transition-transform tw-duration-500 tw-bg-white">
-                        <Image
+                        <OptimizedImage
                           src={item.image}
                           alt={`${item.brand} ${item.name}`}
                           width={600} // Set a fixed width that matches your layout
-                          height={300} // Set a height that maintains the aspect ratio
+                          height={200} // Set a height that maintains the aspect ratio
                           sizes="(max-width: 600px) 100vw, 600px" // Responsive sizes for better loading performance
                           className="tw-object-cover tw-w-full tw-h-48 tw-rounded-t-2xl" // Retain existing styling
                           loading="lazy" // Enable lazy loading to improve performance
@@ -645,43 +591,20 @@ export default function index({
                     className="tw-flex tw-flex-col tw-justify-center"
                   >
                     <div
-                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${selectedTab === index
+                      className={`tw-justify-center md:tw-px-14 tw-px-10 md:tw-py-5 tw-py-3 tw-border tw-border-solid tw-rounded-[73px] max-md:tw-px-5 tw-cursor-pointer ${selectedTab === category.slug
                         ? "tw-bg-neutral-900 tw-text-white"
                         : "tw-bg-violet-100 tw-border-violet-100"
                         }`}
-                      onClick={() => setSelectedTab(index)}
+                      onClick={() => setSelectedTab(category.slug)}
                     >
-                      {category}
+                      {category.name}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="tw-px-4 tw-hidden sm:tw-block">
-              <Slider key={selectedTab} {...categorysliderSettings}>
-                {filterCars(selectedTab).map((car, index) => (
-                  <div className="tw-px-2" key={car.id}>
-                    <CarCard car={car} loading={loading} />
-                  </div>
-                ))}
-              </Slider>
-              {/* )} */}
-            </div>
-            {/* Horizontal scrolling for screens 720px and smaller */}
-            <div className="sm:tw-hidden tw-block tw-overflow-x-auto tw-m-2 custom-scrollbar">
-              <div className="tw-flex tw-nowrap tw-pr-1">
-                {filterCars(selectedTab).map((car) => (
-                  <div
-                    className="tw-inline-block tw-pr-2"
-                    style={{ minWidth: "75%" }}
-                    key={car.id}
-                  >
-                    <CarCard car={car} loading={loading} />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <MostPopularCarSectionComponent carType={selectedTab} />
           </div>
           {/* notable upcoming cars */}
           {/* new */}
@@ -727,7 +650,7 @@ export default function index({
                       className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-bg-black"
                     >
                       <div className="tw-relative tw-flex tw-flex-col tw-justify-end tw-pt-20 tw-min-h-[290px]">
-                        <Image
+                        <OptimizedImage
                           loading="lazy"
                           layout="fill"
                           src={item.imgSrc}
@@ -833,7 +756,7 @@ export default function index({
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-5 max-md:tw-gap-0">
               <div className="tw-flex tw-flex-col max-md:tw-w-full">
                 <div className="tw-relative tw-flex tw-flex-col tw-grow md:tw-items-end md:tw-px-16 md:tw-pb-20 md:tw-min-h-[519px] ">
-                  <Image
+                  <OptimizedImage
                     loading="lazy"
                     alt="car-side"
                     src="/car-side.png"
@@ -852,7 +775,7 @@ export default function index({
                       key={index}
                       className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black tw-p-4"
                     >
-                      <Image
+                      <OptimizedImage
                         loading="lazy"
                         alt={`brand-${item?.name}`}
                         src={`${item?.logo}`}
@@ -911,7 +834,7 @@ export default function index({
                 <Link href={`/category/${item?.slug}`} key={index}>
                   <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black">
                     <div className="tw-w-full md:tw-h-32 sm:tw-h-24 tw-overflow-hidden">
-                      <Image
+                      <OptimizedImage
                         loading="lazy"
                         src={item?.image}
                         width={300} // Replace with actual image width
@@ -1013,7 +936,7 @@ export default function index({
                 </Link>
                 <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
               </div>
-              <Image
+              <OptimizedImage
                 className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
                 src="https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
                 alt="car_Loan_EMI-icon"
@@ -1041,7 +964,7 @@ export default function index({
                 </Link>
                 <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
               </div>
-              <Image
+              <OptimizedImage
                 src={
                   "https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"
                 }

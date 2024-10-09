@@ -2,6 +2,7 @@ import React from 'react'
 import Skeleton from "@mui/material/Skeleton";
 import Link from 'next/link';
 import Image from 'next/image';
+import OptimizedImage from '../common/image/OptimisedImage';
 
 
 const CarPriceRange = ({ minPrice, maxPrice }) => {
