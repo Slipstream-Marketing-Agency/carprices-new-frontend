@@ -64,7 +64,6 @@ const TrendingCarSection = () => {
     };
 
     const [featuredCars, setFeaturedCars] = useState(null)
-    console.log(featuredCars,"featuredCars")
 
     useEffect(() => {
         let isMounted = true;  // To prevent setting state on unmounted component
@@ -72,7 +71,6 @@ const TrendingCarSection = () => {
         const fetchData = async () => {
             try {
                 const fetchedFeaturedCars = await getCarSection('featured');
-                console.log(fetchedFeaturedCars,'fetchedFeaturedCars')
                 if (isMounted) {
                     setFeaturedCars(fetchedFeaturedCars ? (fetchedFeaturedCars.length>0 ? fetchedFeaturedCars[0] : null) : null);
                 }

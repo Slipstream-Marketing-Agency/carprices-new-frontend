@@ -2,6 +2,7 @@ import React from 'react'
 import Skeleton from "@mui/material/Skeleton";
 import Link from 'next/link';
 import Image from 'next/image';
+import OptimizedImage from '../common/image/OptimisedImage';
 
 
 const CarPriceRange = ({ minPrice, maxPrice }) => {
@@ -71,19 +72,16 @@ const CarCard = ({ car, loading }) => {
                 <div className="tw-self-start tw-py-1 tw-px-2 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
                     Model: {car?.highTrim?.year}
                 </div>
-                {loading ? (
-                    <Skeleton variant="rectangular" width="100%" height={160} />
-                ) : (
-                    <Image
-                        loading="lazy" // Lazy loading for improved performance
-                        src={car?.highTrim?.featuredImage} // Ensure this image is optimized
-                        width={600} // Set a fixed width to maintain layout
-                        height={300} // Set a height to maintain aspect ratio
-                        sizes="(max-width: 600px) 100vw, (min-width: 601px) 50vw" // Responsive sizes for better loading
-                        className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48" // Retain existing styling
-                        alt={car.name} // Descriptive alt text for accessibility
-                    />
-                )}
+                <Image
+                    loading="lazy" // Lazy loading for improved performance
+                    src={car?.highTrim?.featuredImage} // Ensure this image is optimized
+                    width={600} // Set a fixed width to maintain layout
+                    height={270} // Set a height to maintain aspect ratio
+                    sizes="(max-width: 600px) 100vw, (min-width: 601px) 50vw" // Responsive sizes for better loading
+                    className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48" // Retain existing styling
+                    layout="fixed"
+                    alt={car.name} // Descriptive alt text for accessibility
+                />
             </div>
             <Link href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}>
                 <div className="tw-flex tw-flex-col tw-px-4 tw-pt-2 tw-mt-2 tw-w-full xl:tw-px-5 xl:tw-pt-3 xl:tw-mt-2 xl:tw-flex-grow">
