@@ -891,10 +891,10 @@ function MainLayout({ children, pageMeta }) {
       <footer>
         <div className="tw-my-10">
           <div className="hidemobile">
-            <Ad970x250 dataAdSlot="6082880703" />
+            <Ad970x250 dataAdSlot="3620924730" />
           </div>
           <div className="hidedesktop">
-            <Ad300x250 dataAdSlot="9351332409" />
+            <Ad300x250 dataAdSlot="1332106070" />
           </div>
         </div>
 

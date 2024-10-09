@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-export default function Ad300X250({dataAdSlot}) {
+export default function Ad300X250({ dataAdSlot }) {
   const router = useRouter()
   useEffect(() => {
     try {
@@ -28,11 +28,10 @@ export default function Ad300X250({dataAdSlot}) {
         />
       </Link> */}
       <ins
-        className="adsbygoogle"
-        style={{ display: "block"}}
+        className="adsbygoogle responsive_desktop_square_300x250"
+        style={{ display: "block" }}
         data-ad-client={adsenseClientId}
         data-ad-slot={dataAdSlot}
-        data-full-width-responsive="true"
       ></ins>
     </div>
   );

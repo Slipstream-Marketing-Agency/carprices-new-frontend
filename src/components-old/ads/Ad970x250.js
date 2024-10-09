@@ -28,11 +28,10 @@ export default function Ad970x250({dataAdSlot}) {
         />
       </Link> */}
       <ins
-        className="adsbygoogle"
+        className="adsbygoogle responsive_footer_ad_horizontal"
         style={{ display: "block"}}
         data-ad-client={adsenseClientId}
         data-ad-slot={dataAdSlot}
-        data-full-width-responsive="true"
       ></ins>
     </div>
   );

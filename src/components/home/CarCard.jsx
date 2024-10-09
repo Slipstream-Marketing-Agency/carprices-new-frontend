@@ -72,7 +72,7 @@ const CarCard = ({ car, loading }) => {
                     Model: {car?.highTrim?.year}
                 </div>
                 {loading ? (
-                    <Skeleton variant="rectangular" width="100%" height={160} />
+                    <Skeleton variant="rectangular" width="100%" height={192} />
                 ) : (
                     <Image
                         loading="lazy" // Lazy loading for improved performance

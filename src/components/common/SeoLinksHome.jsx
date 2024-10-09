@@ -339,7 +339,7 @@ export default function SeoLinksHome() {
         </div>
         <div className="tw-col-span-2 tw-bg-sky-100 tw-px-8 tw-py-8 tw-rounded-2xl tw-text-neutral-900 tw-w-full tw-hidden xl:tw-block">
           <div className="tw-font-semibold tw-text-xl sm:tw-text-2xl tw-mb-2 ">
-            Why carPrices.ae
+            Why Carprices.ae
           </div>
           {whyCarPriceData.map((data, index) => (
             <div className="tw-mb-5">
