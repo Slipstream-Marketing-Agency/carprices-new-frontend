@@ -1115,6 +1115,7 @@ export default function index({
 
 export async function getStaticProps() {
   try {
+    
     const [
       // carSection, 
       home, articles, compare, metaData] = await Promise.all([
