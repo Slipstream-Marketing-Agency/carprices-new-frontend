@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 export default function StepOne({ filterData, setFilterData }) {
   const router = useRouter();
@@ -121,7 +122,7 @@ export default function StepOne({ filterData, setFilterData }) {
             onClick={() => handlePreferencesClick(item.value)}
           >
             <div className="tw-w-[40px] tw-h-[40px] tw-flex tw-justify-center tw-items-center">
-              <Image
+              <OptimizedImage
                 loading="lazy"
                 src={item.img}
                 alt={item.label}

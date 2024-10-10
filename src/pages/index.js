@@ -936,7 +936,7 @@ export default function index({
                 </Link>
                 <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
               </div>
-              <OptimizedImage
+              <Image
                 className="tw-object-contain tw-min-h-0 tw-absolute sm:tw-bottom-6 sm:tw-left-56 tw-bottom-10 tw-left-40 tw-w-[60%] tw-h-[60%] xl:tw-w-[75%] xl:tw-h-[75%]"
                 src="https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
                 alt="car_Loan_EMI-icon"
@@ -964,7 +964,7 @@ export default function index({
                 </Link>
                 <ArrowForwardIcon fontSize="small" className="tw-mx-2" />
               </div>
-              <OptimizedImage
+              <Image
                 src={
                   "https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"
                 }
@@ -1115,8 +1115,10 @@ export default function index({
 
 export async function getStaticProps() {
   try {
-    const [carSection, home, articles, compare, metaData] = await Promise.all([
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`),
+    const [
+      // carSection, 
+      home, articles, compare, metaData] = await Promise.all([
+      // axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
       axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
@@ -1130,11 +1132,11 @@ export async function getStaticProps() {
         bannerText: home?.data?.data?.bannerText,
         bodyTypes: home?.data?.data?.bodyTypes,
         brand: home?.data?.data?.brand,
-        popularcars: carSection?.data[1],
-        featuredcars: carSection?.data[0],
-        electriccars: carSection?.data[2],
-        suv: carSection?.data[3],
-        performance: carSection?.data[4],
+        // popularcars: carSection?.data[1],
+        // featuredcars: carSection?.data[0],
+        // electriccars: carSection?.data[2],
+        // suv: carSection?.data[3],
+        // performance: carSection?.data[4],
         compare: compare?.data,
         articles: articles?.data?.data,
         metaData: metaData,

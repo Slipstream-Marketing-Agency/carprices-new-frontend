@@ -1,3 +1,4 @@
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 import useTranslate from "@/src/utils/useTranslate";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -40,7 +41,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
             onClick={() => handlePreferencesClick(item.slug)}
           >
             <div className="tw-w-[50px] tw-h-[50px] tw-flex tw-justify-center tw-items-center">
-              <Image
+              <OptimizedImage
                 src={item?.image?.url}
                 alt={item.label}
                 width={60}
