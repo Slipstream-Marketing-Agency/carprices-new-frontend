@@ -9,6 +9,7 @@ import SearchIcon from "@mui/icons-material/SearchOutlined";
 import Image from "next/image";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import LoadingAnimation from "@/src/components-old/common/LoadingAnimation";
+import OptimizedImage from "../../common/image/OptimisedImage";
 
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
@@ -499,7 +500,7 @@ function MainSection() {
                                 handleBrandSelect(brand.attributes.slug)
                               }
                             >
-                              <Image
+                              <OptimizedImage
                                 src={
                                   brand.attributes.brandLogo.data.attributes.url
                                 }

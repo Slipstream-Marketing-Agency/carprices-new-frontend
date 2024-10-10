@@ -8,6 +8,7 @@ import useTranslate from "@/src/utils/useTranslate"; // Adjust the path based on
 import FeaturedImage from "../common/FeaturedImage"; // Adjust the path based on your project structure
 import Image from "next/image";
 import PrimaryButton from "@/src/components/buttons/PrimaryButton";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 export default function VariantsListing({ year, brand, model, allTrims }) {
   const router = useRouter();
@@ -24,9 +25,10 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
             >
               <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-4 tw-items-center tw-p-4">
                 <div className="md:tw-w-1/3 tw-flex tw-items-center tw-justify-center">
-                  <Image
+                  <OptimizedImage
                     width={200}
                     height={200}
+                    layout="fixed"
                     alt={item?.name}
                     src={
                       item?.featuredImage

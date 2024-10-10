@@ -13,6 +13,7 @@ import Pagination from "@/src/components/common/Pagination";
 import EastIcon from "@mui/icons-material/East";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import { fetchMetaData } from "@/src/lib/fetchMetaData";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 const SkeletonArticle = () => (
   <div className="skeleton-article">
@@ -161,12 +162,13 @@ function BlogStandardPage({ metaData }) {
                     {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
                         Trending
                       </div> */}
-                    <Image
+                    <OptimizedImage
                       src={article.coverImage || altImage}
-                      alt=""
+                      alt={article?.title}
                       width={0}
                       height={0}
                       sizes="100vw"
+                      layout="fixed"
                       className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
                     />
                     <div className="tw-p-2">
@@ -290,12 +292,13 @@ function BlogStandardPage({ metaData }) {
                   {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
                     Trending
                   </div> */}
-                  <Image
+                  <OptimizedImage
                     src={article.coverImage || altImage}
                     alt=""
                     width={0}
                     height={0}
                     sizes="100vw"
+                    layout="fixed"
                     className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
                   />
                   <div className="tw-p-2">

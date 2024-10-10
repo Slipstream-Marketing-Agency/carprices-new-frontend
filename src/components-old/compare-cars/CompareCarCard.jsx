@@ -6,6 +6,7 @@ import MultiStepCarSelection from "./MultiStepCarSelection";
 import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 function CompareCarCard({ carData }) {
   if (!carData) return null;
@@ -50,7 +51,7 @@ function CompareCarCard({ carData }) {
           <CloseIcon />
         </div>
         <div className="tw-flex tw-justify-center tw-h-[160px] tw-my-4">
-          <Image
+          <OptimizedImage
             src={
               carData?.featuredImage === undefined
                 ? "/assets/img/car-placeholder.png"

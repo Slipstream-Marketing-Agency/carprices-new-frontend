@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 function BodyTypes({ bodyTypeList }) {
   const router = useRouter();
@@ -29,7 +30,17 @@ function BodyTypes({ bodyTypeList }) {
                 <Link legacyBehavior href={`/category/${item?.slug}`} key={idx}>
                   <a className="single-category">
                     <div className="body-icon">
-                      <img src={item?.image} alt="bodytype-icons" />
+                      {/* <img src={item?.image} alt="bodytype-icons" /> */}
+                      <OptimizedImage
+                        loading="lazy"
+                        alt={`bodytype-${item?.name}`}
+                        src={item?.image}
+                        width={90} // Optimized width for md screens
+                        height={90} // Optimized height for md screens
+                        sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
+                        layout="intrinsic" // Optimized for fixed-size images
+                        className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px]"
+                      />
                     </div>
                     <h6 className="text-black fw-bold mt-2">{item?.name}</h6>
                   </a>

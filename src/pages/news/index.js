@@ -13,6 +13,7 @@ import Pagination from "@/src/components/common/Pagination";
 import EastIcon from "@mui/icons-material/East";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import { fetchMetaData } from "@/src/lib/fetchMetaData";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 const SkeletonArticle = () => (
   <div className="skeleton-article">
@@ -125,6 +126,15 @@ function BlogStandardPage({ metaData }) {
                       backgroundImage: `url('${article?.coverImage}')`,
                     }}
                   >
+                    {/* <Image
+                      src={article?.coverImage}
+                      alt="Article Cover"
+                      width={1200}
+                      height={800}
+                      layout="fixed"
+                      quality={100}
+                      className="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-object-cover tw-rounded-2xl"
+                    /> */}
                     <div className="tw-hidden tw-relative md:tw-flex tw-flex-col tw-justify-center md:tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
                       <div className="md:tw-px-6 tw-px-2">
                         <h2 className="tw-text-4xl tw-line-clamp-2 tw-text-white">
@@ -161,12 +171,13 @@ function BlogStandardPage({ metaData }) {
                     {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
                         Trending
                       </div> */}
-                    <Image
+                    <OptimizedImage
                       src={article.coverImage || altImage}
-                      alt=""
+                      alt={article?.title}
                       width={0}
                       height={0}
                       sizes="100vw"
+                      layout="fixed"
                       className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
                     />
                     <div className="tw-p-2">
@@ -240,7 +251,7 @@ function BlogStandardPage({ metaData }) {
                       <div className="tw-flex tw-my-2">
                         <Image
                           src={blog?.coverImage}
-                          alt=""
+                          alt={blog?.title}
                           width={40}
                           height={40}
                           className="tw-object-cover"
@@ -291,9 +302,9 @@ function BlogStandardPage({ metaData }) {
                   {/* <div className="tw-bg-blue-600 tw-text-white tw-opacity-80 tw-rounded-e-2xl tw-absolute tw-top-1 sm:tw-top-3 4xl:tw-top-5 4xl:tw-px-10 4xl:tw-py-2 4xl:tw-text-lg tw-left-0 tw-px-1 sm:tw-px-6 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-base">
                     Trending
                   </div> */}
-                  <Image
+                  <OptimizedImage
                     src={article.coverImage || altImage}
-                    alt=""
+                    alt={article?.title}
                     width={0}
                     height={0}
                     sizes="100vw"

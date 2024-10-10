@@ -4,6 +4,7 @@ import { BrandCategoryHome1 } from "../../../data/data";
 import { useRouter } from "next/router";
 import useTranslate from "@/src/utils/useTranslate";
 import PrimaryButton from "@/src/components/buttons/PrimaryButton";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 function BrandCategory({ brandDetails }) {
   const router = useRouter();
@@ -17,7 +18,7 @@ function BrandCategory({ brandDetails }) {
           <div className="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
             <div className="section-title1 w-100">
               <h2 className={`${isRtl && "text-end"} w-100 fw-bold`}>{t.popularcar}</h2>
-              <hr className="my-0 mt-2 heading-bottom "/>
+              <hr className="my-0 mt-2 heading-bottom " />
 
             </div>
           </div>
@@ -29,13 +30,23 @@ function BrandCategory({ brandDetails }) {
                 <Link legacyBehavior href={`/brands/${item?.slug}`} key={idx}>
                   <a className="single-category1">
                     <div className="brand-icon ">
-                      <img
+                      {/* <img
                         src={item?.logo}
                         alt="brand-icons"
+                      /> */}
+                      <OptimizedImage
+                        loading="lazy"
+                        alt={`brand-${item?.name}`}
+                        src={item?.logo}
+                        width={90} // Optimized width for md screens
+                        height={90} // Optimized height for md screens
+                        sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
+                        layout="intrinsic" // Optimized for fixed-size images
+                        className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px]"
                       />
                     </div>
                     <h6 className="text-dark">{item?.name}</h6>
-              
+
                   </a>
                 </Link>
               </div>
@@ -51,7 +62,7 @@ function BrandCategory({ brandDetails }) {
                   View More
                 </button>
               </Link> */}
-              <PrimaryButton label="View More" href="/brands"/>
+              <PrimaryButton label="View More" href="/brands" />
             </div>
           </div>
         </div>

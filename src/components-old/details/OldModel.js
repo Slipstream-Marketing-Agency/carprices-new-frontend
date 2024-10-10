@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 export default function OldModel({ model }) {
   const router = useRouter();
@@ -58,7 +59,7 @@ export default function OldModel({ model }) {
     >
       <Link href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
         <div className="old_model_container d-flex justify-content-center align-items-center w-50 mx-auto">
-          <Image
+          <OptimizedImage
             width={500}
             height={500}
             src={

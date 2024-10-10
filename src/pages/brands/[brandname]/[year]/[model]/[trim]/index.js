@@ -54,6 +54,7 @@ import KeyFeatures from "@/src/components-old/details/KeyFeatures";
 import VariantsListing from "@/src/components/variant/VariantListing";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import Head from "next/head";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {
@@ -495,10 +496,12 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
               {trimData?.relatedTrims?.map((trim, index) => (
                 <MenuItem key={index} value={trim.slug} className="tw-flex">
                   <ListItemIcon>
-                    <img
+                    <Image
+                      layout="fixed"
+                      width={60}
+                      height={60}
                       src={trim.featuredImage}
                       alt={trim.name}
-                      style={{ width: "60px" }}
                     />
                   </ListItemIcon>
                   <ListItemText
@@ -593,7 +596,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
           </div>
 
           <div className="tw-flex md:tw-my-5 tw-my-7 tw-space-x-2">
-            <PrimaryButton label="Reserve Online" onClick={handleBuyOpen} />
+            <PrimaryButton label="Reserve Online" additionalClass="tw-font-bold" onClick={handleBuyOpen} />
             <OutlinedButton label="Book a Test Drive" onClick={handleOpen} />
           </div>
         </div>

@@ -122,7 +122,7 @@ export default function StepOne({ filterData, setFilterData }) {
             onClick={() => handlePreferencesClick(item.value)}
           >
             <div className="tw-w-[40px] tw-h-[40px] tw-flex tw-justify-center tw-items-center">
-              <OptimizedImage
+              <Image
                 loading="lazy"
                 src={item.img}
                 alt={item.label}

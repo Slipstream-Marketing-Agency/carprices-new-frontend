@@ -7,6 +7,7 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import OptimizedImage from "../components/common/image/OptimisedImage";
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 function ProductCategory({ brands }) {
   const ref = useRef();
@@ -64,12 +65,18 @@ function ProductCategory({ brands }) {
                       <div className="category-card text-center">
                         <a className="category-img">
                           <div className="icon">
-                            <img
+                            <OptimizedImage
+                              loading="lazy"
+                              alt={`brand-${item?.name}`}
                               src={
                                 item?.attributes?.brandLogo?.data?.attributes
                                   ?.url
                               }
-                              alt=""
+                              width={90} // Optimized width for md screens
+                              height={90} // Optimized height for md screens
+                              sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
+                              layout="intrinsic" // Optimized for fixed-size images
+                              className="tw-object-contain tw-aspect-square md:tw-w-[90px] tw-w-[80px]"
                             />
                           </div>
                         </a>

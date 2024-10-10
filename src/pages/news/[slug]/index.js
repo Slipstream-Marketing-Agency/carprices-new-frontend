@@ -54,6 +54,7 @@ import axios from "axios";
 import ShareButton from "@/src/components/common/ShareButton";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import Head from "next/head";
+import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 
 const adCode =
   '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle text-center" style="display:inline-block;width:728px;height:90px;background-color:rosybrown" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1234567890"><span class="text-white">728*90</span></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
@@ -438,7 +439,7 @@ function BlogDetailsPage({
                     {/* <div className="tw-bg-button-bg tw-text-white tw-rounded-e-xl tw-absolute tw-top-2 sm:tw-top-3 tw-left-0 tw-px-1 sm:tw-px-4 tw-py-1 tw-font-thin tw-text-xs sm:tw-text-sm">
                     Trending
                   </div> */}
-                    <Image
+                    <OptimizedImage
                       src={
                         blog?.attributes?.coverImage?.data?.attributes?.url ||
                         altImage
@@ -447,6 +448,7 @@ function BlogDetailsPage({
                       width={0}
                       height={0}
                       sizes="100vw"
+                      layout="fixed"
                       className="tw-w-full md:tw-h-[200px] tw-h-[100px] tw-object-cover tw-rounded-t-[14px] "
                     // style={{ width: "100%", height: "60%" }}
                     />

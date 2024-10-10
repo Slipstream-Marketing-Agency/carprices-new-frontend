@@ -41,7 +41,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
             onClick={() => handlePreferencesClick(item.slug)}
           >
             <div className="tw-w-[50px] tw-h-[50px] tw-flex tw-justify-center tw-items-center">
-              <OptimizedImage
+              <Image
                 src={item?.image?.url}
                 alt={item.label}
                 width={60}

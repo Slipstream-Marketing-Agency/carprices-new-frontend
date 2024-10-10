@@ -126,7 +126,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
                 } hover:tw-grayscale-0 hover:tw-bg-blue-100 tw-transition-all tw-duration-300`}
               onClick={() => handleSeatingClick(item.group)}
             >
-              <OptimizedImage 
+              <Image 
                 src={item.img} 
                 alt={item.label} 
                 className="tw-mb-1 tw-w-full tw-h-auto" 
