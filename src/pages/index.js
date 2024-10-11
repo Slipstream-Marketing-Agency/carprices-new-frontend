@@ -1,5 +1,3 @@
-import { AddBox } from "@mui/icons-material";
-import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
@@ -9,62 +7,18 @@ import altImage from "../../public/assets/images/blog-alt-image.png";
 import useTranslate from "../utils/useTranslate";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import NewSearch from "../utils/NewSearch";
-import { gql } from "@apollo/client";
-import { createApolloClient } from "@/src/lib/apolloClient";
-import {
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
-import CloseIcon from "@mui/icons-material/Close";
-import MenuIcon from "@mui/icons-material/Menu";
 import dynamic from "next/dynamic";
 import FilterLayout from "../components-old/find-car-multi-step-filter/FilterLayout";
-import Ad728x90 from "../components-old/ads/Ad728x90";
 import Ad300x600 from "../components-old/ads/Ad300x600";
-import Ad300x250 from "../components-old/ads/Ad300x250";
-import Ad970x250 from "../components-old/ads/Ad970x250";
 import MainLayout from "../layout/MainLayout";
 import SeoLinksHome from "../components/common/SeoLinksHome";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import CarCard from "../components/home/CarCard";
 import SearchForTheBest from "../components/home/SearchForTheBest";
-import CompareCars from "../components/home/CompareCars";
 import { fetchMetaData } from "../lib/fetchMetaData";
 import TrendingCarSectionPlaceholder from "../components/home/TrendingCarSectionPlaceholder";
-import MostPopularCarSection from "../components/home/MostPopularCarSection";
 import MostPopularSectionPlaceholder from "../components/home/MostPopularSectionPlaceholder";
 import OptimizedImage from "../components/common/image/OptimisedImage";
-
-const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`custom-arrow custom-next-arrow text-black`}
-      onClick={onClick}
-    >
-      <span className="material-symbols-outlined">chevron_right</span>
-    </div>
-  );
-};
-
-// Custom Prev Arrow
-const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`custom-arrow custom-prev-arrow text-black`}
-      onClick={onClick}
-    >
-      <span className="material-symbols-outlined">chevron_left</span>
-    </div>
-  );
-};
 
 const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
   ssr: false,
@@ -95,27 +49,38 @@ const MostPopularCarSectionComponent = dynamic(() => import('../components/home/
 });
 
 export default function index({
-  bannerImage,
-  bannerText,
-  bodyTypes,
-  brand,
-
-  popularcars,
-  featuredcars,
-  electriccars,
-  suv,
-  performance,
-  compare,
-  articles,
-  error,
-  errorMessage,
   metaData,
-  stories,
 }) {
+
+  const [bodyTypes, setBodyTypes] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [homeRes, articlesRes, compareRes] = await Promise.all([
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
+        ]);
+        const homeData = homeRes.data?.data;
+        setBodyTypes(homeData?.bodyTypes);
+        setBrand(homeData?.brand);
+        setArticles(articlesRes.data?.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);  // Add this
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   const sliderRef = useRef(null);
   const featuredSliderRef = useRef(null);
-  const featuredSliderRefMob = useRef(null);
-
 
   const FeaturedData = [
     {
@@ -520,11 +485,11 @@ export default function index({
                         <OptimizedImage
                           src={car.image}
                           alt={`${car.brand} ${car.name}`}
-                          width={600} // Set width to match expected display size
-                          height={384} // Set height to maintain aspect ratio
-                          sizes="(max-width: 600px) 100vw, 600px" // Responsive sizes for better performance
-                          className="tw-object-cover tw-w-full tw-h-96" // Maintain the existing styling
-                          loading="lazy" // Enable lazy loading for images
+                          width={600}
+                          height={384}
+                          sizes="(max-width: 600px) 100vw, 600px"
+                          className="tw-object-cover tw-w-full tw-h-96"
+                          loading="lazy"
                         />
                         <div className="tw-m-2 tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-py-3 tw-pl-4 tw-mt-96 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl tw-text-white">
                           <h6 className="tw-text-white tw-mb-0">{car.name}</h6>
@@ -534,6 +499,7 @@ export default function index({
                   ))}
                 </Slider>
               </div>
+
               <div className="md:tw-hidden tw-block tw-mt-4">
                 <div className="tw-grid tw-grid-cols-2 tw-gap-4">
                   {FeaturedData.map((item, index) => (
@@ -837,11 +803,11 @@ export default function index({
                       <OptimizedImage
                         loading="lazy"
                         src={item?.image}
-                        width={300} // Replace with actual image width
-                        height={200} // Replace with actual image height
+                        width={300}
+                        height={200}
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 100vw"
                         alt={`category-${item?.name}`}
-                        layout="responsive" // Ensure responsive image scaling
+                        layout="responsive"
                         className="tw-object-contain tw-w-full tw-h-full tw-transition-all tw-duration-300 md:tw-py-3 md:tw-px-3 py-1 px-1"
                       />
                     </div>
@@ -852,6 +818,7 @@ export default function index({
                 </Link>
               ))}
             </div>
+
           </div>
           {/* image section */}
           <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
@@ -1049,62 +1016,67 @@ export default function index({
             </div>
             <div className="tw-mt-7 tw-w-full">
               <div className="tw-grid tw-grid-cols-3 tw-gap-5 max-md:tw-grid-cols-1">
-                <Link
-                  href={`/news/${articles.news[0]?.slug}`}
-                  className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
-                  style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
-                  }}
-                >
-                  <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
-                    <div className="tw-px-6">
-                      <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
-                        {articles.news[0].title}
-                      </div>
-                      <div className="tw-mt-1 tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
-                        {articles.news[0].summary}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-
-                <Link
-                  href={`/news/${articles.news[0]?.slug}`}
-                  key={index}
-                  className="md:tw-hidden tw-flex tw-relative tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
-                  style={{
-                    backgroundImage: `url('${articles.news[0].coverImage}')`,
-                  }}
-                >
-                  <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                    <div className="tw-text-sm sm:tw-text-lg tw-text-white">
-                      {articles.news[0].title}
-                    </div>
-                  </div>
-                </Link>
-
-                <div className="tw-grid tw-grid-rows-3 tw-gap-4">
-                  {articles.news.slice(1, 4).map((item, index) => (
-                    <Link href={`/news/${item?.slug}`}>
-                      <div
-                        key={index}
-                        className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
-                        style={{
-                          backgroundImage: `url('${item?.coverImage ? item?.coverImage : altImage
-                            }')`,
-                        }}
-                      >
-                        <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
-                          <div className="tw-text-sm sm:tw-text-lg tw-text-white">
-                            {item.title}
+                {articles?.news?.length > 0 ? (
+                  <>
+                    <Link
+                      href={`/news/${articles.news[0]?.slug}`}
+                      className="md:tw-flex tw-hidden tw-col-span-2 tw-relative tw-flex-col tw-justify-end tw-p-8 tw-pt-20 tw-pb-9 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[838px]"
+                      style={{
+                        backgroundImage: `url('${articles.news[0]?.coverImage || altImage}')`,
+                      }}
+                    >
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
+                        <div className="tw-px-6">
+                          <div className="tw-text-4xl tw-line-clamp-2 tw-text-white">
+                            {articles.news[0]?.title || 'Default Title'}
+                          </div>
+                          <div className="tw-mt-1 tw-opacity-70 tw-text-base tw-line-clamp-2 tw-text-white">
+                            {articles.news[0]?.summary || 'Default Summary'}
                           </div>
                         </div>
                       </div>
                     </Link>
-                  ))}
-                </div>
+
+                    <Link
+                      href={`/news/${articles.news[0]?.slug}`}
+                      key={0}
+                      className="md:tw-hidden tw-flex tw-relative tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
+                      style={{
+                        backgroundImage: `url('${articles.news[0]?.coverImage || altImage}')`,
+                      }}
+                    >
+                      <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50  tw-bg-black tw-rounded-2xl">
+                        <div className="tw-text-sm sm:tw-text-lg tw-text-white">
+                          {articles.news[0]?.title || 'Default Title'}
+                        </div>
+                      </div>
+                    </Link>
+
+                    <div className="tw-grid tw-grid-rows-3 tw-gap-4">
+                      {articles.news.slice(1, 4).map((item, index) => (
+                        <Link href={`/news/${item?.slug}`} key={index}>
+                          <div
+                            className="tw-relative tw-flex tw-flex-col tw-justify-end tw-p-4 tw-text-slate-100 tw-bg-cover tw-rounded-2xl tw-min-h-[269px]"
+                            style={{
+                              backgroundImage: `url('${item?.coverImage || altImage}')`,
+                            }}
+                          >
+                            <div className="tw-relative tw-flex tw-flex-col tw-justify-center tw-p-4 tw-border-l-4 tw-border-l-blue-400 tw-border-solid tw-border-t-0 tw-border-r-0 tw-border-b-0 tw-bg-opacity-50 tw-bg-black tw-rounded-2xl">
+                              <div className="tw-text-sm sm:tw-text-lg tw-text-white">
+                                {item?.title || 'Default Title'}
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div>No articles available</div>
+                )}
               </div>
             </div>
+
           </div>
           <SeoLinksHome />
         </main>
@@ -1115,35 +1087,13 @@ export default function index({
 
 export async function getStaticProps() {
   try {
-    
-    const [
-      // carSection, 
-      home, articles, compare, metaData] = await Promise.all([
-      // axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-sections/findAll`),
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`),
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/home`),
-      axios.get(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`),
-      fetchMetaData("home"),
-    ]);
-    // const stories = await getAllWebStories();
+    const metaData = await fetchMetaData("home");
 
     return {
       props: {
-        bannerImage: home?.data?.data?.bannerImage,
-        bannerText: home?.data?.data?.bannerText,
-        bodyTypes: home?.data?.data?.bodyTypes,
-        brand: home?.data?.data?.brand,
-        // popularcars: carSection?.data[1],
-        // featuredcars: carSection?.data[0],
-        // electriccars: carSection?.data[2],
-        // suv: carSection?.data[3],
-        // performance: carSection?.data[4],
-        compare: compare?.data,
-        articles: articles?.data?.data,
-        metaData: metaData,
-        // stories,
+        metaData,
       },
-      revalidate: 60, // Regenerate the page at most once per minute
+      revalidate: 60, // ISR to keep metadata updated
     };
   } catch (error) {
     return {
