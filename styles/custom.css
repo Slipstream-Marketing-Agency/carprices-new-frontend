@@ -1,6 +1,10 @@
 /* body {
   background-color: #fafafa;
 } */
+
+body {
+  font-family: 'Gilroy', sans-serif;
+}
 .fs-7 {
   font-size: 14px;
 }
