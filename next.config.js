@@ -1,5 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const webpack = require('webpack');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const fetchAllRedirects = async () => {
   let redirects = [];
@@ -24,25 +28,44 @@ const storeRedirects = async () => {
   fs.writeFileSync(filePath, JSON.stringify(redirects, null, 2));
 };
 
-const nextConfig = {
+const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
+
   images: {
     domains: ["cdn.carprices.ae"],
-    loader: "default"
+    loader: "default",
   },
+
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
     localeDetection: false,
   },
+
   eslint: {
     ignoreDuringBuilds: true,
   },
+
   async redirects() {
     await storeRedirects(); // Fetch and store redirects during the build process
     return []; // No static redirects, handled by middleware
   },
+
+  // Compression for responses to improve load time
   compress: true,
-};
+
+  // Minify JavaScript with SWC for better performance
+  swcMinify: true,
+
+  // Custom Webpack configuration
+  webpack: (config) => {
+    config.plugins.push(
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1, // Adjust based on your needs
+      })
+    );
+    return config;
+  },
+});
 
 module.exports = nextConfig;
