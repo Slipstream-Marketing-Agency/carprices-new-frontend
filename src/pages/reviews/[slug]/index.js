@@ -394,7 +394,7 @@ function BlogDetailsPage({
               {recentBlog.map((blog, index) => (
                 <Link
                   legacyBehavior
-                  href={`/review/${blog?.attributes?.slug}`}
+                  href={`/reviews/${blog?.attributes?.slug}`}
                   key={blog?.id}
                 >
                   <div
@@ -442,7 +442,7 @@ function BlogDetailsPage({
                         </div>{" "}
                         <Link
                           legacyBehavior
-                          href={`/review/${blog?.attributes?.slug}`}
+                          href={`/reviews/${blog?.attributes?.slug}`}
                           key={blog?.id}
                         >
                           <button className="tw-bg-transparent tw-text-xs 4xl:tw-text-sm tw-my-4 tw-hidden sm:tw-flex tw-items-center">
@@ -521,7 +521,7 @@ function BlogDetailsPage({
                 {articlesThisWeek?.map((blog) => (
                   <Link
                     legacyBehavior
-                    href={`/review/${blog?.slug}`}
+                    href={`/reviews/${blog?.slug}`}
                     key={blog?.id}
                   >
                     <div className="tw-w-full">
@@ -579,7 +579,7 @@ function BlogDetailsPage({
                 >
                   <div className="review-card">
                     <div className="review-img list-article">
-                      <Link legacyBehavior href={`/review/${reviewItem.slug}`}>
+                      <Link legacyBehavior href={`/reviews/${reviewItem.slug}`}>
                         <a>
                           <div className="position-relative imageContainer">
                             <Image
