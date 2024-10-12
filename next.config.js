@@ -51,20 +51,28 @@ const nextConfig = withBundleAnalyzer({
     return []; // No static redirects, handled by middleware
   },
 
-  // Compression for responses to improve load time
+  // Enable compression for better performance
   compress: true,
 
-  // Minify JavaScript with SWC for better performance
+  // Minify JavaScript using SWC for better performance
   swcMinify: true,
 
-  // Custom Webpack configuration
+  // Custom Webpack configuration for limiting chunks and optimizing build
   webpack: (config) => {
+    // Ensure chunks are limited and manageable
     config.plugins.push(
       new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1, // Adjust based on your needs
+        maxChunks: 5, // Increase this to allow more chunks
       })
     );
+
+
     return config;
+  },
+
+  // Enable bundle analyzer for identifying large bundles and optimizing them
+  experimental: {
+    scrollRestoration: true,
   },
 });
 
