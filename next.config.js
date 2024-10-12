@@ -34,6 +34,7 @@ const nextConfig = withBundleAnalyzer({
   images: {
     domains: ["cdn.carprices.ae"],
     loader: "default",
+    unoptimized: true,
   },
 
   i18n: {
