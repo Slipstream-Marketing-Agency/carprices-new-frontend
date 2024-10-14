@@ -6,9 +6,9 @@ const HeroSection = () => {
         <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
             <div className="video-container tw-relative tw-w-full tw-h-full">
                 <video
-                    preload="metadata"
-                    autoPlay
                     muted
+                    autoPlay
+                    preload="metadata"
                     loop
                     playsInline
                     poster="/path/to/poster.jpg"
@@ -20,6 +20,7 @@ const HeroSection = () => {
                     />
                     Your browser does not support the video tag.
                 </video>
+
             </div>
         </div>
     )

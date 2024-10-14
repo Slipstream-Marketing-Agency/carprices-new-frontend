@@ -356,22 +356,22 @@ export default function index({
     ],
   };
 
-  // const Ad300x250 = dynamic(() => import("../components-old/ads/Ad300x250"), {
-  //   ssr: false,
-  // });
-  // const Ad970x250 = dynamic(() => import("../components-old/ads/Ad970x250"), {
-  //   ssr: false,
-  // });
-  // const Ad728x90 = dynamic(() => import("../components-old/ads/Ad728x90"), {
-  //   ssr: false,
-  // });
-  // const Ad300x600 = dynamic(() => import("../components-old/ads/Ad300x600"), {
-  //   ssr: false,
-  // });
-  // const FilterLayout = dynamic(
-  //   () => import("../components-old/find-car-multi-step-filter/FilterLayout"),
-  //   { ssr: false }
-  // );
+  const Ad300x250 = dynamic(() => import("../components-old/ads/Ad300x250"), {
+    ssr: false,
+  });
+  const Ad970x250 = dynamic(() => import("../components-old/ads/Ad970x250"), {
+    ssr: false,
+  });
+  const Ad728x90 = dynamic(() => import("../components-old/ads/Ad728x90"), {
+    ssr: false,
+  });
+  const Ad300x600 = dynamic(() => import("../components-old/ads/Ad300x600"), {
+    ssr: false,
+  });
+  const FilterLayout = dynamic(
+    () => import("../components-old/find-car-multi-step-filter/FilterLayout"),
+    { ssr: false }
+  );
 
   return (
     <>
@@ -458,7 +458,7 @@ export default function index({
                     </span>
                   </button>
                 </div>
-                {/* <div className="md:tw-hidden tw-flex tw-justify-end items-center tw-gap-4 py-2">
+                <div className="md:tw-hidden tw-flex tw-justify-end items-center tw-gap-4 py-2">
                   <button
                     className="tw-bg-white tw-text-black tw-px-3 tw-py-3 tw-rounded-full tw-shadow-md tw-flex tw-items-center"
                     onClick={() => featuredSliderRefMob.current.slickPrev()}
@@ -475,7 +475,7 @@ export default function index({
                       chevron_right
                     </span>
                   </button>
-                </div> */}
+                </div>
               </div>
               <div className="md:tw-flex tw-hidden tw-flex-col tw-w-3/4 max-md:tw-w-full featured-news-card tw-mt-5">
                 <Slider ref={featuredSliderRef} {...settings}>
@@ -572,11 +572,8 @@ export default function index({
 
             <MostPopularCarSectionComponent carType={selectedTab} />
           </div>
-          {/* notable upcoming cars */}
-          {/* new */}
           <div className="tw-container sm:tw-mt-12  tw-mt-6">
             <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-12 w-full">
-              {/* Sidebar for title and navigation buttons */}
 
               <div className="tw-pt-3 lg:tw-col-span-2">
                 <div className="tw-flex tw-flex-col tw-h-full sm:tw-py-5">
@@ -607,7 +604,6 @@ export default function index({
                 </div>
               </div>
 
-              {/* Carousel Section */}
               <div className="lg:tw-col-span-10">
                 <Slider ref={sliderRef} {...settingsupcoming}>
                   {cars.map((item, index) => (
@@ -651,7 +647,7 @@ export default function index({
             </div>
             <CompareCars />
           </div> */}
-          {/* <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
+          <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
           <div className="tw-flex tw-gap-5 tw-justify-between tw-px-5 tw-w-full tw-max-w-[718px] max-md:tw-flex-wrap max-md:tw-max-w-full">
             <div className="tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-w-[150px] tw-h-[150px]">
               <img
@@ -706,7 +702,7 @@ export default function index({
           <div className="tw-justify-center tw-items-center tw-px-4 tw-py-2 tw-mt-4 tw-w-full  tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-max-w-[710px] tw-rounded-[73px] max-md:tw-px-5 max-md:tw-max-w-full">
             Compare Now
           </div>
-        </div> */}
+        </div>
 
           <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-flex-col tw-justify-center container">
@@ -790,9 +786,9 @@ export default function index({
                   Explore new cars based on body type
                 </h2>
               </div>
-              {/* <button className="tw-px-6 tw-py-3 tw-mt-4 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
-                  View More
-                </button> */}
+              <button className="tw-px-6 tw-py-3 tw-mt-4 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+                View More
+              </button>
             </div>
 
             <div className="tw-grid md:tw-grid-cols-5 tw-grid-cols-3 md:tw-gap-10 tw-gap-8 md:tw-mt-10 tw-mt-5 tw-max-w-full">
@@ -820,10 +816,8 @@ export default function index({
             </div>
 
           </div>
-          {/* image section */}
           <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
-            {/* calculate your car loan EMI */}
-            {/* <div className="tw-flex tw-flex-col tw-w-full">
+            <div className="tw-flex tw-flex-col tw-w-full">
               <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
                 <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                   <img
@@ -855,9 +849,8 @@ export default function index({
                   </div>
                 </div>
               </Link>
-            </div> */}
-            {/* value of  current car */}
-            {/* <div className="tw-flex tw-flex-col tw-w-full">
+            </div>
+            <div className="tw-flex tw-flex-col tw-w-full">
               <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
                 <img
                   src="/car-value.jpg"
@@ -882,10 +875,9 @@ export default function index({
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
 
-          {/* image section NEw */}
           <div className=" tw-container sm:tw-grid tw-grid-cols-2 tw-w-full tw-gap-4 tw-space-y-4 sm:tw-space-y-0">
             <div className="tw-bg-gradient-to-tl tw-from-blue-800 tw-via-blue-600 tw-to-blue-700  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
               <div>
@@ -946,7 +938,7 @@ export default function index({
               />
             </div>
           </div>
-          {/* <div className="container">
+          <div className="container">
         <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
           <div className="flex flex-col w-full">
             <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[300px] h-[200px]">
@@ -969,7 +961,7 @@ export default function index({
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
           <div className="tw-w-full tw-container md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-justify-between ">
               <div className="tw-flex tw-flex-col tw-justify-center">
@@ -996,9 +988,9 @@ export default function index({
                   Here are some of the trending videos from our YouTube channel
                 </h2>
               </div>
-              {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+              <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
       View More
-    </div> */}
+    </div>
             </div>
             <TrendingVideosComponent />
           </div>

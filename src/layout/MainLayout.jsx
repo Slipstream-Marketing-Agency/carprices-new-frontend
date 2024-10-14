@@ -30,10 +30,10 @@ function MainLayout({ children, pageMeta }) {
 
   const meta = {
     title:
-      "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - Carprices.ae",
+      "",
     description:
-      "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-    type: "Car Review Website",
+      "",
+    type: "",
     ...pageMeta,
   };
 

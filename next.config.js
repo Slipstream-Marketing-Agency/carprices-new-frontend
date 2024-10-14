@@ -71,10 +71,6 @@ const nextConfig = withBundleAnalyzer({
     return config;
   },
 
-  // Enable bundle analyzer for identifying large bundles and optimizing them
-  experimental: {
-    scrollRestoration: true,
-  },
 });
 
 module.exports = nextConfig;

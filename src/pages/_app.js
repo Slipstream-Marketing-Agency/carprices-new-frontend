@@ -43,26 +43,31 @@ function MyApp({ Component, pageProps }) {
     }, 3000);
 
     const setCanonical = async () => {
-      const pathSegments = router.asPath.split("?")[0].split("/");
-      const slug = pathSegments[4]; // Adjust based on your path structure
-      const yearSegment = pathSegments.find((segment) =>
-        /^\d{4}$/.test(segment)
-      );
+      // const pathSegments = router.asPath.split("?")[0].split("/");
+      // const slug = pathSegments[4]; // Adjust based on your path structure
+      // const yearSegment = pathSegments.find((segment) =>
+      //   /^\d{4}$/.test(segment)
+      // );
 
-      const year = yearSegment ? parseInt(yearSegment, 10) : null;
+      // const year = yearSegment ? parseInt(yearSegment, 10) : null;
 
-      if (slug) {
-        const latestYear = await fetchLatestYear(slug);
+      // if (slug) {
+      //   const latestYear = await fetchLatestYear(slug);
 
-        if (latestYear && year && year < 2024) {
-          pathSegments[pathSegments.indexOf(yearSegment)] =
-            latestYear.toString();
-        }
+      //   if (latestYear && year && year < 2024) {
+      //     pathSegments[pathSegments.indexOf(yearSegment)] =
+      //       latestYear.toString();
+      //   }
 
-        setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
+      //   setCanonicalUrl("https://carprices.ae" + pathSegments.join("/"));
+      // } else {
+      if (router.pathname === "/404") {
+        // Set the canonical URL for 404 pages (fallback to the root or a custom 404 URL)
+        setCanonicalUrl("https://carprices.ae/404"); // You can use the root URL like https://carprices.ae if you prefer
       } else {
         setCanonicalUrl("https://carprices.ae" + router.asPath.split("?")[0]);
       }
+      // }
     };
 
     setCanonical();
