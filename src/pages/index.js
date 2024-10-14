@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Skeleton from "@mui/material/Skeleton";
 import dynamic from "next/dynamic";
-import FilterLayout from "../components-old/find-car-multi-step-filter/FilterLayout";
 import Ad300x600 from "../components-old/ads/Ad300x600";
 import MainLayout from "../layout/MainLayout";
 import SeoLinksHome from "../components/common/SeoLinksHome";
@@ -19,20 +18,10 @@ import { fetchMetaData } from "../lib/fetchMetaData";
 import TrendingCarSectionPlaceholder from "../components/home/TrendingCarSectionPlaceholder";
 import MostPopularSectionPlaceholder from "../components/home/MostPopularSectionPlaceholder";
 import OptimizedImage from "../components/common/image/OptimisedImage";
+import HeroSection from "../components/home/HeroSection";
+import FilterLayout from "../components-old/find-car-multi-step-filter/FilterLayout";
 
-const HeroSectionComponent = dynamic(() => import('../components/home/HeroSection'), {
-  ssr: false,
-  loading: () => <div className="tw-row-span-1 lg:tw-col-span-7 tw-col-span-12 tw-flex tw-flex-col tw-justify-start tw-text-white tw-rounded-2xl tw-relative tw-overflow-hidden lg:tw-h-full tw-h-[230px] lg:tw-order-1 tw-order-2">
-    <div className="video-container tw-relative tw-w-full tw-h-full">
-      <Skeleton
-        variant="rectangular"
-        width="100%"
-        height="100%"
-        className="tw-absolute tw-top-0 tw-left-0"
-      />
-    </div>
-  </div>
-});
+
 const StorySliderComponent = dynamic(() => import('../components/web-stories/StorySlider'), {
   ssr: false,
 });
@@ -368,10 +357,6 @@ export default function index({
   const Ad300x600 = dynamic(() => import("../components-old/ads/Ad300x600"), {
     ssr: false,
   });
-  const FilterLayout = dynamic(
-    () => import("../components-old/find-car-multi-step-filter/FilterLayout"),
-    { ssr: false }
-  );
 
   return (
     <>
@@ -402,9 +387,9 @@ export default function index({
       >
         <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
           <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full">
-            <HeroSectionComponent />
+            <HeroSection/>
             <div className="tw-row-span-1 lg:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-border tw-border-neutral-100 lg:tw-order-2 tw-order-1">
-              <FilterLayout />
+              <FilterLayout/>
             </div>
           </div>
           <SearchForTheBest />

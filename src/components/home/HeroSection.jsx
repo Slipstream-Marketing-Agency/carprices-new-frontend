@@ -8,10 +8,11 @@ const HeroSection = () => {
                 <video
                     muted
                     autoPlay
-                    preload="metadata"
                     loop
                     playsInline
-                    poster="/path/to/poster.jpg"
+                    poster=""
+                    preload="metadata"
+                    loading="lazy" // Lazy load the video
                     className="banner-video tw-w-full tw-h-full object-cover"
                 >
                     <source
