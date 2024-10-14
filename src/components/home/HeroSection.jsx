@@ -15,7 +15,7 @@ const HeroSection = () => {
                     className="banner-video tw-w-full tw-h-full object-cover"
                 >
                     <source
-                        src="https://cdn.carprices.ae/assets/Promo_Web_1_103eaf6dea.mp4"
+                        src="https://cdn.carprices.ae/assets/Carprices_promo_48b0bdc8d6.mp4"
                         type="video/mp4"
                     />
                     Your browser does not support the video tag.
