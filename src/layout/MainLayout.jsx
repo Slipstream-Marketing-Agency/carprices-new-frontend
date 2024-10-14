@@ -24,6 +24,10 @@ import Ad970x250 from "../components-old/ads/Ad970x250";
 import Ad300x250 from "../components-old/ads/Ad300x250";
 import Image from "next/image";
 import { fetchMetaData } from "../lib/fetchMetaData";
+import HoveredSearchNewCar from "../components/navbar/HoveredSearchNewCar";
+import HoveredCompareCars from "../components/navbar/HoveredCompareCars";
+import HoveredServices from "../components/navbar/HoveredServices";
+import HoveredMore from "../components/navbar/HoveredMore";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -49,13 +53,19 @@ function MainLayout({ children, pageMeta }) {
   };
 
   const links = [
-    { href: "/search-cars", label: "Search New Cars" },
-    { href: "/compare-cars", label: "Compare New Cars" },
-    // { href: "/insurance-calculator", label: "Insurance Calculator" },
-    { href: "/loan-calculator", label: "Car Loan Calculator" },
-    { href: "/news", label: "News" },
-    { href: "/reviews", label: "Reviews" },
+    { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars"},
+    { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars"},
+    { href: "javascript:void(0)", label: "Services", hoverItem: "services"},
+    { href: "javascript:void(0)", label: "More", hoverItem: "more"},
   ];
+  // const links = [
+  //   { href: "/search-cars", label: "Search New Cars" },
+  //   { href: "/compare-cars", label: "Compare New Cars" },
+  //   // { href: "/insurance-calculator", label: "Insurance Calculator" },
+  //   { href: "/loan-calculator", label: "Car Loan Calculator" },
+  //   { href: "/news", label: "News" },
+  //   { href: "/reviews", label: "Reviews" },
+  // ];
 
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -332,6 +342,48 @@ function MainLayout({ children, pageMeta }) {
 
   const [searchClicked, setSearchClcked] = useState();
 
+  const [hoveredMenuItem, setHoveredMenuItem] = useState(null);
+  const [brands, setBrands] = useState([])
+  const [bodyTypes, setBodyTypes] = useState([])
+
+  useEffect(() => {
+    let isMounted = true;  // To prevent setting state on unmounted component
+
+    const fetchData = async () => {
+
+      try {
+        const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}home/find`)
+        const homeData = data.data?.data;
+        setBrands(homeData?.brand ? homeData.brand : [])
+        setBodyTypes(homeData?.bodyTypes ? homeData.bodyTypes : [])
+      } catch (error) {
+        console.error("Server-side Data Fetching Error:", error.message);
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function to prevent memory leaks if the component unmounts
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  const HoveredMenuItemDropdown = () => {
+    if (hoveredMenuItem === 'search-cars') {
+      return <HoveredSearchNewCar brands={brands} bodyTypes={bodyTypes} />
+    }
+    if (hoveredMenuItem === 'compare-cars') {
+      return <HoveredCompareCars />
+    }
+    if (hoveredMenuItem === 'services') {
+      return <HoveredServices />
+    }
+    if (hoveredMenuItem === 'more') {
+      return <HoveredMore />
+    }
+    return <></>
+  }
+
   return (
     <>
       <Head>
@@ -379,7 +431,7 @@ function MainLayout({ children, pageMeta }) {
                   height={0}
                 />
               </div>
-              
+
             </div>
 
             <div className="tw-flex tw-flex-col tw-pt-4">
@@ -536,45 +588,20 @@ function MainLayout({ children, pageMeta }) {
                 </div>
               </div>
             </div>
-            <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4">
+            <div className="tw-flex tw-relative tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4" onMouseLeave={() => { setHoveredMenuItem(null) }}>
               <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
-                <Link
-                  href="/search-cars"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Search New Cars
-                </Link>
-                <Link
-                  href="/compare-cars"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Compare New Cars
-                </Link>
-                {/* <Link
-                  href="/insurance-calculator"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Insurance Calculator
-                </Link> */}
-                <Link
-                  href="/loan-calculator"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Car Loan Calculator
-                </Link>
-                <Link
-                  href="/news"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  News
-                </Link>
-                <Link
-                  href="/reviews"
-                  className="tw-justify-center tw-font-semibold"
-                >
-                  Reviews
-                </Link>
+                {links.map((link, i) => (
+                  <Link
+                    key={i}
+                    href={link.href}
+                    className="tw-justify-center tw-font-semibold"
+                    onMouseOver={() => { setHoveredMenuItem(link.hoverItem) }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
+              <HoveredMenuItemDropdown />
             </div>
           </div>
           <div className="tw-gap-5 tw-justify-between tw-px-5 tw-py-4 tw-bg-white tw-w-full md:tw-hidden tw-flex">
