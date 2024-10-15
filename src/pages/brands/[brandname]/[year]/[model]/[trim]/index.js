@@ -281,7 +281,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
 
   console.log(trimData, "trimDatatrimData");
 
-  const [activeLink, setActiveLink] = useState("#overview");
+  const [activeLink, setActiveLink] = useState("#specs");
 
   const handleLinkClick = (href) => {
     setActiveLink(href);
@@ -456,9 +456,9 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                 )}
               />
               /Monthly EMI*{" "}
-              <span className="tw-underline ">
+              {/* <span className="tw-underline ">
                 <Link href="">Details</Link>
-              </span>
+              </span> */}
             </p>
           </div>
 
@@ -606,26 +606,26 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         <nav className="tw-text-lg tw-leading-none tw-text-black tw-bg-zinc-50 tw-shadow tw-mt-10  tw-mb-10 tw-overflow-x-scroll no-scrollbar">
           <div className="tw-mx-auto tw-container tw-flex tw-gap-7 tw-items-center">
             <Link
-              href="#overview"
-              onClick={() => handleLinkClick("#overview")}
+              href="#specs"
+              onClick={() => handleLinkClick("#specs")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#overview"
+                activeLink === "#specs"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
               }`}
             >
-              Overview
+              specs
             </Link>
             <Link
-              href="#variants"
-              onClick={() => handleLinkClick("#variants")}
+              href="#variants&prices"
+              onClick={() => handleLinkClick("#variants&prices")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#variants"
+                activeLink === "#variants&prices"
                   ? "tw-border-b-blue-600 tw-text-black"
                   : "tw-border-transparent tw-text-gray-500"
               }`}
             >
-              Variants
+              Variants & Prices
             </Link>
             <Link
               href="#price"
@@ -710,7 +710,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
 
       <div
         className="tw-container tw-mx-auto tw-grid tw-grid-cols-12"
-        id="overview"
+        id="specs"
       >
         <div className="md:tw-col-span-9 tw-col-span-12">
           <TrimDescription trim={trimData} />
