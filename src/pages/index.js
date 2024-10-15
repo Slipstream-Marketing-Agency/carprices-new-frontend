@@ -923,30 +923,7 @@ export default function index({
               />
             </div>
           </div>
-          <div className="container">
-            <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
-              <div className="flex flex-col w-full">
-                <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[300px] h-[200px]">
-                  <img
-                    src="/sponsored.jpg"
-                    alt=""
-                    className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
-                  />
-                  <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 tw-text-white"></div>
-                </div>
-              </div>
-              <div className="flex flex-col w-full">
-                <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
-                  <img
-                    src="/sponsored-content-3.png"
-                    alt=""
-                    className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
-                  />
-
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <div className="tw-w-full tw-container md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-justify-between ">
               <div className="tw-flex tw-flex-col tw-justify-center">
