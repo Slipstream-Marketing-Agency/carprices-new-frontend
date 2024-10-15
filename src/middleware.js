@@ -41,7 +41,20 @@ export async function middleware(req) {
     return NextResponse.redirect(url, 301); // 301 Moved Permanently
   }
 
-  // Step 5: Handle dynamic redirection for non-existent 'trim' level pages (as before)
+  // Step 5: Handle URLs that contain 'undefined' in the path and redirect to the brand level
+  if (pathname.includes('/undefined/')) {
+    const pathSegments = pathname.split('/').filter(Boolean);
+
+    // Redirect to the '/brands/:brandname' level if 'undefined' is present
+    const undefinedIndex = pathSegments.indexOf('undefined');
+    if (undefinedIndex !== -1 && undefinedIndex > 2) {
+      const brandPath = `/${pathSegments.slice(0, 2).join('/')}`; // Redirect to '/brands/:brandname'
+      url.pathname = brandPath;
+      return NextResponse.redirect(url, 301); // 301 Moved Permanently
+    }
+  }
+
+  // Step 6: Handle dynamic redirection for non-existent 'trim' level pages (as before)
   if (pathname.startsWith('/brands/')) {
     const pathSegments = pathname.split('/').filter(Boolean);
     if (pathSegments.length === 5) {
@@ -58,7 +71,7 @@ export async function middleware(req) {
     }
   }
 
-  // Step 6: Continue to the requested page if no redirection is needed
+  // Step 7: Continue to the requested page if no redirection is needed
   return NextResponse.next();
 }
 
