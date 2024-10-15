@@ -387,9 +387,9 @@ export default function index({
       >
         <main className="tw-flex tw-flex-col tw-items-center tw-justify-between tw-w-full tw-font-gilroy tw-overflow-x-hidden">
           <div className="tw-grid tw-gap-4 tw-p-4 lg:tw-grid-rows-1 lg:tw-grid-cols-10 tw-w-full">
-            <HeroSection/>
+            <HeroSection />
             <div className="tw-row-span-1 lg:tw-col-span-3 tw-col-span-12 tw-flex tw-flex-col tw-justify-center tw-border tw-border-neutral-100 lg:tw-order-2 tw-order-1">
-              <FilterLayout/>
+              <FilterLayout />
             </div>
           </div>
           <SearchForTheBest />
@@ -632,7 +632,7 @@ export default function index({
             </div>
             <CompareCars />
           </div> */}
-          <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
+          {/* <div className="tw-flex tw-flex-col tw-items-center tw-pt-3 tw-pr-2 tw-pb-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-max-w-[750px]">
           <div className="tw-flex tw-gap-5 tw-justify-between tw-px-5 tw-w-full tw-max-w-[718px] max-md:tw-flex-wrap max-md:tw-max-w-full">
             <div className="tw-flex tw-flex-col tw-justify-center tw-rounded-2xl tw-w-[150px] tw-h-[150px]">
               <img
@@ -687,7 +687,7 @@ export default function index({
           <div className="tw-justify-center tw-items-center tw-px-4 tw-py-2 tw-mt-4 tw-w-full  tw-font-semibold tw-tracking-tight tw-leading-4 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 tw-border-solid tw-max-w-[710px] tw-rounded-[73px] max-md:tw-px-5 max-md:tw-max-w-full">
             Compare Now
           </div>
-        </div>
+        </div> */}
 
           <div className="tw-w-full md:px-0 tw-px-5 md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-flex-col tw-justify-center container">
@@ -924,29 +924,29 @@ export default function index({
             </div>
           </div>
           <div className="container">
-        <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
-          <div className="flex flex-col w-full">
-            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[300px] h-[200px]">
-              <img
-                src="/sponsored.jpg"
-                alt=""
-                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
-              />
-              <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 tw-text-white"></div>
+            <div className="grid grid-cols-2 md:gap-10 gap-0 max-md:grid-cols-1 md:mt-10 md:mb-10">
+              <div className="flex flex-col w-full">
+                <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[300px] h-[200px]">
+                  <img
+                    src="/sponsored.jpg"
+                    alt=""
+                    className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+                  />
+                  <div className="relative z-10 m-2 bottom-0 left-0 right-0 md:p-5 p-3 tw-text-white"></div>
+                </div>
+              </div>
+              <div className="flex flex-col w-full">
+                <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
+                  <img
+                    src="/sponsored-content-3.png"
+                    alt=""
+                    className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
+                  />
+
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col w-full">
-            <div className="flex flex-col  rounded-2xl shadow-lg bg-stone-900 relative max-md:mt-6  md:h-[350px] h-[200px]">
-              <img
-                src="/sponsored-content-3.png"
-                alt=""
-                className="absolute inset-0 object-cover w-full md:h-[350px] h-[200px] rounded-2xl"
-              />
-              
-            </div>
-          </div>
-        </div>
-      </div>
           <div className="tw-w-full tw-container md:tw-mt-12 tw-mt-6">
             <div className="tw-relative tw-flex tw-justify-between ">
               <div className="tw-flex tw-flex-col tw-justify-center">
@@ -974,8 +974,8 @@ export default function index({
                 </h2>
               </div>
               <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
-      View More
-    </div>
+                View More
+              </div>
             </div>
             <TrendingVideosComponent />
           </div>
