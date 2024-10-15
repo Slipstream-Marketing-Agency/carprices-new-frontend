@@ -28,6 +28,8 @@ import HoveredSearchNewCar from "../components/navbar/HoveredSearchNewCar";
 import HoveredCompareCars from "../components/navbar/HoveredCompareCars";
 import HoveredServices from "../components/navbar/HoveredServices";
 import HoveredMore from "../components/navbar/HoveredMore";
+import HoveredBlog from "../components/navbar/HoveredBlog";
+import MobileSidebar from "../components/navbar/MobileSidebar";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -56,6 +58,7 @@ function MainLayout({ children, pageMeta }) {
     { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars"},
     { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars"},
     { href: "javascript:void(0)", label: "Services", hoverItem: "services"},
+    { href: "javascript:void(0)", label: "Blog", hoverItem: "blog"},
     { href: "javascript:void(0)", label: "More", hoverItem: "more"},
   ];
   // const links = [
@@ -378,6 +381,9 @@ function MainLayout({ children, pageMeta }) {
     if (hoveredMenuItem === 'services') {
       return <HoveredServices />
     }
+    if (hoveredMenuItem === 'blog') {
+      return <HoveredBlog />
+    }
     if (hoveredMenuItem === 'more') {
       return <HoveredMore />
     }
@@ -400,54 +406,7 @@ function MainLayout({ children, pageMeta }) {
       </Head>
       {/* <Topbar />
       <Header /> */}
-      <div
-        className={`tw-fixed tw-top-0 tw-left-0 tw-z-[9999] tw-w-3/4 tw-max-w-[480px] tw-h-full tw-bg-white tw-shadow-lg tw-transform tw-transition-transform tw-duration-300 ${isOpen ? "tw-translate-x-0" : "-tw-translate-x-full"
-          }`}
-      >
-        <div className="tw-flex tw-flex-col tw-pb-20 tw-mx-auto tw-w-full tw-max-w-[480px]">
-          <div className="tw-flex tw-flex-col tw-px-4 tw-pt-2 tw-w-full">
-            <div className="tw-flex tw-justify-between tw-items-start tw-gap-5 tw-pt-7 tw-w-full tw-text-base tw-tracking-wider tw-text-center tw-whitespace-nowrap tw-text-neutral-900">
-              <Link
-                href="/"
-                className="tw-flex tw-items-center tw-gap-1.5 tw-mt-2 cursor-pointer"
-              >
-                <Image
-                  loading="lazy"
-                  src="/assets/img/car-prices-logo.png"
-                  className="tw-w-[150px] tw-object-contain"
-                  alt="logo"
-                  width={150}  // Set a valid width
-                  height={50}  // Adjust height based on your logo's aspect ratio
-                  layout="intrinsic"  // Automatically sizes the image based on its intrinsic dimensions
-                />
-              </Link>
-              <div onClick={toggleNavigation}>
-                <Image
-                  loading="lazy"
-                  src="/close-button.svg"
-                  className="tw-shrink-0 tw-w-6 tw-aspect-[0.8]"
-                  alt={`close`}
-                  width={0}
-                  height={0}
-                />
-              </div>
-
-            </div>
-
-            <div className="tw-flex tw-flex-col tw-pt-4">
-              {links.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  className="tw-justify-center tw-font-semibold tw-py-3"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
       <div className="tw-flex tw-flex-col tw-bg-white tw-w-full md:tw-block tw-hidden tw-border-solid tw-border-b-[1px] tw-border-gray-200">
         <div>
           <div
