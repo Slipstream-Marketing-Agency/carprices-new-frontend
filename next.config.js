@@ -40,7 +40,7 @@ const nextConfig = withBundleAnalyzer({
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
-    localeDetection: false,
+    localeDetection: false, // Disable automatic locale detection
   },
 
   eslint: {
@@ -48,29 +48,47 @@ const nextConfig = withBundleAnalyzer({
   },
 
   async redirects() {
-    await storeRedirects(); // Fetch and store redirects during the build process
-    return []; // No static redirects, handled by middleware
+    // First, store fetched redirects if necessary
+    await storeRedirects(); 
+
+    return [
+      // Existing redirect to remove '/ar/' from URLs
+      {
+        source: '/ar/:path*', // Capture all URLs starting with /ar/
+        destination: '/:path*', // Redirect to the same path without /ar/
+        permanent: true, // Set 301 permanent redirect
+      },
+
+      // Dynamic redirect for non-existent 'trim' level pages
+      {
+        source: '/brands/:brandname/:year/:model/:trim*', // Match all 'trim' level pages
+        has: [
+          {
+            type: 'header', // Look for a 404 response header
+            key: 'x-nextjs-page-status', // Custom header to indicate 404 (if applicable)
+            value: '404',
+          },
+        ],
+        destination: '/brands/:brandname/:year/:model', // Redirect to the 'model' level (parent)
+        permanent: true, // Set 301 redirect for SEO
+      },
+    ];
   },
 
-  // Enable compression for better performance
-  compress: true,
+  compress: true, // Enable compression for performance
 
-  // Minify JavaScript using SWC for better performance
-  swcMinify: true,
+  swcMinify: true, // Enable SWC for JavaScript minification
 
-  // Custom Webpack configuration for limiting chunks and optimizing build
   webpack: (config) => {
-    // Ensure chunks are limited and manageable
+    // Limit chunk sizes to optimize loading performance
     config.plugins.push(
       new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 5, // Increase this to allow more chunks
+        maxChunks: 5, // Limit the number of chunks
       })
     );
-
-
+    
     return config;
   },
-
 });
 
 module.exports = nextConfig;
