@@ -801,7 +801,7 @@ export default function index({
             </div>
 
           </div>
-          <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
+          {/* <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container">
             <div className="tw-flex tw-flex-col tw-w-full">
               <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
                 <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
@@ -861,7 +861,7 @@ export default function index({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className=" tw-container sm:tw-grid tw-grid-cols-2 tw-w-full tw-gap-4 tw-space-y-4 sm:tw-space-y-0">
             <div className="tw-bg-gradient-to-tl tw-from-blue-800 tw-via-blue-600 tw-to-blue-700  tw-rounded-2xl tw-p-4 sm:tw-p-6 tw-text-white tw-flex tw-relative tw-overflow-hidden tw-custom-gradient">
