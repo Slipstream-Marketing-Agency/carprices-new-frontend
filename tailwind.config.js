@@ -11,6 +11,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      boxShadow: {
+        'custom-shadow': '0 8px 16px rgba(0, 0, 0, 0.25)',
+      },
       fontFamily: {
         gilroy: ["Gilroy", "sans-serif"],
       },

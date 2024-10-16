@@ -57,7 +57,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                     {brands?.map((item, idx) => (
                                         <div
                                             key={idx}
-                                            className="tw-text-center tw-bg-gray-50 tw-p-2 tw-rounded-lg tw-shadow-sm hover:tw-shadow-lg tw-transition-shadow tw-duration-300 tw-cursor-pointer"
+                                            className="tw-text-center tw-bg-gray-50 tw-p-2 tw-rounded-lg hover:tw-shadow-custom-shadow tw-transition-shadow tw-duration-300 tw-cursor-pointer"
                                             onMouseDown={(e) => e.currentTarget.classList.add('tw-scale-95')}
                                             onMouseUp={(e) => e.currentTarget.classList.remove('tw-scale-95')}
                                             onMouseLeave={(e) => e.currentTarget.classList.remove('tw-scale-95')}
@@ -76,7 +76,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                         />
                                                     </div>
                                                     <div className="content">
-                                                        <h5 className="tw-text-sm tw-font-medium tw-text-gray-800">{item?.name}</h5>
+                                                        <span className="tw-text-xs tw-font-medium tw-text-gray-800">{item?.name}</span>
                                                     </div>
                                                 </div>
                                             </Link>
@@ -96,7 +96,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                     {bodyTypes.map((bodyType, index) => (
                                         <Link href={`/category/${bodyType?.slug}`} key={index}>
                                             <div
-                                                className="tw-text-center tw-bg-gray-50 tw-p-2 tw-rounded-lg tw-shadow-sm hover:tw-shadow-lg tw-transition-shadow tw-duration-300 tw-cursor-pointer"
+                                                className="tw-text-center tw-bg-gray-50 tw-p-2 tw-rounded-lg tw-shadow-sm hover:tw-shadow-custom-shadow tw-transition-shadow tw-duration-300 tw-cursor-pointer"
                                                 onMouseDown={(e) => e.currentTarget.classList.add('tw-scale-95')}
                                                 onMouseUp={(e) => e.currentTarget.classList.remove('tw-scale-95')}
                                                 onMouseLeave={(e) => e.currentTarget.classList.remove('tw-scale-95')}
@@ -114,7 +114,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                         />
                                                     </div>
                                                     <div className="content">
-                                                        <h5 className="tw-text-sm tw-font-medium tw-text-gray-800">{bodyType?.name}</h5>
+                                                        <span className="tw-text-xs tw-font-medium tw-text-gray-800">{bodyType?.name}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                             {bodyTypes.map((bodyType, index) => (
                                                 <Link href={`/category/${bodyType?.slug}`} key={index}>
                                                     <div
-                                                        className="tw-text-center tw-bg-gray-50 tw-p-0 tw-rounded-lg tw-shadow-sm hover:tw-shadow-lg tw-transition-shadow tw-duration-300 tw-cursor-pointer"
+                                                        className="tw-text-center tw-bg-gray-50 tw-p-0 tw-rounded-lg tw-shadow-sm hover:tw-shadow-custom-shadow tw-transition-shadow tw-duration-300 tw-cursor-pointer"
                                                         onMouseDown={(e) => e.currentTarget.classList.add('tw-scale-95')}
                                                         onMouseUp={(e) => e.currentTarget.classList.remove('tw-scale-95')}
                                                         onMouseLeave={(e) => e.currentTarget.classList.remove('tw-scale-95')}
@@ -155,7 +155,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                                 />
                                                             </div>
                                                             <div className="content">
-                                                                <h5 className="tw-text-sm tw-font-medium tw-text-gray-800">{bodyType?.name}</h5>
+                                                                <span className="tw-text-xs tw-font-medium tw-text-gray-800">{bodyType?.name}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -174,7 +174,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                             {brands.map((brand, index) => (
                                                 <Link href={`/brands/${brand?.slug}`} key={index}>
                                                     <div
-                                                        className="tw-text-center tw-bg-gray-50 tw-p-0 tw-rounded-lg tw-shadow-sm hover:tw-shadow-lg tw-transition-shadow tw-duration-300 tw-cursor-pointer"
+                                                        className="tw-text-center tw-bg-gray-50 tw-p-0 tw-rounded-lg tw-shadow-sm hover:tw-shadow-custom-shadow tw-transition-shadow tw-duration-300 tw-cursor-pointer"
                                                         onMouseDown={(e) => e.currentTarget.classList.add('tw-scale-95')}
                                                         onMouseUp={(e) => e.currentTarget.classList.remove('tw-scale-95')}
                                                         onMouseLeave={(e) => e.currentTarget.classList.remove('tw-scale-95')}
@@ -192,7 +192,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                                 />
                                                             </div>
                                                             <div className="content">
-                                                                <h5 className="tw-text-sm tw-font-medium tw-text-gray-800">{brand?.name}</h5>
+                                                                <span className="tw-text-xs tw-font-medium tw-text-gray-800">{brand?.name}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,36 +208,36 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                         )}
                         {hoveredSection === 'popularCar' && (
                             <div className="tw-bg-white tw-rounded-lg">
-                                <div className="tw-grid md:tw-grid-cols-2 tw-gap-8 tw-mb-4">
-                                    {/* Body Types Section */}
-                                    <div>
-                                        <h6 className="tw-text-sm tw-font-semibold tw-text-gray-400">Browse Popular Cars</h6>
-                                        <div className="tw-grid tw-grid-cols-1 tw-gap-1 tw-my-2">
-                                            {bodyTypes.map((bodyType, index) => (
-                                                <Link href={`/category/${bodyType?.slug}`} key={index}>
-                                                    <div
-                                                        className="tw-flex tw-items-center tw-bg-gray-100 tw-border tw-border-gray-600 tw-px-3 tw-py-2 tw-rounded-full tw-shadow-sm hover:tw-shadow-lg tw-transition-shadow tw-duration-300 tw-cursor-pointer"
-                                                        onMouseDown={(e) => e.currentTarget.classList.add('tw-scale-95')}
-                                                        onMouseUp={(e) => e.currentTarget.classList.remove('tw-scale-95')}
-                                                        onMouseLeave={(e) => e.currentTarget.classList.remove('tw-scale-95')}
-                                                    >
-                                                        <div className="tw-flex tw-items-center tw-flex-grow">
-                                                            {/* Body Type Name */}
-                                                            <span className="tw-text-sm tw-font-medium tw-text-gray-800">{bodyType?.name}</span>
-                                                        </div>
+                                {/* Body Types Section */}
+                                <div>
+                                    <h6 className="tw-text-sm tw-font-semibold tw-text-gray-400">Browse Popular Cars</h6>
+                                    <div className="tw-grid tw-grid-cols-3 tw-gap-2 tw-my-2">
+                                        {bodyTypes.slice(1).map((bodyType, index) => (
+                                            <div className="tw-flex tw-shadow-sm hover:tw-shadow-custom-shadow tw-flex-col tw-py-2 tw-rounded-lg tw-items-center tw-mb-4 md:tw-mb-0">
+                                                <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-flex-grow xl:tw-px-5">
+                                                    <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                                        height="0"
+                                                        sizes="100vw" className="tw-w-full tw-h-14 tw-object-contain tw-rounded-lg" />
+                                                </div>
+                                                <div className="tw-flex tw-flex-col tw-px-2 tw-mt-3 tw-w-full xl:tw-flex-grow">
+                                                    <h6 className="tw-text-xs tw-text-blue-600 tw-font-semibold tw-m-0 xl:tw-text-lg">
+                                                        Volvo XC40
+                                                    </h6>
+                                                    <div className="tw-flex tw-justify-between tw-items-center">
+                                                        <span className="tw-m-0 tw-text-neutral-900 tw-font-bold tw-text-[10px] ">AED 423,543</span>
+                                                        <Link href="/compare-cars">
+                                                            <button className="tw-flex tw-justify-center tw-p-1 tw-items-cent tw-max-w-full tw-text-xs tw-leading-0 tw-text-center tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 active:tw-bg-blue-700 tw-border-solid tw-rounded-full tw-w-full">
+                                                                View Details
+                                                            </button>
+                                                        </Link>
                                                     </div>
-                                                </Link>
-                                            ))}
-                                        </div>
-                                        <Link href="/search-cars" className="tw-text-blue-600 tw-font-bold tw-px-2 hover:tw-text-blue-700">
-                                            See all Cars <span className="tw-font-extrabold">→</span>
-                                        </Link>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-
-                                    {/* Brands Section (if you want to add similar styling for brands) */}
-                                    <div>
-                                        {/* Add content for the Brands Section here if needed */}
-                                    </div>
+                                    <Link href="/search-cars" className="tw-text-blue-600 tw-font-bold tw-px-2 hover:tw-text-blue-700">
+                                        See all Cars <span className="tw-font-extrabold">→</span>
+                                    </Link>
                                 </div>
                             </div>
                         )}

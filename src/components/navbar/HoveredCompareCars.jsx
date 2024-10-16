@@ -16,7 +16,7 @@ const HoveredCompareCars = () => {
         <div className="tw-rounded-xl tw-shadow-xl tw-absolute tw-top-10 tw-w-[840px] tw-z-50 tw-bg-white tw-border tw-border-gray-200">
             <h4 className="tw-text-sm tw-font-semibold tw-text-blue-700 tw-p-4">Compare Cars</h4>
             <div className="tw-grid md:tw-grid-cols-2 tw-gap-4 tw-p-4">
-                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 tw-shadow-md tw-rounded-lg">
+                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 hover:tw-shadow-custom-shadow tw-rounded-lg">
                     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-center tw-items-center tw-relative">
                         {/* Shorter vertical line with fading effect for desktop */}
                         <div className="tw-hidden tw-absolute md:tw-block tw-inset-x-0 tw-top-1/4 tw-bottom-1/4 tw-mx-auto tw-w-px tw-bg-gray-300 tw-opacity-50"></div>
@@ -64,7 +64,7 @@ const HoveredCompareCars = () => {
                         </button>
                     </Link>
                 </div>
-                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 tw-shadow-md tw-rounded-lg">
+                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 hover:tw-shadow-custom-shadow tw-rounded-lg">
                     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-center tw-items-center tw-relative">
                         {/* Shorter vertical line with fading effect for desktop */}
                         <div className="tw-hidden tw-absolute md:tw-block tw-inset-x-0 tw-top-1/4 tw-bottom-1/4 tw-mx-auto tw-w-px tw-bg-gray-300 tw-opacity-50"></div>
@@ -112,7 +112,7 @@ const HoveredCompareCars = () => {
                         </button>
                     </Link>
                 </div>
-                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 tw-shadow-md tw-rounded-lg">
+                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 hover:tw-shadow-custom-shadow tw-rounded-lg">
                     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-center tw-items-center tw-relative">
                         {/* Shorter vertical line with fading effect for desktop */}
                         <div className="tw-hidden tw-absolute md:tw-block tw-inset-x-0 tw-top-1/4 tw-bottom-1/4 tw-mx-auto tw-w-px tw-bg-gray-300 tw-opacity-50"></div>
@@ -160,7 +160,7 @@ const HoveredCompareCars = () => {
                         </button>
                     </Link>
                 </div>
-                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 tw-shadow-md tw-rounded-lg">
+                <div className="tw-flex tw-flex-col tw-items-center tw-bg-white tw-p-4 hover:tw-shadow-custom-shadow tw-rounded-lg">
                     <div className="tw-flex tw-flex-col md:tw-flex-row tw-justify-center tw-items-center tw-relative">
                         {/* Shorter vertical line with fading effect for desktop */}
                         <div className="tw-hidden tw-absolute md:tw-block tw-inset-x-0 tw-top-1/4 tw-bottom-1/4 tw-mx-auto tw-w-px tw-bg-gray-300 tw-opacity-50"></div>

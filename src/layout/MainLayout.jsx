@@ -55,11 +55,11 @@ function MainLayout({ children, pageMeta }) {
   };
 
   const links = [
-    { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars"},
-    { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars"},
-    { href: "javascript:void(0)", label: "Services", hoverItem: "services"},
-    { href: "javascript:void(0)", label: "Blog", hoverItem: "blog"},
-    { href: "javascript:void(0)", label: "More", hoverItem: "more"},
+    { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars" },
+    { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars" },
+    { href: "javascript:void(0)", label: "Services", hoverItem: "services" },
+    { href: "javascript:void(0)", label: "Blog", hoverItem: "blog" },
+    { href: "javascript:void(0)", label: "More", hoverItem: "more" },
   ];
   // const links = [
   //   { href: "/search-cars", label: "Search New Cars" },
