@@ -5,6 +5,7 @@ import Head from "next/head"; // Import the Head component
 export default function Custom404() {
     return (
         <>
+        
             <Head>
                 {/* Add noindex meta tag here */}
                 <meta name="robots" content="noindex, nofollow" />
