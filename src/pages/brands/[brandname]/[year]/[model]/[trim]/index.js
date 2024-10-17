@@ -614,7 +614,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                   : "tw-border-transparent tw-text-gray-500"
               }`}
             >
-              specs
+              Specs
             </Link>
             <Link
               href="#variants&prices"
@@ -627,7 +627,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
             >
               Variants & Prices
             </Link>
-            <Link
+            {/* <Link
               href="#price"
               onClick={() => handleLinkClick("#price")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -681,7 +681,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
               }`}
             >
               User Reviews
-            </Link>
+            </Link> */}
             <Link
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
@@ -693,7 +693,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
             >
               FAQ
             </Link>
-            <Link
+            {/* <Link
               href="#similar-cars"
               onClick={() => handleLinkClick("#similar-cars")}
               className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
@@ -703,7 +703,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
               }`}
             >
               Similar Cars
-            </Link>
+            </Link> */}
           </div>
         </nav>
       </div>
@@ -754,7 +754,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         <VehicleFaq trim={trimData} />
       </div>
 
-      <div id="vehicle-details" className="tw-container">
+      <div id="variants&prices" className="tw-container">
         <div className="tw-my-10">
           <Ad728x90 dataAdSlot="5962627056" />
         </div>

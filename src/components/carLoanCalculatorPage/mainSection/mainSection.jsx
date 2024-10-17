@@ -25,6 +25,7 @@ function MainSection() {
   const [selectedModelName, setSelectedModelName] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedVariant, setSelectedVariant] = useState("");
+  const [selectedVariantThumbnail, setSelectedVariantThumbnail] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
@@ -178,6 +179,14 @@ function MainSection() {
                           name
                           mainSlug
                           price
+                          featuredImage {
+                            data {
+                              attributes {
+                                url
+                                formats
+                              }
+                            }
+                          }
                         }
                       }
                     }
@@ -227,6 +236,7 @@ function MainSection() {
     setCurrentStep("brand");
 
     setSelectedVariant(variantdata.name);
+    setSelectedVariantThumbnail(variantdata.featuredImage.data.attributes.formats.thumbnail.url)
     setPrice(variantdata.price);
     // setSelectedBrand("");
     // setSelectedModel("");
@@ -439,7 +449,7 @@ function MainSection() {
                     iconSrc={null}
                     label={selectedModel}
                     onClick={() => {
-                      setCurrentStep("model"), setSearchTerm("");
+                      setCurrentStep("model"); setSearchTerm("");
                     }}
                   />
                 </Link>
@@ -454,7 +464,7 @@ function MainSection() {
                     iconSrc={null}
                     label={selectedYear}
                     onClick={() => {
-                      setCurrentStep("year"), setSearchTerm("");
+                      setCurrentStep("year"); setSearchTerm("");
                     }}
                   />
                 </Link>
@@ -530,6 +540,7 @@ function MainSection() {
                               setSelectedModel(model.slug);
                               setSelectedModelName(model.name);
                               setCurrentStep("year");
+                              setSearchTerm("");
                             }}
                           >
                             {model.name}
@@ -546,7 +557,7 @@ function MainSection() {
                           <button
                             key={year}
                             className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
-                            onClick={() => handleYearSelect(year)}
+                            onClick={() =>{ handleYearSelect(year);setSearchTerm("")}}
                           >
                             {year}
                           </button>
@@ -588,6 +599,7 @@ function MainSection() {
           selectedYear={selectedYear}
           selectedVariant={selectedVariant}
           price={price}
+          selectedVariantThumbnail={selectedVariantThumbnail}
         />
       ) : (
         <BannerSection

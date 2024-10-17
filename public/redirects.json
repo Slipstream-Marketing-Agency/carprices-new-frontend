@@ -1,5 +1,85 @@
 [
   {
+    "id": 2744,
+    "from": "/brands/toyota/2024/supra/3.0t-gr-m/t",
+    "to": "/brands",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:24:45.058Z",
+    "updatedAt": "2024-10-17T06:25:40.389Z"
+  },
+  {
+    "id": 2743,
+    "from": "/reviews/2023-mitsubishi-outlander-quick-preview",
+    "to": "/reviews",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:23:32.957Z",
+    "updatedAt": "2024-10-17T06:24:27.806Z"
+  },
+  {
+    "id": 2742,
+    "from": "/reviews/2021-hyundai-sonata-detailed-review",
+    "to": "/reviews",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:21:23.516Z",
+    "updatedAt": "2024-10-17T06:21:23.516Z"
+  },
+  {
+    "id": 2741,
+    "from": "/reviews/walkaround-of-the-2022-nissan-pathfinder-all-you-need-to-knowalkaround-of-the-2022-nissan-pathfinder-all-you-need-to-know",
+    "to": "/reviews",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:20:54.327Z",
+    "updatedAt": "2024-10-17T06:21:05.898Z"
+  },
+  {
+    "id": 2740,
+    "from": "/reviews/new-mg-gt-review",
+    "to": "/reviews",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:19:45.242Z",
+    "updatedAt": "2024-10-17T06:19:45.242Z"
+  },
+  {
+    "id": 2739,
+    "from": "/reviews/volkswagen-t-roc-review-heres-why-it-is-so-brilliant",
+    "to": "/reviews",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:19:19.247Z",
+    "updatedAt": "2024-10-17T06:19:19.247Z"
+  },
+  {
+    "id": 2738,
+    "from": "/brands/mitsubishi/2024/xpander-cross-1",
+    "to": "/brands/mitsubishi",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:16:13.781Z",
+    "updatedAt": "2024-10-17T06:18:56.408Z"
+  },
+  {
+    "id": 2737,
+    "from": "/brands/aston-martin/2023/db11",
+    "to": "/brands/aston-martin",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:14:57.758Z",
+    "updatedAt": "2024-10-17T06:15:41.191Z"
+  },
+  {
+    "id": 2736,
+    "from": "/reviews/opel-astra-2021-review",
+    "to": "/reviews",
+    "type": "moved_permanently_301",
+    "createdAt": "2024-10-17T06:13:27.587Z",
+    "updatedAt": "2024-10-17T06:14:17.360Z"
+  },
+  {
+    "id": 2735,
+    "from": "/reviews/meet-the-lotus-exige-410-sport-20th-anniversary-edition",
+    "to": "/brands/lotus/2022/exige/sport-410-20th-anniversary",
+    "type": "found_302",
+    "createdAt": "2024-10-17T06:12:24.233Z",
+    "updatedAt": "2024-10-17T06:12:24.233Z"
+  },
+  {
     "id": 2733,
     "from": "/news/2025-Nissan-Patrol-launch-UAE",
     "to": "/news/2025-nissan-patrol-launch-uae",

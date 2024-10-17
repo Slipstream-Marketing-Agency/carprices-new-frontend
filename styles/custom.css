@@ -1608,6 +1608,13 @@ input[type="color"]:focus,
     background-color: #f1f1f1 !important;
   }
 
+  .Ad320x100 {
+    width: 320px;
+    height: 100px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
   .Ad160x600 {
     width: 160px;
     height: 600px;

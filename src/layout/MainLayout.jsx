@@ -24,6 +24,8 @@ import Ad970x250 from "../components-old/ads/Ad970x250";
 import Ad300x250 from "../components-old/ads/Ad300x250";
 import Image from "next/image";
 import { fetchMetaData } from "../lib/fetchMetaData";
+import Ad728x90 from "../components-old/ads/Ad728x90";
+import Ad320x100 from "../components-old/ads/Ad320x100";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -379,7 +381,7 @@ function MainLayout({ children, pageMeta }) {
                   height={0}
                 />
               </div>
-              
+
             </div>
 
             <div className="tw-flex tw-flex-col tw-pt-4">
@@ -890,13 +892,25 @@ function MainLayout({ children, pageMeta }) {
 
       <footer>
         <div className="tw-my-10">
+          {/* Desktop Ad */}
           <div className="hidemobile">
             <Ad970x250 dataAdSlot="3620924730" />
           </div>
+
+          {/* Mobile Ad */}
           <div className="hidedesktop">
             <Ad300x250 dataAdSlot="1332106070" />
           </div>
         </div>
+
+        {/* <div className="">
+          <div className="tw-fixed md:tw-hidden tw-bottom-0 tw-left-0 tw-w-full tw-z-50 tw-py-2 tw-justify-center">
+            <Ad320x100 dataAdSlot="1332106070" />
+          </div>
+          <div className="tw-hidden md:tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-z-50 tw-py-2 md:tw-flex tw-justify-center">
+            <Ad728x90 dataAdSlot="3620924730" />
+          </div>
+        </div> */}
 
         <div className="tw-flex tw-justify-center tw-items-center tw-px-16 tw-py-16 tw-bg-neutral-900 max-md:tw-px-5 tw-w-full ">
           <div className="tw-flex tw-flex-col tw-w-full tw-container">

@@ -577,6 +577,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                             onClick={() => {
                               setSelectedModel(model.slug);
                               setCurrentStep("year");
+                              setSearchTerm("");
                             }}
                           >
                             {model.name}
@@ -593,7 +594,7 @@ const MultiStepCarSelection = ({ carData, mode }) => {
                           <button
                             key={year}
                             className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
-                            onClick={() => handleYearSelect(year)}
+                            onClick={() => {handleYearSelect(year);setSearchTerm("")}}
                           >
                             {year}
                           </button>

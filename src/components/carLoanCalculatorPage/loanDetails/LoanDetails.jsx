@@ -12,6 +12,7 @@ const LoanDetails = ({
   selectedModelName,
   selectedYear,
   selectedVariant,
+  selectedVariantThumbnail,
   price, // this comes from the parent
 }) => {
   const [P, setP] = useState(0); // Start with 0 until price is available
@@ -84,18 +85,31 @@ const LoanDetails = ({
   return (
     <>
       {/* Car Details Section */}
-      <div className="tw-my-6 tw-bg-gradient-to-r tw-from-blue-500 tw-to-purple-600 tw-rounded-lg tw-p-6 tw-flex tw-justify-between tw-items-center tw-w-full tw-shadow-lg">
-        <div>
-          <div className="tw-text-white tw-uppercase tw-text-sm tw-font-bold">
-            {selectedYear} {selectedBrand}
-          </div>
-          <div className="tw-text-2xl lg:tw-text-3xl tw-font-semibold tw-text-white">
-            {selectedModelName} {selectedVariant}
+      <div className="tw-my-6 tw-bg-gradient-to-tl tw-to-[#275BA7] tw-via-[#275BA7] tw-from-[#77cdf2] tw-rounded-lg tw-p-6 tw-flex tw-flex-col tw-gap-3 md:tw-flex-row tw-justify-between tw-items-center tw-w-full tw-shadow-lg">
+        <div className="tw-flex tw-gap-3 tw-justify-start tw-items-end">
+          {selectedVariantThumbnail &&
+            <Image
+              src={
+                selectedVariantThumbnail
+              }
+              alt="icon-car"
+              width={85}
+              height={65}
+              className="tw-bg-white tw-h-20 tw-w-28"
+            />
+          }
+          <div>
+            <div className="tw-text-white tw-uppercase tw-text-sm tw-font-bold">
+              {selectedYear} {selectedBrand}
+            </div>
+            <div className="tw-text-2xl lg:tw-text-3xl tw-font-semibold tw-text-white">
+              {selectedModelName} {selectedVariant}
+            </div>
           </div>
         </div>
         <button
           onClick={setShowModal}
-          className="tw-py-2 tw-px-6 tw-text-blue-600 tw-bg-white tw-rounded-lg tw-shadow-md tw-text-sm hover:tw-bg-gray-100 tw-transition-all"
+          className="tw-py-2 tw-px-6 tw-text-blue-600 tw-font-semibold tw-bg-white tw-rounded-lg tw-w-full md:tw-w-auto tw-shadow-md tw-text-sm hover:tw-bg-gray-100 tw-transition-all"
         >
           Change Car
         </button>
@@ -122,7 +136,10 @@ const LoanDetails = ({
 
             {/* Tenure */}
             <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
-              <label className="tw-text-gray-500 tw-text-sm">Tenure (Years)</label>
+              <div className="tw-flex tw-justify-between">
+                <label className="tw-text-gray-500 tw-text-sm">Tenure</label>
+                <span className="">{N} years</span>
+              </div>
               <input
                 type="range"
                 min="1"
@@ -134,14 +151,18 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>1 year</span>
-                <span>{N} years</span>
                 <span>5 years</span>
               </div>
             </div>
 
             {/* Interest Rate */}
             <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
-              <label className="tw-text-gray-500 tw-text-sm">Interest Rate (%)</label>
+              <div className="tw-flex tw-justify-between">
+                <label className="tw-text-gray-500 tw-text-sm">Interest Rate</label>
+                <span>
+                  {R}% ({P ? <Price data={(price - (price * (downPayment / 100))) * (R / 100)} /> : 0} per year)
+                </span>
+              </div>
               <input
                 type="range"
                 min="1.9"
@@ -153,16 +174,19 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>1.9%</span>
-                <span>
-                  {R}% ({P ? <Price data={(price - (price * (downPayment / 100))) * (R / 100)} /> : 0} per year)
-                </span>
+
                 <span>8%</span>
               </div>
             </div>
 
             {/* Down Payment */}
             <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
-              <label className="tw-text-gray-500 tw-text-sm">Down Payment (%)</label>
+            <div className="tw-flex tw-justify-between">
+                <label className="tw-text-gray-500 tw-text-sm">Down Payment</label>
+                <span>
+                  {downPayment}% ({P ? <Price data={(price * (downPayment / 100))} /> : 0})
+                </span>
+              </div>
               <input
                 type="range"
                 min="20"
@@ -174,9 +198,7 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>20%</span>
-                <span>
-                  {downPayment}% ({P ? <Price data={(price * (downPayment / 100))} /> : 0})
-                </span>
+                
                 <span>80%</span>
               </div>
             </div>
@@ -199,7 +221,7 @@ const LoanDetails = ({
                 <div className="tw-flex tw-justify-between tw-items-center tw-text-sm lg:tw-text-base tw-text-gray-600">
                   <span>Monthly EMI</span>
                   <span className="tw-font-bold tw-text-lg lg:tw-text-xl tw-text-gray-800">
-                    AED {emi ? emi.toFixed(0).toLocaleString("en-US") : "0"}*
+                    AED {emi ? Number(emi).toLocaleString("en-US", { maximumFractionDigits: 0 }) : "0"}*
                   </span>
                 </div>
 
@@ -207,7 +229,7 @@ const LoanDetails = ({
                 <div className="tw-flex tw-justify-between tw-items-center tw-text-sm lg:tw-text-base tw-text-gray-600">
                   <span>Total Interest</span>
                   <span className="tw-font-bold tw-text-lg lg:tw-text-xl tw-text-gray-800">
-                    AED {payableInterest ? payableInterest.toFixed(0).toLocaleString("en-US") : "0"}*
+                    AED {payableInterest ? Number(payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 }) : "0"}*
                   </span>
                 </div>
 
@@ -215,7 +237,7 @@ const LoanDetails = ({
                 <div className="tw-bg-blue-100 tw-rounded-md tw-py-2 tw-px-4 tw-text-sm lg:tw-text-base tw-font-semibold tw-text-gray-700 tw-mt-4">
                   Total Amount Payable
                   <span className="tw-text-blue-600 tw-text-lg lg:tw-text-xl tw-block tw-font-bold">
-                    AED {P && payableInterest ? (P + payableInterest).toFixed(0).toLocaleString("en-US") : "0"}*
+                    AED {P && payableInterest ? (P + payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 }) : "0"}*
                   </span>
                 </div>
               </div>
