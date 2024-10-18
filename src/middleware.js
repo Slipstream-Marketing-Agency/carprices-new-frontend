@@ -42,17 +42,28 @@ export async function middleware(req) {
   }
 
   // Step 5: Handle URLs that contain 'undefined' in the path and redirect to the brand level
-  if (pathname.includes('/undefined/')) {
+  if (pathname.includes('/undefined')) {
     const pathSegments = pathname.split('/').filter(Boolean);
 
-    // Redirect to the '/brands/:brandname' level if 'undefined' is present
-    const undefinedIndex = pathSegments.indexOf('undefined');
-    if (undefinedIndex !== -1 && undefinedIndex > 2) {
-      const brandPath = `/${pathSegments.slice(0, 2).join('/')}`; // Redirect to '/brands/:brandname'
+    // Check if it's the specific case: /brands/:brandname/:year/undefined (without extra segments)
+    if (pathSegments.length === 4 && pathSegments[0] === 'brands' && pathSegments[3] === 'undefined') {
+      // Redirect to /brands/:brandname (e.g., /brands/borgward)
+      const brandPath = `/${pathSegments[0]}/${pathSegments[1]}`;
+      url.pathname = brandPath;
+      return NextResponse.redirect(url, 301); // 301 Moved Permanently
+    }
+
+    // Check if it's /brands/:brandname/:year/undefined/... (with extra segments)
+    if (pathSegments.length > 4 && pathSegments[0] === 'brands' && pathSegments[3] === 'undefined') {
+      // Redirect to /brands/:brandname (e.g., /brands/borgward)
+      const brandPath = `/${pathSegments[0]}/${pathSegments[1]}`;
       url.pathname = brandPath;
       return NextResponse.redirect(url, 301); // 301 Moved Permanently
     }
   }
+
+
+
 
   // Step 6: Handle dynamic redirection for non-existent 'trim' level pages (as before)
   if (pathname.startsWith('/brands/')) {
@@ -70,6 +81,7 @@ export async function middleware(req) {
       }
     }
   }
+
 
   // Step 7: Continue to the requested page if no redirection is needed
   return NextResponse.next();
