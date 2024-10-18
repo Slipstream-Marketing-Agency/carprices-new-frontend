@@ -3,6 +3,8 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Image from "next/image";
 import Price from "@/src/utils/Price";
+import PrimaryButton from "../../buttons/PrimaryButton";
+import InquireForm from "./InquireForm";
 Chart.register(...registerables);
 
 const LoanDetails = ({
@@ -23,6 +25,7 @@ const LoanDetails = ({
   const [downPaymentResult, setDownPaymentResult] = useState(0);
   const [payableInterest, setPayableInterest] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [pieData, setPieData] = useState({
     labels: ["Principal", "Interest"],
     datasets: [
@@ -181,7 +184,7 @@ const LoanDetails = ({
 
             {/* Down Payment */}
             <div className="tw-space-y-2 tw-bg-gray-50 tw-p-4 tw-rounded-lg tw-shadow-inner tw-border">
-            <div className="tw-flex tw-justify-between">
+              <div className="tw-flex tw-justify-between">
                 <label className="tw-text-gray-500 tw-text-sm">Down Payment</label>
                 <span>
                   {downPayment}% ({P ? <Price data={(price * (downPayment / 100))} /> : 0})
@@ -198,10 +201,11 @@ const LoanDetails = ({
               />
               <div className="tw-text-sm tw-flex tw-justify-between tw-text-gray-700">
                 <span>20%</span>
-                
+
                 <span>80%</span>
               </div>
             </div>
+            <PrimaryButton label="Inquire Now" additionalClass="tw-font-bold" onClick={() => setIsModalOpen(true)} />
           </div>
 
           {/* Doughnut Chart + Summary Section (Right Side) */}
@@ -245,6 +249,7 @@ const LoanDetails = ({
           </div>
         </div>
       </div>
+      <InquireForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 };

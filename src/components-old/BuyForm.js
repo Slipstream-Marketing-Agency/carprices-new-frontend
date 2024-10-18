@@ -1,6 +1,6 @@
 // components/CarTestDriveForm.js
 import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import {
@@ -12,8 +12,9 @@ import {
   TextField,
   MenuItem,
   Typography,
-  Box,
   CircularProgress,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 const emirates = [
@@ -30,6 +31,7 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
   const fullCarName = `${year} ${brand} ${model} ${carName}`;
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -51,9 +53,14 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
       loadRecaptcha();
     }
   }, []);
+
   const handleClose = () => {
     onClose();
     setSubmitted(false);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -101,7 +108,7 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
 
               if (response.status === 200) {
                 setSubmitted(true);
-                onClose();
+                setSnackbarOpen(true); // Open the snackbar
               } else {
                 console.error("Error submitting form:", response);
               }
@@ -109,6 +116,7 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
               console.error("Error submitting form:", error);
             } finally {
               setLoading(false);
+              setSubmitting(false);
             }
           }}
         >
@@ -211,6 +219,18 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
           )}
         </Formik>
       </Dialog>
+
+      {/* Snackbar for Thank You prompt */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+          Thank you for your submission. We will contact you shortly!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

@@ -25,7 +25,8 @@ import Ad300x250 from "../components-old/ads/Ad300x250";
 import Image from "next/image";
 import { fetchMetaData } from "../lib/fetchMetaData";
 import Ad728x90 from "../components-old/ads/Ad728x90";
-import Ad320x100 from "../components-old/ads/Ad320x100";
+import FixedAd728x90 from "../components-old/ads/FixedAd728x90";
+import FixedAd320x50 from "../components-old/ads/FixedAd320x50";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -903,14 +904,10 @@ function MainLayout({ children, pageMeta }) {
           </div>
         </div>
 
-        {/* <div className="">
-          <div className="tw-fixed md:tw-hidden tw-bottom-0 tw-left-0 tw-w-full tw-z-50 tw-py-2 tw-justify-center">
-            <Ad320x100 dataAdSlot="1332106070" />
-          </div>
-          <div className="tw-hidden md:tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-z-50 tw-py-2 md:tw-flex tw-justify-center">
-            <Ad728x90 dataAdSlot="3620924730" />
-          </div>
-        </div> */}
+        <div className="">
+          <FixedAd320x50 dataAdSlot="1332106070" />
+          <FixedAd728x90 dataAdSlot="3620924730" />
+        </div>
 
         <div className="tw-flex tw-justify-center tw-items-center tw-px-16 tw-py-16 tw-bg-neutral-900 max-md:tw-px-5 tw-w-full ">
           <div className="tw-flex tw-flex-col tw-w-full tw-container">

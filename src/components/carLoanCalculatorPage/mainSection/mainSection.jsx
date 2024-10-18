@@ -283,8 +283,8 @@ function MainSection() {
   const filteredOptions = (options) => {
     return searchTerm
       ? options.filter((option) =>
-          option.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        option.toLowerCase().includes(searchTerm.toLowerCase())
+      )
       : options;
   };
 
@@ -354,22 +354,19 @@ function MainSection() {
       <div className="tw-flex tw-items-center tw-justify-center ">
         <div
           id="slideover-container"
-          className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${
-            showModal ? "tw-visible" : "tw-invisible"
-          }`}
+          className={`tw-w-full tw-h-full tw-fixed tw-z-[999] tw-inset-0 ${showModal ? "tw-visible" : "tw-invisible"
+            }`}
         >
           <div
             onClick={toggleSlideover}
             id="slideover-bg"
-            className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${
-              showModal ? "tw-opacity-50" : "tw-opacity-0"
-            }`}
+            className={`tw-w-full tw-h-full tw-duration-500 tw-ease-out tw-transition-all tw-inset-0 tw-absolute tw-bg-gray-900 ${showModal ? "tw-opacity-50" : "tw-opacity-0"
+              }`}
           />
           <div
             id="slideover"
-            className={`tw-w-full md:tw-w-[60%]  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${
-              showModal ? "tw-translate-x-0" : "tw-translate-x-full"
-            }`}
+            className={`tw-w-full md:tw-w-[60%]  tw-rounded-tl-2xl  tw-rounded-bl-2xl tw-bg-white tw-h-full tw-absolute tw-right-0 tw-duration-300 tw-ease-out tw-transition-all ${showModal ? "tw-translate-x-0" : "tw-translate-x-full"
+              }`}
           >
             <div
               onClick={toggleSlideover}
@@ -418,11 +415,10 @@ function MainSection() {
               </h2>
               <div className="tw-flex gap-3">
                 <Link
-                  className={` ${
-                    currentStep === "brand" && selectedBrand === ""
+                  className={` ${currentStep === "brand" && selectedBrand === ""
                       ? "tw-hidden "
                       : "tw-block"
-                  }`}
+                    }`}
                   href="#brand"
                   onClick={() => {
                     setCurrentStep("brand");
@@ -440,9 +436,8 @@ function MainSection() {
                 </Link>
 
                 <Link
-                  className={` ${
-                    selectedModel === "" ? "tw-hidden " : "tw-block"
-                  }`}
+                  className={` ${selectedModel === "" ? "tw-hidden " : "tw-block"
+                    }`}
                   href="#model"
                 >
                   <DataBadge
@@ -455,9 +450,8 @@ function MainSection() {
                 </Link>
 
                 <Link
-                  className={` ${
-                    selectedYear === "" ? "tw-hidden " : "tw-block"
-                  }`}
+                  className={` ${selectedYear === "" ? "tw-hidden " : "tw-block"
+                    }`}
                   href="#year"
                 >
                   <DataBadge
@@ -470,9 +464,8 @@ function MainSection() {
                 </Link>
 
                 <Link
-                  className={` ${
-                    selectedVariant === "" ? "tw-hidden " : "tw-block"
-                  }`}
+                  className={` ${selectedVariant === "" ? "tw-hidden " : "tw-block"
+                    }`}
                   href="#variant"
                 >
                   <DataBadge
@@ -490,7 +483,7 @@ function MainSection() {
                 </div>
                 <input
                   type="text"
-                  className="tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-block tw-p-2 tw-border tw-rounded-full tw-w-full tw-mb-4 sm:tw-text-sm tw-border-gray-300 tw-px-10"
+                  className="focus:!tw-ring-0 focus:!tw-border-gray-700 tw-block tw-p-2 tw-border tw-rounded-full tw-w-full tw-mb-4 sm:tw-text-sm tw-border-gray-700 tw-px-10"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   placeholder={`Search ${currentStep}`}
@@ -557,7 +550,7 @@ function MainSection() {
                           <button
                             key={year}
                             className="tw-bg-white hover:tw-bg-blue-200 tw-text-left tw-py-4 tw-px-2"
-                            onClick={() =>{ handleYearSelect(year);setSearchTerm("")}}
+                            onClick={() => { handleYearSelect(year); setSearchTerm("") }}
                           >
                             {year}
                           </button>

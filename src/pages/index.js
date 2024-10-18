@@ -950,9 +950,9 @@ export default function index({
                   Here are some of the trending videos from our YouTube channel
                 </h2>
               </div>
-              <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
+              {/* <div className="tw-self-start tw-px-6 tw-py-3 tw-mt-2.5 tw-text-base tw-tracking-tight tw-leading-4 tw-text-center tw-rounded-[119px] tw-text-neutral-900">
                 View More
-              </div>
+              </div> */}
             </div>
             <TrendingVideosComponent />
           </div>
