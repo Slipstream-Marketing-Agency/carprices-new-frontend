@@ -45,9 +45,15 @@ export async function middleware(req) {
   if (pathname.includes('/undefined')) {
     const pathSegments = pathname.split('/').filter(Boolean);
 
-    // Check if it's the specific case: /brands/:brandname/:year/undefined (without extra segments)
+    // Check if the specific case: /brands/undefined/2024/undefined
+    if (pathSegments.length === 4 && pathSegments[0] === 'brands' && pathSegments[1] === 'undefined' && pathSegments[3] === 'undefined') {
+      // Redirect to /brands
+      url.pathname = '/brands';
+      return NextResponse.redirect(url, 301); // 301 Moved Permanently
+    }
+
+    // Check if it's the case: /brands/:brandname/:year/undefined (without extra segments)
     if (pathSegments.length === 4 && pathSegments[0] === 'brands' && pathSegments[3] === 'undefined') {
-      // Redirect to /brands/:brandname (e.g., /brands/borgward)
       const brandPath = `/${pathSegments[0]}/${pathSegments[1]}`;
       url.pathname = brandPath;
       return NextResponse.redirect(url, 301); // 301 Moved Permanently
@@ -55,7 +61,6 @@ export async function middleware(req) {
 
     // Check if it's /brands/:brandname/:year/undefined/... (with extra segments)
     if (pathSegments.length > 4 && pathSegments[0] === 'brands' && pathSegments[3] === 'undefined') {
-      // Redirect to /brands/:brandname (e.g., /brands/borgward)
       const brandPath = `/${pathSegments[0]}/${pathSegments[1]}`;
       url.pathname = brandPath;
       return NextResponse.redirect(url, 301); // 301 Moved Permanently
@@ -65,11 +70,27 @@ export async function middleware(req) {
 
 
 
-  // Step 6: Handle dynamic redirection for non-existent 'trim' level pages (as before)
+  // Step 6: Handle dynamic redirection for non-existent model or trim level pages
   if (pathname.startsWith('/brands/')) {
     const pathSegments = pathname.split('/').filter(Boolean);
+
+    // If the URL has 4 segments, it's a model-level URL (e.g., /brands/aston-martin/2022/db11)
+    if (pathSegments.length === 4) {
+      try {
+        const response = await fetch(`${req.nextUrl.origin}/${pathSegments.join('/')}`);
+        if (response.status === 404) {
+          // If it's a 404, remove the last 'model' segment and redirect to the parent 'brand' level
+          const brandPath = `/${pathSegments[0]}/${pathSegments[1]}`;
+          url.pathname = brandPath;
+          return NextResponse.redirect(url, 301); // 301 Moved Permanently
+        }
+      } catch (error) {
+        return NextResponse.next(); // In case of fetch error, continue without redirecting
+      }
+    }
+
+    // If the URL has 5 segments, it's a trim-level URL (e.g., /brands/aston-martin/2022/db11/trim)
     if (pathSegments.length === 5) {
-      // Attempt to fetch the URL to check if it exists
       try {
         const response = await fetch(`${req.nextUrl.origin}/${pathSegments.join('/')}`);
         if (response.status === 404) {
