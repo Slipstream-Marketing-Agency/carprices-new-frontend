@@ -10,7 +10,7 @@ const HeroSection = () => {
                     autoPlay
                     loop
                     playsInline
-                    poster=""
+                    poster="https://cdn.carprices.ae/assets/placeholder_banner_24e092733.webp"
                     preload="metadata"
                     loading="lazy" // Lazy load the video
                     className="banner-video tw-w-full tw-h-full object-cover"
