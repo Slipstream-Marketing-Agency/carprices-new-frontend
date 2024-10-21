@@ -6,20 +6,20 @@ export default function FixedAd728x90({ dataAdSlot }) {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true); // State to control ad visibility
 
-  useEffect(() => {
-    // Reset ad visibility when navigating to a new page
-    const handleRouteChange = () => {
-      setIsVisible(true);
-    };
+  const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const adHiddenKey = 'adHiddenUntil'; // localStorage key
+  const hideDuration = 1 * 60 * 60 * 1000; // Hide for 1 hours (in milliseconds)
 
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
-  
   useEffect(() => {
+    const adHiddenUntil = localStorage.getItem(adHiddenKey);
+    const currentTime = new Date().getTime();
+
+    if (adHiddenUntil && currentTime < parseInt(adHiddenUntil)) {
+      setIsVisible(false); // Keep ad hidden if the duration has not expired
+    } else {
+      setIsVisible(true); // Show ad if the hidden duration has expired or does not exist
+    }
+
     if (isVisible) {
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -29,9 +29,9 @@ export default function FixedAd728x90({ dataAdSlot }) {
     }
   }, [router.query, isVisible]);
 
-  const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-
   const handleCloseAd = () => {
+    const hideUntil = new Date().getTime() + hideDuration;
+    localStorage.setItem(adHiddenKey, hideUntil.toString()); // Store the future hide duration in localStorage
     setIsVisible(false); // Hide ad when close button is clicked
   };
 

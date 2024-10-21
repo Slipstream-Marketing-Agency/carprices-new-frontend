@@ -96,9 +96,9 @@ const LoanDetails = ({
                 selectedVariantThumbnail
               }
               alt="icon-car"
-              width={85}
+              width={95}
               height={65}
-              className="tw-bg-white tw-h-20 tw-w-28"
+              className="tw-h-20 tw-w-36 tw-object-contain"
             />
           }
           <div>
@@ -241,7 +241,7 @@ const LoanDetails = ({
                 <div className="tw-bg-blue-100 tw-rounded-md tw-py-2 tw-px-4 tw-text-sm lg:tw-text-base tw-font-semibold tw-text-gray-700 tw-mt-4">
                   Total Amount Payable
                   <span className="tw-text-blue-600 tw-text-lg lg:tw-text-xl tw-block tw-font-bold">
-                    AED {P && payableInterest ? (P + payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 }) : "0"}*
+                    AED {P && payableInterest ? (totalCost).toLocaleString("en-US", { maximumFractionDigits: 0 }) : "0"}*
                   </span>
                 </div>
               </div>

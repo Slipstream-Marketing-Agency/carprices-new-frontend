@@ -27,6 +27,8 @@ import { fetchMetaData } from "../lib/fetchMetaData";
 import Ad728x90 from "../components-old/ads/Ad728x90";
 import FixedAd728x90 from "../components-old/ads/FixedAd728x90";
 import FixedAd320x50 from "../components-old/ads/FixedAd320x50";
+import PrimaryButton from "../components/buttons/PrimaryButton";
+import LoginModal from "../components/login-modal/LoginModal";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -70,6 +72,8 @@ function MainLayout({ children, pageMeta }) {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [brandOptions, setBrandOptions] = useState([]);
@@ -540,7 +544,7 @@ function MainLayout({ children, pageMeta }) {
               </div>
             </div>
             <div className="tw-flex tw-justify-end tw-gap-5 max-md:tw-flex-wrap tw-mr-4">
-              <div className="tw-flex tw-flex-auto tw-justify-end  tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
+              <div className="tw-flex tw-flex-auto tw-justify-end tw-items-center tw-gap-5  tw-my-auto tw-text-sm tw-font-medium tw-leading-5 tw-text-neutral-900 max-md:tw-flex-wrap">
                 <Link
                   href="/search-cars"
                   className="tw-justify-center tw-font-semibold"
@@ -577,6 +581,7 @@ function MainLayout({ children, pageMeta }) {
                 >
                   Reviews
                 </Link>
+                <PrimaryButton label='Signin' additionalClass="!tw-bg-black" onClick={() => setIsLoginModalOpen(true)} />
               </div>
             </div>
           </div>
@@ -1174,6 +1179,7 @@ function MainLayout({ children, pageMeta }) {
           </div>
         </div>
       </footer>
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
     </>
   );
 }

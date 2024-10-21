@@ -508,8 +508,8 @@ function MainSection() {
                                   brand.attributes.brandLogo.data.attributes.url
                                 }
                                 alt="icon-brand"
-                                width={70}
-                                height={70}
+                                width={50}
+                                height={50}
                                 className="tw-cursor-pointer"
                               />
                               <div className="tw-capitalize tw-text-center tw-my-1 tw-text-xs">
@@ -583,7 +583,7 @@ function MainSection() {
       </div>
 
       {/* bannersection */}
-      {variants.length > 0 ? (
+      {(variants.length > 0 && selectedVariant) ? (
         <LoanDetails
           setShowModal={setShowModal}
           selectedBrand={selectedBrand}

@@ -51,14 +51,13 @@ const LoanInquireForm = ({ isOpen, onClose }) => {
                         <Grid item>
                             <strong>{submitted ? "Thank You" : "Apply now and have us call you"}</strong>
                         </Grid>
-                        <Grid item>
-                            {/* Bank Logo */}
+                        {/* <Grid item>
                             <img
                                 src="/carLoanPage/enbd-logo.jpg" // Replace with your actual logo URL
                                 alt="Bank Logo"
                                 style={{ height: "40px", width: "auto" }}
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </DialogTitle>
                 <Formik
