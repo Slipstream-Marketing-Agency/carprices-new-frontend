@@ -29,6 +29,7 @@ import FixedAd728x90 from "../components-old/ads/FixedAd728x90";
 import FixedAd320x50 from "../components-old/ads/FixedAd320x50";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import LoginModal from "../components/login-modal/LoginModal";
+import CookiesCard from "../components-old/common/CookiesCard";
 
 function MainLayout({ children, pageMeta }) {
   const router = useRouter();
@@ -1180,6 +1181,7 @@ function MainLayout({ children, pageMeta }) {
         </div>
       </footer>
       <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+      <CookiesCard />
     </>
   );
 }

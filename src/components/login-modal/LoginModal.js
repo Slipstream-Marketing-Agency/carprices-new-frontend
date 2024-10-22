@@ -7,12 +7,14 @@ import { setCookie } from "@/src/lib/helper";
 
 function LoginModal({ isOpen, setIsOpen }) {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [activeForm, setActiveForm] = useState('login');
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     username: "", // Only used for registration
+    code: "",
   });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -81,6 +83,7 @@ function LoginModal({ isOpen, setIsOpen }) {
       setSnackbarOpen(true);
     } finally {
       setIsLoading(false); // Stop loading
+      setActiveForm('login')
     }
   };
 
@@ -126,8 +129,42 @@ function LoginModal({ isOpen, setIsOpen }) {
       setSnackbarOpen(true);
     } finally {
       setIsLoading(false); // Stop loading
+      setActiveForm('login')
     }
   };
+
+  const handleForgetPassword = async () => {
+    const { email } = formData;
+
+    setIsLoading(true); // Start loading
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}auth/forgot-password`,
+        {
+          email,
+        }
+      );
+
+      setSnackbarMessage("Email Sent!");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
+
+      // Reset formData to initial state
+      setFormData({ username: "", email: "", password: "" });
+      setActiveForm('login')
+      setIsOpen(false)
+    } catch (error) {
+      console.error("Registration error:", error);
+      const errorMessage = error.response?.data?.error?.message || "An error occurred";
+
+      // Show error message
+      setSnackbarMessage(errorMessage);
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -140,18 +177,21 @@ function LoginModal({ isOpen, setIsOpen }) {
   return (
     <>
       {isOpen && (
-        <dialog className="tw-fixed tw-left-0 tw-top-0  tw-bottom-0 tw-right-0 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-20 tw-overflow-auto  tw-z-10 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-1000 tw-ease-in-out tw-no-scrollbar">
-          <div className="tw-absolute tw-bg-white tw-w-[93%]  md:tw-w-[42%] xl:tw-w-1/4 sm:tw-rounded-3xl tw-z-30 tw-rounded-lg">
+        <dialog
+          className="tw-fixed tw-left-0 tw-top-0 tw-bottom-0 tw-right-0 tw-w-full tw-h-full tw-bg-black tw-bg-opacity-40 tw-overflow-auto tw-z-10 tw-flex tw-justify-center tw-items-center tw-transition-all tw-duration-1000 tw-ease-in-out tw-no-scrollbar"
+          onClick={() => setIsOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()} className="tw-absolute tw-bg-white tw-w-[93%]  md:tw-w-[42%] xl:tw-w-1/4 sm:tw-rounded-3xl tw-z-30 tw-rounded-lg">
             <Close
               onClick={() => setIsOpen(false)}
               fontSize=""
               className="tw-cursor-pointer tw-absolute tw-right-4 tw-top-4"
             />
-            {isSignIn ? (
+            {activeForm === 'login' && (
               <section className="tw-p-8 tw-flex tw-flex-col tw-justify-between">
                 <div className="tw-my-6">
                   <div>
-                    Welcome to
+                    Welcome to{" "}
                     <span className="tw-font-semibold">CarPrices.ae</span>
                   </div>
                   <div className="tw-font-semibold tw-text-4xl">Sign in</div>
@@ -190,26 +230,28 @@ function LoginModal({ isOpen, setIsOpen }) {
                   placeholder="Password"
                 />
                 <div className="float-right tw-my-6">
-                  <button className="tw-text-blue-500 tw-bg-transparent tw-text-xs tw-float-right">
+                  <button className="tw-text-blue-500 tw-bg-transparent tw-text-xs tw-float-right" onClick={() => setActiveForm('forget-password')}>
                     Forgot Password
                   </button>
                 </div>
                 <div className="tw-mt-6 tw-flex tw-justify-between">
                   <button
                     className="tw-text-xs tw-bg-transparent"
-                    onClick={() => setIsSignIn(false)}
+                    onClick={() => setActiveForm('registration')}
                   >
                     No Account ? Sign up
                   </button>
                   <button
                     onClick={handleLogin}
                     className="tw-text-white tw-text-xs tw-px-16 tw-py-2 tw-bg-blue-600 tw-rounded-full"
+                    disabled={isLoading} // Disable the button when loading
                   >
-                    Sign in
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "Sign in"}
                   </button>
                 </div>
               </section>
-            ) : (
+            )}
+            {activeForm === 'registration' && (
               <section className="tw-p-8 tw-flex tw-flex-col tw-justify-between">
                 <div className="tw-my-6">
                   <div>
@@ -276,7 +318,7 @@ function LoginModal({ isOpen, setIsOpen }) {
                 <div className="tw-mt-6 tw-flex tw-justify-between">
                   <button
                     className="tw-text-xs tw-bg-transparent"
-                    onClick={() => setIsSignIn(true)}
+                    onClick={() => setActiveForm('login')}
                   >
                     Have an account ? Sign In
                   </button>
@@ -286,6 +328,43 @@ function LoginModal({ isOpen, setIsOpen }) {
                     disabled={isLoading} // Disable the button when loading
                   >
                     {isLoading ? <CircularProgress size={20} color="inherit" /> : "Create Account"}
+                  </button>
+                </div>
+              </section>
+            )}
+            {activeForm === 'forget-password' && (
+              <section className="tw-p-8 tw-flex tw-flex-col tw-justify-between">
+                <div className="tw-my-6">
+                  <div>
+                    Welcome to{" "}
+                    <span className="tw-font-semibold">CarPrices.ae</span>
+                  </div>
+                  <div className="tw-font-semibold tw-text-4xl">Forget Password</div>
+                </div>
+                <label className="tw-text-sm tw-font-semibold">
+                  Email
+                </label>
+                <input
+                  className="radius-lg rounded-md p-2 w-full border tw-border-gray-200 tw-rounded-lg tw-text-sm tw-my-2"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
+                <div className="tw-mt-6 tw-flex tw-justify-between">
+                  <button
+                    className="tw-text-xs tw-bg-transparent"
+                    onClick={() => setActiveForm('login')}
+                  >
+                    Back to SignIn
+                  </button>
+                  <button
+                    onClick={handleForgetPassword}
+                    className="tw-text-white tw-text-xs tw-px-16 tw-py-2 tw-bg-blue-600 tw-rounded-full"
+                    disabled={isLoading} // Disable the button when loading
+                  >
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "Forget Password"}
                   </button>
                 </div>
               </section>
