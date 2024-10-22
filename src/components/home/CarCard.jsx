@@ -1,115 +1,105 @@
-import React from 'react'
+import React from 'react';
 import Skeleton from "@mui/material/Skeleton";
 import Link from 'next/link';
 import Image from 'next/image';
 import OptimizedImage from '../common/image/OptimisedImage';
+import PrimaryButton from '../buttons/PrimaryButton';
 
+const CarPriceRange = React.memo(({ minPrice, maxPrice }) => {
+    const formatPrice = (price) =>
+        price?.toLocaleString("en-AE", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) || "TBC*";
 
-const CarPriceRange = ({ minPrice, maxPrice }) => {
-    const formatPrice = (price) => {
-        return price.toLocaleString("en-AE", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-        });
-    };
+    const priceInfo = minPrice === maxPrice || !maxPrice
+        ? `AED ${formatPrice(minPrice)}*`
+        : `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
 
-    let priceInfo;
-    if (minPrice === null || maxPrice === null) {
-        // If either min or max price is null, display TBD
-        priceInfo = "TBD*";
-    } else if (minPrice === maxPrice) {
-        // If min and max prices are the same, display only one price
-        priceInfo = `AED ${formatPrice(minPrice)}*`;
-    } else {
-        // Display price range
-        priceInfo = `AED ${formatPrice(minPrice)}* - ${formatPrice(maxPrice)}*`;
-    }
+    return <span className="">{priceInfo}</span>;
+});
 
-    return (
-        <span className="tw-m-0 tw-text-neutral-900 tw-font-bold md:tw-text-[21px] ">
-            {priceInfo}
-        </span>
-    );
-};
-
-const CarEMIDisplay = ({ minPrice }) => {
-    const tenureInMonths = 60; // Loan tenure in months
-
+// Memoized CarEMIDisplay component
+const CarEMIDisplay = React.memo(({ minPrice }) => {
+    const tenureInMonths = 60;
     const calculateEMI = (principal) => {
-        const annualInterestRate = 0.025; // Annual interest rate (2.5%)
-        const monthlyInterestRate = annualInterestRate / 12; // Monthly interest rate
-        const compoundInterestFactor = Math.pow(
-            1 + monthlyInterestRate,
-            tenureInMonths
-        );
-        const emi =
-            (principal * monthlyInterestRate * compoundInterestFactor) /
-            (compoundInterestFactor - 1);
-        return Math.round(emi);
+        const monthlyInterestRate = 0.025 / 12;
+        const factor = Math.pow(1 + monthlyInterestRate, tenureInMonths);
+        return Math.round((principal * monthlyInterestRate * factor) / (factor - 1));
     };
 
-    // Calculate EMI using the minimum price
-    const minEMI = calculateEMI(minPrice);
+    const emi = minPrice ? `AED ${calculateEMI(minPrice).toLocaleString("en-AE", { minimumFractionDigits: 0 })}*` : "Not Available";
 
-    // Format the minimum EMI for display
-    const emiString = minEMI
-        ? `AED ${minEMI.toLocaleString("en-AE", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-        })}*`
-        : "Not Available";
-
-    return (
-        <span className="tw-mt-1 tw-text-base tw-font-semibold">{emiString}</span>
-    );
-};
+    return <p className="tw-mt-1 md:text-md tw-text-sm tw-font-semibold">{emi}</p>;
+});
 
 const CarCard = ({ car, loading }) => {
+    const { year, featuredImage, brand, model, engine, power, torque, minPrice, maxPrice } = car || {};
     return (
-        <div className="tw-flex tw-flex-col tw-py-4 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-md tw-cursor-pointer tw-transition-all hover:tw-shadow-lg
-          xl:tw-py-5 xl:tw-h-full xl:tw-px-5 xl:tw-w-full xl:tw-shadow-lg">
-            <div className="tw-flex tw-flex-col tw-text-sm tw-leading-4 tw-text-neutral-900 tw-px-4 tw-flex-grow xl:tw-px-5 xl:tw-h-full">
-                <div className="tw-self-start tw-py-1 tw-px-2 tw-mb-2 tw-text-xs tw-rounded-full tw-border tw-border-solid tw-bg-slate-100 tw-border-blue-600 tw-border-opacity-30">
-                    Model: {car?.highTrim?.year}
-                </div>
-                {loading ? (
-                    <Skeleton variant="rectangular" width="100%" height={192} />
-                ) : (
-                    <Image
-                        loading="lazy" // Lazy loading for improved performance
-                        src={car?.highTrim?.featuredImage} // Ensure this image is optimized
-                        width={600} // Set a fixed width to maintain layout
-                        height={300} // Set a height to maintain aspect ratio
-                        sizes="(max-width: 600px) 100vw, (min-width: 601px) 50vw" // Responsive sizes for better loading
-                        className="tw-w-full tw-h-44 tw-object-contain tw-rounded-lg xl:tw-h-48" // Retain existing styling
-                        alt={car.name} // Descriptive alt text for accessibility
-                    />
-                )}
-            </div>
-            <Link href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}>
-                <div className="tw-flex tw-flex-col tw-px-4 tw-pt-2 tw-mt-2 tw-w-full xl:tw-px-5 xl:tw-pt-3 xl:tw-mt-2 xl:tw-flex-grow">
-                    <h6 className="tw-text-xs tw-tracking-wider tw-leading-4 tw-text-blue-600 tw-uppercase tw-font-bold tw-m-0">
-                        {car.brand.name}
-                    </h6>
-                    <h4 className="tw-text-base tw-text-gray-900 tw-font-semibold tw-m-0 xl:tw-text-lg">
-                        {car.name}
-                    </h4>
-                    <CarPriceRange minPrice={car?.minPrice} maxPrice={car?.maxPrice} />
-                </div>
+        <article className="tw-flex tw-flex-col tw-py-5 tw-bg-white tw-rounded-2xl tw-border tw-border-solid tw-border-zinc-100 tw-shadow-md tw-cursor-pointer tw-transition-all tw-hover:shadow-lg tw-xl:w-full tw-xl:shadow-lg">
+            <p className="tw-z-10 tw-text-xs tw-justify-center tw-self-start tw-py-1.5 tw-pr-2 tw-pl-3 tw-rounded-tr-full tw-rounded-br-full tw-backdrop-blur-md tw-bg-slate-100 tw-font-semibold">
+                Model: {year}
+            </p>
+
+            <Link href={`/brands/${brand?.slug}/${year}/${model?.slug}`}>
+                <header className="tw-flex tw-flex-col tw-w-full tw-text-sm tw-leading-4 tw-rounded-2xl tw-text-neutral-900 tw-px-5">
+                    <div className="tw-relative tw-self-center tw--mt-1.5 tw-w-full tw-aspect-[1.69] tw-max-w-[278px] tw-flex tw-justify-center tw-items-center">
+                        <Image
+                            src={featuredImage?.url || "/assets/img/car-placeholder.png"}
+                            alt={`Image of ${model?.name || "Car"}`}
+                            width={featuredImage?.width}
+                            height={featuredImage?.height}
+                            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            loading="lazy"
+                        />
+                    </div>
+                </header>
             </Link>
-            <div className="tw-flex tw-items-center tw-mt-3 tw-px-4 tw-w-full tw-justify-between xl:tw-mt-4 xl:tw-px-5 xl:tw-justify-between">
-                <div className="tw-flex tw-flex-col tw-items-start">
-                    <span className="tw-text-xs tw-leading-3">EMI Starting from</span>
-                    <CarEMIDisplay minPrice={car?.minPrice} />
+
+            <Link href={`/brands/${brand?.slug}/${year}/${model?.slug}`}>
+                <section className="tw-car-filter-card tw-flex tw-flex-col tw-justify-center tw-mt-1 tw-w-full tw-px-5">
+                    <div className="tw-flex tw-flex-col">
+                        <h6 className="tw-text-blue-600 tw-uppercase tw-font-semibold tw-mb-1 tw-text-xs">
+                            {brand?.name}
+                        </h6>
+                        <h4 className="tw-text-gray-600 tw-font-semibold tw-mb-0 md:text-lg tw-text-sm">
+                            {model?.name}
+                        </h4>
+                        <h4 className="tw-text-neutral-900 tw-font-bold tw-mt-2">
+                            <CarPriceRange minPrice={minPrice} maxPrice={maxPrice} />
+                        </h4>
+                    </div>
+                </section>
+            </Link>
+
+            <section className="tw-px-5 md:tw-block tw-hidden">
+                <div className="tw-car-filter-card-spec tw-flex tw-gap-5 tw-justify-between tw-self-center tw-p-3 tw-w-full tw-rounded-lg tw-bg-slate-100 tw-text-neutral-900 tw-mt-2">
+                    <div className="tw-flex tw-flex-col">
+                        <p className="tw-text-xs tw-leading-5 tw-uppercase tw-text-gray-500">Engine</p>
+                        <p className="tw-text-sm tw-font-semibold tw-text-gray-500">{engine || "N/A"}</p>
+                    </div>
+                    <div className="tw-flex tw-flex-col">
+                        <p className="tw-text-xs tw-leading-5 tw-uppercase tw-text-gray-500">Power</p>
+                        <p className="tw-text-sm tw-font-semibold tw-text-gray-500">{power ? `${power}hp` : "N/A"}</p>
+                    </div>
+                    <div className="tw-flex tw-flex-col">
+                        <p className="tw-text-xs tw-leading-5 tw-uppercase tw-text-gray-500">Torque</p>
+                        <p className="tw-text-sm tw-font-semibold tw-text-gray-500">{torque ? `${torque}Nm` : "N/A"}</p>
+                    </div>
                 </div>
-                <Link href={`/brands/${car?.brand?.slug}/${car?.highTrim?.year}/${car?.slug}`}>
-                    <button className="tw-mt-3 tw-px-4 tw-py-2 tw-text-sm tw-font-semibold tw-tracking-tight tw-text-white tw-bg-blue-600 tw-border tw-border-blue-600 active:tw-bg-blue-700 tw-border-solid tw-rounded-full tw-hover:tw-bg-blue-700 tw-focus:tw-outline-none tw-focus:tw-ring-2 tw-focus:tw-ring-blue-500 xl:tw-mt-4 xl:tw-px-7 xl:tw-py-3 xl:tw-text-base xl:tw-font-semibold xl:tw-tracking-tight xl:tw-leading-4 xl:tw-bg-blue-600 xl:tw-border xl:tw-border-blue-600 xl:tw-rounded-full xl:tw-hover:tw-bg-blue-700 xl:tw-focus:tw-ring-2 xl:tw-focus:tw-ring-blue-500 xl:tw-active:tw-bg-blue-700">
-                        View Details
-                    </button>
-                </Link>
-            </div>
-        </div>
+            </section>
+
+            <footer className="tw-grid tw-grid-cols-2 tw-mt-3 tw-w-full tw-px-5">
+                <div className="tw-flex tw-flex-col tw-my-auto tw-text-neutral-900">
+                    <p className="tw-text-xs tw-text-gray-500">EMI Starting from</p>
+                    <CarEMIDisplay minPrice={minPrice} />
+                </div>
+                <div className="tw-flex tw-justify-end">
+                    <PrimaryButton
+                        label="View Details"
+                        href={`/brands/${brand?.slug}/${year}/${model?.slug}`}
+                    />
+                </div>
+            </footer>
+        </article>
     );
 };
 
-export default CarCard
+export default CarCard;

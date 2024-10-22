@@ -582,7 +582,7 @@ function MainLayout({ children, pageMeta }) {
                 >
                   Reviews
                 </Link>
-                <PrimaryButton label='Signin' additionalClass="!tw-bg-black" onClick={() => setIsLoginModalOpen(true)} />
+                {/* <PrimaryButton label='Signin' additionalClass="!tw-bg-black" onClick={() => setIsLoginModalOpen(true)} /> */}
               </div>
             </div>
           </div>
