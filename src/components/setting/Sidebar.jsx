@@ -71,7 +71,7 @@ const Sidebar = () => {
                     </Collapse>
 
                     {/* Security Section */}
-                    <Link href="/setting/security" className={`tw-text-left tw-py-2 tw-pl-4 tw-flex tw-items-center tw-text-black tw-text-base tw-font-medium tw-border-l-4 hover:tw-bg-gray-50 ${router.pathname === '/setting/security' ? 'tw-border-0 tw-border-l-4 tw-border-solid tw-bg-gray-100 tw-border-blue-600' : 'tw-border-transparent'}`}>
+                    <Link href="/setting/security" className={`tw-text-left tw-py-2 tw-pl-2 tw-flex tw-items-center tw-text-black tw-text-base tw-font-medium tw-border-l-4 hover:tw-bg-gray-50 ${router.pathname === '/setting/security' ? 'tw-border-0 tw-border-l-4 tw-border-solid tw-bg-gray-100 tw-border-blue-600' : 'tw-border-transparent'}`}>
                         <Security className="tw-mr-3 tw-text-black" />
                         Security
                     </Link>
