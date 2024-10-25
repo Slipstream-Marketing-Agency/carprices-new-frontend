@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://carprices.ae/static-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://carprices.ae/trims-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://carprices.ae/models-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://carprices.ae/brands-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://carprices.ae/bodytypes-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://carprices.ae/articles-sitemap.xml</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
+</sitemapindex>

@@ -1,0 +1,602 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+  --white-color: #fff;
+  --black-color: #000;
+  --black-color2: #1d1d1d;
+  --title-color: #13141a;
+  --text-color: #5e5e5e;
+  /* --primary: #46D993; */
+  --primary: #275ba7;
+  --secondary: #24272c;
+  --light: #77cdf2;
+  --rating: #ffa236;
+  --grey: #f5f5f5;
+  --bg-color: #f7f7f7;
+  --black: #000;
+  --white: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #ffffff;
+    --white-color: #fff;
+    --black-color: #000;
+    --black-color2: #1d1d1d;
+    --title-color: #13141a;
+    --text-color: #5e5e5e;
+    /* --primary: #46D993; */
+    --primary: #275ba7;
+    --secondary: #24272c;
+    --light: #77cdf2;
+    --rating: #ffa236;
+    --grey: #f5f5f5;
+    --bg-color: #f7f7f7;
+    --black: #000;
+    --white: #fff;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Poppins', 'Arial', 'sans-serif';
+  /* Updated to use Roboto from Google Fonts */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  body {
+    color: black !important;
+    /* This will set the default text color to black globally */
+  }
+}
+
+/* text */
+p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h2 {
+  line-height: 1.2 !important;
+}
+
+@media (max-width:768px) {
+  p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* Image */
+
+/* Global image loading CSS */
+img {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+/* Once the image source is fully available, these rules will apply */
+img[src],
+img[srcset] {
+  opacity: 1;
+  filter: none;
+}
+
+
+
+/* Home Page Filter */
+.gradient-filter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  background: repeating-linear-gradient(135deg, rgba(40, 81, 196, 0.5) 0%, rgba(40, 81, 196, 0.5) 1%, rgba(255, 255, 255, 0) 2%, rgba(255, 255, 255, 0) 1%);
+}
+
+/* Car Card */
+
+.car-filter-card-spec .spec-head {
+  font-size: 13px;
+}
+
+.car-filter-card-spec .spec-value {
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+/* Slider */
+.custom-arrow {
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white !important;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+}
+
+.custom-next-arrow {
+  right: -13px !important;
+}
+
+.custom-prev-arrow {
+  left: -13px !important;
+}
+
+.custom-arrow img {
+  width: 20px;
+  height: 20px;
+}
+
+.slick-next:before {
+  display: none;
+}
+
+.slick-prev:before {
+  display: none;
+}
+
+.slick-list {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+/* Adsense */
+
+@media (min-width: 728px) {
+  .responsive_leaderboard_horizontal {
+    text-align: center;
+    width: 728px;
+    height: 90px;
+  }
+
+  .responsive_vertical_ad_desktop {
+    text-align: center;
+    width: 300px;
+    height: 600px;
+  }
+
+  .responsive_footer_ad_horizontal {
+    text-align: center;
+    width: 970px;
+    height: 250px;
+  }
+
+  .responsive_footer_mobile_square {
+    display: none;
+  }
+
+  .responsive_desktop_square_300x250 {
+    text-align: center;
+    width: 300px;
+    height: 250px;
+  }
+
+  .fixed_top_banner_bill_board {
+    width: 970px;
+    height: 180px;
+    text-align: center;
+  }
+
+  .Ad728x90 {
+    width: 728px;
+    height: 90px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .AdBlog {
+    width: 728px;
+    height: 90px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad300x250 {
+    width: 300px;
+    height: 250px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad970x180 {
+    width: 970px;
+    height: 180px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad300x600 {
+    width: 300px;
+    height: 600px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad970x250 {
+    width: 970px;
+    height: 250px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad320x100 {
+    width: 320px;
+    height: 100px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad160x600 {
+    width: 160px;
+    height: 600px;
+    margin: auto;
+    background-color: #f1f1f1 !important;
+  }
+
+  .Ad250x250 {
+    display: none;
+  }
+}
+
+/* Scrollbar */
+
+/* Hide scrollbar for the custom-scrollbar class */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Hides the scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  /* Hides the scrollbar in IE and Edge */
+  scrollbar-width: none;
+  /* Hides the scrollbar in Firefox */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--primary);
+}
+
+
+/* compare-cars */
+
+.loader {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.mobileFilter {
+  display: flex;
+  align-items: center;
+
+  /* flex-wrap: wrap; */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+  scrollbar-width: none; /* Hide the scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide the scrollbar for IE/Edge */
+}
+.mobileFilter::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar for WebKit browsers */
+}
+.specificMobileFilter {
+  cursor: pointer;
+  margin-right: 10px;
+
+  flex: 1; /* Equal width for each item */
+  max-width: 200px; /* Adjust the max-width as needed */
+  margin: 5px;
+}
+.mobileFilterTitle {
+  font-size: 17px;
+  font-weight: 800;
+  padding: 3px 6px;
+  padding-top: 6px;
+  padding-left: 10px;
+  border-radius: 13px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+  display: inline-block;
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobileFilterTitle:active {
+  background: #e0f6ff;
+}
+
+
+/* Old Model Switch Tab*/
+
+.year_tab .container {
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.year_tab .tabs {
+  display: flex;
+  position: relative;
+  color: var(--white);
+  background-color: var(--primary);
+  box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15),
+    0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  padding: 0px;
+  border-radius: 99px;
+}
+
+.year_tab.tabs * {
+  z-index: 2;
+}
+
+.year_tab input[type="radio"] {
+  display: none;
+}
+
+.year_tab .tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 100px;
+  font-weight: 500;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color 0.15s ease-in;
+  z-index: 100 !important;
+}
+
+.year_tab .notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  transition: 0.15s ease-in;
+}
+
+.year_tab input[type="radio"]:checked + label > .notification {
+  background-color: var(--light);
+  color: #fff;
+}
+
+.year_tab input[id="radio-1"]:checked ~ .glider {
+  transform: translateX(0);
+}
+
+.year_tab input[id="radio-2"]:checked ~ .glider {
+  transform: translateX(100%);
+}
+
+.year_tab input[id="radio-3"]:checked ~ .glider {
+  transform: translateX(200%);
+}
+
+.year_tab .glider {
+  position: absolute;
+  display: flex;
+  height: 30px;
+  width: 100px;
+  color: var(--white);
+  background-color: var(--light);
+  z-index: 1;
+  border-radius: 99px;
+  transition: 0.25s ease-out;
+}
+
+@media (max-width: 767px) {
+  .year_tab .tabs {
+    transform: scale(0.6);
+  }
+
+  .year_tab .tab {
+    height: 40px;
+    width: 130px;
+    font-size: 22px;
+  }
+  .year_tab .glider {
+    height: 40px;
+    width: 130px;
+  }
+}
+
+.old-model-tab img {
+  object-fit: contain;
+  height: 300px;
+}
+
+
+
+h1 {
+  font-size: 1.8rem !important;
+}
+
+h2 {
+  font-size: 1.6rem !important;
+}
+
+h3 {
+  font-size: 1.4rem !important;
+}
+
+h4 {
+  font-size: 1.2rem !important;
+}
+
+h5 {
+  font-size: 1rem !important;
+}
+
+h6 {
+  font-size: 0.8rem !important;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 1.4rem !important;
+  }
+  h2 {
+    font-size: 1.2rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+  h4 {
+    font-size: 1rem !important;
+  }
+
+  h5 {
+    font-size: 0.8rem !important;
+  }
+
+  h6 {
+    font-size: 0.8rem !important;
+  }
+  /* p {
+    font-size: 14px !important;
+  } */
+}
+
+
+
+
+
+.read-more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding-left: 15px;
+}
+
+.read-more-less {
+  font-size: 15px;
+  color: #484848;
+  position: relative;
+}
+
+.read-more-less .height-hidden {
+  transition: all 0.1s ease-in;
+}
+
+.height-hidden {
+  height: 38px;
+  overflow: hidden;
+}
+
+.info {
+  font-size: 15px;
+  margin-top: 8px;
+  color: #484848;
+}
+
+.read-more-less .read-more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding-left: 15px;
+}
+
+.read-more-less .read-more,
+.read-more-less .read-less {
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.button,
+.btn-solid,
+.btn-line,
+a,
+.read-more,
+.read-less {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.read-more-less .read-more:before {
+  content: "... ";
+  position: absolute;
+  left: 0;
+  text-decoration: none;
+}
+
+.read-more-less .read-less.hide {
+  display: none;
+}
+
+.read-more-less .read-less {
+  position: relative;
+  display: block;
+  text-align: right;
+}
+
+.read-more-less .read-more,
+.read-more-less .read-less {
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.button,
+.btn-solid,
+.btn-line,
+a,
+.read-more,
+.read-less {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.hide {
+  display: none;
+}
+
+.read-more-less {
+  font-size: 15px;
+  color: #484848;
+  position: relative;
+}
