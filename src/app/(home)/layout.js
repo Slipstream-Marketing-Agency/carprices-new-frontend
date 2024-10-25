@@ -37,6 +37,9 @@ export default function RootLayout({ children, params }) {
 
   return (
     <html lang="en">
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       <body className={`${poppins.className} antialiased`}> {/* Apply Google Font */}
         <Script
           id="gtm"
