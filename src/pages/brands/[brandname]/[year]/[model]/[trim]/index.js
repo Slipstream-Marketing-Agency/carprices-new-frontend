@@ -55,6 +55,7 @@ import VariantsListing from "@/src/components/variant/VariantListing";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import Head from "next/head";
 import OptimizedImage from "@/src/components/common/image/OptimisedImage";
+import UserReviews from "@/src/components/car-detail/UserReviews";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {
@@ -164,9 +165,9 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
     // Format the minimum EMI for display
     const emiString = minEMI
       ? `AED ${minEMI?.toLocaleString("en-AE", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 2,
-        })}*`
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      })}*`
       : "Not Available";
 
     return <span>{emiString}</span>;
@@ -297,20 +298,17 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
     <MainLayout
       pageMeta={{
         title: trimData?.seo?.metaTitle ? trimData.seo.metaTitle : `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
-        description: trimData?.seo?.metaDescription ? trimData.seo.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${
-          trimData?.name
-        } price in UAE starts at ${
-          trimData.price <= 0
+        description: trimData?.seo?.metaDescription ? trimData.seo.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
+          } price in UAE starts at ${trimData.price <= 0
             ? "TBD"
             : "AED" +
-              " " +
-              trimData.price?.toLocaleString("en-AE", {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2,
-              })
-        }*.Check out ${
-          trimData?.model
-        } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
+            " " +
+            trimData.price?.toLocaleString("en-AE", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 2,
+            })
+          }*.Check out ${trimData?.model
+          } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
         type: "Car Review Website",
         ...(trimData?.seo?.metaRobots && { robots: trimData.seo.metaRobots }),
         ...(trimData?.seo?.canonicalURL && { canonical: trimData.seo.canonicalURL }),
@@ -452,7 +450,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                   ((trimData.price - trimData.price * (downPayment / 100)) *
                     (interestRate / 100 / 12) *
                     Math.pow(1 + interestRate / 100 / 12, years * 12)) /
-                    (Math.pow(1 + interestRate / 100 / 12, years * 12) - 1)
+                  (Math.pow(1 + interestRate / 100 / 12, years * 12) - 1)
                 )}
               />
               /Monthly EMI*{" "}
@@ -525,9 +523,8 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                   <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
                     {trimData?.fuelType === "Electric"
                       ? trimData?.motor?.split(" ")[0]
-                      : `${(trimData?.displacement / 1000).toFixed(1)}L ${
-                          trimData?.engine
-                        }`}
+                      : `${(trimData?.displacement / 1000).toFixed(1)}L ${trimData?.engine
+                      }`}
                   </h5>
                 </div>
               </div>
@@ -585,8 +582,8 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
                   </h6>
                   <h5 className="tw-text-gray-500 tw-font-semibold tw-mt-1 tw-mb-0">
                     {trimData?.fuelType === "Electric" &&
-                    trimData?.fuelConsumption === null &&
-                    trimData?.range !== 0
+                      trimData?.fuelConsumption === null &&
+                      trimData?.range !== 0
                       ? trimData?.range
                       : trimData?.fuelConsumption + "kmpl"}
                   </h5>
@@ -608,22 +605,20 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
             <Link
               href="#specs"
               onClick={() => handleLinkClick("#specs")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#specs"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
-              }`}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-h-full tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#specs"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
+                }`}
             >
               Specs
             </Link>
             <Link
               href="#variants&prices"
               onClick={() => handleLinkClick("#variants&prices")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#variants&prices"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
-              }`}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#variants&prices"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
+                }`}
             >
               Variants & Prices
             </Link>
@@ -685,11 +680,10 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
             <Link
               href="#faq"
               onClick={() => handleLinkClick("#faq")}
-              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${
-                activeLink === "#faq"
-                  ? "tw-border-b-blue-600 tw-text-black"
-                  : "tw-border-transparent tw-text-gray-500"
-              }`}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#faq"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
+                }`}
             >
               FAQ
             </Link>
@@ -734,7 +728,7 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
       <div id="vehicle-details" className="tw-container">
         <DetailedSpecification trim={trimData} />
       </div>
-      
+
       <div className="tw-my-10">
         <Ad728x90 dataAdSlot="5962627056" />
       </div>
@@ -753,6 +747,20 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
 
         <VehicleFaq trim={trimData} />
       </div>
+      <div
+        className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-14"
+        id="reviews"
+      >
+        <div className="md:tw-col-span-9 tw-col-span-12">
+          <UserReviews
+            name={`${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name}`}
+          />
+        </div>
+        <div className="md:tw-col-span-3 tw-col-span-9">
+          {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+          <Ad300x600 dataAdSlot="3792539533" />
+        </div>
+      </div>
 
       <div id="variants&prices" className="tw-container">
         <div className="tw-my-10">
@@ -766,73 +774,73 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         />
       </div>
       <div className="tw-grid tw-grid-cols-2 md:tw-gap-10 tw-gap-0 max-md:tw-grid-cols-1 tw-container tw-px-5 tw-my-10">
-            <div className="tw-flex tw-flex-col tw-w-full">
-              <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
-                <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
-                  <img
-                    src="/emi.jpg"
-                    alt=""
-                    className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
-                  />
-                  <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+        <div className="tw-flex tw-flex-col tw-w-full">
+          <Link href="/loan-calculator" className="tw-flex md:tw-gap-2.5 ">
+            <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
+              <img
+                src="/emi.jpg"
+                alt=""
+                className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
+              />
+              <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
 
-                  <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
-                    <div>
-                      <h2 className="tw-text-white">
-                        Calculate Your Car Loan EMI
-                      </h2>
-                      <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
-                        Fill in the details and find out what the installment
-                        will be for your new car. Our car loan calculator is
-                        interactive and accurate.
-                      </p>
-                    </div>
-                    <div className="tw-flex tw-items-center tw-gap-2 md:tw-mt-10 tw-mt-3">
-                      <p className="tw-text-white tw-font-bold">
-                        Calculate Now
-                      </p>
-                      <span className="material-symbols-outlined tw-text-white">
-                        arrow_forward
-                      </span>
-                    </div>
-                  </div>
+              <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
+                <div>
+                  <h2 className="tw-text-white">
+                    Calculate Your Car Loan EMI
+                  </h2>
+                  <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                    Fill in the details and find out what the installment
+                    will be for your new car. Our car loan calculator is
+                    interactive and accurate.
+                  </p>
                 </div>
-              </Link>
-            </div>
-            <div className="tw-flex tw-flex-col tw-w-full">
-              <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
-                <img
-                  src="/car-value.jpg"
-                  alt=""
-                  className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
-                />
-                <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
-                <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
-                  <div>
-                    <h2 className="tw-text-white">
-                      Find out the value of your current car
-                    </h2>
-                    <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
-                      Our car valuation calculator helps you find out what you
-                      can expect for your current car. Fill in the details and
-                      get an estimated current value for your used car.
-                    </p>
-                  </div>
-
-                  <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
-                    <p className="tw-font-bold">Coming Soon</p>
-                    {/* <span className="material-symbols-outlined">
+                <div className="tw-flex tw-items-center tw-gap-2 md:tw-mt-10 tw-mt-3">
+                  <p className="tw-text-white tw-font-bold">
+                    Calculate Now
+                  </p>
+                  <span className="material-symbols-outlined tw-text-white">
                     arrow_forward
-                  </span> */}
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
+          </Link>
+        </div>
+        <div className="tw-flex tw-flex-col tw-w-full">
+          <div className="tw-flex tw-flex-col tw-rounded-2xl tw-shadow-lg tw-bg-stone-900 tw-relative max-md:tw-mt-6 md:tw-h-[350px] tw-h-[200px]">
+            <img
+              src="/car-value.jpg"
+              alt=""
+              className="tw-absolute tw-inset-0 tw-object-cover tw-w-full md:tw-h-[350px] tw-h-[200px] tw-rounded-2xl"
+            />
+            <div className="md:hidden block tw-rounded-2xl tw-absolute tw-inset-0 tw-bg-black tw-opacity-30"></div>
+            <div className="tw-relative tw-z-10 tw-m-2 tw-bottom-0 tw-left-0 tw-right-0 md:tw-p-5 tw-p-3 tw-text-white">
+              <div>
+                <h2 className="tw-text-white">
+                  Find out the value of your current car
+                </h2>
+                <p className="md:tw-mt-6 tw-leading-6 md:tw-w-[50%] w-full">
+                  Our car valuation calculator helps you find out what you
+                  can expect for your current car. Fill in the details and
+                  get an estimated current value for your used car.
+                </p>
+              </div>
+
+              <div className="tw-flex md:tw-gap-2.5 md:tw-mt-10 tw-mt-3">
+                <p className="tw-font-bold">Coming Soon</p>
+                {/* <span className="material-symbols-outlined">
+                    arrow_forward
+                  </span> */}
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
 
       <div className="tw-container tw-mx-auto">
         {" "}
-        <SeoLinksFilter/>
+        <SeoLinksFilter />
       </div>
 
       <div className="car-details-area mt-15 mb-15">

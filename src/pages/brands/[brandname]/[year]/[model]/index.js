@@ -32,6 +32,7 @@ import KeyFeatures from "@/src/components-old/details/KeyFeatures";
 import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import ImageSlider from "@/src/components/car-detail/ImageSlider";
 import Head from "next/head";
+import UserReviews from "@/src/components/car-detail/UserReviews";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -735,6 +736,20 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
               )} */}
 
         {/* <Ad728x90 dataAdSlot="7369694604" /> */}
+        <div
+          className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-14"
+          id="reviews"
+        >
+          <div className="md:tw-col-span-9 tw-col-span-12">
+            <UserReviews
+              name={`${year} ${brand?.name} ${model?.name}`}
+            />
+          </div>
+          <div className="md:tw-col-span-3 tw-col-span-9">
+            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+            <Ad300x600 dataAdSlot="3792539533" />
+          </div>
+        </div>
         <div
           className="tw-container tw-mx-auto tw-grid tw-grid-cols-12 tw-mt-14"
           id="faq"
