@@ -33,6 +33,7 @@ import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import ImageSlider from "@/src/components/car-detail/ImageSlider";
 import Head from "next/head";
 import UserReviews from "@/src/components/car-detail/UserReviews";
+import UserReviewsNew from "@/src/components/car-detail/UserReviewsNew";
 
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
@@ -515,6 +516,16 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
             >
               Variants & prices
             </Link>
+            <Link
+              href={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
+              onClick={() => handleLinkClick("#user-reviews")}
+              className={`tw-gap-2.5 tw-py-5 tw-self-stretch tw-p-2.5 tw-my-auto tw-whitespace-nowrap tw-border-0 tw-border-b-2 tw-border-solid ${activeLink === "#user-reviews"
+                ? "tw-border-b-blue-600 tw-text-black"
+                : "tw-border-transparent tw-text-gray-500"
+                }`}
+            >
+              User Reviews
+            </Link>
             {/* <Link
               href="#price"
               onClick={() => handleLinkClick("#price")}
@@ -741,8 +752,15 @@ function CarDeatilsPage({ oldModel, currentmodel, seoData }) {
           id="reviews"
         >
           <div className="md:tw-col-span-9 tw-col-span-12">
-            <UserReviews
+            {/* <UserReviews
               name={`${year} ${brand?.name} ${model?.name}`}
+            /> */}
+            <UserReviewsNew
+              name={`${year} ${brand?.name} ${model?.name}`}
+              year={year}
+              model={model.name}
+              brand={brand.name}
+              link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
             />
           </div>
           <div className="md:tw-col-span-3 tw-col-span-9">

@@ -56,6 +56,7 @@ import SeoLinksFilter from "@/src/components/common/SeoLinksFilter";
 import Head from "next/head";
 import OptimizedImage from "@/src/components/common/image/OptimisedImage";
 import UserReviews from "@/src/components/car-detail/UserReviews";
+import UserReviewsNew from "@/src/components/car-detail/UserReviewsNew";
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   .MuiToggleButtonGroup-grouped {
@@ -752,9 +753,15 @@ function CarDeatilsPage({ model, trimList, trimData, trimSlug }) {
         id="reviews"
       >
         <div className="md:tw-col-span-9 tw-col-span-12">
-          <UserReviews
+          {/* <UserReviews
             name={`${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name}`}
-          />
+          /> */}
+          <UserReviewsNew
+              name={`${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name}`}
+              year={trimData?.year}
+              model={trimData?.model}
+              brand={trimData?.brand}
+            />
         </div>
         <div className="md:tw-col-span-3 tw-col-span-9">
           {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
