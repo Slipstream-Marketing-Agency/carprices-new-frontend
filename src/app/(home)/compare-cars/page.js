@@ -1,6 +1,7 @@
 import { fetchMetaData } from '@/lib/fetchMetaData';
 import React from 'react';
 import CompareCarsWrap from '@/components/compare-cars/CompareCarsWrap';
+import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
 // import CarComparisonTable from '@/components/compare-cars/CarComparisonTable';
 
 export async function generateMetadata({ params }) {
@@ -43,6 +44,9 @@ export async function generateMetadata({ params }) {
 
 export default async function CompareCars({ params }) {
     return (
-        <CompareCarsWrap params={params} />
+        <>
+            <CompareCarsWrap params={params} />
+            <SelectedCompareCarsSection />
+        </>
     );
 }

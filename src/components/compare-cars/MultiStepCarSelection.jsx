@@ -4,6 +4,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import EditIcon from '@mui/icons-material/Edit';
 import CarSelectionModal from './CarSelectionModal'; // Import your modal component
+import { CircularProgress } from "@mui/material";
 
 const MultiStepCarSelection = ({ carData, mode }) => {
   const [showModal, setShowModal] = useState(false); // State to handle modal visibility
@@ -59,22 +60,31 @@ const MultiStepCarSelection = ({ carData, mode }) => {
   return (
     <>
       {mode === "add" ? (
-        <div onClick={() => setShowModal(true)}>
-          <div className="text-center cursor-pointer">
-            <ControlPointIcon className="text-[120px] text-gray-300" />
-            <h5 className="text-gray-500">Add to Compare</h5>
+        selectedVariant ? (
+          <div className="flex justify-center items-center mt-4">
+            <CircularProgress /> {/* Material UI loading spinner */}
           </div>
-        </div>
+        ) : (
+          <>
+            <div onClick={() => setShowModal(true)}>
+              <div className="text-center cursor-pointer">
+                <ControlPointIcon className="text-[120px] text-gray-300" />
+                <h5 className="text-gray-500">Add to Compare</h5>
+              </div>
+            </div>
+          </>
+        )
       ) : (
         <div className="absolute top-3 left-3">
           <button
             className="bg-white font-semibold flex items-center"
             onClick={() => setShowModal(true)}
           >
-            <EditIcon className="text-sm mr-2" /> Change Car{" "}
+            <EditIcon className="text-sm mr-2" /> Change Car
           </button>
         </div>
       )}
+
 
       {/* CarSelectionModal Integration */}
       <CarSelectionModal
@@ -83,15 +93,6 @@ const MultiStepCarSelection = ({ carData, mode }) => {
         onVariantSelect={handleVariantSelect}
       />
 
-      {/* Display selected car details */}
-      {selectedVariant && (
-        <div className="mt-4">
-          <h2 className="text-xl">Selected Car Variant: {selectedVariant}</h2>
-          <p>Year: {selectedYear}</p>
-          <p>Brand: {selectedBrand}</p>
-          <p>Model: {selectedModel}</p>
-        </div>
-      )}
     </>
   );
 };

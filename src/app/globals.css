@@ -45,7 +45,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Poppins', 'Arial', 'sans-serif';
   /* Updated to use Roboto from Google Fonts */
 }
 
@@ -450,6 +449,7 @@ img[srcset] {
 
 
 
+/* 
 h1 {
   font-size: 1.8rem !important;
 }
@@ -472,9 +472,9 @@ h5 {
 
 h6 {
   font-size: 0.8rem !important;
-}
+} */
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   h1 {
     font-size: 1.4rem !important;
   }
@@ -496,10 +496,7 @@ h6 {
   h6 {
     font-size: 0.8rem !important;
   }
-  /* p {
-    font-size: 14px !important;
-  } */
-}
+} */
 
 
 

@@ -98,18 +98,24 @@ const CarSelectionModal = ({
 
     const handleYearSelect = (year) => {
         setSelectedYear(year);
+        setSelectedBrand(""); // Reset brand when changing the year
+        setSelectedModel(""); // Reset model when changing the year
+        setSelectedVariant(""); // Reset variant when changing the year
         setSearchTerm("");
         fetchBrands(year);
     };
 
     const handleBrandSelect = (brand) => {
         setSelectedBrand(brand);
+        setSelectedModel(""); // Reset model when changing the brand
+        setSelectedVariant(""); // Reset variant when changing the brand
         setSearchTerm("");
         fetchModels(brand);
     };
 
     const handleModelSelect = (model) => {
         setSelectedModel(model);
+        setSelectedVariant(""); // Reset variant when changing the model
         setSearchTerm("");
         fetchVariants(model);
     };
@@ -170,65 +176,69 @@ const CarSelectionModal = ({
                             Choose {currentStep}
                         </h2>
                         <div className="flex gap-3">
-                            <div
-                                className={` ${currentStep === "year" && selectedYear === "" ? "hidden " : "block"
-                                    }`}
-                                onClick={() => {
-                                    setCurrentStep("year");
-                                    setSearchTerm("");
-                                }}
-                            >
-                                <DataBadge
-                                    iconSrc={null}
-                                    label={selectedYear}
+                            {selectedYear && (
+                                <div
+                                    className={`${currentStep === "year" && selectedYear === "" ? "hidden" : "block"}`}
                                     onClick={() => {
                                         setCurrentStep("year");
                                         setSearchTerm("");
                                     }}
-                                />
-                            </div>
+                                >
+                                    <DataBadge
+                                        iconSrc={null}
+                                        label={selectedYear}
+                                        onClick={() => {
+                                            setCurrentStep("year");
+                                            setSearchTerm("");
+                                        }}
+                                    />
+                                </div>
+                            )}
 
-                            <div
-                                className={` ${currentStep === "brand" && selectedBrand === ""
-                                    ? "hidden "
-                                    : "block"
-                                    }`}
-                                onClick={() => {
-                                    setCurrentStep("brand");
-                                    setSearchTerm("");
-                                }}
-                            >
-                                <DataBadge
-                                    iconSrc={null}
-                                    label={selectedBrand}
+                            {selectedBrand && (
+                                <div
+                                    className={`${currentStep === "brand" && selectedBrand === "" ? "hidden" : "block"}`}
                                     onClick={() => {
                                         setCurrentStep("brand");
                                         setSearchTerm("");
                                     }}
-                                />
-                            </div>
+                                >
+                                    <DataBadge
+                                        iconSrc={null}
+                                        label={selectedBrand}
+                                        onClick={() => {
+                                            setCurrentStep("brand");
+                                            setSearchTerm("");
+                                        }}
+                                    />
+                                </div>
+                            )}
 
-                            <div className={` ${selectedModel === "" ? "hidden " : "block"}`}>
-                                <DataBadge
-                                    iconSrc={null}
-                                    label={selectedModel}
-                                    onClick={() => {
-                                        setCurrentStep("model");
-                                        setSearchTerm("");
-                                    }}
-                                />
-                            </div>
+                            {selectedModel && (
+                                <div className={`${selectedModel === "" ? "hidden" : "block"}`}>
+                                    <DataBadge
+                                        iconSrc={null}
+                                        label={selectedModel}
+                                        onClick={() => {
+                                            setCurrentStep("model");
+                                            setSearchTerm("");
+                                        }}
+                                    />
+                                </div>
+                            )}
 
-                            <div className={` ${selectedVariant === "" ? "hidden " : "block"}`}>
-                                <DataBadge
-                                    iconSrc={null}
-                                    label={selectedVariant}
-                                    onClick={() => {
-                                        setCurrentStep("variant");
-                                        setSearchTerm("");
-                                    }}
-                                />
-                            </div>
+                            {selectedVariant && (
+                                <div className={`${selectedVariant === "" ? "hidden" : "block"}`}>
+                                    <DataBadge
+                                        iconSrc={null}
+                                        label={selectedVariant}
+                                        onClick={() => {
+                                            setCurrentStep("variant");
+                                            setSearchTerm("");
+                                        }}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         <div className="relative rounded-md shadow-sm my-6">

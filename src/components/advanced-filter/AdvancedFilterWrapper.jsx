@@ -623,7 +623,7 @@ export default function AdvancedFilterWrapper({
                                     </div>
                                     <span
                                         className={`read-more ${expanded ? "hide" : ""
-                                            } text-primary fw-bold tw-mb-[-3px]`}
+                                            } text-primary fw-bold mb-[-3px]`}
                                         onClick={() => setExpanded(true)}
                                     >
                                         Read More

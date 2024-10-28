@@ -11,9 +11,6 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
-      fontFamily: {
-        roboto: ['Poppins', 'Arial', 'sans-serif'], // Update to Roboto Google Font
-      },
       textColor: {
         DEFAULT: '#000', // Set the default text color to black
       },

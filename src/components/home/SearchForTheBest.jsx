@@ -24,31 +24,31 @@ const searchBestCar = [
   {
     imageUrl: "/assets/img/home-search-for-best/car-dealers.webp",
     label: "Car Dealers",
-    linkUrl: "#",
+    linkUrl: "/car-dealers",
     bgColor: "bg-[#FFF8E8]",
   },
   {
     imageUrl: "/assets/img/home-search-for-best/car-videos.webp",
     label: "Car Videos",
-    linkUrl: "#",
+    linkUrl: "videos",
     bgColor: "bg-[#FFE8E8]",
   },
-  {
-    imageUrl: "/assets/img/home-search-for-best/car-promo.webp",
-    label: "Car Promos",
-    linkUrl: "#",
-    bgColor: "bg-[#FFE8F3]",
-  },
+  // {
+  //   imageUrl: "/assets/img/home-search-for-best/car-promo.webp",
+  //   label: "Car Promos",
+  //   linkUrl: "#",
+  //   bgColor: "bg-[#FFE8F3]",
+  // },
 ];
 
 const SearchForTheBest = () => {
   return (
-    <div className="container flex flex-col px-3 md:mt-12 mt-4 md:mb-6 mb-1">
+    <div className="container flex justify-center px-3 md:mt-12 mt-4 md:mb-6 mb-1">
       {/* <div className="self-start mb-2">
         <h1 className="text-xl font-semibold capitalize">Explore the Best Car Prices in the UAE</h1>
       </div> */}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {searchBestCar.map((car, index) => (
           <div
             key={index}

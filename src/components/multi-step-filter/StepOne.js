@@ -133,7 +133,7 @@ export default function StepOne({ filterData, setFilterData }) {
                 alt={item.label}
                 width={40}
                 height={40}
-                priority={true}
+                loading="lazy"
                 sizes="(min-width: 1024px) 40px, (min-width: 768px) 30px, 100vw"
                 className="w-full aspect-square object-contain"
               />

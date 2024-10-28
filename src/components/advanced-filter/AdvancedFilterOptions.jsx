@@ -31,7 +31,7 @@ export default function AdvancedFilterOptions({ brandoptions,
     driveoptions,
     displaynone,
     toggleModal,
-    setIsLoading, additionalQueryParams }) {
+    additionalQueryParams }) {
 
 
 
@@ -132,26 +132,18 @@ export default function AdvancedFilterOptions({ brandoptions,
     const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
+        if (!isInitialRender) return; // Prevent re-running on subsequent renders
+
         const query = new URLSearchParams(window.location.search);
         const brands = query.get("brand") ? query.get("brand").split(",") : [];
-        const bodies = query.get("bodytype")
-            ? query.get("bodytype").split(",")
-            : [];
+        const bodies = query.get("bodytype") ? query.get("bodytype").split(",") : [];
         const prices = query.get("price") ? query.get("price").split(",") : [];
         const powers = query.get("power") ? query.get("power").split(",") : [];
-        const displacements = query.get("displacement")
-            ? query.get("displacement").split(",")
-            : [];
-        const fuelTypes = query.get("fuelType")
-            ? query.get("fuelType").split(",")
-            : [];
-        const cylinders = query.get("cylinders")
-            ? query.get("cylinders").split(",")
-            : [];
+        const displacements = query.get("displacement") ? query.get("displacement").split(",") : [];
+        const fuelTypes = query.get("fuelType") ? query.get("fuelType").split(",") : [];
+        const cylinders = query.get("cylinders") ? query.get("cylinders").split(",") : [];
         const drive = query.get("drive") ? query.get("drive").split(",") : [];
-        const transmission = query.get("transmission")
-            ? query.get("transmission").split(",")
-            : [];
+        const transmission = query.get("transmission") ? query.get("transmission").split(",") : [];
 
         setSelectedBrands(brands);
         setSelectedBody(bodies);
@@ -167,21 +159,25 @@ export default function AdvancedFilterOptions({ brandoptions,
         if (page) {
             setCurrentPage(parseInt(page, 10));
         }
-    }, [router.asPath]);
+
+        setIsInitialRender(false); // Mark initial render as completed
+    }, [isInitialRender]);
+
 
     useEffect(() => {
-        const currentParams = new URLSearchParams(searchParams.toString()); // Create a mutable copy
-    
-        // Function to update or delete the parameter
+        if (isInitialRender) return; // Skip if it's the initial render
+
+        const currentParams = new URLSearchParams(searchParams.toString());
+
         const updateParamsForFilter = (key, value) => {
             if (value.length > 0) {
-                currentParams.set(key, value.join(",")); // Set the key with a comma-separated value
+                currentParams.set(key, value.join(","));
             } else {
-                currentParams.delete(key); // Remove the parameter if the value is empty
+                currentParams.delete(key);
             }
         };
-    
-        // Update the parameters based on the filter states
+
+        // Update URL parameters based on the current filter states
         updateParamsForFilter("brand", selectedBrands);
         updateParamsForFilter("bodytype", selectedBody);
         updateParamsForFilter("price", selectedPrice);
@@ -191,39 +187,27 @@ export default function AdvancedFilterOptions({ brandoptions,
         updateParamsForFilter("cylinders", selectedCylinders);
         updateParamsForFilter("drive", selectedDrive);
         updateParamsForFilter("transmission", selectedTransmission);
-    
-        // Include any additional parameters
+
+        // Include any additional query parameters
         Object.entries(additionalQueryParams).forEach(([key, value]) => {
             if (value) {
-                currentParams.set(key, value); // Use set to add the parameter
+                currentParams.set(key, value);
             } else {
-                currentParams.delete(key); // Remove if falsy
+                currentParams.delete(key);
             }
         });
-    
-        // Include current page if it's greater than 1
+
         if (currentPage > 1) {
             currentParams.set("page", currentPage.toString());
         } else {
             currentParams.delete("page");
         }
-    
-        // Construct the query string and update the URL
-        const queryString = currentParams.toString(); // Convert back to a query string
-        const baseUrl = pathname.replace(
-            /\[.*?\]/g,
-            (matched) => searchParams[matched.substring(1, matched.length - 1)] || ""
-        );
-    
-        if (!isInitialRender) {
-            router.replace(
-                `${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`,
-                undefined,
-                { shallow: true }
-            );
-        } else {
-            setIsInitialRender(false);
-        }
+
+        const queryString = currentParams.toString();
+        const baseUrl = pathname.replace(/\[.*?\]/g, (matched) => searchParams[matched.substring(1, matched.length - 1)] || "");
+
+        router.replace(`${baseUrl}${queryString.length > 0 ? "?" : ""}${queryString}`, undefined, { shallow: true });
+
     }, [
         selectedBrands,
         selectedBody,
@@ -235,12 +219,11 @@ export default function AdvancedFilterOptions({ brandoptions,
         selectedDrive,
         selectedTransmission,
         currentPage,
-        additionalQueryParams,
-        isInitialRender,
-        pathname, // Ensure pathname is included to avoid stale closure issues
-        searchParams // Ensure searchParams is included to avoid stale closure issues
+        // additionalQueryParams,
+        pathname,
+        // searchParams
     ]);
-    
+
 
     const handleBrandChange = (brandSlug) => {
         setSelectedBrands((prevSelectedBrands) => {
@@ -270,7 +253,7 @@ export default function AdvancedFilterOptions({ brandoptions,
 
     // Function to update selected filters
     const updateSelectedFilters = (type, value) => {
-        setIsLoading(true)
+
         setSelectedFilters((prevFilters) => {
             // Check if filter is already selected
             const isFilterSelected = prevFilters.some(
@@ -1634,6 +1617,9 @@ export default function AdvancedFilterOptions({ brandoptions,
     const [initialValues, setInitialValues] = useState([]); // Default values for initial slider range
 
     console.log(initialValues, "initialprice");
+
+    console.log(bodyoptions, "bodyoptionsbodyoptions");
+
     useEffect(() => {
         if (price) {
             // Split by commas to handle multiple ranges
@@ -1671,16 +1657,21 @@ export default function AdvancedFilterOptions({ brandoptions,
     };
 
     const handleSliderChangeCommitted = (event, newValue) => {
-        const queryString = `?price=${newValue[0]}-${newValue[1]}`;
-        const newUrl = `/search-cars${queryString}`;
+        const minPrice = isNaN(newValue[0]) ? priceRange.min : newValue[0];
+        const maxPrice = isNaN(newValue[1]) ? priceRange.max : newValue[1];
 
-        // Now use router.push to navigate with the full URL
-        try {
-            router.push(newUrl);  // Manually append query string
-        } catch (error) {
-            console.error("Router push error:", error);
+        const queryString = `price=${minPrice}-${maxPrice}`;
+        const currentParams = new URLSearchParams(searchParams.toString());
+        currentParams.set('price', `${minPrice}-${maxPrice}`);
+
+        const newUrl = `${pathname}?${currentParams.toString()}`;
+
+        // Update the URL using the router
+        if (!isInitialRender) {
+            router.replace(newUrl, undefined, { shallow: true });
         }
     };
+
 
 
     const formatPrice = (price) => {
@@ -1863,6 +1854,39 @@ export default function AdvancedFilterOptions({ brandoptions,
                                 />
                             </Accordion>
                         )}
+
+
+                        <Accordion title="Body Type" defaultOpen={true}>
+                            {/* <CheckboxFilter
+                                options={bodyoptions}
+                                selectedOptions={selectedBody}
+                                handleChange={handleBodyChange}
+                                labelKey="bodyTypeLabel"
+                                valueKey="value"
+                            /> */}
+                            <div className='grid grid-cols-3 gap-2 '>
+                                {bodyoptions.map((item, idx) => (
+                                    <div className="h-[70px]">
+                                        <button
+                                            key={idx}
+                                            className={`shadow rounded-xl p-2 ${selectedBody.includes(item.value)
+                                                ? "bg-blue-200 font-semibold"
+                                                : "bg-white "
+                                                }`}
+                                            onClick={() => handleBodyChange(item.value)}
+                                        >
+                                            <img
+                                                src={item.image}
+                                                alt={item.label}
+                                                className="w-20 h-8 object-contain mb-2"
+                                            />
+                                            <p className='text-[10px]'>{item.label}</p>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+
+                        </Accordion>
                         {pathname !== "/category/[categoryname]" && (
                             <Accordion title="Power" defaultOpen={true}>
                                 <CheckboxFilter
@@ -1874,6 +1898,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                 />
                             </Accordion>
                         )}
+
 
 
 

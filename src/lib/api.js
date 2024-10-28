@@ -72,3 +72,73 @@ export async function getStoriesByTag(
   const url = `${API_URL}web-stories/tag/${tagSlug}?page=${page}&pageSize=${pageSize}&sort=${sort}`;
   return await fetchWithErrorHandling(url);
 }
+
+// utils/fetchDealerBranches.js
+export const fetchDealerBranches = async () => {
+  try {
+    const response = await fetch(`${API_URL}dealer-branches`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch dealer branches');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching dealer branches:', error);
+    return { branches: [] };
+  }
+};
+
+export const fetchCarBrandsWithDealers = async () => {
+  try {
+    const response = await fetch(`${API_URL}car-brands-dealers`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch branches');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching dealer branches:', error);
+    return { branches: [] };
+  }
+};
+
+// utils/fetchDealers.js
+// In '@/lib/api.js'
+export const fetchDealers = async (brandSlug = '', page = 1, pageSize = 10, dealerBranchSlug = '') => {
+  try {
+    // Construct the query parameters based on what is provided
+    let url = `${API_URL}car-dealers/by-filter?page=${page}&pageSize=${pageSize}`;
+
+    if (brandSlug) {
+      url += `&brandSlug=${brandSlug}`;
+    }
+
+    if (dealerBranchSlug) {
+      url += `&dealerBranch=${dealerBranchSlug}`;
+    }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Failed to fetch dealers');
+    }
+
+    const data = await response.json();
+    return data; // Return the fetched data
+  } catch (error) {
+    console.error('Error fetching dealers:', error);
+    return { dealers: [], pagination: {} }; // Return default empty structure on error
+  }
+};
+
+
+// services/videoService.js
+export const fetchTrendingVideos = async (page = 1, pageSize = 10, sort = 'createdAt', order = 'DESC') => {
+  try {
+    const response = await fetch(`${API_URL}car-videos/by-filter?trending=true&page=${page}&pageSize=${pageSize}&sort=${sort}&order=${order}`);
+    const data = await response.json();
+    return data.videos || [];
+  } catch (error) {
+    console.error('Error fetching trending videos:', error);
+    return [];
+  }
+};

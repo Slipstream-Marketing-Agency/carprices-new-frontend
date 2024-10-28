@@ -3,12 +3,17 @@ import SearchForTheBest from "@/components/home/SearchForTheBest";
 import FilterLayout from "@/components/multi-step-filter/FilterLayout";
 import { getCarSection } from "@/lib/api";
 import HeroSection from '@/components/home/HeroSection';
-import axios from 'axios';
 import SeoLinksHome from '@/components/common/SeoLinksHome';
 import { fetchMetaData } from '@/lib/fetchMetaData';
+import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
+import { Suspense } from 'react';
+import CarCardSkeleton from '@/components/car-components/CarCardSkeleton';
+import CarDealersHome from '@/components/home/CarDealersHome';
 
 // Dynamically import components
-const TrendingCars = dynamic(() => import('@/components/home/TrendingCars'), { ssr: false });
+const TrendingCars = dynamic(() => import('@/components/home/TrendingCars'), {
+  ssr: false
+});
 const FeaturedNews = dynamic(() => import('@/components/home/FeaturedNews'), { ssr: false });
 const MostPopularCarSection = dynamic(() => import('@/components/home/MostPopularCarSection'), { ssr: false });
 const UpcomingCars = dynamic(() => import('@/components/home/UpcomingCars'), { ssr: false });
@@ -24,7 +29,7 @@ const TrendingNews = dynamic(() => import('@/components/home/TrendingNews'), { s
 export async function generateMetadata() {
   const slug = "home";
   const metaData = await fetchMetaData(slug);
-  
+
   return {
     title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
     description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
@@ -98,17 +103,34 @@ export default async function Home() {
         <FilterLayout />
       </div>
       <SearchForTheBest />
+
+
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
+
       <MostPopularCarSection />
+
       <UpcomingCars />
+      <SelectedCompareCarsSection />
+
+
+
       <ChooseBrand brand={brands} />
+
       <CustomAdComponent />
+
       <ChooseBodyType bodyTypes={bodyTypes} />
+      <CarDealersHome />
+
       <ServicesAdComponent />
+
       <WebStories />
+
       <TrendingVideos />
+
       <TrendingNews articles={articles} />
+
+
       <SeoLinksHome />
     </div>
   );
