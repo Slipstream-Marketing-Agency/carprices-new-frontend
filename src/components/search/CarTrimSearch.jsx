@@ -26,12 +26,12 @@ function CarTrimSearch() {
                     : '';
                 
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_MEILISEARCH_HOST}/indexes/car-trim/search`, 
+                    `${process.env.MEILISEARCH_HOST}/indexes/car-trim/search`, 
                     {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY}`
+                            'Authorization': `Bearer ${process.env.MEILISEARCH_API_KEY}`
                         },
                         body: JSON.stringify({
                             q: query,
