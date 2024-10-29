@@ -378,7 +378,7 @@ export default function NavBar() {
 
     return (
         <>
-           <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
+            <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
             <div className="flex flex-col bg-white w-full md:block hidden border-solid border-b-[1px] border-gray-200">
                 <div>
                     <div
@@ -400,7 +400,7 @@ export default function NavBar() {
                             <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
                                 <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
                                     <div className="flex justify-center items-center gap-2 px-4 py-1 max-md:flex-wrap w-full">
-                                        <span className="material-symbols-outlined">search</span>
+                                        <SearchIcon />
                                         <input
                                             type="search"
                                             className="bg-transparent border-none text-gray-900 text-sm rounded-full w-full p-2.5 focus:outline-none focus:ring-0"
@@ -596,9 +596,9 @@ export default function NavBar() {
                                 <ListItem button component="a" href="/compare-cars">
                                     <ListItemText primary="Compare New Cars" />
                                 </ListItem>
-                                {/* <ListItem button component="a" href="/insurance-calculator">
-                  <ListItemText primary="Insurance Calculator" />
-                </ListItem> */}
+                                <ListItem button component="a" href="/insurance-calculator">
+                                    <ListItemText primary="Insurance Calculator" />
+                                </ListItem>
                                 <ListItem button component="a" href="/loan-calculator">
                                     <ListItemText primary="Car Loan Calculator" />
                                 </ListItem>
