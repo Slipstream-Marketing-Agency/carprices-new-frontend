@@ -25,14 +25,14 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
     const [hoveredSection, setHoveredSection] = useState(subItems[0].name);
 
     return (
-        <div className="rounded-xl shadow-xl absolute top-10 z-50 bg-white border border-gray-200">
+        <div className="rounded-xl shadow-xl absolute top-12 z-50 bg-white border border-gray-200">
             <div className="flex max-md:flex-col">
                 {/* Sidebar with Search options */}
                 <div className="flex rounded-tl-lg rounded-bl-lg bg-slate-100 flex-col max-md:ml-0 max-md:w-full pl-6 py-4">
                     <div className="flex flex-col max-md:mt-10">
                         <div className="flex flex-col gap-0 text-sm leading-6 text-slate-800 w-[250px] overflow-y-auto">
                             {subItems.map((item, i) => (
-                                <div className="flex justify-between py-1 px-0">
+                                <div className="flex justify-between py-1 px-0" key={i}>
                                     <div className="flex w-full">
                                         <span
                                             className={`w-full text-left font-semibold text-base py-2 px-2 rounded-tl-lg rounded-bl-lg cursor-pointer transition-colors duration-300 ${hoveredSection === item.name ? 'bg-white text-blue-500' : 'bg-slate-100 text-gray-700'}`}
@@ -213,7 +213,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                     <h6 className="text-sm font-semibold text-gray-400">Browse Popular Cars</h6>
                                     <div className="grid grid-cols-3 gap-2 my-2">
                                         {bodyTypes.slice(1).map((bodyType, index) => (
-                                            <div className="flex shadow-sm hover:shadow-custom-shadow flex-col py-2 rounded-lg items-center mb-4 md:mb-0">
+                                            <div key={index} className="flex shadow-sm hover:shadow-custom-shadow flex-col py-2 rounded-lg items-center mb-4 md:mb-0">
                                                 <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
                                                     <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
                                                         height="0"

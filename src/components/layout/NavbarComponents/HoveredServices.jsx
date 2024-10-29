@@ -3,7 +3,7 @@ import React from 'react'
 
 const HoveredServices = () => {
     return (
-        <div className="rounded-xl shadow-xl absolute top-10 right-4 z-50 bg-white border border-gray-200">
+        <div className="rounded-xl shadow-xl absolute top-12 right-24 z-50 bg-white border border-gray-200">
             <div className="flex flex-col p-4 gap-2">
                 {/* Loan Calculator Link */}
                 <Link href="/loan-calculator" className="py-2 text-sm font-medium rounded-lg transition">

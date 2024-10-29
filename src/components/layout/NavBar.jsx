@@ -24,13 +24,29 @@ import HoveredBlog from "./NavbarComponents/HoveredBlog";
 import HoveredMore from "./NavbarComponents/HoveredMore";
 import MobileSidebar from "./NavbarComponents/MobileSidebar";
 import { createApolloClient } from "@/lib/apolloClient";
+import PrimaryButton from "../buttons/PrimaryButton";
+import LoginModal from "../login-modal/LoginModal";
+import { getCookie } from "@/lib/helper";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import HoveredProfile from "./NavbarComponents/HoveredProfile";
 
 
 export default function NavBar() {
     const router = useRouter();
     const pathname = usePathname();
     const isSearchCarsPage = pathname?.startsWith("/search-cars");
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [loggedInJwt, setLoggedInJwt] = useState(null);
+    const [loggedInUser, setLoggedInUser] = useState(null);
 
+    const setMyUserInfo = () => {
+        setLoggedInJwt(getCookie('jwt'))
+        setLoggedInUser(JSON.parse(getCookie('user')))
+    }
+
+    useEffect(() => {
+        setMyUserInfo()
+    }, [])
 
     const currentYear = new Date().getFullYear();
 
@@ -373,6 +389,9 @@ export default function NavBar() {
         if (hoveredMenuItem === 'more') {
             return <HoveredMore />
         }
+        if (hoveredMenuItem === 'profile') {
+            return <HoveredProfile setMyUserInfo={setMyUserInfo} setHoveredMenuItem={setHoveredMenuItem} />
+        }
         return <></>
     }
 
@@ -423,7 +442,7 @@ export default function NavBar() {
                                                                 Search Result
                                                             </div>
                                                             {searchResults.map((item, index) => (
-                                                                <div className="flex justify-between py-0 px-0">
+                                                                <div className="flex justify-between py-0 px-0" key={index}>
                                                                     <div className="flex  w-full">
                                                                         {/* <img
                                           loading="lazy"
@@ -495,7 +514,7 @@ export default function NavBar() {
                                                                 >
                                                                     <div className="flex flex-col w-[250px]  grow justify-center rounded-2xl self-stretch text-white rounded-xl max-md:mt-4">
                                                                         <div className="flex overflow-hidden relative flex-col rounded-2xl justify-end px-1 pt-20 pb-1 w-full aspect-[0.84]">
-                                                                            <img
+                                                                            <Image
                                                                                 loading="lazy"
                                                                                 srcSet={`${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&`}
                                                                                 className="object-cover absolute inset-0 size-full"
@@ -520,7 +539,7 @@ export default function NavBar() {
                             </div>
                         </div>
                         <div className="flex relative justify-end gap-5 max-md:flex-wrap mr-4" onMouseLeave={() => { setHoveredMenuItem(null) }}>
-                            <div className="flex flex-auto justify-end  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap">
+                            <div className="flex flex-auto justify-end items-center  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap">
                                 {links.map((link, i) => (
                                     <Link
                                         key={i}
@@ -531,6 +550,16 @@ export default function NavBar() {
                                         {link.label}
                                     </Link>
                                 ))}
+                                {loggedInJwt ?
+                                    <div className="shadow-md py-1 px-2 rounded-full cursor-pointer flex items-center justify-between" onMouseOver={() => { setHoveredMenuItem('profile') }}>
+                                        <div className="flex items-center capitalize justify-center w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold">
+                                            {loggedInUser?.username.charAt(0)}
+                                        </div>
+                                        <KeyboardArrowDownIcon />
+                                    </div>
+                                    :
+                                    <PrimaryButton label='Signin' additionalClass="!bg-black !border-black" onClick={() => setIsLoginModalOpen(true)} />
+                                }
                             </div>
                             <HoveredMenuItemDropdown />
                         </div>
@@ -699,7 +728,7 @@ export default function NavBar() {
                                                         Search Result
                                                     </div>
                                                     {searchResults.map((item, index) => (
-                                                        <div className="flex justify-between py-0 px-0">
+                                                        <div className="flex justify-between py-0 px-0" key={index}>
                                                             <div className="flex  w-full">
                                                                 {/* <img
                                           loading="lazy"
@@ -841,7 +870,9 @@ export default function NavBar() {
                         ></div>
                     </div>
                 )}
-            </div></>
+            </div>
+            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} setMyUserInfo={setMyUserInfo} />
+        </>
 
     )
 }

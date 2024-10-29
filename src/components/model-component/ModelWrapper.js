@@ -15,6 +15,7 @@ import Image from "next/image";
 import KeyFeatures from "./KeyFeatures";
 import VehicleFaq from "./VehicleFaq";
 import useTranslate from "@/utils/UseTranslate";
+import CarDetailReview from "../reviews/CarDetailReview";
 
 export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
     const [currentURL, setCurrentURL] = useState("");
@@ -268,7 +269,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                     <PrimaryButton label="View All Variants" href={"#variants&prices"} />
                 </div>
             </div>
-            <div className=" sticky top-0 z-10">
+            <div className="sticky top-0 z-20">
                 <nav className="text-base sm:text-lg leading-none text-black bg-zinc-50 shadow mt-10  mb-10 overflow-x-scroll custom-scrollbar">
                     <div className="mx-auto container flex gap-7 items-center">
                         <Link
@@ -394,7 +395,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                                         {model?.name}{" "}
                                     </p>
                                     {currentmodel?.highlightsList?.map((item, index) => (
-                                        <li>
+                                        <li key={index}>
                                             {item.list}
                                             <div className="h-[2px] bg-gradient-to-r from-teal-600 to-black-100 mt-2 "></div>
                                         </li>
@@ -465,6 +466,24 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
               )} */}
 
                 {/* <Ad728x90 dataAdSlot="7369694604" /> */}
+                <div
+                    className="container mx-auto grid grid-cols-12 mt-14"
+                    id="reviews"
+                >
+                    <div className="md:col-span-9 col-span-12">
+                        <CarDetailReview
+                            name={`${year} ${brand?.name} ${model?.name}`}
+                            year={year}
+                            model={model?.slug}
+                            brand={brand?.slug}
+                            link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
+                        />
+                    </div>
+                    <div className="md:col-span-3 col-span-9">
+                        {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+                        <Ad300x600 dataAdSlot="3792539533" />
+                    </div>
+                </div>
                 <div
                     className="container mx-auto grid grid-cols-12 mt-14"
                     id="faq"
