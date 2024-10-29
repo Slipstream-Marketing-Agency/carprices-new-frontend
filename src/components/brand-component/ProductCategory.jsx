@@ -58,12 +58,12 @@ function ProductCategory({ brands }) {
 
 
               <div className="text-center cursor-pointer">
-                <div className="mb-2">
+                <div className="mb-2 flex justify-center items-center">
                   <Image
                     loading="lazy"
                     alt={`brand-${item?.attributes?.name}`}
                     src={
-                      item?.attributes?.brandLogo?.data?.attributes?.url
+                      item?.attributes?.brandLogo
                     }
                     width={90} // Optimized width for md screens
                     height={90} // Optimized height for md screens

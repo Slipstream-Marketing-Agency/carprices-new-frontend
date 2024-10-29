@@ -15,6 +15,9 @@ const VideoPage = ({ params }) => {
             setLoading(false);
         };
 
+        console.log(fetchVideo,"fetchVideo");
+        
+
         fetchVideo();
     }, [slug]);
 

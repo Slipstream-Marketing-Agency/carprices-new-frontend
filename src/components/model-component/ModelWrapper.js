@@ -269,7 +269,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                 </div>
             </div>
             <div className=" sticky top-0 z-10">
-                <nav className="text-base sm:text-lg leading-none text-black bg-zinc-50 shadow mt-10  mb-10 overflow-x-scroll no-scrollbar">
+                <nav className="text-base sm:text-lg leading-none text-black bg-zinc-50 shadow mt-10  mb-10 overflow-x-scroll custom-scrollbar">
                     <div className="mx-auto container flex gap-7 items-center">
                         <Link
                             href="#specs"
@@ -292,6 +292,15 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                             Variants & prices
                         </Link>
                         <Link
+                            href={`/brands/${brand.slug}/${mainTrim.year}/${model.slug}/video`}
+                            className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#faq"
+                                ? "border-b-blue-600 text-black"
+                                : "border-transparent text-gray-500"
+                                }`}
+                        >
+                            Videos
+                        </Link>
+                        <Link
                             href="#faq"
                             onClick={() => handleLinkClick("#faq")}
                             className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#faq"
@@ -301,6 +310,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                         >
                             FAQ
                         </Link>
+
 
                     </div>
                 </nav>
@@ -363,7 +373,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                     <div className="md:col-span-3 col-span-12">
                         {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                         <Suspense fallback={<div>Loading ad...</div>}>
-                        <Ad300x600 dataAdSlot={"1763487396"} />
+                            <Ad300x600 dataAdSlot={"1763487396"} />
                         </Suspense>
                     </div>
                 </div>
@@ -419,8 +429,8 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                             </div>
                         </div>
                         <div className="md:col-span-3 col-span-12">
-                        <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot={"8615289670"} />
+                            <Suspense fallback={<div>Loading ad...</div>}>
+                                <Ad300x600 dataAdSlot={"8615289670"} />
                             </Suspense>
                         </div>
                     </section>
@@ -481,7 +491,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                     <div className="md:col-span-3 col-span-9">
                         {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                         <Suspense fallback={<div>Loading ad...</div>}>
-                        <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="3792539533" />
                         </Suspense>
                     </div>
                 </div>

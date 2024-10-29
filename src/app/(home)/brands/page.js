@@ -1,10 +1,6 @@
 import React from "react";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
 import BrandListWrapper from "@/components/brand-component/BrandListWrapper";
 import { fetchMetaData } from "@/lib/fetchMetaData";
-
-
 
 export async function generateMetadata() {
   const slug = "search-cars";
@@ -34,57 +30,15 @@ export async function generateMetadata() {
   };
 }
 
-
-const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
-
 async function fetchBrands(page, pageSize) {
   try {
-    const { data } = await client.query({
-      query: gql`
-        query carBrands($page: Int, $pageSize: Int) {
-          carBrands(sort: "name:asc", pagination: { page: $page, pageSize: $pageSize }) {
-            data {
-              id
-              attributes {
-                name
-                slug
-                brandLogo {
-                  data {
-                    id
-                    attributes {
-                      url
-                    }
-                  }
-                }
-                car_models {
-                  data {
-                    attributes {
-                      name
-                      slug
-                      year
-                    }
-                  }
-                }
-              }
-            }
-            meta {
-              pagination {
-                page
-                pageSize
-                pageCount
-                total
-              }
-            }
-          }
-        }
-      `,
-      variables: { page, pageSize },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}car-brands/names?page=${page}&pageSize=${pageSize}`
+    );
+    if (!response.ok) throw new Error("Failed to fetch brand data");
 
-    return data.carBrands;
+    const { brands, pagination } = await response.json();
+    return { brands, pagination };
   } catch (error) {
     console.error("Data Fetching Error:", error.message);
     throw error;
@@ -92,13 +46,14 @@ async function fetchBrands(page, pageSize) {
 }
 
 export default async function BrandCategoryPage({ searchParams }) {
-  const page = searchParams.page || 1; // Get the current page from the query, defaulting to 1
+  const page = parseInt(searchParams.page, 10) || 1; // Get the current page from the query, defaulting to 1
   const pageSize = 24; // Set the number of items per page
 
+  const { brands, pagination } = await fetchBrands(page, pageSize);
 
-  const brandsData = await fetchBrands(page, pageSize);
-
+  console.log(pagination,"pagination");
+  
   return (
-    <BrandListWrapper brandsData={brandsData} />
+    <BrandListWrapper brandsData={brands} pagination={pagination} />
   );
 }

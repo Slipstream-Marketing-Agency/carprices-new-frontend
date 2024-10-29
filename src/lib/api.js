@@ -142,3 +142,16 @@ export const fetchTrendingVideos = async (page = 1, pageSize = 10, sort = 'creat
     return [];
   }
 };
+
+
+// Fetch branches related to a specific brand
+export const fetchFilteredBranches = async (brandSlug) => {
+  const response = await fetch(`${API_URL}dealer-branches/filter-by-brand?brandSlug=${brandSlug}`);
+  return response.json();
+};
+
+// Fetch brands related to a specific branch
+export const fetchFilteredBrands = async (branchSlug) => {
+  const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`);
+  return response.json();
+};
