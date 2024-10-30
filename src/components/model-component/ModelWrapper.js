@@ -17,7 +17,7 @@ import VehicleFaq from "./VehicleFaq";
 import useTranslate from "@/utils/UseTranslate";
 import CarDetailReview from "../reviews/CarDetailReview";
 
-export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
+export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPage = 'basic', activeTab = '' }) {
     const [currentURL, setCurrentURL] = useState("");
 
     // If using browser-specific features, use `useEffect` on the client-side
@@ -145,7 +145,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
 
         return <span>{emiString}</span>;
     };
-    const [activeLink, setActiveLink] = useState("#specs");
+    const [activeLink, setActiveLink] = useState(activeTab);
 
     const handleLinkClick = (href) => {
         setActiveLink(href);
@@ -273,7 +273,18 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                 <nav className="text-base sm:text-lg leading-none text-black bg-zinc-50 shadow mt-10  mb-10 overflow-x-scroll custom-scrollbar">
                     <div className="mx-auto container flex gap-7 items-center">
                         <Link
-                            href="#specs"
+                            href={`/brands/${brand?.slug}/${year}/${model?.slug}`}
+                            className={`gap-2.5 py-5 self-stretch p-2.5 h-full whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#modelname"
+                                ? "border-b-blue-600 text-black"
+                                : "border-transparent text-gray-500"
+                                }`}
+                        >
+                            {model.name}
+                        </Link>
+                        <Link
+                            // href="#specs"
+                            // onClick={() => handleLinkClick("#specs")}
+                            href={`/brands/${brand?.slug}/${year}/${model?.slug}/specs#specs`}
                             onClick={() => handleLinkClick("#specs")}
                             className={`gap-2.5 py-5 self-stretch p-2.5 h-full whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#specs"
                                 ? "border-b-blue-600 text-black"
@@ -283,7 +294,9 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                             Specs
                         </Link>
                         <Link
-                            href="#variants&prices"
+                            // href="#variants&prices"
+                            // onClick={() => handleLinkClick("#variants&prices")}
+                            href={`/brands/${brand?.slug}/${year}/${model?.slug}/variants#variants&prices`}
                             onClick={() => handleLinkClick("#variants&prices")}
                             className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#variants&prices"
                                 ? "border-b-blue-600 text-black"
@@ -293,8 +306,18 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                             Variants & prices
                         </Link>
                         <Link
+                            href={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#user-reviews`}
+                            onClick={() => handleLinkClick("#user-reviews")}
+                            className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#user-reviews"
+                                ? "border-b-blue-600 text-black"
+                                : "border-transparent text-gray-500"
+                                }`}
+                        >
+                            User Reviews
+                        </Link>
+                        <Link
                             href={`/brands/${brand.slug}/${mainTrim.year}/${model.slug}/video`}
-                            className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#faq"
+                            className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#video"
                                 ? "border-b-blue-600 text-black"
                                 : "border-transparent text-gray-500"
                                 }`}
@@ -302,7 +325,9 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                             Videos
                         </Link>
                         <Link
-                            href="#faq"
+                            // href="#faq"
+                            // onClick={() => handleLinkClick("#faq")}
+                            href={`/brands/${brand?.slug}/${year}/${model?.slug}/faq#faq`}
                             onClick={() => handleLinkClick("#faq")}
                             className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#faq"
                                 ? "border-b-blue-600 text-black"
@@ -316,68 +341,75 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
                     </div>
                 </nav>
             </div>
-
-            <div
-                className="container mx-auto grid grid-cols-12"
-                id="specs"
-            >
-                <div className="md:col-span-9 col-span-12">
-                    <ModelDescription
-                        year={year}
-                        brand={brand}
-                        model={model}
-                        minPrice={minPrice}
-                        maxPrice={maxPrice}
-                        minFuelConsumption={minFuelConsumption}
-                        maxFuelConsumption={maxFuelConsumption}
-                        engineTypes={engineTypes}
-                        transmissionList={transmissionList}
-                        motorTypes={motorTypes}
-                        mainTrimFuelType={mainTrimFuelType}
-                        allTrims={allTrims}
-                        mainTrim={mainTrim}
-                        getTransmissionType={getTransmissionType}
-                    />
-                    <Suspense fallback={<div>Loading ad...</div>}>
-                        <Ad728x90 dataAdSlot={"1087083283"} />
-                    </Suspense>
-                </div>
-                <div className="md:col-span-3 col-span-12">
-                    <Suspense fallback={<div>Loading ad...</div>}>
-                        <Ad300x600 dataAdSlot={"1763487396"} />
-                    </Suspense>
-                </div>
-            </div>
-            <div className="container mx-auto mt-10" id="variants&prices">
-                <VariantsListing
-                    year={year}
-                    brand={brand}
-                    model={model}
-                    minPrice={minPrice}
-                    maxPrice={maxPrice}
-                    minFuelConsumption={minFuelConsumption}
-                    maxFuelConsumption={maxFuelConsumption}
-                    engineTypes={engineTypes}
-                    transmissionList={transmissionList}
-                    motorTypes={motorTypes}
-                    mainTrimFuelType={mainTrimFuelType}
-                    allTrims={allTrims}
-                    mainTrim={mainTrim}
-                />
-                <div className="container mx-auto grid grid-cols-12 mt-10">
+            {
+                (parentPage === 'basic' || parentPage === 'specs') && <div
+                    className="container mx-auto grid grid-cols-12"
+                    id="specs"
+                >
                     <div className="md:col-span-9 col-span-12">
-                        <OldModel model={oldModel} />
-                        <div className="mt-14">
+                        <ModelDescription
+                            year={year}
+                            brand={brand}
+                            model={model}
+                            minPrice={minPrice}
+                            maxPrice={maxPrice}
+                            minFuelConsumption={minFuelConsumption}
+                            maxFuelConsumption={maxFuelConsumption}
+                            engineTypes={engineTypes}
+                            transmissionList={transmissionList}
+                            motorTypes={motorTypes}
+                            mainTrimFuelType={mainTrimFuelType}
+                            allTrims={allTrims}
+                            mainTrim={mainTrim}
+                            getTransmissionType={getTransmissionType}
+                        />
+                        <Suspense fallback={<div>Loading ad...</div>}>
                             <Ad728x90 dataAdSlot={"1087083283"} />
-                        </div>
+                        </Suspense>
                     </div>
                     <div className="md:col-span-3 col-span-12">
-                        {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                         <Suspense fallback={<div>Loading ad...</div>}>
                             <Ad300x600 dataAdSlot={"1763487396"} />
                         </Suspense>
                     </div>
                 </div>
+            }
+
+            <div className="container mx-auto mt-10">
+                {
+                    (parentPage === 'basic' || parentPage === 'variants&prices') &&
+                    <div id="variants&prices">
+                        <VariantsListing
+                            year={year}
+                            brand={brand}
+                            model={model}
+                            minPrice={minPrice}
+                            maxPrice={maxPrice}
+                            minFuelConsumption={minFuelConsumption}
+                            maxFuelConsumption={maxFuelConsumption}
+                            engineTypes={engineTypes}
+                            transmissionList={transmissionList}
+                            motorTypes={motorTypes}
+                            mainTrimFuelType={mainTrimFuelType}
+                            allTrims={allTrims}
+                            mainTrim={mainTrim}
+                        />
+                        <div className="container mx-auto grid grid-cols-12 mt-10">
+                            <div className="md:col-span-9 col-span-12">
+                                <OldModel model={oldModel} />
+                                <div className="mt-14">
+                                    <Ad728x90 dataAdSlot={"1087083283"} />
+                                </div>
+                            </div>
+                            <div className="md:col-span-3 col-span-12">
+                                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+                                <Suspense fallback={<div>Loading ad...</div>}>
+                                    <Ad300x600 dataAdSlot={"1763487396"} />
+                                </Suspense>
+                            </div>
+                        </div>
+                    </div>
+                }
 
                 {currentmodel?.highlightsList?.length > 0 && (
                     <section className="grid grid-cols-12  mt-12  rounded-xl ">
@@ -466,54 +498,62 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData }) {
               )} */}
 
                 {/* <Ad728x90 dataAdSlot="7369694604" /> */}
-                <div
-                    className="container mx-auto grid grid-cols-12 mt-14"
-                    id="reviews"
-                >
-                    <div className="md:col-span-9 col-span-12">
-                        <CarDetailReview
-                            name={`${year} ${brand?.name} ${model?.name}`}
-                            year={year}
-                            model={model?.slug}
-                            brand={brand?.slug}
-                            link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
-                        />
-                    </div>
-                    <div className="md:col-span-3 col-span-9">
-                        {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                        <Ad300x600 dataAdSlot="3792539533" />
-                    </div>
-                </div>
-                <div
-                    className="container mx-auto grid grid-cols-12 mt-14"
-                    id="faq"
-                >
-                    <div className="md:col-span-9 col-span-12">
-                        <VehicleFaq
-                            year={year}
-                            brand={brand}
-                            model={model}
-                            minPrice={minPrice}
-                            maxPrice={maxPrice}
-                            minFuelConsumption={minFuelConsumption}
-                            maxFuelConsumption={maxFuelConsumption}
-                            engineTypes={engineTypes}
-                            transmissionList={transmissionList}
-                            motorTypes={motorTypes}
-                            mainTrimFuelType={mainTrimFuelType}
-                            allTrims={allTrims}
-                            mainTrim={mainTrim}
-                            CarPriceRange={CarPriceRange}
-                            getTransmissionType={getTransmissionType}
-                        />
-                    </div>
-                    <div className="md:col-span-3 col-span-9">
-                        {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                        <Suspense fallback={<div>Loading ad...</div>}>
+                {
+                    (parentPage === 'basic' || parentPage === 'user-reviews') && <div
+                        className="container mx-auto grid grid-cols-12 mt-14"
+                        id="reviews"
+                    >
+                        <div className="md:col-span-9 col-span-12">
+                            <CarDetailReview
+                                name={`${year} ${brand?.name} ${model?.name}`}
+                                year={year}
+                                model={model?.slug}
+                                brand={brand?.slug}
+                                link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
+                                fromReviewPage={parentPage === 'user-reviews'}
+                            />
+                        </div>
+                        <div className="md:col-span-3 col-span-9">
+                            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                             <Ad300x600 dataAdSlot="3792539533" />
-                        </Suspense>
+                        </div>
                     </div>
-                </div>
+                }
+
+                {
+                    (parentPage === 'faq' || parentPage === 'basic') &&
+
+                    <div
+                        className="container mx-auto grid grid-cols-12 mt-14"
+                        id="faq"
+                    >
+                        <div className="md:col-span-9 col-span-12">
+                            <VehicleFaq
+                                year={year}
+                                brand={brand}
+                                model={model}
+                                minPrice={minPrice}
+                                maxPrice={maxPrice}
+                                minFuelConsumption={minFuelConsumption}
+                                maxFuelConsumption={maxFuelConsumption}
+                                engineTypes={engineTypes}
+                                transmissionList={transmissionList}
+                                motorTypes={motorTypes}
+                                mainTrimFuelType={mainTrimFuelType}
+                                allTrims={allTrims}
+                                mainTrim={mainTrim}
+                                CarPriceRange={CarPriceRange}
+                                getTransmissionType={getTransmissionType}
+                            />
+                        </div>
+                        <div className="md:col-span-3 col-span-9">
+                            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+                            <Suspense fallback={<div>Loading ad...</div>}>
+                                <Ad300x600 dataAdSlot="3792539533" />
+                            </Suspense>
+                        </div>
+                    </div>
+                }
                 {/* <Ad300x250 dataAdSlot="5772723668" />{" "}
             <div className="car-details-sidebar positionStickyAd mt-4">
               <Ad300x600 dataAdSlot="3792539533" />

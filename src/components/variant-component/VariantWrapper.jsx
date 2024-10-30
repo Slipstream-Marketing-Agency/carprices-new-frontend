@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import Link from "next/link";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams, useParams } from 'next/navigation';
 import Ad728x90 from "../ads/Ad728x90";
 import VariantsListing from "./VariantListing";
 import VehicleFaq from "./VehicleFaq";
@@ -42,6 +42,8 @@ import SeoLinksFilter from "../common/SeoLinksFilter";
 import LoanEnquireForm from "../forms/LoanEnquireForm";
 import BuyForm from "../forms/BuyForm";
 import CarTestDriveForm from "../forms/CarTestDriveForm";
+import CarDetailReview from "../reviews/CarDetailReview";
+import Ad300x600 from "../ads/Ad300x600";
 
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
@@ -246,21 +248,25 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
 
   const [selectedTrim, setSelectedTrim] = useState("");
 
+  const pageParams = useParams()
+
+  const modelslug = pageParams.model;
+  const brandslug = pageParams.brandname;
+  const trimslug = pageParams.trim;
+  const year = pageParams.year;
+
   useEffect(() => {
-    const trim = searchParams.get("trim");
+    const trim = pageParams.trim;
     if (trim) {
       setSelectedTrim(trim);
     }
-  }, [searchParams]);
+  }, [pageParams]);
 
   const handleChange = (event) => {
     const selectedSlug = event.target.value;
     setSelectedTrim(selectedSlug);
 
     if (selectedSlug) {
-      const brandname = searchParams.get("brandname");
-      const year = searchParams.get("year");
-      const model = searchParams.get("model");
       window.history.pushState(null, "", `/brands/${brandname}/${year}/${model}/${selectedSlug}`);
     }
   };
@@ -271,11 +277,6 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
     setActiveLink(href);
   };
 
-  const modelslug = searchParams.get("model");
-  const brandslug = searchParams.get("brandname");
-  const trimslug = searchParams.get("trim");
-
-  console.log(trimData, "trimDatatrimData");
   return (
     <div><div className="grid grid-cols-12 gap-4 mx-auto container">
       <div className="col-span-12 lg:col-span-5">
@@ -607,6 +608,25 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
         )}
 
         <VehicleFaq trim={trimData} />
+      </div>
+
+      <div
+        className="container mx-auto grid grid-cols-12 mt-14"
+        id="reviews"
+      >
+        <div className="md:col-span-9 col-span-12">
+          <CarDetailReview
+              name={`${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name}`}
+              year={trimData?.year}
+              model={modelslug}
+              brand={brandslug}
+              link={`/brands/${brandslug}/${year}/${modelslug}/user-reviews#reviews`}
+            />
+        </div>
+        <div className="md:col-span-3 col-span-9">
+          {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+          <Ad300x600 dataAdSlot="3792539533" />
+        </div>
       </div>
 
       <div id="variants&prices" className="container">

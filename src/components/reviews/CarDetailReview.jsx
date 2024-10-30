@@ -69,7 +69,7 @@ const CarDetailReview = ({ name, brand, model, year, fromReviewPage = false, lin
                             </div>
                             {fromReviewPage &&
                                 <>
-                                    <div className='flex items-center justify-between text-blue-500'>
+                                    <div className='flex my-2 items-center justify-between text-blue-500'>
                                         <div className='px-4 flex items-center gap-4 font-bold'>
                                             <div>
                                                 <ThumbUpAltOutlinedIcon className='h-5 w-5 mr-2 cursor-pointer' />

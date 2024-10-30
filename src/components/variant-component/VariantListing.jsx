@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import _ from "lodash";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams, useParams } from 'next/navigation';
 import Price from "@/utils/Price"; // Adjust the path based on your project structure
 import useTranslate from "@/utils/UseTranslate"; // Adjust the path based on your project structure
 import Image from "next/image";
