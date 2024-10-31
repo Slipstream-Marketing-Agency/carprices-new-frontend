@@ -616,7 +616,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
       >
         <div className="md:col-span-9 col-span-12">
           <CarDetailReview
-              name={`${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name}`}
+              name={`${trimData?.brand} ${trimData?.model}`}
               year={trimData?.year}
               model={modelslug}
               brand={brandslug}

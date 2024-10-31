@@ -38,7 +38,7 @@ const CarEMIDisplay = React.memo(({ minPrice }) => {
 
 // Main CarCard component
 const CarCard = ({ car }) => {
-  const { year, featuredImage, brand, model, engine, power, torque, minPrice, maxPrice } = car || {};
+  const { year, featuredImage, brand, model, engine, power, torque, minPrice, maxPrice, rating } = car || {};
   const pathname = usePathname();
   const isReviewPage = pathname === '/write-review';
 
@@ -82,9 +82,9 @@ const CarCard = ({ car }) => {
             {isReviewPage &&
               <p className="text-neutral-900 flex items-center font-semibold text-sm">
                 <StarIcon sx={{ color: '#f79712' }} className='h-4 w-4 mb-[3px]' />
-                <span>0</span>
+                <span>{rating?.average ? rating.average : 0}</span>
                 {' '}
-                <span className="ml-4">(0 Reviews)</span>
+                <span className="ml-4">({rating?.count ? rating.count : 0} Reviews)</span>
               </p>
             }
           </div>

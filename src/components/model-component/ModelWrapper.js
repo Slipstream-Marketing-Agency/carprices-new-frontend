@@ -505,7 +505,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                     >
                         <div className="md:col-span-9 col-span-12">
                             <CarDetailReview
-                                name={`${year} ${brand?.name} ${model?.name}`}
+                                name={`${brand?.name} ${model?.name}`}
                                 year={year}
                                 model={model?.slug}
                                 brand={brand?.slug}
