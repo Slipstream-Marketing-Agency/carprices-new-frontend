@@ -5,11 +5,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
 import axios from 'axios';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { getCookie } from '@/lib/helper';
+import LoginModal from '@/components/login-modal/LoginModal';
+import { Alert, CircularProgress, Snackbar } from '@mui/material';
 
 const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
     const brandSlug = searchParams.get('brand');
     const modelSlug = searchParams.get('model');
@@ -21,12 +29,13 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(1);
     const [selectedBrand, setSelectedBrand] = useState(null);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [carDetails, setCarDetails] = useState({
-        brand: 'Toyota',
-        model: 'Highlander',
-    });
+    const [carDetails, setCarDetails] = useState();
 
+    const [title, setTitle] = useState('');
+    const [opinion, setOpinion] = useState('');
     const [rating, setRating] = useState(4);
     const [hover, setHover] = useState(null);
 
@@ -56,7 +65,11 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                 setModels(response.data.models);
                 const foundModel = response.data.models.find(m => m.slug === modelSlug);
                 if (foundModel) {
-                    setCarDetails(prev => ({ ...prev, model: foundModel.name }));
+                    setCarDetails(prev => ({
+                        ...prev,
+                        model: foundModel.name,
+                        image: foundModel.featuredImage // assuming `image` is the key in foundModel for the image URL
+                    }));
                 }
                 setLoading(false);
             })
@@ -68,6 +81,7 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
 
     const handleCarChange = (newBrand, newModel) => {
         setCarDetails({ brand: newBrand, model: newModel });
+        setStep(1);
         router.push(`${pathname}?brand=${newBrand}&model=${newModel}&year=${year}`);
     };
 
@@ -78,9 +92,72 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     };
 
     const handleModelSelect = (model) => {
-        setCarDetails({ brand: selectedBrand.name, model: model.name });
+        setCarDetails({ brand: selectedBrand.name, model: model.name, image: model.featuredImage });
         setShowModal(false);
         handleCarChange(selectedBrand.slug, model.slug);
+    };
+
+    const handleReviewSubmit = async () => {
+
+        // Check if title has at least 3 words
+        if (title.trim().split(/\s+/).length < 3) {
+            setSnackbarMessage("Title must be at least 3 words");
+            setSnackbarSeverity("error");
+            setSnackbarOpen(true);
+            return;
+        }
+
+        // Check if opinion has at least 20 characters
+        if (opinion.trim().length < 20) {
+            setSnackbarMessage("Opinion must be at least 20 characters");
+            setSnackbarSeverity("error");
+            setSnackbarOpen(true);
+            return;
+        }
+
+        setIsSubmitting(true);
+        // Example data structure for the review
+        const reviewData = {
+            title,
+            opinion,
+            rating,
+            car_model_slug: modelSlug // Replace with the actual slug
+        };
+        const jwt = getCookie('jwt');
+        if (!jwt) {
+            setIsLoginModalOpen(true)
+            setIsSubmitting(false)
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}car-reviews`, reviewData, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`, // Replace with actual token
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            // Handle success response
+
+            setSnackbarMessage("Review submitted successfully");
+            setSnackbarSeverity("success");
+            setSnackbarOpen(true);
+
+            setTitle("");
+            setOpinion("");
+        } catch (error) {
+            // Handle error response
+            console.error('Error submitting review:', error.response ? error.response.data : error.message);
+
+            const errorMessage = error.response?.data?.error?.message || "An error occurred";
+            // Show error message
+            setSnackbarMessage(errorMessage);
+            setSnackbarSeverity("error");
+            setSnackbarOpen(true);
+        } finally {
+            setIsSubmitting(false)
+        }
     };
 
     return (
@@ -91,7 +168,7 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                 <div className="w-1/3 h-full bg-blue-50 hidden lg:flex lg:items-center lg:justify-center p-20">
                     <div className="text-center">
                         <h2 className="!text-4xl !leading-[3.5rem] text-left font-bold text-gray-800 mb-4">
-                            What do you think about {carDetails.brand} {carDetails.model}?
+                            What do you think about {carDetails?.brand} {carDetails?.model}?
                         </h2>
                         <div className="flex items-center justify-center">
                             <Image
@@ -104,29 +181,30 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
 
                 {/* Right Section */}
                 <div className="w-full h-full lg:w-2/3 px-4 relative flex flex-col items-center py-10">
-                    <button onClick={() => router.back()} className="absolute bg-gray-50 top-4 right-4 text-gray-600 hover:text-gray-900">
+                    <Link href={'/write-review'} className="absolute bg-gray-50 top-4 right-4 text-gray-600 hover:text-gray-900">
                         <CloseIcon className='bg-gray-50' />
-                    </button>
+                    </Link>
 
                     <div className="w-full md:w-96">
                         <h3 className="text-xl font-semibold text-gray-800 mb-6">Rate & Review</h3>
 
                         {/* Car Information */}
                         <div className="flex items-center mb-6">
-                            <Image
-                                src="/path-to-car-image.jpg"
-                                alt={`${carDetails.brand} ${carDetails.model}`}
+                            {carDetails?.image && <Image
+                                src={`${carDetails?.image}`}
+                                alt={`${carDetails?.brand} ${carDetails?.model}`}
                                 width={64}
                                 height={64}
-                                className="w-16 h-16 rounded-md object-cover mr-4"
-                            />
+                                className="w-16 h-16 rounded-full object-contain mr-4"
+                            />}
+
                             <div>
-                                <p className="text-gray-700 font-semibold">{carDetails.brand} {carDetails.model}
+                                <p className="text-gray-700 font-semibold">{carDetails?.brand} {carDetails?.model}
                                     <button
                                         onClick={() => setShowModal(true)}
                                         className="ml-3 p-1 rounded-sm text-gray-800 font-semibold hover:underline"
                                     >
-                                        Edit
+                                        {(!carDetails?.brand || !carDetails?.model) ? 'Select Car' : 'Edit'}
                                     </button>
                                 </p>
                                 <p className="flex items-center">
@@ -145,7 +223,7 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                         </div>
 
                         {/* Review Form */}
-                        <form className="w-full max-w-md">
+                        <div className="w-full max-w-md">
                             <div className="mb-4">
                                 <label className="block text-gray-600 font-semibold">Review your experience</label>
                                 <textarea
@@ -154,6 +232,8 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                                     rows="4"
                                     minLength="20"
                                     required
+                                    value={opinion}
+                                    onChange={(e) => setOpinion(e.target.value)}
                                 ></textarea>
                                 <p className="text-gray-400 text-xs pt-1">Minimum 20 Words required</p>
                             </div>
@@ -166,6 +246,8 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                                     placeholder="Title"
                                     minLength="3"
                                     required
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                                 <p className="text-gray-400 text-xs pt-1">Minimum 3 Words required</p>
                             </div>
@@ -173,10 +255,12 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                             <button
                                 type="submit"
                                 className="w-full bg-blue-500 text-white font-semibold rounded-md py-3 hover:bg-blue-600"
+                                onClick={isSubmitting ? () => { } : handleReviewSubmit}
+                                disabled={isSubmitting}
                             >
-                                Submit
+                                {isSubmitting ? <CircularProgress size={20} color="inherit" /> : "Submit"}
                             </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -213,36 +297,54 @@ const RateCarPage = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                                 </button>
                             </div>
 
-                            {step === 1 ? (
-                                <div className="grid grid-cols-2 gap-4 max-h-72 overflow-auto">
-                                    {brands.map((brand) => (
-                                        <button
-                                            key={brand.slug}
-                                            onClick={() => handleBrandSelect(brand)}
-                                            className="flex items-center border border-gray-200 rounded-md p-2 hover:border-blue-400"
-                                        >
-                                            <Image src={brand.brandLogo} alt={brand.name} width={40} height={40} className="mr-3" />
-                                            <span className="font-medium text-gray-700">{brand.name}</span>
-                                        </button>
-                                    ))}
+                            {loading ? (
+                                <div className="flex justify-center items-center h-72">
+                                    <div className="spinner border-t-4 border-blue-400 border-solid rounded-full w-12 h-12 animate-spin"></div>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-2 gap-4 max-h-72 overflow-auto">
-                                    {models.map((model) => (
-                                        <button
-                                            key={model.slug}
-                                            onClick={() => handleModelSelect(model)}
-                                            className="flex items-center border border-gray-200 rounded-md p-2 hover:border-blue-400"
-                                        >
-                                            <span className="font-medium text-gray-700">{model.name}</span>
-                                        </button>
-                                    ))}
-                                </div>
+                                step === 1 ? (
+                                    <div className="grid grid-cols-2 gap-4 max-h-72 overflow-auto">
+                                        {brands.map((brand) => (
+                                            <button
+                                                key={brand.slug}
+                                                onClick={() => handleBrandSelect(brand)}
+                                                className="flex items-center border border-gray-200 rounded-md p-2 hover:border-blue-400"
+                                            >
+                                                <Image src={brand.brandLogo} alt={brand.name} width={40} height={40} className="mr-3" />
+                                                <span className="font-medium text-gray-700">{brand.name}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-2 gap-4 max-h-72 overflow-auto">
+                                        {models.map((model) => (
+                                            <button
+                                                key={model.slug}
+                                                onClick={() => handleModelSelect(model)}
+                                                className="flex items-center border border-gray-200 rounded-md p-2 hover:border-blue-400"
+                                            >
+                                                <span className="font-medium text-gray-700">{model.name}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )
                             )}
                         </div>
                     </div>
                 )}
             </div>
+            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} setMyUserInfo={handleReviewSubmit} />
+            {/* Snackbar for Success and Error messages */}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackbarOpen(false)}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </>
     );
 };

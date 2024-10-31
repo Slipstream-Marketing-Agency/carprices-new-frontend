@@ -7,7 +7,7 @@ import axios from "axios";
 import { Snackbar, Alert, CircularProgress } from "@mui/material"; // Import Snackbar and Alert
 import { setCookie } from "@/lib/helper";
 
-function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
+function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
   const [isSignIn, setIsSignIn] = useState(true);
   const [activeForm, setActiveForm] = useState('login');
   const [isLoading, setIsLoading] = useState(false);
@@ -86,7 +86,9 @@ function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
     } finally {
       setIsLoading(false); // Stop loading
       setActiveForm('login')
-      setMyUserInfo()
+      if (postLogin) {
+        postLogin()
+      }
     }
   };
 
@@ -133,7 +135,9 @@ function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
     } finally {
       setIsLoading(false); // Stop loading
       setActiveForm('login')
-      setMyUserInfo()
+      if (postLogin) {
+        postLogin()
+      }
     }
   };
 
@@ -247,7 +251,7 @@ function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
                   </button>
                   <button
                     onClick={handleLogin}
-                    className="text-white text-xs px-16 py-2 bg-blue-600 rounded-full"
+                    className="text-white text-xs px-8 2xl:px-16 py-2 bg-blue-600 rounded-full"
                     disabled={isLoading} // Disable the button when loading
                   >
                     {isLoading ? <CircularProgress size={20} color="inherit" /> : "Sign in"}
@@ -327,7 +331,7 @@ function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
                     Have an account ? Sign In
                   </button>
                   <button
-                    className="text-white text-xs px-10 py-2 bg-blue-600 rounded-full"
+                    className="text-white text-xs px-6 2xl:px-10 py-2 bg-blue-600 rounded-full"
                     onClick={handleRegister}
                     disabled={isLoading} // Disable the button when loading
                   >
@@ -365,7 +369,7 @@ function LoginModal({ isOpen, setIsOpen, setMyUserInfo }) {
                   </button>
                   <button
                     onClick={handleForgetPassword}
-                    className="text-white text-xs px-16 py-2 bg-blue-600 rounded-full"
+                    className="text-white text-xs px-6 2xl:px-16 py-2 bg-blue-600 rounded-full"
                     disabled={isLoading} // Disable the button when loading
                   >
                     {isLoading ? <CircularProgress size={20} color="inherit" /> : "Forget Password"}
