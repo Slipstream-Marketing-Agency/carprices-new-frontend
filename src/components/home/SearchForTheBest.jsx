@@ -45,7 +45,7 @@ const SearchForTheBest = () => {
   return (
     <div className="container flex justify-center px-3 md:mt-12 mt-4 md:mb-6 mb-1">
       {/* <div className="self-start mb-2">
-        <h1 className="text-xl font-semibold capitalize">Explore the Best Car Prices in the UAE</h1>
+        <h2 className="text-xl font-semibold capitalize">Search For t</h2>
       </div> */}
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">

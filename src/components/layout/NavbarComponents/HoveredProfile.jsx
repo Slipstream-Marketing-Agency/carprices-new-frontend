@@ -1,14 +1,17 @@
 import { removeCookie } from '@/lib/helper'
+import { logout } from '@/store/slices/authSlice'
 import Link from 'next/link'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
-const HoveredProfile = ({setMyUserInfo, setHoveredMenuItem}) => {
+const HoveredProfile = ({setHoveredMenuItem}) => {
+
+
+    const dispatch = useDispatch()
 
     const handleLogout = () => {
-        removeCookie('jwt');
-        removeCookie('user');
+        dispatch(logout());
 
-        setMyUserInfo()
         setHoveredMenuItem(null)
     }
 

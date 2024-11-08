@@ -120,7 +120,7 @@ const CarCard = ({ car }) => {
         <div className="flex justify-end">
           {isReviewPage ? <PrimaryButton
             label="Review Now"
-            href={`/write-review/rate-car?brand=${brand?.slug}&model=${model?.slug}&year=${year}`}
+            href={`/write-review/rate-car?brand=${brand?.slug}&model=${model?.slug}`}
           /> : <PrimaryButton
             label="View Details"
             href={`/brands/${brand?.slug}/${year}/${model?.slug}`}

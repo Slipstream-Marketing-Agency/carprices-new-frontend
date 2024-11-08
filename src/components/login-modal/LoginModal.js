@@ -6,8 +6,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Snackbar, Alert, CircularProgress } from "@mui/material"; // Import Snackbar and Alert
 import { setCookie } from "@/lib/helper";
+import { verifyUser } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
+
+  const dispatch = useDispatch()
+
   const [isSignIn, setIsSignIn] = useState(true);
   const [activeForm, setActiveForm] = useState('login');
   const [isLoading, setIsLoading] = useState(false);
@@ -124,6 +129,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
       setIsOpen(false);
       // Reset formData to initial state
       setFormData({ username: "", email: "", password: "" });
+      dispatch(verifyUser());
     } catch (error) {
       console.error("Registration error:", error);
       const errorMessage = error.response?.data?.error?.message || "An error occurred";

@@ -5,6 +5,7 @@ import Image from "next/image";
 import useTranslate from "@/utils/UseTranslate";
 import axios from "axios";
 import Slider from "react-slick/lib/slider";
+import StarIcon from '@mui/icons-material/Star';
 import {
   FormControl,
   InputLabel,
@@ -26,7 +27,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import Link from "next/link";
-import { useRouter, usePathname, useSearchParams, useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Ad728x90 from "../ads/Ad728x90";
 import VariantsListing from "./VariantListing";
 import VehicleFaq from "./VehicleFaq";
@@ -44,6 +45,7 @@ import BuyForm from "../forms/BuyForm";
 import CarTestDriveForm from "../forms/CarTestDriveForm";
 import CarDetailReview from "../reviews/CarDetailReview";
 import Ad300x600 from "../ads/Ad300x600";
+import ImageSlider from "../model-component/ImageSlider";
 
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
@@ -76,8 +78,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
 SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
 
 export default function VariantWrapper({ model, trimList, trimData, trimSlug }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const router = useRouter()
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const [isSticky, setIsSticky] = useState(false);
@@ -267,7 +268,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
     setSelectedTrim(selectedSlug);
 
     if (selectedSlug) {
-      window.history.pushState(null, "", `/brands/${brandname}/${year}/${model}/${selectedSlug}`);
+      router.push(`/brands/${brandslug}/${year}/${modelslug}/${selectedSlug}`);
     }
   };
 
@@ -277,10 +278,32 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
     setActiveLink(href);
   };
 
+  const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-reviews?carModelSlug=${modelslug}`);
+        const data = response.data;
+
+        setReviews(data);
+
+        // Calculate the average rating
+        const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
+        setAverageRating(totalRating / data.length || 0);
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    };
+
+    fetchReviews();
+  }, [modelslug]);
+
   return (
     <div><div className="grid grid-cols-12 gap-4 mx-auto container">
       <div className="col-span-12 lg:col-span-5">
-        <div className="grid grid-cols-12 gap-4">
+        {/* <div className="grid grid-cols-12 gap-4">
           <div className="order-2 md:order-1 md:col-span-2 col-span-12 md:h-[333px]">
             <Slider {...thumbSettings}>
               <div>
@@ -342,23 +365,24 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
               ))}
             </Slider>
           </div>
-        </div>
+        </div> */}
+        <ImageSlider mainTrim={trimData} />
       </div>
 
       <div className="col-span-12 lg:col-span-6 md:pl-10">
-        <div className="relative">
-          <h1 className="g font-semibold mb-1">
+        <div className="relative flex flex-col md:flex-row items-center gap-2">
+          <h1 className="g font-semibold text-lg md:text-2xl">
             {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
             {trimData?.name}
           </h1>
+          <Link href={`/brands/${brandslug}/${year}/${modelslug}/user-reviews#reviews`} className="flex items-center gap-2 rounded-full border border-gray-300 p-1 shadow-sm">
+            <span className="text-sm">
+              <StarIcon sx={{ color: '#f79712' }} className='h-4 w-4' />
+              {averageRating ? averageRating.toFixed(1) : '0.0'}/5 |
+            </span>
+            <p className="text-blue-500 text-sm uppercase mr-1">{reviews.length} Reviews</p>
+          </Link>
         </div>
-        {/* <span class="inline-flex items-center rounded-full bg-green-500 px-2 py-1 text-xs font-semibold text-white ring-1 ring-inset ring-green-600/20">
-        4.2 <StarIcon className="text-[14px] ml-1" />
-      </span>
-      <span className="text-[14px] mx-2">182 Ratings & Reviews</span>
-      <span className="text-[14px] font-semibold underline">
-        Rate Now
-      </span> */}
         <div className="md:my-3 my-3">
           <h2>
             <Price data={trimData.price} />
@@ -430,84 +454,45 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
           </Select>
         </FormControl>
 
-        <div className="md:my-5 my-7">
+        <div className="my-4">
           <div className="grid grid-cols-3 gap-4 md:w-[70%]">
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {trimData?.fuelType === "Electric"
-                    ? "Motor Type"
-                    : "Engine Type"}
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.fuelType === "Electric"
+            {[
+              {
+                label: trimData?.fuelType === "Electric" ? "Motor Type" : "Engine Type",
+                value:
+                  trimData?.fuelType === "Electric"
                     ? trimData?.motor?.split(" ")[0]
-                    : `${(trimData?.displacement / 1000).toFixed(1)}L ${trimData?.engine
-                    }`}
-                </h5>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {t.transmission}
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.transmission}
-                </h5>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {t.power} (hp)
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.power}
-                </h5>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {t.torque} (Nm)
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.torque}
-                </h5>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {t.seats}
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.seatingCapacity}
-                </h5>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <div>
-                <h6 className="font-medium mb-0 text-gray-500">
-                  {trimData?.fuelType === "Electric"
-                    ? "Range"
-                    : "Fuel Efficiency"}
-                </h6>
-                <h5 className="text-gray-500 font-semibold mt-1 mb-0">
-                  {trimData?.fuelType === "Electric" &&
-                    trimData?.fuelConsumption === null &&
-                    trimData?.range !== 0
+                    : `${(trimData?.displacement / 1000).toFixed(1)}L ${trimData?.engine}`,
+              },
+              {
+                label: t.transmission,
+                value: trimData?.transmission,
+              },
+              {
+                label: `${t.power} (hp)`,
+                value: trimData?.power,
+              },
+              {
+                label: `${t.torque} (Nm)`,
+                value: trimData?.torque,
+              },
+              {
+                label: t.seats,
+                value: trimData?.seatingCapacity,
+              },
+              {
+                label: trimData?.fuelType === "Electric" ? "Range" : "Fuel Efficiency",
+                value:
+                  trimData?.fuelType === "Electric" && trimData?.fuelConsumption === null && trimData?.range !== 0
                     ? trimData?.range
-                    : trimData?.fuelConsumption + "kmpl"}
-                </h5>
+                    : trimData?.fuelConsumption + "kmpl",
+              },
+            ].map((item, index) => (
+              <div key={index} className="p-3 bg-gray-50 rounded-md hover:bg-gray-100">
+                <h6 className="font-medium text-[10px] md:text-sm text-gray-600 mb-1">{item.label}</h6>
+                <h5 className="text-gray-800 text-sm md:text-base font-semibold">{item.value}</h5>
               </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -616,12 +601,14 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
       >
         <div className="md:col-span-9 col-span-12">
           <CarDetailReview
-              name={`${trimData?.brand} ${trimData?.model}`}
-              year={trimData?.year}
-              model={modelslug}
-              brand={brandslug}
-              link={`/brands/${brandslug}/${year}/${modelslug}/user-reviews#reviews`}
-            />
+            name={`${trimData?.brand} ${trimData?.model}`}
+            year={trimData?.year}
+            model={modelslug}
+            brand={brandslug}
+            averageRating={averageRating}
+            reviews={reviews}
+            link={`/brands/${brandslug}/${year}/${modelslug}/user-reviews#reviews`}
+          />
         </div>
         <div className="md:col-span-3 col-span-9">
           {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}

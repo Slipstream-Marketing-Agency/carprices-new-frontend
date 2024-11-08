@@ -5,6 +5,7 @@ import "./../globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Script from "next/script";
+import StoreProvider from "../../../providers/StoreProvider";
 
 // Load Google Fonts (in this case, Poppins)
 const poppins = Poppins({
@@ -73,7 +74,9 @@ export default function RootLayout({ children, params }) {
           </noscript>
         </noscript>
         <main className="w-full flex flex-col">
-          <NavBar />
+          <StoreProvider>
+            <NavBar />
+          </StoreProvider>
           {children}
           <Footer />
         </main>

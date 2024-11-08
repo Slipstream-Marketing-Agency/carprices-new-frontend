@@ -8,28 +8,7 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import ShareIcon from '@mui/icons-material/Share';
 
-const CarDetailReview = ({ name, brand, model, year, fromReviewPage = false, link = '#' }) => {
-    const [reviews, setReviews] = useState([]);
-    const [averageRating, setAverageRating] = useState(0);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-reviews?carModelSlug=${model}`);
-                const data = response.data;
-
-                setReviews(data);
-
-                // Calculate the average rating
-                const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
-                setAverageRating(totalRating / data.length || 0);
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-            }
-        };
-
-        fetchReviews();
-    }, [model]);
+const CarDetailReview = ({ name, brand, model, year, fromReviewPage = false, link = '#', reviews, averageRating }) => {
 
     // Function to format the date
     const formatDate = (dateString) => {

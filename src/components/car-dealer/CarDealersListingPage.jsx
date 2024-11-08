@@ -6,6 +6,7 @@ import { Skeleton } from '@mui/material';
 import Select from 'react-select';
 import PrimaryButton from '../buttons/PrimaryButton';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const INITIAL_LIMIT = 12; // Number of dealers to load initially
 const LOAD_MORE_COUNT = 12; // Number of dealers to load each time "Load More" is clicked
@@ -60,12 +61,12 @@ const CarDealersListingPage = () => {
             setLoading(false);
         }
     };
-    
+
 
     const handleBrandChange = async (selectedOption) => {
         setSelectedBrand(selectedOption);
         setLimit(INITIAL_LIMIT);
-    
+
         if (selectedOption) {
             const branchData = await fetchFilteredBranches(selectedOption.value);
             setBranches(branchData || []);
@@ -73,11 +74,11 @@ const CarDealersListingPage = () => {
             setBranches(allBranches);
         }
     };
-    
+
     const handleBranchChange = async (selectedOption) => {
         setSelectedBranch(selectedOption);
         setLimit(INITIAL_LIMIT);
-    
+
         if (selectedOption) {
             const brandData = await fetchFilteredBrands(selectedOption.value);
             setBrands(brandData || []);
@@ -85,7 +86,7 @@ const CarDealersListingPage = () => {
             setBrands(allBrands);
         }
     };
-    
+
 
     const loadMoreDealers = async () => {
         const newLimit = limit + LOAD_MORE_COUNT;
@@ -167,27 +168,61 @@ const CarDealersListingPage = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {dealers.map((dealer) => (
-                                
+
                                 <Link href={`tel:${dealer.phone_number}`} key={dealer.id} className="bg-white rounded-lg shadow-md p-5">
-                                    <div className="flex flex-col justify-between h-full">
-                                        <div>
-                                            <h3 className="text-lg font-semibold">{dealer.name}</h3>
-                                            <p className="text-sm text-gray-600 mb-2 font-semibold">{dealer.dealer_branch.name}</p>
-                                            <p className="text-sm text-gray-600">{dealer.address}</p>
+                                    <div className='grid grid-cols-12 gap-3 h-full'>
+                                        <div className="col-span-4 flex items-start ">
+                                            <Image
+                                                src={
+                                                    dealer.logo === null ? "/assets/placeholder/car-dealer-logo-placeholder.webp" : dealer.logo.url
+                                                }
+                                                alt={`${dealer.dealer_branch.name}-${dealer.name}-`}
+                                                width={800}
+                                                height={100}
+                                                className="object-cover w-full border rounded-[30px]"
+                                            />
                                         </div>
-                                        <div className="contact-info flex items-center mt-3 space-x-2">
-                                            <span
-                                                role="img"
-                                                aria-label="phone"
-                                                className="bg-blue-500 p-1 rounded-full w-[30px] h-[30px] flex justify-center items-center"
-                                            >
-                                                <CallIcon className="text-white text-lg" />
-                                            </span>
-                                            <a href={`tel:${dealer.phone_number}`} className="text-blue-600 hover:underline">
-                                                {dealer.phone_number}
-                                            </a>
+                                        <div className='col-span-8 '>
+                                            <div className="flex flex-col justify-between h-full">
+
+                                                <div>
+                                                    <div className='flex items-center gap-3 bg-blue-100 p-2 rounded-xl mb-3'>
+                                                        <Image
+                                                            src={
+                                                                dealer.select_related_brand === null ? "/assets/placeholder/car-dealer-logo-placeholder.webp" : dealer.select_related_brand?.brandLogo?.formats?.thumbnail?.url
+                                                            }
+                                                            alt={`${dealer.dealer_branch.name}-${dealer.name}-`}
+                                                            width={50}
+                                                            height={50}
+                                                            className="object-cover w-[35px] h-[35px] rounded-[30px]"
+                                                        />
+                                                        <p>{dealer.select_related_brand?.name}</p>
+                                                    </div>
+                                                    <div className='p-1'>
+                                                        <h3 className="text-lg font-semibold">{dealer.name}</h3>
+                                                        <p className="text-sm text-gray-600 mb-2 font-semibold">{dealer.dealer_branch.name}</p>
+                                                        <p className="text-sm text-gray-600">{dealer.address}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="contact-info flex items-center mt-3 space-x-2 bg-blue-100 p-2 rounded-xl ">
+                                                    <span
+                                                        role="img"
+                                                        aria-label="phone"
+                                                        className="bg-blue-500 p-1 rounded-full w-[25px] h-[25px] flex justify-center items-center"
+                                                    >
+                                                        <CallIcon className="text-white text-sm" />
+                                                    </span>
+                                                    <Link href={`tel:${dealer.phone_number}`} className="text-blue-600 hover:underline text-md">
+                                                        {dealer.phone_number}
+                                                    </Link>
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
+
                                 </Link>
                             ))}
                         </div>

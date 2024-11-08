@@ -29,6 +29,8 @@ import LoginModal from "../login-modal/LoginModal";
 import { getCookie } from "@/lib/helper";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import HoveredProfile from "./NavbarComponents/HoveredProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyUser } from "@/store/slices/authSlice";
 
 
 export default function NavBar() {
@@ -36,17 +38,19 @@ export default function NavBar() {
     const pathname = usePathname();
     const isSearchCarsPage = pathname?.startsWith("/search-cars");
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [loggedInJwt, setLoggedInJwt] = useState(null);
-    const [loggedInUser, setLoggedInUser] = useState(null);
+    
+    const { user } = useSelector((state) => state.auth);
 
-    const setMyUserInfo = () => {
-        setLoggedInJwt(getCookie('jwt'))
-        setLoggedInUser(JSON.parse(getCookie('user')))
-    }
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setMyUserInfo()
-    }, [])
+        dispatch(verifyUser());
+    }, [dispatch]);
+
+    // const setMyUserInfo = () => {
+    //     setLoggedInJwt(getCookie('jwt'))
+    //     setLoggedInUser(JSON.parse(getCookie('user')))
+    // }
 
     const currentYear = new Date().getFullYear();
 
@@ -390,7 +394,7 @@ export default function NavBar() {
             return <HoveredMore />
         }
         if (hoveredMenuItem === 'profile') {
-            return <HoveredProfile setMyUserInfo={setMyUserInfo} setHoveredMenuItem={setHoveredMenuItem} />
+            return <HoveredProfile setHoveredMenuItem={setHoveredMenuItem} />
         }
         return <></>
     }
@@ -550,10 +554,10 @@ export default function NavBar() {
                                         {link.label}
                                     </Link>
                                 ))}
-                                {loggedInJwt ?
+                                {user ?
                                     <div className="shadow-md py-1 px-2 rounded-full cursor-pointer flex items-center justify-between" onMouseOver={() => { setHoveredMenuItem('profile') }}>
                                         <div className="flex items-center capitalize justify-center w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold">
-                                            {loggedInUser?.username.charAt(0)}
+                                            {user?.username.charAt(0)}
                                         </div>
                                         <KeyboardArrowDownIcon />
                                     </div>
@@ -871,7 +875,7 @@ export default function NavBar() {
                     </div>
                 )}
             </div>
-            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} setMyUserInfo={setMyUserInfo} />
+            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen}  />
         </>
 
     )

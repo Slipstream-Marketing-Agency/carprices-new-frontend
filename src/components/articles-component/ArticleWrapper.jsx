@@ -1,5 +1,6 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
+import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import moment from "moment";
 import Image from "next/image";
@@ -11,6 +12,10 @@ import Ad300X250 from "@/components/ads/Ad300x250";
 import Ad300x600 from "@/components/ads/Ad300x600";
 import EastIcon from "@mui/icons-material/East";
 import Pagination from "@/components/advanced-filter/Pagination";
+import dynamic from "next/dynamic";
+import { fetchArticles } from "@/lib/api";
+import CarouselCards from "./CarouselCards";
+const TrendingVideos = dynamic(() => import('@/components/home/TrendingVideos'), { ssr: false });
 const SkeletonArticle = () => (
     <div className="skeleton-article">
         <div className="skeleton-image"></div>
@@ -22,6 +27,7 @@ const SkeletonArticle = () => (
 
 export default function ArticleWrapper() {
     const pathname = usePathname();
+    const [searchQuery, setSearchQuery] = useState('');
     const [articles, setArticles] = useState([]);
     const [articlesThisWeek, setArticlesThisWeek] = useState([]);
     const [popularArticles, setPopularArticles] = useState([]);
@@ -31,18 +37,19 @@ export default function ArticleWrapper() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const page = searchParams.get("page") || 1;
+    // const page = searchParams.get("page") || 1;
+    const [page, setPage] = useState(1)
     const pageSize = 24;
+
+    // const [tags, setTags] = (['uae', 'reviews', 'NIO', 'bmw', 'tesla', 'mini'])
+    const tags = ['uae', 'reviews', 'NIO', 'bmw', 'tesla', 'mini']
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setPageLoading(true);
-                const [articlesRes, articlesThisWeekRes, popularArticlesRes] =
+                
+                const [articlesThisWeekRes, popularArticlesRes] =
                     await Promise.all([
-                        axios.get(
-                            `${process.env.NEXT_PUBLIC_API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`
-                        ),
                         axios.get(
                             `${process.env.NEXT_PUBLIC_API_URL}articles/listlasttwoweeks?slug=${pathname === "/news" ? "news" : "review"}`
                         ),
@@ -51,21 +58,57 @@ export default function ArticleWrapper() {
                         ),
                     ]);
 
-                setArticles(articlesRes.data.data);
-                setTotalPage(articlesRes.data.pagination.pageCount);
+                // setArticles(articlesRes.data.data);
+                // setTotalPage(articlesRes.data.pagination.pageCount);
                 setArticlesThisWeek(articlesThisWeekRes.data.data);
                 setPopularArticles(popularArticlesRes.data.data);
                 setLoading(false);
-                setPageLoading(false);
+                
             } catch (error) {
                 console.error("Error fetching data:", error);
                 setLoading(false);
-                setPageLoading(false);
+                
             }
         };
 
         fetchData();
-    }, [page]);
+    }, [pathname]);
+
+    useEffect(() => {
+        const fetchArticlesData = async() => {
+            setPageLoading(true)
+            try {
+                const articlesRes = await fetchArticles(pathname, page, pageSize)
+                setArticles((prevArticles) => {
+                    const newArticles = articlesRes.data.filter(
+                        (newArticle) => !prevArticles.some((prevArticle) => prevArticle.id === newArticle.id)
+                    );
+                    return [...prevArticles, ...newArticles];
+                });
+                setPageLoading(false)
+            } catch (error) {
+                console.log(error)
+                setPageLoading(false)
+            }
+        }
+
+        fetchArticlesData()
+    }, [page, pathname])
+
+    const tabsCarousel = [
+        {
+            name: "News",
+            slug: "news",
+        },
+        {
+            name: "Articles",
+            slug: "articles",
+        },
+        {
+            name: "Featured",
+            slug: "featured",
+        },
+    ]
 
     return (
         <div className="mt-4"
@@ -73,6 +116,7 @@ export default function ArticleWrapper() {
             <section>
                 <div className="container grid sm:gap-10 grid-cols-12">
                     <div className="sm:col-span-9 col-span-12 space-y-6">
+                        <CarouselCards tabs={tabsCarousel} />
                         <div className="">
                             {pathname === "/news" ? <><h1 className="sm:text-3xl capitalize font-semibold mb-3">
                                 Latest Car News in UAE
@@ -94,10 +138,9 @@ export default function ArticleWrapper() {
                                     know about the happenings in the UAE automotive industry.
                                 </p></>}
 
-                            {articles.slice(0, 1).map((article, index) => (
+                            {/* {articles.slice(0, 1).map((article, index) => (
                                 <div key={`article-${article?.id}-${index}`}>
                                     {" "}
-                                    {/* Add index to key */}
                                     <Link
                                         href={`/news/${article?.slug}`}
                                         className="flex relative flex-col justify-end p-8 pt-20 pb-9 text-slate-100 bg-cover rounded-2xl md:min-h-[500px] min-h-[200px]"
@@ -129,18 +172,16 @@ export default function ArticleWrapper() {
                                         </div>
                                     </Link>
                                 </div>
-                            ))}
+                            ))} */}
 
                             <div className="grid gap-4 grid-cols-12 mt-6">
-                                {articles.slice(1, 10).map((article, index) => (
+                                {/* {articles.slice(1, 10).map((article, index) => ( */}
+                                {articles.map((article, index) => (
                                     <Link
                                         href={`/news/${article.slug}`}
                                         key={article?.id}
-                                        className="relative col-span-6 md:col-span-4 rounded-[14px] shadow-lg"
+                                        className="relative text-gray-700 hover:text-blue-500 col-span-6 md:col-span-4 rounded-[14px] shadow-lg"
                                     >
-                                        {/* <div className="bg-blue-600 text-white opacity-80 rounded-e-2xl absolute top-1 sm:top-3 4xl:top-5 4xl:px-10 4xl:py-2 4xl:text-lg left-0 px-1 sm:px-6 py-1 font-thin text-xs sm:text-base">
-                        Trending
-                      </div> */}
                                         <Image
                                             src={article.coverImage || altImage}
                                             alt={article?.title}
@@ -157,9 +198,9 @@ export default function ArticleWrapper() {
                                                     : `${article?.title}`
                                                     }`}
                                             </div>
-                                            <div className="flex flex-col justify-between">
+                                            <div className="flex flex-col justify-between text-gray-800">
                                                 <div>
-                                                    <div className="text-xs leading-9 text-gray-700">
+                                                    <div className="text-xs leading-9">
                                                         <span className="hidden sm:inline">
                                                             {article?.author} &mdash;
                                                         </span>{" "}
@@ -167,9 +208,6 @@ export default function ArticleWrapper() {
                                                             "MMMM Do YYYY"
                                                         )}
                                                     </div>
-                                                    {/* <div className="line-clamp-2 text-xs text-gray-500 ">
-                            {article?.summary}
-                          </div> */}
                                                 </div>{" "}
                                                 <Link
                                                     legacyBehavior
@@ -186,7 +224,7 @@ export default function ArticleWrapper() {
                                     </Link>
                                 ))}
                             </div>
-                            {!loading && !pageLoading && (
+                            {/* {!loading && !pageLoading && (
                                 <div className="mt-4">
                                     <Pagination
                                         currentPage={page}
@@ -194,40 +232,117 @@ export default function ArticleWrapper() {
                                         onPageChange={setPageLoading}
                                     />
                                 </div>
-                            )}
+                            )} */}
+                            {!loading && <div className="mt-4 flex justify-center">
+                                <button
+                                    onClick={() => setPage((prevPage) => prevPage + 1)}
+                                    className="px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-300 flex items-center"
+                                    disabled={pageLoading}
+                                >
+                                    {pageLoading ? (
+                                        <span className="flex items-center">
+                                            <svg
+                                                className="animate-spin h-5 w-5 mr-2 text-white"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <circle
+                                                    className="opacity-25"
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="10"
+                                                    stroke="currentColor"
+                                                    strokeWidth="4"
+                                                ></circle>
+                                                <path
+                                                    className="opacity-75"
+                                                    fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                                ></path>
+                                            </svg>
+                                            Loading...
+                                        </span>
+                                    ) : (
+                                        'Load More'
+                                    )}
+                                </button>
+                            </div>}
+
                         </div>
 
                         {/* <Categories /> */}
                     </div>
                     <div className="md:col-span-3 col-span-12 space-y-6">
+                        <div className="my-6 border border-gray-300 p-4 rounded-md ">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                                Search
+                                <span className="ml-2 bg-blue-500 h-8 w-8 text-white rounded-full flex items-center justify-center">
+                                    <SearchIcon />
+                                </span>
+                            </h2>
+                            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden shadow-md focus-within:border-blue-500">
+                                <input
+                                    type="text"
+                                    placeholder="Search for articles..."
+                                    className="w-full px-4 py-2 text-gray-700 outline-none bg-gray-50 rounded-l-full"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                                <button className="p-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-r-md">
+                                    <SearchIcon fontSize="medium" />
+                                </button>
+                            </div>
+                        </div>
                         <Suspense fallback={<div>Loading filters...</div>}>
                             <Ad300X250 dataAdSlot="2567975821" />
                         </Suspense>
+                        <div className="my-6 border border-gray-300 p-4 rounded-md ">
+                            <h4 className="font-bold capitalize mb-2">Popular Tags</h4>
+                            <hr className="my-2" />
+                            <div className="flex flex-wrap gap-2">
+                                {tags?.map((tag, index) => (
+                                    <span
+                                        key={index}
+                                        className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-200 cursor-pointer"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                         {articlesThisWeek?.length > 0 && (
                             <div>
                                 <h4 className="font-bold capitalize">From This week</h4>
                                 <hr className="my-2" />
                                 {articlesThisWeek?.map((blog) => (
                                     <Link
-                                        legacyBehavior
                                         href={`/news/${blog?.slug}`}
                                         key={blog?.id}
+                                        className="block transition-colors duration-200 rounded-lg hover:text-blue-600"
                                     >
-                                        <div className="w-full">
-                                            <div className="flex my-2">
-                                                <Image
-                                                    src={blog?.coverImage}
-                                                    alt={blog?.title}
-                                                    width={40}
-                                                    height={40}
-                                                    className="object-cover"
-                                                />
-                                                <p className="text-sm mx-2  text-gray-600 line-clamp-2">
-                                                    {`${blog?.title}`}
-                                                </p>
+                                        <div className="flex items-center gap-4">
+                                            <Image
+                                                src={blog?.coverImage}
+                                                alt={blog?.title}
+                                                width={90}
+                                                height={90}
+                                                className="object-cover rounded-md w-20 h-14"
+                                            />
+                                            <div className="flex flex-col">
+                                                <h3 className="text-md font-semibold line-clamp-2">
+                                                    {blog?.title}
+                                                </h3>
+                                                <span className="text-xs text-gray-500 mt-1">
+                                                    Published on: {new Date(blog?.publishedAt).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                    })}
+                                                </span>
                                             </div>
-                                            <hr className="my-0" />
                                         </div>
+                                        <hr className="my-3 border-gray-300" />
                                     </Link>
                                 ))}
                             </div>
@@ -252,7 +367,7 @@ export default function ArticleWrapper() {
             <div className="container">
                 <h2 className="font-semibold capitalize">Popular News</h2>
                 <div className="grid gap-4 grid-cols-12 mt-6">
-                    {loading || pageLoading ? (
+                    {loading ? (
                         <>
                             <SkeletonArticle />
                             <SkeletonArticle />

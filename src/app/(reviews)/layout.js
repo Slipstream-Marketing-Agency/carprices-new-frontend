@@ -1,3 +1,4 @@
+import StoreProvider from "../../../providers/StoreProvider";
 import "./../globals.css";
 
 export const metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
         <meta name="robots" content="noindex, nofollow" />
       </head>
       <body>
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

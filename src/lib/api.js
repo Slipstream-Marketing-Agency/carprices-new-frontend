@@ -155,3 +155,8 @@ export const fetchFilteredBrands = async (branchSlug) => {
   const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`);
   return response.json();
 };
+
+export const fetchArticles = async(pathname, page, pageSize) => {
+  const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`)
+  return response.json();
+}

@@ -448,6 +448,109 @@ img[srcset] {
 }
 
 
+.article-content h1 {
+  font-size: 1.8rem !important;
+}
+
+.article-content h2 {
+  font-size: 1.6rem !important;
+}
+
+.article-content h3 {
+  font-size: 1.4rem !important;
+}
+
+.article-content h4 {
+  font-size: 1.2rem !important;
+}
+
+.article-content h5 {
+  font-size: 1rem !important;
+}
+
+.article-content h6 {
+  font-size: 0.8rem !important;
+}
+
+
+/* General table styling */
+.table table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 1rem !important;
+  background-color: #ffffff !important;
+  margin: 1rem 0 !important;
+}
+
+/* Table cell styling with border and padding */
+.table th, .table td {
+  border: 1px solid #ddd !important;
+  padding: 12px !important;
+  text-align: left !important;
+  vertical-align: top !important;
+  font-weight: normal !important;
+}
+
+/* Header row styling */
+.table th {
+  background-color: #f8f8f8 !important;
+  color: #333 !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+}
+
+/* Alternating row colors for better readability */
+.table tr:nth-child(even) {
+  background-color: #f9f9f9 !important;
+}
+
+/* Hover effect for rows */
+.table tr:hover {
+  background-color: #f1f1f1 !important;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+  /* Allow horizontal scrolling on small screens */
+  .table {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Stack table cells vertically for better readability on mobile */
+  .table table, .table thead, .table tbody, .table th, .table td, .table tr {
+      display: block !important;
+  }
+
+  /* Add a bottom margin for each row for better spacing */
+  .table tr {
+      margin-bottom: 1rem !important;
+      border: 1px solid #ddd !important;
+      border-radius: 5px !important;
+  }
+
+  /* Style individual cells with labels for accessibility */
+  .table td {
+      display: flex !important;
+      justify-content: space-between !important;
+      padding: 8px !important;
+      font-size: 0.9rem !important;
+  }
+
+  /* Hide the table header on small screens */
+  .table thead {
+      display: none !important;
+  }
+
+  /* Add responsive labels in cells to represent headers */
+  .table td::before {
+      content: attr(data-label) !important;
+      font-weight: bold !important;
+      text-transform: uppercase !important;
+      color: #333 !important;
+      flex-basis: 40% !important;
+  }
+}
 
 /* 
 h1 {
@@ -596,4 +699,13 @@ a,
   font-size: 15px;
   color: #484848;
   position: relative;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
