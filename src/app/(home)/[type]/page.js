@@ -191,8 +191,15 @@ export default async function TypePage({ params, searchParams }) {
                   </Link>
                 ))}
               </div>
-              <Pagination currentPage={articlesData.pagination.page} pageCount={articlesData.pagination.pageCount} type={type} totalResults={articlesData.pagination.total} pageSize={articlesData.pagination.pageSize} />
-            </div>
+              {articlesData?.pagination && (
+                <Pagination
+                  currentPage={articlesData.pagination.page}
+                  pageCount={articlesData.pagination.pageCount}
+                  type={type}
+                  totalResults={articlesData.pagination.total}
+                  pageSize={articlesData.pagination.pageSize}
+                />
+              )}            </div>
             <PopularCategories />
 
           </div>
