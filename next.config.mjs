@@ -14,7 +14,7 @@ const fetchAllRedirects = async () => {
 
   do {
     const response = await fetch(
-      `https://apis.carprices.ae/api/redirects?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+      `${process.env.NEXT_PUBLIC_API_URL}redirects?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
     );
     const data = await response.json();
     redirects = [...redirects, ...data.redirects];
