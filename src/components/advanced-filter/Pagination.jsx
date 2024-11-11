@@ -58,7 +58,7 @@ export default function Pagination({ currentPage, totalPages }) {
 
     return (
         <div className=" mt-6">
-            <div className="flex space-x-2">
+            <div className="flex md:flex-row flex-col items-center space-x-2">
                 <ul className="flex space-x-2">
                     {pages.map((pageNumber, index, array) => (
                         <React.Fragment key={pageNumber}>
@@ -79,7 +79,7 @@ export default function Pagination({ currentPage, totalPages }) {
                         </React.Fragment>
                     ))}
                 </ul>
-                <div className="flex space-x-2 -mt-[9px]">
+                <div className="flex space-x-2 md:mt-0 mt-4">
                     <Link href={changePage(currentPageNumber - 1) || "#"} passHref>
                         <button
                             disabled={currentPageNumber === 1}

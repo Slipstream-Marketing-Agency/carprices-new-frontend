@@ -316,7 +316,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         >
                             User Reviews
                         </Link>
-                        <Link
+                        {/* <Link
                             href={`/brands/${brand.slug}/${mainTrim.year}/${model.slug}/video`}
                             className={`gap-2.5 py-5 self-stretch p-2.5 my-auto whitespace-nowrap border-0 border-b-2 border-solid ${activeLink === "#video"
                                 ? "border-b-blue-600 text-black"
@@ -324,7 +324,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                 }`}
                         >
                             Videos
-                        </Link>
+                        </Link> */}
                         <Link
                             // href="#faq"
                             // onClick={() => handleLinkClick("#faq")}

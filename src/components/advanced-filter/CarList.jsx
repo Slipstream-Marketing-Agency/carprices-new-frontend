@@ -45,9 +45,9 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
       "initialprice",
     ];
 
-    // Check if the user is on the "/brands" or "/category" page
+    // Check if the user is on the "/brands" or "/body-types" page
     const isBrandPage = pathname.startsWith("/brands/");
-    const isCategoryPage = pathname.startsWith("/category/");
+    const isCategoryPage = pathname.startsWith("/body-types/");
 
     // Exclude 'brandname' when on the brands page
     if (isCategoryPage) {
@@ -100,9 +100,9 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
     if (pathname.startsWith("/brands/")) {
       const brandname = searchParams.get("brandname"); // Retain brandname
       router.push(`/brands/${brandname}`);
-    } else if (pathname.startsWith("/category/")) {
+    } else if (pathname.startsWith("/body-types/")) {
       const categoryname = searchParams.get("categoryname"); // Retain categoryname
-      router.push(`/category/${categoryname}`);
+      router.push(`/body-types/${categoryname}`);
     } else {
       // If not on brand or category page, clear all filters
       router.push(pathname);
@@ -156,13 +156,7 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
           </span>
         )}
       </div>
-      <div className="flex gap-5 justify-between rounded-2xl text-neutral-900 max-md:flex-wrap my-5">
-        <p className="capitalize font-semibold text-2xl">Search New Cars</p>
-        <div className="my-auto text-sm font-medium tracking-normal flex items-center">
-          <p className="text-neutral-900 mr-2 font-semibold">{totalCars}</p>
-          <p className="text-neutral-900">results found</p>
-        </div>
-      </div>
+      
       <div className="grid gap-4 mt-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3">
         {isLoading ? (
           // Show skeletons while loading

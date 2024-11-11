@@ -138,7 +138,7 @@ export default function SearchSelect({ articleType }) {
       const selectedValue = selectedOption.value;
 
       if (selectedType === 'category') {
-        window.location.href = `/${articleType}/category/${selectedValue}`;
+        window.location.href = `/${articleType}/body-types/${selectedValue}`;
       } else if (selectedType === 'tag') {
         window.location.href = `/${articleType}/tag/${selectedValue}`;
       }

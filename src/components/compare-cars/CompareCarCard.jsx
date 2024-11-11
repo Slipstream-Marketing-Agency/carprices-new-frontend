@@ -8,11 +8,12 @@ import Image from "next/image";
 import Price from "@/utils/Price";
 import MultiStepCarSelection from "./MultiStepCarSelection";
 
-function CompareCarCard({ carData }) {
+function CompareCarCard({ carData, cars, setCars }) {
+  
+    const router = useRouter();
+    const pathname = usePathname();
+    
   if (!carData) return null;
-
-  const router = useRouter();
-  const pathname = usePathname();
 
   const handleRemoveCar = () => {
     const currentPath = pathname;
@@ -75,6 +76,8 @@ function CompareCarCard({ carData }) {
             carData={carData?.mainSlug}
             mode={"update"}
             handleModal={handleModal}
+            cars={cars}
+            setCars={setCars}
           />
         </div>
       </div>

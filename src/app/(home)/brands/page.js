@@ -51,8 +51,6 @@ export default async function BrandCategoryPage({ searchParams }) {
 
   const { brands, pagination } = await fetchBrands(page, pageSize);
 
-  console.log(pagination,"pagination");
-  
   return (
     <BrandListWrapper brandsData={brands} pagination={pagination} />
   );

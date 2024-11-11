@@ -13622,7 +13622,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 .brand-category-area .single-category1::after {
   content: "";
-  /* background-image: url(../img/home1/category1-bg.png); */
+  /* background-image: url(../img/home1/body-types1-bg.png); */
   background-color: var(--light);
   background-repeat: no-repeat;
   background-size: cover;
@@ -27141,7 +27141,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
   height: 100%;
 }
 .product-category-page .single-category-wrap .category-card .category-img {
-  /* background-image: url(../img/inner-page/category-bg.png); */
+  /* background-image: url(../img/inner-page/body-types-bg.png); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

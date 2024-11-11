@@ -1355,7 +1355,7 @@ function CarLeftSidebar({
                 </div>
               </div>
             )}
-            {router.pathname !== "/category/[categoryname]" && (
+            {router.pathname !== "/body-types/[categoryname]" && (
               <div className="product-widget mb-8">
                 <div className="check-box-item">
                   <h4
@@ -2013,7 +2013,7 @@ function CarLeftSidebar({
               </div>
             </div>
           )}
-          {router.pathname !== "/category/[categoryname]" && (
+          {router.pathname !== "/body-types/[categoryname]" && (
             <div className="product-widget mb-3">
               <div className="check-box-item">
                 <h4

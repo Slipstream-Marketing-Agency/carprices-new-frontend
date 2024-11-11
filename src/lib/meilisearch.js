@@ -1,8 +1,8 @@
 import { MeiliSearch } from 'meilisearch';
 
 const client = new MeiliSearch({
-  host: process.env.MEILISEARCH_HOST,
-  apiKey: process.env.MEILISEARCH_API_KEY,
+  host: "https://search.carprices.ae",
+  apiKey: "R8d7cB3zT2xL9pM6vW4jF1qS8kN0yV5h",
 });
 
 export default client;

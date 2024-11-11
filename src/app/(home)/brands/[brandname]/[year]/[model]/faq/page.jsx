@@ -16,7 +16,7 @@ export default async function FaqPage({ params }) {
         );
 
         const currentmodelResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${model}/${yearInt}`
+            `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`
         );
 
         currentmodel = currentmodelResponse.data.data.model;

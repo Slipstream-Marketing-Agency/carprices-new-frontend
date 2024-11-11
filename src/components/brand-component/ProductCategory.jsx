@@ -47,11 +47,8 @@ function ProductCategory({ brands }) {
     };
   });
   return (
-    <div className="mb-5 mt-4 container">
+    <div className="mb-5 mt-4 ">
       <div className="">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold my-4">Top Car Brands in UAE</h1>
-        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
           {brands?.map((item) => (
             <Link href={`/brands/${item?.attributes?.slug}`} key={item?.attributes?.slug} className="flex justify-center items-center bg-gray-100 p-5 rounded-xl">

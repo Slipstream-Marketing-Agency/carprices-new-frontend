@@ -23,10 +23,10 @@ const CarSelectionModal = ({
     const [models, setModels] = useState([]);
     const [variants, setVariants] = useState([]);
 
-    console.log('Years:', years);
-    console.log('Brands:', brands);
-    console.log('Models:', models);
-    console.log('Variants:', variants);
+    // console.log('Years:', years);
+    // console.log('Brands:', brands);
+    // console.log('Models:', models);
+    // console.log('Variants:', variants);
 
     useEffect(() => {
         if (isOpen) {

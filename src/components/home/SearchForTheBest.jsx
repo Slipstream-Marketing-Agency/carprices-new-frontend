@@ -30,7 +30,7 @@ const searchBestCar = [
   {
     imageUrl: "/assets/img/home-search-for-best/car-videos.webp",
     label: "Car Videos",
-    linkUrl: "videos",
+    linkUrl: "/car-videos",
     bgColor: "bg-[#FFE8E8]",
   },
   // {

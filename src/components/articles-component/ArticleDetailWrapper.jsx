@@ -12,9 +12,15 @@ import RelatedArticles from "./RelatedArticles";
 import LastTwoWeeksArticles from "./LastTwoWeeksArticles";
 import PopularCategories from "../popular-sections/PopularCategories";
 import FeaturedSlider from "./FeaturedSlider";
+import Relations from "./Relations";
+import ArticleComment from "./ArticleComment";
 
 export default function ArticleDetailWrapper({ data, type, slug, featuredArticlesData }) {
+    const [isExpanded, setIsExpanded] = useState(false);
 
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
     const { detailData, relatedArticles } = data;
     const { title, author, content, publishedAt, summary, coverImage, articleTags, articleCategories, articleTypes } = detailData;
     const currentURL = typeof window !== "undefined" ? window.location.href : "";
@@ -73,27 +79,63 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
             <section className="container">
                 <div className="sm:grid gap-10 grid-cols-12 my-6">
                     <div className="sm:col-span-9 space-y-6">
-                        <ArticleHeader
-                            title={title}
-                            author={author}
-                            publishedAt={publishedAt}
-                            summary={summary}
-                            content={content}
-                            currentURL={currentURL}
-                            articleTypes={articleTypes}
-                        />
-                        <Image
-                            src={coverImage?.url || "/assets/img/car-placeholder.png"}
-                            alt="Cover Image"
-                            width={1000}
-                            height={563}
-                            className="object-contain w-full"
-                            quality={100}
-                            loading="lazy"
-                        />
-                        <div className="mt-4 article-content">{renderContent}</div>
+                        <div className="shadow-md rounded-xl p-3">
+                            <ArticleHeader
+                                title={title}
+                                author={author}
+                                publishedAt={publishedAt}
+                                summary={summary}
+                                content={content}
+                                currentURL={currentURL}
+                                articleTypes={articleTypes}
+                            />
+                            <Image
+                                src={coverImage?.url || "/assets/img/car-placeholder.png"}
+                                alt="Cover Image"
+                                width={1000}
+                                height={563}
+                                className="object-contain w-full"
+                                quality={100}
+                                loading="lazy"
+                            />
+                            <div className="mt-4 article-content">{renderContent}</div>
+
+                        </div>
+
+                        <div className="mt-6 shadow-md p-4 rounded-lg">
+                            <div className="flex items-center space-x-3 mb-4">
+                                <Image
+                                    src={author.avatar.url}
+                                    width={80}
+                                    height={80}
+                                    alt="author-martin"
+                                    className="object-cover rounded-full"
+                                />
+                                <div>
+                                    <h6 className="text-blue-600 font-semibold text-xs uppercase">Published by</h6>
+                                    <h5 className="text-lg sm:text-xl font-bold">{author?.name || "Unknown Author"}</h5>
+                                </div>
+                            </div>
+                            <p className={`${isExpanded ? '' : 'line-clamp-2'} transition-all duration-300`} dangerouslySetInnerHTML={{ __html: author?.author_description }}></p>
+                            <div className=' flex justify-start'>
+                                <button
+                                    onClick={toggleReadMore}
+                                    className="text-xs font-semibold text-blue-500 mt-0 hover:underline focus:outline-none rounded-xl"
+                                >
+                                    {isExpanded ? 'Read Less' : 'Read More'}
+                                </button>
+                            </div>
+                            <div className="flex space-x-2 mt-4">
+                                <Link href={`mailto:${author?.email}`} className="text-blue-600"><EmailIcon /></Link>
+                                <Link href={`${author?.Instagram}`} className="text-pink-500" target="_blank" rel="noreferrer"><InstagramIcon /></Link>
+                                <Link href={`${author?.twitter}`} className="text-blue-400" target="_blank" rel="noreferrer"><TwitterIcon /></Link>
+                                <Link href={`${author?.linkedin}`} className="text-blue-700" target="_blank" rel="noreferrer"><LinkedInIcon /></Link>
+                            </div>
+                        </div>
+                        <ArticleComment slug={slug} />
+
                         <div>
-                            <RelatedArticles articles={relatedArticles} type={type} slug={slug} />
+                            <RelatedArticles type='article' slug={slug} />
                         </div>
                         <PopularCategories />
 
@@ -102,11 +144,11 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                         <FeaturedSlider featuredArticles={featuredArticlesData} type={type} />
                         <TagsList tags={articleTags} />
                         <CategoryList categories={articleCategories} />
-                        <AuthorInfo author={author} />
-                        <LastTwoWeeksArticles />
-                        <div className='my-6 sticky top-0'>
-                            <Suspense fallback={<div>Loading ad...</div>}>
+                        <Relations slug={slug} />
 
+                        <LastTwoWeeksArticles />
+                        <div className='my-6 sticky top-0  md:block hidden'>
+                            <Suspense fallback={<div>Loading ad...</div>}>
                                 <Ad300x600 dataAdSlot="3792539533" />
                             </Suspense>
                         </div>
@@ -126,7 +168,7 @@ const ArticleHeader = ({ title, author, publishedAt, summary, content, currentUR
             <span className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm">{type.type}</span>
         )}
 
-        <h1 className="capitalize font-bold text-2xl sm:text-3xl">{title}</h1>
+        <h1 className="capitalize font-bold text-2xl sm:text-3xl mt-3">{title}</h1>
         <div className="flex justify-between items-center my-1 sm:my-2 text-xs sm:text-sm">
             <span className="text-gray-400 space-x-3">
                 <span>{author?.name || "Unknown Author"}</span>
@@ -165,7 +207,7 @@ const CategoryList = ({ categories }) => (
             <h3 className="md:text-lg font-semibold">Related Categories</h3>
             <div className="flex flex-wrap gap-2 mt-4">
                 {categories.map(category => (
-                    <Link key={category.id} href={`/news/category/${category.slug}`}>
+                    <Link key={category.id} href={`/news/body-types/${category.slug}`}>
                         <div className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-[10px] font-medium hover:bg-blue-200 hover:text-blue-700 transition-colors">
                             {category.name}
                         </div>
@@ -178,27 +220,3 @@ const CategoryList = ({ categories }) => (
 );
 
 
-const AuthorInfo = ({ author }) => (
-    <div className="mt-6 shadow-md p-4 rounded-lg">
-        <div className="flex items-center space-x-3 mb-4">
-            <Image
-                src={author.avatar.url}
-                width={80}
-                height={80}
-                alt="author-martin"
-                className="object-cover rounded-full"
-            />
-            <div>
-                <h6 className="text-blue-600 font-semibold text-xs uppercase">Author</h6>
-                <h1 className="text-lg sm:text-xl font-bold">{author?.name || "Unknown Author"}</h1>
-            </div>
-        </div>
-        <p className="text-sm" dangerouslySetInnerHTML={{ __html: author?.author_description }}></p>
-        <div className="flex space-x-2 mt-4">
-            <a href={`mailto:${author?.email}`} className="text-blue-600"><EmailIcon /></a>
-            <a href={author?.Instagram} className="text-pink-500" target="_blank" rel="noreferrer"><InstagramIcon /></a>
-            <a href={author?.twitter} className="text-blue-400" target="_blank" rel="noreferrer"><TwitterIcon /></a>
-            <a href={author?.linkedin} className="text-blue-700" target="_blank" rel="noreferrer"><LinkedInIcon /></a>
-        </div>
-    </div>
-);

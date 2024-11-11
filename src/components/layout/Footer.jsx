@@ -25,14 +25,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="">
+      {/* <div className="">
         <Suspense fallback={<div>Loading ad...</div>}>
           <FixedAd320x50 dataAdSlot="1332106070" />
         </Suspense>
         <Suspense fallback={<div>Loading ad...</div>}>
           <FixedAd728x90 dataAdSlot="3620924730" />
         </Suspense>
-      </div>
+      </div> */}
 
       <div className="flex justify-center items-center px-16 py-16 bg-neutral-900 max-md:px-5 w-full ">
         <div className="flex flex-col w-full container">

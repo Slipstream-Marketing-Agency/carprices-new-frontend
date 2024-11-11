@@ -16,10 +16,10 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
             name: 'bodyTypes',
             label: 'Search By Body Type',
         },
-        {
-            name: 'popularCar',
-            label: 'Popular New Cars',
-        },
+        // {
+        //     name: 'popularCar',
+        //     label: 'Popular New Cars',
+        // },
     ]
 
     const [hoveredSection, setHoveredSection] = useState(subItems[0].name);
@@ -83,7 +83,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         </div>
                                     ))}
                                 </div>
-                                <Link href="/search-cars" className="text-blue-600 font-bold px-2 hover:text-blue-700">
+                                <Link href="/brands" className="text-blue-600 font-bold px-2 hover:text-blue-700">
                                     View All <span className="font-extrabold">→</span>
                                 </Link>
                             </div>
@@ -94,7 +94,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                 <h5 className="text-sm font-semibold text-gray-400">Body Types</h5>
                                 <div className="grid grid-cols-4 gap-4 mb-4">
                                     {bodyTypes.map((bodyType, index) => (
-                                        <Link href={`/category/${bodyType?.slug}`} key={index}>
+                                        <Link href={`/body-types/${bodyType?.slug}`} key={index}>
                                             <div
                                                 className="text-center bg-gray-50 p-2 rounded-lg shadow-sm hover:shadow-custom-shadow transition-shadow duration-300 cursor-pointer"
                                                 onMouseDown={(e) => e.currentTarget.classList.add('scale-95')}
@@ -121,7 +121,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         </Link>
                                     ))}
                                 </div>
-                                <Link href="/search-cars" className="text-blue-600 font-bold px-2 hover:text-blue-700">
+                                <Link href="/body-types" className="text-blue-600 font-bold px-2 hover:text-blue-700">
                                     View All <span className="font-extrabold">→</span>
                                 </Link>
                             </div>
@@ -135,7 +135,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         <h6 className="text-sm font-semibold text-gray-400">Browse Cars by Body Style</h6>
                                         <div className="grid grid-cols-2 gap-4 mt-2">
                                             {bodyTypes.map((bodyType, index) => (
-                                                <Link href={`/category/${bodyType?.slug}`} key={index}>
+                                                <Link href={`/body-types/${bodyType?.slug}`} key={index}>
                                                     <div
                                                         className="text-center bg-gray-50 p-0 rounded-lg shadow-sm hover:shadow-custom-shadow transition-shadow duration-300 cursor-pointer"
                                                         onMouseDown={(e) => e.currentTarget.classList.add('scale-95')}
@@ -162,7 +162,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                 </Link>
                                             ))}
                                         </div>
-                                        <Link href="/search-cars" className="text-blue-600 font-bold px-2 hover:text-blue-700">
+                                        <Link href="/body-types" className="text-blue-600 font-bold px-2 hover:text-blue-700">
                                             See all Body Styles <span className="font-extrabold">→</span>
                                         </Link>
                                     </div>
@@ -199,7 +199,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                 </Link>
                                             ))}
                                         </div>
-                                        <Link href="/search-cars" className="text-blue-600 font-bold px-2 hover:text-blue-700">
+                                        <Link href="/brands" className="text-blue-600 font-bold px-2 hover:text-blue-700">
                                             See all Brands <span className="font-extrabold">→</span>
                                         </Link>
                                     </div>

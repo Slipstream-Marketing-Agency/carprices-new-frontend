@@ -86,12 +86,12 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
 
     return (
         <div className="container mb-10">
-            <div className="flex flex-col self-start max-md:max-w-full">
+            <div className="flex flex-col self-start max-md:max-w-full mb-6">
                 <h5 className="md:text-sm text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
-                    Most popular new cars in the UAE
+                Explore the UAE’s Most Popular Car Dealers
                 </h5>
                 <h2 className="md:text-lg text-md font-semibold capitalize">
-                    Here are some of the most popular new cars users look for in the UAE
+                Explore branches in your city for the best car buying experience
                 </h2>
             </div>
 

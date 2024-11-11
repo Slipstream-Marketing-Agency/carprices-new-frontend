@@ -31,6 +31,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import HoveredProfile from "./NavbarComponents/HoveredProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "@/store/slices/authSlice";
+import Search from "../common/Search";
 
 
 export default function NavBar() {
@@ -38,7 +39,7 @@ export default function NavBar() {
     const pathname = usePathname();
     const isSearchCarsPage = pathname?.startsWith("/search-cars");
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    
+
     const { user } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
@@ -62,10 +63,11 @@ export default function NavBar() {
 
     const links = [
         { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars" },
-        { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars" },
-        { href: "javascript:void(0)", label: "Services", hoverItem: "services" },
-        { href: "javascript:void(0)", label: "Blog", hoverItem: "blog" },
-        { href: "javascript:void(0)", label: "More", hoverItem: "more" },
+        { href: "/compare-cars", label: "Compare New Cars"},
+        // { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars" },
+        { href: "#", onClick: (e) => e.preventDefault(), label: "Services", hoverItem: "services" },
+        { href: "#", onClick: (e) => e.preventDefault(), label: "News, Reviews & Videos", hoverItem: "blog" },
+        { href: "#", onClick: (e) => e.preventDefault(), label: "More", hoverItem: "more" },
     ];
     // const links = [
     //   { href: "/search-cars", label: "Search New Cars" },
@@ -402,7 +404,7 @@ export default function NavBar() {
     return (
         <>
             <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
-            <div className="flex flex-col bg-white w-full md:block hidden border-solid border-b-[1px] border-gray-200">
+            <div className="md:flex flex-col bg-white w-full hidden border-solid border-b-[1px] border-gray-200">
                 <div>
                     <div
                         className="grid grid-cols-1 md:grid-cols-[50%_50%] gap-5 px-10 py-4 w-full max-md:flex-wrap max-md:px-5 max-md:max-w-full"
@@ -421,7 +423,7 @@ export default function NavBar() {
                                 />
                             </Link>
                             <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
-                                <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
+                                {/* <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
                                     <div className="flex justify-center items-center gap-2 px-4 py-1 max-md:flex-wrap w-full">
                                         <SearchIcon />
                                         <input
@@ -433,7 +435,10 @@ export default function NavBar() {
                                             autoComplete="off"
                                         />
                                     </div>
-                                </div>
+                                </div> */}
+
+                                <Search/>
+                                
 
                                 <div className="relative w-full ">
                                     {showDropdown && searchResults.length > 0 && (
@@ -875,7 +880,7 @@ export default function NavBar() {
                     </div>
                 )}
             </div>
-            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen}  />
+            <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
         </>
 
     )

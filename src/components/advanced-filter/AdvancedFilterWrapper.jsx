@@ -10,18 +10,20 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import {
     Dialog,
     DialogContent,
-    DialogTitle,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
+    MenuItem
 } from "@mui/material";
 import LoaderOverlay from "../common/LoaderOverlay ";
 import Pagination from "./Pagination";
-import Head from "next/head";
-import axios from "axios";
-import moment from "moment";
-import PriceListTable from "../brand-component/PriceListTable";
+import ExpandableText from "../common/ExpandableText";
+import Select from "react-select";
+import PopularCategories from "../popular-sections/PopularCategories";
+import WebStories from "../home/WebStories";
+import TrendingVideos from "../home/TrendingVideos";
+import ServicesAdComponent from "../home/ServicesAdComponent";
+import CarDealersHome from "../home/CarDealersHome";
+import SeoLinksFilter from "../common/SeoLinksFilter";
+import PrimaryButton from "../buttons/PrimaryButton";
+import FilterLayout from "../multi-step-filter/FilterLayout";
 
 export default function AdvancedFilterWrapper({
     currentPage,
@@ -214,30 +216,6 @@ export default function AdvancedFilterWrapper({
         }
     }, [selectedOption, router, searchParams]);
 
-
-    const [branddetails, setBrandDetails] = useState(null); // State for brand details
-
-    console.log(branddetails, "branddetails");
-
-
-    // Fetch brand details when the pathname matches /brands/[brandname]
-    useEffect(() => {
-        const fetchBrandDetails = async () => {
-            try {
-                const response = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}car-brands/${params.brandname}` // Use params to get brandname
-                );
-                setBrandDetails(response.data); // Set the fetched brand details
-            } catch (error) {
-                console.error("Error fetching brand details:", error);
-            }
-        };
-
-        // Check if the current pathname matches the desired format
-        if (pathname.startsWith('/brands/') && params.brandname) {
-            fetchBrandDetails(); // Call the fetch function if the condition is met
-        }
-    }, [pathname, params.brandname]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -468,11 +446,31 @@ export default function AdvancedFilterWrapper({
     );
     const currentYear = new Date().getFullYear();
     const isBrandPage = pathname.startsWith('/brands/') && pathname.split('/').length === 3;
-    const isCategoryPage = pathname.startsWith('/category/') && pathname.split('/').length === 3;
+    const isCategoryPage = pathname.startsWith('/body-types/') && pathname.split('/').length === 3;
 
     const [expanded, setExpanded] = useState(false);
+
+    const sortingOptions = [
+        { value: "price-desc", label: "Price High to Low" },
+        { value: "price-asc", label: "Price Low to High" },
+    ];
+
+    const [toggleModalFunction, setToggleModalFunction] = useState(null);
+
+    const toggleModalFromParent = (filterId) => {
+
+        console.log(filterId, "filterId");
+
+        if (toggleModalFunction === null) {
+            setToggleModalFunction(filterId);
+        } else {
+            setToggleModalFunction(null);
+        }
+    };
+
+
     return <div>
-        <head>
+        {/* <head>
             {isBrandPage ? ( // Only render these tags on the brand page
                 <>
                     <title>
@@ -480,7 +478,6 @@ export default function AdvancedFilterWrapper({
                             ? branddetails.seo.metaTitle
                             : `${branddetails?.attributes?.name} ${currentYear} Car Prices in UAE, Latest Models, Reviews & Specifications in UAE - Carprices.ae`}
                     </title>
-                    {/* Meta description */}
                     <meta
                         name="description"
                         content={
@@ -498,7 +495,6 @@ export default function AdvancedFilterWrapper({
                 <title>
                     "Explore Car Body Types: Sedans, SUVs, Coupes, and More"
                 </title>
-                {/* Meta description */}
                 <meta
                     name="description"
                     content="Discover the different car body types, including sedans, SUVs, hatchbacks, and coupes. Learn about their features, advantages, and what makes each style unique. Find the perfect car that suits your lifestyle and needs!"
@@ -508,7 +504,53 @@ export default function AdvancedFilterWrapper({
                     href={`https://carprice.ae${pathname}`} // Use the pathname to construct the canonical URL
                 />
             </>) : <></>}
-        </head>
+        </head> */}
+
+
+
+        <div className="flex items-center justify-center ">
+            <div
+                id="slideover-container"
+                className={`w-full h-full fixed z-[999] inset-0 ${isVisible ? "visible" : "invisible"
+                    }`}
+            >
+                <div
+                    onClick={toggleSlideover}
+                    id="slideover-bg"
+                    className={`w-full h-full duration-500 ease-out transition-all inset-0 absolute bg-gray-900 ${isVisible ? "opacity-50" : "opacity-0"
+                        }`}
+                />
+                <div
+                    id="slideover"
+                    className={`w-full md:w-96  rounded-tl-2xl  rounded-bl-2xl bg-white h-full absolute right-0 duration-300 ease-out transition-all ${isVisible ? "translate-x-0" : "translate-x-full"
+                        }`}
+                >
+                    <div
+                        onClick={toggleSlideover}
+                        className="z-[999] absolute cursor-pointer text-gray-600 top-0 w-8 h-8 flex items-center justify-center right-0 mt-1 mr-1"
+                    >
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="white"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </div>
+                    <div className="mt-0">
+                        <FilterLayout />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <PopupComponent
             open={open}
             onClose={handleClose}
@@ -542,7 +584,7 @@ export default function AdvancedFilterWrapper({
                 </div>
             </div>
         </div>
-        {/* <LoaderOverlay isVisible={isLoading} /> */}
+        <LoaderOverlay isVisible={isLoading} />
 
         <div className="container mx-auto px-4">
             {/* Sidebar and Car Listing */}
@@ -560,88 +602,87 @@ export default function AdvancedFilterWrapper({
                         driveoptions={driveoptions}
                         driveList={driveListRes}
                         additionalQueryParams={additionalQueryParams}
+                        toggleModal={toggleModalFunction}
+                        setIsLoading={setIsLoading}
                     />
                 </aside>
                 <main className="md:col-span-9 col-span-12">
-                    <FormControl className="hidden md:block">
-                        <InputLabel id="sorting-select-label">Sort by</InputLabel>
-                        <Select
-                            labelId="sorting-select-label"
-                            value={selectedOption}
-                            onChange={(event) => handleOptionChange(event.target.value)}
-                            label="Sort by"
-                            sx={{
-                                width: "200px",
-                                borderRadius: "30px",
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                    borderRadius: "30px",
-                                },
-                            }}
-                        >
-                            <MenuItem value="price-desc">
-                                <i className="bi bi-sort-down" />
-                                Price High to Low
-                            </MenuItem>
-                            <MenuItem value="price-asc">
-                                <i className="bi bi-sort-up" />
-                                Price Low to High
-                            </MenuItem>
-                        </Select>
-                    </FormControl>
-                    {isBrandPage && (
-                        <>
-                            <div>
-                                <h1 class="fw-bold">
-                                    {branddetails?.attributes?.name} UAE Cars
-                                </h1>
-                                <hr className="my-0 mt-2 heading-bottom " />
-                                <div className="read-more-less" id="dynamic-content">
-                                    <div
-                                        className={`info ${expanded ? "" : "height-hidden"
-                                            } dynamic-content content-hidden`}
-                                    >
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: branddetails?.attributes?.description,
-                                            }}
-                                        ></div>
-                                        <h2 className="fw-bold mt-4">
-                                            {branddetails?.attributes?.name} Cars{" "}
-                                            {moment().format("MMMM YYYY")} Price List in UAE
-                                        </h2>
-                                        <hr className="mb-3 mt-2 heading-bottom " />
-
-
-                                        <br />
-
-                                        <PriceListTable
-                                            data={
-                                                branddetails?.attributes?.modelsWithPriceRange || []
-                                            }
-                                            brand={branddetails?.attributes?.name}
-                                        />
-                                    </div>
-                                    <span
-                                        className={`read-more ${expanded ? "hide" : ""
-                                            } text-primary fw-bold mb-[-3px]`}
-                                        onClick={() => setExpanded(true)}
-                                    >
-                                        Read More
-                                    </span>
-                                    <span
-                                        className={`read-less scroll-to-parent-pos content-read-less ${expanded ? "" : "hide"
-                                            } text-primary fw-bold`}
-                                        onClick={() => setExpanded(false)}
-                                    >
-                                        Read Less
-                                    </span>
+                    {(pathname === '/search-cars' || pathname.includes('/body-types')) &&
+                        <div className='shadow-md p-4 mt-5 rounded-lg'>
+                            {pathname === '/search-cars' && (
+                                <>
+                                    <h1 className="md:text-3xl text-xl font-semibold">Find Your Perfect New Car</h1>
+                                    <h4 className="md:text-lg text-md font-medium text-blue-600">
+                                        Browse the Latest Models Across All Brands and Price Ranges
+                                    </h4>
+                                    <ExpandableText content={`<p>Explore our extensive collection of new cars available in the UAE. Compare prices, specifications, and features to find the vehicle that best fits your lifestyle and budget. With options across a wide range of brands and models, from budget-friendly choices to premium options, you’re sure to find the perfect car for you. Start your journey to a new car with CarPrices.ae today!</p>`} />
+                                </>
+                            )}
+                            {pathname.includes('/body-types') && (
+                                <>
+                                    <h1 className="md:text-3xl text-xl font-semibold">Discover Cars by Body Type</h1>
+                                    <h4 className="md:text-lg text-md font-medium text-blue-600">
+                                        Find the Ideal Car Body Type to Suit Your Needs and Style
+                                    </h4>
+                                    <ExpandableText content={`<p>Explore our wide selection of car body types, from sedans to SUVs and more. Compare features and specifications to find the body style that best matches your lifestyle. CarPrices.ae makes it easy to browse and choose the car that’s right for you based on the body type. Begin your search for the perfect fit today!</p>`} />
+                                </>
+                            )}
+                        </div>
+                    }
+                    <div className="hidden md:flex gap-4 justify-between px-5 py-4 text-base tracking-normal rounded-2xl bg-blue-100 max-md:flex-wrap my-4">
+                        <div className="my-auto text-black leading-[150%] max-md:max-w-full">
+                            Need help finding the right vehicle?{" "}
+                            <span className="">Start Your Super Search Now!</span>
+                            <span className="tracking-normal"> ✨</span>
+                        </div>
+                        <PrimaryButton label="Search Now" onClick={toggleSlideover} />
+                    </div>
+                    <div className="mt-5">
+                        <div className="flex justify-between ">
+                            <div className="flex gap-5 justify-between rounded-2xl text-neutral-900 max-md:flex-wrap ">
+                                <p className="capitalize font-semibold text-2xl">{pathname.includes('/body-types') ? 'Search New Cars By Body Type' : 'Search New Cars'}</p>
+                                <div className="my-auto text-sm font-medium tracking-normal flex items-center">
+                                    <p className="text-neutral-900 mr-2 font-semibold">{totalCars}</p>
+                                    <p className="text-neutral-900">results found</p>
                                 </div>
                             </div>
-                        </>
-                    )}
-                    <CarList cars={allTrims || []} totalCars={totalCars} setIsLoading={setIsLoading} isLoading={isLoading} />
-                    <Pagination currentPage={current} totalPages={total} />
+                            <div className="hidden md:block">
+                                <Select
+                                    options={sortingOptions}
+                                    value={sortingOptions.find(option => option.value === selectedOption)}
+                                    onChange={(option) => handleOptionChange(option.value)}
+                                    placeholder="Sort by"
+                                    styles={{
+                                        control: (base) => ({
+                                            ...base,
+                                            width: 200,
+                                            borderRadius: 30,
+                                        }),
+                                    }}
+                                />
+                            </div>
+                        </div>
+
+
+                        <CarList cars={allTrims || []} totalCars={totalCars} setIsLoading={setIsLoading} isLoading={isLoading} />
+                        <Pagination currentPage={current} totalPages={total} />
+                    </div>
+                    <PopularCategories />
+
+                    <WebStories />
+
+                    <TrendingVideos />
+                    <div className="mt-6">
+                        <ServicesAdComponent />
+                    </div>
+                    <div className="mt-10">
+                        <CarDealersHome />
+                    </div>
+                    <SeoLinksFilter />
+
+
                 </main>
+
             </div>
         </div></div>;
 }

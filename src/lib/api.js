@@ -52,7 +52,7 @@ export async function getStoriesByCategory(
   pageSize = 10,
   sort = "createdAt:desc"
 ) {
-  const url = `${API_URL}web-stories/category/${categorySlug}?page=${page}&pageSize=${pageSize}&sort=${sort}`;
+  const url = `${API_URL}web-stories/body-types/${categorySlug}?page=${page}&pageSize=${pageSize}&sort=${sort}`;
   return await fetchWithErrorHandling(url);
 }
 

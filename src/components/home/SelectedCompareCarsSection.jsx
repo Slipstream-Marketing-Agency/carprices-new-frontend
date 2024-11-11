@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Slider from 'react-slick';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import PrimaryButton from '../buttons/PrimaryButton';
 
 
 export default function SelectedCompareCarsSection() {
@@ -73,12 +74,10 @@ export default function SelectedCompareCarsSection() {
                     </h2>
 
                 </div>
-                <Link href="/compare-cars">
-                    <span className="capitalize font-semibold">Compare Cars</span>
-                </Link>
+
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 container">
-                <div className="xl:col-span-3 relative half-card-slider hidden sm:block">
+                <div className="xl:col-span-3 relative half-card-slider ">
                     <Slider {...sliderSettings}>
                         {carComparisons.map((comparison) => {
                             // Check if there are at least two car models for the comparison
@@ -156,17 +155,20 @@ export default function SelectedCompareCarsSection() {
                                             </div>
                                         )}
                                     </div>
-                                    <Link href={comparisonUrl} className="w-full">
-                                        <button className="flex justify-center items-center px-2 py-3 mt-3 max-w-full text-base leading-4 text-center text-white bg-blue-600 border border-blue-600 active:bg-blue-700 border-solid rounded-[73px] w-full">
-                                            Compare Now
-                                        </button>
-                                    </Link>
+                                    <PrimaryButton label={`Compare Now`} href={comparisonUrl} additionalClass='w-full mt-4' />
+
                                 </div>
                             );
                         })}
                     </Slider>
                 </div>
+            
+
             </div>
+            <div className='flex justify-center w-full'>
+                    <PrimaryButton label={`Compare More Cars`} href={"/compare-cars"} />
+
+                </div>
         </div>
     );
 }

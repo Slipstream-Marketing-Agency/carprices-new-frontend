@@ -353,20 +353,16 @@ export default function FilterLayout() {
                     }`}
             >
                 <div
-                    className={`${pathname === "/"
-                        ? "relative flex flex-col rounded-tr-2xl rounded-tl-2xl justify-center items-start px-4 h-[95px] text-white bg-gradient-to-r from-blue-500 to-blue-800 "
-                        : "relative flex flex-col rounded-tl-2xl justify-center items-start px-4 py-4 text-white bg-gradient-to-r from-blue-500 to-blue-800 "
-                        }`}
+                    className={`relative flex flex-col rounded-tl-2xl justify-center items-start px-4 text-white bg-gradient-to-r from-blue-500 to-blue-800 font-semibold ${pathname === "/" ? "rounded-tr-2xl h-[85px]" : "py-4"}`}
                 >
-                    <div
-                        className="gradient-filter"
-                    />
-                    <h3 className="text-white text-xl relative  text-start ">
+                    {/* Consider adding aria-label or role for screen readers */}
+                    <h1 className="text-white text-xl text-start">
                         {steps[currentStep].title}
-                    </h3>
+                    </h1>
                 </div>
 
-                <div className="flex flex-col px-6 pt-6 bg-white relative -top-5 rounded-tr-2xl rounded-tl-2xl">
+
+                <div className="flex flex-col px-6 py-4 bg-white relative rounded-b-2xl rounded-tl-2xl">
                     {loading && (
                         <div className="absolute mt-4 inset-0 bg-white bg-opacity-75 flex justify-center items-center z-50">
                             <CircularProgress />

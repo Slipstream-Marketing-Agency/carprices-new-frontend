@@ -1,4 +1,6 @@
+// src/components/RelatedArticles.jsx
 "use client";
+
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -8,10 +10,16 @@ import Image from 'next/image';
 
 export default function RelatedArticles({ type, slug }) {
     const [articles, setArticles] = useState([]);
+
     useEffect(() => {
         const fetchRelatedArticles = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/related?slug=${slug}`);
+                // Determine the query parameter based on type
+                const paramType = type === 'brand' ? 'brand' : 
+                                  type === 'model' ? 'model' : 'slug';
+
+                // Make the API request with the correct parameter
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/related?${paramType}=${slug}`);
                 setArticles(response.data.articles || []);
             } catch (error) {
                 console.error('Error fetching related articles:', error);
@@ -19,27 +27,27 @@ export default function RelatedArticles({ type, slug }) {
         };
 
         fetchRelatedArticles();
-    }, [slug]);
+    }, [slug, type]); // Refetch when slug or type changes
+
     return (
-        <div className="flex flex-col md:mt-4 mt-2 ">
+        <div className="flex flex-col md:mt-4 mt-2 shadow-md rounded-xl p-3">
             <div className="flex justify-between gap-5 px-1 w-full max-md:flex-wrap">
                 <h2 className="md:text-2xl text-md font-semibold capitalize">
                     Related Articles
                 </h2>
-
             </div>
             <div className="mt-1 w-full">
                 {articles.length > 0 ? (
                     <CardSliderWrapper
                         responsive={{
-                            mobile: 1.5, // Show 1.5 slides on small screens
-                            tablet: 2.5, // Show 2.5 slides on medium screens
-                            desktop: 3.5, // Show 3.5 slides on large screens
+                            mobile: 1.5,
+                            tablet: 2.5,
+                            desktop: 3.5,
                         }}
                     >
                         {articles.map((article) => (
                             <Link key={article.id} href={`/${article?.types[0].slug}/${article.slug}`}>
-                                <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full ">
+                                <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                                     <div className="relative">
                                         <Image
                                             src={article.coverImage || '/assets/placeholder/news-placeholder.webp'}
@@ -65,21 +73,17 @@ export default function RelatedArticles({ type, slug }) {
                                         </div>
 
                                         <div className="mt-2">
-
                                             <div className="flex flex-col justify-between text-gray-800 mt-2">
                                                 <div className='flex justify-between'>
                                                     <div className='flex items-center gap-2'>
-
                                                         <p className="text-xs font-semibold sm:inline">
                                                             {article.author?.name || 'Unknown Author'}
                                                         </p>{" "}
                                                     </div>
-
-                                                    <p><span className='text-xs font-semibold sm:inline'>Published:
-                                                    </span><span className='text-xs ml-1'>{new Date(article.publishedAt).toLocaleDateString()}
-                                                        </span>
+                                                    <p>
+                                                        <span className='text-xs font-semibold sm:inline'>Published: </span>
+                                                        <span className='text-xs ml-1'>{new Date(article.publishedAt).toLocaleDateString()}</span>
                                                     </p>
-
                                                 </div>{" "}
                                             </div>
                                         </div>

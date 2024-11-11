@@ -40,8 +40,6 @@ export default async function Webstory({ params }) {
     // Fetch the story data based on the slug
     const story = await getWebStoryData(slug);
 
-    console.log(story, "getWebStoryData");
-
 
     // If the story is not found, throw an error or handle the case
     if (!story) {
