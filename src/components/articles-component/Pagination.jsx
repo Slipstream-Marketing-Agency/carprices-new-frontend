@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Pagination({ currentPage, pageCount, type, totalResults, pageSize }) {
   const router = useRouter();
@@ -14,9 +13,13 @@ export default function Pagination({ currentPage, pageCount, type, totalResults,
     router.push(`/${type}?page=1&pageSize=${newSize}`);
   };
 
+  const handlePageChange = (page) => {
+    router.push(`/${type}?page=${page}&pageSize=${selectedPageSize}`);
+  };
+
   const generatePageNumbers = () => {
     const pages = [];
-    const maxPagesToShow = 5; // Show a maximum of 5 pages in the control
+    const maxPagesToShow = 5;
     let startPage = Math.max(1, currentPage - 2);
     let endPage = Math.min(pageCount, currentPage + 2);
 
@@ -37,54 +40,50 @@ export default function Pagination({ currentPage, pageCount, type, totalResults,
   const displayedResultsEnd = Math.min(currentPage * selectedPageSize, totalResults);
 
   return (
-    <div className=" md:flex md:flex-row flex-col md:justify-between items-center mt-8 space-y-3">
+    <div className="md:flex md:flex-row flex-col md:justify-between items-center mt-8 space-y-3">
       <div className="flex items-center space-x-2">
         {/* Previous Page Button */}
         {currentPage > 1 && (
-          <Link
-            href={`/${type}?page=${currentPage - 1}&pageSize=${selectedPageSize}`}
-            prefetch={true}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
             className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
           >
             &lt;
-          </Link>
+          </button>
         )}
 
         {/* Page Numbers */}
         {generatePageNumbers().map((page) => (
-          <Link
+          <button
             key={page}
-            href={`/${type}?page=${page}&pageSize=${selectedPageSize}`}
-            prefetch={true}
+            onClick={() => handlePageChange(page)}
             className={`px-3 py-1 rounded ${page === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
           >
             {page}
-          </Link>
+          </button>
         ))}
 
         {/* Ellipsis and Last Page */}
         {currentPage < pageCount - 2 && (
           <>
             <span className="px-3 py-1 text-gray-700">...</span>
-            <Link
-              href={`/${type}?page=${pageCount}&pageSize=${selectedPageSize}`}
-              prefetch={true}
+            <button
+              onClick={() => handlePageChange(pageCount)}
               className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
             >
               {pageCount}
-            </Link>
+            </button>
           </>
         )}
 
         {/* Next Page Button */}
         {currentPage < pageCount && (
-          <Link
-            href={`/${type}?page=${currentPage + 1}&pageSize=${selectedPageSize}`}
-            prefetch={true}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
             className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
           >
             &gt;
-          </Link>
+          </button>
         )}
       </div>
 
