@@ -165,10 +165,10 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
     return (
         <div className="container">
             <div className="grid grid-cols-12 gap-5">
-                <div className="md:col-span-9">
+                <div className="md:col-span-9 col-span-12">
 
                     <div className="grid grid-cols-12 mt-6 mb-4 shadow-md p-4 rounded-lg gap-5">
-                        <div className="col-span-4 flex justify-start items-start w-full">
+                        <div className="md:col-span-4 col-span-12 flex justify-start items-start w-full">
                             <Image
                                 src={brandDetails?.cover || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-cover-image`}
@@ -180,7 +180,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                             />
                         </div>
 
-                        <div className="col-span-8 flex flex-col items-start">
+                        <div className="md:col-span-8 col-span-12 flex flex-col items-start">
                             <Image
                                 src={brandDetails?.logo || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-logo`}
@@ -283,7 +283,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     {loading ? (
                         <div className="grid grid-cols-12 gap-5">
                             {[1, 2, 3, 4].map((_, index) => (
-                                <div className="md:col-span-4 relative" key={index}>
+                                <div className="md:col-span-4 col-span-12 relative" key={index}>
                                     <CarCardSkeleton />
                                 </div>
                             ))}
@@ -291,7 +291,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     ) : (
                         (models?.length > 0 ? <div className="grid grid-cols-12 gap-5">
                             {(!isSearching ? initialModels : models).map((car) => (
-                                <div className="md:col-span-4 relative" key={car.id}>
+                                <div className="md:col-span-4 col-span-12 relative" key={car.id}>
                                     <CarCard car={car} brandname={selectedBrand} />
                                 </div>
                             ))}
@@ -314,7 +314,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     <RelatedVideos type='brand' slug={brandname} />
                 </div>
                 <div className="md:col-span-3">
-                    <div className='my-6 sticky top-0'>
+                    <div className='my-6 sticky top-0  md:block hidden'>
                         <Suspense fallback={<div>Loading ad...</div>}>
                             <Ad300x600 dataAdSlot="3792539533" />
                         </Suspense>

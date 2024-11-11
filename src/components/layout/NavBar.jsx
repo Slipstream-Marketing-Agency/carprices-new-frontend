@@ -703,15 +703,7 @@ export default function NavBar() {
                     <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
                         <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
                             <div className="flex  items-center gap-2 px-4 py-1 w-full">
-                                <span className="material-symbols-outlined">search</span>
-                                <input
-                                    type="search"
-                                    className="bg-transparent border-none text-gray-900 text-sm rounded-full w-full p-2.5 focus:outline-none focus:ring-0"
-                                    value={query}
-                                    onChange={handleInputChange}
-                                    placeholder={t.searchForBrandandCars}
-                                    autoComplete="off"
-                                />
+                                <Search/>
                             </div>
                         </div>
                         <div className="relative w-full ">
