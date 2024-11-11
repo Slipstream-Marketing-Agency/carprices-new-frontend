@@ -13,7 +13,7 @@ const HoveredCompareCars = () => {
     ]
 
     return (
-        <div className="rounded-xl shadow-xl absolute top-12 w-[840px] z-50 bg-white border border-gray-200">
+        <div className="rounded-xl shadow-xl absolute top-10 w-[840px] z-50 bg-white border border-gray-200">
             <h4 className="text-sm font-semibold text-blue-700 p-4">Compare Cars</h4>
             <div className="grid md:grid-cols-2 gap-4 p-4">
                 <div className="flex flex-col items-center bg-white p-4 hover:shadow-custom-shadow rounded-lg">

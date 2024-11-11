@@ -1,7 +1,10 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 function CarDetails({ data }) {
+
   // Helper function to process field values with conditions
   function processFieldValue(field, value) {
     switch (field) {
@@ -36,13 +39,13 @@ function CarDetails({ data }) {
         },
       ],
     },
-    {
-      heading: "Safety",
-      sections: [
-        { field: "haveABS", header: "ABS" },
-        { field: "haveFrontAirbags", header: "Front Airbags" },
-      ],
-    },
+    // {
+    //   heading: "Safety",
+    //   sections: [
+    //     { field: "haveABS", header: "ABS" },
+    //     { field: "haveFrontAirbags", header: "Front Airbags" },
+    //   ],
+    // },
     {
       heading: "Transmission",
       sections: [
@@ -124,131 +127,170 @@ function CarDetails({ data }) {
           field: "haveAdaptiveCruiseControl",
           header: "Adaptive Cruise Control",
         },
+        { field: "haveABS", header: "ABS" },
+        { field: "haveFrontAirbags", header: "Front Airbags" },
         { field: "haveLaneChangeAssist", header: "Lane Change Assist" },
       ],
     },
   ];
 
+  // State for active section
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  // Create refs for each section
+  const sectionRefs = useRef({});
+
+  useEffect(() => {
+    // Create an intersection observer to detect when sections are in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveCategory(entry.target.id);
+        }
+      });
+    }, { threshold: 0.5 }); // Trigger when 50% of the section is in view
+
+    // Observe all sections
+    Object.keys(sectionRefs.current).forEach((key) => {
+      observer.observe(sectionRefs.current[key]);
+    });
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, []);
+
+
+  // Scroll to category section
+  const scrollToSection = (categoryHeading) => {
+    const element = document.getElementById(categoryHeading);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="">
-      <div className="">
-        {categories.map((category, catIndex) => (
-          <div key={catIndex} className="mb-10">
-            <h2 className="text-lg py-3 sm:py-5 sm:text-2xl">
-              {category.heading}
-            </h2>
-            <hr />
-            <div className="hidden sm:grid grid-cols-10">
-              <div className="col-span-2 ">
-                {category.sections.map((section, index) => (
-                  <div
-                    key={index}
-                    className={`text-base font-bold sm:py-10 sm:px-4 ${
-                      index % 2 === 0 ? "bg-gray-50" : "bg-tablegrey2"
-                    }`}
-                  >
-                    {section.header}
-                  </div>
-                ))}
-              </div>
-              {data.map((carTrim, index) => (
-                <div key={index} className="col-span-2 ">
-                  {category.sections.map((section, colIndex) => (
+    <>
+      {/* Sticky Navbar */}
+      <div className="sticky top-0 z-20">
+        <nav className="text-sm md:text-base leading-none text-black bg-zinc-50 shadow my-6 overflow-x-scroll custom-scrollbar">
+          <div className="mx-auto container flex gap-7 items-center">
+            {categories.map((category, catIndex) => (
+              <button
+                key={`nav-${catIndex}`}
+                className={`gap-2.5 py-5 self-stretch p-2.5 h-full whitespace-nowrap border-0 border-b-2 border-solid ${activeCategory === category.heading
+                  ? "border-b-blue-600 text-black"
+                  : "border-transparent text-gray-500"
+                  }`}
+                onClick={() => {
+                  scrollToSection(category.heading);
+                  setActiveCategory(category.heading); // Set active category on click
+                }}
+              >
+                {category.heading}
+              </button>
+            ))}
+          </div>
+        </nav>
+      </div>
+
+      <section className="py-8 bg-white container">
+        <div className="container mx-auto">
+          {categories.map((category, catIndex) => (
+            <div
+              key={`cat-${catIndex}`}
+              id={category.heading} // Assigning unique id to each section for scrolling
+              className="mb-14"
+              ref={(el) => (sectionRefs.current[category.heading] = el)}
+            >
+              <h2 className="text-xl font-bold py-4 border-b border-gray-300 sm:py-6 sm:text-3xl">
+                {category.heading}
+              </h2>
+              <div className="hidden sm:grid grid-cols-10 mt-4">
+                {/* Category Header Column */}
+                <div className="col-span-2 bg-gradient-to-r from-gray-50 to-gray-100">
+                  {category.sections.map((section, secIndex) => (
                     <div
-                      key={colIndex}
-                      className={`py-10 flex gap-2 col-span-2 text-base sm:py-10 ${
-                        section.field === "name" ? "font-semibold" : ""
-                      } ${
-                        colIndex % 2 === 0
-                          ? "bg-gray-50"
-                          : "bg-tablegrey2"
-                      }`}
+                      key={`section-${secIndex}`}
+                      className={`text-base font-semibold py-5 px-4 border-b border-gray-200 flex items-center justify-center ${secIndex % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                      style={{ height: '70px' }}
                     >
-                      <div
-                        className={`${
-                          typeof carTrim[section.field] === "boolean"
-                            ? "block"
-                            : "hidden"
-                        }`}
-                      >
-                        {carTrim[section.field] ? (
-                          <Image
-                            src={"/yes-icon.svg"}
-                            alt="Yes"
-                            width={20}
-                            height={20}
-                          />
-                        ) : (
-                          <Image
-                            src={"/no-icon.svg"}
-                            alt="No"
-                            width={20}
-                            height={20}
-                          />
-                        )}
-                      </div>
-                      {typeof carTrim[section.field] !== "boolean" &&
-                        processFieldValue(
-                          section.field,
-                          carTrim[section.field]
-                        )}
+                      {section.header}
                     </div>
                   ))}
                 </div>
-              ))}
-            </div>
 
-            {/* Mobile UI */}
-            <div className="sm:hidden">
-              {category.sections.map((section, index) => (
-                <div
-                  key={index}
-                  className={`py-4 ${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-tablegrey2"
-                  }`}
-                >
-                  <h4 className="text-xs font-bold text-center">
-                    {section.header}
-                  </h4>
-                  <div className="grid grid-cols-12 py-4">
-                    {data.map((carTrim, i) => (
+                {/* Car Trims Columns */}
+                {data.map((carTrim, dataIndex) => (
+                  <div key={`car-${dataIndex}`} className="col-span-2">
+                    {category.sections.map((section, colIndex) => (
                       <div
-                        key={i}
-                        className={`col-span-6 text-center`}
+                        key={`car-section-${colIndex}`}
+                        className={`py-5 px-4 flex items-center justify-center gap-2 text-sm border-b border-gray-200 ${colIndex % 2 === 0 ? 'bg-gray-50' : 'bg-tablegrey2'}`}
+                        style={{ height: '70px' }}
                       >
-                        {typeof carTrim[section.field] === "boolean" ? (
+                        {typeof carTrim[section.field] === 'boolean' ? (
                           carTrim[section.field] ? (
-                            <Image
-                              src={"/yes-icon.svg"}
-                              alt="Yes"
-                              width={20}
-                              height={20}
-                            />
+                            <Image src="/yes-icon.svg" alt="Yes" width={20} height={20} />
                           ) : (
-                            <Image
-                              src={"/no-icon.svg"}
-                              alt="No"
-                              width={20}
-                              height={20}
-                            />
+                            <Image src="/no-icon.svg" alt="No" width={20} height={20} />
                           )
                         ) : (
-                          processFieldValue(
-                            section.field,
-                            carTrim[section.field]
-                          )
+                          processFieldValue(section.field, carTrim[section.field])
                         )}
                       </div>
                     ))}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Mobile UI */}
+              <div className="sm:hidden">
+                {category.sections.map((section, index) => (
+                  <div
+                    key={`mobile-section-${index}`}
+                    className={`py-4 px-2 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b border-gray-200`}
+                  >
+                    <h4 className="text-sm font-semibold text-center mb-2">{section.header}</h4>
+                    <div className="grid grid-cols-12 gap-2">
+                      {data.map((carTrim, i) => (
+                        <div
+                          key={`mobile-car-${i}`}
+                          className="col-span-6 flex justify-center text-center p-2 border rounded-md shadow-sm bg-gray-50"
+                        >
+                          {typeof carTrim[section.field] === 'boolean' ? (
+                            carTrim[section.field] ? (
+                              <Image
+                                src="/yes-icon.svg"
+                                alt="Yes"
+                                width={20}
+                                height={20}
+                              />
+                            ) : (
+                              <Image
+                                src="/no-icon.svg"
+                                alt="No"
+                                width={20}
+                                height={20}
+                              />
+                            )
+                          ) : (
+                            <div className="text-xs font-medium">
+                              {processFieldValue(section.field, carTrim[section.field])}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </>
   );
+
 }
 
 export default CarDetails;

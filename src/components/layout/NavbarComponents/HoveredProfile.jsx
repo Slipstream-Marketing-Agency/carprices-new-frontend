@@ -16,7 +16,7 @@ const HoveredProfile = ({setHoveredMenuItem}) => {
     }
 
     return (
-        <div className="rounded-lg shadow-xl absolute top-12 -right-6 z-50 bg-white border border-gray-200">
+        <div className="rounded-lg shadow-xl absolute top-10 -right-6 z-50 bg-white border border-gray-200">
             <div className="flex flex-col p-4 gap-2">
                 <Link href="/setting/profile" className="py-2 text-left text-sm font-medium rounded-lg transition">
                     Profile
