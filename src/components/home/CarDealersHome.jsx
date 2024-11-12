@@ -6,6 +6,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CallIcon from '@mui/icons-material/Call';
 import Link from 'next/link';
+import CarDealerCard from '../car-dealer/CarDealerCard';
 
 const CarDealersHome = ({ brandName, brandSlug }) => {
     const [dealers, setDealers] = useState([]);
@@ -147,23 +148,7 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                 <Slider {...sliderSettings}>
                     {dealers.map((dealer) => (
                         <div key={dealer.id} className="px-2">
-                            <Link href={`tel:${dealer.phone_number}`} className="block">
-                                <div className="bg-white rounded-lg shadow-md p-5 h-[190px] flex flex-col justify-between">
-                                    <div>
-                                        <h3 className="text-lg font-semibold">{dealer.name}</h3>
-                                        <p className="text-sm text-gray-600 mb-2 font-semibold">{dealer.dealer_branch.name}</p>
-                                        <p className="text-sm text-gray-600">{dealer.address}</p>
-                                    </div>
-                                    <div className="contact-info flex items-center mt-3 space-x-2">
-                                        <span role="img" aria-label="phone" className="bg-blue-500 p-1 rounded-full w-[30px] h-[30px] flex justify-center items-center">
-                                            <CallIcon className="text-white text-lg" />
-                                        </span>
-                                        <span className="text-blue-600 hover:underline">
-                                            {dealer.phone_number}
-                                        </span>
-                                    </div>
-                                </div>
-                            </Link>
+                            <CarDealerCard key={dealer.id} dealer={dealer} />
                         </div>
                     ))}
                 </Slider>

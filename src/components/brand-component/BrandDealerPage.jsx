@@ -16,6 +16,7 @@ import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 import InnerNavigation from './InnerNavigation';
 import { usePathname } from 'next/navigation';
 import Ad300x600 from '../ads/Ad300x600';
+import CarDealerCard from '../car-dealer/CarDealerCard';
 export default function BrandDealerPage({ brandname, dealers, pagination, brandDetails, search, branchname }) {
     const pathname = usePathname();
     console.log(pathname, "pathname");
@@ -258,51 +259,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
 
                     <div className="grid grid-cols-12 gap-5">
                         {dealers?.map((item) => (
-                            <div className="md:col-span-4 col-span-12  relative" key={item.id} >
-                                <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
-                                    <Link href={`/car-dealers/${item.slug}`} className="relative">
-                                        <Image
-                                            src={item.dealer_shop_image || '/assets/placeholder/dealer-placeholder.webp'}
-                                            alt={item?.name}
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            layout="fixed"
-                                            className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
-                                        />
-                                    </Link>
-                                    <div className="p-2 flex flex-col justify-between h-full">
-                                        <Link href={`/car-dealers/${item.slug}`} className='flex flex-col space-y-2 mb-3'>
-                                            <h3 className="text-lg font-medium">{item.name}</h3>
-                                            <p className="text-sm text-gray-600 font-semibold flex items-center gap-2"><LocationOnIcon className='text-green-500' />{item.dealer_branch.name}</p>
-                                            <p className="text-sm text-gray-600 flex items-center gap-2"><BusinessIcon /> {item.address}</p>
-                                        </Link>
-                                        <button
-                                            onClick={() => window.location.href = `tel:${item.phone_number}`}
-                                            className='border border-blue-400 p-2 rounded-lg w-full flex justify-center items-center gap-3 text-sm font-semibold hover:bg-blue-100'
-                                        >
-                                            <CallIcon className='text-blue-400' />Call Dealer
-                                        </button>
-
-
-                                        {/* <div className="mt-2">
-                                        <div className="flex flex-col justify-between text-gray-800 mt-2">
-                                            <div className='flex justify-between'>
-                                                <div className='flex items-center gap-2'>
-                                                    <p className="text-xs font-semibold sm:inline">
-                                                        {item.author?.name || 'Unknown Author'}
-                                                    </p>{" "}
-                                                </div>
-                                                <p>
-                                                    <span className='text-xs font-semibold sm:inline'>Published: </span>
-                                                    <span className='text-xs ml-1'>{new Date(item.publishedAt).toLocaleDateString()}</span>
-                                                </p>
-                                            </div>{" "}
-                                        </div>
-                                    </div> */}
-                                    </div>
-                                </div>
-                            </div>
+                            <CarDealerCard key={item.id} dealer={item} />
                         ))}
                     </div>
                     <Pagination
