@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import Price from '@/utils/Price';
 
 const VariantDropDown = ({ variant, dpPercentages, durations, index, expandedIndex, handleToggle }) => {
     const [dpPercentage, setDpPercentage] = useState(20);
@@ -66,13 +67,13 @@ const VariantDropDown = ({ variant, dpPercentages, durations, index, expandedInd
 
                             <div className="grid grid-cols-2 gap-y-3 border-t pt-5">
                                 <p className="text-gray-500 font-medium">OTR:</p>
-                                <p className="text-gray-800 font-semibold text-right">AED {variant.price.toLocaleString()}</p>
+                                <p className="text-gray-800 font-semibold text-right"><Price data={variant.price} /></p>
                                 <p className="text-gray-500 font-medium">Down Payment:</p>
-                                <p className="text-gray-800 font-semibold text-right">AED {downPayment.toFixed(2).toLocaleString()}</p>
+                                <p className="text-gray-800 font-semibold text-right"><Price data={downPayment} /></p>
                                 <p className="text-gray-500 font-medium">Installment:</p>
-                                <p className="text-blue-600 font-semibold text-right">AED {installment.toFixed(2).toLocaleString()}</p>
+                                <p className="text-blue-600 font-semibold text-right"><Price data={installment} /></p>
                                 <p className="text-gray-500 font-medium">Total First Payment:</p>
-                                <p className="text-blue-600 font-semibold text-right">AED {totalFirstPayment.toFixed(2).toLocaleString()}</p>
+                                <p className="text-blue-600 font-semibold text-right"><Price data={totalFirstPayment} /></p>
                             </div>
 
                             <div className="mt-5 text-center">

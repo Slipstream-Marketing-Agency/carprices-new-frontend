@@ -1,6 +1,6 @@
 "use client"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -224,7 +224,7 @@ export default function AdvancedFilterOptions({ brandoptions,
         currentPage,
         // additionalQueryParams,
         pathname,
-        // searchParams
+        // searchParams,
     ]);
 
 
@@ -294,11 +294,26 @@ export default function AdvancedFilterOptions({ brandoptions,
     };
 
     const [searchText, setSearchText] = useState("");
+    const inputRef = useRef(null);
+    const mobileInputRef = useRef(null);
     const [searchBodyText, setSearchBodyText] = useState("");
 
     const handleSearchChange = (e) => {
         setSearchText(e.target.value);
     };
+
+    // to ensure focus remains on input after rerender
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [searchText]);
+    // to ensure focus remains on input after rerender
+    useEffect(() => {
+        if (mobileInputRef.current) {
+            mobileInputRef.current.focus();
+        }
+    }, [searchText]);
 
     const handleBodySearchChange = (e) => {
         setSearchBodyText(e.target.value);
@@ -990,7 +1005,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                 <div className="show">
                                     <div className="row g-xl-2 gy-2 ">
                                         {bodyoptions.map((item, idx) => (
-                                            <div className="col-xl-4 col-4">
+                                            <div className="col-xl-4 col-4" key={idx}>
                                                 <button
                                                     key={idx}
                                                     className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${tempSelectedBodyTypes.includes(item.value)
@@ -1276,8 +1291,9 @@ export default function AdvancedFilterOptions({ brandoptions,
                                     <div className="form-inner mb-4">
                                         <input
                                             type="text"
+                                            ref={mobileInputRef}
                                             placeholder="Search Brand"
-                                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="w-full test px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             value={searchText}
                                             onChange={handleSearchChange}
                                         />
@@ -1301,7 +1317,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                 /> */}
                                 <div className='grid grid-cols-3 gap-2 '>
                                     {bodyoptions.map((item, idx) => (
-                                        <div className="h-[70px]">
+                                        <div className="h-[70px]" key={idx}>
                                             <button
                                                 key={idx}
                                                 className={`shadow rounded-xl p-2 ${tempSelectedBodyTypes.includes(item.value)
@@ -1704,6 +1720,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                 <div className="form-inner mb-4">
                                     <input
                                         type="text"
+                                        ref={inputRef}
                                         placeholder="Search Brand"
                                         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         value={searchText}
@@ -1729,7 +1746,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                             /> */}
                             <div className='grid grid-cols-3 gap-2 '>
                                 {bodyoptions.map((item, idx) => (
-                                    <div className="h-[70px]">
+                                    <div className="h-[70px]" key={idx}>
                                         <button
                                             key={idx}
                                             className={`shadow rounded-xl p-2 ${selectedBody.includes(item.value)
