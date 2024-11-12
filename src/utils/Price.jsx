@@ -8,7 +8,7 @@ export default function Price(data) {
         ? "TBD"
         : "AED" + " " +price?.toLocaleString("en-AE", {
             minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
+            maximumFractionDigits: 0,
           })}
       *
     </>

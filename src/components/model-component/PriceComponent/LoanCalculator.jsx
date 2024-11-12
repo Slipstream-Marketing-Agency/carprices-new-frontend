@@ -1,3 +1,4 @@
+import Price from '@/utils/Price';
 import React, { useState } from 'react';
 
 const LoanCalculator = ({ vehicleName, variants }) => {
@@ -30,7 +31,7 @@ const LoanCalculator = ({ vehicleName, variants }) => {
                 >
                     {variants.map((variant) => (
                         <option key={variant.name} value={variant.name}>
-                            {variant.name} - AED {variant.price.toLocaleString()}
+                            {variant.name} - <Price data={variant.price} />
                         </option>
                     ))}
                 </select>
@@ -100,15 +101,15 @@ const LoanCalculator = ({ vehicleName, variants }) => {
                             <div className="p-6 bg-blue-100 border rounded-lg shadow-lg">
                                 <div className="flex justify-between items-center mb-4">
                                     <p className="font-medium text-blue-700">Down Payment:</p>
-                                    <p className="font-semibold">AED {downPayment.toFixed(0).toLocaleString()}</p>
+                                    <p className="font-semibold"><Price data={downPayment} /></p>
                                 </div>
                                 <div className="flex justify-between items-center mb-4">
                                     <p className="font-medium text-blue-700">Finance Amount:</p>
-                                    <p className="font-semibold">AED {financeAmount.toFixed(0).toLocaleString()}</p>
+                                    <p className="font-semibold"><Price data={financeAmount} /> </p>
                                 </div>
                                 <div className="flex justify-between items-center border-t pt-4">
                                     <p className="font-medium text-blue-700">Monthly Repayment (EMI):</p>
-                                    <p className="font-bold text-blue-700">AED {monthlyRepayment.toFixed(0).toLocaleString()}</p>
+                                    <p className="font-bold text-blue-700"><Price data={monthlyRepayment} /></p>
                                 </div>
                                 <button
                                     className="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"

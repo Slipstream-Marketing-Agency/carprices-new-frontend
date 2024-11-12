@@ -83,8 +83,8 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
     const tableData = cars;
 
     return (
-        <div className="container">
-            <div className='my-6'>
+        <div className="">
+            <div className='my-6 container'>
                 <h1 className='text-2xl font-semibold mb-3'>Compare Cars in UAE</h1>
                 <p>
                     Simplifying Your Decision-Making Process. Compare Your Ideal Cars
@@ -94,7 +94,7 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
                 </p>
             </div>
 
-            <div className="grid grid-cols-12 gap-3">
+            <div className="grid grid-cols-12 gap-3 container">
                 {cars.map((carData, index) => (
                     <div key={index} className="md:col-span-3 col-span-6">
                         {loadingIndices.includes(index) ? (
@@ -124,7 +124,7 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
 
             </div>
             {pathname === '/compare-cars' &&
-                <div className='w-full flex justify-center'>
+                <div className='w-full flex justify-center container'>
                     <button onClick={handleCompareCarClick} disabled={cars.length < 1} className={`px-5 py-2 mt-4 text-center border rounded-md md:text-[16px] text-[12px] 
                     ${cars.length < 1 ? 'bg-gray-300 text-white border-gray-300' : 'bg-blue-600 text-white border-blue-600'}`}>
                         Compare Cars

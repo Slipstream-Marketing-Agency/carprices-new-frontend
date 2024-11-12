@@ -39,7 +39,7 @@ export default function CarComparisonTable({ tableData }) {
 
   console.log(tableData, "tableData");
   return (
-    <div className="container">
+    <div className="w-full">
       <CarDetails
         heading={"Basic Information"}
         data={tableData}
