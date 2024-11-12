@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
         description: `Explore the latest ${capitalBrandName} car videos, reviews, and model highlights in the UAE on CarPrices.ae. Watch video reviews, specifications, and detailed insights to help you choose the right ${capitalBrandName} model.`,
         charset: "UTF-8",
         alternates: {
-            canonical: `https://carprices.ae/brands/${brandname}/videos`,
+            canonical: `https://carprices.ae/brands/${brandname}/car-videos`,
         },
         keywords: `${capitalBrandName} car videos UAE, ${capitalBrandName} reviews UAE, ${capitalBrandName} model videos, ${capitalBrandName} car specs UAE, CarPrices.ae`,
         robots: {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
             "@type": "WebPage",
             name: `${capitalBrandName} Car Videos in UAE`,
             description: `Watch authorized ${capitalBrandName} car videos, model reviews, and specifications in the UAE on CarPrices.ae.`,
-            url: `https://carprices.ae/brands/${brandname}/videos`,
+            url: `https://carprices.ae/brands/${brandname}/car-videos`,
         },
         author: "CarPrices.ae Team",
         icon: "./favicon.ico",

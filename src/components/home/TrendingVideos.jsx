@@ -82,7 +82,7 @@ export default function TrendingVideos() {
                         {videos.length > 0 ? (
                             videos.map((video, index) => (
                                 <div key={index} className="custom-slide px-2">
-                                    <Link href={`/videos/${video.slug}`}>
+                                    <Link href={`/car-videos/${video.slug}`}>
                                         <div
                                             className="flex flex-col justify-between bg-white rounded-lg shadow-md overflow-hidden h-full border border-gray-200"
                                         >
