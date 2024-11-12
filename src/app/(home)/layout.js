@@ -36,7 +36,7 @@ export default function RootLayout({ children, params }) {
 
   return (
     <html lang="en">
-      
+
       <body className={`${poppins.className} antialiased`}> {/* Apply Google Font */}
         <Script
           id="gtm"
@@ -49,6 +49,14 @@ export default function RootLayout({ children, params }) {
               })(window,document,'script','dataLayer','GTM-W564HNC');`,
           }}
         /> <noscript>
+          {process.env.NODE_ENV === 'development' && <Script
+            strategy="afterInteractive" // Load the script after the page is interactive
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416539"
+            crossOrigin="anonymous"
+          />}
+
+
           <img
             height="1"
             width="1"
