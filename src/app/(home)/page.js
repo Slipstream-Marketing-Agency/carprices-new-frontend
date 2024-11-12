@@ -5,25 +5,25 @@ import { getCarSection } from "@/lib/api";
 import HeroSection from '@/components/home/HeroSection';
 import SeoLinksHome from '@/components/common/SeoLinksHome';
 import { fetchMetaData } from '@/lib/fetchMetaData';
-import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
-import { Suspense } from 'react';
-import CarCardSkeleton from '@/components/car-components/CarCardSkeleton';
-import CarDealersHome from '@/components/home/CarDealersHome';
+// import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
+// import { Suspense } from 'react';
+// import CarCardSkeleton from '@/components/car-components/CarCardSkeleton';
+// import CarDealersHome from '@/components/home/CarDealersHome';
 
 // Dynamically import components
-const TrendingCars = dynamic(() => import('@/components/home/TrendingCars'), {
-  ssr: false
-});
-const FeaturedNews = dynamic(() => import('@/components/home/FeaturedNews'), { ssr: false });
-const MostPopularCarSection = dynamic(() => import('@/components/home/MostPopularCarSection'), { ssr: false });
-const UpcomingCars = dynamic(() => import('@/components/home/UpcomingCars'), { ssr: false });
-const ChooseBrand = dynamic(() => import('@/components/home/ChooseBrand'), { ssr: false });
-const CustomAdComponent = dynamic(() => import('@/components/home/CustomAdComponent'), { ssr: false });
-const ChooseBodyType = dynamic(() => import('@/components/home/ChooseBodyType'), { ssr: false });
-const ServicesAdComponent = dynamic(() => import('@/components/home/ServicesAdComponent'), { ssr: false });
-const WebStories = dynamic(() => import('@/components/home/WebStories'), { ssr: false });
-const TrendingVideos = dynamic(() => import('@/components/home/TrendingVideos'), { ssr: false });
-const TrendingNews = dynamic(() => import('@/components/home/TrendingNews'), { ssr: false });
+// const TrendingCars = dynamic(() => import('@/components/home/TrendingCars'), {
+//   ssr: false
+// });
+// const FeaturedNews = dynamic(() => import('@/components/home/FeaturedNews'), { ssr: false });
+// const MostPopularCarSection = dynamic(() => import('@/components/home/MostPopularCarSection'), { ssr: false });
+// const UpcomingCars = dynamic(() => import('@/components/home/UpcomingCars'), { ssr: false });
+// const ChooseBrand = dynamic(() => import('@/components/home/ChooseBrand'), { ssr: false });
+// const CustomAdComponent = dynamic(() => import('@/components/home/CustomAdComponent'), { ssr: false });
+// const ChooseBodyType = dynamic(() => import('@/components/home/ChooseBodyType'), { ssr: false });
+// const ServicesAdComponent = dynamic(() => import('@/components/home/ServicesAdComponent'), { ssr: false });
+// const WebStories = dynamic(() => import('@/components/home/WebStories'), { ssr: false });
+// const TrendingVideos = dynamic(() => import('@/components/home/TrendingVideos'), { ssr: false });
+// const TrendingNews = dynamic(() => import('@/components/home/TrendingNews'), { ssr: false });
 
 // Metadata generation
 export async function generateMetadata() {
@@ -105,7 +105,7 @@ export default async function Home() {
       <SearchForTheBest />
 
 
-      <TrendingCars featuredCars={featuredCarsData} />
+      {/* <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
 
       <MostPopularCarSection />
@@ -128,10 +128,10 @@ export default async function Home() {
 
       <TrendingVideos />
 
-      <TrendingNews articles={articles} />
+      <TrendingNews articles={articles} /> */}
 
 
-      <SeoLinksHome />
+      {/* <SeoLinksHome /> */}
     </div>
   );
 }

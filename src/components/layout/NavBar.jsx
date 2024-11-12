@@ -548,7 +548,7 @@ export default function NavBar() {
                             </div>
                         </div>
                         <div className="flex relative justify-end gap-5 max-md:flex-wrap mr-4" onMouseLeave={() => { setHoveredMenuItem(null) }}>
-                            <div className="flex flex-auto justify-end items-center  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap">
+                            <div className="flex flex-auto justify-end items-center  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap py-2">
                                 {links.map((link, i) => (
                                     <Link
                                         key={i}

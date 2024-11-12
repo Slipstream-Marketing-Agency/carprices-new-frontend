@@ -30,6 +30,7 @@ export default async function TypePage({ params, searchParams }) {
     notFound();
   }
 
+  
   const fetchArticles = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
