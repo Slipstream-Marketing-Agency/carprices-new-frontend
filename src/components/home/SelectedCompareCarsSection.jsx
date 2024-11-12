@@ -16,7 +16,7 @@ export default function SelectedCompareCarsSection() {
         // Fetch the car comparison data from the API
         async function fetchCarComparisons() {
             try {
-                const response = await fetch('http://localhost:1337/api/compare-car/home');
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`);
                 const data = await response.json();
                 setCarComparisons(data);
             } catch (error) {
