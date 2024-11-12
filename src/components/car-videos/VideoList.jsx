@@ -6,7 +6,7 @@ const VideoList = ({ videos }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 my-4 ">
       {videos.map(video => (
         <div key={video.id} className="border rounded-lg overflow-hidden shadow-md">
-          <Link href={`/videos/${video.slug}`}>
+          <Link href={`/car-videos/${video.slug}`}>
             <img
               src={video.thumbnail || '/default-thumbnail.jpg'}
               alt={video.title}
