@@ -70,7 +70,7 @@ export async function middleware(req) {
 
 
 
-  // Step 6: Handle dynamic redirection for non-existent model or trim level pages
+  // // Step 6: Handle dynamic redirection for non-existent model or trim level pages
   // if (pathname.startsWith('/brands/')) {
   //   const pathSegments = pathname.split('/').filter(Boolean);
 
@@ -104,8 +104,8 @@ export async function middleware(req) {
   // }
 
 
-  // Step 7: Continue to the requested page if no redirection is needed
-  return NextResponse.next();
+  // // Step 7: Continue to the requested page if no redirection is needed
+  // return NextResponse.next();
 }
 
 // // Function to handle redirection by trimming the 'trim' part of the URL
