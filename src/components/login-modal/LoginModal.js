@@ -192,10 +192,10 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
     <>
       {isOpen && (
         <dialog
-          className="fixed left-0 top-0 bottom-0 right-0 w-full h-full bg-black bg-opacity-40 overflow-auto z-10 flex justify-center items-center transition-all duration-1000 ease-in-out no-scrollbar"
+          className="fixed left-0 top-0 bottom-0 right-0 w-full h-full bg-black bg-opacity-40 overflow-auto z-[100] flex justify-center items-center transition-all duration-1000 ease-in-out no-scrollbar"
           onClick={() => setIsOpen(false)}
         >
-          <div onClick={(e) => e.stopPropagation()} className="absolute bg-white w-[93%]  md:w-[42%] xl:w-1/4 sm:rounded-3xl z-30 rounded-lg">
+          <div onClick={(e) => e.stopPropagation()} className="absolute bg-white w-[93%]  md:w-[42%] xl:w-1/4 sm:rounded-3xl z-50 rounded-lg">
             <Close
               onClick={() => setIsOpen(false)}
               fontSize=""
