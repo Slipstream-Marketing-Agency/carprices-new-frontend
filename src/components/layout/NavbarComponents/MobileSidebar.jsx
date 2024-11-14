@@ -146,9 +146,12 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                         </h3>
                     )}
 
-                    <div className="flex flex-col pt-6 gap-4">
-                        {activeMenu ? (
-                            subMenuOptions.map((link, index) => (
+                    <div className="flex flex-col pt-6 gap-4 transition-all duration-300 ease-in-out">
+                        {/* Sub Menu */}
+                        <div
+                            className={`flex flex-col gap-4 transition-all duration-300 transform ${activeMenu ? 'translate-x-0 opacity-100 h-auto' : '-translate-x-full opacity-0 h-0 overflow-hidden'}`}
+                        >
+                            {subMenuOptions.map((link, index) => (
                                 <Link
                                     key={index}
                                     href={link.link}
@@ -156,9 +159,14 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                                 >
                                     {link.label}
                                 </Link>
-                            ))
-                        ) : (
-                            links.map((link, index) => (
+                            ))}
+                        </div>
+
+                        {/* Main Menu */}
+                        <div
+                            className={`flex flex-col gap-4 transition-all duration-300 transform ${activeMenu ? '-translate-x-full opacity-0 h-0 overflow-hidden' : 'translate-x-0 opacity-100 h-auto'}`}
+                        >
+                            {links.map((link, index) => (
                                 <div
                                     key={index}
                                     onClick={() => handleShowSubMenu(link)}
@@ -171,8 +179,8 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                                         <KeyboardArrowRightIcon className="text-gray-500" />
                                     )}
                                 </div>
-                            ))
-                        )}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
