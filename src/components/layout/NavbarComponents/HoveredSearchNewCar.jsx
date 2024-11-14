@@ -25,7 +25,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
     const [hoveredSection, setHoveredSection] = useState(subItems[0].name);
 
     return (
-        <div className="rounded-xl shadow-xl absolute top-10 z-50 bg-white border border-gray-200">
+        <div className="rounded-xl shadow-xl absolute top-6 z-50 bg-white border border-gray-200">
             <div className="flex max-md:flex-col">
                 {/* Sidebar with Search options */}
                 <div className="flex rounded-tl-lg rounded-bl-lg bg-slate-100 flex-col max-md:ml-0 max-md:w-full pl-6 py-4">

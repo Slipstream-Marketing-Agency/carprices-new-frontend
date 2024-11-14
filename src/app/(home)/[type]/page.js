@@ -15,7 +15,7 @@ import Ad300x600 from '@/components/ads/Ad300x600';
 import PopularCategories from '@/components/popular-sections/PopularCategories';
 import { Suspense } from 'react';
 
-const VALID_TYPES = ['news', 'review']; // Example, update this based on your types
+const VALID_TYPES = ['news', 'reviews','new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
 
 export async function generateStaticParams() {
   return VALID_TYPES.map((type) => ({ type }));

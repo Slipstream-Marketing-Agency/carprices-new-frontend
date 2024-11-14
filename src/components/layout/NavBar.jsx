@@ -63,7 +63,7 @@ export default function NavBar() {
 
     const links = [
         { href: "/search-cars", label: "Search New Cars", hoverItem: "search-cars" },
-        { href: "/compare-cars", label: "Compare New Cars"},
+        { href: "/compare-cars", label: "Compare New Cars" },
         // { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars" },
         { href: "#", onClick: (e) => e.preventDefault(), label: "Services", hoverItem: "services" },
         { href: "#", onClick: (e) => e.preventDefault(), label: "News, Reviews & Videos", hoverItem: "blog" },
@@ -395,331 +395,150 @@ export default function NavBar() {
         if (hoveredMenuItem === 'more') {
             return <HoveredMore />
         }
-        if (hoveredMenuItem === 'profile') {
-            return <HoveredProfile setHoveredMenuItem={setHoveredMenuItem} />
-        }
         return <></>
     }
+
+    const [scrolledDown, setScrolledDown] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    // Scroll event handler
+    const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down
+            setScrolledDown(true);
+        } else {
+            // Scrolling up
+            setScrolledDown(false);
+        }
+        setLastScrollY(currentScrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [lastScrollY]);
 
     return (
         <>
             <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
-            <div className="md:flex flex-col bg-white w-full hidden border-solid border-b-[1px] border-gray-200">
-                <div>
+            <div className="bg-white hidden md:block w-full border-solid border-b-[1px] border-gray-200 md:mb-28">
+                <div className="w-full">
+                    {/* Top Section */}
                     <div
-                        className="grid grid-cols-1 md:grid-cols-[50%_50%] gap-5 px-10 py-4 w-full max-md:flex-wrap max-md:px-5 max-md:max-w-full"
-                        ref={searchRef}
+                        className={`bg-white ${scrolledDown ? 'translate-y-[-100%]' : 'translate-y-0'} md:fixed z-20 w-full border-solid border-b-[1px] border-gray-200 transition-transform duration-300`}
                     >
-                        <div className="flex gap-5 text-base leading-5 text-zinc-500 w-full max-md:flex-wrap">
-                            <Link href="/" className="flex items-center">
-                                <Image
-                                    loading="lazy"
-                                    src="/assets/img/car-prices-logo.png"
-                                    className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px]"
-                                    alt="logo"
-                                    width={179}  // Provide explicit width
-                                    height={28}  // Adjust this based on your image aspect ratio
-                                    layout="intrinsic"
-                                />
-                            </Link>
-                            <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
-                                {/* <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
-                                    <div className="flex justify-center items-center gap-2 px-4 py-1 max-md:flex-wrap w-full">
-                                        <SearchIcon />
-                                        <input
-                                            type="search"
-                                            className="bg-transparent border-none text-gray-900 text-sm rounded-full w-full p-2.5 focus:outline-none focus:ring-0"
-                                            value={query}
-                                            onChange={handleInputChange}
-                                            placeholder={t.searchForBrandandCars}
-                                            autoComplete="off"
-                                        />
-                                    </div>
-                                </div> */}
-
-                                <Search/>
-                                
-
-                                <div className="relative w-full ">
-                                    {showDropdown && searchResults.length > 0 && (
-                                        <div className="px-4 py-6 bg-white rounded-xl shadow-lg absolute z-50">
-                                            <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                                                <div className="flex flex-col w-[22%] max-md:ml-0 max-md:w-full">
-                                                    <div className="flex flex-col max-md:mt-10">
-                                                        <div className="flex flex-col text-sm leading-6 text-slate-800 h-[325px] w-[189px] overflow-y-auto">
-                                                            <div className="justify-center leading-[129%] text-neutral-400">
-                                                                Search Result
-                                                            </div>
-                                                            {searchResults.map((item, index) => (
-                                                                <div className="flex justify-between py-0 px-0" key={index}>
-                                                                    <div className="flex  w-full">
-                                                                        {/* <img
-                                          loading="lazy"
-                                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b52b3f9b35f46f045a8a46c03f5d7e95a4c4e0f5f00d2a8939e31eb00504355?apiKey=7580612134c3412b9f32a9330debcde8&"
-                                          className="shrink-0 w-6 aspect-square"
-                                        /> */}
-                                                                        <button
-                                                                            key={index}
-                                                                            type="button"
-                                                                            className="w-full text-left py-1 px-1 cursor-pointer hover:bg-gray-100 focus:bg-gray-200 rounded-2xl bg-white"
-                                                                            onClick={() => handleItemClick(item)}
-                                                                        >
-                                                                            {formatLabel(item)}
-                                                                        </button>
-                                                                    </div>
-                                                                    {/* <img
+                        <div className="flex justify-between items-center px-10 py-4">
+                            {/* Logo Section */}
+                            <div className="flex items-center">
+                                <Link href="/" className="flex items-center">
+                                    <Image
                                         loading="lazy"
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/74b321bbdc5e630832324473665e26cc5cec64ae70f6bc6ac7059a2fb8b56dbe?apiKey=7580612134c3412b9f32a9330debcde8&"
-                                        className="shrink-0 w-6 aspect-square"
-                                      /> */}
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        {/* <div className="flex flex-col py-0.5 mt-4 text-xs leading-4 text-gray-600">
-                                  <div className="justify-center text-sm leading-5 text-neutral-400">
-                                    Popular Searches
-                                  </div>
-                                  <div className="flex gap-3 pr-12 mt-3 max-md:pr-5">
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Best Car
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      News Cars
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 whitespace-nowrap border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Trending
-                                    </div>
-                                  </div>
-                                  <div className="flex gap-3 mt-3 whitespace-nowrap">
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Affordable
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Luxury
-                                    </div>
-                                  </div>
-                                </div> */}
-                                                    </div>
-                                                </div>
-                                                <div className="flex flex-col max-md:ml-0 max-md:w-full">
-                                                    <div className="flex flex-col max-md:mt-10 md:w-[600px] w-[390px]">
-                                                        <div className="justify-center py-0.5 text-sm leading-5 text-neutral-400 max-md:max-w-full">
-                                                            Quick access
-                                                        </div>
+                                        src="/assets/img/car-prices-logo.png"
+                                        className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
+                                        alt="logo"
+                                        width={179}
+                                        height={28}
+                                        layout="intrinsic"
+                                    />
+                                </Link>
+                            </div>
 
-                                                        <div
-                                                            ref={scrollRef}
-                                                            className="scroll-container pb-2 mt-2 max-md:max-w-full flex overflow-x-auto gap-3 no-scroll"
-                                                            onMouseDown={handleMouseDown}
-                                                            onMouseLeave={handleMouseLeave}
-                                                            onMouseUp={handleMouseUp}
-                                                            onMouseMove={handleMouseMove}
-                                                        >
-                                                            {carItems.map((item, index) => (
-                                                                <Link
-                                                                    href={item.link}
-                                                                    key={index}
-                                                                    className="flex flex-col rounded-2xl w-[250px] gap-3 max-md:ml-0 max-md:w-full"
-                                                                >
-                                                                    <div className="flex flex-col w-[250px]  grow justify-center rounded-2xl self-stretch text-white rounded-xl max-md:mt-4">
-                                                                        <div className="flex overflow-hidden relative flex-col rounded-2xl justify-end px-1 pt-20 pb-1 w-full aspect-[0.84]">
-                                                                            <Image
-                                                                                loading="lazy"
-                                                                                srcSet={`${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=100 100w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=200 200w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=400 400w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=800 800w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=1200 1200w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=1600 1600w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&width=2000 2000w, ${item.imgSrc}?apiKey=7580612134c3412b9f32a9330debcde8&`}
-                                                                                className="object-cover absolute inset-0 size-full"
-                                                                                alt={item.title}
-                                                                            />
-                                                                            <div className="flex relative flex-col justify-center items-start px-4 py-3 mt-44 rounded-xl border border-solid backdrop-blur-[32px] bg-zinc-500 bg-opacity-10 border-white border-opacity-10 max-md:pr-5 max-md:mt-10">
-                                                                                <div className="text-sm leading-5">
-                                                                                    {item.title}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </Link>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
+                            {/* Center Search Bar */}
+                            <div className="flex-grow flex justify-center">
+                                <div className="w-[60%] max-w-full">
+                                    <Search />
                                 </div>
                             </div>
-                        </div>
-                        <div className="flex relative justify-end gap-5 max-md:flex-wrap mr-4" onMouseLeave={() => { setHoveredMenuItem(null) }}>
-                            <div className="flex flex-auto justify-end items-center  gap-5  my-auto text-sm font-medium leading-5 text-neutral-900 max-md:flex-wrap py-2">
-                                {links.map((link, i) => (
-                                    <Link
-                                        key={i}
-                                        href={link.href}
-                                        className="justify-center font-semibold"
-                                        onMouseOver={() => { setHoveredMenuItem(link.hoverItem) }}
+
+                            {/* Sign-in Section */}
+                            <div className="flex items-center gap-5" onMouseLeave={() => { setHoveredMenuItem(null) }}>
+                                {user ? (
+                                    <div
+                                        className="shadow-md relative py-1 px-2 rounded-full cursor-pointer flex items-center justify-between"
+                                        onMouseOver={() => setHoveredMenuItem('profile')}
                                     >
-                                        {link.label}
-                                    </Link>
-                                ))}
-                                {user ?
-                                    <div className="shadow-md py-1 px-2 rounded-full cursor-pointer flex items-center justify-between" onMouseOver={() => { setHoveredMenuItem('profile') }}>
                                         <div className="flex items-center capitalize justify-center w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold">
                                             {user?.username.charAt(0)}
                                         </div>
                                         <KeyboardArrowDownIcon />
+                                        {hoveredMenuItem === 'profile' && <HoveredProfile setHoveredMenuItem={setHoveredMenuItem} />}
                                     </div>
-                                    :
-                                    <PrimaryButton label='Signin' additionalClass="!bg-black !border-black" onClick={() => setIsLoginModalOpen(true)} />
-                                }
+                                ) : (
+                                    <PrimaryButton label="Signin" additionalClass="!bg-black !border-black" onClick={() => setIsLoginModalOpen(true)} />
+                                )}
                             </div>
-                            <HoveredMenuItemDropdown />
-                        </div>
-                    </div>
-                    <div className="gap-5 justify-between px-5 py-4 bg-white w-full md:hidden flex">
-                        <div className="flex gap-2 text-xl tracking-wider text-center whitespace-nowrap text-neutral-900">
-                            <Link href="/">
-                                {" "}
-                                <Image
-                                    loading="lazy"
-                                    src="/assets/img/car-prices-logo.png"
-                                    className="w-[150px] object-contain"
-                                    alt={`logo`}
-                                    width={150}
-                                    height={50}
-                                />
-                            </Link>
-                            <div className="my-auto"></div>
-                        </div>
-                        <div className="flex gap-4 justify-center my-auto">
-                            <Image
-                                loading="lazy"
-                                src="/search.svg"
-                                className="shrink-0 w-5 aspect-square"
-                                onClick={toggleSearch}
-                                alt={`search`}
-                                width={0}
-                                height={0}
-                            />
-                            <IconButton onClick={toggleDrawer}>
-                                <MenuIcon />
-                            </IconButton>
                         </div>
                     </div>
 
-                    <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-                        <div
-                            className="w-64 px-5 py-4"
-                            role="presentation"
-                            onClick={toggleDrawer}
-                            onKeyDown={toggleDrawer}
-                        >
-                            <div className="flex justify-between items-center">
-                                <Link href="/">
+                    {/* Centered Links Section */}
+                    <div className={`fixed flex justify-between min-h-14 shadow-md items-center left-0 w-full bg-white border-solid border-[1px] border-gray-200 z-10 transition-all duration-200 ${scrolledDown ? 'top-0' : 'top-16'}`}>
+                        {/* Logo Section */}
+                        <div className="flex items-center">
+                            {scrolledDown && (
+                                <Link href="/" className="flex items-center ml-4 animate-logo-in">
                                     <Image
                                         loading="lazy"
                                         src="/assets/img/car-prices-logo.png"
-                                        className="w-[150px] object-contain"
-                                        alt={`logo`}
-                                        width={150}
-                                        height={50}
+                                        className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
+                                        alt="logo"
+                                        width={179}
+                                        height={28}
+                                        layout="intrinsic"
                                     />
                                 </Link>
-                                <IconButton onClick={toggleDrawer}>
-                                    <CloseIcon />
-                                </IconButton>
-                            </div>
-                            <Divider />
-                            <List>
-                                <ListItem button component="a" href="/search-cars">
-                                    <ListItemText primary="Search New Cars" />
-                                </ListItem>
-                                <ListItem button component="a" href="/compare-cars">
-                                    <ListItemText primary="Compare New Cars" />
-                                </ListItem>
-                                <ListItem button component="a" href="/insurance-calculator">
-                                    <ListItemText primary="Insurance Calculator" />
-                                </ListItem>
-                                <ListItem button component="a" href="/loan-calculator">
-                                    <ListItemText primary="Car Loan Calculator" />
-                                </ListItem>
-                                <ListItem button component="a" href="/news">
-                                    <ListItemText primary="News" />
-                                </ListItem>
-                                <ListItem button component="a" href="/review">
-                                    <ListItemText primary="Reviews" />
-                                </ListItem>
-                            </List>
+                            )}
                         </div>
-                    </Drawer>
-
-                    <Dialog open={isSearchOpen} onClose={toggleSearch} fullScreen>
-                        <DialogTitle>
-                            Search
-                            <IconButton
-                                aria-label="close"
-                                onClick={toggleSearch}
-                                sx={{
-                                    position: "absolute",
-                                    right: 8,
-                                    top: 8,
-                                    color: (theme) => theme.palette.grey[500],
-                                }}
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                        </DialogTitle>
-                        <DialogContent>
-                            <div className="flex items-center bg-gray-200 rounded-full px-4 py-2">
-                                <span className="material-symbols-outlined">search</span>
-                                <input
-                                    type="search"
-                                    className="bg-transparent border-none text-gray-900 text-sm rounded-full w-full p-2.5 focus:outline-none focus:ring-0"
-                                    value={query}
-                                    onChange={handleInputChange}
-                                    placeholder={t.searchForBrandandCars}
-                                    autoComplete="off"
-                                />
-                            </div>
-                            <div className="w-full px-5 mt-4">
-                                {showDropdown && searchResults.length > 0 && (
-                                    <div className="w-full bg-white shadow-lg rounded-lg max-h-56 overflow-auto z-50">
-                                        {searchResults.map((item, index) => (
-                                            <button
-                                                key={index}
-                                                type="button"
-                                                className="w-full text-left p-2 cursor-pointer hover:bg-gray-100 focus:bg-gray-200 bg-white"
-                                                onClick={() => handleItemClick(item)}
+                        <div className={`flex gap-5 ${ scrolledDown ? '' : 'mt-2'}`}>
+                            {links.map((link, i) => (
+                                <div
+                                    key={i}
+                                    className="relative group"
+                                    onMouseOver={() => setHoveredMenuItem(link.hoverItem)}
+                                    onMouseLeave={() => setHoveredMenuItem(null)}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        className={`flex items-center p-1 justify-center font-normal text-sm ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : 'border-t-2 border-transparent'}`}
+                                    >
+                                        {link.label}
+                                        <span className="">
+                                            <svg
+                                                className="w-4 h-4"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
                                             >
-                                                {formatLabel(item)}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </DialogContent>
-                    </Dialog>
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </span>
+                                    </Link>
+
+                                    {/* Show the dropdown menu when hovered */}
+                                    {hoveredMenuItem === link.hoverItem && (
+                                        <HoveredMenuItemDropdown />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <div className=""></div>
+                    </div>
                 </div>
             </div>
+
             <div className="gap-5 justify-between bg-white w-full md:hidden flex ">
                 {searchClicked ? (
                     <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
                         <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
                             <div className="flex  items-center gap-2 px-4 py-1 w-full">
-                                <Search/>
+                                <Search />
                             </div>
                         </div>
                         <div className="relative w-full ">
                             {showDropdown && searchResults.length > 0 && (
-                                // <div className="absolute mt-1 w-full p-2 bg-white shadow-lg rounded-b-lg max-h-56 overflow-auto z-50">
-                                //   {searchResults.map((item, index) => (
-                                //     <button
-                                //       key={index}
-                                //       type="button"
-                                //       className="w-full text-left p-2 cursor-pointer hover:bg-gray-100 focus:bg-gray-200 bg-white"
-                                //       onClick={() => handleItemClick(item)}
-                                //     >
-                                //       {formatLabel(item)}
-                                //     </button>
-                                //   ))}
-                                // </div>
                                 <div className="px-4 py-6 bg-white rounded-xl shadow-lg absolute z-50">
                                     <div className="flex gap-5 flex-col">
                                         <div className="flex flex-col w-[100%] max-md:ml-0 max-md:w-full">
@@ -731,11 +550,6 @@ export default function NavBar() {
                                                     {searchResults.map((item, index) => (
                                                         <div className="flex justify-between py-0 px-0" key={index}>
                                                             <div className="flex  w-full">
-                                                                {/* <img
-                                          loading="lazy"
-                                          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b52b3f9b35f46f045a8a46c03f5d7e95a4c4e0f5f00d2a8939e31eb00504355?apiKey=7580612134c3412b9f32a9330debcde8&"
-                                          className="shrink-0 w-6 aspect-square"
-                                        /> */}
                                                                 <button
                                                                     key={index}
                                                                     type="button"
@@ -745,38 +559,9 @@ export default function NavBar() {
                                                                     {formatLabel(item)}
                                                                 </button>
                                                             </div>
-                                                            {/* <img
-                                        loading="lazy"
-                                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/74b321bbdc5e630832324473665e26cc5cec64ae70f6bc6ac7059a2fb8b56dbe?apiKey=7580612134c3412b9f32a9330debcde8&"
-                                        className="shrink-0 w-6 aspect-square"
-                                      /> */}
                                                         </div>
                                                     ))}
                                                 </div>
-                                                {/* <div className="flex flex-col py-0.5 mt-4 text-xs leading-4 text-gray-600">
-                                  <div className="justify-center text-sm leading-5 text-neutral-400">
-                                    Popular Searches
-                                  </div>
-                                  <div className="flex gap-3 pr-12 mt-3 max-md:pr-5">
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Best Car
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      News Cars
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 whitespace-nowrap border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Trending
-                                    </div>
-                                  </div>
-                                  <div className="flex gap-3 mt-3 whitespace-nowrap">
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Affordable
-                                    </div>
-                                    <div className="justify-center px-4 pt-2 pb-2.5 border border-solid bg-zinc-100 border-zinc-300 rounded-[100px]">
-                                      Luxury
-                                    </div>
-                                  </div>
-                                </div> */}
                                             </div>
                                         </div>
                                         <div className="flex flex-col max-md:ml-0 max-md:w-full">

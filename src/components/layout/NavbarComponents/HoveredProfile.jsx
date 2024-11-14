@@ -16,17 +16,17 @@ const HoveredProfile = ({setHoveredMenuItem}) => {
     }
 
     return (
-        <div className="rounded-lg shadow-xl absolute top-10 -right-6 z-50 bg-white border border-gray-200">
-            <div className="flex flex-col p-4 gap-2">
-                <Link href="/setting/profile" className="py-2 text-left text-sm font-medium rounded-lg transition">
+        <div className="rounded-lg shadow-xl absolute top-10 left-0 z-50 bg-white border border-gray-200">
+            <div className="flex flex-col">
+                <Link href="/setting/profile" className="px-4 py-2 hover:bg-blue-100 text-left text-sm rounded-t-lg font-medium transition">
                     Profile
                 </Link>
 
-                <Link href="/setting/address" className="py-2 text-left text-sm font-medium rounded-lg transition">
+                <Link href="/setting/address" className="px-4 py-2 hover:bg-blue-100 text-left text-sm font-medium transition">
                     Addresses
                 </Link>
 
-                <button onClick={ handleLogout } className="py-2 text-left text-sm font-medium rounded-lg transition">
+                <button onClick={ handleLogout } className="px-4 py-2 hover:bg-blue-100 text-left text-sm rounded-b-lg font-medium transition">
                     Logout
                 </button>
             </div>

@@ -25,7 +25,7 @@ export default function TtitleAndDescription({ type }) {
                         <strong>Keywords: </strong>latest car news UAE, UAE automotive industry, new car launches UAE, car price updates UAE, car events UAE, automotive news UAE
                     </p>
                 </>
-            ) : type === "review" ? (
+            ) : type === "reviews" ? (
                 <>
                     <h1 className="sm:text-2xl capitalize font-semibold">
                         UAE Car Reviews - In-Depth Analysis, Ratings & Real User Opinions
@@ -61,7 +61,7 @@ export default function TtitleAndDescription({ type }) {
                         <strong>Keywords: </strong>car buying guide UAE, how to buy a car UAE, best cars to buy UAE, car shopping tips UAE, UAE car market
                     </p>
                 </>
-            ) : type === "comparison" ? (
+            ) : type === "comparisons" ? (
                 <>
                     <h1 className="sm:text-2xl capitalize font-semibold">
                         Car Comparisons in UAE - Side-by-Side Analysis of Top Models
@@ -73,16 +73,16 @@ export default function TtitleAndDescription({ type }) {
                         <strong>Keywords: </strong>car comparisons UAE, best car comparison UAE, SUV comparison UAE, electric vehicle comparison UAE, car features comparison UAE
                     </p>
                 </>
-            ) : type === "how-to" ? (
+            ) : type === "top-picks" ? (
                 <>
                     <h1 className="sm:text-2xl capitalize font-semibold">
-                        How-To Guides for Car Owners in UAE - Tips, Maintenance & Upgrades
+                        Top Picks for Car Owners in the UAE - Best Products, Accessories & Recommendations
                     </h1>
                     <p className={`${isExpanded ? '' : 'line-clamp-2'} transition-all duration-300`}>
-                        Discover practical how-to guides that help you maintain, upgrade, and enjoy your car to the fullest in the UAE. From routine maintenance tips and DIY fixes to advice on car care in hot climates, our guides cover essential skills every car owner should know.
+                        Handpicked Recommendations to Enhance Your Driving Experience in the UAE
                         <br />
                         <br />
-                        <strong>Keywords: </strong>car maintenance tips UAE, how to maintain a car UAE, DIY car care UAE, car upgrade guide UAE, car resale tips UAE
+                        <strong>Keywords: </strong>best car accessories UAE, top car products UAE, car gadgets UAE, recommended car upgrades UAE, car care products UAE
                     </p>
                 </>
             ) : null}

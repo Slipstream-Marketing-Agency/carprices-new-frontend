@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'logo-in': 'logoIn 0.5s ease-out forwards',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -25,6 +28,18 @@ module.exports = {
           '3xl': '1440px',
         },
         padding: "14px",
+      },
+      keyframes: {
+        logoIn: {
+          '0%': {
+            transform: 'translateX(-100%)',  // Starting from the left
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translateX(0)',  // Ending at the default position
+            opacity: 1,
+          },
+        },
       },
     },
   },
