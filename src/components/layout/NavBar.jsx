@@ -501,7 +501,7 @@ export default function NavBar() {
                                 >
                                     <Link
                                         href={link.href}
-                                        className={`flex items-center justify-center font-semibold ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : ''}`}
+                                        className={`flex items-center p-1 justify-center font-normal text-sm ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : 'border-t-2 border-transparent'}`}
                                     >
                                         {link.label}
                                         <span className="">

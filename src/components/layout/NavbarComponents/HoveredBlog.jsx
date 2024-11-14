@@ -9,7 +9,7 @@ const HoveredBlog = () => {
                     News & Top Stories
                 </Link>
 
-                <Link href="/review" className="py-2 px-4 hover:bg-blue-100 text-sm font-medium transition">
+                <Link href="/reviews" className="py-2 px-4 hover:bg-blue-100 text-sm font-medium transition">
                    Car Expert Reviews
                 </Link>
                 <Link href="/car-videos" className="py-2 px-4 hover:bg-blue-100 text-sm font-medium rounded-b-lg transition">
