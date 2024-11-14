@@ -423,7 +423,7 @@ export default function NavBar() {
 
     return (
         <>
-            <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
+            <MobileSidebar toggleNavigation={toggleNavigation} setIsLoginModalOpen={setIsLoginModalOpen} isOpen={isOpen} links={links} />
             <div className="bg-white hidden md:block w-full border-solid border-b-[1px] border-gray-200 md:mb-28">
                 <div className="w-full">
                     {/* Top Section */}
