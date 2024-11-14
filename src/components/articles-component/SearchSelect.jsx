@@ -137,13 +137,15 @@ export default function SearchSelect({ articleType }) {
       const selectedType = selectedOption.type;
       const selectedValue = selectedOption.value;
 
+      // Set URL based on the type of search
       if (selectedType === 'category') {
-        window.location.href = `/${articleType}/body-types/${selectedValue}`;
+        window.location.href = `/${articleType}/category/${selectedValue}`;
       } else if (selectedType === 'tag') {
         window.location.href = `/${articleType}/tag/${selectedValue}`;
       }
     }
   };
+
 
   return (
     <div className="flex flex-col sm:flex-row items-center w-full space-y-4 sm:space-y-0 sm:space-x-4 my-6">

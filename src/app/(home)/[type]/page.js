@@ -46,7 +46,7 @@ export default async function TypePage({ params, searchParams }) {
   const fetchFeaturedArticles = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
-        params: { category: 'featured', page: 1, pageSize: 5 },
+        params: { tag: 'featured', page: 1, pageSize: 5 },
       });
       return data;
     } catch (error) {
