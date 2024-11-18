@@ -55,16 +55,6 @@ export default async function TypePage({ params, searchParams }) {
     }
   };
 
-  const fetchArticleTypes = async () => {
-    try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}article-types/type-list`);
-      return data;
-    } catch (error) {
-      console.error('Error fetching article types:', error);
-      return [];
-    }
-  };
-
   const fetchPopularCategoriesAndTabs = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/popular-categories-tags?type=${type}`);
@@ -77,7 +67,6 @@ export default async function TypePage({ params, searchParams }) {
 
   const articlesData = await fetchArticles();
   const featuredArticlesData = await fetchFeaturedArticles();
-  const articleTypes = await fetchArticleTypes();
   const popularCatgeoriesAndTabs = await fetchPopularCategoriesAndTabs();
 
 
@@ -92,7 +81,7 @@ export default async function TypePage({ params, searchParams }) {
         <div className="container grid sm:gap-10 grid-cols-12">
           <div className="sm:col-span-9 col-span-12 ">
             <div>
-              <TypeNavigation types={articleTypes} currentType={type} />
+              <TypeNavigation currentType={type} />
 
               <TtitleAndDescription type={type} />
               <SearchSelect articleType={type} />
