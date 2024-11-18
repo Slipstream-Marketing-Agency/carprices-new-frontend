@@ -128,7 +128,7 @@ export default async function Home() {
 
       <TrendingVideos />
 
-      <TrendingNews articles={articles} />
+      {/* <TrendingNews articles={articles} /> */}
 
 
       <SeoLinksHome />
