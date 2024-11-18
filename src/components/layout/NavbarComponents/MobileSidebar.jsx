@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -12,6 +12,7 @@ import { logout } from '@/store/slices/authSlice';
 const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen }) => {
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch()
+    const pathname = usePathname()
     const router = useRouter();
     const [subMenuOptions, setSubMenuOptions] = useState([]);
     const [activeMenu, setActiveMenu] = useState(null);
@@ -103,7 +104,7 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                                 </div>
                                 <KeyboardArrowDownIcon />
                                 {profileMenuOpen && (
-                                    <div className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg w-full py-2">
+                                    <div className="absolute top-full z-20 left-0 mt-2 bg-white shadow-lg rounded-lg w-full py-2">
                                         <Link
                                             href="/setting/profile"
                                             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
@@ -149,7 +150,7 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                     <div className="flex flex-col pt-6 gap-4 transition-all duration-300 ease-in-out">
                         {/* Sub Menu */}
                         <div
-                            className={`flex flex-col gap-4 transition-all duration-300 transform ${activeMenu ? 'translate-x-0 opacity-100 h-auto' : '-translate-x-full opacity-0 h-0 overflow-hidden'}`}
+                            className={`flex flex-col ml-3 gap-4 transition-all duration-300 transform ${activeMenu ? 'translate-x-0 opacity-100 h-auto' : '-translate-x-full opacity-0 h-0 overflow-hidden'}`}
                         >
                             {subMenuOptions.map((link, index) => (
                                 <Link
@@ -170,7 +171,7 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                                 <div
                                     key={index}
                                     onClick={() => handleShowSubMenu(link)}
-                                    className="flex justify-between items-center text-gray-700 font-medium cursor-pointer hover:text-black transition px-4 py-3 rounded-lg hover:bg-gray-100 shadow-sm"
+                                    className={`flex justify-between items-center ${pathname === link.href ? 'text-blue-600' : 'text-gray-700'} font-medium cursor-pointer hover:text-black transition px-4 py-3 rounded-lg hover:bg-gray-100 shadow-sm`}
                                 >
                                     <div className="flex items-center gap-2">
                                         {link.label}
