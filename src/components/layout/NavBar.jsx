@@ -423,7 +423,7 @@ export default function NavBar() {
 
     return (
         <>
-            <MobileSidebar toggleNavigation={toggleNavigation} isOpen={isOpen} links={links} />
+            <MobileSidebar toggleNavigation={toggleNavigation} setIsLoginModalOpen={setIsLoginModalOpen} isOpen={isOpen} links={links} />
             <div className="bg-white hidden md:block w-full border-solid border-b-[1px] border-gray-200 md:mb-28">
                 <div className="w-full">
                     {/* Top Section */}
@@ -501,7 +501,7 @@ export default function NavBar() {
                                 >
                                     <Link
                                         href={link.href}
-                                        className={`flex items-center p-1 justify-center font-normal text-sm ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : 'border-t-2 border-transparent'}`}
+                                        className={`flex items-center p-1 justify-center font-normal text-sm ${pathname === link.href ? 'text-blue-600' : ''} ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : 'border-t-2 border-transparent'}`}
                                     >
                                         {link.label}
                                         <span className="">

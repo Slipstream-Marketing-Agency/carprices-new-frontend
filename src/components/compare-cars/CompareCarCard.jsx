@@ -39,7 +39,7 @@ function CompareCarCard({ carData, cars, setCars }) {
 
   return (
     <div className={`md:col-span-3 col-span-6 `}>
-      <div className="relative border-solid border border-gray-200 rounded-lg p-4 h-[340px]">
+      <div className="relative border-solid border border-gray-200 rounded-lg p-4 h-[320px] shadow-md">
         <div
           className="flex justify-end cursor-pointer"
           onClick={handleRemoveCar}
