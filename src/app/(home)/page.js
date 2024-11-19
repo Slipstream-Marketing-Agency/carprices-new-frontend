@@ -130,7 +130,6 @@ export default async function Home() {
 
       {/* <TrendingNews articles={articles} /> */}
 
-
       <SeoLinksHome />
     </div>
   );
