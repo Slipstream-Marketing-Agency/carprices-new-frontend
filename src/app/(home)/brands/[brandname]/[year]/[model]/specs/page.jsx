@@ -1,6 +1,52 @@
 import ModelWrapper from "@/components/model-component/ModelWrapper";
 import axios from "axios";
 
+export async function generateMetadata({ params }) {
+    const { year, brandname, model } = params;
+    const yearInt = parseInt(year, 10);
+    
+    const currentmodelResponse = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`
+    );
+
+    const currentmodel = currentmodelResponse.data.data.model;
+    const seoData = currentmodelResponse.data.data.seo;
+
+    const minPrice = currentmodel?.price?.min;
+
+    return {
+        title: seoData?.metaTitle ? seoData.metaTitle : `${currentmodel.brand?.name} ${currentmodel.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
+        description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
+        } starting at ${minPrice <= 0
+          ? "TBD"
+          : "AED" +
+          " " +
+          minPrice?.toLocaleString("en-AE", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })
+        }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
+        charset: "UTF-8",
+        alternates: {
+            ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
+        },
+        // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+        robots: {
+            index: true,
+            follow: true,
+        },
+        structuredData: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: seoData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+            description: seoData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+            url: "https://carprices.ae",
+        },
+        author: "Carprices.ae Team",
+        icon: "./favicon.ico",
+    };
+}
+
 export default async function SpecsPage({ params }) {
     const { year, brandname, model } = params;
     const yearInt = parseInt(year, 10);

@@ -14,11 +14,41 @@ import NewsletterSubscribe from '@/components/articles-component/NewsLetterSubsc
 import Ad300x600 from '@/components/ads/Ad300x600';
 import PopularCategories from '@/components/popular-sections/PopularCategories';
 import { Suspense } from 'react';
+import { fetchMetaData } from '@/lib/fetchMetaData';
 
 const VALID_TYPES = ['news', 'reviews','new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
 
 export async function generateStaticParams() {
   return VALID_TYPES.map((type) => ({ type }));
+}
+
+export async function generateMetadata({params}) {
+  const { type } = params;
+  const metaData = await fetchMetaData(type);
+  console.log(metaData, 'mymetadata.....')
+
+  return {
+    title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+    description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+    charset: "UTF-8",
+    alternates: {
+      ...(metaData?.canonical && { canonical: metaData.canonical }),
+    },
+    keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+    robots: {
+      index: true,
+      follow: true,
+    },
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+      description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      url: "https://carprices.ae",
+    },
+    author: "Carprices.ae Team",
+    icon: "./favicon.ico",
+  };
 }
 
 export default async function TypePage({ params, searchParams }) {
@@ -139,7 +169,7 @@ export default async function TypePage({ params, searchParams }) {
                         )} {article?.carBrands?.length > 0 &&
                           <div className='flex flex-wrap mt-2'>
                             {article?.carBrands?.map((brand, index) => (
-                              <div>
+                              <div key={index}>
 
                                 <Image
                                   src={brand.brandLogo}

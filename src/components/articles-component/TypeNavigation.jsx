@@ -19,8 +19,8 @@ export default function TypeNavigation({ currentType }) {
       }
     };
 
-    fetchArticleTypes(articleTypes)
-  },[articleTypes])
+    fetchArticleTypes()
+  },[])
 
   console.log(articleTypes)
 

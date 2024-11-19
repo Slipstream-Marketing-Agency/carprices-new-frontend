@@ -132,7 +132,7 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
                 </div>
             }
 
-            {tableData.length > 0 && <CarComparisonTable tableData={tableData} />}
+            {(tableData.length > 0 && pathname !== '/compare-cars') && <CarComparisonTable tableData={tableData} />}
         </div>
     );
 }

@@ -504,6 +504,7 @@ export default function NavBar() {
                                         className={`flex items-center p-1 justify-center font-normal text-sm ${pathname === link.href ? 'text-blue-600' : ''} ${hoveredMenuItem === link.hoverItem ? 'border-t-2 border-blue-600 text-blue-600' : 'border-t-2 border-transparent'}`}
                                     >
                                         {link.label}
+                                        {link.href !== '/compare-cars' &&
                                         <span className="">
                                             <svg
                                                 className="w-4 h-4"
@@ -515,6 +516,7 @@ export default function NavBar() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                                             </svg>
                                         </span>
+                                        }
                                     </Link>
 
                                     {/* Show the dropdown menu when hovered */}

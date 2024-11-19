@@ -24,7 +24,7 @@ const CarDealerCard = ({dealer}) => {
                     <Link href={`/car-dealers/${dealer.slug}`} className='flex flex-col space-y-2 mb-3'>
                         <h3 className="text-lg font-medium">{dealer.name}</h3>
                         <p className="text-sm text-gray-600 font-semibold flex items-center gap-2"><LocationOnIcon className='text-green-500' />{dealer.dealer_branch.name}</p>
-                        <p className="text-sm text-gray-600 flex items-center gap-2"><BusinessIcon /> {dealer.address}</p>
+                        <p className="text-sm text-gray-600 flex items-center gap-2 h-10"><BusinessIcon /> {dealer.address}</p>
                     </Link>
                     <button
                         onClick={() => window.location.href = `tel:${dealer.phone_number}`}
