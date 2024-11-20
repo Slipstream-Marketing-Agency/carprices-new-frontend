@@ -13,7 +13,7 @@ export default function WebStories() {
                     </h5>
                     <h2 className="md:text-xl text-md font-semibold capitalize">Web Stories</h2>
                 </div>
-                <Link href="/web-stories" >
+                <Link href="/web-stories" className='px-5 py-2 text-white bg-blue-600 border border-blue-600 rounded-[47px] max-md:px-4 md:text-[16px] text-[12px] whitespace-nowrap flex items-center justify-center'>
                     <span className="capitalize font-semibold">
                         View More
                     </span>

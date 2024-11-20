@@ -1,11 +1,33 @@
-// src/components/NavigationGrid.js
+'use client'
 
+import axios from 'axios';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function TypeNavigation({ types = [], currentType }) {
+export default function TypeNavigation({ currentType }) {
+
+  const [articleTypes, setArticleTypes] = useState([]);
+
+  useEffect(() => {
+    const fetchArticleTypes = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}article-types/type-list`);
+        setArticleTypes(data);
+      } catch (error) {
+        console.error('Error fetching article types:', error);
+        return [];
+      }
+    };
+
+    fetchArticleTypes()
+  },[])
+
+  console.log(articleTypes)
+
+
   return (
     <div className="md:flex rounded-lg shadow-md hidden w-full mb-4">
-      {types.map((type) => (
+      {articleTypes.map((type) => (
         <Link key={type.slug} href={`/${type.slug}`} className="group flex-grow basis-0">
           <div
             className={`p-2 border text-center transition-all ${

@@ -69,6 +69,11 @@ export default function TrendingVideos() {
                         Discover the Hottest Automotive Highlights
                     </h2>
                 </div>
+                <Link href="/car-videos" className='px-5 py-2 text-white bg-blue-600 border border-blue-600 rounded-[47px] max-md:px-4 md:text-[16px] text-[12px] whitespace-nowrap flex items-center justify-center'>
+                    <span className="capitalize font-semibold">
+                        View More
+                    </span>
+                </Link>
             </div>
             <div className="mt-1 w-full">
                 {loading ? (
