@@ -103,33 +103,19 @@ export default async function Home() {
         <FilterLayout />
       </div>
       <SearchForTheBest />
-
-
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
-
       <MostPopularCarSection />
-
       <UpcomingCars />
       <SelectedCompareCarsSection />
-
-
-
       <ChooseBrand brand={brands} />
-
       <CustomAdComponent />
-
       <ChooseBodyType bodyTypes={bodyTypes} />
       <CarDealersHome />
-
       <ServicesAdComponent />
-
       <WebStories />
-
       <TrendingVideos />
-
       <TrendingNews articles={articles} />
-
       <SeoLinksHome />
     </div>
   );
