@@ -184,13 +184,13 @@ export default function Footer() {
                         >
                           Privacy Policy
                         </Link>
-                        {/* <Link
+                        <Link
                             href="/terms-and-conditions"
                             className="mt-1 text-white"
                           >
                             Terms and Conditions
                           </Link>
-                          <Link
+                          {/*<Link
                             href="/code-of-conduct"
                             className="mt-1 text-white"
                           >

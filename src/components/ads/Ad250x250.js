@@ -15,7 +15,7 @@ export default function Ad250x250({ dataAdSlot }) {
   return (
     <div className="flex justify-center">
       <ins
-        className="adsbygoogle bg-gray-600"
+        className="adsbygoogle bg-slate-200"
         style={{ display: "inline-block", width: "250px", height: "250px" }}
         data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID} // Use environment variable for AdSense client ID
         data-ad-slot={dataAdSlot} // Pass the dynamic ad slot ID
