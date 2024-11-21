@@ -102,6 +102,7 @@ export default async function Home() {
         </div>
         <FilterLayout />
       </div>
+
       <SearchForTheBest />
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
@@ -115,7 +116,7 @@ export default async function Home() {
       <ServicesAdComponent />
       <WebStories />
       <TrendingVideos />
-      <TrendingNews articles={articles} />
+      {/* <TrendingNews articles={articles} /> */}
       <SeoLinksHome />
     </div>
   );
