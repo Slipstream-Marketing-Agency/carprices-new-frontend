@@ -102,7 +102,6 @@ export default async function Home() {
         </div>
         <FilterLayout />
       </div>
-
       <SearchForTheBest />
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />

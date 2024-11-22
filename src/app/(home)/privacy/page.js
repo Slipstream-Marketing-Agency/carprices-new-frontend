@@ -52,7 +52,7 @@ export default function Privacy() {
                         Updated <span className="font-semibold">20 Dec, 2023</span>
                     </div>
                     <p className="text-gray-700 leading-relaxed">
-                        Slipstream Holdings Limited ("we", "our", "us") is committed to
+                        Slipstream Holdings Limited (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;) is committed to
                         protecting your privacy. This privacy policy explains how we
                         collect, use, disclose, and safeguard your information when you
                         visit our website www.carprices.ae in compliance with the General
@@ -197,7 +197,7 @@ export default function Privacy() {
                 <div className="bg-white shadow-lg rounded-lg p-8">
                     <h4 className=" font-semibold mb-4">Cookies</h4>
                     <p className="text-gray-700 leading-relaxed">
-                        Our website may use "cookies" to enhance user experience. Your web
+                        Our website may use &quot;cookies&quot; to enhance user experience. Your web
                         browser places cookies on your hard drive for record-keeping
                         purposes and sometimes to track information about them. You can
                         choose to set your web browser to refuse cookies or to alert you

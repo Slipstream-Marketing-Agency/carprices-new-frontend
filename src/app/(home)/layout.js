@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Script from "next/script";
 import StoreProvider from "../../../providers/StoreProvider";
+import CookiePopup from "@/components/layout/CookiePopup";
 
 // Load Google Fonts (in this case, Poppins)
 const poppins = Poppins({
@@ -52,7 +53,8 @@ export default function RootLayout({ children, params }) {
           {process.env.NODE_ENV === 'development' && <Script
             strategy="afterInteractive" // Load the script after the page is interactive
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416539"
+            // src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416539"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
             crossOrigin="anonymous"
           />}
 
@@ -84,6 +86,8 @@ export default function RootLayout({ children, params }) {
           {children}
           <Footer />
         </main>
+
+        <CookiePopup />
 
       </body>
     </html>
