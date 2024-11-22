@@ -24,4 +24,8 @@
     <loc>https://carprices.ae/articles-sitemap.xml</loc>
     <lastmod>2024-02-28T12:34:56Z</lastmod>
   </sitemap>
+   <sitemap>
+    <loc>https://carprices.ae/ads.txt</loc>
+    <lastmod>2024-02-28T12:34:56Z</lastmod>
+  </sitemap>
 </sitemapindex>

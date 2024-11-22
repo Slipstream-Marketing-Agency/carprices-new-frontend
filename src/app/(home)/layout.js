@@ -37,6 +37,11 @@ export default function RootLayout({ children, params }) {
 
   return (
     <html lang="en">
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
+          crossOrigin="anonymous"></script>
+        <meta name="google-adsense-account" content="ca-pub-4096282930416593" />
+      </head>
 
       <body className={`${poppins.className} antialiased`}> {/* Apply Google Font */}
         <Script
@@ -50,13 +55,12 @@ export default function RootLayout({ children, params }) {
               })(window,document,'script','dataLayer','GTM-W564HNC');`,
           }}
         /> <noscript>
-          {process.env.NODE_ENV === 'development' && <Script
+          {/* {process.env.NODE_ENV === 'development' && <Script
             strategy="afterInteractive" // Load the script after the page is interactive
             async
-            // src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416539"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
             crossOrigin="anonymous"
-          />}
+          />} */}
 
 
           <img
@@ -65,11 +69,7 @@ export default function RootLayout({ children, params }) {
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1194042761803181&ev=PageView&noscript=1"
           />
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
-            crossOrigin="anonymous"
-          />
+
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-W564HNC"
