@@ -6,6 +6,7 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// Fetch all redirects from the API
 const fetchAllRedirects = async () => {
   let redirects = [];
   let page = 1;
@@ -25,10 +26,54 @@ const fetchAllRedirects = async () => {
   return redirects;
 };
 
+// Store fetched redirects into a file
 const storeRedirects = async () => {
   const redirects = await fetchAllRedirects();
   const filePath = path.join(process.cwd(), 'public', 'redirects.json');
   fs.writeFileSync(filePath, JSON.stringify(redirects, null, 2));
+};
+
+// Generate sitemaps by triggering APIs and saving the files
+const generateSitemaps = async () => {
+  const apiEndpoints = [
+    'https://apis.carprices.ae/api/articles/generateSitemap',
+    'https://apis.carprices.ae/api/car-body-type/generateSitemap',
+    'https://apis.carprices.ae/api/car-trims/generate',
+  ];
+
+  console.log('Triggering API to generate sitemaps...');
+  for (const endpoint of apiEndpoints) {
+    try {
+      const response = await fetch(endpoint);
+      if (!response.ok) throw new Error(`Failed to trigger API at ${endpoint}`);
+      console.log(`Successfully triggered ${endpoint}`);
+    } catch (error) {
+      console.error(`Error triggering ${endpoint}:`, error);
+    }
+  }
+
+  const sitemaps = [
+    { name: 'articles-sitemap.xml', url: 'https://apis.carprices.ae/articles-sitemap.xml' },
+    { name: 'bodytypes-sitemap.xml', url: 'https://apis.carprices.ae/bodytypes-sitemap.xml' },
+    { name: 'trims-sitemap.xml', url: 'https://apis.carprices.ae/trims-sitemap.xml' },
+    { name: 'models-sitemap.xml', url: 'https://apis.carprices.ae/models-sitemap.xml' },
+    { name: 'brands-sitemap.xml', url: 'https://apis.carprices.ae/brands-sitemap.xml' },
+  ];
+
+  console.log('Fetching and saving sitemaps...');
+  for (const sitemap of sitemaps) {
+    try {
+      const response = await fetch(sitemap.url);
+      if (!response.ok) throw new Error(`Failed to fetch ${sitemap.name}`);
+      const xmlContent = await response.text();
+      const outputDir = path.resolve(process.cwd(), 'public');
+      fs.mkdirSync(outputDir, { recursive: true });
+      fs.writeFileSync(path.join(outputDir, sitemap.name), xmlContent, 'utf8');
+      console.log(`${sitemap.name} saved successfully.`);
+    } catch (error) {
+      console.error(`Error fetching ${sitemap.name}:`, error);
+    }
+  }
 };
 
 const nextConfig = bundleAnalyzer({
@@ -51,8 +96,10 @@ const nextConfig = bundleAnalyzer({
   },
 
   async redirects() {
-    // First, store fetched redirects if necessary
-    await storeRedirects();
+    if (process.env.NODE_ENV === 'production') {
+      // Store fetched redirects if necessary
+      await storeRedirects();
+    }
 
     return [
       {
@@ -79,6 +126,13 @@ const nextConfig = bundleAnalyzer({
 
   swcMinify: true,
 
+  async generateBuildId() {
+    if (process.env.NODE_ENV === 'production') {
+      // Generate sitemaps only in production
+      await generateSitemaps();
+    }
+    return null; // Use the default build ID
+  },
 });
 
 export default nextConfig;
