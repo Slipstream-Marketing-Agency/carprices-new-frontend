@@ -316,7 +316,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                 <div className="md:col-span-3">
                     <div className='my-6 sticky top-0  md:block hidden'>
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="1425312679" />
                         </Suspense>
                     </div>
                 </div>

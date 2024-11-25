@@ -322,7 +322,7 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
 
             <div className="col-span-3"><div className='my-6 sticky top-0  md:block hidden'>
                 <Suspense fallback={<div>Loading ad...</div>}>
-                    <Ad300x600 dataAdSlot="3792539533" />
+                    <Ad300x600 dataAdSlot="1269400005" />
                 </Suspense>
             </div></div>
         </div>

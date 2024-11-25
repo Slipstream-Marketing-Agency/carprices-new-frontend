@@ -174,9 +174,9 @@ export default async function FilteredTypePage({ params, searchParams }) {
         </div>
         <div className="sm:col-span-3 col-span-12">
         <NewsletterSubscribe />
-        <div className='my-6 sticky top-0  md:block hidden'>
+        <div className='my-6 pt-16 sticky top-0  md:block hidden'>
               <Suspense fallback={<div>Loading ad...</div>}>
-                <Ad300x600 dataAdSlot="3792539533" />
+                <Ad300x600 dataAdSlot="2051998638" />
               </Suspense>
             </div>
         </div>

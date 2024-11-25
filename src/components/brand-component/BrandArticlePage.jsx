@@ -124,7 +124,7 @@ export default function BrandArticlePage({ type, slug, brandDetails, brandname }
                 <div className="md:col-span-3">
                     <div className='my-6 sticky top-0'>
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="1884477677" />
                         </Suspense>
                     </div>
                 </div>

@@ -13,26 +13,26 @@ export default function Footer() {
         {/* Desktop Ad */}
         <div className="md:block hidden">
           <Suspense fallback={<div>Loading ad...</div>}>
-            <Ad970x250 dataAdSlot="3620924730" />
+            <Ad970x250 dataAdSlot="8049596622" />
           </Suspense>
         </div>
 
         {/* Mobile Ad */}
         <div className="md:hidden block">
           <Suspense fallback={<div>Loading ad...</div>}>
-            <Ad300X250 dataAdSlot="1332106070" />
+            <Ad300X250 dataAdSlot="8021505025" />
           </Suspense>
         </div>
       </div>
 
-      {/* <div className="">
+      <div className="">
         <Suspense fallback={<div>Loading ad...</div>}>
-          <FixedAd320x50 dataAdSlot="1332106070" />
+          <FixedAd320x50 dataAdSlot="7930738208" />
         </Suspense>
         <Suspense fallback={<div>Loading ad...</div>}>
-          <FixedAd728x90 dataAdSlot="3620924730" />
+          <FixedAd728x90 dataAdSlot="2810273462" />
         </Suspense>
-      </div> */}
+      </div>
 
       <div className="flex justify-center items-center px-16 py-16 bg-neutral-900 max-md:px-5 w-full ">
         <div className="flex flex-col w-full container">

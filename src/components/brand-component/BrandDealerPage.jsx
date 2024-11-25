@@ -274,7 +274,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
                 <div className="md:col-span-3 col-span-12">
                     <div className='my-6 sticky top-0  md:block hidden'>
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="4298888026" />
                         </Suspense>
                     </div>
                 </div>

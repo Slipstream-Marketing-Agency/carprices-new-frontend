@@ -547,7 +547,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
         <div className="md:col-span-9 col-span-12">
           <TrimDescription trim={trimData} />
           <Suspense fallback={<div>Loading ad...</div>}>
-            <Ad728x90 dataAdSlot="7369694604" />
+            <Ad728x90 dataAdSlot="4262121782" />
           </Suspense>
         </div>
         <div className="md:col-span-3 col-span-12">
@@ -561,7 +561,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
 
           <div className="my-10">
             <Suspense fallback={<div>Loading ad...</div>}>
-              <Ad728x90 dataAdSlot="5962627056" />
+              <Ad728x90 dataAdSlot="3376517159" />
             </Suspense>
           </div>
         </div>
@@ -573,20 +573,20 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
 
       <div className="my-10">
         <Suspense fallback={<div>Loading ad...</div>}>
-          <Ad728x90 dataAdSlot="5962627056" />
+          <Ad728x90 dataAdSlot="7495897007" />
         </Suspense>
       </div>
       <div id="vehicle-details" className="container">
         <VehicleReview trim={trimData} />
         <div className="my-10">
           <Suspense fallback={<div>Loading ad...</div>}>
-            <Ad728x90 dataAdSlot="5962627056" />
+            <Ad728x90 dataAdSlot="7083827875" />
           </Suspense>
         </div>
         {trimData?.galleryImages?.length > 0 && (
           <>
             {" "}  <Suspense fallback={<div>Loading ad...</div>}>
-              <Ad728x90 dataAdSlot="5962627056" />
+              <Ad728x90 dataAdSlot="6713298376" />
             </Suspense>
             <VehicleGallery trim={trimData.galleryImages} />
           </>
@@ -612,14 +612,14 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
         </div>
         <div className="md:col-span-3 col-span-9">
           {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-          <Ad300x600 dataAdSlot="3792539533" />
+          <Ad300x600 dataAdSlot="4457664530" />
         </div>
       </div>
 
       <div id="variants&prices" className="container">
         <div className="my-10">
           <Suspense fallback={<div>Loading ad...</div>}>
-            <Ad728x90 dataAdSlot="5962627056" />
+            <Ad728x90 dataAdSlot="2774053364" />
           </Suspense>
         </div>
         <VariantsListing

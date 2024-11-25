@@ -149,7 +149,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                         <LastTwoWeeksArticles />
                         <div className='my-6 sticky top-0  md:block hidden'>
                             <Suspense fallback={<div>Loading ad...</div>}>
-                                <Ad300x600 dataAdSlot="3792539533" />
+                                <Ad300x600 dataAdSlot="3687406715" />
                             </Suspense>
                         </div>
 
