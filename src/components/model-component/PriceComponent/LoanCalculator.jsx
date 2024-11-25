@@ -80,7 +80,7 @@ const LoanCalculator = ({ vehicleName, variants }) => {
                             <div className="mb-8">
                                 <label className="block mb-2 font-semibold">Finance Period (years)</label>
                                 <div className="flex gap-3 flex-wrap">
-                                    {[1, 2, 3, 4, 5, 6, 7].map((year) => (
+                                    {[1, 2, 3, 4, 5].map((year) => (
                                         <button
                                             key={year}
                                             className={`px-4 py-2 border rounded-lg transition-all ${financePeriod === year

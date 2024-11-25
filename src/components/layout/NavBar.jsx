@@ -467,7 +467,7 @@ export default function NavBar() {
                                         {hoveredMenuItem === 'profile' && <HoveredProfile setHoveredMenuItem={setHoveredMenuItem} />}
                                     </div>
                                 ) : (
-                                    <PrimaryButton label="Signin" additionalClass="!bg-black !border-black" onClick={() => setIsLoginModalOpen(true)} />
+                                    <PrimaryButton label="Sign In" additionalClass="!bg-black !border-black" onClick={() => setIsLoginModalOpen(true)} />
                                 )}
                             </div>
                         </div>

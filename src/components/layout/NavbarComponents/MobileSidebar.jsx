@@ -134,7 +134,7 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
                             </div>
                         ) : (
                             <PrimaryButton
-                                label="Signin"
+                                label="Sign In"
                                 additionalClass="!bg-black !border-black"
                                 onClick={handleSetIsLoginModalOpen}
                             />

@@ -132,11 +132,11 @@ export default function LoanCalculatorWrapper() {
             </div>
             <div className="h-1/2 sm:col-span-3 block space-y-10">
                 <Suspense fallback={<div>Loading ad...</div>}>
-                    <Ad300x600 dataAdSlot="3792539533" />
+                    <Ad300x600 dataAdSlot="4063084302" />
                 </Suspense>
                 <div className="md:hidden block mt-10">
                     <Suspense fallback={<div>Loading ad...</div>}>
-                        <Ad300X250 dataAdSlot="9351332409" />
+                        <Ad300X250 dataAdSlot="2565896738" />
                     </Suspense>
                 </div>
             </div>

@@ -69,7 +69,7 @@ export default function TrendingCars({ featuredCars }) {
             </h2>
 
             <div className="absolute top-10 right-0 xl:block hidden">
-                <Suspense fallback={<div>Loading ad...</div>}><Ad300x600 dataAdSlot="3792539533" /></Suspense>
+                <Suspense fallback={<div>Loading ad...</div>}><Ad300x600 dataAdSlot="4432678024" /></Suspense>
             </div>
 
 
@@ -84,7 +84,7 @@ export default function TrendingCars({ featuredCars }) {
                         ))}
                     </Slider>
                     <div className="md:block hidden mt-4">
-                        <Suspense fallback={<div>Loading ad...</div>}><Ad728x90 dataAdSlot="4367254600" /></Suspense>
+                        <Suspense fallback={<div>Loading ad...</div>}><Ad728x90 dataAdSlot="6424416548" /></Suspense>
                     </div>
                 </div>
                 <div className="sm:hidden block overflow-x-auto m-2 custom-scrollbar">
@@ -97,7 +97,7 @@ export default function TrendingCars({ featuredCars }) {
                     </div>
                 </div>
                 <div className="md:hidden block sm:mb-4 w-full">
-                    <Suspense fallback={<div>Loading ad...</div>}><Ad300X250 dataAdSlot="8451638145" /></Suspense>
+                    <Suspense fallback={<div>Loading ad...</div>}><Ad300X250 dataAdSlot="4521415159" /></Suspense>
                 </div>
             </div>
         </div>

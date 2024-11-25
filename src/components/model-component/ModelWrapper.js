@@ -19,6 +19,7 @@ import CarDetailReview from "../reviews/CarDetailReview";
 import StarIcon from '@mui/icons-material/Star';
 import MainPriceComponent from "./PriceComponent/PriceComponent";
 import axios from "axios";
+import Ad300X250 from "../ads/Ad300x250";
 
 export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPage = 'basic', activeTab = '' }) {
     const [currentURL, setCurrentURL] = useState("");
@@ -184,7 +185,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                     <ImageSlider mainTrim={mainTrim} />
                 </div>
 
-                <div className="col-span-12 lg:col-span-6 md:pl-10">
+                <div className="col-span-12 lg:col-span-7 md:pl-10">
                     <div className="relative flex items-center gap-2">
                         <h1 className="g font-semibold md:text-2xl">
                             {mainTrim?.year} {brand?.name} {model?.name}{" "}
@@ -200,13 +201,6 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                             <p className="text-blue-500 text-sm uppercase mr-1">{reviews.length} Reviews</p>
                         </Link>
                     </div>
-                    {/* <span class="inline-flex items-center rounded-full bg-green-500 px-2 py-1 text-xs font-semibold text-white ring-1 ring-inset ring-green-600/20">
-            4.2 <StarIcon className="text-[14px] ml-1" />
-          </span>
-          <span className="text-[14px] mx-2">182 Ratings & Reviews</span>
-          <span className="text-[14px] font-semibold underline">
-            Rate Now
-          </span> */}
                     <div className="md:my-3 my-3">
                         <h2 className="md:text-lg font-semibold">
                             <CarPriceRange />
@@ -214,10 +208,10 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         <p className="font-medium text-gray-500 mt-3">
                             <CarEMIDisplay />
                             /Monthly EMI*{" "}
-                            {/* <span className="underline ">
-                <Link href="">Details</Link>
-              </span> */}
                         </p>
+                        {/* <div className='absolute right-4  md:block hidden'>
+                            <Ad300X250 dataAdSlot="5772723668" />
+                        </div> */}
                     </div>
                     <div className="my-4">
                         <div className="grid grid-cols-3 gap-4 md:w-[70%]">
@@ -365,12 +359,12 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                             getTransmissionType={getTransmissionType}
                         />
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad728x90 dataAdSlot={"1087083283"} />
+                            <Ad728x90 dataAdSlot={"2246434169"} />
                         </Suspense>
                     </div>
                     <div className="md:col-span-3 col-span-12">
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot={"1763487396"} />
+                            <Ad300x600 dataAdSlot={"5778656502"} />
                         </Suspense>
                     </div>
                 </div>
@@ -380,35 +374,48 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                 {
                     (parentPage === 'basic' || parentPage === 'variants&prices') &&
                     <div id="variants&prices">
-                        <VariantsListing
-                            year={year}
-                            brand={brand}
-                            model={model}
-                            minPrice={minPrice}
-                            maxPrice={maxPrice}
-                            minFuelConsumption={minFuelConsumption}
-                            maxFuelConsumption={maxFuelConsumption}
-                            engineTypes={engineTypes}
-                            transmissionList={transmissionList}
-                            motorTypes={motorTypes}
-                            mainTrimFuelType={mainTrimFuelType}
-                            allTrims={allTrims}
-                            mainTrim={mainTrim}
-                        />
-                        <div className="container mx-auto grid grid-cols-12 mt-10">
+                        <div className="container mx-auto grid grid-cols-12">
+                            <div className="md:col-span-9 col-span-12">
+                                <VariantsListing
+                                    year={year}
+                                    brand={brand}
+                                    model={model}
+                                    minPrice={minPrice}
+                                    maxPrice={maxPrice}
+                                    minFuelConsumption={minFuelConsumption}
+                                    maxFuelConsumption={maxFuelConsumption}
+                                    engineTypes={engineTypes}
+                                    transmissionList={transmissionList}
+                                    motorTypes={motorTypes}
+                                    mainTrimFuelType={mainTrimFuelType}
+                                    allTrims={allTrims}
+                                    mainTrim={mainTrim}
+                                />
+                                <OldModel model={oldModel} />
+                                <div className="mt-14">
+                                    <Ad728x90 dataAdSlot={"9526329827"} />
+                                </div>
+                            </div>
+                            <div className="md:col-span-3 col-span-9">
+                                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+                                <div className='my-6 pt-20 sticky top-0'>
+                                    <Ad300x600 dataAdSlot="2960921471" />
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div className="container mx-auto grid grid-cols-12 mt-10">
                             <div className="md:col-span-9 col-span-12">
                                 <OldModel model={oldModel} />
                                 <div className="mt-14">
-                                    <Ad728x90 dataAdSlot={"1087083283"} />
+                                    <Ad728x90 dataAdSlot={"9526329827"} />
                                 </div>
                             </div>
                             <div className="md:col-span-3 col-span-12">
-                                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                                 <Suspense fallback={<div>Loading ad...</div>}>
-                                    <Ad300x600 dataAdSlot={"1763487396"} />
+                                    <Ad300x600 dataAdSlot={"2960921471"} />
                                 </Suspense>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 }
 
@@ -422,7 +429,9 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         </div>
                         <div className="md:col-span-3 col-span-9">
                             {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <div className='my-6 pt-20 sticky top-0'>
+                                <Ad300x600 dataAdSlot="1811319896" />
+                            </div>
                         </div>
                     </div>
                 }
@@ -479,7 +488,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         </div>
                         <div className="md:col-span-3 col-span-12">
                             <Suspense fallback={<div>Loading ad...</div>}>
-                                <Ad300x600 dataAdSlot={"8615289670"} />
+                                <Ad300x600 dataAdSlot={"2178049771"} />
                             </Suspense>
                         </div>
                     </section>
@@ -533,7 +542,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         </div>
                         <div className="md:col-span-3 col-span-9">
                             {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="2601828820" />
                         </div>
                     </div>
                 }
@@ -567,7 +576,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                         <div className="md:col-span-3 col-span-9">
                             {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
                             <Suspense fallback={<div>Loading ad...</div>}>
-                                <Ad300x600 dataAdSlot="3792539533" />
+                                <Ad300x600 dataAdSlot="9673396418" />
                             </Suspense>
                         </div>
                     </div>
