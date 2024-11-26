@@ -6,8 +6,6 @@ import { useEffect } from "react";
 export default function Ad300x600({ dataAdSlot }) {
   const searchParams = useSearchParams();
 
-  console.log(searchParams, "searchParams"); // Access query params here
-
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});

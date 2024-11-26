@@ -14,6 +14,7 @@ import PopularCategories from "../popular-sections/PopularCategories";
 import FeaturedSlider from "./FeaturedSlider";
 import Relations from "./Relations";
 import ArticleComment from "./ArticleComment";
+import InArticleAd from "../ads/inArticleAd";
 
 export default function ArticleDetailWrapper({ data, type, slug, featuredArticlesData }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -53,26 +54,45 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
     // Render article content with YouTube embed handling
     const renderContent = useMemo(() => {
         if (!content) return null;
+    
+        // Replace empty <p> tags with <br> and split the content into paragraphs
         const paragraphs = content.replace(/<p>(&nbsp;|\s*)<\/p>/g, "<br />").split("<br>");
-
-        return paragraphs.map((paragraph, index) => {
+    
+        return paragraphs.flatMap((paragraph, index) => {
             const videoId = extractYouTubeVideoId(paragraph);
-            return videoId ? (
-                <iframe
-                    key={index}
-                    width="100%"
-                    height="315"
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    title="YouTube video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                />
-            ) : (
-                <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
-            );
+    
+            // Ad configuration: Show ads after every 3 paragraphs
+            const adIndex = 3;
+            const isAdSlot = (index + 1) % adIndex === 0;
+    
+            // Render content with an ad slot conditionally
+            return [
+                videoId ? (
+                    <iframe
+                        key={`video-${index}`}
+                        width="100%"
+                        height="315"
+                        src={`https://www.youtube.com/embed/${videoId}`}
+                        title="YouTube video"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    />
+                ) : (
+                    <div
+                        key={`content-${index}`}
+                        dangerouslySetInnerHTML={{ __html: paragraph }}
+                    />
+                ),
+                isAdSlot && (
+                    <div key={`ad-${index}`} className="ad-container my-4">
+                        <InArticleAd dataAdSlot={'6707256067'} />
+                    </div>
+                ),
+            ].filter(Boolean); // Remove `false` values from the array
         });
     }, [content]);
+    
 
     return (
         <div>
@@ -165,7 +185,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 const ArticleHeader = ({ title, author, publishedAt, summary, content, currentURL, articleTypes }) => (
     <div className="mb-6">
         {articleTypes.map((type, index) =>
-            <span className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm">{type.type}</span>
+            <span key={index} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm">{type.type}</span>
         )}
 
         <h1 className="capitalize font-bold text-2xl sm:text-3xl mt-3">{title}</h1>
