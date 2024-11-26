@@ -23,6 +23,7 @@ export default function Ad728x90({ dataAdSlot }) {
         data-ad-slot={dataAdSlot} // Pass the dynamic ad slot ID
         data-full-width-responsive="true"
       ></ins>
+      
     </div>
   );
 }
