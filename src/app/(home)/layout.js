@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Script from "next/script";
 import StoreProvider from "../../../providers/StoreProvider";
 import CookiePopup from "@/components/layout/CookiePopup";
+import BlockDetector from "@/components/ads/BlockerDetect";
 
 // Load Google Fonts (in this case, Poppins)
 const poppins = Poppins({
@@ -89,7 +90,7 @@ export default function RootLayout({ children, params }) {
         </main>
 
         <CookiePopup />
-
+        <BlockDetector />
       </body>
     </html>
   );
