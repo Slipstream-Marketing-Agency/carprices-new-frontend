@@ -54,7 +54,8 @@ export default function RootLayout({ children, params }) {
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-W564HNC');`,
           }}
-        /> <noscript>
+        /> 
+        <noscript>
           {/* {process.env.NODE_ENV === 'development' && <Script
             strategy="afterInteractive" // Load the script after the page is interactive
             async
