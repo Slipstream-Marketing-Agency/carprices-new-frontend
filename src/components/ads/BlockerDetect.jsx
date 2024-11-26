@@ -9,24 +9,27 @@ const BlockDetector = () => {
 
     useEffect(() => {
         const detectAdblock = async () => {
-            const bait = document.createElement('div');
-            bait.className = 'adsbox';
-            bait.style.cssText = 'width: 1px; height: 1px; position: absolute; top: -10000px;';
-            document.body.appendChild(bait);
-            
-            window.setTimeout(() => {
-                if (bait.offsetParent === null || bait.offsetHeight === 0 || bait.offsetWidth === 0) {
+            try {
+                // Attempt to load a common ad-related script
+                const response = await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', { method: 'HEAD' });
+
+                // If the fetch succeeds, adblock is not active
+                if (response.ok) {
+                    setAdblockDetected(false);
+                } else {
                     setAdblockDetected(true);
                 }
-                document.body.removeChild(bait);
-            }, 100);
+            } catch (error) {
+                // If the request fails, adblock is likely active
+                setAdblockDetected(true);
+            }
         };
 
         detectAdblock();
     }, []);
 
     if (!adblockDetected) {
-        return null;
+        return null; // Render nothing if no ad blocker is detected
     }
 
     return (
@@ -41,7 +44,7 @@ const BlockDetector = () => {
 
                     <div className="px-6">
                         <p className="text-lg">
-                            We’ve noticed an ad blocker is enabled. While ads help support our free content, we respect your choice. Please consider whitelisting our website if you enjoy our content.
+                            We’ve noticed that an ad blocker is enabled. Ads help support our content and keep it free for everyone. Please consider whitelisting our site or disabling your ad blocker.
                         </p>
                     </div>
 
