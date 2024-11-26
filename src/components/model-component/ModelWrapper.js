@@ -198,6 +198,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                 <StarIcon sx={{ color: '#f79712' }} className='h-4 w-4' />
                                 {averageRating ? averageRating.toFixed(1) : '0.0'}/5 |
                             </span>
+                            
                             <p className="text-blue-500 text-sm uppercase mr-1">{reviews.length} Reviews</p>
                         </Link>
                     </div>
