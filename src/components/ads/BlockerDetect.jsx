@@ -44,7 +44,7 @@ const BlockDetector = () => {
 
                     <div className="px-6">
                         <p className="text-lg">
-                            We’ve noticed that an ad blocker is enabled. Ads help support our content and keep it free for everyone. Please consider whitelisting our site or disabling your ad blocker.
+                        We see you’ve enabled an ad blocker, and we completely understand your need for a clutter-free experience. However, ads are what keep our platform alive, allowing us to bring you the valuable, free content you love. By whitelisting our site or pausing your ad blocker, you help us continue creating and sharing content that matters to you. Thank you for supporting us—we truly appreciate it!
                         </p>
                     </div>
 
