@@ -91,6 +91,7 @@ export default function AdvancedFilterWrapper({
     const driveSlugs = useMemo(() => (searchParams.get("drive") ? searchParams.get("drive").split(",") : []), [searchParams]);
     const transmissionSlugs = useMemo(() => (searchParams.get("transmission") ? searchParams.get("transmission").split(",") : []), [searchParams]);
 
+
     const additionalQueryParams = useMemo(() => ({
         haveMusic: searchParams.get("haveMusic"),
         isLuxury: searchParams.get("isLuxury"),
@@ -400,18 +401,6 @@ export default function AdvancedFilterWrapper({
         sorting,
     ]);
 
-
-
-    console.log('Brand Slugs:', brandSlugs);
-    console.log('Body Type Slugs:', bodyTypeSlugs);
-    console.log('Fuel Type Slugs:', fuelTypeSlugs);
-    console.log('Cylinder Slugs:', cylinderSlugs);
-    console.log('Drive Slugs:', driveSlugs);
-    console.log('Transmission Slugs:', transmissionSlugs);
-    console.log('Price Range:', priceRange);
-    console.log('Power Range:', powerRange);
-    console.log('Displacement Range:', displacementRange);
-    console.log(allTrims, "allTrims");
 
     const [isVisible, setIsVisible] = useState(false);
 
