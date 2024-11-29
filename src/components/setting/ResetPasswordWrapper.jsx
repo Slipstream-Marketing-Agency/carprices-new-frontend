@@ -109,7 +109,7 @@ const ResetPasswordWrapper = () => {
     }
     return (
         <div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center mt-16">
                 <div className="w-full md:w-1/3 sm:w-2/3 bg-white shadow-lg rounded-lg p-8 mx-4">
                     <h1 className="font-bold text-3xl text-center mb-6">Reset Password</h1>
 

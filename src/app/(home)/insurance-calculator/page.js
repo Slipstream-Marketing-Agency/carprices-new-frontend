@@ -156,7 +156,7 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
                     {loading && <p className="text-blue-500 mb-4">Loading...</p>}
 
                     {currentStep === "year" && (
-                        <>            <h4 className="text-xl text-gray-500 mb-3 font-semibold">Select Car's model year</h4>
+                        <>            <h4 className="text-xl text-gray-500 mb-3 font-semibold">Select Car&apos;s model year</h4>
 
                             <div className="flex flex-wrap gap-4">
                                 {years.map((year) => (
@@ -230,7 +230,7 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
                     )}
 
                     {currentStep === "spec" && (
-                        <><p className="text-xl text-gray-500 mb-3 font-semibold">What is Your Vehicle's Specification ?</p>
+                        <><p className="text-xl text-gray-500 mb-3 font-semibold">What is Your Vehicle&apos;s Specification ?</p>
                             <div className="flex flex-wrap gap-4">
                                 <button
                                     className="py-4 shadow whitespace-nowrap rounded-lg hover:bg-gray-200 text-left px-2"
@@ -279,6 +279,7 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
                                     </div>
                                     <div className="mb-4">
                                         <Field
+                                            type="date"
                                             name="dob"
                                             placeholder="Date of Birth (DD/MMM/YYYY)"
                                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
@@ -293,10 +294,10 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
                                         />
                                         <ErrorMessage name="phone" component="div" className="text-red-500 text-sm" />
                                     </div>
-                                    <p>By Clicking on "Proceed", I declare that I agree to the website Privacy Policy and Terms of Use.</p>
+                                    <p>By Clicking on &quot;Proceed&quot;, I declare that I agree to the website Privacy Policy and Terms of Use.</p>
                                     <button
                                         type="submit"
-                                        className="w-full bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 focus:outline-none mt-4"
+                                        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:outline-none mt-4"
                                         disabled={!(isValid && dirty)} // Disable if form is invalid or untouched
                                     >
                                         Submit
@@ -310,7 +311,7 @@ const CarInsuranceCalculator = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) =>
                         {currentStep !== "year" && (
                             <button
                                 onClick={handleBackStep}
-                                className="bg-gray-300 text-gray-700 p-2 rounded-lg hover:bg-gray-400"
+                                className="bg-[#77cdf2] w-full text-white p-2 rounded-lg hover:bg-[#77cdf2]"
                             >
                                 Back
                             </button>

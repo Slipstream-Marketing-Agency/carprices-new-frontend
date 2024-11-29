@@ -18,7 +18,7 @@ export default function WebstoriesWrapper({ stories, categories }) {
             <div className="md:col-span-3 col-span-12">
                 {/* Category Filter Component */}
                 <Suspense fallback={<div>Loading ad...</div>}>
-                    <Ad300X250 dataAdSlot="6764889295" />
+                    <Ad300X250 dataAdSlot="4794384498" />
                 </Suspense>
                 <div className="my-0 p-2">
                     {/* <CategoryFilter categories={categories} /> */}
@@ -27,7 +27,7 @@ export default function WebstoriesWrapper({ stories, categories }) {
                 <div className="sticky-sidebar">
                     <div className="ad-container">
                         <Suspense fallback={<div>Loading ad...</div>}>
-                            <Ad300x600 dataAdSlot="3792539533" />
+                            <Ad300x600 dataAdSlot="9445572804" />
                         </Suspense>
                     </div>
                 </div>

@@ -392,7 +392,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                     allTrims={allTrims}
                                     mainTrim={mainTrim}
                                 />
-                                <OldModel model={oldModel} />
+                                <OldModel model={oldModel} currentYear={year} />
                                 <div className="mt-14">
                                     <Ad728x90 dataAdSlot={"9526329827"} />
                                 </div>

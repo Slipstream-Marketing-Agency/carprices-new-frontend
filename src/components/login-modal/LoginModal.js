@@ -8,8 +8,10 @@ import { Snackbar, Alert, CircularProgress } from "@mui/material"; // Import Sna
 import { setCookie } from "@/lib/helper";
 import { verifyUser } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
+function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
 
   const dispatch = useDispatch()
 
@@ -26,6 +28,18 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible);
+  };
+
+  const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!isConfirmPasswordVisible);
+  };
 
   // Close snackbar
   const handleSnackbarClose = () => setSnackbarOpen(false);
@@ -235,14 +249,22 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
                 <label className="text-sm font-semibold my-2">
                   Enter your password
                 </label>
-                <input
-                  className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                />
+                <div className="relative">
+                  <input
+                    className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
+                    type={isPasswordVisible ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                  />
+                  <span
+                    className="absolute right-3 top-[0.35rem] cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {isPasswordVisible ? <Visibility className="text-base" /> : <VisibilityOff className="text-base" />}
+                  </span>
+                </div>
                 <div className="float-right my-6">
                   <button className="text-blue-500 bg-transparent text-xs float-right" onClick={() => setActiveForm('forget-password')}>
                     Forgot Password
@@ -310,25 +332,41 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
                 <label className="text-sm font-semibold my-2">
                   Enter your password
                 </label>
-                <input
-                  className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                />
+                <div className="relative">
+                  <input
+                    className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
+                    type={isPasswordVisible ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                  />
+                  <span
+                    className="absolute right-3 top-[0.35rem] cursor-pointer text-gray-500"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {isPasswordVisible ? <Visibility className="text-base" /> : <VisibilityOff className="text-base" />}
+                  </span>
+                </div>
                 <label className="text-sm font-semibold my-2">
                   Re-enter password
                 </label>
-                <input
-                  className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="Re-enter Password"
-                />
+                <div className="relative">
+                  <input
+                    className="radius-lg p-2 w-full border border-gray-200 rounded-lg text-sm"
+                    type={isConfirmPasswordVisible ? "text" : "password"}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Re-enter Password"
+                  />
+                  <span
+                    className="absolute right-3 top-[0.35rem] cursor-pointer text-gray-500"
+                    onClick={toggleConfirmPasswordVisibility}
+                  >
+                    {isConfirmPasswordVisible ? <Visibility className="text-base" /> : <VisibilityOff className="text-base" />}
+                  </span>
+                </div>
                 <div className="mt-6 flex justify-between">
                   <button
                     className="text-xs bg-transparent"
@@ -337,7 +375,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
                     Have an account ? Sign In
                   </button>
                   <button
-                    className="text-white text-xs px-6 2xl:px-10 py-2 bg-blue-600 rounded-full"
+                    className="text-white text-xs px-6 2xl:px-6 py-2 bg-blue-600 rounded-full"
                     onClick={handleRegister}
                     disabled={isLoading} // Disable the button when loading
                   >
@@ -375,7 +413,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin=null }) {
                   </button>
                   <button
                     onClick={handleForgetPassword}
-                    className="text-white text-xs px-6 2xl:px-16 py-2 bg-blue-600 rounded-full"
+                    className="text-white text-xs px-4 2xl:px-6 py-2 bg-blue-600 rounded-full"
                     disabled={isLoading} // Disable the button when loading
                   >
                     {isLoading ? <CircularProgress size={20} color="inherit" /> : "Forget Password"}

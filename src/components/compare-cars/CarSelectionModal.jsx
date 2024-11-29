@@ -280,7 +280,7 @@ const CarSelectionModal = ({
                                         {filterOptions(brands).map((brand) => (
                                             <button
                                                 key={brand.slug}
-                                                className="cursor-pointer flex flex-col items-center hover:bg-gray-200 rounded-lg border"
+                                                className="cursor-pointer flex flex-col items-center justify-center hover:bg-gray-200 rounded-lg border"
                                                 onClick={() => handleBrandSelect(brand.slug)}
                                             >
                                                 <Image

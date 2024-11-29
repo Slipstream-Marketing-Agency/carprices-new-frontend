@@ -3,18 +3,22 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-export default function OldModel({ model }) {
+export default function OldModel({ model, currentYear }) {
+  console.log(currentYear,"currentYear")
   const searchParams = useSearchParams();
   const currentDate = new Date();
   const currentRealYear = currentDate.getFullYear();
 
   // Accessing the "year" from searchParams
-  const currentYear = Number(searchParams.get('year')) || currentRealYear;
+  // const currentYear = Number(searchParams.get('year')) || currentRealYear;
 
   const allYearMainTrims = model?.trims;
   const [initialActiveTab, setInitialActiveTab] = useState(
-    currentRealYear === currentYear ? currentYear - 1 : currentYear
+    currentYear
   );
+  // const [initialActiveTab, setInitialActiveTab] = useState(
+  //   currentRealYear === currentYear ? currentYear - 1 : currentYear
+  // );
   const [activeTab, setActiveTab] = useState(initialActiveTab);
   const [gliderPosition, setGliderPosition] = useState(0);
 
@@ -26,11 +30,13 @@ export default function OldModel({ model }) {
     setActiveTab(initialActiveTab);
   }, [currentYear]);
 
+  // const sortedYears = allYearMainTrims
+  //   .sort((a, b) => b?.year - a?.year)
+  //   .filter((trim) =>
+  //     currentYear === currentRealYear ? trim.year !== currentRealYear : trim.year
+  //   );
   const sortedYears = allYearMainTrims
-    .sort((a, b) => b?.year - a?.year)
-    .filter((trim) =>
-      currentYear === currentRealYear ? trim.year !== currentRealYear : trim.year
-    );
+  .sort((a, b) => b?.year - a?.year);
 
   const tabButtons = sortedYears?.map((car) => (
     <input
@@ -99,16 +105,21 @@ export default function OldModel({ model }) {
                 <div className="tabs flex justify-between">
                   {tabButtons}
                   {sortedYears?.map((car) => (
-                    <label
-                      className={`tab py-2 px-4 rounded-md cursor-pointer ${activeTab === car?.year
+                    <Link key={car?.year} className={`tab py-2 px-4 rounded-md cursor-pointer ${activeTab === car?.year
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                      }`} href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
+                      <label
+                        className={`tab py-2 px-4 rounded-md cursor-pointer ${activeTab === car?.year
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 text-gray-700"
-                        }`}
-                      htmlFor={`radio-${car?.year}`}
-                      key={car?.year}
-                    >
-                      {car?.year}
-                    </label>
+                          }`}
+                        htmlFor={`radio-${car?.year}`}
+                        key={car?.year}
+                      >
+                        {car?.year}
+                      </label>
+                    </Link>
                   ))}
                   <span
                     className="glider absolute bottom-0 left-0 h-1  transition-transform duration-300"
