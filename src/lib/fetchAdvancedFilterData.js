@@ -14,6 +14,15 @@ const fetchWithErrorHandling = async (url) => {
   }
 };
 
+// Helper function to build query string with additional query parameters
+const buildQueryString = (baseParams, additionalParams) => {
+  const queryParams = new URLSearchParams({
+    ...baseParams,
+    ...additionalParams,
+  });
+  return queryParams.toString();
+};
+
 // Fetch filtered trims based on provided parameters
 export async function fetchFilteredTrims({
   brandSlugs = [],
@@ -27,26 +36,30 @@ export async function fetchFilteredTrims({
   powerRange = [],
   page = 1,
   pageSize = 12,
-  sort = ""
+  sort = "",
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/homefilter?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(transmissionSlugs)}&priceRanges=${JSON.stringify(
-    priceRange
-  )}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}&sort=${JSON.stringify(
-    sort
-  )}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+    sort: JSON.stringify(sort),
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/homefilter?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
-// Fetch full filter data (e.g., price range by brands)
+// Fetch full filter data
 export async function fetchFullFilter({
   brandSlugs = [],
   bodyTypeSlugs = [],
@@ -59,19 +72,24 @@ export async function fetchFullFilter({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/price-range-by-brands?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(transmissionSlugs)}&priceRanges=${JSON.stringify(
-    priceRange
-  )}&displacementRanges=${JSON.stringify(displacementRange)}&powerRanges=${JSON.stringify(
-    powerRange
-  )}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/price-range-by-brands?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -87,17 +105,23 @@ export async function fetchFuelTypeList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/fuelList?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&cylinders=${JSON.stringify(
-    cylinderSlugs
-  )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/fuelList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -113,17 +137,23 @@ export async function fetchCylinderList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/cylinderList?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/cylinderList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -139,17 +169,23 @@ export async function fetchTransmissionList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/transmissionList?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/transmissionList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -165,17 +201,23 @@ export async function fetchDriveList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/driveList?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/driveList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -191,17 +233,23 @@ export async function fetchPriceRange({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/priceRange?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(transmissionSlugs)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/priceRange?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -217,17 +265,23 @@ export async function fetchDisplacementRange({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/displacementRange?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(transmissionSlugs)}&priceRanges=${JSON.stringify(
-    priceRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/displacementRange?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -243,17 +297,23 @@ export async function fetchPowerRange({
   displacementRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/powerRange?brands=${JSON.stringify(
-    brandSlugs
-  )}&bodyTypes=${JSON.stringify(bodyTypeSlugs)}&fuelType=${JSON.stringify(
-    fuelTypeSlugs
-  )}&cylinders=${JSON.stringify(cylinderSlugs)}&drive=${JSON.stringify(
-    driveSlugs
-  )}&transmission=${JSON.stringify(transmissionSlugs)}&priceRanges=${JSON.stringify(
-    priceRange
-  )}&displacementRanges=${JSON.stringify(displacementRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/powerRange?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -269,17 +329,23 @@ export async function fetchBrandList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/brandList?bodyTypes=${JSON.stringify(
-    bodyTypeSlugs
-  )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-    cylinderSlugs
-  )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    bodyTypes: JSON.stringify(bodyTypeSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/brandList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
 
@@ -295,16 +361,22 @@ export async function fetchBodyTypeList({
   powerRange = [],
   page = 1,
   pageSize = 12,
+  ...additionalQueryParams
 }) {
-  const url = `${API_URL}car-trims/bodyList?brands=${JSON.stringify(
-    brandSlugs
-  )}&fuelType=${JSON.stringify(fuelTypeSlugs)}&cylinders=${JSON.stringify(
-    cylinderSlugs
-  )}&drive=${JSON.stringify(driveSlugs)}&transmission=${JSON.stringify(
-    transmissionSlugs
-  )}&priceRanges=${JSON.stringify(priceRange)}&displacementRanges=${JSON.stringify(
-    displacementRange
-  )}&powerRanges=${JSON.stringify(powerRange)}&page=${page}&pageSize=${pageSize}`;
+  const baseParams = {
+    brands: JSON.stringify(brandSlugs),
+    fuelType: JSON.stringify(fuelTypeSlugs),
+    cylinders: JSON.stringify(cylinderSlugs),
+    drive: JSON.stringify(driveSlugs),
+    transmission: JSON.stringify(transmissionSlugs),
+    priceRanges: JSON.stringify(priceRange),
+    displacementRanges: JSON.stringify(displacementRange),
+    powerRanges: JSON.stringify(powerRange),
+    page,
+    pageSize,
+  };
 
+  const queryString = buildQueryString(baseParams, additionalQueryParams);
+  const url = `${API_URL}car-trims/bodyList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
