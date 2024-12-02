@@ -46,7 +46,7 @@ const CarCard = ({ car }) => {
     <article className={`flex flex-col py-5 bg-white rounded-2xl border border-solid border-zinc-100 shadow-md cursor-pointer transition-all hover:shadow-lg ${isReviewPage ? 'w-full shadow-lg' : 'xl:w-full xl:shadow-lg'}`}>
 
       {/* Model Year Display */}
-      <p className="z-10 text-xs justify-center self-start py-1.5 pr-2 pl-3 rounded-tr-full rounded-br-full backdrop-blur-md bg-slate-100 font-semibold">
+      <p className=" text-xs justify-center self-start py-1.5 pr-2 pl-3 rounded-tr-full rounded-br-full backdrop-blur-md bg-slate-100 font-semibold">
         Model: {year}
       </p>
 

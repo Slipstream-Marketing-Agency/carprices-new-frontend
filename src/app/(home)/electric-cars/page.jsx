@@ -1,13 +1,43 @@
 import RelatedArticles from '@/components/articles-component/RelatedArticles';
 import BannerCarousel from '@/components/electric-cars/BannerCarousel';
 import BrandSection from '@/components/electric-cars/BrandSection';
+import CustomCarSlider from '@/components/electric-cars/CustomCarSlider';
 import ElectricCarFaqs from '@/components/electric-cars/ElectricCarFaqs';
 import EvReviews from '@/components/electric-cars/EvReviews';
 import FilterModal from '@/components/electric-cars/FilterModal';
 import PopularSection from '@/components/electric-cars/PopularSection';
 import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
+import { fetchMetaData } from '@/lib/fetchMetaData';
 import Image from 'next/image';
 import React from 'react';
+
+export async function generateMetadata() {
+    const slug = "electric-cars";
+    const metaData = await fetchMetaData(slug);
+
+    return {
+        title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+        description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+        charset: "UTF-8",
+        alternates: {
+            ...(metaData?.canonicalURL && { canonical: metaData.canonicalURL }),
+        },
+        keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+        robots: {
+            index: true,
+            follow: true,
+        },
+        structuredData: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+            description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+            url: "https://carprices.ae",
+        },
+        author: "Carprices.ae Team",
+        icon: "./favicon.ico",
+    };
+}
 
 const ElectricCar = () => {
 
@@ -42,11 +72,13 @@ const ElectricCar = () => {
                     <BannerCarousel />
                 </div>
             </div>
-            <div className='mt-4'>
-                <PopularSection />
-            </div>
-            <div className='container'>
+            <div className='mt-4 container'>
+                {/* <PopularSection /> */}
+                <CustomCarSlider selectedTab={'electric'} heading="Popular Electric Cars" />
+                <CustomCarSlider selectedTab={'electric'} heading="Upcoming Electric Cars" />
                 <BrandSection />
+                <CustomCarSlider selectedTab={'electric'} heading="Hybrid Cars" />
+                <CustomCarSlider selectedTab={'electric'} heading="Plug-In Hybrid Cars" />
                 <SelectedCompareCarsSection />
                 <div className="mt-4">
                     <EvReviews />

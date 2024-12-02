@@ -65,7 +65,7 @@ const CustomSlider = ({ items, title, basePath }) => {
         {/* Styled Left Button */}
         <button
           onClick={scrollLeft}
-          className="absolute left-0 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
+          className="absolute left-0 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
           style={{ transform: 'translateX(-50%)' }}
         >
           <ChevronLeftIcon fontSize="small" className="text-gray-700" />
@@ -98,7 +98,7 @@ const CustomSlider = ({ items, title, basePath }) => {
         {/* Styled Right Button */}
         <button
           onClick={scrollRight}
-          className="absolute right-0 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
+          className="absolute right-0 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
           style={{ transform: 'translateX(50%)' }}
         >
           <ChevronRightIcon fontSize="small" className="text-gray-700" />

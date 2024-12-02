@@ -118,13 +118,13 @@ export default async function TypePage({ params, searchParams }) {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {articlesData?.data?.map((article, index) => (
                   <Link
-                    href={`/${type}/${article.slug}`}
+                    href={`/${type}/${article?.slug}`}
                     key={article?.id}
                     className="bg-white shadow-lg rounded-lg overflow-hidden"
                   >
                     <div className="relative">
                       <Image
-                        src={article.coverImage || '/assets/placeholder/news-placeholder.webp'}
+                        src={article?.coverImage || '/assets/placeholder/news-placeholder.webp'}
                         alt={article?.title}
                         width={0}
                         height={0}
@@ -135,16 +135,16 @@ export default async function TypePage({ params, searchParams }) {
                       <div className="absolute top-2 left-2 flex flex-wrap gap-2">
                         {article?.types?.map((type, index) => (
                           <span key={index} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
-                            {type.name}
+                            {type?.name}
                           </span>
                         ))}
                       </div>
                     </div>
                     <div className="p-2">
-                      <h3 className="text-md font-semibold mb-2">{article.title}</h3>
-                      <p className="text-[12px] text-gray-700 line-clamp-3">{article.summary}</p>
+                      <h3 className="text-md font-semibold mb-2">{article?.title}</h3>
+                      <p className="text-[12px] text-gray-700 line-clamp-3">{article?.summary}</p>
                       <div className="mt-2">
-                        {article.categories.length > 0 && (
+                        {article?.categories?.length > 0 && (
                           <p>
                             <span className="text-[10px] font-semibold">Categories: </span>
                             {article.categories?.map((category, index) => (
@@ -157,7 +157,7 @@ export default async function TypePage({ params, searchParams }) {
                             ))}
                           </p>
                         )}
-                        {article.tags.length > 0 && (
+                        {article.tags?.length > 0 && (
                           <p>
                             <span className="text-[10px] font-semibold">Tags: </span>
                             {article.tags?.map((tag, index) => (
@@ -172,7 +172,7 @@ export default async function TypePage({ params, searchParams }) {
                               <div key={index}>
 
                                 <Image
-                                  src={brand.brandLogo}
+                                  src={brand?.brandLogo?brand?.brandLogo:''}
                                   alt={brand?.name}
                                   width={30}
                                   height={30}
@@ -180,7 +180,8 @@ export default async function TypePage({ params, searchParams }) {
                                 />
                               </div>
                             ))}
-                          </div>}
+                          </div>
+                          }
 
 
 
@@ -200,7 +201,7 @@ export default async function TypePage({ params, searchParams }) {
                             </div>
 
                             <p><span className='text-xs font-semibold sm:inline'>Published:
-                            </span><span className='text-xs ml-1'>{new Date(article.publishedAt).toLocaleDateString()}
+                            </span><span className='text-xs ml-1'>{new Date(article?.publishedAt).toLocaleDateString()}
                               </span>
                             </p>
 

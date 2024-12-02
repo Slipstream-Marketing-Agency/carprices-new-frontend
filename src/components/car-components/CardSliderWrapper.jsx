@@ -58,7 +58,7 @@ export default function CardSliderWrapper({ children, responsive }) {
       {/* Left Arrow */}
       <button
         onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 z-10 hover:bg-gray-100 focus:outline-none flex items-center justify-center"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 focus:outline-none flex items-center justify-center"
         disabled={currentIndex === 0}
       >
         <ChevronLeftIcon />
@@ -83,7 +83,7 @@ export default function CardSliderWrapper({ children, responsive }) {
       {/* Right Arrow */}
       <button
         onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 z-10 hover:bg-gray-100 focus:outline-none"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 focus:outline-none"
         disabled={currentIndex >= totalSlides - slidesToShow}
       >
         <ChevronRightIcon />
