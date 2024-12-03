@@ -409,7 +409,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
                     className="text-xs bg-transparent"
                     onClick={() => setActiveForm('login')}
                   >
-                    Back to SignIn
+                    Back to Sign In
                   </button>
                   <button
                     onClick={handleForgetPassword}
