@@ -102,6 +102,10 @@ export default async function TypePage({ params, searchParams }) {
 
   console.log(popularCatgeoriesAndTabs, "popularCatgeoriesAndTabs");
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <div>
       <div className="container px-4 py-4">
@@ -150,9 +154,9 @@ export default async function TypePage({ params, searchParams }) {
                             {article.categories?.map((category, index) => (
                               <span
                                 key={index}
-                                className="text-[10px] bg-yellow-200 text-black py-[1px] px-[5px] rounded-xl mr-1"
+                                className="text-[10px] bg-yellow-200 capitalize text-black py-[1px] px-[5px] rounded-xl mr-1"
                               >
-                                {category.name}
+                                {capitalizeFirstLetter(category.name)}
                               </span>
                             ))}
                           </p>
@@ -161,8 +165,8 @@ export default async function TypePage({ params, searchParams }) {
                           <p>
                             <span className="text-[10px] font-semibold">Tags: </span>
                             {article.tags?.map((tag, index) => (
-                              <span key={index} className="text-[10px] bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
-                                {tag.name}
+                              <span key={index} className="text-[10px] capitalize bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
+                                {capitalizeFirstLetter(tag.name)}
                               </span>
                             ))}
                           </p>

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -9,7 +9,7 @@ import PrimaryButton from '@/components/buttons/PrimaryButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/store/slices/authSlice';
 
-const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen }) => {
+const MobileSidebar = ({ toggleNavigation, setIsOpen, isOpen, links, setIsLoginModalOpen }) => {
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch()
     const pathname = usePathname()
@@ -22,6 +22,10 @@ const MobileSidebar = ({ toggleNavigation, isOpen, links, setIsLoginModalOpen })
         toggleNavigation();
         setIsLoginModalOpen(true);
     };
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname])
 
     const handleSetSubMenuOptions = (hoverItem) => {
         let options = [];
