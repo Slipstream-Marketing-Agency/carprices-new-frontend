@@ -86,7 +86,7 @@ export default function FeaturedNews() {
     };
 
     return (
-        <div className="container md:py-8 overflow-hidden">
+        <div className="container md:py-8 mt-5 overflow-hidden">
             <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                 <div className="flex flex-col justify-between w-1/4 max-md:w-full sm:my-3">
                     <div className="flex flex-col">
@@ -104,7 +104,7 @@ export default function FeaturedNews() {
                             </button>
                         </Link>
                     </div>
-                    <div className="flex md:justify-end justify-between cars-center gap-4 py-2">
+                    <div className="hidden md:flex md:justify-end justify-between cars-center gap-4 py-2">
                         <button
                             className="bg-white text-black px-3 py-3 rounded-full shadow-md flex cars-center hover:shadow-md active:shadow-md focus:shadow-md"
                             onClick={() => featuredSliderRef.current.slickPrev()}
