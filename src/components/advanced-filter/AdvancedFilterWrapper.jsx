@@ -74,17 +74,16 @@ export default function AdvancedFilterWrapper({
     }, [params.brandname, searchParams]);
 
     const bodyTypeSlugs = useMemo(() => {
-        const bodyTypeFromParams = params.categoryname;
-        const bodyTypeFromSearch = searchParams.get("bodytype");
+        const bodyTypeFromParams = params.bodytypename
+            ? params.bodytypename.split(",") // Assuming `bodytypename` can be a comma-separated string
+            : [];
+        const bodyTypeFromSearch = searchParams.get("bodytype")
+            ? searchParams.get("bodytype").split(",")
+            : [];
 
-        // If `categoryname` exists in `params`, use it.
-        if (bodyTypeFromParams) {
-            return bodyTypeFromParams;
-        }
-
-        // If `bodytype` exists in searchParams, split it by commas, otherwise return an empty array.
-        return bodyTypeFromSearch ? bodyTypeFromSearch.split(",") : [];
-    }, [params.categoryname, searchParams]);
+        // Combine both arrays and remove duplicates if necessary
+        return [...new Set([...bodyTypeFromParams, ...bodyTypeFromSearch])];
+    }, [params.bodytypename, searchParams]);
 
     const fuelTypeSlugs = useMemo(() => (searchParams.get("fuelType") ? searchParams.get("fuelType").split(",") : []), [searchParams]);
     const cylinderSlugs = useMemo(() => (searchParams.get("cylinders") ? searchParams.get("cylinders").split(",") : []), [searchParams]);

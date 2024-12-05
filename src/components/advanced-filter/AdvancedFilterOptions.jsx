@@ -1,5 +1,5 @@
 "use client"
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -42,6 +42,7 @@ export default function AdvancedFilterOptions({ brandoptions,
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const params = useParams()
 
     const [isSticky, setIsSticky] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -428,17 +429,17 @@ export default function AdvancedFilterOptions({ brandoptions,
         },
         {
             range: { min: 601, max: 1000 },
-            powerLabel: "600hp - 1000hp",
+            powerLabel: "600hp - 1,000hp",
             value: "601-1000",
         },
         {
             range: { min: 1001, max: 1400 },
-            powerLabel: "1000hp - 1400hp",
+            powerLabel: "1,000hp - 1,400hp",
             value: "1001-1400",
         },
         {
             range: { min: 1401, max: 2000 },
-            powerLabel: "1400hp - 2000hp",
+            powerLabel: "1,400hp - 2,000hp",
             value: "1401-2000",
         },
     ];
@@ -459,22 +460,22 @@ export default function AdvancedFilterOptions({ brandoptions,
     const displacementOptions = [
         {
             range: { min: 0, max: 1000 },
-            displacementLabel: "Below 1000cc",
+            displacementLabel: "Below 1,000cc",
             value: "0-1000",
         },
         {
             range: { min: 1000, max: 2000 },
-            displacementLabel: "1000cc - 2000cc",
+            displacementLabel: "1,000cc - 2,000cc",
             value: "1000-2000",
         },
         {
             range: { min: 2000, max: 4000 },
-            displacementLabel: "2000cc - 4000cc",
+            displacementLabel: "2,000cc - 4,000cc",
             value: "2000-4000",
         },
         {
             range: { min: 4000, max: 8000 },
-            displacementLabel: "4000cc - 8000cc",
+            displacementLabel: "4,000cc - 8,000cc",
             value: "4000-8000",
         },
     ];
@@ -1139,7 +1140,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                                         onChange={() => handleModalCylinderChange(option)}
                                                     />
                                                     <span className="checkmark checkmarkRight0" />
-                                                    <span className="text">{option} Cylinder</span>
+                                                    <span className="text">{option}{" "}Cylinder</span>
                                                 </label>
                                             </li>
                                         ))}
@@ -1320,7 +1321,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                         <div className="h-[70px]" key={idx}>
                                             <button
                                                 key={idx}
-                                                className={`shadow rounded-xl p-2 ${tempSelectedBodyTypes.includes(item.value)
+                                                className={`shadow rounded-xl p-2 ${(selectedBody.includes(item.value)|| (params.bodytypename === item.value))
                                                     ? "bg-blue-200 font-semibold"
                                                     : "bg-white "
                                                     }`}
@@ -1749,7 +1750,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                     <div className="h-[70px]" key={idx}>
                                         <button
                                             key={idx}
-                                            className={`shadow rounded-xl p-2 ${selectedBody.includes(item.value)
+                                            className={`shadow rounded-xl p-2 ${(selectedBody.includes(item.value)|| (params.bodytypename === item.value))
                                                 ? "bg-blue-200 font-semibold"
                                                 : "bg-white "
                                                 }`}
