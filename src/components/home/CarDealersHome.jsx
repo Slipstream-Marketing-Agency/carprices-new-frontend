@@ -87,13 +87,20 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
 
     return (
         <div className="container mb-10">
-            <div className="flex flex-col self-start max-md:max-w-full mb-6">
-                <h5 className="md:text-sm text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
-                Explore the UAE’s Most Popular Car Dealers
-                </h5>
-                <h2 className="md:text-lg text-md font-semibold capitalize">
-                Explore branches in your city for the best car buying experience
-                </h2>
+            <div className="relative flex items-center justify-between ">
+                <div className="flex flex-col self-start max-md:max-w-full mb-6">
+                    <h5 className="md:text-sm text-xs tracking-wider leading-5 text-blue-600 uppercase font-bold">
+                        Explore the UAE’s Most Popular Car Dealers
+                    </h5>
+                    <h2 className="md:text-lg text-md font-semibold capitalize">
+                        Explore branches in your city for the best car buying experience
+                    </h2>
+                </div>
+                <Link href="/car-dealers" className='px-5 py-2 text-white bg-blue-600 border border-blue-600 rounded-[47px] max-md:px-4 md:text-[16px] text-[12px] whitespace-nowrap flex items-center justify-center'>
+                    <span className="capitalize font-semibold">
+                        View All
+                    </span>
+                </Link>
             </div>
 
             <div className="flex md:gap-5 gap-2 md:justify-between mt-3 w-full text-base leading-4 text-center text-neutral-900 max-md:flex-wrap max-md:max-w-full">

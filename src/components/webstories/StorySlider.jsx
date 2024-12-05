@@ -71,9 +71,9 @@ const StorySlider = () => {
                                     {" "}
                                     {story.title}
                                 </h6>
-                                <p className="text-xs font-light mt-1">
+                                {/* <p className="text-xs font-light mt-1">
                                     {moment(story.publishedAt).format("MMMM Do YYYY")}
-                                </p>
+                                </p> */}
                             </div>
                         </Link>
                     );
@@ -102,9 +102,9 @@ const StorySlider = () => {
                                         {" "}
                                         {story.title}
                                     </h6>
-                                    <p className="text-xs font-light mt-1">
+                                    {/* <p className="text-xs font-light mt-1">
                                         {moment(story.publishedAt).format("MMMM Do YYYY")}
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
                         </Link>
