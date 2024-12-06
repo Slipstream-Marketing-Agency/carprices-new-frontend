@@ -5,6 +5,7 @@ import { Chart, registerables } from "chart.js";
 import Image from "next/image";
 import PrimaryButton from "../buttons/PrimaryButton";
 import Price from "@/utils/Price";
+import LoanInquiryForm from "./LoanInquireForm";
 Chart.register(...registerables);
 
 export default function Calculator({
@@ -211,7 +212,7 @@ export default function Calculator({
                     <div className="flex flex-col space-y-6 items-center">
                         {/* Doughnut Chart */}
                         <div className="flex justify-center border rounded-xl py-2 w-full h-[265px]">
-                            <Doughnut className="w-full h-full" data={pieData}  height={300} />
+                            <Doughnut className="w-full h-full" data={pieData} height={300} />
                         </div>
 
                         {/* EMI Summary */}
@@ -248,7 +249,7 @@ export default function Calculator({
                     </div>
                 </div>
             </div>
-            {/* <InquireForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
+            <LoanInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} car={selectedYear + " " + selectedBrand + " " + selectedModelName + " " + selectedVariant} price={price} tenure={N} interest_rate={R} down_payment={downPayment} monthly_emi={Number(emi).toLocaleString("en-US", { maximumFractionDigits: 0 })} total_interest={Number(payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 })} total_amount_payable={(totalCost).toLocaleString("en-US", { maximumFractionDigits: 0 })} />
         </>
     );
 }
