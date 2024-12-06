@@ -3,6 +3,7 @@ import Image from "next/image";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import LoadingAnimation from "./LoadingAnimation";
 import axios from "axios";
+import client from '@/lib/meilisearch';
 
 const CarSelectionModal = ({
     isOpen,
@@ -240,23 +241,24 @@ const CarSelectionModal = ({
                                 </div>
                             )}
                         </div>
-
-                        <div className="relative rounded-md shadow-sm my-6">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <SearchIcon />
+                        {currentStep !== 'year' &&
+                            <div className="relative rounded-md shadow-sm my-6">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <SearchIcon />
+                                </div>
+                                <input
+                                    type="text"
+                                    className="focus:ring-blue-500 focus:border-blue-500 block p-2 border rounded-full w-full mb-4 sm:text-sm border-gray-300 px-10"
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    placeholder={`Search ${currentStep}`}
+                                />
                             </div>
-                            <input
-                                type="text"
-                                className="focus:ring-blue-500 focus:border-blue-500 block p-2 border rounded-full w-full mb-4 sm:text-sm border-gray-300 px-10"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                                placeholder={`Search ${currentStep}`}
-                            />
-                        </div>
+                        }
 
                         <div>
                             {currentStep === "year" && (
-                                <div className="overflow-auto h-[650px]">
+                                <div className="overflow-auto h-[60vh]">
                                     <div className="grid gap-6 grid-cols-12 ">
                                         {filterOptions(years).map((year) => (
                                             <button
@@ -275,7 +277,7 @@ const CarSelectionModal = ({
                             )}
 
                             {currentStep === "brand" && selectedYear && (
-                                <div className="overflow-auto h-[650px]">
+                                <div className="overflow-auto h-[60vh]">
                                     <div className=" grid gap-6 md:grid-cols-6 grid-cols-3 ">
                                         {filterOptions(brands).map((brand) => (
                                             <button
@@ -301,7 +303,7 @@ const CarSelectionModal = ({
                             )}
 
                             {currentStep === "model" && selectedBrand && (
-                                <div className="flex flex-col">
+                                <div className="overflow-auto h-[60vh] flex flex-col">
                                     {filterOptions(models).map((model) => (
                                         <button
                                             key={model.slug}

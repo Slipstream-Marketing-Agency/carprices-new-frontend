@@ -139,7 +139,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
     };
 
     const [branddetails, setBrandDetails] = useState(null); // State for brand details
-    console.log(branddetails, "branddetails");
+    // console.log(branddetails, "branddetails");
 
     const [expanded, setExpanded] = useState(false);
 

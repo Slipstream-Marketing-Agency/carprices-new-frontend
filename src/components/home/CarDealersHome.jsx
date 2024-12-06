@@ -14,6 +14,7 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
     const [selectedBranch, setSelectedBranch] = useState('');
     const [loadingBranches, setLoadingBranches] = useState(true);
     const [loadingDealers, setLoadingDealers] = useState(true);
+    console.log(dealers,"dealersdealers")
 
     useEffect(() => {
         const loadBranches = async () => {
