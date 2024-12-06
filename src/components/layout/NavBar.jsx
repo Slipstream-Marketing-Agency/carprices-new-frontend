@@ -379,6 +379,11 @@ export default function NavBar() {
             isMounted = false;
         };
     }, []);
+
+    useEffect(() => {
+        setHoveredMenuItem(null)
+    }, [pathname])
+    
     const HoveredMenuItemDropdown = () => {
         if (hoveredMenuItem === 'search-cars') {
             return <HoveredSearchNewCar brands={brands} bodyTypes={bodyTypes} />

@@ -5,7 +5,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import BusinessIcon from '@mui/icons-material/Business';
 import CallIcon from '@mui/icons-material/Call';
 
-const CarDealerCard = ({dealer}) => {
+const CarDealerCard = ({ dealer }) => {
     return (
         <div className="md:col-span-4 col-span-12  relative" key={dealer.id} >
             <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
@@ -22,7 +22,14 @@ const CarDealerCard = ({dealer}) => {
                 </Link>
                 <div className="p-2 flex flex-col justify-between h-full">
                     <Link href={`/car-dealers/${dealer.slug}`} className='flex flex-col space-y-2 mb-3'>
-                        <h3 className="text-lg font-medium">{dealer.name}</h3>
+                        <h3 className="text-lg font-medium">{dealer.name} deals in {dealer.select_related_brand?.name}</h3>
+                        <Image
+                            src={dealer.select_related_brand?.brandLogo?.url ? dealer.select_related_brand?.brandLogo.url : ''}
+                            alt={dealer.select_related_brand?.name}
+                            width={30}
+                            height={30}
+                            className='border rounded-xl'
+                        />
                         <p className="text-sm text-gray-600 font-semibold flex items-center gap-2"><LocationOnIcon className='text-green-500' />{dealer.dealer_branch.name}</p>
                         <p className="text-sm text-gray-600 flex items-center gap-2 h-10"><BusinessIcon /> {dealer.address}</p>
                     </Link>

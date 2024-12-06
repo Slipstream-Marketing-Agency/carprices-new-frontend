@@ -627,6 +627,10 @@ h6 {
   height: 38px;
   overflow: hidden;
 }
+.height-hidden-avatr {
+  height: 56px;
+  overflow: hidden;
+}
 
 .info {
   font-size: 15px;
