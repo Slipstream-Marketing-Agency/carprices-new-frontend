@@ -6,6 +6,7 @@ import CompareCarCard from '@/components/compare-cars/CompareCarCard';
 import CarComparisonTable from '@/components/compare-cars/CarComparisonTable';
 import { fetchCarComparisonData } from '@/lib/fetchCarComparisonData';
 import { usePathname, useRouter } from 'next/navigation';
+import NewCarSelection from './NewCarSelection';
 
 export default function CompareCarsWrap({ params, slugOverride = null }) {
     const slug = slugOverride || params.slug || "default-slug";
@@ -111,13 +112,20 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
                     toBeAddedLength.map((item, index) => (
                         <div key={index} className="md:col-span-3 col-span-6">
                             <div className="flex justify-center items-center border-solid border shadow-md border-gray-200 rounded-lg h-[320px]">
-                                <MultiStepCarSelection
+                                <NewCarSelection
                                     mode="add"
                                     onAddCar={() => handleAddCar(index)}
                                     onAddCarComplete={() => handleAddCarComplete(index)}
                                     cars={cars}
                                     setCars={setCars}
                                 />
+                                {/* <MultiStepCarSelection
+                                    mode="add"
+                                    onAddCar={() => handleAddCar(index)}
+                                    onAddCarComplete={() => handleAddCarComplete(index)}
+                                    cars={cars}
+                                    setCars={setCars}
+                                /> */}
                             </div>
                         </div>
                     ))}
