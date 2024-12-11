@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Ad300x600 from '@/components/ads/Ad300x600';
 import { Email as EmailIcon, Instagram as InstagramIcon, Twitter as TwitterIcon, LinkedIn as LinkedInIcon } from "@mui/icons-material";
 import CallIcon from '@mui/icons-material/Call';
+import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 async function fetchDealer(slug) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-dealers/slug/${slug}`, {
         cache: "no-store",
@@ -15,6 +16,43 @@ async function fetchDealer(slug) {
     }
 
     return await response.json();
+}
+
+export async function generateMetadata({ params }) {
+    const dealer = await fetchDealer(params.slug);
+
+    // Convert dealer name to a capital case for better readability
+    const capitalDealerName = dealer.name ? slugToCapitalCase(dealer.name) : 'Dealer';
+
+    // Create metadata for the dealer page
+    const metaData = {
+        title: `${capitalDealerName} Deals in ${dealer.select_related_brand?.name || 'Various Brands'} | Contact & Details`,
+        description: `Discover ${capitalDealerName}'s address, contact details, and operating hours. Specializing in ${dealer.select_related_brand?.name || 'automotive brands'}, ${capitalDealerName} provides exceptional service.`,
+        charset: "UTF-8",
+        alternates: {
+            canonical: `https://carprices.ae/dealers/${dealer.id || 'unknown'}`,
+        },
+        keywords: `${capitalDealerName} deals, ${dealer.select_related_brand?.name || 'car brands'} dealer, ${capitalDealerName} contact details, ${capitalDealerName} address, ${capitalDealerName} operating hours`,
+        robots: {
+            index: true,
+            follow: true,
+        },
+        structuredData: {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: `${capitalDealerName}`,
+            address: `${dealer.address || 'Address not available'}`,
+            telephone: `${dealer.phone_number || 'N/A'}`,
+            email: `${dealer.email || 'N/A'}`,
+            openingHours: `${dealer.operating_hours || 'N/A'}`,
+            description: `Explore ${capitalDealerName}'s services, specializing in ${dealer.select_related_brand?.name || 'multiple brands'}.`,
+            url: `https://carprices.ae/dealers/${params.slug || 'unknown'}`,
+        },
+        author: "CarPrices.ae Team",
+        icon: "./favicon.ico",
+    };
+
+    return metaData;
 }
 
 export default async function DealerPage({ params }) {
@@ -39,7 +77,7 @@ export default async function DealerPage({ params }) {
                         />
 
                         {/* Dealer Details */}
-                        <h1 className="text-3xl font-bold mt-6">{dealer.name}</h1>
+                        <h1 className="text-3xl font-bold mt-6">{dealer.name} deals in {dealer.select_related_brand?.name}</h1>
                         <p className="text-gray-600 mt-2">{dealer.address}</p>
 
                         {/* Additional Dealer Information */}
