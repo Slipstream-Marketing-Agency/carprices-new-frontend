@@ -34,6 +34,9 @@ export async function generateMetadata({ params }) {
 
     const data = await fetchData(type, slug);
     console.log(data?.detailData?.metaTitle, 'mydata')
+    if (!data) {
+        notFound();
+    }
 
     return {
         title: data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
