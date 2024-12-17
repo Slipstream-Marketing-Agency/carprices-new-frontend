@@ -1,6 +1,7 @@
 import axios from "axios";
 import ArticleDetailWrapper from "@/components/articles-component/ArticleDetailWrapper";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 
 const VALID_TYPES = ['news', 'reviews', 'new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
@@ -85,5 +86,9 @@ export default async function BlogDetailsPage({ params }) {
         return <div>404 - Article Not Found</div>;
     }
 
-    return <ArticleDetailWrapper data={data} type={type} slug={slug} featuredArticlesData={featuredArticlesData} />;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ArticleDetailWrapper data={data} type={type} slug={slug} featuredArticlesData={featuredArticlesData} />;
+        </Suspense>
+    )
 }
