@@ -4,6 +4,7 @@ import Image from "next/image";
 import Banner from "./Banner";
 import CarSelectionModal from "../compare-cars/CarSelectionModal";
 import Calculator from "./Calculator";
+import SimpleLoanCalculator from "./SimpleLoanCalculator";
 
 export default function CalculatorContent() {
     const [carSelected, setCarSelected] = useState(false);
@@ -52,11 +53,15 @@ export default function CalculatorContent() {
                     selectedVariantThumbnail={selectedVariantThumbnail} />
             )}
             {!selectedVariant && (
+                <>
                 <Banner
                     modal={showModal}
                     setShowModal={setShowModal}
                     setCarSelected={setCarSelected}
                 />
+                <div className="mt-5" />
+                <SimpleLoanCalculator />
+                </>
             )}
 
             <div>

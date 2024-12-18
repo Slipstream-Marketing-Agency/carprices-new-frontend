@@ -150,6 +150,20 @@ const CarSelectionModal = ({
     };
 
     if (!isOpen) return null;
+    const BackIcon = () => (
+        <span className="mr-1 text-gray-500 text-sm">←</span>
+    );
+
+    const handleBackNavigation = () => {
+        if (currentStep === "variant") {
+            setCurrentStep("model");
+        } else if (currentStep === "model") {
+            setCurrentStep("brand");
+        } else if (currentStep === "brand") {
+            setCurrentStep("year");
+        }
+        setSearchTerm("");
+    };
 
     return (
         <div className="flex items-center justify-center ">
@@ -176,71 +190,101 @@ const CarSelectionModal = ({
                         <h2 className="my-2 capitalize font-semibold">
                             Choose {currentStep}
                         </h2>
-                        <div className="flex gap-3">
-                            {selectedYear && (
-                                <div
-                                    className={`${currentStep === "year" && selectedYear === "" ? "hidden" : "block"}`}
-                                    onClick={() => {
-                                        setCurrentStep("year");
-                                        setSearchTerm("");
-                                    }}
-                                >
-                                    <DataBadge
-                                        iconSrc={null}
-                                        label={selectedYear}
+                        <div className="flex items-center gap-4 items-start">
+                            {/* Step Title */}
+                            {/* <div className="text-lg font-semibold text-gray-700">
+                                {currentStep === "year" && "Select a Year"}
+                                {currentStep === "brand" && "Select a Brand"}
+                                {currentStep === "model" && "Select a Model"}
+                                {currentStep === "variant" && "Select a Variant"}
+                            </div> */}
+
+                            {/* Navigation Buttons */}
+                            <div className="flex gap-3 items-center">
+                                {selectedYear && (
+                                    <div
+                                        className={`cursor-pointer transition-transform transform hover:scale-105 ${currentStep === "year" && selectedYear === "" ? "hidden" : "block"
+                                            }`}
                                         onClick={() => {
                                             setCurrentStep("year");
                                             setSearchTerm("");
                                         }}
-                                    />
-                                </div>
-                            )}
+                                        title="Click to go back to year selection"
+                                    >
+                                        <DataBadge
+                                            iconSrc={<BackIcon />} // Add a back icon for visual indication
+                                            label={selectedYear}
+                                            active={currentStep === "year"}
+                                        />
+                                    </div>
+                                )}
 
-                            {selectedBrand && (
-                                <div
-                                    className={`${currentStep === "brand" && selectedBrand === "" ? "hidden" : "block"}`}
-                                    onClick={() => {
-                                        setCurrentStep("brand");
-                                        setSearchTerm("");
-                                    }}
-                                >
-                                    <DataBadge
-                                        iconSrc={null}
-                                        label={selectedBrand}
+                                {selectedBrand && (
+                                    <div
+                                        className={`cursor-pointer transition-transform transform hover:scale-105 ${currentStep === "brand" && selectedBrand === "" ? "hidden" : "block"
+                                            }`}
                                         onClick={() => {
                                             setCurrentStep("brand");
                                             setSearchTerm("");
                                         }}
-                                    />
-                                </div>
-                            )}
+                                        title="Click to go back to brand selection"
+                                    >
+                                        <DataBadge
+                                            iconSrc={<BackIcon />}
+                                            label={selectedBrand}
+                                            active={currentStep === "brand"}
+                                        />
+                                    </div>
+                                )}
 
-                            {selectedModel && (
-                                <div className={`${selectedModel === "" ? "hidden" : "block"}`}>
-                                    <DataBadge
-                                        iconSrc={null}
-                                        label={selectedModel}
+                                {selectedModel && (
+                                    <div
+                                        className={`cursor-pointer transition-transform transform hover:scale-105 ${selectedModel === "" ? "hidden" : "block"
+                                            }`}
                                         onClick={() => {
                                             setCurrentStep("model");
                                             setSearchTerm("");
                                         }}
-                                    />
-                                </div>
-                            )}
+                                        title="Click to go back to model selection"
+                                    >
+                                        <DataBadge
+                                            iconSrc={<BackIcon />}
+                                            label={selectedModel}
+                                            active={currentStep === "model"}
+                                        />
+                                    </div>
+                                )}
 
-                            {selectedVariant && (
-                                <div className={`${selectedVariant === "" ? "hidden" : "block"}`}>
-                                    <DataBadge
-                                        iconSrc={null}
-                                        label={selectedVariant}
+                                {selectedVariant && (
+                                    <div
+                                        className={`cursor-pointer transition-transform transform hover:scale-105 ${selectedVariant === "" ? "hidden" : "block"
+                                            }`}
                                         onClick={() => {
                                             setCurrentStep("variant");
                                             setSearchTerm("");
                                         }}
-                                    />
-                                </div>
+                                        title="Click to go back to variant selection"
+                                    >
+                                        <DataBadge
+                                            iconSrc={<BackIcon />}
+                                            label={selectedVariant}
+                                            active={currentStep === "variant"}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Back Button */}
+                            {currentStep !== "year" && (
+                                <button
+                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500"
+                                    onClick={() => handleBackNavigation()}
+                                >
+                                    Back
+                                </button>
                             )}
                         </div>
+
                         {currentStep !== 'year' &&
                             <div className="relative rounded-md shadow-sm my-6">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -258,7 +302,7 @@ const CarSelectionModal = ({
 
                         <div>
                             {currentStep === "year" && (
-                                <div className="overflow-auto h-[60vh]">
+                                <div className="overflow-auto mt-4 h-[60vh]">
                                     <div className="grid gap-6 grid-cols-12 ">
                                         {filterOptions(years).map((year) => (
                                             <button
@@ -278,11 +322,23 @@ const CarSelectionModal = ({
 
                             {currentStep === "brand" && selectedYear && (
                                 <div className="overflow-auto h-[60vh]">
-                                    <div className=" grid gap-6 md:grid-cols-6 grid-cols-3 ">
+                                    {/* Informational Header */}
+                                    <div className="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+                                        <h2 className="text-lg font-bold text-blue-800">
+                                            Browse Brands for Cars in {selectedYear}
+                                        </h2>
+                                        <p className="text-sm text-blue-600">
+                                            Select a brand to view cars available in {selectedYear}.
+                                            Only brands with cars for the selected year are shown.
+                                        </p>
+                                    </div>
+
+                                    {/* Brand Selection Grid */}
+                                    <div className="grid gap-6 md:grid-cols-6 grid-cols-3">
                                         {filterOptions(brands).map((brand) => (
                                             <button
                                                 key={brand.slug}
-                                                className="cursor-pointer flex flex-col items-center justify-center hover:bg-gray-200 rounded-lg border"
+                                                className="cursor-pointer flex flex-col items-center justify-center hover:bg-gray-200 rounded-lg border p-2"
                                                 onClick={() => handleBrandSelect(brand.slug)}
                                             >
                                                 <Image
@@ -298,6 +354,8 @@ const CarSelectionModal = ({
                                             </button>
                                         ))}
                                     </div>
+
+                                    {/* Loading Animation */}
                                     {filterOptions(brands).length === 0 && <LoadingAnimation />}
                                 </div>
                             )}
