@@ -7,7 +7,7 @@ import CallIcon from '@mui/icons-material/Call';
 
 const CarDealerCard = ({ dealer }) => {
     return (
-        <div className="md:col-span-4 col-span-12  relative" key={dealer.id} >
+        <div className="md:col-span-4 col-span-12 relative" key={dealer.id} >
             <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                 <Link href={`/car-dealers/${dealer.slug}`} className="relative">
                     <Image
@@ -22,7 +22,7 @@ const CarDealerCard = ({ dealer }) => {
                 </Link>
                 <div className="p-2 flex flex-col justify-between h-full">
                     <Link href={`/car-dealers/${dealer.slug}`} className='flex flex-col space-y-2 mb-3'>
-                        <h3 className="text-lg font-medium">{dealer.name} deals in {dealer.select_related_brand?.name}</h3>
+                        <h3 className="text-lg font-medium h-14">{dealer.name} deals in {dealer.select_related_brand?.name}</h3>
                         <Image
                             src={dealer.select_related_brand?.brandLogo?.url ? dealer.select_related_brand?.brandLogo.url : ''}
                             alt={dealer.select_related_brand?.name}

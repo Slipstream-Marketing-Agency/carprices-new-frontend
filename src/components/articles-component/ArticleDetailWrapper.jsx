@@ -43,13 +43,13 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
     };
 
     // Extract and memoize meta description
-    const metaDescription = useMemo(() => {
-        if (!content) return "";
-        const parser = new DOMParser();
-        const parsedHtml = parser.parseFromString(content, "text/html");
-        const text = parsedHtml.documentElement.textContent || "";
-        return text.length > 160 ? `${text.substring(0, 160)}...` : text;
-    }, [content]);
+    // const metaDescription = useMemo(() => {
+    //     if (!content) return "";
+    //     const parser = new DOMParser();
+    //     const parsedHtml = parser.parseFromString(content, "text/html");
+    //     const text = parsedHtml.documentElement.textContent || "";
+    //     return text.length > 160 ? `${text.substring(0, 160)}...` : text;
+    // }, [content]);
 
     // Render article content with YouTube embed handling
     const renderContent = useMemo(() => {

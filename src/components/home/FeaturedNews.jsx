@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import Slider from 'react-slick';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CardSliderWrapper from '../car-components/CardSliderWrapper';
 
 export default function FeaturedNews() {
     const featuredSliderRef = useRef(null);
@@ -105,7 +106,7 @@ export default function FeaturedNews() {
                         </Link>
                     </div>
                     <div className="hidden md:flex md:justify-end justify-between cars-center gap-4 py-2">
-                        <button
+                        {/* <button
                             className="bg-white text-black px-3 py-3 rounded-full shadow-md flex cars-center hover:shadow-md active:shadow-md focus:shadow-md"
                             onClick={() => featuredSliderRef.current.slickPrev()}
                         >
@@ -116,31 +117,39 @@ export default function FeaturedNews() {
                             onClick={() => featuredSliderRef.current.slickNext()}
                         >
                             <ChevronRightIcon />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 
                 <div className="flex flex-col w-3/4 max-md:w-full">
-                    <Slider ref={featuredSliderRef} {...settings}>
-                        {FeaturedData.map((car, index) => (
-                            <Link href={car.url} key={index} className="p-2">
-                                <div className="relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-500 custom-scale">
-                                    <Image
-                                        src={car.image}
-                                        alt={`${car.brand} ${car.name}`}
-                                        width={600}
-                                        height={384}
-                                        sizes="(max-width: 600px) 100vw, 600px"
-                                        className="object-cover w-full md:h-[450px] h-[350px]"
-                                        loading="lazy"
-                                    />
-                                    <div className="m-2 absolute bottom-0 left-0 right-0 py-3 pl-4 border-l-4 border-l-blue-400 border-solid border-t-0 border-r-0 border-b-0 bg-opacity-50 bg-black rounded-2xl text-white">
-                                        <h6 className="text-white mb-0 md:text-sm text-xs">{car.name}</h6>
+                    {/* <Slider ref={featuredSliderRef} {...settings}> */}
+                        <CardSliderWrapper
+                            responsive={{
+                                mobile: 1.5,
+                                tablet: 2.5,
+                                desktop: 3.5,
+                            }}
+                        >
+                            {FeaturedData.map((car, index) => (
+                                <Link href={car.url} key={index} className="p-2">
+                                    <div className="relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-500 custom-scale">
+                                        <Image
+                                            src={car.image}
+                                            alt={`${car.brand} ${car.name}`}
+                                            width={600}
+                                            height={384}
+                                            sizes="(max-width: 600px) 100vw, 600px"
+                                            className="object-cover w-full md:h-[450px] h-[350px]"
+                                            loading="lazy"
+                                        />
+                                        <div className="m-2 absolute bottom-0 left-0 right-0 py-3 pl-4 border-l-4 border-l-blue-400 border-solid border-t-0 border-r-0 border-b-0 bg-opacity-50 bg-black rounded-2xl text-white">
+                                            <h6 className="text-white mb-0 md:text-sm text-xs">{car.name}</h6>
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </Slider>
+                                </Link>
+                            ))}
+                        </CardSliderWrapper>
+                    {/* </Slider> */}
                 </div>
             </div>
         </div>

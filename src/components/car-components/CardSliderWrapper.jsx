@@ -55,14 +55,6 @@ export default function CardSliderWrapper({ children, responsive }) {
 
   return (
     <div className="relative w-full">
-      {/* Left Arrow */}
-      <button
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 focus:outline-none flex items-center justify-center"
-        disabled={currentIndex === 0}
-      >
-        <ChevronLeftIcon />
-      </button>
 
       {/* Slider Content */}
       <div
@@ -79,6 +71,15 @@ export default function CardSliderWrapper({ children, responsive }) {
           </div>
         ))}
       </div>
+
+      {/* Left Arrow */}
+      <button
+        onClick={scrollLeft}
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 focus:outline-none flex items-center justify-center"
+        disabled={currentIndex === 0}
+      >
+        <ChevronLeftIcon />
+      </button>
 
       {/* Right Arrow */}
       <button

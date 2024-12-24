@@ -7,6 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CallIcon from '@mui/icons-material/Call';
 import Link from 'next/link';
 import CarDealerCard from '../car-dealer/CarDealerCard';
+import CardSliderWrapper from '../car-components/CardSliderWrapper';
 
 const CarDealersHome = ({ brandName, brandSlug }) => {
     const [dealers, setDealers] = useState([]);
@@ -14,7 +15,7 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
     const [selectedBranch, setSelectedBranch] = useState('');
     const [loadingBranches, setLoadingBranches] = useState(true);
     const [loadingDealers, setLoadingDealers] = useState(true);
-    console.log(dealers,"dealersdealers")
+    console.log(dealers, "dealersdealers")
 
     useEffect(() => {
         const loadBranches = async () => {
@@ -153,13 +154,26 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                     ))}
                 </div>
             ) : (
-                <Slider {...sliderSettings}>
+                // <Slider {...sliderSettings}>
+                //     {dealers.map((dealer) => (
+                //         <div key={dealer.id} className="px-2">
+                //             <CarDealerCard key={dealer.id} dealer={dealer} />
+                //         </div>
+                //     ))}
+                // </Slider>
+                <CardSliderWrapper
+                    responsive={{
+                        mobile: 1.5,
+                        tablet: 2.5,
+                        desktop: 4.5,
+                    }}
+                >
                     {dealers.map((dealer) => (
                         <div key={dealer.id} className="px-2">
                             <CarDealerCard key={dealer.id} dealer={dealer} />
                         </div>
                     ))}
-                </Slider>
+                </CardSliderWrapper>
             )}
 
         </div>
