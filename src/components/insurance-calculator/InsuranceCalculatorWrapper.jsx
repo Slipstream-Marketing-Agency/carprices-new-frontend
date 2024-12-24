@@ -6,6 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ExpandableText from "@/components/common/ExpandableText";
 import Ad300x600 from "@/components/ads/Ad300x600";
+import { Alert, Snackbar } from "@mui/material";
 
 const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     const [currentStep, setCurrentStep] = useState("year");
@@ -130,7 +131,6 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
         }
     };
 
-    // Validation schema for the final form step
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Name is required"),
         email: Yup.string().email("Invalid email").required("Email is required"),
@@ -138,13 +138,44 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
         phone: Yup.string().matches(/^[0-9]+$/, "Only numbers are allowed").min(8, "Must be at least 8 digits").required("Phone number is required"),
     });
 
-    const disabled = true
+    const handleSubmitForm = async (values) => {
+        try {
+            setLoading(true);
+            setSubmitting(true);
+            const token = await window.grecaptcha.execute(
+                process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+                { action: "submit" }
+            );
 
+            const response = await axios.post("/api/insurance-calculator", {
+                ...values,
+                recaptchaToken: token,
+            });
+
+            if (response.status === 200) {
+                setSubmitted(true);
+                setSnackbarOpen(true); // Open the snackbar
+            } else {
+                console.error("Error submitting form:", response);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        } finally {
+            setLoading(false);
+            setSubmitting(false);
+        }
+    };
+
+    const disabled = true;
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+      };
     return (
-        <div className="container grid grid-cols-12 ">
-
-            <div className="col-span-12 md:col-span-9  ">
-                <div className='shadow-md p-4 mt-5 rounded-lg'>
+        <div className="container grid grid-cols-12">
+            <div className="col-span-12 md:col-span-9">
+                <div className="shadow-md p-4 mt-5 rounded-lg">
                     <h1 className="md:text-3xl text-xl font-semibold">UAE Car Insurance Calculator - Get Instant Car Insurance Quotes Online</h1>
                     <h4 className="md:text-lg text-md font-medium text-blue-600">
                         Calculate Your Car Insurance Costs in UAE with Accurate and Up-to-Date Rates
@@ -152,12 +183,12 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     <ExpandableText content={`<p>Use our comprehensive Car Insurance Calculator to estimate insurance costs for your car in the UAE. Select your car’s model year, brand, model, and specifications to get an accurate insurance quote tailored to your vehicle. With our easy-to-use tool, you can quickly compare insurance options based on the latest prices and find the best insurance deal for your car. Start your journey toward hassle-free car insurance now!</p>`} />
                 </div>
 
-                <div className='flex flex-col items-center shadow-md p-4 mt-5 rounded-lg'>
+                <div className="flex flex-col items-center shadow-md p-4 mt-5 rounded-lg">
                     {loading && <p className="text-blue-500 mb-4">Loading...</p>}
 
                     {currentStep === "year" && (
-                        <>            <h4 className="text-xl text-gray-500 mb-3 font-semibold">Select Car&apos;s model year</h4>
-
+                        <>
+                            <h4 className="text-xl text-gray-500 mb-3 font-semibold">Select Car&apos;s model year</h4>
                             <div className="flex flex-wrap gap-4">
                                 {years.map((year) => (
                                     <button
@@ -173,7 +204,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     )}
 
                     {currentStep === "brand" && (
-                        <><p className="text-xl text-gray-500 mb-3 font-semibold">Select Brand</p>
+                        <>
+                            <p className="text-xl text-gray-500 mb-3 font-semibold">Select Brand</p>
                             <div className="grid gap-6 md:grid-cols-4 grid-cols-2">
                                 {brands.map((brand) => (
                                     <button
@@ -182,7 +214,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                                         onClick={() => handleSelect("brand", brand.slug)}
                                     >
                                         <Image
-                                            src={brand.brandLogo} // Assuming brandLogo URL is correct
+                                            src={brand.brandLogo}
                                             alt={`${brand.name} logo`}
                                             width={60}
                                             height={60}
@@ -198,7 +230,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     )}
 
                     {currentStep === "model" && (
-                        <><p className="text-xl text-gray-500 mb-3 font-semibold">Select Model</p>
+                        <>
+                            <p className="text-xl text-gray-500 mb-3 font-semibold">Select Model</p>
                             <div className="flex flex-wrap gap-4">
                                 {models.map((model) => (
                                     <button
@@ -214,7 +247,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     )}
 
                     {currentStep === "trim" && (
-                        <><p className="text-xl text-gray-500 mb-3 font-semibold">Select Variant</p>
+                        <>
+                            <p className="text-xl text-gray-500 mb-3 font-semibold">Select Variant</p>
                             <div className="flex flex-wrap gap-4">
                                 {trims.map((trim) => (
                                     <button
@@ -230,7 +264,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     )}
 
                     {currentStep === "spec" && (
-                        <><p className="text-xl text-gray-500 mb-3 font-semibold">What is Your Vehicle&apos;s Specification ?</p>
+                        <>
+                            <p className="text-xl text-gray-500 mb-3 font-semibold">What is Your Vehicle&apos;s Specification ?</p>
                             <div className="flex flex-wrap gap-4">
                                 <button
                                     className="py-4 shadow whitespace-nowrap rounded-lg hover:bg-gray-200 text-left px-2"
@@ -240,8 +275,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                                 </button>
                                 <button
                                     disabled={disabled}
-                                    className={`py-4 shadow whitespace-nowrap rounded-lg text-left px-2 
-                                 ${disabled ? "bg-gray-400" : "hover:bg-gray-200"}`}
+                                    className={`py-4 shadow whitespace-nowrap rounded-lg text-left px-2 ${disabled ? "bg-gray-400" : "hover:bg-gray-200"}`}
                                     onClick={() => handleSelect("spec", "Non-GCC Spec/Modified")}
                                 >
                                     Non-GCC Spec/Modified
@@ -254,11 +288,12 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                         <Formik
                             initialValues={{ name: "", email: "", dob: "", phone: "" }}
                             validationSchema={validationSchema}
-                            onSubmit={(values) => {
-                                alert("Form submitted successfully with data: " + JSON.stringify(values, null, 2));
+                            onSubmit={(values, { setSubmitting }) => {
+                                setSubmitting(true);
+                                handleSubmitForm(values).finally(() => setSubmitting(false));
                             }}
                         >
-                            {({ isValid, dirty }) => (
+                            {({ isValid, dirty, isSubmitting }) => (
                                 <Form className="w-full">
                                     <h3 className="text-md font-semibold mb-4">Please Fill Your Details</h3>
                                     <div className="mb-4">
@@ -298,9 +333,9 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                                     <button
                                         type="submit"
                                         className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:outline-none mt-4"
-                                        disabled={!(isValid && dirty)} // Disable if form is invalid or untouched
+                                        disabled={!(isValid && dirty) || isSubmitting}
                                     >
-                                        Submit
+                                        {isSubmitting ? "Submitting..." : "Submit"}
                                     </button>
                                 </Form>
                             )}
@@ -318,16 +353,27 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                         )}
                     </div>
                 </div>
-
             </div>
 
-            <div className="col-span-3"><div className='my-6 sticky top-0  md:block hidden'>
-                <Suspense fallback={<div>Loading ad...</div>}>
-                    <Ad300x600 dataAdSlot="1269400005" />
-                </Suspense>
-            </div></div>
+            <div className="col-span-3">
+                <div className="my-6 sticky top-0 md:block hidden">
+                    <Suspense fallback={<div>Loading ad...</div>}>
+                        <Ad300x600 dataAdSlot="1269400005" />
+                    </Suspense>
+                </div>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                >
+                    <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: "100%" }}>
+                        Thank you for your submission. We will contact you shortly!
+                    </Alert>
+                </Snackbar>
+            </div>
         </div>
     );
-}
+};
 
-export default InsuranceCalculatorWrapper
+export default InsuranceCalculatorWrapper;
