@@ -713,3 +713,7 @@ a,
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.article-content a {
+  color: #3b82f6;
+}

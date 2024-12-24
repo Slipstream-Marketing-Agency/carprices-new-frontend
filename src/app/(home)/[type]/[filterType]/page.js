@@ -1,5 +1,15 @@
 import axios from "axios";
 import ArticleDetailWrapper from "@/components/articles-component/ArticleDetailWrapper";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+
+
+const VALID_TYPES = ['news', 'reviews', 'new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
+
+export async function generateStaticParams() {
+    return VALID_TYPES.map((type) => ({ type }));
+}
+
 
 async function fetchData(type, slug) {
     try {
@@ -19,9 +29,15 @@ async function fetchData(type, slug) {
 
 export async function generateMetadata({ params }) {
     const { type, filterType: slug } = params; // Destructure type and use filterType as slug
+    if (!VALID_TYPES.includes(type)) {
+        notFound();
+    }
 
     const data = await fetchData(type, slug);
-    console.log(data.detailData.metaTitle, 'mydata')
+    console.log(data?.detailData?.metaTitle, 'mydata')
+    if (!VALID_TYPES.includes(type)) {
+        notFound();
+    }
 
     return {
         title: data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
@@ -70,5 +86,9 @@ export default async function BlogDetailsPage({ params }) {
         return <div>404 - Article Not Found</div>;
     }
 
-    return <ArticleDetailWrapper data={data} type={type} slug={slug} featuredArticlesData={featuredArticlesData} />;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ArticleDetailWrapper data={data} type={type} slug={slug} featuredArticlesData={featuredArticlesData} />;
+        </Suspense>
+    )
 }

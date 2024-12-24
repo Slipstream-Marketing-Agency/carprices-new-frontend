@@ -54,6 +54,7 @@ export default function CalculatorContent() {
                     selectedVariantThumbnail={selectedVariantThumbnail} />
             )}
             {!selectedVariant && (
+                <>
                 <Banner
                     modal={showModal}
                     selectedModel={selectedModel}
@@ -63,6 +64,9 @@ export default function CalculatorContent() {
                     setShowModal={setShowModal}
                     setCarSelected={setCarSelected}
                 />
+                <div className="mt-5" />
+                <SimpleLoanCalculator />
+                </>
             )}
 
             <div>
