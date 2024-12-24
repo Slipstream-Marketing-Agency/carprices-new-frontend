@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Banner from "./Banner";
-import CarSelectionModal from "../compare-cars/CarSelectionModal";
+// import CarSelectionModal from "../compare-cars/CarSelectionModal";
 import Calculator from "./Calculator";
-import SimpleLoanCalculator from "./SimpleLoanCalculator";
+import CarSelectionModal from "./CarSelectionModal";
 
 export default function CalculatorContent() {
     const [carSelected, setCarSelected] = useState(false);
@@ -21,6 +21,7 @@ export default function CalculatorContent() {
 
     // Handle variant selection from CarSelectionModal
     const handleVariantSelect = (variantData) => {
+        console.log(variantData)
         setSelectedYear(variantData.year);
         setSelectedBrand(variantData.brand);
         setSelectedModel(variantData.model);
@@ -56,6 +57,10 @@ export default function CalculatorContent() {
                 <>
                 <Banner
                     modal={showModal}
+                    selectedModel={selectedModel}
+                    setSelectedModel={setSelectedModel}
+                    selectedVariant={selectedVariant}
+                    setSelectedVariant={setSelectedVariant}
                     setShowModal={setShowModal}
                     setCarSelected={setCarSelected}
                 />
@@ -78,7 +83,7 @@ export default function CalculatorContent() {
                         well-maintained roads and world-class infrastructure, is a dream
                         shared by many residents and expatriates alike. However, the reality
                         is that purchasing a car in the UAE often requires a substantial
-                        financial commitment, and that's where a car loan can make all the
+                        financial commitment, and that&apos;s where a car loan can make all the
                         difference.
                     </p>
                     <h2 className="text-2xl mt-6 font-semibold capitalize">
@@ -91,7 +96,7 @@ export default function CalculatorContent() {
                         Interest rates play a pivotal role in determining the cost of your
                         car loan. Typically, car loan interest rates in the UAE can vary
                         depending on the lender and the prevailing market conditions.
-                        Therefore, it's essential to compare interest rates across different
+                        Therefore, it&apos;s essential to compare interest rates across different
                         financial institutions to secure the most favorable deal. Lower
                         interest rates translate to reduced monthly installments, which
                         means less financial strain over the loan tenure. By doing your

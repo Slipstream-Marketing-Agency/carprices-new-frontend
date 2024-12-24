@@ -11,6 +11,7 @@ import LoginModal from '@/components/login-modal/LoginModal';
 import { Alert, CircularProgress, Snackbar } from '@mui/material';
 import CarSelectionModal from '@/components/reviews/CarSelectionModal';
 import EditIcon from '@mui/icons-material/Edit';
+import NewCarSelection from './NewCarSelection';
 
 const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     const router = useRouter();
@@ -135,11 +136,16 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     return (
         < >
             <div>
-                <CarSelectionModal
+                <NewCarSelection
                     isOpen={showModal}
                     onClose={() => setShowModal(false)}
                     onVariantSelect={handleVariantSelect}
                 />
+                {/* <CarSelectionModal
+                    isOpen={showModal}
+                    onClose={() => setShowModal(false)}
+                    onVariantSelect={handleVariantSelect}
+                /> */}
                 <div className="flex bg-gray-50 w-full h-full fixed top-0 left-0 items-center justify-center">
                     <div className="w-1/3 h-full bg-blue-50 hidden lg:flex lg:items-center lg:justify-center p-20">
                         <div className="text-center">

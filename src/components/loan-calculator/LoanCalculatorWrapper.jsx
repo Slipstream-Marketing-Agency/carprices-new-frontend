@@ -7,7 +7,7 @@ import CalculatorContent from './CalculatorContent';
 export default function LoanCalculatorWrapper() {
     const faq = [
         {
-            question: <>Can I get a car loan in the UAE if I'm not a UAE national?</>,
+            question: <>Can I get a car loan in the UAE if I&apos;m not a UAE national?</>,
             answer: (
                 <>
                     Yes, many banks offer car loans to expatriates, but eligibility
@@ -47,7 +47,7 @@ export default function LoanCalculatorWrapper() {
             question: <>Can I apply for a car loan without a UAE residence visa?</>,
             answer: (
                 <>
-                    It's challenging, but some lenders offer car loans to individuals with
+                    It&apos;s challenging, but some lenders offer car loans to individuals with
                     certain visa types, such as employment or investor visas.
                 </>
             ),
@@ -59,7 +59,7 @@ export default function LoanCalculatorWrapper() {
             answer: (
                 <>
                     Missing an EMI payment can result in late payment fees and negatively
-                    impact your credit score. It's essential to make payments on time.
+                    impact your credit score. It&apos;s essential to make payments on time.
                 </>
             ),
             id: 5,
@@ -131,9 +131,11 @@ export default function LoanCalculatorWrapper() {
                 </div>
             </div>
             <div className="h-1/2 sm:col-span-3 block space-y-10">
-                <Suspense fallback={<div>Loading ad...</div>}>
-                    <Ad300x600 dataAdSlot="4063084302" />
-                </Suspense>
+                <div className='my-6 pt-20 sticky top-0'>
+                    <Suspense fallback={<div>Loading ad...</div>}>
+                        <Ad300x600 dataAdSlot="4063084302" />
+                    </Suspense>
+                </div>
                 <div className="md:hidden block mt-10">
                     <Suspense fallback={<div>Loading ad...</div>}>
                         <Ad300X250 dataAdSlot="2565896738" />
