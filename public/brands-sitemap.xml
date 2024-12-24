@@ -67,11 +67,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/hyundai</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/changan</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -172,6 +167,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/hyundai</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/peugeot</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -252,11 +252,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/lamborghini</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/land-rover</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -292,6 +287,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/avatr</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/rolls-royce</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -312,7 +312,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/jeep</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/opel</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/lamborghini</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -353,11 +363,6 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/bugatti</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/jeep</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>

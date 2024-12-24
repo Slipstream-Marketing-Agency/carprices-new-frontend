@@ -5,6 +5,7 @@ import Banner from "./Banner";
 // import CarSelectionModal from "../compare-cars/CarSelectionModal";
 import Calculator from "./Calculator";
 import CarSelectionModal from "./CarSelectionModal";
+import SimpleLoanCalculator from "./SimpleLoanCalculator";
 
 export default function CalculatorContent() {
     const [carSelected, setCarSelected] = useState(false);
