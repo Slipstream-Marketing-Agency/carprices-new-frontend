@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Banner from "./Banner";
-// import CarSelectionModal from "../compare-cars/CarSelectionModal";
+import CarSelectionModal from "../compare-cars/CarSelectionModal";
 import Calculator from "./Calculator";
-import CarSelectionModal from "./CarSelectionModal";
+// import CarSelectionModal from "./CarSelectionModal";
 import SimpleLoanCalculator from "./SimpleLoanCalculator";
 
 export default function CalculatorContent() {

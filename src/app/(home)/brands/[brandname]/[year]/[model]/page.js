@@ -1,51 +1,55 @@
 import ModelWrapper from "@/components/model-component/ModelWrapper";
 import axios from "axios";
+import { notFound } from "next/navigation";
 
 
 export async function generateMetadata({ params }) {
     const { year, brandname, model } = params;
     const yearInt = parseInt(year, 10);
-    
-    const currentmodelResponse = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`
-    );
 
-    const currentmodel = currentmodelResponse.data.data.model;
-    const seoData = currentmodelResponse.data.data.seo;
+    try {
+        const currentmodelResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`
+        );
+        const currentmodel = currentmodelResponse.data.data.model;
+        const seoData = currentmodelResponse.data.data.seo;
 
-    const minPrice = currentmodel?.price?.min;
+        const minPrice = currentmodel?.price?.min;
 
-    return {
-        title: seoData?.metaTitle ? seoData.metaTitle : `${currentmodel.brand?.name} ${currentmodel.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
-        description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
-        } starting at ${minPrice <= 0
-          ? "TBD"
-          : "AED" +
-          " " +
-          minPrice?.toLocaleString("en-AE", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-          })
-        }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
-        charset: "UTF-8",
-        alternates: {
-            ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
-        },
-        // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
-        robots: {
-            index: true,
-            follow: true,
-        },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: seoData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-            description: seoData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-            url: "https://carprices.ae",
-        },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
-    };
+        return {
+            title: seoData?.metaTitle ? seoData.metaTitle : `${currentmodel.brand?.name} ${currentmodel.name} ${year} Car Prices In UAE | Variants, Spec & Features - Carprices.ae`,
+            description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
+                } starting at ${minPrice <= 0
+                    ? "TBD"
+                    : "AED" +
+                    " " +
+                    minPrice?.toLocaleString("en-AE", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                    })
+                }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
+            charset: "UTF-8",
+            alternates: {
+                ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
+            },
+            // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+            robots: {
+                index: true,
+                follow: true,
+            },
+            structuredData: {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                name: seoData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+                description: seoData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+                url: "https://carprices.ae",
+            },
+            author: "Carprices.ae Team",
+            icon: "./favicon.ico",
+        };
+    } catch (error) {
+        return notFound()
+    }
 }
 
 export default async function ModelPage({ params }) {
@@ -79,24 +83,26 @@ export default async function ModelPage({ params }) {
 
         // Handle redirect for old slugs
         if (error.response && error.response.status === 404) {
-            const redirectResponse = await axios.get(
-                `${process.env.NEXT_PUBLIC_API_URL}model/old-slug/${model}`
-            );
-            const newModelSlug = redirectResponse.data.model.slug;
+            try {
+                const redirectResponse = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}model/old-slug/${model}`
+                );
+                const newModelSlug = redirectResponse.data.model.slug;
 
-            // Redirect to the new model page
-            return {
-                redirect: {
-                    permanent: false,
-                    destination: `/brands/${brandname}/${year}/${newModelSlug}`,
-                },
-            };
+                // Redirect to the new model page
+                return {
+                    redirect: {
+                        permanent: false,
+                        destination: `/brands/${brandname}/${year}/${newModelSlug}`,
+                    },
+                };
+            } catch (error) {
+                return notFound();
+            }
         }
 
         // Return 404 if everything else fails
-        return {
-            notFound: true,
-        };
+        return notFound();
     }
 
     return (
