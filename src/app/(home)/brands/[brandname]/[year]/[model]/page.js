@@ -48,7 +48,11 @@ export async function generateMetadata({ params }) {
             icon: "./favicon.ico",
         };
     } catch (error) {
-        return notFound()
+        if (error.response?.status === 404) {
+            return notFound(); // Call notFound() for 404 errors
+        }
+        console.error("Error fetching model data:", error);
+        throw error; // Re-throw other errors for handling elsewhere
     }
 }
 
@@ -77,6 +81,7 @@ export default async function ModelPage({ params }) {
         // If no trims, return 404
         if (!currentmodel || currentmodel.trims.length === 0) {
             throw new Error('No trims available');
+            return notFound();
         }
     } catch (error) {
         console.error('Error fetching model data:', error);
@@ -97,12 +102,20 @@ export default async function ModelPage({ params }) {
                     },
                 };
             } catch (error) {
-                return notFound();
+                if (error.response?.status === 404) {
+                    return notFound(); // Call notFound() for 404 errors
+                }
+                console.error("Error fetching model data:", error);
+                throw error; // Re-throw other errors for handling elsewhere
             }
         }
 
         // Return 404 if everything else fails
-        return notFound();
+        if (error.response?.status === 404) {
+            return notFound(); // Call notFound() for 404 errors
+        }
+        console.error("Error fetching model data:", error);
+        throw error; // Re-throw other errors for handling elsewhere
     }
 
     return (

@@ -34,9 +34,9 @@ export async function generateMetadata({ params }) {
     }
 
     const data = await fetchData(type, slug);
-    console.log(data?.detailData?.metaTitle, 'mydata')
-    if (!VALID_TYPES.includes(type)) {
-        notFound();
+    console.log(data?.detailData?.metaTitle, 'mydata', typeof(data), data)
+    if (!VALID_TYPES.includes(type) || !data) {
+        return notFound();
     }
 
     return {
