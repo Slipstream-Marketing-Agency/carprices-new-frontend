@@ -372,108 +372,106 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
             } */}
 
             <div className="container mx-auto mt-10">
-                {
-                    (parentPage === 'basic' || parentPage === 'variants&prices') &&
-                    <div>
-                        <div className="container mx-auto grid grid-cols-12">
-                            <div className="md:col-span-9 col-span-12">
-                                {
-                                    (parentPage === 'basic' || parentPage === 'specs') &&
-                                    <div id="specs">
-                                        <ModelDescription
-                                            year={year}
-                                            brand={brand}
-                                            model={model}
-                                            minPrice={minPrice}
-                                            maxPrice={maxPrice}
-                                            minFuelConsumption={minFuelConsumption}
-                                            maxFuelConsumption={maxFuelConsumption}
-                                            engineTypes={engineTypes}
-                                            transmissionList={transmissionList}
-                                            motorTypes={motorTypes}
-                                            mainTrimFuelType={mainTrimFuelType}
-                                            allTrims={allTrims}
-                                            mainTrim={mainTrim}
-                                            getTransmissionType={getTransmissionType}
-                                        />
-                                    </div>
-                                }
-                                {
-                                    (parentPage === 'basic' || parentPage === 'variants&prices') &&
-                                    <div id="variants&prices">
-                                        <VariantsListing
-                                            year={year}
-                                            brand={brand}
-                                            model={model}
-                                            minPrice={minPrice}
-                                            maxPrice={maxPrice}
-                                            minFuelConsumption={minFuelConsumption}
-                                            maxFuelConsumption={maxFuelConsumption}
-                                            engineTypes={engineTypes}
-                                            transmissionList={transmissionList}
-                                            motorTypes={motorTypes}
-                                            mainTrimFuelType={mainTrimFuelType}
-                                            allTrims={allTrims}
-                                            mainTrim={mainTrim}
-                                        />
-                                        <OldModel model={oldModel} currentYear={year} />
-                                        <div className="mt-14">
-                                            <Ad728x90 dataAdSlot={"9526329827"} />
-                                        </div>
-                                    </div>
-                                }
-                                {
-                                    (parentPage === 'basic' || parentPage === 'price') &&
-                                    <div id="price" className="mt-14">
-                                        <MainPriceComponent currentmodel={currentmodel} year={year} />
-                                    </div>
-                                }
-                                {
-                                    (parentPage === 'basic' || parentPage === 'user-reviews') &&
-                                    <div id="reviews" className="mt-14">
-                                        <CarDetailReview
-                                            averageRating={averageRating}
-                                            reviews={reviews}
-                                            name={`${brand?.name} ${model?.name}`}
-                                            year={year}
-                                            model={model?.slug}
-                                            brand={brand?.slug}
-                                            link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
-                                            fromReviewPage={parentPage === 'user-reviews'}
-                                        />
-                                    </div>
-                                }
-                                {
-                                    (parentPage === 'faq' || parentPage === 'basic') &&
-                                    <div id="faqs" className="mt-14">
-                                        <VehicleFaq
-                                            year={year}
-                                            brand={brand}
-                                            model={model}
-                                            minPrice={minPrice}
-                                            maxPrice={maxPrice}
-                                            minFuelConsumption={minFuelConsumption}
-                                            maxFuelConsumption={maxFuelConsumption}
-                                            engineTypes={engineTypes}
-                                            transmissionList={transmissionList}
-                                            motorTypes={motorTypes}
-                                            mainTrimFuelType={mainTrimFuelType}
-                                            allTrims={allTrims}
-                                            mainTrim={mainTrim}
-                                            CarPriceRange={CarPriceRange}
-                                            getTransmissionType={getTransmissionType}
-                                        />
-                                    </div>
-                                }
-                            </div>
-                            <div className="md:col-span-3 col-span-9">
-                                {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
-                                <div className='my-6 pt-20 sticky top-0'>
-                                    <Ad300x600 dataAdSlot="2960921471" />
+                <div>
+                    <div className="container mx-auto grid grid-cols-12">
+                        <div className="md:col-span-9 col-span-12">
+                            {
+                                (parentPage === 'basic' || parentPage === 'specs') &&
+                                <div id="specs">
+                                    <ModelDescription
+                                        year={year}
+                                        brand={brand}
+                                        model={model}
+                                        minPrice={minPrice}
+                                        maxPrice={maxPrice}
+                                        minFuelConsumption={minFuelConsumption}
+                                        maxFuelConsumption={maxFuelConsumption}
+                                        engineTypes={engineTypes}
+                                        transmissionList={transmissionList}
+                                        motorTypes={motorTypes}
+                                        mainTrimFuelType={mainTrimFuelType}
+                                        allTrims={allTrims}
+                                        mainTrim={mainTrim}
+                                        getTransmissionType={getTransmissionType}
+                                    />
                                 </div>
+                            }
+                            {
+                                (parentPage === 'basic' || parentPage === 'variants&prices') &&
+                                <div id="variants&prices">
+                                    <VariantsListing
+                                        year={year}
+                                        brand={brand}
+                                        model={model}
+                                        minPrice={minPrice}
+                                        maxPrice={maxPrice}
+                                        minFuelConsumption={minFuelConsumption}
+                                        maxFuelConsumption={maxFuelConsumption}
+                                        engineTypes={engineTypes}
+                                        transmissionList={transmissionList}
+                                        motorTypes={motorTypes}
+                                        mainTrimFuelType={mainTrimFuelType}
+                                        allTrims={allTrims}
+                                        mainTrim={mainTrim}
+                                    />
+                                    <OldModel model={oldModel} currentYear={year} />
+                                    <div className="mt-14">
+                                        <Ad728x90 dataAdSlot={"9526329827"} />
+                                    </div>
+                                </div>
+                            }
+                            {
+                                (parentPage === 'basic' || parentPage === 'price') &&
+                                <div id="price" className="mt-14">
+                                    <MainPriceComponent currentmodel={currentmodel} year={year} />
+                                </div>
+                            }
+                            {
+                                (parentPage === 'basic' || parentPage === 'user-reviews') &&
+                                <div id="reviews" className="mt-14">
+                                    <CarDetailReview
+                                        averageRating={averageRating}
+                                        reviews={reviews}
+                                        name={`${brand?.name} ${model?.name}`}
+                                        year={year}
+                                        model={model?.slug}
+                                        brand={brand?.slug}
+                                        link={`/brands/${brand?.slug}/${year}/${model?.slug}/user-reviews#reviews`}
+                                        fromReviewPage={parentPage === 'user-reviews'}
+                                    />
+                                </div>
+                            }
+                            {
+                                (parentPage === 'faq' || parentPage === 'basic') &&
+                                <div id="faqs" className="mt-14">
+                                    <VehicleFaq
+                                        year={year}
+                                        brand={brand}
+                                        model={model}
+                                        minPrice={minPrice}
+                                        maxPrice={maxPrice}
+                                        minFuelConsumption={minFuelConsumption}
+                                        maxFuelConsumption={maxFuelConsumption}
+                                        engineTypes={engineTypes}
+                                        transmissionList={transmissionList}
+                                        motorTypes={motorTypes}
+                                        mainTrimFuelType={mainTrimFuelType}
+                                        allTrims={allTrims}
+                                        mainTrim={mainTrim}
+                                        CarPriceRange={CarPriceRange}
+                                        getTransmissionType={getTransmissionType}
+                                    />
+                                </div>
+                            }
+                        </div>
+                        <div className="md:col-span-3 col-span-9">
+                            {/* <Ad300x250 dataAdSlot="5772723668" />{" "} */}
+                            <div className='my-6 pt-20 sticky top-0'>
+                                <Ad300x600 dataAdSlot="2960921471" />
                             </div>
                         </div>
-                        {/* <div className="container mx-auto grid grid-cols-12 mt-10">
+                    </div>
+                    {/* <div className="container mx-auto grid grid-cols-12 mt-10">
                             <div className="md:col-span-9 col-span-12">
                                 <OldModel model={oldModel} />
                                 <div className="mt-14">
@@ -486,8 +484,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                 </Suspense>
                             </div>
                         </div> */}
-                    </div>
-                }
+                </div>
 
                 {currentmodel?.highlightsList?.length > 0 && (
                     <section className="grid grid-cols-12  mt-12  rounded-xl ">
