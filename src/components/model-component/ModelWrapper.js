@@ -20,9 +20,11 @@ import StarIcon from '@mui/icons-material/Star';
 import MainPriceComponent from "./PriceComponent/PriceComponent";
 import axios from "axios";
 import Ad300X250 from "../ads/Ad300x250";
+import RelatedArticles from "../articles-component/RelatedArticles";
 
 export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPage = 'basic', activeTab = '' }) {
     const [currentURL, setCurrentURL] = useState("");
+    console.log(currentmodel,'currentmodel')
 
     // If using browser-specific features, use `useEffect` on the client-side
     useEffect(() => {
@@ -424,6 +426,12 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                 (parentPage === 'basic' || parentPage === 'price') &&
                                 <div id="price" className="mt-14">
                                     <MainPriceComponent currentmodel={currentmodel} year={year} />
+                                </div>
+                            }
+                            {
+                                (parentPage === 'basic' || parentPage === 'related-articles') &&
+                                <div>
+                                    <RelatedArticles type='article' slug={brand?.slug} />
                                 </div>
                             }
                             {
