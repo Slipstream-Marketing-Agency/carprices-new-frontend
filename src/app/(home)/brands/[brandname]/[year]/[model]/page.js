@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
 
         return {
             title: false ? seoData.metaTitle : `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
-            description: `${year} ${currentmodel.brand?.name} ${currentmodel.name}`,
+            description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
             // description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
             //     } starting at ${minPrice <= 0
             //         ? "TBD"
