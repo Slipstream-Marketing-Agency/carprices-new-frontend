@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
         const minPrice = currentmodel?.price?.min;
 
         return {
-            title: false ? seoData.metaTitle : `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
-            description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
+            title: `${year} ${currentmodel.brand?.name} ${currentmodel.name} Variants | Compare Features & Prices - Carprices.ae`,
+            description: `Compare all available variants of the ${year} ${currentmodel.brand?.name} ${currentmodel.name}. Find the best option based on features, price, and specifications in the UAE.`,
             // description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
             //     } starting at ${minPrice <= 0
             //         ? "TBD"
