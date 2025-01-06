@@ -3,8 +3,6 @@ import ArticleDetailWrapper from "@/components/articles-component/ArticleDetailW
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-export const fetchCache = 'force-no-store';
-
 const VALID_TYPES = ['news', 'reviews', 'new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
 
 export async function generateStaticParams() {
@@ -16,9 +14,7 @@ async function fetchData(type, slug) {
     try {
         // Fetch the single article details
         const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
-            headers: {
-                'Cache-Control': 'no-store',
-            },
+            cache: "no-store",
         });
         const detailData = articleResponse.data?.data || null;
 
