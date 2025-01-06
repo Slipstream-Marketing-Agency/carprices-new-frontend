@@ -3,6 +3,7 @@ import ArticleDetailWrapper from "@/components/articles-component/ArticleDetailW
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+export const fetchCache = 'force-no-store';
 
 const VALID_TYPES = ['news', 'reviews', 'new-launches', 'comparisons', 'buying-guide', 'top-picks']; // Example, update this based on your types
 
