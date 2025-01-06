@@ -15,7 +15,11 @@ export async function generateStaticParams() {
 async function fetchData(type, slug) {
     try {
         // Fetch the single article details
-        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`);
+        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
+            headers: {
+                'Cache-Control': 'no-store',
+            },
+        });
         const detailData = articleResponse.data?.data || null;
 
 
@@ -35,7 +39,7 @@ export async function generateMetadata({ params }) {
     }
 
     const data = await fetchData(type, slug);
-    console.log(data?.detailData?.metaTitle, 'mydata', typeof(data), data)
+    console.log(data?.detailData?.metaTitle, 'mydata', typeof (data), data)
     if (!VALID_TYPES.includes(type) || !data) {
         return notFound();
     }
