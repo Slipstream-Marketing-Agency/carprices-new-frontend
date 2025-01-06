@@ -717,3 +717,14 @@ a,
 .article-content a {
   color: #3b82f6;
 }
+
+.article-content ol {
+  list-style: decimal; /* Restores default ordered list numbering */
+  margin: 1em 0; /* Adds default margin (browser-dependent, typically 1em) */
+  padding-left: 40px; /* Adds default padding (browser-dependent, typically 40px) */
+}
+.article-content ul {
+  list-style: disc; /* Restores the default bullet points */
+  margin: 1em 0; /* Adds default vertical margins (typically 1em) */
+  padding-left: 40px; /* Adds default left padding for indentation */
+}

@@ -185,7 +185,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 const ArticleHeader = ({ title, author, publishedAt, summary, content, currentURL, articleTypes }) => (
     <div className="mb-6">
         {articleTypes.map((type, index) =>
-            <span key={index} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm">{type.type}</span>
+            <span key={index} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm mr-2">{type.type}</span>
         )}
 
         <h1 className="capitalize font-bold text-2xl sm:text-3xl mt-3">{title}</h1>
@@ -195,7 +195,7 @@ const ArticleHeader = ({ title, author, publishedAt, summary, content, currentUR
                 <span>|</span>
                 <span>{moment(publishedAt).format("MMMM Do YYYY")}</span>
                 <span>|</span>
-                <span>Read Time: {Math.ceil(content?.length / 200)} mins</span>
+                <span>Read Time: {Math.ceil((content?.split(/\s+/).filter(word => word).length || 0) / 200)} mins</span>
             </span>
             <ShareButton url={currentURL} title="Check out this article on CarPrices.ae" />
         </div>

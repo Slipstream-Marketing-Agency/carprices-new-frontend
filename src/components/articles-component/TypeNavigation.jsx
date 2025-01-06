@@ -26,7 +26,7 @@ export default function TypeNavigation({ currentType }) {
 
 
   return (
-    <div className="md:flex rounded-lg shadow-md hidden w-full mb-4">
+    <div className="flex rounded-lg shadow-md w-full mb-4 overflow-x-auto">
       {articleTypes.map((type) => (
         <Link key={type.slug} href={`/${type.slug}`} className="group flex-grow basis-0">
           <div
