@@ -4,6 +4,11 @@ import FixedAd320x50 from '../ads/FixedAd320x50'
 import FixedAd728x90 from '../ads/FixedAd728x90'
 import Ad300X250 from '../ads/Ad300x250'
 import Ad970x250 from '../ads/Ad970x250'
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -242,10 +247,23 @@ export default function Footer() {
                       </div>
                     </div>
                     <div className="flex gap-2 mt-2">
-                      <Link href="https://youtube.com/@carpricesuae?feature=shared">
+                      {/* <Link href="https://youtube.com/@carpricesuae?feature=shared">
                         <i className="bx bxl-youtube text-white" />
+                        <YouTubeIcon />
+                      </Link> */}
+                      <Link href="https://www.facebook.com/carprices.ae/" target='_blank'>
+                        <FacebookIcon className='text-white' />
                       </Link>
-                      <Link href="https://www.facebook.com/carprices.ae/">
+                      <Link href="https://x.com/carprices_ae" target='_blank'>
+                        <XIcon className='text-white' />
+                      </Link>
+                      <Link href="https://www.linkedin.com/company/carprices-ae/" target='_blank'>
+                        <LinkedInIcon className='text-white' />
+                      </Link>
+                      <Link href="https://www.instagram.com/carprices.ae/" target='_blank'>
+                        <InstagramIcon className='text-white' />
+                      </Link>
+                      {/* <Link href="https://www.facebook.com/carprices.ae/">
                         <i className="bx bxl-facebook text-white" />
                       </Link>
                       <Link href="https://x.com/CarPricesAe?t=_IgNE0J6jf5r1ZiiKrkaYw&s=09">
@@ -256,7 +274,7 @@ export default function Footer() {
                       </Link>
                       <Link href="https://www.instagram.com/carprices.ae?igsh=bnE4cnpudjFwMHg1">
                         <i className="bx bxl-instagram-alt text-white" />
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>

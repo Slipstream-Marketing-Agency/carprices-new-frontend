@@ -25,7 +25,6 @@ export async function generateStaticParams() {
 export async function generateMetadata({params}) {
   const { type } = params;
   const metaData = await fetchMetaData(type);
-  console.log(metaData, 'mymetadata.....')
 
   return {
     title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
@@ -96,11 +95,9 @@ export default async function TypePage({ params, searchParams }) {
   };
 
   const articlesData = await fetchArticles();
+  console.log(articlesData, 'articlesDataarticlesData');
   const featuredArticlesData = await fetchFeaturedArticles();
   const popularCatgeoriesAndTabs = await fetchPopularCategoriesAndTabs();
-
-
-  console.log(popularCatgeoriesAndTabs, "popularCatgeoriesAndTabs");
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
