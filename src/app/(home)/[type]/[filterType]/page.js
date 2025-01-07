@@ -12,12 +12,11 @@ export async function generateStaticParams() {
 
 async function fetchData(type, slug) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
-            method: "GET",
+        // Fetch the single article details
+        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
             cache: "no-store",
         });
-        const articleResponse = await response.json();
-        const detailData = articleResponse?.data || null;
+        const detailData = articleResponse.data?.data || null;
 
 
         return {
