@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
         description: `Discover ${capitalDealerName}'s address, contact details, and operating hours. Specializing in ${dealer.select_related_brand?.name || 'automotive brands'}, ${capitalDealerName} provides exceptional service.`,
         charset: "UTF-8",
         alternates: {
-            canonical: `https://carprices.ae/dealers/${dealer.id || 'unknown'}`,
+            canonical: `https://carprices.ae/dealers/${params.slug || 'unknown'}`,
         },
         keywords: `${capitalDealerName} deals, ${dealer.select_related_brand?.name || 'car brands'} dealer, ${capitalDealerName} contact details, ${capitalDealerName} address, ${capitalDealerName} operating hours`,
         robots: {

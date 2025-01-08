@@ -10,7 +10,7 @@ export async function generateMetadata() {
         description: "Share your car experience with CarPrices.ae! Write reviews to help others explore car models, specs, and features in UAE. Join our community of informed drivers today.",
         charset: "UTF-8",
         alternates: {
-            canonical: `https://carprices.ae/review/write`,
+            canonical: `https://carprices.ae/write-review`,
         },
         keywords: "write car review, car reviews UAE, share car experience, car model review, carprices.ae reviews",
         robots: {
