@@ -227,7 +227,7 @@ const CategoryList = ({ categories }) => (
             <h3 className="md:text-lg font-semibold">Related Categories</h3>
             <div className="flex flex-wrap gap-2 mt-4">
                 {categories.map(category => (
-                    <Link key={category.id} href={`/news/body-types/${category.slug}`}>
+                    <Link key={category.id} href={`/news/category/${category.slug}`}>
                         <div className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-[10px] font-medium hover:bg-blue-200 hover:text-blue-700 transition-colors">
                             {category.name}
                         </div>
