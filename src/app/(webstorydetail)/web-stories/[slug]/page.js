@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
         description: seo.metaDescription ? seo.metaDescription : "Read the latest story on Carprices.ae.",
         charset: "UTF-8",
         alternates: {
-            canonical: seo.canonicalURL || `https://carprices.ae/${story.slug}`,
+            canonical: seo.canonicalURL || `https://carprices.ae/web-stories/${story.slug}`,
         },
         keywords: seo.keyword || "cars, carprices, automotive, stories",
         robots: {
