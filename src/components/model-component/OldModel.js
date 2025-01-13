@@ -102,7 +102,7 @@ export default function OldModel({ model, currentYear }) {
 
             <div className="year_tab">
               <div className="container mx-auto">
-                <div className="tabs flex justify-between">
+                <div className="tabs !bg-white flex justify-between">
                   {tabButtons}
                   {sortedYears?.map((car) => (
                     <Link key={car?.year} className={`tab py-2 px-4 rounded-md cursor-pointer ${activeTab === car?.year
