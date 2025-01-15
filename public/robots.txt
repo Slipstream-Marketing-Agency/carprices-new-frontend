@@ -1,3 +1,7 @@
 User-agent: *
 Disallow: /brands/*/car-articles
+Disallow: /dealers/
+Disallow: /trim/
+Disallow: /news/body-types
+Disallow: /en/brands/
 Sitemap: https://carprices.ae/sitemap.xml

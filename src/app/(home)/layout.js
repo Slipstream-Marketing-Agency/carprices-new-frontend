@@ -8,6 +8,7 @@ import Script from "next/script";
 import StoreProvider from "../../../providers/StoreProvider";
 import CookiePopup from "@/components/layout/CookiePopup";
 import BlockDetector from "@/components/ads/BlockerDetect";
+import { fetchMetaData } from "@/lib/fetchMetaData";
 
 // Load Google Fonts (in this case, Poppins)
 const poppins = Poppins({
@@ -33,6 +34,28 @@ const poppins = Poppins({
 //   display: "swap", // Optimizes performance by using fallback fonts until the custom font loads
 // });
 
+export const metadata = {
+  title: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+  description: "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+  charset: "UTF-8",
+  alternates: {
+    canonical: `https://carprices.ae`,
+  },
+  keywords: "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+    description: "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+    url: "https://carprices.ae",
+  },
+  author: "CarPrices.ae Team",
+  icon: "./favicon.ico",
+}
 
 export default function RootLayout({ children, params }) {
 

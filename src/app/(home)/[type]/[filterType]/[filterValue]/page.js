@@ -11,8 +11,49 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import NewsletterSubscribe from '@/components/articles-component/NewsLetterSubscription';
 
-const VALID_TYPES = ['news', 'review', 'new-launches'];
+const VALID_TYPES = ['news', 'reviews', 'new-launches'];
 const VALID_FILTERS = ['category', 'tag'];
+
+const toTitleCase = (str) => {
+  return str
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+export async function generateMetadata({ params }) {
+  const { type, filterType, filterValue } = params;
+
+  // Validate type and filterType; if invalid, show 404 page
+  if (!VALID_TYPES.includes(type) || !VALID_FILTERS.includes(filterType)) {
+    notFound();
+  }
+
+  const readableValue = filterValue.replace(/-/g, ' '); // Convert URL-friendly to readable format
+  
+  return {
+    title: `${toTitleCase(readableValue)} - ${type.charAt(0).toUpperCase() + type.slice(1)} Articles in UAE - CarPrices.ae`,
+    description: `Discover the latest information about ${toTitleCase(readableValue)} in the ${type.toUpperCase()} section. Stay updated with reviews, comparisons, and news at CarPrices.ae.`,
+    charset: "UTF-8",
+    alternates: {
+      canonical: `https://carprices.ae/${type}/${filterType}/${filterValue}`,
+    },
+    keywords: `${toTitleCase(readableValue)}, ${type}, latest ${type} UAE, ${type} news UAE, ${type} reviews UAE, CarPrices.ae`,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: `${toTitleCase(readableValue)} - ${type.charAt(0).toUpperCase() + type.slice(1)} Articles in UAE - CarPrices.ae`,
+      description: `Discover the latest information about ${toTitleCase(readableValue)} in the ${type.toUpperCase()} section. Stay updated with reviews, comparisons, and news at CarPrices.ae.`,
+      url: `https://carprices.ae/${type}/${filterType}/${filterValue}`,
+    },
+    author: "CarPrices.ae Team",
+    icon: "./favicon.ico",
+  };
+}
 
 export default async function FilteredTypePage({ params, searchParams }) {
   const { type, filterType, filterValue } = params;
