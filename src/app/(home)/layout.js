@@ -46,16 +46,59 @@ export const metadata = {
     index: true,
     follow: true,
   },
-  structuredData: {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-    description: "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-    url: "https://carprices.ae",
-  },
   author: "CarPrices.ae Team",
   icon: "./favicon.ico",
 }
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Car Prices",
+      logo: "/assets/img/car-prices-logo.png",
+      description: "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      url: "https://carprices.ae",
+      legalName: "Car Prices",
+      telephone: "+971553956364",
+    },
+    {
+      "@type": "WebSite",
+      "name": "CarPrices.ae",
+      "url": "https://carprices.ae",
+      "description": "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Car Prices",
+        "logo": "/assets/img/car-prices-logo.png"
+      },
+      "inLanguage": "en",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://carprices.ae/search-cars"
+      }
+    },
+    {
+      "@type": "AboutPage",
+      "name": "About Us - CarPrices.ae",
+      "url": "https://carprices.ae/about",
+      "description": "Learn more about CarPrices.ae, the leading platform for exploring the latest car prices, specifications, and reviews in the UAE."
+    },
+    {
+      "@type": "ContactPage",
+      "name": "Contact Us - CarPrices.ae",
+      "url": "https://carprices.ae/contact-us",
+      "description": "Get in touch with CarPrices.ae for any inquiries about car prices, specifications, or services in the UAE.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+971553956364",
+        "contactType": "customer service",
+        "areaServed": "UAE",
+        "availableLanguage": ["English", "Arabic"]
+      }
+    }
+  ]
+};
+
 
 export default function RootLayout({ children, params }) {
 
@@ -65,6 +108,13 @@ export default function RootLayout({ children, params }) {
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
           crossOrigin="anonymous"></script>
         <meta name="google-adsense-account" content="ca-pub-4096282930416593" />
+        <script
+          key="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
       </head>
 
       <body className={`${poppins.className} antialiased`}> {/* Apply Google Font */}
@@ -78,7 +128,7 @@ export default function RootLayout({ children, params }) {
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-W564HNC');`,
           }}
-        /> 
+        />
         <noscript>
           {/* {process.env.NODE_ENV === 'development' && <Script
             strategy="afterInteractive" // Load the script after the page is interactive

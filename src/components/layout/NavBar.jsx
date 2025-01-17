@@ -32,6 +32,7 @@ import HoveredProfile from "./NavbarComponents/HoveredProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "@/store/slices/authSlice";
 import Search from "../common/Search";
+import BreadCrumbs from "../common/BreadCrumbs";
 
 
 export default function NavBar() {
@@ -383,7 +384,7 @@ export default function NavBar() {
     useEffect(() => {
         setHoveredMenuItem(null)
     }, [pathname])
-    
+
     const HoveredMenuItemDropdown = () => {
         if (hoveredMenuItem === 'search-cars') {
             return <HoveredSearchNewCar brands={brands} bodyTypes={bodyTypes} />
@@ -496,7 +497,7 @@ export default function NavBar() {
                                 </Link>
                             )}
                         </div>
-                        <div className={`flex gap-5 ${ scrolledDown ? '' : 'mt-2'}`}>
+                        <div className={`flex gap-5 ${scrolledDown ? '' : 'mt-2'}`}>
                             {links.map((link, i) => (
                                 <div
                                     key={i}
@@ -510,17 +511,17 @@ export default function NavBar() {
                                     >
                                         {link.label}
                                         {link.href !== '/compare-cars' &&
-                                        <span className="">
-                                            <svg
-                                                className="w-4 h-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                            </svg>
-                                        </span>
+                                            <span className="">
+                                                <svg
+                                                    className="w-4 h-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </span>
                                         }
                                     </Link>
 
@@ -665,6 +666,9 @@ export default function NavBar() {
                 )}
             </div>
             <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+            <div className="container">
+                <BreadCrumbs />
+            </div>
         </>
 
     )

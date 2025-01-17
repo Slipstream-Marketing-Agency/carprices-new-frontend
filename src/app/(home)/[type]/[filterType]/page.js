@@ -12,8 +12,9 @@ export async function generateStaticParams() {
 
 async function fetchData(type, slug) {
     try {
+        var timestamp = new Date().getTime();
         // Fetch the single article details
-        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
+        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`, {
             cache: "no-store",
         });
         const detailData = articleResponse.data?.data || null;
@@ -69,6 +70,39 @@ export default async function BlogDetailsPage({ params }) {
 
     const data = await fetchData(type, slug);
 
+    console.log(data.detailData, "articleData");
+
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": data.detailData?.title,
+        "description": data.detailData?.summary,
+        "author": {
+            "@type": "Person",
+            "name": "CarPrices.ae Team"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Car Prices",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "/assets/img/car-prices-logo.png"
+            }
+        },
+        "datePublished": new Date(data.detailData?.publishedAt).toISOString(),
+        "dateModified": new Date(data.detailData?.updatedAt).toISOString(),
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://carprices.ae/${type}/${slug}`
+        },
+        "image": {
+            "@type": "ImageObject",
+            "url": data.detailData?.coverImage?.url,
+            "width": 1200,
+            "height": 630
+        }
+    }
+
     const fetchFeaturedArticles = async () => {
         try {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
@@ -89,6 +123,10 @@ export default async function BlogDetailsPage({ params }) {
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
             <ArticleDetailWrapper data={data} type={type} slug={slug} featuredArticlesData={featuredArticlesData} />;
         </Suspense>
     )
