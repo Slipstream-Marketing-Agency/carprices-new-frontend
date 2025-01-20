@@ -1,19 +1,25 @@
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const BreadCrumbs = () => {
     const pathname = usePathname();
     const baseUrl = 'https://carprices.ae'; // Replace with your website URL
     const pathSegments = pathname.split('/').filter((segment) => segment);
+    // Check if the pathname starts with /brands/
+    if (!pathname.startsWith('/brands/')) {
+        return null; // Don't render breadcrumbs if the path doesn't start with /brands/
+    }
 
     // Generate breadcrumb items
     const breadcrumbs = pathSegments.map((segment, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name: segment.replace(/-/g, ' ').toUpperCase(), // Replace dashes with spaces and capitalize
-        item: `${baseUrl}/${pathSegments.slice(0, index + 1).join('/')}`,
-    }));
+        name: /^\d{4}$/.test(segment) // Check if the segment is a year
+            ? undefined // Skip name for year in schema
+            : segment.replace(/-/g, ' ').toUpperCase(), // Replace dashes with spaces and capitalize
+        item: `${baseUrl}/${pathSegments.slice(0, index + 1).join('/')}`, // Full path including year
+    })).filter((breadcrumb) => breadcrumb.name); // Remove schema items without a name
 
     // Add homepage as the first breadcrumb
     const breadcrumbSchema = {
@@ -40,18 +46,24 @@ const BreadCrumbs = () => {
                     </a>
                     {pathSegments.map((segment, index) => (
                         <div key={index} className="flex items-center space-x-2">
-                            <span> <ChevronRightIcon /> </span>
-                            <a
-                                href={`/${pathSegments.slice(0, index + 1).join('/')}`}
-                                className={`hover:text-blue-600 capitalize ${index === pathSegments.length - 1 ? 'font-semibold text-black' : ''
-                                    }`}
-                            >
-                                {segment.replace(/-/g, ' ')}
-                            </a>
+                            {!/^\d{4}$/.test(segment) ? ( // Skip displaying the year
+                                <>
+                                    <span>
+                                        <ChevronRightIcon />
+                                    </span>
+                                    <a
+                                        href={`/${pathSegments.slice(0, index + 1).join('/')}`}
+                                        className={`hover:text-blue-600 capitalize ${index === pathSegments.length - 1 ? 'font-semibold text-black' : ''
+                                            }`}
+                                    >
+                                        {segment.replace(/-/g, ' ')}
+                                    </a>
+                                </>
+                            ) : null}
                         </div>
                     ))}
-                </nav>}
-
+                </nav>
+            }
 
             {/* Breadcrumb Schema */}
             <script
@@ -60,6 +72,6 @@ const BreadCrumbs = () => {
             />
         </>
     );
-}
+};
 
-export default BreadCrumbs
+export default BreadCrumbs;

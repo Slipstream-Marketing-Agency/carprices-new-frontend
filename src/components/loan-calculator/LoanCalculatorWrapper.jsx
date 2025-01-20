@@ -7,80 +7,71 @@ import CalculatorContent from './CalculatorContent';
 export default function LoanCalculatorWrapper() {
     const faq = [
         {
-            question: <>Can I get a car loan in the UAE if I&apos;m not a UAE national?</>,
-            answer: (
-                <>
-                    Yes, many banks offer car loans to expatriates, but eligibility
-                    criteria may differ based on your visa type.
-                </>
-            ),
+            question: "Can I get a car loan in the UAE if I&apos;m not a UAE national?",
+            answer: `Yes, many banks offer car loans to expatriates, but eligibility
+                    criteria may differ based on your visa type.`,
             id: 1,
             condition: true,
         },
         {
-            question: (
-                <>What interest rates can I expect for a car loan in the UAE?</>
-            ),
-            answer: (
-                <>
-                    Interest rates vary between banks and can depend on factors like loan
-                    amount, tenure, and your creditworthiness.
-                </>
-            ),
+            question: "What interest rates can I expect for a car loan in the UAE?",
+            answer: `Interest rates vary between banks and can depend on factors like loan
+                    amount, tenure, and your creditworthiness.`,
             id: 2,
             condition: true,
         },
         {
-            question: (
-                <> Is it possible to finance a used luxury car with a car loan?</>
-            ),
-            answer: (
-                <>
-                    Yes, some banks in the UAE offer financing options for used luxury
-                    cars.
-                </>
-            ),
+            question: "Is it possible to finance a used luxury car with a car loan?",
+            answer: `Yes, some banks in the UAE offer financing options for used luxury
+                    cars.`,
             id: 3,
             condition: true,
         },
         {
-            question: <>Can I apply for a car loan without a UAE residence visa?</>,
-            answer: (
-                <>
-                    It&apos;s challenging, but some lenders offer car loans to individuals with
-                    certain visa types, such as employment or investor visas.
-                </>
-            ),
+            question: "Can I apply for a car loan without a UAE residence visa?",
+            answer: `It's challenging, but some lenders offer car loans to individuals with
+                    certain visa types, such as employment or investor visas.`,
             id: 4,
             condition: true,
         },
         {
-            question: <>What happens if I miss an EMI payment?</>,
-            answer: (
-                <>
+            question: "What happens if I miss an EMI payment?",
+            answer: `
                     Missing an EMI payment can result in late payment fees and negatively
-                    impact your credit score. It&apos;s essential to make payments on time.
-                </>
-            ),
+                    impact your credit score. It's essential to make payments on time.
+                `,
             id: 5,
             condition: true,
         },
         {
-            question: (
-                <>What banks can be loan providers for a Car loan in the UAE?</>
-            ),
-            answer: (
-                <>
-                    Emirates NBD, Dubai Islamic Bank, First Abu Dhabi Bank etc. offer a
+            question: "What banks can be loan providers for a Car loan in the UAE?",
+            answer: `Emirates NBD, Dubai Islamic Bank, First Abu Dhabi Bank etc. offer a
                     wide range of car loan options, including competitive interest rates
                     and flexible repayment terms. Their customer-centric approach makes
-                    them a top choice for many residents.
-                </>
-            ),
+                    them a top choice for many residents.`,
             id: 6,
             condition: true,
         },
     ];
+
+    // Function to generate the schema.org FAQ JSON-LD
+    const generateFAQSchema = (faqData) => {
+        return {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqData.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    // The answer should be plain text here
+                    "text": item.plainAnswer ? item.plainAnswer : (typeof item.answer === "string" ? item.answer : item.answer.toString().replace(/(<([^>]+)>)/gi, ""))
+                }
+            }))
+        };
+    };
+
+    const faqSchema = generateFAQSchema(faq);
 
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -89,6 +80,7 @@ export default function LoanCalculatorWrapper() {
     };
     return (
         <div className="grid sm:grid-cols-12 my-4 gap-16 px-6 sm:px-24 md:px-16 lg:p-50">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
             <div className="sm:col-span-9">
                 <CalculatorContent />
                 <h2 className="mt-8 mb-3 font-semibold text-2xl  text-lightgray capitalize">

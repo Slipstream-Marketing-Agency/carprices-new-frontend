@@ -21,17 +21,15 @@ export default function VehicleFaq({ trim }) {
   const faq = [
     {
       question: `What is the price of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,
-      answer: `The  ${trim?.year} ${trim?.brand} ${trim?.model} ${
-        trim?.name
-      } is priced at ${
-        trim?.price !== null
+      answer: `The  ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name
+        } is priced at ${trim?.price !== null
           ? "AED " +
-            trim?.price?.toLocaleString("en-AE", {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 2,
-            })
+          trim?.price?.toLocaleString("en-AE", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })
           : "TBD*"
-      }*.`,
+        }*.`,
       id: 1,
       condition: true,
     },
@@ -60,11 +58,9 @@ export default function VehicleFaq({ trim }) {
     },
     {
       question: `What type of engine and transmission does the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} have?`,
-      answer: `The ${trim?.year} ${trim?.brand} ${
-        trim?.name
-      } is equipped with a ${(trim?.displacement / 1000).toFixed(1)}L ${
-        trim?.engine
-      } engine and is paired with a ${trim?.transmission} transmission.`,
+      answer: `The ${trim?.year} ${trim?.brand} ${trim?.name
+        } is equipped with a ${(trim?.displacement / 1000).toFixed(1)}L ${trim?.engine
+        } engine and is paired with a ${trim?.transmission} transmission.`,
       id: 4,
       condition:
         trim?.fuelType === "Hybrid" ||
@@ -81,26 +77,20 @@ export default function VehicleFaq({ trim }) {
     },
     {
       question: `What safety features are included in the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?`,
-      answer: `Safety components of the ${trim?.year} ${trim?.brand} ${
-        trim?.name
-      } consist of ${trim?.airbags} airbags, ABS, ${
-        trim?.haveFrontParkAssist && "front park assist, "
-      }${trim?.haveRearParkAssist && "rear park assist, "}${
-        trim?.have360ParkingCamera && "360° rear parking camera, "
-      }${trim?.haveAdaptiveCuriseControl && "adaptive cruise control, "}${
-        trim?.haveLaneChangeAssist && "lane change assist"
-      }.`,
+      answer: `Safety components of the ${trim?.year} ${trim?.brand} ${trim?.name
+        } consist of ${trim?.airbags} airbags, ABS, ${trim?.haveFrontParkAssist && "front park assist, "
+        }${trim?.haveRearParkAssist && "rear park assist, "}${trim?.have360ParkingCamera && "360° rear parking camera, "
+        }${trim?.haveAdaptiveCuriseControl && "adaptive cruise control, "}${trim?.haveLaneChangeAssist && "lane change assist"
+        }.`,
       id: 5,
       condition: true,
     },
     {
       question: `How many passengers can the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} accommodate?
       `,
-      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${
-        trim?.name
-      } has a seating capacity of ${
-        trim?.seatingCapacity && trim?.seatingCapacity.split(" ")[0]
-      } passengers.
+      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name
+        } has a seating capacity of ${trim?.seatingCapacity && trim?.seatingCapacity.split(" ")[0]
+        } passengers.
       `,
       id: 6,
       condition: true,
@@ -108,13 +98,12 @@ export default function VehicleFaq({ trim }) {
     {
       question: ` What are the exterior dimensions of the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?
       `,
-      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${
-        trim?.name
-      } has dimensions of ${formatNumberWithCommas(
-        trim?.length
-      )}mm length, ${formatNumberWithCommas(
-        trim?.width
-      )}mm width, and ${formatNumberWithCommas(trim?.height)}mm height.
+      answer: `The ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name
+        } has dimensions of ${formatNumberWithCommas(
+          trim?.length
+        )}mm length, ${formatNumberWithCommas(
+          trim?.width
+        )}mm width, and ${formatNumberWithCommas(trim?.height)}mm height.
       `,
       id: 7,
       condition: true,
@@ -129,26 +118,20 @@ export default function VehicleFaq({ trim }) {
     {
       question: `Does the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name} come with any driver assistance features?
       `,
-      answer: `Yes, the ${trim?.year} ${trim?.brand} ${
-        trim?.name
-      } offers driver assistance features such as ${
-        trim?.haveAdaptiveCuriseControl && "cruise control, "
-      }${trim?.haveAdaptiveCuriseControl && "adaptive cruise control, "}${
-        trim?.haveLaneChangeAssist && "lane change assist"
-      } to enhance the driving experience.`,
+      answer: `Yes, the ${trim?.year} ${trim?.brand} ${trim?.name
+        } offers driver assistance features such as ${trim?.haveAdaptiveCuriseControl && "cruise control, "
+        }${trim?.haveAdaptiveCuriseControl && "adaptive cruise control, "}${trim?.haveLaneChangeAssist && "lane change assist"
+        } to enhance the driving experience.`,
       id: 9,
       condition: true,
     },
     {
       question: `What kind of connectivity and entertainment features are included in the ${trim?.year} ${trim?.brand} ${trim?.model} ${trim?.name}?
       `,
-      answer: ` The ${trim?.year} ${trim?.brand} ${trim?.name} comes with ${
-        trim?.haveAppleCarPlay && "Apple CarPlay, "
-      }${
-        trim?.haveAndroidAuto && "Android Auto, "
-      }compatibility for seamless connectivity ${
-        trim?.haveRearSeatEntertainment ? "and rear seat entertainment" : ""
-      }.`,
+      answer: ` The ${trim?.year} ${trim?.brand} ${trim?.name} comes with ${trim?.haveAppleCarPlay && "Apple CarPlay, "
+        }${trim?.haveAndroidAuto && "Android Auto, "
+        }compatibility for seamless connectivity ${trim?.haveRearSeatEntertainment ? "and rear seat entertainment" : ""
+        }.`,
       id: 10,
       condition: true,
     },
@@ -156,12 +139,32 @@ export default function VehicleFaq({ trim }) {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
+  // Function to generate the schema.org FAQ JSON-LD
+  const generateFAQSchema = (faqData) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          // The answer should be plain text here
+          "text": item.plainAnswer ? item.plainAnswer : (typeof item.answer === "string" ? item.answer : item.answer.toString().replace(/(<([^>]+)>)/gi, ""))
+        }
+      }))
+    };
+  };
+
+  const faqSchema = generateFAQSchema(faq);
+
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
   return (
     <div id="faq" className="my-3">
       <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
         <h2 className="font-semibold mb-5">
           FAQs (Frequently Asked Questions) on {trim?.year} {trim?.brand}{" "}
           {trim?.model} {trim?.name}
@@ -177,18 +180,16 @@ export default function VehicleFaq({ trim }) {
                       className="text-xl font-medium w-full px-4 py-2 text-left flex justify-between items-center bg-white rounded-t"
                     >
                       <span
-                        className={`${
-                          activeIndex === index ? "text-blue-700" : ""
-                        }`}
+                        className={`${activeIndex === index ? "text-blue-700" : ""
+                          }`}
                       >
                         {item.question}
                       </span>
                       <svg
-                        className={`w-6 h-6 transform ${
-                          activeIndex === index
+                        className={`w-6 h-6 transform ${activeIndex === index
                             ? "rotate-180 text-blue-700"
                             : ""
-                        }`}
+                          }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -203,11 +204,10 @@ export default function VehicleFaq({ trim }) {
                       </svg>
                     </button>
                     <div
-                      className={`overflow-hidden transition-[max-height] duration-500 ${
-                        activeIndex === index
+                      className={`overflow-hidden transition-[max-height] duration-500 ${activeIndex === index
                           ? "max-h-96 p-0"
                           : "max-h-0 p-0"
-                      }`}
+                        }`}
                     >
                       <p className="text-gray-700 p-4">{item.answer}</p>
                     </div>

@@ -238,10 +238,8 @@ export default function VehicleFaq({
   };
   return (
     <>
-      <Head>
-        {/* Add structured data for FAQPage */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      </Head>
+      {/* Add structured data for FAQPage */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <h2 className="font-semibold mb-5">
         FAQs (Frequently Asked Questions) on {year} {brand.name} {model.name}
       </h2>
