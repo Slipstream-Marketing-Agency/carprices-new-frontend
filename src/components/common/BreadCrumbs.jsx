@@ -6,9 +6,9 @@ const BreadCrumbs = () => {
     const pathname = usePathname();
     const baseUrl = 'https://carprices.ae'; // Replace with your website URL
     const pathSegments = pathname.split('/').filter((segment) => segment);
-    // Check if the pathname starts with /brands/
-    if (!pathname.startsWith('/brands/')) {
-        return null; // Don't render breadcrumbs if the path doesn't start with /brands/
+    // Check if the pathname starts with /brands/ or /body-types/
+    if (!pathname.startsWith('/brands') && !pathname.startsWith('/body-types')) {
+        return null; // Don't render breadcrumbs if the path doesn't start with /brands/ or /body-types/
     }
 
     // Generate breadcrumb items
