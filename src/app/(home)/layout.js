@@ -60,21 +60,16 @@ const structuredData = {
       url: "https://carprices.ae",
       legalName: "Car Prices",
       telephone: "+971553956364",
+      sameAs: ["https://www.facebook.com/carprices.ae/", "https://x.com/carprices_ae", "https://www.linkedin.com/company/carprices-ae/", "https://www.instagram.com/carprices.ae/"]
     },
     {
+      "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "CarPrices.ae",
       "url": "https://carprices.ae",
-      "description": "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Car Prices",
-        "logo": "/assets/img/car-prices-logo.png"
-      },
-      "inLanguage": "en",
       "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://carprices.ae/search-cars"
+          "@type": "SearchAction",
+          "target": "https://carprices.ae/search-cars?brand={brand}&bodytype={bodytype}",
+          "query-input": "name=brand name=bodytype"
       }
     },
     {

@@ -717,6 +717,9 @@ a,
 .article-content a {
   color: #3b82f6;
 }
+.article-content a>span {
+  color: #3b82f6 !important;
+}
 
 .article-content ol {
   list-style: decimal; /* Restores default ordered list numbering */

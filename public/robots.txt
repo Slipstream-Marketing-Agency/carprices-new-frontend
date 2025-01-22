@@ -4,4 +4,5 @@ Disallow: /dealers/
 Disallow: /trim/
 Disallow: /news/body-types
 Disallow: /en/brands/
+Disallow: /ar/
 Sitemap: https://carprices.ae/sitemap.xml
