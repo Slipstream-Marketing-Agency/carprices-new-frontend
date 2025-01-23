@@ -132,34 +132,82 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
     };
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().required("Name is required"),
+        full_name: Yup.string().required("Name is required"),
         email: Yup.string().email("Invalid email").required("Email is required"),
         dob: Yup.string().required("Date of Birth is required"),
-        phone: Yup.string().matches(/^[0-9]+$/, "Only numbers are allowed").min(8, "Must be at least 8 digits").required("Phone number is required"),
+        mobile_number: Yup.string().matches(/^[0-9]+$/, "Only numbers are allowed").min(8, "Must be at least 8 digits").required("Phone number is required"),
+        first_registered: Yup.string().required("First registered date is required"),
+        city_to_register: Yup.string().required("City is required"),
+        years_of_international_driving_experience: Yup.string().required("Driving experience is required"),
+        driving_in_uae: Yup.string().required("Driving in UAE is required"),
     });
 
-    const handleSubmitForm = async (values, setSubmitting) => {
+    const initialValues = {
+        brand_new: false,
+        first_car: false,
+        first_registered: "",
+        city_to_register: "",
+        is_the_current_policy_full_comprehensive: false,
+        current_policy_includes_agency_repair: false,
+        years_of_international_driving_experience: "",
+        driving_in_uae: "",
+        full_name: "",
+        mobile_number: "",
+        email: "",
+        dob: "",
+        insuranceType: "Fully Comprehensive",
+    };
+
+    const handleSubmitForm = async (values, { setSubmitting, resetForm }) => {
         try {
             console.log('submitting...')
             setLoading(true);
             setSubmitting(true);
-            // Check if reCAPTCHA is loaded
-            if (!window.grecaptcha) {
-                throw new Error("Google reCAPTCHA is not available.");
-            }
-            const token = await window.grecaptcha.execute(
-                process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-                { action: "submit" }
-            );
-
-            const response = await axios.post("/api/insurance-calculator", {
+            const data = {
+                year: selectedYear,
+                brand: selectedBrand,
+                model: selectedModel,
+                variant: selectedTrim,
+                nationality: "UAE",
+                country: "United Arab Emirates",
+                gcc_and_unmodified: true,
                 ...values,
-                recaptchaToken: token,
-            });
+                years_of_international_driving_experience: String(values.years_of_international_driving_experience || ""),
+                driving_in_uae: String(values.driving_in_uae || ""),
+            };
+            
+            // return
+            // Check if reCAPTCHA is loaded
+            // if (!window.grecaptcha) {
+            //     throw new Error("Google reCAPTCHA is not available.");
+            // }
+            // const token = await window.grecaptcha.execute(
+            //     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+            //     { action: "submit" }
+            // );
+
+            // const response = await axios.post("/api/insurance-calculator", {
+            //     ...values,
+            //     recaptchaToken: token,
+            // });
+
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}insurance-calculator-enquiries`,
+                {
+                  data,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
+                  },
+                }
+              );
+              console.log(response.status === 200)
 
             if (response.status === 200) {
                 setSnackbarOpen(true); // Open the snackbar
-                setSubmitted(true);
+                resetForm()
+                setCurrentStep("year")
             } else {
                 console.error("Error submitting form:", response);
             }
@@ -291,52 +339,196 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
 
                     {currentStep === "form" && (
                         <Formik
-                            initialValues={{ name: "", email: "", dob: "", phone: "" }}
+                            initialValues={initialValues}
                             validationSchema={validationSchema}
-                            onSubmit={(values, { setSubmitting }) => {
-                                handleSubmitForm(values, setSubmitting);
-                            }}
+                            onSubmit={handleSubmitForm}
                         >
                             {({ isValid, dirty, isSubmitting }) => (
-                                <Form className="w-full">
-                                    <h3 className="text-md font-semibold mb-4">Please Fill Your Details</h3>
-                                    <div className="mb-4">
+                                <Form className="w-full grid grid-cols-1 gap-6 bg-white p-6 rounded-lg shadow-lg border">
+                                    <h3 className="text-lg font-semibold text-gray-700">Please Fill Your Details</h3>
+
+                                    <div>
                                         <Field
-                                            name="name"
+                                            name="full_name"
                                             placeholder="Your Name"
-                                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         />
-                                        <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
+                                        <ErrorMessage
+                                            name="full_name"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
                                     </div>
-                                    <div className="mb-4">
+
+                                    <div>
                                         <Field
                                             name="email"
-                                            placeholder="Email"
-                                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                                            type="email"
+                                            placeholder="Email Address"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         />
-                                        <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
-                                    </div>
-                                    <div className="mb-4">
-                                        <Field
-                                            type="date"
-                                            name="dob"
-                                            placeholder="Date of Birth (DD/MMM/YYYY)"
-                                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                                        <ErrorMessage
+                                            name="email"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
                                         />
-                                        <ErrorMessage name="dob" component="div" className="text-red-500 text-sm" />
                                     </div>
-                                    <div className="mb-4">
+
+                                    <div>
                                         <Field
-                                            name="phone"
+                                            name="mobile_number"
+                                            type="tel"
                                             placeholder="Mobile Number"
-                                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         />
-                                        <ErrorMessage name="phone" component="div" className="text-red-500 text-sm" />
+                                        <ErrorMessage
+                                            name="mobile_number"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
                                     </div>
-                                    <p>By Clicking on &quot;Proceed&quot;, I declare that I agree to the website Privacy Policy and Terms of Use.</p>
+
+                                    <div>
+                                        <Field
+                                            name="dob"
+                                            type="date"
+                                            placeholder="Date of Birth"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                        <ErrorMessage
+                                            name="dob"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <Field
+                                            name="first_registered"
+                                            type="date"
+                                            placeholder="First Registered Date"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                        <ErrorMessage
+                                            name="first_registered"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <Field
+                                            name="city_to_register"
+                                            placeholder="City to Register"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                        <ErrorMessage
+                                            name="city_to_register"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <Field
+                                            name="brand_new"
+                                            type="checkbox"
+                                            className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                                        />
+                                        <label htmlFor="brand_new" className="text-gray-600">
+                                            Brand New
+                                        </label>
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <Field
+                                            name="first_car"
+                                            type="checkbox"
+                                            className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                                        />
+                                        <label htmlFor="first_car" className="text-gray-600">
+                                            First Car
+                                        </label>
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <Field
+                                            name="is_the_current_policy_full_comprehensive"
+                                            type="checkbox"
+                                            className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                                        />
+                                        <label htmlFor="is_the_current_policy_full_comprehensive" className="text-gray-600">
+                                            Is the Current Policy Fully Comprehensive?
+                                        </label>
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <Field
+                                            name="current_policy_includes_agency_repair"
+                                            type="checkbox"
+                                            className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                                        />
+                                        <label htmlFor="current_policy_includes_agency_repair" className="text-gray-600">
+                                            Current Policy Includes Agency Repair
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <Field
+                                            name="years_of_international_driving_experience"
+                                            type="number"
+                                            placeholder="Years of International Driving Experience"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                        <ErrorMessage
+                                            name="years_of_international_driving_experience"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <Field
+                                            name="driving_in_uae"
+                                            placeholder="Driving in UAE"
+                                            type="number"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        />
+                                        <ErrorMessage
+                                            name="driving_in_uae"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <Field
+                                            as="select"
+                                            name="insuranceType"
+                                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        >
+                                            <option value="Fully Comprehensive">Fully Comprehensive</option>
+                                            <option value="Third Party">Third Party</option>
+                                        </Field>
+                                        <ErrorMessage
+                                            name="insuranceType"
+                                            component="div"
+                                            className="text-red-500 text-sm mt-1"
+                                        />
+                                    </div>
+
+                                    <p className="text-sm text-gray-500">
+                                        By clicking on &quot;Proceed&quot;, I declare that I agree to the website{" "}
+                                        <span className="text-blue-600 underline cursor-pointer">Privacy Policy</span> and{" "}
+                                        <span className="text-blue-600 underline cursor-pointer">Terms of Use</span>.
+                                    </p>
+
                                     <button
                                         type="submit"
-                                        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:outline-none mt-4"
+                                        className={`w-full bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus:outline-none transition duration-200 ease-in-out ${!(isValid && dirty) || isSubmitting
+                                                ? "opacity-50 cursor-not-allowed"
+                                                : ""
+                                            }`}
                                         disabled={!(isValid && dirty) || isSubmitting}
                                     >
                                         {isSubmitting ? "Submitting..." : "Submit"}
