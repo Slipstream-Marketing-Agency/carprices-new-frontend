@@ -138,10 +138,15 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
         phone: Yup.string().matches(/^[0-9]+$/, "Only numbers are allowed").min(8, "Must be at least 8 digits").required("Phone number is required"),
     });
 
-    const handleSubmitForm = async (values) => {
+    const handleSubmitForm = async (values, setSubmitting) => {
         try {
+            console.log('submitting...')
             setLoading(true);
             setSubmitting(true);
+            // Check if reCAPTCHA is loaded
+            if (!window.grecaptcha) {
+                throw new Error("Google reCAPTCHA is not available.");
+            }
             const token = await window.grecaptcha.execute(
                 process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
                 { action: "submit" }
@@ -153,8 +158,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
             });
 
             if (response.status === 200) {
-                setSubmitted(true);
                 setSnackbarOpen(true); // Open the snackbar
+                setSubmitted(true);
             } else {
                 console.error("Error submitting form:", response);
             }
@@ -171,7 +176,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
 
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
-      };
+    };
     return (
         <div className="container grid grid-cols-12">
             <div className="col-span-12 md:col-span-9">
@@ -289,8 +294,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                             initialValues={{ name: "", email: "", dob: "", phone: "" }}
                             validationSchema={validationSchema}
                             onSubmit={(values, { setSubmitting }) => {
-                                setSubmitting(true);
-                                handleSubmitForm(values).finally(() => setSubmitting(false));
+                                handleSubmitForm(values, setSubmitting);
                             }}
                         >
                             {({ isValid, dirty, isSubmitting }) => (
