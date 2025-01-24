@@ -31,8 +31,6 @@ const emirates = [
 ];
 
 const LoanInquiryForm = ({ car, price, tenure, interest_rate, down_payment, monthly_emi, total_interest, total_amount_payable, isOpen, onClose }) => {
-  console.log(car, price, tenure, interest_rate, down_payment, monthly_emi, total_interest, total_amount_payable, "dddddddddddddddd");
-
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);

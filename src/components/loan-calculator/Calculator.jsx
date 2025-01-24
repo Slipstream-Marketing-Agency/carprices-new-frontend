@@ -105,8 +105,8 @@ export default function Calculator({
                         <div className="text-white uppercase text-sm font-bold">
                             {selectedYear} {selectedBrand}
                         </div>
-                        <div className="text-2xl lg:text-3xl font-semibold text-white">
-                            {selectedModelName} {selectedVariant}
+                        <div className="text-2xl lg:text-3xl capitalize font-semibold text-white">
+                            {selectedModel} {selectedVariant}
                         </div>
                     </div>
                 </div>
@@ -249,7 +249,15 @@ export default function Calculator({
                     </div>
                 </div>
             </div>
-            <LoanInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} car={selectedYear + " " + selectedBrand + " " + selectedModelName + " " + selectedVariant} price={price} tenure={N} interest_rate={R} down_payment={downPayment} monthly_emi={Number(emi).toLocaleString("en-US", { maximumFractionDigits: 0 })} total_interest={Number(payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 })} total_amount_payable={(totalCost).toLocaleString("en-US", { maximumFractionDigits: 0 })} />
+            <LoanInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}
+                car={selectedYear + " " + selectedBrand + " " + selectedModel + " " + selectedVariant}
+                price={Number(price).toLocaleString("en-US", {maximumFractionDigits:0})}
+                tenure={Number(N).toLocaleString("en-US", {maximumFractionDigits:0})}
+                interest_rate={Number((price - (price * (downPayment / 100))) * (R / 100)).toLocaleString("en-US", {maximumFractionDigits:0})}
+                down_payment={Number(price * (downPayment / 100)).toLocaleString("en-US", {maximumFractionDigits:0})}
+                monthly_emi={Number(emi).toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                total_interest={Number(payableInterest).toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                total_amount_payable={(totalCost).toLocaleString("en-US", { maximumFractionDigits: 0 })} />
         </>
     );
 }

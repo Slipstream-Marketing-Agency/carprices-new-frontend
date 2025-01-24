@@ -14,10 +14,22 @@ async function fetchData(type, slug) {
     try {
         var timestamp = new Date().getTime();
         // Fetch the single article details
-        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`, {
-            cache: "no-store",
-        });
-        const detailData = articleResponse.data?.data || null;
+        const articleResponse = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`,
+            {
+              method: "GET",
+              cache: "no-store", // Ensures no caching
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          
+          if (!articleResponse.ok) {
+            throw new Error(`HTTP error! Status: ${articleResponse.status}`);
+          }
+          
+          const detailData = (await articleResponse.json())?.data || null;
 
 
         return {
@@ -69,8 +81,9 @@ export default async function BlogDetailsPage({ params }) {
     const { type, filterType: slug } = params; // Destructure type and use filterType as slug
 
     const data = await fetchData(type, slug);
-
-    console.log(data.detailData, "articleData");
+    if (!VALID_TYPES.includes(type) || !data) {
+        return notFound();
+    }
 
     const structuredData = {
         "@context": "https://schema.org",
