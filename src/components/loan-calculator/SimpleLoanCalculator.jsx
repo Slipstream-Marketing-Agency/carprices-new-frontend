@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import Price from "@/utils/Price";
 Chart.register(...registerables);
 
 export default function SimpleLoanCalculator() {
     const [P, setP] = useState(100000); // Loan amount
     const [R, setR] = useState(5); // Interest rate
     const [N, setN] = useState(3); // Tenure in years
-    const [downPayment, setDownPayment] = useState(10); // Down payment percentage
+    const [downPayment, setDownPayment] = useState(20); // Down payment percentage
     const [emi, setEmi] = useState(0);
     const [payableInterest, setPayableInterest] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
@@ -80,11 +81,14 @@ export default function SimpleLoanCalculator() {
 
                     {/* Tenure */}
                     <div className="p-4 border rounded-lg shadow-inner">
-                        <label className="text-gray-500 text-sm">Tenure (Years)</label>
+                        <div className="flex justify-between">
+                            <label className="text-gray-500 text-sm">Tenure</label>
+                            <span className="">{N} years</span>
+                        </div>
                         <input
                             type="range"
                             min="1"
-                            max="10"
+                            max="5"
                             step="1"
                             value={N}
                             onChange={(e) => setN(parseFloat(e.target.value))}
@@ -92,38 +96,56 @@ export default function SimpleLoanCalculator() {
                         />
                         <div className="text-sm flex justify-between text-gray-700 mt-1">
                             <span>1 year</span>
-                            <span>{N} years</span>
-                            <span>10 years</span>
+
+                            <span>5 years</span>
                         </div>
                     </div>
 
                     {/* Interest Rate */}
                     <div className="p-4 border rounded-lg shadow-inner">
-                        <label className="text-gray-500 text-sm">Interest Rate (%)</label>
+                        <div className="flex justify-between">
+                            <label className="text-gray-500 text-sm">Interest Rate</label>
+                            <span>
+                                {R}% ({P ? <Price data={(P - (P * (downPayment / 100))) * (R / 100)} /> : 0} per year)
+                            </span>
+                        </div>
                         <input
-                            type="number"
+                            type="range"
+                            min="1.9"
+                            max="8"
+                            step="0.1"
                             value={R}
                             onChange={(e) => setR(parseFloat(e.target.value))}
-                            className="w-full mt-2 p-2 border rounded"
+                            className="w-full h-2 rounded-full bg-blue-200 cursor-pointer"
                         />
+                        <div className="text-sm flex justify-between text-gray-700">
+                            <span>1.9%</span>
+
+                            <span>8%</span>
+                        </div>
                     </div>
 
                     {/* Down Payment */}
                     <div className="p-4 border rounded-lg shadow-inner">
-                        <label className="text-gray-500 text-sm">Down Payment (%)</label>
+                        <div className="flex justify-between">
+                            <label className="text-gray-500 text-sm">Down Payment</label>
+                            <span>
+                                {downPayment}% ({P ? <Price data={(P * (downPayment / 100))} /> : 0})
+                            </span>
+                        </div>
                         <input
                             type="range"
-                            min="0"
-                            max="50"
+                            min="20"
+                            max="80"
                             step="1"
                             value={downPayment}
                             onChange={(e) => setDownPayment(parseFloat(e.target.value))}
                             className="w-full mt-2"
                         />
                         <div className="text-sm flex justify-between text-gray-700 mt-1">
-                            <span>0%</span>
-                            <span>{downPayment}%</span>
-                            <span>50%</span>
+                            <span>20%</span>
+                            
+                            <span>80%</span>
                         </div>
                     </div>
                 </div>
