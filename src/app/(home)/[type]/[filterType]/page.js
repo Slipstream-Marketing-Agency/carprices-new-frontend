@@ -14,8 +14,9 @@ async function fetchData(type, slug) {
     try {
         var timestamp = new Date().getTime();
         // Fetch the single article details
+        const url = `${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`;
         const articleResponse = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`,
+            url,
             {
               method: "GET",
               cache: "no-store", // Ensures no caching
