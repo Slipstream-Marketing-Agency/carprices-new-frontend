@@ -18,6 +18,8 @@ const poppins = Poppins({
   display: "swap", // Optimizes performance by using fallback fonts until the font loads
 });
 
+export const fetchCache = 'force-no-store';
+
 // Load all Gilroy fonts (normal and italic versions)
 // const gilroy = localFont({
 //   src: [
