@@ -243,7 +243,7 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
                     />
                 </div>
                 <div className="md:col-span-3">
-                    <div className='my-6 sticky top-0 md:block hidden'>
+                    <div className='my-6 sticky top-16 md:block hidden'>
                         <Suspense fallback={<div>Loading ad...</div>}>
                             <Ad300x600 dataAdSlot="8425835299" />
                         </Suspense>

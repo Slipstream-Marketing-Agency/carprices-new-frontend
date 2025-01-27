@@ -96,7 +96,7 @@ const VideoPage = async ({ params }) => {
                 </div>
             </div>
             <div className="col-span-3">
-                <div className="sticky top-0">
+                <div className="sticky top-16">
                     <Suspense fallback={<div>Loading ad...</div>}>
                         <Ad300x600 dataAdSlot="1077828318" />
                     </Suspense>
