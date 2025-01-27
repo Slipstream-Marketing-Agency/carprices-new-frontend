@@ -15,6 +15,7 @@ import FeaturedSlider from "./FeaturedSlider";
 import Relations from "./Relations";
 import ArticleComment from "./ArticleComment";
 import InArticleAd from "../ads/inArticleAd";
+import Ad300X250 from "../ads/Ad300x250";
 
 export default function ArticleDetailWrapper({ data, type, slug, featuredArticlesData }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -62,7 +63,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
             const videoId = extractYouTubeVideoId(paragraph);
     
             // Ad configuration: Show ads after every 3 paragraphs
-            const adIndex = 3;
+            const adIndex = 2;
             const isAdSlot = (index + 1) % adIndex === 0;
     
             // Render content with an ad slot conditionally
@@ -86,7 +87,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                 ),
                 isAdSlot && (
                     <div key={`ad-${index}`} className="ad-container my-4">
-                        <InArticleAd dataAdSlot={'6707256067'} />
+                        <InArticleAd dataAdSlot={'1038344998'} />
                     </div>
                 ),
             ].filter(Boolean); // Remove `false` values from the array
@@ -162,12 +163,17 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                     </div>
                     <div className="sm:col-span-3 space-y-6">
                         <FeaturedSlider featuredArticles={featuredArticlesData} type={type} />
+                        <div className='my-6'>
+                            <Suspense fallback={<div>Loading ad...</div>}>
+                                <Ad300X250 dataAdSlot="1038608329" />
+                            </Suspense>
+                        </div>
                         <TagsList tags={articleTags} />
                         <CategoryList categories={articleCategories} />
                         <Relations slug={slug} />
 
                         <LastTwoWeeksArticles />
-                        <div className='my-6 sticky top-0  md:block hidden'>
+                        <div className='my-6 sticky top-16  md:block hidden'>
                             <Suspense fallback={<div>Loading ad...</div>}>
                                 <Ad300x600 dataAdSlot="3687406715" />
                             </Suspense>

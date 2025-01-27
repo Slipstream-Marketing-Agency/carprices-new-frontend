@@ -1,12 +1,14 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import MultiStepCarSelection from '@/components/compare-cars/MultiStepCarSelection';
 import CompareCarCard from '@/components/compare-cars/CompareCarCard';
 import CarComparisonTable from '@/components/compare-cars/CarComparisonTable';
 import { fetchCarComparisonData } from '@/lib/fetchCarComparisonData';
 import { usePathname, useRouter } from 'next/navigation';
 import NewCarSelection from './NewCarSelection';
+import Ad728x90 from '../ads/Ad728x90';
+import Ad300X250 from '../ads/Ad300x250';
 
 export default function CompareCarsWrap({ params, slugOverride = null }) {
     const slug = slugOverride || params.slug || "default-slug";
@@ -139,6 +141,18 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
                     </button>
                 </div>
             }
+
+            <div className="my-10">
+                {/* Desktop Ad */}
+                <div className="hidden md:block mt-4">
+                    <Suspense fallback={<div>Loading ad...</div>}><Ad728x90 dataAdSlot="3117713420" /></Suspense>
+                </div>
+
+                {/* Mobile Ad */}
+                <div className="block md:hidden w-full">
+                    <Suspense fallback={<div>Loading ad...</div>}><Ad300X250 dataAdSlot="1689345018" /></Suspense>
+                </div>
+            </div>
 
             {(tableData.length > 0 && pathname !== '/compare-cars') && <CarComparisonTable tableData={tableData} />}
         </div>
