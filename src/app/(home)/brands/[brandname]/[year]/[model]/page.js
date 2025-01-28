@@ -13,6 +13,7 @@ export async function generateMetadata({ params }) {
         );
         const currentmodel = currentmodelResponse.data.data.model;
         const seoData = currentmodelResponse.data.data.seo;
+        const mainTrim = currentmodel?.highTrim[0];
 
         const minPrice = currentmodel?.price?.min;
 
@@ -31,7 +32,13 @@ export async function generateMetadata({ params }) {
             //     }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
             charset: "UTF-8",
             alternates: {
-                ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
+                canonical: seoData?.canonicalURL || `https://carprices.ae/brands/${brandname}/${year}/${model}`,
+            },
+            openGraph: {
+                title: false ? seoData.metaTitle : `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
+                description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
+                image: mainTrim?.featuredImage === null ? "https://carprices.ae/assets/img/car-placeholder.png" : mainTrim?.featuredImage,
+                url: `https://carprices.ae/brands/${brandname}/${year}/${model}`,
             },
             // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
             robots: {

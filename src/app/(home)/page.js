@@ -37,6 +37,12 @@ export async function generateMetadata() {
     alternates: {
       canonical: `https://carprices.ae`,
     },
+    openGraph: {
+      title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+      description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      image: "https://carprices.ae/assets/img/car-prices-logo.png",
+      url: "https://carprices.ae",
+    },
     keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
     robots: {
       index: true,

@@ -9,7 +9,7 @@ import Ad300x600 from "@/components/ads/Ad300x600";
 import { Alert, Snackbar } from "@mui/material";
 
 const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
-    const [currentStep, setCurrentStep] = useState("year");
+    const [currentStep, setCurrentStep] = useState("brand");
     const [selectedYear, setSelectedYear] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
@@ -22,7 +22,8 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
     const [trims, setTrims] = useState([]);
 
     useEffect(() => {
-        fetchYears();
+        // fetchYears();
+        fetchBrands(2025);
     }, []);
 
     const fetchYears = async () => {
@@ -539,7 +540,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                     )}
 
                     <div className="flex justify-center mt-6 w-full">
-                        {currentStep !== "year" && (
+                        {currentStep !== "brand" && (
                             <button
                                 onClick={handleBackStep}
                                 className="bg-[#77cdf2] w-full text-white p-2 rounded-lg hover:bg-[#77cdf2]"

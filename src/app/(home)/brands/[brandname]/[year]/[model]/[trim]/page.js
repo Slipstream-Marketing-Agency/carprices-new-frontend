@@ -34,7 +34,23 @@ export async function generateMetadata({ params }) {
                 } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
             charset: "UTF-8",
             alternates: {
-                ...(seoData?.canonicalURL && { canonical: seoData.canonicalURL }),
+                canonical: seoData?.canonicalURL || `https://carprices.ae/brands/${brandname}/${year}/${model}/${trim}`,
+            },
+            openGraph: {
+                title: seoData?.metaTitle ? seoData.metaTitle : `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+                description: seoData?.metaDescription ? seoData.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
+                    } price in UAE starts at ${trimData.price <= 0
+                        ? "TBD"
+                        : "AED" +
+                        " " +
+                        trimData.price?.toLocaleString("en-AE", {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 2,
+                        })
+                    }*.Check out ${trimData?.model
+                    } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
+                image: trimData?.featuredImage === null ? "https://carprices.ae/assets/img/car-placeholder.png" : trimData?.featuredImage,
+                url: `https://carprices.ae/brands/${brandname}/${year}/${model}/${trim}`,
             },
             // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
             robots: {
