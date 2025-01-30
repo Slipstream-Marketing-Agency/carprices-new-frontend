@@ -20,18 +20,19 @@ export async function generateMetadata({ params }) {
         const seoData = trimData?.seo;
 
         return {
-            title: seoData?.metaTitle ? seoData.metaTitle : `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
-            description: seoData?.metaDescription ? seoData.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
-                } price in UAE starts at ${trimData.price <= 0
-                    ? "TBD"
-                    : "AED" +
-                    " " +
-                    trimData.price?.toLocaleString("en-AE", {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 2,
-                    })
-                }*.Check out ${trimData?.model
-                } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
+            title: false ? seoData.metaTitle : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+            // description: seoData?.metaDescription ? seoData.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
+            //     } price in UAE starts at ${trimData.price <= 0
+            //         ? "TBD"
+            //         : "AED" +
+            //         " " +
+            //         trimData.price?.toLocaleString("en-AE", {
+            //             minimumFractionDigits: 0,
+            //             maximumFractionDigits: 2,
+            //         })
+            //     }*.Check out ${trimData?.model
+            //     } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
+            description: false ? seoData.metaDescription : `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} with the latest specs, pricing, and features in the UAE. Find your next car with CarPrices.ae.`,
             charset: "UTF-8",
             alternates: {
                 canonical: seoData?.canonicalURL || `https://carprices.ae/brands/${brandname}/${year}/${model}/${trim}`,

@@ -10,7 +10,7 @@ import { Alert, Snackbar } from "@mui/material";
 
 const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
     const [currentStep, setCurrentStep] = useState("brand");
-    const [selectedYear, setSelectedYear] = useState("");
+    const [selectedYear, setSelectedYear] = useState(2025);
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
     const [selectedTrim, setSelectedTrim] = useState("");
