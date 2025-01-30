@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import CarCard from './CarCard';
+// import CarCard from './CarCard';
 import Pagination from './Pagination';
 import ExpandableText from '../common/ExpandableText';
 import { fetchModels } from '@/lib/brandapis';
@@ -17,6 +17,7 @@ import RelatedVideos from '../car-videos/RelatedVideos';
 import InnerNavigation from './InnerNavigation';
 import Ad300x600 from '../ads/Ad300x600';
 import PriceListTable from './PriceListTable';
+import CarCard from '../car-components/CarCard';
 
 export default function SingleBrand({ brandname, year, initialModels, pagination, brandDetails, search }) {
     const router = useRouter();
@@ -292,7 +293,8 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                         (models?.length > 0 ? <div className="grid grid-cols-12 gap-5">
                             {(!isSearching ? initialModels : models).map((car) => (
                                 <div className="md:col-span-4 col-span-12 relative" key={car.id}>
-                                    <CarCard car={car} brandname={selectedBrand} />
+                                    {/* <CarCard car={car} brandname={selectedBrand} /> */}
+                                    <CarCard car={car} />
                                 </div>
                             ))}
                         </div> : <div className="flex flex-col items-center justify-center text-gray-500 mt-10">
