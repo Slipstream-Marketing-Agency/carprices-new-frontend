@@ -188,7 +188,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                 </div>
 
                 <div className="col-span-12 lg:col-span-7 md:pl-10">
-                    <div className="relative flex items-center gap-2">
+                    <div className="relative flex flex-col md:flex-row items-center gap-2 flex-wrap">
                         <h1 className="g font-semibold md:text-2xl">
                             {mainTrim?.year} {brand?.name} {model?.name}{" "}
                             <span className="text-[18px] font-light">

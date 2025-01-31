@@ -370,7 +370,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
       </div>
 
       <div className="col-span-12 lg:col-span-6 md:pl-10">
-        <div className="relative flex flex-col md:flex-row items-center gap-2">
+        <div className="relative flex flex-col md:flex-row items-center gap-2 flex-wrap">
           <h1 className="g font-semibold text-lg md:text-2xl">
             {trimData?.year} {trimData?.brand} {trimData?.model}{" "}
             {trimData?.name}

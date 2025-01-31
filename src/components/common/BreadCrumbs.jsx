@@ -40,7 +40,7 @@ const BreadCrumbs = () => {
         <>
             {/* Breadcrumb Navigation */}
             {pathSegments.length > 0 &&
-                <nav className="flex items-center space-x-2 text-sm text-gray-600 mt-5" aria-label="breadcrumb">
+                <nav className="flex flex-wrap items-center space-x-2 text-sm text-gray-600 mt-5" aria-label="breadcrumb">
                     <a href="/" className="hover:text-blue-600">
                         Home
                     </a>

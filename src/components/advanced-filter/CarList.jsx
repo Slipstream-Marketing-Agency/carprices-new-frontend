@@ -6,7 +6,12 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import CarCard from "../car-components/CarCard";
 import CarCardSkeleton from "../car-components/CarCardSkeleton";
 
-const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
+const CarList = ({ 
+  cars, 
+  totalCars, 
+  setIsLoading, 
+  isLoading,
+}) => {
   const router = useRouter();
   const pathname = usePathname(); // Get the current path
   const searchParams = useSearchParams(); // Get the search parameters (query)
@@ -111,8 +116,8 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
 
   return (
     <>
-      <div className="mt-3 flex items-center flex-wrap">
-        {filters.map((filter, index) => (
+      <div className="mt-3 flex items-center flex-wrap gap-2">
+        {/* {filters.map((filter, index) => (
           <Chip
             key={index}
             label={
@@ -131,11 +136,29 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
             }
             onDelete={() => removeFilter(filter.type, filter.value)}
           />
+        ))} */}
+        {filters.map((filter, index) => (
+          <span
+            key={index}
+            className="primary-delete text-sm font-semibold inline-flex items-center transition-all duration-300 transform hover:scale-105 hover:text-blue-700 hover:bg-blue-200 cursor-pointer px-3 py-1 rounded-md bg-blue-50 active:bg-blue-200"
+          >
+            <span className="mr-2">
+              {
+                filter.type === "price"
+                  ? `AED ${filter.label
+                    .split("-")
+                    .map((price) => new Intl.NumberFormat().format(price))
+                    .join(" - ")}`
+                  : filter.label
+              }
+            </span>
+            <CloseIcon onClick={() => removeFilter(filter.type, filter.value)} className="rounded-full p-[1px] font-bold bg-white h-4 w-4" />
+          </span>
         ))}
 
         {filters.length > 0 && (
           <span
-            className="primary-delete text-sm ml-3 font-semibold inline-flex items-center transition-all duration-300 transform hover:scale-105 hover:text-blue-700 hover:bg-blue-200 cursor-pointer px-3 py-1 rounded-md bg-blue-50 active:bg-blue-200"
+            className="primary-delete text-sm font-semibold inline-flex items-center transition-all duration-300 transform hover:scale-105 hover:text-blue-700 hover:bg-blue-200 cursor-pointer px-3 py-1 rounded-md bg-blue-50 active:bg-blue-200"
             onClick={clearFilters}
           >
             <svg
@@ -156,7 +179,7 @@ const CarList = ({ cars, totalCars, setIsLoading, isLoading }) => {
           </span>
         )}
       </div>
-      
+
       <div className="grid gap-4 mt-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3">
         {isLoading ? (
           // Show skeletons while loading
