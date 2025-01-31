@@ -470,11 +470,11 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
               },
               {
                 label: `${t.power} (hp)`,
-                value: trimData?.power,
+                value: trimData?.power ? Number(trimData.power).toLocaleString("en-US", {maximumFractionDigits:0}) : 'N/A',
               },
               {
                 label: `${t.torque} (Nm)`,
-                value: trimData?.torque,
+                value: trimData?.torque ? Number(trimData.torque).toLocaleString("en-US", {maximumFractionDigits:0}) : 'N/A',
               },
               {
                 label: t.seats,

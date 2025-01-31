@@ -229,11 +229,11 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                 },
                                 {
                                     label: `${t.power} (hp)`,
-                                    value: minPower === maxPower ? minPower : `${minPower} to ${maxPower}`,
+                                    value: minPower === maxPower ? Number(minPower).toLocaleString("en-US", {maximumFractionDigits:0}) : `${Number(minPower).toLocaleString("en-US", {maximumFractionDigits:0})} to ${Number(maxPower).toLocaleString("en-US", {maximumFractionDigits:0})}`,
                                 },
                                 {
                                     label: `${t.torque} (Nm)`,
-                                    value: minTorque === maxTorque ? minTorque : `${minTorque} to ${maxTorque}`,
+                                    value: minTorque === maxTorque ? Number(minTorque).toLocaleString("en-US", {maximumFractionDigits:0}) : `${Number(minTorque).toLocaleString("en-US", {maximumFractionDigits:0})} to ${Number(maxTorque).toLocaleString("en-US", {maximumFractionDigits:0})}`,
                                 },
                                 {
                                     label: t.seats,
