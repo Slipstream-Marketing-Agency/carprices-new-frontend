@@ -140,6 +140,7 @@ export default function Home() {
                   }));
                 }
               }}
+              
               required
               maxLength={10}
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
@@ -152,6 +153,7 @@ export default function Home() {
               onChange={handleChange}
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             >
+
               <option>Abu Dhabi</option>
               <option>Dubai</option>
               <option>Sharjah</option>
