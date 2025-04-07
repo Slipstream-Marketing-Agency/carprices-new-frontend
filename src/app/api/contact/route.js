@@ -20,7 +20,7 @@ export async function POST(req) {
     const mailOptions = {
       from: process.env.SMTP_PASSWORD,
       // from: "asad@slipstream.agency",
-      to: "sahin@slipstream.agency",
+      to: "ahmed@slipstream.agency",
       // to: "info@smartmobilityint.com",
       subject: "New offer Form Submission",
       html: `
