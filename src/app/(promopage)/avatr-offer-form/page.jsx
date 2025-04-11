@@ -219,7 +219,7 @@ export default function Home() {
 
             {/* <div className="block lg:hidden">
               <Suspense fallback={<div>Loading ad…</div>}>
-                <Ad970x250 dataAdSlot="6424416548" />
+                <Ad970x250 dataAdSlot="6087017302" />
               </Suspense>
             </div> */}
           </div>
