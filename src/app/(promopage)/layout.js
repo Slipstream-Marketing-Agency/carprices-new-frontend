@@ -31,6 +31,18 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
         <script src="https://cdn.tailwindcss.com"></script>
+             <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16899666326"
+        />
+        <script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-16899666326');
+          `}
+        </script>
       </head>
       <body className={`${poppins.className} antialiased`}>
       <StoreProvider>
