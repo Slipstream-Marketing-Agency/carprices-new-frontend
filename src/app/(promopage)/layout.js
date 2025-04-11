@@ -1,6 +1,9 @@
 import "./../avatr.css";
-import Header from "@/components/promo/Header";
-import Footer from "@/components/promo/Footer";
+// import Header from "@/components/promo/Header";
+// import Footer from "@/components/promo/Footer";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
+import StoreProvider from "../../../providers/StoreProvider";
 
 export const metadata = {
   title: "AVATR OFFER FORM - OFFICIAL AVATR DEALER IN UAE",
@@ -20,9 +23,13 @@ export default function RootLayout({ children }) {
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body className="antialiased font-sans">
-        <Header />
+      <StoreProvider>
+      <NavBar />
+      </StoreProvider>
+        {/* <Header /> */}
         {children}
         <Footer />
+        
       </body>
     </html>
   );

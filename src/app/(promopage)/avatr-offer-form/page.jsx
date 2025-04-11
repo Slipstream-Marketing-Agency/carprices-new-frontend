@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import Ad300x600 from "@/components/ads/Ad300x600";
+import Ad728x90 from "@/components/ads/Ad728x90";
+import Ad970x250 from "@/components/ads/Ad970x250";
+import { Suspense, useState } from "react";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Swal from "sweetalert2";
 
@@ -86,7 +89,6 @@ export default function Home() {
 
       <div className="container mx-auto my-12 lg:px-40 sm:px-14 px-5">
         <div className="flex flex-col lg:flex-row gap-10 justify-between">
-
           {/* Offer Card */}
           <div className="bg-white border-4 border-black p-8 rounded-3xl shadow-md w-full lg:w-1/3">
             <h2 className="text-2xl font-bold">AVATR Offer</h2>
@@ -96,7 +98,9 @@ export default function Home() {
               <li>3 Years / 60,000 KM Service Contract</li>
               <li>2 Years Complimentary Etisalat Connectivity</li>
               <li>Free Registration, Tinting & Insurance</li>
-              <li>7 kWh Charger + Installation & Extra 2 kWh Portable Charger</li>
+              <li>
+                7 kWh Charger + Installation & Extra 2 kWh Portable Charger
+              </li>
               <li>24/7 Road Assistance</li>
             </ul>
           </div>
@@ -106,7 +110,9 @@ export default function Home() {
             onSubmit={handleSubmit}
             className="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2"
           >
-            <label className="block text-gray-700 font-semibold mt-4">Name *</label>
+            <label className="block text-gray-700 font-semibold mt-4">
+              Name *
+            </label>
             <input
               type="text"
               name="name"
@@ -116,7 +122,9 @@ export default function Home() {
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">Email *</label>
+            <label className="block text-gray-700 font-semibold mt-4">
+              Email *
+            </label>
             <input
               type="email"
               name="email"
@@ -126,7 +134,9 @@ export default function Home() {
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">Phone *</label>
+            <label className="block text-gray-700 font-semibold mt-4">
+              Phone *
+            </label>
             <input
               type="text"
               name="phone"
@@ -140,20 +150,20 @@ export default function Home() {
                   }));
                 }
               }}
-              
               required
               maxLength={10}
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">Emirates</label>
+            <label className="block text-gray-700 font-semibold mt-4">
+              Emirates
+            </label>
             <select
               name="emirates"
               value={formData.emirates}
               onChange={handleChange}
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             >
-
               <option>Abu Dhabi</option>
               <option>Dubai</option>
               <option>Sharjah</option>
@@ -163,7 +173,9 @@ export default function Home() {
               <option>Fujairah</option>
             </select>
 
-            <label className="block text-gray-700 font-semibold mt-4">Vehicle of Interest</label>
+            <label className="block text-gray-700 font-semibold mt-4">
+              Vehicle of Interest
+            </label>
             <select
               name="vehicle"
               value={formData.vehicle}
@@ -193,16 +205,29 @@ export default function Home() {
             </div>
           </form>
 
-          <div className=" p-8 rounded-xl w-full lg:w-1/3">
+          <div className="  rounded-xl w-full lg:w-1/3">
             {/* Adds content goes here */}
-          </div>
 
+            <div className="hidden lg:block">
+              <Suspense fallback={<div>Loading ad…</div>}>
+                <Ad300x600 dataAdSlot="6424416548" />
+              </Suspense>
+            </div>
+
+            {/* Lower: only on small/medium screens */}
+
+            {/* <div className="block lg:hidden">
+              <Suspense fallback={<div>Loading ad…</div>}>
+                <Ad970x250 dataAdSlot="6424416548" />
+              </Suspense>
+            </div> */}
+
+          </div>
         </div>
 
-        <div className=" p-8 rounded-xl w-full lg:w-1/1 my-10">
-            {/* Adds content goes here */}
-          </div>
-
+        {/* <div className=" p-8 rounded-xl w-full lg:w-1/1 my-10">
+          
+        </div> */}
       </div>
     </div>
   );
