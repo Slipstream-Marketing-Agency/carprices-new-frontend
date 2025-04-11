@@ -92,7 +92,7 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-5 justify-between">
           {/* Offer Card */}
           <div className="bg-white border-4 border-black p-8 rounded-3xl shadow-md w-full lg:w-1/3">
-            <h2 className="text-lg lg:text-2xl font-semibold">AVATR Offer</h2>
+           <a  href="https://avatruae.com/" > <h2 className="text-lg lg:text-2xl font-semibold">AVATR Offer</h2> </a>
             <ul className="mt-6 list-disc list-inside text-xs lg:text-sm">
               <li className="mt-[10px] text-[16px] ">
                 8 Years Battery Warranty (Unlimited Mileage)
