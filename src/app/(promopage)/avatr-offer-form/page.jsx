@@ -114,7 +114,11 @@ export default function Home() {
               </li>
               <li className="mt-[18px] text-[16px]">24/7 Road Assistance</li>
             </ul>
-            <a href="https://avatruae.com/?utm_source=link&utm_medium=cp&utm_campaign=traffic-backlink" style={{marginTop:'20px'}} >
+
+            <br />
+            <br />
+            <br />
+            <a href="https://avatruae.com/?utm_source=link&utm_medium=cp&utm_campaign=traffic-backlink" >
                 <button
                   type="button"
                   className="bg-black text-white py-2 px-4 rounded-md font-semibold hover:bg-gray-800 transition cursor-pointer"
