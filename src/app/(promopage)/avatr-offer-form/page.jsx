@@ -90,18 +90,28 @@ export default function Home() {
       <div className="container mx-auto my-12 lg:px-40 sm:px-14 px-5">
         <div className="flex flex-col lg:flex-row gap-10 justify-between">
           {/* Offer Card */}
-          <div className="bg-white border-4 border-black p-8 rounded-3xl shadow-md w-full lg:w-1/3">
-            <h2 className="text-lg lg:text-2xl font-bold">AVATR Offer</h2>
-            <ul className="mt-6 space-y-2 list-disc list-inside text-sm lg:text-base">
-              <li>8 Years Battery Warranty (Unlimited Mileage)</li>
-              <li>5 Years Warranty (Unlimited Mileage)</li>
-              <li>3 Years / 60,000 KM Service Contract</li>
-              <li>2 Years Complimentary Etisalat Connectivity</li>
-              <li>Free Registration, Tinting & Insurance</li>
-              <li>
+          <div className="bg-white border-2 border-black p-4 rounded-3xl shadow-md w-full lg:w-1/3">
+            <h2 className="text-lg lg:text-2xl font-semibold">AVATR Offer</h2>
+            <ul className="mt-6 list-disc list-inside text-xs lg:text-sm">
+              <li className="mt-[10px]">
+                8 Years Battery Warranty (Unlimited Mileage)
+              </li>
+              <li className="mt-[18px]">
+                5 Years Warranty (Unlimited Mileage)
+              </li>
+              <li className="mt-[18px]">
+                3 Years / 60,000 KM Service Contract
+              </li>
+              <li className="mt-[18px]">
+                2 Years Complimentary Etisalat Connectivity
+              </li>
+              <li className="mt-[18px]">
+                Free Registration, Tinting & Insurance
+              </li>
+              <li className="mt-[18px]">
                 7 kWh Charger + Installation & Extra 2 kWh Portable Charger
               </li>
-              <li>24/7 Road Assistance</li>
+              <li className="mt-[18px]">24/7 Road Assistance</li>
             </ul>
           </div>
 
@@ -110,9 +120,7 @@ export default function Home() {
             onSubmit={handleSubmit}
             className="bg-white p-8 rounded-lg shadow-lg w-full lg:w-1/2"
           >
-            <label className="block text-gray-700 font-semibold mt-4">
-              Name *
-            </label>
+            <label className="block   mt-4">Name *</label>
             <input
               type="text"
               name="name"
@@ -122,9 +130,7 @@ export default function Home() {
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">
-              Email *
-            </label>
+            <label className="block   mt-4">Email *</label>
             <input
               type="email"
               name="email"
@@ -134,9 +140,7 @@ export default function Home() {
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">
-              Phone *
-            </label>
+            <label className="block   mt-4">Phone *</label>
             <input
               type="text"
               name="phone"
@@ -155,9 +159,7 @@ export default function Home() {
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-black"
             />
 
-            <label className="block text-gray-700 font-semibold mt-4">
-              Emirates
-            </label>
+            <label className="block   mt-4">Emirates</label>
             <select
               name="emirates"
               value={formData.emirates}
@@ -173,9 +175,7 @@ export default function Home() {
               <option>Fujairah</option>
             </select>
 
-            <label className="block text-gray-700 font-semibold mt-4">
-              Vehicle of Interest
-            </label>
+            <label className="block   mt-4">Vehicle of Interest</label>
             <select
               name="vehicle"
               value={formData.vehicle}
@@ -221,7 +221,6 @@ export default function Home() {
                 <Ad970x250 dataAdSlot="6424416548" />
               </Suspense>
             </div> */}
-
           </div>
         </div>
 
