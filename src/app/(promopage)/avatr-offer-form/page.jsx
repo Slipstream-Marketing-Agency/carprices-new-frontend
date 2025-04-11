@@ -115,7 +115,7 @@ export default function Home() {
               <li className="mt-[18px] text-[16px]">24/7 Road Assistance</li>
             </ul>
 
-            <br />
+       
             <br />
        
             <a href="https://avatruae.com/?utm_source=link&utm_medium=cp&utm_campaign=traffic-backlink" >
