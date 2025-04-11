@@ -118,14 +118,18 @@ export default function Home() {
        
             <br />
        
+            <center>
             <a href="https://avatruae.com/?utm_source=link&utm_medium=cp&utm_campaign=traffic-backlink" >
+                <center>
                 <button
                   type="button"
                   className="bg-black text-white py-2 px-4 rounded-md font-semibold hover:bg-gray-800 transition cursor-pointer"
                 >
-                 Explore Avatr
+                 Explore AVATR
                 </button>
+                </center>
               </a>
+            </center>
           </div>
 
           {/* Contact Form */}
