@@ -117,7 +117,7 @@ export default function Home() {
 
             <br />
             <br />
-            <br />
+       
             <a href="https://avatruae.com/?utm_source=link&utm_medium=cp&utm_campaign=traffic-backlink" >
                 <button
                   type="button"
