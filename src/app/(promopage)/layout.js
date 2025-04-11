@@ -3,7 +3,17 @@ import "./../avatr.css";
 // import Footer from "@/components/promo/Footer";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import { Poppins } from "next/font/google";
+import "./../globals.css";
 import StoreProvider from "../../../providers/StoreProvider";
+
+// Load Google Fonts (in this case, Poppins)
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"], // Adjust weights as needed
+  style: ["normal"], // You can add "italic" if needed
+  subsets: ["latin"], // Specify the subset (for example, 'latin')
+  display: "swap", // Optimizes performance by using fallback fonts until the font loads
+});
 
 export const metadata = {
   title: "AVATR OFFER FORM - OFFICIAL AVATR DEALER IN UAE",
@@ -22,9 +32,13 @@ export default function RootLayout({ children }) {
         />
         <script src="https://cdn.tailwindcss.com"></script>
       </head>
-      <body className="antialiased font-sans">
+      <body className={`${poppins.className} antialiased`}>
       <StoreProvider>
       <NavBar />
+
+
+
+
       </StoreProvider>
         {/* <Header /> */}
         {children}
