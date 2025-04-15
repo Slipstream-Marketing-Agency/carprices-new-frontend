@@ -28,6 +28,10 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700&family=Geist+Mono&display=swap"
           rel="stylesheet"
         />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=G-83HBSF6KZ6`}
+        />
       </head>
       <body className={`${poppins.className} antialiased`}>
         {/* Tailwind CDN (not recommended for production — should use PostCSS build) */}
