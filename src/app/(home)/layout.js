@@ -102,7 +102,7 @@ export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
       <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
           crossOrigin="anonymous"></script>
         <meta name="google-adsense-account" content="ca-pub-4096282930416593" />
         <script
@@ -142,7 +142,7 @@ export default function RootLayout({ children, params }) {
           {/* {process.env.NODE_ENV === 'development' && <Script
             strategy="afterInteractive" // Load the script after the page is interactive
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4096282930416593"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
             crossOrigin="anonymous"
           />} */}
 
