@@ -84,7 +84,7 @@ export default function TrendingCars({ featuredCars }) {
                         ))}
                     </Slider>
                     <div className="md:block hidden mt-4">
-                        <Suspense fallback={<div>Loading ad...</div>}><Ad728x90 dataAdSlot="6424416548" /></Suspense>
+                       
                     </div>
                 </div>
                 <div className="sm:hidden block overflow-x-auto m-2 custom-scrollbar">
