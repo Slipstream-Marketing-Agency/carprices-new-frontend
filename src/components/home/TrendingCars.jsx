@@ -69,7 +69,7 @@ export default function TrendingCars({ featuredCars }) {
             </h2>
 
             <div className="absolute top-10 right-0 xl:block hidden">
-                ahmed testing
+               <Suspense fallback={<div>Loading ad...</div>}><Ad300x600 dataAdSlot="4432678024" /></Suspense>
             </div>
 
 
