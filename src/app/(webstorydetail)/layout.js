@@ -6,8 +6,7 @@ export default function RootLayout({ children }) {
       <head>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
           crossOrigin="anonymous"></script>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
-     crossorigin="anonymous"></script>
+            
         <meta name="google-adsense-account" content="ca-pub-4857144107996534" />
       </head>
       <body>
