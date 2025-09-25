@@ -1,29 +1,55 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import SearchForTheBest from "@/components/home/SearchForTheBest";
 import FilterLayout from "@/components/multi-step-filter/FilterLayout";
 import { getCarSection } from "@/lib/api";
-import HeroSection from '@/components/home/HeroSection';
-import SeoLinksHome from '@/components/common/SeoLinksHome';
-import { fetchMetaData } from '@/lib/fetchMetaData';
-import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
-import { Suspense } from 'react';
-import CarCardSkeleton from '@/components/car-components/CarCardSkeleton';
-import CarDealersHome from '@/components/home/CarDealersHome';
+import HeroSection from "@/components/home/HeroSection";
+import SeoLinksHome from "@/components/common/SeoLinksHome";
+import { fetchMetaData } from "@/lib/fetchMetaData";
+import SelectedCompareCarsSection from "@/components/home/SelectedCompareCarsSection";
+import { Suspense } from "react";
+import CarCardSkeleton from "@/components/car-components/CarCardSkeleton";
+import CarDealersHome from "@/components/home/CarDealersHome";
+import Link from "next/link";
 
 // Dynamically import components
-const TrendingCars = dynamic(() => import('@/components/home/TrendingCars'), {
-  ssr: false
+const TrendingCars = dynamic(() => import("@/components/home/TrendingCars"), {
+  ssr: false,
 });
-const FeaturedNews = dynamic(() => import('@/components/home/FeaturedNews'), { ssr: false });
-const MostPopularCarSection = dynamic(() => import('@/components/home/MostPopularCarSection'), { ssr: false });
-const UpcomingCars = dynamic(() => import('@/components/home/UpcomingCars'), { ssr: false });
-const ChooseBrand = dynamic(() => import('@/components/home/ChooseBrand'), { ssr: false });
-const CustomAdComponent = dynamic(() => import('@/components/home/CustomAdComponent'), { ssr: false });
-const ChooseBodyType = dynamic(() => import('@/components/home/ChooseBodyType'), { ssr: false });
-const ServicesAdComponent = dynamic(() => import('@/components/home/ServicesAdComponent'), { ssr: false });
-const WebStories = dynamic(() => import('@/components/home/WebStories'), { ssr: false });
-const TrendingVideos = dynamic(() => import('@/components/home/TrendingVideos'), { ssr: false });
-const TrendingNews = dynamic(() => import('@/components/home/TrendingNews'), { ssr: false });
+const FeaturedNews = dynamic(() => import("@/components/home/FeaturedNews"), {
+  ssr: false,
+});
+const MostPopularCarSection = dynamic(
+  () => import("@/components/home/MostPopularCarSection"),
+  { ssr: false }
+);
+const UpcomingCars = dynamic(() => import("@/components/home/UpcomingCars"), {
+  ssr: false,
+});
+const ChooseBrand = dynamic(() => import("@/components/home/ChooseBrand"), {
+  ssr: false,
+});
+const CustomAdComponent = dynamic(
+  () => import("@/components/home/CustomAdComponent"),
+  { ssr: false }
+);
+const ChooseBodyType = dynamic(
+  () => import("@/components/home/ChooseBodyType"),
+  { ssr: false }
+);
+const ServicesAdComponent = dynamic(
+  () => import("@/components/home/ServicesAdComponent"),
+  { ssr: false }
+);
+const WebStories = dynamic(() => import("@/components/home/WebStories"), {
+  ssr: false,
+});
+const TrendingVideos = dynamic(
+  () => import("@/components/home/TrendingVideos"),
+  { ssr: false }
+);
+const TrendingNews = dynamic(() => import("@/components/home/TrendingNews"), {
+  ssr: false,
+});
 
 // Metadata generation
 export async function generateMetadata() {
@@ -31,19 +57,29 @@ export async function generateMetadata() {
   const metaData = await fetchMetaData(slug);
 
   return {
-    title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-    description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+    title:
+      metaData?.title ||
+      "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+    description:
+      metaData?.description ||
+      "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
     charset: "UTF-8",
     alternates: {
       canonical: `https://carprices.ae`,
     },
     openGraph: {
-      title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-      description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      title:
+        metaData?.title ||
+        "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+      description:
+        metaData?.description ||
+        "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
       image: "https://carprices.ae/assets/img/car-prices-logo.png",
       url: "https://carprices.ae",
     },
-    keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+    keywords:
+      metaData?.keywords ||
+      "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
     robots: {
       index: true,
       follow: true,
@@ -51,8 +87,12 @@ export async function generateMetadata() {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      name: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-      description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
+      name:
+        metaData?.title ||
+        "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
+      description:
+        metaData?.description ||
+        "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
       url: "https://carprices.ae",
     },
     author: "Carprices.ae Team",
@@ -64,9 +104,13 @@ export async function generateMetadata() {
 async function fetchHomeData() {
   try {
     const [featuredCarsRes, homeDataRes, articlesRes] = await Promise.all([
-      getCarSection('featured'),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}home/find`, { cache: 'force-cache' }).then(res => res.json()),
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/home`, { cache: 'force-cache' }).then(res => res.json())
+      getCarSection("featured"),
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}home/find`, {
+        cache: "force-cache",
+      }).then((res) => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/home`, {
+        cache: "force-cache",
+      }).then((res) => res.json()),
     ]);
 
     return {
@@ -75,7 +119,7 @@ async function fetchHomeData() {
       articles: articlesRes?.data,
     };
   } catch (error) {
-    console.error('Failed to fetch data:', error);
+    console.error("Failed to fetch data:", error);
     return {
       featuredCars: null,
       homeData: null,
@@ -93,9 +137,10 @@ export async function generateStaticParams() {
 export default async function Home() {
   const { featuredCars, homeData, articles } = await fetchHomeData();
 
-  const featuredCarsData = Array.isArray(featuredCars) && featuredCars.length > 0
-    ? featuredCars[0]
-    : null;
+  const featuredCarsData =
+    Array.isArray(featuredCars) && featuredCars.length > 0
+      ? featuredCars[0]
+      : null;
 
   const brands = homeData?.brand || [];
   const bodyTypes = homeData?.bodyTypes || [];
@@ -109,6 +154,28 @@ export default async function Home() {
         <FilterLayout />
       </div>
       <SearchForTheBest />
+      <Link href="https://shozon.com/en/uae/motors/used-cars" target="_blank" className="my-4">
+        <img
+          src="/assets/shozon/728-90.jpg"
+          alt="SHOZON – Buy & Sell Cars (728×90)"
+          className="hidden md:block mx-auto w-[728px] h-[90px] object-contain"
+          width={728}
+          height={90}
+          loading="lazy"
+        />
+
+        {/* Mobile-only (300×250) */}
+        <img
+          src="/assets/shozon/300-250.jpg"
+          alt="SHOZON – Buy & Sell Cars (300×250)"
+          className="block md:hidden mx-auto w-[300px] h-[250px] object-contain"
+          width={300}
+          height={250}
+          loading="lazy"
+        />
+      </Link>
+      {/* Desktop-only (728×90) */}
+
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
       <MostPopularCarSection />
