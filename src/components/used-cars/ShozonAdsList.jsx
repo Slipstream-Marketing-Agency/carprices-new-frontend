@@ -27,6 +27,12 @@ const SORT_TYPES = [
   "Year Lowest to Highest",
 ];
 
+// Affiliate id (from env, fallback to "stream")
+const AFFILIATE_ID =
+  (typeof process !== "undefined" &&
+    process.env?.NEXT_PUBLIC_SHOZON_AFF?.trim()) ||
+  "stream";
+
 // Ad assets + link
 const SHOZON_LINK = "https://shozon.com/en/uae/motors/used-cars";
 const ADS = {
@@ -35,6 +41,29 @@ const ADS = {
   BANNER_468x60: "/assets/shozon/468-60-Car-1.jpg",
 };
 
+/* ---------------------------- affiliate utils --------------------------- */
+/**
+ * Append ?aff=<id> to a URL if it's not already present.
+ * Safely preserves existing query params and hash.
+ */
+function appendAffiliateParam(url, affiliate = AFFILIATE_ID) {
+  try {
+    // Provide a base for relative URLs to avoid URL constructor errors
+    const base =
+      typeof window !== "undefined" ? window.location.origin : "https://shozon.com";
+    const u = new URL(url, base);
+    if (affiliate && !u.searchParams.has("aff")) {
+      u.searchParams.set("aff", affiliate);
+    }
+    return u.toString();
+  } catch {
+    if (!affiliate) return url;
+    const join = url.includes("?") ? "&" : "?";
+    // Very last-resort fallback if URL parsing failed
+    if (/\baff=/.test(url)) return url;
+    return `${url}${join}aff=${encodeURIComponent(affiliate)}`;
+  }
+}
 
 /* --------------------------------- icons -------------------------------- */
 const IconFilter = (props) => (
@@ -147,6 +176,12 @@ export default function ShozonAdsList() {
   const [hasMore, setHasMore] = useState(true);
   const sentinelRef = useRef(null);
   const observerRef = useRef(null);
+
+  // Compute affiliate-decorated banner link once
+  const shozonBannerHref = useMemo(
+    () => appendAffiliateParam(SHOZON_LINK),
+    []
+  );
 
   // Debounce keyword
   useEffect(() => {
@@ -313,7 +348,7 @@ export default function ShozonAdsList() {
       {/* Mobile top 468x60 ad */}
       <div className="md:hidden mb-4 flex justify-center">
         <a
-          href={SHOZON_LINK}
+          href={shozonBannerHref}
           target="_blank"
           rel="noreferrer"
           className="block"
@@ -544,128 +579,139 @@ export default function ShozonAdsList() {
           ) : (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {items.map((ad, idx) => (
-                  <>
-                    <article
-                      key={ad.id}
-                      className="group rounded-2xl border overflow-hidden shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 bg-white cursor-pointer"
-                      role={ad?.url ? "link" : undefined}
-                      tabIndex={ad?.url ? 0 : -1}
-                      aria-label={ad?.title ? `Open ${ad.title}` : "Open ad"}
-                      onClick={() => {
-                        if (ad?.url)
-                          window.open(ad.url, "_blank", "noopener,noreferrer");
-                      }}
-                      onKeyDown={(e) => {
-                        if (!ad?.url) return;
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          window.open(ad.url, "_blank", "noopener,noreferrer");
-                        }
-                      }}
-                    >
-                      {ad.primary_image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          alt={ad.title || "Vehicle"}
-                          src={ad.primary_image}
-                          className="aspect-[16/10] w-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="aspect-[16/10] w-full bg-gray-100" />
-                      )}
-                      <div className="p-4 space-y-2">
-                        <div className="flex items-start justify-between gap-3">
-                          <h3 className="font-semibold leading-snug line-clamp-2">
-                            {ad.title || "Untitled"}
-                          </h3>
-                          <span className="shrink-0 text-xs text-gray-500">
-                            {ad.time}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="text-lg font-semibold">
-                            {ad.price}
-                          </div>
-                          {ad.emirate && (
-                            <span className="text-xs rounded-full border px-2 py-1 bg-white">
-                              {ad.emirate}
-                            </span>
-                          )}
-                        </div>
-                        {Array.isArray(ad.features) &&
-                          ad.features.length > 0 && (
-                            <div className="flex flex-wrap gap-2 pt-2">
-                              {ad.features.slice(0, 4).map((f, i2) => (
-                                <span
-                                  key={i2}
-                                  className="text-xs rounded-full border px-2 py-1 bg-white"
-                                  title={`${f.title}: ${f.value}`}
-                                >
-                                  {f.title}: {f.value}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        {Array.isArray(ad.tree) && ad.tree.length > 0 && (
-                          <div className="text-xs text-gray-500 pt-2">
-                            {ad.tree.map((t) => t.title).join(" › ")}
-                          </div>
-                        )}
-                        {ad.url && (
-                          <a
-                            className="inline-flex items-center gap-1 mt-2 text-sm underline underline-offset-2 decoration-gray-400 hover:opacity-80"
-                            href={ad.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            View on Shozon
-                            <svg
-                              viewBox="0 0 24 24"
-                              className="h-3.5 w-3.5"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M7 17L17 7M9 7h8v8"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </article>
+                {items.map((ad, idx) => {
+                  const adHref = ad?.url ? appendAffiliateParam(ad.url) : null;
 
-                    {/* Mobile-only 300x250 ad after every 5 cars */}
-                    {(idx + 1) % 5 === 0 && (
-                      <div
-                        key={`ad-300x250-${idx}`}
-                        className="md:hidden col-span-1 flex justify-center"
+                  return (
+                    <div key={ad.id} className="contents">
+                      <article
+                        className="group rounded-2xl border overflow-hidden shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 bg-white cursor-pointer"
+                        role={adHref ? "link" : undefined}
+                        tabIndex={adHref ? 0 : -1}
+                        aria-label={ad?.title ? `Open ${ad.title}` : "Open ad"}
+                        onClick={() => {
+                          if (adHref)
+                            window.open(
+                              adHref,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                        }}
+                        onKeyDown={(e) => {
+                          if (!adHref) return;
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            window.open(
+                              adHref,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }
+                        }}
                       >
-                        <a
-                          href={SHOZON_LINK}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="block"
-                        >
+                        {ad.primary_image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
                           <img
-                            src={ADS.RECT_300x250}
-                            alt="ShOZON - Buy & Sell Cars (300x250)"
-                            className="w-[300px] h-[250px] object-contain"
-                            width={300}
-                            height={250}
+                            alt={ad.title || "Vehicle"}
+                            src={ad.primary_image}
+                            className="aspect-[16/10] w-full object-cover"
                             loading="lazy"
                           />
-                        </a>
-                      </div>
-                    )}
-                  </>
-                ))}
+                        ) : (
+                          <div className="aspect-[16/10] w-full bg-gray-100" />
+                        )}
+                        <div className="p-4 space-y-2">
+                          <div className="flex items-start justify-between gap-3">
+                            <h3 className="font-semibold leading-snug line-clamp-2">
+                              {ad.title || "Untitled"}
+                            </h3>
+                            <span className="shrink-0 text-xs text-gray-500">
+                              {ad.time}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="text-lg font-semibold">
+                              {ad.price}
+                            </div>
+                            {ad.emirate && (
+                              <span className="text-xs rounded-full border px-2 py-1 bg-white">
+                                {ad.emirate}
+                              </span>
+                            )}
+                          </div>
+                          {Array.isArray(ad.features) &&
+                            ad.features.length > 0 && (
+                              <div className="flex flex-wrap gap-2 pt-2">
+                                {ad.features.slice(0, 4).map((f, i2) => (
+                                  <span
+                                    key={i2}
+                                    className="text-xs rounded-full border px-2 py-1 bg-white"
+                                    title={`${f.title}: ${f.value}`}
+                                  >
+                                    {f.title}: {f.value}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          {Array.isArray(ad.tree) && ad.tree.length > 0 && (
+                            <div className="text-xs text-gray-500 pt-2">
+                              {ad.tree.map((t) => t.title).join(" › ")}
+                            </div>
+                          )}
+                          {adHref && (
+                            <a
+                              className="inline-flex items-center gap-1 mt-2 text-sm underline underline-offset-2 decoration-gray-400 hover:opacity-80"
+                              href={adHref}
+                              target="_blank"
+                              rel="noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              View on Shozon
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="h-3.5 w-3.5"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M7 17L17 7M9 7h8v8"
+                                  stroke="currentColor"
+                                  strokeWidth="1.5"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </a>
+                          )}
+                        </div>
+                      </article>
+
+                      {/* Mobile-only 300x250 ad after every 5 cars */}
+                      {(idx + 1) % 5 === 0 && (
+                        <div
+                          key={`ad-300x250-${idx}`}
+                          className="md:hidden col-span-1 flex justify-center"
+                        >
+                          <a
+                            href={shozonBannerHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="block"
+                          >
+                            <img
+                              src={ADS.RECT_300x250}
+                              alt="ShOZON - Buy & Sell Cars (300x250)"
+                              className="w-[300px] h-[250px] object-contain"
+                              width={300}
+                              height={250}
+                              loading="lazy"
+                            />
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Infinite sentinel */}
@@ -701,7 +747,7 @@ export default function ShozonAdsList() {
         <aside className="hidden md:block md:col-span-3">
           <div className="sticky top-24">
             <a
-              href={SHOZON_LINK}
+              href={shozonBannerHref}
               target="_blank"
               rel="noreferrer"
               className="block"
