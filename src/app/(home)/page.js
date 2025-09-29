@@ -154,26 +154,32 @@ export default async function Home() {
         <FilterLayout />
       </div>
       <SearchForTheBest />
-      <Link href="https://shozon.com/en/uae/motors/used-cars" target="_blank" className="my-4">
-        <img
-          src="/assets/shozon/728-90.jpg"
-          alt="SHOZON – Buy & Sell Cars (728×90)"
-          className="hidden md:block mx-auto w-[728px] h-[90px] object-contain"
-          width={728}
-          height={90}
-          loading="lazy"
-        />
+     <Link
+  href={`https://shozon.com/en/uae/motors/used-cars?aff=${encodeURIComponent(process.env.NEXT_PUBLIC_SHOZON_AFF || "stream")}`}
+  target="_blank"
+  rel="noopener"
+  className="my-4"
+>
+  <img
+    src="/assets/shozon/728-90.jpg"
+    alt="SHOZON – Buy & Sell Cars (728×90)"
+    className="hidden md:block mx-auto w-[728px] h-[90px] object-contain"
+    width={728}
+    height={90}
+    loading="lazy"
+  />
 
-        {/* Mobile-only (300×250) */}
-        <img
-          src="/assets/shozon/300-250.jpg"
-          alt="SHOZON – Buy & Sell Cars (300×250)"
-          className="block md:hidden mx-auto w-[300px] h-[250px] object-contain"
-          width={300}
-          height={250}
-          loading="lazy"
-        />
-      </Link>
+  {/* Mobile-only (300×250) */}
+  <img
+    src="/assets/shozon/300-250.jpg"
+    alt="SHOZON – Buy & Sell Cars (300×250)"
+    className="block md:hidden mx-auto w-[300px] h-[250px] object-contain"
+    width={300}
+    height={250}
+    loading="lazy"
+  />
+</Link>
+
       {/* Desktop-only (728×90) */}
 
       <TrendingCars featuredCars={featuredCarsData} />
