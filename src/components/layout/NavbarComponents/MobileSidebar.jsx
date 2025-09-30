@@ -31,8 +31,9 @@ const MobileSidebar = ({
 
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname]);
+  }, [pathname, setIsOpen]);
 
+  // Build submenu options. Use **href** consistently.
   const handleSetSubMenuOptions = (hoverItem) => {
     let options = [];
     if (hoverItem === "search-cars") {
@@ -45,33 +46,54 @@ const MobileSidebar = ({
       ];
     } else if (hoverItem === "services") {
       options = [
-        { link: "/loan-calculator", label: "Loan Calculator" },
-        { link: "/insurance-calculator", label: "Insurance Calculator" },
+        { href: "/loan-calculator", label: "Loan Calculator" },
+        { href: "/insurance-calculator", label: "Insurance Calculator" },
       ];
     } else if (hoverItem === "blog") {
       options = [
-        { link: "/news", label: "News" },
-        { link: "/reviews", label: "Reviews" },
+        { href: "/news", label: "News" },
+        { href: "/reviews", label: "Reviews" },
       ];
     } else if (hoverItem === "more") {
       options = [
-        { link: "/about", label: "About Us" },
-        { link: "/contact-us", label: "Contact Us" },
+        { href: "/about", label: "About Us" },
+        { href: "/contact-us", label: "Contact Us" },
       ];
     }
     setSubMenuOptions(options);
   };
 
+  // Only "search-cars" opens a submenu. Everything else navigates directly.
   const handleShowSubMenu = (link) => {
+    // Always direct link for compare page
     if (link.href === "/compare-cars") {
-      return router.push("/compare-cars");
+      router.push("/compare-cars");
+      return;
     }
-    setActiveMenu(link);
-    handleSetSubMenuOptions(link.hoverItem);
+
+    // If this link should open a submenu (only "search-cars"), open it
+    if (link.hoverItem === "search-cars") {
+      setActiveMenu(link);
+      handleSetSubMenuOptions(link.hoverItem);
+      return;
+    }
+
+    // Otherwise, if it has a regular href, navigate directly (e.g., Used Cars)
+    if (link.href) {
+      router.push(link.href);
+      return;
+    }
+
+    // Fallback: if a hoverItem exists (services/blog/more) open submenu;
+    // remove this block if you truly want ONLY search-cars to have submenu.
+    if (link.hoverItem) {
+      setActiveMenu(link);
+      handleSetSubMenuOptions(link.hoverItem);
+    }
   };
 
   const handleProfileMenuToggle = () => {
-    setProfileMenuOpen(!profileMenuOpen);
+    setProfileMenuOpen((v) => !v);
   };
 
   return (
@@ -86,6 +108,7 @@ const MobileSidebar = ({
             <Link
               href="/"
               className="flex items-center gap-2 mt-2 cursor-pointer"
+              onClick={toggleNavigation}
             >
               <Image
                 loading="lazy"
@@ -96,9 +119,10 @@ const MobileSidebar = ({
                 height={50}
               />
             </Link>
-            <div
+            <button
               onClick={toggleNavigation}
               className="cursor-pointer p-2 hover:bg-gray-100 rounded-full transition"
+              aria-label="Close menu"
             >
               <Image
                 loading="lazy"
@@ -108,18 +132,18 @@ const MobileSidebar = ({
                 width={24}
                 height={24}
               />
-            </div>
+            </button>
           </div>
 
           {/* Sign-in / Profile Section */}
           <div className="flex items-center justify-between mt-5">
             {user ? (
               <div
-                className="shadow-md relative py-2 px-4 rounded-full cursor-pointer flex items-center justify-between"
+                className="shadow-md relative py-2 px-4 rounded-full cursor-pointer flex items-center gap-2"
                 onClick={handleProfileMenuToggle}
               >
                 <div className="flex items-center capitalize justify-center w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold">
-                  {user?.username.charAt(0)}
+                  {user?.username?.charAt(0)}
                 </div>
                 <KeyboardArrowDownIcon />
                 {profileMenuOpen && (
@@ -140,9 +164,8 @@ const MobileSidebar = ({
                     </Link>
                     <button
                       onClick={() => {
-                        // Dispatch logout action here (pseudo-code)
                         dispatch(logout());
-                        // toggleNavigation();
+                        toggleNavigation();
                       }}
                       className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
@@ -163,7 +186,7 @@ const MobileSidebar = ({
           {activeMenu && (
             <h3
               onClick={() => setActiveMenu(null)}
-              className="text-gray-600 font-bold pt-6 cursor-pointer hover:text-gray-800 transition"
+              className="text-gray-600 font-bold pt-6 cursor-pointer hover:text-gray-800 transition flex items-center gap-1"
             >
               <KeyboardArrowLeftIcon /> {activeMenu.label}
             </h3>
@@ -182,6 +205,7 @@ const MobileSidebar = ({
                 <Link
                   key={index}
                   href={item.href}
+                  onClick={toggleNavigation}
                   className="text-gray-700 font-medium hover:text-black transition px-4 py-2 rounded-lg hover:bg-gray-100 shadow-sm"
                 >
                   {item.label}
