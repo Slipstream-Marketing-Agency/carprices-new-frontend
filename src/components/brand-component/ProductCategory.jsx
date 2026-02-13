@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useMemo, useRef } from "react";
-import SwiperCore, {
-  Autoplay,
-  EffectFade,
-  Navigation,
-  Pagination,
-} from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 function ProductCategory({ brands }) {
   const ref = useRef();
   const slideSetting = useMemo(() => {

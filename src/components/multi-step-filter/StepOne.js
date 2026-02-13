@@ -118,7 +118,7 @@ export default function StepOne({ filterData, setFilterData }) {
   return (
     <div className="grid grid-cols-3 gap-2">
       {filterItems.map((item, index) => (
-        <Tooltip key={index} title={item.toolbar} arrow>
+        <Tooltip key={`item-${index}`} title={item.toolbar} arrow>
           <button
             key={item.label}
             className={`flex flex-col items-center  p-2 rounded-xl border border-2 border-solid ${isFilterActive(item.value)

@@ -88,7 +88,7 @@ export default function LoanCalculatorWrapper() {
                 </h2>
                 <div className="w-full  mx-auto space-y-2 mt-6">
                     {faq.map((item, index) => (
-                        <div key={index} className="border rounded bg-white">
+                        <div key={`item-${index}`} className="border rounded bg-white">
                             <button
                                 onClick={() => toggleAccordion(index)}
                                 className="w-full px-4 py-2 text-left flex justify-between items-center bg-gray-100 rounded-t"

@@ -33,7 +33,6 @@ const StorySlider = () => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    console.log('Failed to fetch stories', err);
                 }
             } finally {
             }
@@ -54,7 +53,7 @@ const StorySlider = () => {
                     return (
                         <Link
                             href={`/web-stories/${story.slug}`}
-                            key={index}
+                            key={story?.slug || story.slug || index}
                             className="flex-shrink-0 relative w-64 h-96 rounded-2xl"
                             target="_blank"
                         >
@@ -84,7 +83,7 @@ const StorySlider = () => {
                     {stories.map((story, index) => (
                         <Link
                             href={`/web-stories/${story.slug}`}
-                            key={index}
+                            key={story?.slug || story.slug || index}
                             className="px-2"
                             target="_blank"
                         >

@@ -15,8 +15,7 @@ const FilterSidebar = ({ selectedBrand, onBrandChange, selectedModel, onModelCha
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}brands-with-videos`);
         const data = await response.json();
         setBrandOptions(data.map(brand => ({ value: brand.slug, label: brand.name })));
-      } catch (error) {
-        console.error("Error fetching brands:", error);
+      } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
       }
     };
 
@@ -38,8 +37,7 @@ const FilterSidebar = ({ selectedBrand, onBrandChange, selectedModel, onModelCha
         const data = await response.json();
 
         setModelOptions(data.map(model => ({ value: model.slug, label: model.name })));
-      } catch (error) {
-        console.error("Error fetching models:", error);
+      } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
       } finally {
         setLoadingModels(false);
       }

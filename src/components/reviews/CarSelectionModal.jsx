@@ -50,8 +50,7 @@ const CarSelectionModal = ({
                 pageSize: pagination.pageSize,
                 totalPages: response.data.data.pagination.pageCount,
             });
-        } catch (error) {
-            console.error("Error fetching brands:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoading(false);
             setIsLoadingMore(false);
@@ -77,8 +76,7 @@ const CarSelectionModal = ({
                 pageSize: pagination.pageSize,
                 totalPages: response.data.data.pagination.pageCount,
             });
-        } catch (error) {
-            console.error("Error fetching models:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
         } finally {
             setLoading(false);
             setIsLoadingMore(false);

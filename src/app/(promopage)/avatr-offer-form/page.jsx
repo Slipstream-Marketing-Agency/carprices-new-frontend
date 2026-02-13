@@ -38,8 +38,6 @@ export default function Home() {
 
       const data = await response.json();
       if (data.success) {
-        console.log("dataaaa", data);
-
         setFormData({
           name: "",
           email: "",

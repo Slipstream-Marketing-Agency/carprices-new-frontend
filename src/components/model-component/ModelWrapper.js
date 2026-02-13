@@ -24,11 +24,9 @@ import RelatedArticles from "../articles-component/RelatedArticles";
 
 export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPage = 'basic', activeTab = '' }) {
     const [currentURL, setCurrentURL] = useState("");
-    console.log(currentmodel,'currentmodel')
-
-    // If using browser-specific features, use `useEffect` on the client-side
+    
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        if (typeof window !== 'undefined') {
             setCurrentURL(window.location.href);
         }
     }, []);
@@ -76,7 +74,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                 const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
                 setAverageRating(totalRating / data.length || 0);
             } catch (error) {
-                console.error('Error fetching reviews:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching reviews:', error); }
             }
         };
 
@@ -244,7 +242,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                     value: mainTrimFuelType,
                                 },
                             ].map((item, index) => (
-                                <div key={index} className="p-3 bg-gray-50 rounded-md hover:bg-gray-100">
+                                <div key={`item-${index}`} className="p-3 bg-gray-50 rounded-md hover:bg-gray-100">
                                     <h6 className="font-medium text-[10px] md:text-sm text-gray-600 mb-1">{item.label}</h6>
                                     <h5 className="text-gray-800 text-sm md:text-base font-semibold">{item.value}</h5>
                                 </div>
@@ -510,7 +508,7 @@ export default function ModelWrapper({ oldModel, currentmodel, seoData, parentPa
                                         {model?.name}{" "}
                                     </p>
                                     {currentmodel?.highlightsList?.map((item, index) => (
-                                        <li key={index}>
+                                        <li key={`item-${index}`}>
                                             {item.list}
                                             <div className="h-[2px] bg-gradient-to-r from-teal-600 to-black-100 mt-2 "></div>
                                         </li>

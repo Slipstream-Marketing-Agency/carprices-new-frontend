@@ -55,7 +55,6 @@ export default function ContactForm() {
         const loadRecaptcha = () => {
             if (window.grecaptcha) {
                 window.grecaptcha.ready(() => {
-                    console.log("reCAPTCHA ready");
                 });
             }
         };
@@ -123,13 +122,15 @@ export default function ContactForm() {
                     setSubject("");
                 }
             } catch (error) {
-                console.error("Error submitting form:", error);
+                if (process.env.NODE_ENV === 'development') { 
+                    console.error("Error submitting form:", error); 
+                }
                 alert("Error submitting form");
             } finally {
                 setLoading(false);
             }
         } else {
-            // console.log("Form is not valid:", errors);
+            alert("Please fill in all required fields correctly");
         }
     };
 
@@ -137,11 +138,12 @@ export default function ContactForm() {
         setOpenThankYou(false);
     };
     return (
-        <>{loading && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999]">
-                <CircularProgress />
-            </div>
-        )}
+        <>
+            {loading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999]">
+                    <CircularProgress />
+                </div>
+            )}
             <Dialog open={openThankYou} onClose={handleCloseThankYou}>
                 <DialogTitle>
                     {t.thankYou}
@@ -307,6 +309,7 @@ export default function ContactForm() {
                         </div>
                     </form>
                 </div>
-            </div></>
-    )
+            </div>
+        </>
+    );
 }

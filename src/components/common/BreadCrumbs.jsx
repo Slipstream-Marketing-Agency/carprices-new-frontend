@@ -45,7 +45,7 @@ const BreadCrumbs = () => {
                         Home
                     </a>
                     {pathSegments.map((segment, index) => (
-                        <div key={index} className="flex items-center space-x-2">
+                        <div key={`segment-${index}`} className="flex items-center space-x-2">
                             {!/^\d{4}$/.test(segment) ? ( // Skip displaying the year
                                 <>
                                     <span>

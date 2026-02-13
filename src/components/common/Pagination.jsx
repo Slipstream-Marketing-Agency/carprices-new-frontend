@@ -3,11 +3,12 @@ import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types"; // Import PropTypes
 export default function Pagination({ currentPage, totalPages }) {
+  const router = useRouter();
+  
   if (isNaN(currentPage) || isNaN(totalPages)) {
     return null; // Or handle the error scenario for invalid inputs
   }
 
-  const router = useRouter();
   const currentPageNumber = parseInt(currentPage, 10);
 
   const changePage = (page) => {

@@ -2,27 +2,7 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
         <url>
-          <loc>https://carprices.ae/brands/geely</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/lexus</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/porsche</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/mercedes-benz</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/baic</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -32,7 +12,22 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/toyota</loc>
+          <loc>https://carprices.ae/brands/porsche</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/baic</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/geely</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/lexus</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -47,12 +42,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/chevrolet</loc>
+          <loc>https://carprices.ae/brands/toyota</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/nissan</loc>
+          <loc>https://carprices.ae/brands/chevrolet</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -62,12 +57,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/honda</loc>
+          <loc>https://carprices.ae/brands/nissan</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/changan</loc>
+          <loc>https://carprices.ae/brands/honda</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -78,6 +73,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/exeed</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/changan</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -122,17 +122,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/ford</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/seres</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/kia</loc>
+          <loc>https://carprices.ae/brands/ford</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -147,17 +142,22 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/chery</loc>
+          <loc>https://carprices.ae/brands/kia</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/genesis</loc>
+          <loc>https://carprices.ae/brands/alfa-romeo</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
           <loc>https://carprices.ae/brands/aston-martin</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/chery</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -227,6 +227,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/bestune</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/jaguar</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -248,6 +253,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/volvo</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/bugatti</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -307,7 +317,12 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bestune</loc>
+          <loc>https://carprices.ae/brands/devel</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/dorcen</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -327,6 +342,11 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/genesis</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/riddara</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -342,7 +362,17 @@
           <priority>0.8</priority>
         </url>
         <url>
+          <loc>https://carprices.ae/brands/isuzu</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
           <loc>https://carprices.ae/brands/undefined</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/lincoln</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -362,41 +392,6 @@
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>https://carprices.ae/brands/bugatti</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/zeekr</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/dorcen</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/devel</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/lincoln</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/alfa-romeo</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
-          <loc>https://carprices.ae/brands/isuzu</loc>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-        <url>
           <loc>https://carprices.ae/brands/soueast</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
@@ -408,6 +403,11 @@
         </url>
         <url>
           <loc>https://carprices.ae/brands/zarooq-motors</loc>
+          <changefreq>monthly</changefreq>
+          <priority>0.8</priority>
+        </url>
+        <url>
+          <loc>https://carprices.ae/brands/zeekr</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>

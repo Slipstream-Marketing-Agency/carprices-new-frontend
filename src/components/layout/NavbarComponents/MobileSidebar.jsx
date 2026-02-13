@@ -203,7 +203,7 @@ const MobileSidebar = ({
             >
               {subMenuOptions.map((item, index) => (
                 <Link
-                  key={index}
+                  key={`item-${index}`}
                   href={item.href}
                   onClick={toggleNavigation}
                   className="text-gray-700 font-medium hover:text-black transition px-4 py-2 rounded-lg hover:bg-gray-100 shadow-sm"
@@ -223,7 +223,7 @@ const MobileSidebar = ({
             >
               {links.map((link, index) => (
                 <div
-                  key={index}
+                  key={`link-${index}`}
                   onClick={() => handleShowSubMenu(link)}
                   className={`flex justify-between items-center ${
                     pathname === link.href ? "text-blue-600" : "text-gray-700"

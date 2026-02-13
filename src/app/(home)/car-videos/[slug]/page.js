@@ -15,8 +15,7 @@ export async function generateMetadata({ params }) {
         } else {
             notFound(); // Trigger a 404 if the video is not found
         }
-    } catch (error) {
-        console.error('Error fetching video metadata:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching video metadata:', error); }
         notFound(); // Redirect to 404 on error as well
     }
 
@@ -62,8 +61,7 @@ const VideoPage = async ({ params }) => {
             // Trigger a 404 if the video is not found
             notFound();
         }
-    } catch (error) {
-        console.error('Error fetching video:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching video:', error); }
         notFound(); // Redirect to 404 on error as well
     }
 

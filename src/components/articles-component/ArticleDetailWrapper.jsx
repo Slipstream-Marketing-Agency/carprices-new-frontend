@@ -191,7 +191,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 const ArticleHeader = ({ title, author, publishedAt, summary, content, currentURL, articleTypes }) => (
     <div className="mb-6">
         {articleTypes.map((type, index) =>
-            <span key={index} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm mr-2">{type.type}</span>
+            <span key={`type-${index}`} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm mr-2">{type.type}</span>
         )}
 
         <h1 className="capitalize font-bold text-2xl sm:text-3xl mt-3">{title}</h1>

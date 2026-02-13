@@ -53,49 +53,31 @@ const ResetPasswordWrapper = () => {
         }
 
         setLoading(true)
-        console.log('first')
-
+        
         try {
-            // Make an API call to reset the password
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_URL}auth/reset-password`,
                 {
                     code: code,
-                    password,
+                    password: password,
                     passwordConfirmation: confirmPassword
                 }
             )
 
-            // Extract the JWT and user information from the response
-            const { jwt, user } = response.data
-
-            // Store the JWT token in a cookie for 7 days
-            setCookie('jwt', jwt, 7)
-
-            // Store only username, email, and id in the user cookie
-            const userInfo = {
-                username: user.username,
-                email: user.email,
-                id: user.id
+            if (response.data.jwt) {
+                setCookie('authToken', response.data.jwt, 7)
+                dispatch(verifyUser())
+                setSuccess(true)
+                setSnackbarMessage("Password reset successfully!")
+                setSnackbarSeverity("success")
+                setSnackbarOpen(true)
+                setTimeout(() => {
+                    router.push('/')
+                }, 2000)
             }
-            setCookie('user', JSON.stringify(userInfo), 7)
-
-            // Show success message
-            setSnackbarMessage("Password Reset Successfully!")
-            setSnackbarSeverity("success")
-            setSnackbarOpen(true)
-
-            // Reset form data to initial state
-            setFormData({ password: "", confirmPassword: "" })
-            dispatch(verifyUser())
-            router.push('/')
-            setSuccess(true)
-        } catch (error) {
-            console.error("Password reset error:", error)
-            const errorMessage = error.response?.data?.error?.message || "An error occurred"
-
-            // Show error message
-            setSnackbarMessage(errorMessage)
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to reset password')
+            setSnackbarMessage(err.response?.data?.message || 'Failed to reset password')
             setSnackbarSeverity("error")
             setSnackbarOpen(true)
         } finally {
@@ -103,61 +85,74 @@ const ResetPasswordWrapper = () => {
         }
     }
 
-    // Handle snackbar close
     const handleSnackbarClose = () => {
         setSnackbarOpen(false)
     }
+
     return (
-        <div>
-            <div className="flex justify-center items-center mt-16">
-                <div className="w-full md:w-1/3 sm:w-2/3 bg-white shadow-lg rounded-lg p-8 mx-4">
-                    <h1 className="font-bold text-3xl text-center mb-6">Reset Password</h1>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8">
+                <div>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                        Reset Your Password
+                    </h2>
+                </div>
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                    <div className="rounded-md shadow-sm -space-y-px">
+                        <div>
+                            <label htmlFor="password" className="sr-only">
+                                New Password
+                            </label>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                placeholder="New Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="confirmPassword" className="sr-only">
+                                Confirm Password
+                            </label>
+                            <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                type="password"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                placeholder="Confirm Password"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
 
-                    <form onSubmit={handleSubmit}>
-                        <label className="block font-semibold text-sm mb-2">New Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="w-full border border-gray-200 rounded-lg p-2 mb-4"
-                            placeholder="Enter your new password"
-                            required
-                        />
-
-                        <label className="block font-semibold text-sm mb-2">Confirm Password</label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            className="w-full border border-gray-200 rounded-lg p-2 mb-4"
-                            placeholder="Confirm your new password"
-                            required
-                        />
-
+                    <div>
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white py-2 px-6 rounded-full w-full font-semibold flex items-center justify-center"
                             disabled={loading}
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                         >
-                            {loading ? <CircularProgress size={24} color="inherit" /> : "Reset Password"}
+                            {loading ? <CircularProgress size={24} color="inherit" /> : 'Reset Password'}
                         </button>
-                    </form>
-                </div>
-            </div>
+                    </div>
+                </form>
 
-            {/* Snackbar for Success and Error messages */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-                <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert onClose={handleSnackbarClose} severity={snackbarSeverity}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
+            </div>
         </div>
     )
 }

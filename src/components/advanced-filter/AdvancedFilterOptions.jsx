@@ -111,8 +111,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                 );
 
                 setPriceRange(response?.data?.price);
-            } catch (error) {
-                console.error("Failed to fetch filtered trims:", error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch filtered trims:", error); }
             }
         };
         fetchPriceRange();
@@ -356,10 +355,6 @@ export default function AdvancedFilterOptions({ brandoptions,
         // Then, sort the filtered options
         return sortOptions(filtered, selectedBrands);
     }, [brandoptions, searchText, selectedBrands]);
-
-    console.log(filteredAndSortedBrandOptions, "filteredAndSortedBrandOptions");
-
-
     const priceOptions = [
         {
             range: { min: 0, max: 50000 },
@@ -610,8 +605,6 @@ export default function AdvancedFilterOptions({ brandoptions,
             }
         });
     };
-
-    console.log(tempSelectedPrice, "tempSelectedPrice");
     // Step 3: Apply changes when "Apply Filter" is clicked
     const applyPriceFilter = () => {
         setSelectedPrice(tempSelectedPrice);
@@ -824,9 +817,6 @@ export default function AdvancedFilterOptions({ brandoptions,
             setTempSelectedDrive(selectedDrive);
         }
     }, [showDriveModal, selectedDrive]);
-
-    console.log(tempSelectedDrive, "tempSelectedDrive");
-
     // Handle changes in the drive modal
     const handleModalDriveChange = (driveValue) => {
         setTempSelectedDrive((prevSelectedDrive) => {
@@ -1410,11 +1400,6 @@ export default function AdvancedFilterOptions({ brandoptions,
     const [minPrice, setMinPrice] = useState(43758);
     const [maxPrice, setMaxPrice] = useState(33660000);
     const [initialValues, setInitialValues] = useState([]); // Default values for initial slider range
-
-    console.log(initialValues, "initialprice");
-
-    console.log(bodyoptions, "bodyoptionsbodyoptions");
-
     useEffect(() => {
         if (price) {
             // Split by commas to handle multiple ranges
@@ -1426,9 +1411,6 @@ export default function AdvancedFilterOptions({ brandoptions,
             // Get the minimum and maximum prices from all the ranges
             const min = Math.min(...allPrices);
             const max = Math.max(...allPrices);
-
-            console.log(price, 'inside useEffect price');
-
             setMinPrice(min);
             setMaxPrice(max);
         }
@@ -1590,8 +1572,7 @@ export default function AdvancedFilterOptions({ brandoptions,
                                             //   variant="contained"
                                             //   fullWidth
                                             //   onClick={() => {
-                                            //     console.log("llllllllllllll");
-                                            //     const applyFilterFunction =
+                                            ////     const applyFilterFunction =
                                             //       filterFunctions[filter.id];
                                             //     if (applyFilterFunction) {
                                             //       applyFilterFunction(); // Call the function dynamically
@@ -1604,7 +1585,6 @@ export default function AdvancedFilterOptions({ brandoptions,
                                             <PrimaryButton
                                                 label="Apply Filter"
                                                 onClick={() => {
-                                                    console.log("llllllllllllll");
                                                     const applyFilterFunction =
                                                         filterFunctions[filter.id];
                                                     if (applyFilterFunction) {

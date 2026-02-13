@@ -119,7 +119,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
         <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {dynamicFilterItems.map((item, index) => (
             <div
-              key={index}
+              key={`item-${index}`}
               className={`cursor-pointer flex flex-col justify-center items-center p-4 rounded-xl border-2 border-solid ${isFilterActive(item.group)
                 ? "bg-light border-blue-300"
                 : "bg-white border-zinc-100 grayscale"

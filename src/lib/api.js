@@ -7,16 +7,28 @@ const fetchWithErrorHandling = async (url) => {
     if (!res.ok) {
       throw new Error(`Error fetching data from ${url} - Status: ${res.status}`);
     }
-    return await res.json();  // Ensure the response is parsed as JSON
+    return await res.json();
   } catch (error) {
-    console.error("API Fetch Error: ", error);
-    return null; // Return null or an empty object to avoid breaking the app
+    // Log to monitoring service in production
+    if (process.env.NODE_ENV === 'development') {
+      console.error("API Fetch Error: ", error);
+    }
+    return null;
   }
 };
 
 export async function getCarSection(sectionName) {
   const url = `${API_URL}car-sections/findAll?${sectionName}=1`;
-  return await fetchWithErrorHandling(url);
+  try {
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) throw new Error(`Error fetching ${url} - Status: ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error("getCarSection error:", error);
+    }
+    return null;
+  }
 }
 
 // Fetch all web stories with pagination and sorting
@@ -33,11 +45,7 @@ export async function getAllWebStories(
 export async function getWebStoryData(slug) {
   const url = `${API_URL}web-stories/${slug}`;
   const story = await fetchWithErrorHandling(url);
-
-  // Log the full response to debug
-  console.log(story, "Story data in getWebStoryData");
-
-  return story;  // Ensure the parsed story is returned
+  return story;
 }
 // Fetch all categories that have web stories associated with them
 export async function getCategories() {
@@ -83,7 +91,7 @@ export const fetchDealerBranches = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching dealer branches:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching dealer branches:', error); }
     return { branches: [] };
   }
 };
@@ -97,7 +105,7 @@ export const fetchCarBrandsWithDealers = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching dealer branches:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching dealer branches:', error); }
     return { branches: [] };
   }
 };
@@ -125,7 +133,7 @@ export const fetchDealers = async (brandSlug = '', page = 1, pageSize = 10, deal
     const data = await response.json();
     return data; // Return the fetched data
   } catch (error) {
-    console.error('Error fetching dealers:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching dealers:', error); }
     return { dealers: [], pagination: {} }; // Return default empty structure on error
   }
 };
@@ -138,7 +146,7 @@ export const fetchTrendingVideos = async (page = 1, pageSize = 10, sort = 'creat
     const data = await response.json();
     return data.videos || [];
   } catch (error) {
-    console.error('Error fetching trending videos:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching trending videos:', error); }
     return [];
   }
 };

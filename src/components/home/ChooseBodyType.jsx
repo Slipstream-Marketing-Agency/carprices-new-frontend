@@ -21,7 +21,7 @@ export default function ChooseBodyType({ bodyTypes }) {
 
             <div className="grid md:grid-cols-5 grid-cols-3 md:gap-10 gap-8 md:mt-10 mt-5 max-w-full">
                 {bodyTypes.map((item, index) => (
-                    <Link href={`/body-types/${item?.slug}`} key={index}>
+                    <Link href={`/body-types/${item?.slug}`} key={item?.slug || item.slug || index}>
                         <div className="flex flex-col justify-center items-center text-center text-black">
                             <div className="w-full md:h-32 sm:h-24 overflow-hidden">
                                 <Image

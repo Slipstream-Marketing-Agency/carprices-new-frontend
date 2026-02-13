@@ -3,9 +3,9 @@ import React from "react";
 import ShozonAdsList from "@/components/used-cars/ShozonAdsList";
 import Script from "next/script";
 
-// If you keep this file as .tsx, remove the `// @ts-ignore` below.
+// If you keep this file as .tsx, remove the `// @ts-expect-error` below.
 export const metadata = {
-  // @ts-ignore - works fine in JS/TS without explicit type import
+  // @ts-expect-error - works fine in JS/TS without explicit type import
   metadataBase: new URL("https://carprices.ae"),
 
   title:

@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 export default function OldModel({ model, currentYear }) {
-  console.log(currentYear,"currentYear")
-  const searchParams = useSearchParams();
   const currentDate = new Date();
   const currentRealYear = currentDate.getFullYear();
 

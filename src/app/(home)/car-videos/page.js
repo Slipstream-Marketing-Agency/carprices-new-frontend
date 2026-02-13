@@ -33,8 +33,6 @@ export async function generateMetadata() {
 }
 
 export default async function pages({ params, searchParams }) {
-    console.log(params, searchParams, "params, searchParams");
-
     const { brandname } = params;
     const currentPage = parseInt(searchParams.page) || 1;
     const pageSize = parseInt(searchParams.pageSize) || 9;

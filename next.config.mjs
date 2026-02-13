@@ -41,14 +41,12 @@ const generateSitemaps = async () => {
     'https://apis.carprices.ae/api/car-trims/generate',
   ];
 
-  console.log('Triggering API to generate sitemaps...');
   for (const endpoint of apiEndpoints) {
     try {
       const response = await fetch(endpoint);
       if (!response.ok) throw new Error(`Failed to trigger API at ${endpoint}`);
-      console.log(`Successfully triggered ${endpoint}`);
     } catch (error) {
-      console.error(`Error triggering ${endpoint}:`, error);
+      // Log to file or monitoring service in production
     }
   }
 
@@ -60,7 +58,6 @@ const generateSitemaps = async () => {
     { name: 'brands-sitemap.xml', url: 'https://apis.carprices.ae/brands-sitemap.xml' },
   ];
 
-  console.log('Fetching and saving sitemaps...');
   for (const sitemap of sitemaps) {
     try {
       const response = await fetch(sitemap.url);
@@ -69,9 +66,8 @@ const generateSitemaps = async () => {
       const outputDir = path.resolve(process.cwd(), 'public');
       fs.mkdirSync(outputDir, { recursive: true });
       fs.writeFileSync(path.join(outputDir, sitemap.name), xmlContent, 'utf8');
-      console.log(`${sitemap.name} saved successfully.`);
     } catch (error) {
-      console.error(`Error fetching ${sitemap.name}:`, error);
+      // Log to file or monitoring service in production
     }
   }
 };
@@ -81,8 +77,30 @@ const nextConfig = bundleAnalyzer({
 
   images: {
     domains: ['cdn.carprices.ae'],
-    loader: 'default',
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.carprices.ae',
+        pathname: '/**',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    unoptimized: false,
   },
 
   i18n: {
@@ -92,7 +110,7 @@ const nextConfig = bundleAnalyzer({
   },
 
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
 
   async redirects() {

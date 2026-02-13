@@ -195,9 +195,6 @@ export default function AdvancedFilterWrapper({
 
 
     const [selectedOption, setSelectedOption] = useState(() => searchParams.get("sort") || "");
-
-    console.log(selectedOption, "selectedOption");
-
     const handleOptionChange = (option) => {
         setSelectedOption(option);
         setOpen(false); // Close the popup after selecting an option
@@ -218,11 +215,44 @@ export default function AdvancedFilterWrapper({
 
 
     useEffect(() => {
+        // Fetch car listings FIRST (priority), then filter options in background
         const fetchData = async () => {
             setIsLoading(true);
             try {
+                // Step 1: Fetch car listings immediately (most important)
+                const trims = await fetchFilteredTrims({
+                    brandSlugs,
+                    bodyTypeSlugs,
+                    fuelTypeSlugs,
+                    cylinderSlugs,
+                    driveSlugs,
+                    transmissionSlugs,
+                    priceRange,
+                    displacementRange,
+                    powerRange,
+                    page,
+                    pageSize,
+                    sorting,
+                    ...additionalQueryParams,
+                });
+
+                // Set car listing data immediately so user sees cars
+                setAllTrims(trims?.data?.list || []);
+                setTotal(trims?.data?.pagination?.pageCount);
+                setCurrent(page);
+                setTotalCars(trims?.data?.totalFilteredCars || 0);
+
+            } catch (error) {
+                if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch car listings:", error); }
+                setAllTrims([]);
+                setTotalCars(0);
+            } finally {
+                setIsLoading(false);
+            }
+
+            // Step 2: Fetch filter options in background (non-blocking)
+            try {
                 const [
-                    trims,
                     fuelTypes,
                     cylinders,
                     transmissions,
@@ -233,20 +263,6 @@ export default function AdvancedFilterWrapper({
                     brands,
                     bodyTypes,
                 ] = await Promise.all([
-                    fetchFilteredTrims({
-                        brandSlugs,
-                        bodyTypeSlugs,
-                        fuelTypeSlugs,
-                        cylinderSlugs,
-                        driveSlugs,
-                        transmissionSlugs,
-                        priceRange,
-                        displacementRange,
-                        powerRange,
-                        page,
-                        sorting,
-                        ...additionalQueryParams,
-                    }),
                     fetchFuelTypeList({
                         brandSlugs,
                         bodyTypeSlugs,
@@ -348,26 +364,6 @@ export default function AdvancedFilterWrapper({
                     }),
                 ]);
 
-                // Log the API responses to see if they are returning the expected data
-                console.log('Trims response:', trims);
-                console.log('Fuel Types response:', fuelTypes);
-                console.log('Cylinders response:', cylinders);
-                console.log('Transmissions response:', transmissions);
-                console.log('Drives response:', drives);
-                console.log('Prices response:', prices);
-                console.log('Displacements response:', displacements);
-                console.log('Powers response:', powers);
-                console.log('Brands response:', brands);
-                console.log('Body Types response:', bodyTypes);
-
-                // Set state with the responses
-
-                console.log(total, "sssss");
-
-                setAllTrims(trims?.data?.list || []);
-                setTotal(trims?.data?.pagination?.pageCount);
-                setCurrent(page);
-                setTotalCars(trims?.data?.totalFilteredCars || 0);
                 setFuelTypeListRes(fuelTypes?.fuelTypes || []);
                 setCylinderListRes(cylinders?.cylinders || []);
                 setTransmissionListRes(transmissions?.transmission || []);
@@ -377,11 +373,8 @@ export default function AdvancedFilterWrapper({
                 setTotalPowerRangeRes(powers?.power || []);
                 setBrandListRes(brands?.brands || []);
                 setBodyTypeListRes(bodyTypes?.bodyTypes || []);
-
             } catch (error) {
-                console.error("Failed to fetch data:", error);
-            } finally {
-                setIsLoading(false);
+                if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch filter data:", error); }
             }
         };
 
@@ -446,9 +439,6 @@ export default function AdvancedFilterWrapper({
     const [toggleModalFunction, setToggleModalFunction] = useState(null);
 
     const toggleModalFromParent = (filterId) => {
-
-        console.log(filterId, "filterId");
-
         if (toggleModalFunction === null) {
             setToggleModalFunction(filterId);
         } else {

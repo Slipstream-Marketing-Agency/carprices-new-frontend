@@ -21,7 +21,7 @@ export default function VariantsListing({ data, brandslug, modelslug, trimslug }
       <h2 className="font-semibold mb-5 mt-14">Other Variants</h2>
       <div className="bg-white shadow-sm p-4 rounded-xl border border-solid border-gray-200 ">
         {filteredTrims?.map((trim, index) => (
-          <div key={index} className="mb-3 mt-3 ">
+          <div key={trim?.slug || trim.slug || index} className="mb-3 mt-3 ">
             <Link
               href={`/brands/${brandslug}/${trim?.year}/${modelslug}/${trim.slug}`}
             >

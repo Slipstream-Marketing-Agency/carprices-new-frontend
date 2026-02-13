@@ -34,7 +34,7 @@ export default function ChooseBrand({ brand }) {
                         {brand.map((item, index) => (
                             <Link
                                 href={`/brands/${item?.slug}`}
-                                key={index}
+                                key={item?.slug || item.slug || index}
                                 className="flex flex-col justify-center items-center text-center text-black p-4"
                             >
                                 <Image

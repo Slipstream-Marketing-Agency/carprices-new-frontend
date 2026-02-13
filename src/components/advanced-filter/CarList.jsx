@@ -119,7 +119,7 @@ const CarList = ({
       <div className="mt-3 flex items-center flex-wrap gap-2">
         {/* {filters.map((filter, index) => (
           <Chip
-            key={index}
+            key={`filter-${index}`}
             label={
               filter.type === "price"
                 ? `AED ${filter.label
@@ -139,7 +139,7 @@ const CarList = ({
         ))} */}
         {filters.map((filter, index) => (
           <span
-            key={index}
+            key={`filter-${index}`}
             className="primary-delete text-sm font-semibold inline-flex items-center transition-all duration-300 transform hover:scale-105 hover:text-blue-700 hover:bg-blue-200 cursor-pointer px-3 py-1 rounded-md bg-blue-50 active:bg-blue-200"
           >
             <span className="mr-2">
@@ -184,14 +184,14 @@ const CarList = ({
         {isLoading ? (
           // Show skeletons while loading
           [1, 2, 3, 4, 5, 6].map((_, index) => (
-            <div key={index}>
+            <div key={`_-${index}`}>
               <CarCardSkeleton />
             </div>
           ))
         ) : (
           // Show actual car cards after loading
           cars.map((car, index) => (
-            <CarCard key={index} car={car} />
+            <CarCard key={`car-${index}`} car={car} />
           ))
         )}
       </div>

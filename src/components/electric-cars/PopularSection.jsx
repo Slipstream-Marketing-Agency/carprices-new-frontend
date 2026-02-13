@@ -82,7 +82,6 @@ const PopularSection = () => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    console.log("Failed to fetch filteredCars", err);
                     setLoading(false); // Set loading to false on error
                 }
             }
@@ -110,7 +109,7 @@ const PopularSection = () => {
                 <div className="flex md:gap-5 gap-2 md:justify-between mt-3 w-full text-base leading-4 text-center text-neutral-900 max-md:flex-wrap max-md:max-w-full">
                     <div className="flex md:gap-5 gap-2 md:justify-between sm:px-5 overflow-x-scroll custom-scrollbar">
                         {categories.map((category, index) => (
-                            <div key={index} className="flex flex-col justify-center">
+                            <div key={category?.slug || category.slug || index} className="flex flex-col justify-center">
                                 <div
                                     className={` whitespace-nowrap font-semibold justify-center md:text-sm text-xs  md:px-8 px-6 md:py-2 py-3 border border-solid rounded-[73px] max-md:px-5 cursor-pointer ${selectedTab === category.slug ? "bg-neutral-900 text-white" : "bg-violet-100 border-violet-100"
                                         }`}
@@ -128,7 +127,7 @@ const PopularSection = () => {
                             {loading ? (
                                 // Show skeletons while loading
                                 [1, 2, 3, 4].map((_, index) => (
-                                    <div className="px-2" key={index}>
+                                    <div className="px-2" key={`_-${index}`}>
                                         <CarCardSkeleton />
                                     </div>
                                 ))
@@ -147,7 +146,7 @@ const PopularSection = () => {
                             {loading ? (
                                 // Show skeletons for small screen while loading
                                 [1, 2].map((_, index) => (
-                                    <div className="inline-block pr-2" style={{ minWidth: '75%' }} key={index}>
+                                    <div className="inline-block pr-2" style={{ minWidth: '75%' }} key={`_-${index}`}>
                                         <CarCardSkeleton />
                                     </div>
                                 ))

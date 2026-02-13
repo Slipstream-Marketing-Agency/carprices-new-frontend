@@ -10,7 +10,6 @@ import {
 import Image from "next/image";
 
 const KeyFeatures = ({ data }) => {
-  console.log(data, "");
   const features = [
     {
       icon: (
@@ -110,7 +109,7 @@ const KeyFeatures = ({ data }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {data?.map((feature, index) => (
           <div
-            key={index}
+            key={`feature-${index}`}
             className="bg-gradient-to-r from-blue-50 to-white rounded-xl p-6 flex flex-col items-start"
           >
             <Image

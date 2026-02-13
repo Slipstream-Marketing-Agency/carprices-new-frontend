@@ -14,8 +14,6 @@ const NewCarSelection = ({ carData, mode, cars, setCars }) => {
     const pathname = usePathname();
 
     const [selectedSlug, setSelectedSlug] = useState([])
-    console.log(selectedSlug, cars, 'selectedSlug')
-
     // Handle variant selection from CarSelectionModal
     const handleVariantSelect = (variantData) => {
         const newVariantMainSlug = variantData.mainSlug; // Assuming mainSlug is the identifier

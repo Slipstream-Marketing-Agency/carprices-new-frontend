@@ -63,7 +63,7 @@ export default function CardSliderWrapper({ children, responsive }) {
       >
         {children.map((child, index) => (
           <div
-            key={index}
+            key={`child-${index}`}
             className="flex-shrink-0"
             style={{ width: `${slideWidth}%` }} // Dynamic width based on slidesToShow
           >
@@ -94,7 +94,7 @@ export default function CardSliderWrapper({ children, responsive }) {
       {/* <div className="flex justify-center mt-0 space-x-2">
         {children.map((_, index) => (
           <button
-            key={index}
+            key={`_-${index}`}
             onClick={() => scrollToSlide(index)}
             className={`w-3 h-1 rounded-full ${index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
               }`}

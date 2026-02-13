@@ -72,8 +72,7 @@ export async function generateMetadata({ params }) {
         // Return 404 if everything else fails
         if (error.response?.status === 404) {
             return notFound(); // Call notFound() for 404 errors
-        }
-        console.error("Error fetching model data:", error);
+        }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
         throw error; // Re-throw other errors for handling elsewhere
     }
 
@@ -92,8 +91,7 @@ export default async function TrimPage({ params }) {
             `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${model}/${trimSlug}/${year}`
         );
         trimData = response.data.data;
-    } catch (error) {
-        console.error("Failed to fetch trim data:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch trim data:", error); }
         return notFound(); // Handle not found case
     }
 

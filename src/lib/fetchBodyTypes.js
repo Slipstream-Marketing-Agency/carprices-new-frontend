@@ -6,10 +6,8 @@ export async function fetchCarBodyTypes() {
       });
   
       const carBodyTypes = Object.keys(response.facetsDistribution.name);
-      console.log('Car Body Types:', carBodyTypes);
       return carBodyTypes;
-    } catch (error) {
-      console.error('Error fetching car body types:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching car body types:', error); }
     }
   }
   

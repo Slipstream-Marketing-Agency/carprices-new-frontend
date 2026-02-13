@@ -94,8 +94,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
       setIsOpen(false);
       // Reset formData to initial state
       setFormData({ username: "", email: "", password: "" });
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Registration error:", error); }
       const errorMessage = error.response?.data?.error?.message || "An error occurred";
 
       // Show error message
@@ -144,8 +143,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
       // Reset formData to initial state
       setFormData({ username: "", email: "", password: "" });
       dispatch(verifyUser());
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Registration error:", error); }
       const errorMessage = error.response?.data?.error?.message || "An error occurred";
 
       // Show error message
@@ -181,8 +179,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
       setFormData({ username: "", email: "", password: "" });
       setActiveForm('login')
       setIsOpen(false)
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Registration error:", error); }
       const errorMessage = error.response?.data?.error?.message || "An error occurred";
 
       // Show error message

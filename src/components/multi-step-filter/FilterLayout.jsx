@@ -169,8 +169,7 @@ export default function FilterLayout() {
             setSeatList(responseSeat?.data?.seats);
 
             return true; // Success
-        } catch (error) {
-            console.error("Error fetching data:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching data:", error); }
             setLoading(false);
             return false;
         } finally {

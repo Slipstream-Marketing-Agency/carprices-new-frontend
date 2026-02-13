@@ -9,9 +9,7 @@ const ShareButton = ({ url, title, text }) => {
           text: text,
           url: url,
         });
-        console.log("Content shared successfully");
-      } catch (error) {
-        console.error("Error sharing content:", error);
+      } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error sharing content:", error); }
       }
     } else {
       alert("Sharing is not supported in this browser.");

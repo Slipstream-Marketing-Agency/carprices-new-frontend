@@ -39,8 +39,7 @@ async function fetchBrands(page, pageSize) {
 
     const { brands, pagination } = await response.json();
     return { brands, pagination };
-  } catch (error) {
-    console.error("Data Fetching Error:", error.message);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Data Fetching Error:", error.message); }
     throw error;
   }
 }

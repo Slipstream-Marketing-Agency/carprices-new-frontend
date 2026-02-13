@@ -30,8 +30,7 @@ const VideosPage = () => {
             setVideos(prevVideos => currentPage === 1 ? data.videos : [...prevVideos, ...data.videos]);
             setTotalPages(data.pagination.totalPages);
             setTotalVideos(data.pagination.totalItems);
-        } catch (error) {
-            console.error("Error fetching videos:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching videos:", error); }
         } finally {
             setLoading(false);
         }

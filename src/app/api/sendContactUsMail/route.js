@@ -18,20 +18,14 @@ const validateCaptcha = async (token) => {
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
       },
     });
-
-    console.log('reCAPTCHA API response:', response.data);
     return response.data.success;
-  } catch (error) {
-    console.error('Error validating reCAPTCHA:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error validating reCAPTCHA:', error); }
     return false;
   }
 };
 
 export async function POST(req) {
   const { name, email, phone, subject, recaptchaToken } = await req.json();
-
-  console.log('Request body:', { name, email, phone, subject });
-
   // Validate reCAPTCHA
   const isValidCaptcha = await validateCaptcha(recaptchaToken);
   if (!isValidCaptcha) {
@@ -72,11 +66,8 @@ export async function POST(req) {
       subject: 'Contact Us Form Submission',
       html: emailMessage,
     });
-
-    console.log('Email sent successfully');
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), { status: 200 });
-  } catch (error) {
-    console.error('Error sending email:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error sending email:', error); }
     return new Response(JSON.stringify({ message: 'Error occurred while sending email' }), { status: 500 });
   }
 }

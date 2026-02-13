@@ -14,13 +14,10 @@ export default function Relations({ slug }) {
         const fetchRelations = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}relations/${slug}`);
-                console.log(response, "responsesssss");
-
                 setVideos(response?.data?.data?.select_related_videos || []);
                 setBrands(response?.data?.data?.car_brands || []);
                 setModels(response?.data?.data?.car_models || []);
-            } catch (error) {
-                console.error('Error fetching related articles:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
             }
         };
 

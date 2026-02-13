@@ -1,6 +1,6 @@
 "use client"
 import React, { Suspense, useEffect, useMemo, useState } from "react";
-import SwiperCore, { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import useTranslate from "@/utils/UseTranslate";
 import axios from "axios";
@@ -293,7 +293,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
         const totalRating = data.reduce((acc, review) => acc + review.rating, 0);
         setAverageRating(totalRating / data.length || 0);
       } catch (error) {
-        console.error('Error fetching reviews:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching reviews:', error); }
       }
     };
 
@@ -320,7 +320,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
                 />
               </div>
               {trimData?.galleryImages?.map((item, index) => (
-                <div key={index}>
+                <div key={`item-${index}`}>
                   <Image
                     src={
                       item === null ? "/assets/img/car-placeholder.png" : item
@@ -351,7 +351,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
                 />
               </div>
               {trimData?.galleryImages?.map((item, index) => (
-                <div key={index} className="flex items-center">
+                <div key={`item-${index}`} className="flex items-center">
                   <Image
                     src={
                       item === null ? "/assets/img/car-placeholder.png" : item
@@ -435,7 +435,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
             }}
           >
             {trimData?.relatedTrims?.map((trim, index) => (
-              <MenuItem key={index} value={trim.slug} className="flex">
+              <MenuItem key={trim?.slug || trim.slug || index} value={trim.slug} className="flex">
                 <ListItemIcon>
                   <Image
                     layout="fixed"
@@ -488,7 +488,7 @@ export default function VariantWrapper({ model, trimList, trimData, trimSlug }) 
                     : trimData?.fuelConsumption + "kmpl",
               },
             ].map((item, index) => (
-              <div key={index} className="p-3 bg-gray-50 rounded-md hover:bg-gray-100">
+              <div key={`item-${index}`} className="p-3 bg-gray-50 rounded-md hover:bg-gray-100">
                 <h6 className="font-medium text-[10px] md:text-sm text-gray-600 mb-1">{item.label}</h6>
                 <h5 className="text-gray-800 text-sm md:text-base font-semibold">{item.value}</h5>
               </div>

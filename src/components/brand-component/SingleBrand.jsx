@@ -63,8 +63,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {
-            console.error("Error fetching brands:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }
@@ -140,9 +139,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
     };
 
     const [branddetails, setBrandDetails] = useState(null); // State for brand details
-    // console.log(branddetails, "branddetails");
-
-    const [expanded, setExpanded] = useState(false);
+    //const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         const fetchBrandDetails = async () => {
@@ -151,8 +148,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandname}` // Use params to get brandname
                 );
                 setBrandDetails(response.data); // Set the fetched brand details
-            } catch (error) {
-                console.error("Error fetching brand details:", error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brand details:", error); }
             }
         };
 
@@ -284,7 +280,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     {loading ? (
                         <div className="grid grid-cols-12 gap-5">
                             {[1, 2, 3, 4].map((_, index) => (
-                                <div className="md:col-span-4 col-span-12 relative" key={index}>
+                                <div className="md:col-span-4 col-span-12 relative" key={`_-${index}`}>
                                     <CarCardSkeleton />
                                 </div>
                             ))}

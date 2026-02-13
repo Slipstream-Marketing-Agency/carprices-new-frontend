@@ -35,7 +35,6 @@ const LoanEnquireForm = ({ carName, brand, model, year, loanOpen, onClose }) => 
         const loadRecaptcha = () => {
             if (window.grecaptcha) {
                 window.grecaptcha.ready(() => {
-                    console.log("reCAPTCHA ready");
                 });
             }
         };
@@ -102,11 +101,9 @@ const LoanEnquireForm = ({ carName, brand, model, year, loanOpen, onClose }) => 
                             if (response.status === 200) {
                                 setSubmitted(true);
                                 onClose();
-                            } else {
-                                console.error("Error submitting form:", response);
+                            } else {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", response); }
                             }
-                        } catch (error) {
-                            console.error("Error submitting form:", error);
+                        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", error); }
                         } finally {
                             setLoading(false);
                         }

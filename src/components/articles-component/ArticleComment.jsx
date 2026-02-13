@@ -30,8 +30,7 @@ const ArticleComment = ({ slug }) => {
                     article_comments: comment.article_comments || [], // Ensure article_comments is an array
                 }));
                 setComments(updatedComments.filter(comment => comment.publishedAt !== null)); // Only show published comments
-            } catch (error) {
-                console.error("Error fetching comments:", error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching comments:", error); }
             }
         };
 
@@ -103,8 +102,7 @@ const ArticleComment = ({ slug }) => {
             localStorage.setItem("showThankYouPopup", "true");
             setIsModalOpen(true);
             setTimeout(() => window.location.reload(), 1000); // Reload page after 1 second
-        } catch (error) {
-            console.error("Error posting comment:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error posting comment:", error); }
             setError("Failed to post comment. Please try again.");
         }
     };

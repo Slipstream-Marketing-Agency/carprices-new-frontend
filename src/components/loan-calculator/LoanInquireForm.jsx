@@ -39,7 +39,6 @@ const LoanInquiryForm = ({ car, price, tenure, interest_rate, down_payment, mont
     const loadRecaptcha = () => {
       if (window.grecaptcha) {
         window.grecaptcha.ready(() => {
-          console.log("reCAPTCHA ready");
         });
       }
     };
@@ -125,11 +124,9 @@ const LoanInquiryForm = ({ car, price, tenure, interest_rate, down_payment, mont
               if (response.status === 200) {
                 setSubmitted(true);
                 setSnackbarOpen(true); // Open the snackbar
-              } else {
-                console.error("Error submitting form:", response);
+              } else {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", response); }
               }
-            } catch (error) {
-              console.error("Error submitting form:", error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", error); }
             } finally {
               setLoading(false);
               setSubmitting(false);

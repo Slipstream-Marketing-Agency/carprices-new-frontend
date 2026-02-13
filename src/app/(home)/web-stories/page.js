@@ -46,8 +46,7 @@ export default async function WebStoriesPage() {
                 <WebstoriesWrapper stories={stories} categories={categories} />
             </div>
         );
-    } catch (error) {
-        console.error('Error fetching web stories or categories:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching web stories or categories:', error); }
         return (
             <div>
                 <p>Error loading web stories. Please try again later.</p>

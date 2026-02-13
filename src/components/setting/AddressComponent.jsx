@@ -55,7 +55,6 @@ const AddressComponent = () => {
     const setLatLngFromMap = async (latitude, longitude) => {
         setLat(latitude);
         setLng(longitude);
-        console.log(`New Coordinates: ${latitude}, ${longitude}`);
         // await setAddressFromMap(latitude, longitude)
     };
     // Fetch address from lat/lng when the lat/lng changes
@@ -80,8 +79,7 @@ const AddressComponent = () => {
                         lat,
                         lng,
                     }));
-                } catch (error) {
-                    console.error('Error fetching address from lat/lng:', error);
+                } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching address from lat/lng:', error); }
                 }
             }
         };
@@ -207,8 +205,7 @@ const AddressComponent = () => {
                         Cancel
                     </Button>
                     <Button
-                        onClick={() => {
-                            console.log(addressData); // Save address logic
+                        onClick={() => {// Save address logic
                             setOpen(false);
                         }}
                         color="primary"

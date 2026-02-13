@@ -19,8 +19,6 @@ import Ad300x600 from '../ads/Ad300x600';
 import CarDealerCard from '../car-dealer/CarDealerCard';
 export default function BrandDealerPage({ brandname, dealers, pagination, brandDetails, search, branchname }) {
     const pathname = usePathname();
-    console.log(pathname, "pathname");
-
     const router = useRouter();
     const [pageSize, setPageSize] = useState(pagination.pageSize);
     const [searchTerm, setSearchTerm] = useState(search);
@@ -52,10 +50,6 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
                     order: "asc",
                 },
             });
-
-            console.log(response, "response");
-
-
             const newBrands = response?.data?.map((brand) => ({
                 value: brand.slug,
                 label: brand.name,
@@ -70,8 +64,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {
-            console.error("Error fetching brands:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }
@@ -85,10 +78,6 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
                     brandSlug: brandname
                 },
             });
-
-            console.log(response, "response");
-
-
             const newBranches = response?.data?.map((branch) => ({
                 value: branch.slug,
                 label: branch.name,
@@ -103,8 +92,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
             });
 
             if (loadMore) setBranchPage((prevPage) => prevPage + 1);
-        } catch (error) {
-            console.error("Error fetching branches:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching branches:", error); }
         } finally {
             setLoadingBranches(false);
         }

@@ -11,16 +11,16 @@ import CarCardSkeleton from "@/components/car-components/CarCardSkeleton";
 import CarDealersHome from "@/components/home/CarDealersHome";
 import Link from "next/link";
 
-// Dynamically import components
+// Dynamically import components — enable SSR for car-listing sections
 const TrendingCars = dynamic(() => import("@/components/home/TrendingCars"), {
-  ssr: false,
+  ssr: true,
 });
 const FeaturedNews = dynamic(() => import("@/components/home/FeaturedNews"), {
   ssr: false,
 });
 const MostPopularCarSection = dynamic(
   () => import("@/components/home/MostPopularCarSection"),
-  { ssr: false }
+  { ssr: true }
 );
 const UpcomingCars = dynamic(() => import("@/components/home/UpcomingCars"), {
   ssr: false,
@@ -103,8 +103,24 @@ export async function generateMetadata() {
 // Fetch data function with force cache
 async function fetchHomeData() {
   try {
-    const [featuredCarsRes, homeDataRes, articlesRes] = await Promise.all([
+    const [
+      featuredCarsRes,
+      popularCarsRes,
+      electricCarsRes,
+      suvsCarsRes,
+      performanceCarsRes,
+      compareCarsRes,
+      homeDataRes,
+      articlesRes,
+    ] = await Promise.all([
       getCarSection("featured"),
+      getCarSection("popular"),
+      getCarSection("electric"),
+      getCarSection("suvs"),
+      getCarSection("performance"),
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`, {
+        cache: "force-cache",
+      }).then((res) => res.json()).catch(() => []),
       fetch(`${process.env.NEXT_PUBLIC_API_URL}home/find`, {
         cache: "force-cache",
       }).then((res) => res.json()),
@@ -115,13 +131,22 @@ async function fetchHomeData() {
 
     return {
       featuredCars: featuredCarsRes,
+      carSections: {
+        popular: Array.isArray(popularCarsRes) && popularCarsRes.length > 0 ? popularCarsRes[0] : null,
+        electric: Array.isArray(electricCarsRes) && electricCarsRes.length > 0 ? electricCarsRes[0] : null,
+        suvs: Array.isArray(suvsCarsRes) && suvsCarsRes.length > 0 ? suvsCarsRes[0] : null,
+        performance: Array.isArray(performanceCarsRes) && performanceCarsRes.length > 0 ? performanceCarsRes[0] : null,
+      },
+      compareCars: Array.isArray(compareCarsRes) ? compareCarsRes : [],
       homeData: homeDataRes?.data,
       articles: articlesRes?.data,
     };
   } catch (error) {
-    console.error("Failed to fetch data:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch data:", error); }
     return {
       featuredCars: null,
+      carSections: { popular: null, electric: null, suvs: null, performance: null },
+      compareCars: [],
       homeData: null,
       articles: null,
     };
@@ -135,7 +160,7 @@ export async function generateStaticParams() {
 
 // Page component
 export default async function Home() {
-  const { featuredCars, homeData, articles } = await fetchHomeData();
+  const { featuredCars, carSections, compareCars, homeData, articles } = await fetchHomeData();
 
   const featuredCarsData =
     Array.isArray(featuredCars) && featuredCars.length > 0
@@ -184,9 +209,9 @@ export default async function Home() {
 
       <TrendingCars featuredCars={featuredCarsData} />
       <FeaturedNews />
-      <MostPopularCarSection />
+      <MostPopularCarSection carSections={carSections} />
       <UpcomingCars />
-      <SelectedCompareCarsSection />
+      <SelectedCompareCarsSection comparisons={compareCars} />
       <ChooseBrand brand={brands} />
       <CustomAdComponent />
       <ChooseBodyType bodyTypes={bodyTypes} />

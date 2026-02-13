@@ -16,8 +16,7 @@ export default function ModelPage() {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        if (!year || !brandname || !model) {
-            console.warn("Missing required parameters");
+        if (!year || !brandname || !model) {if (process.env.NODE_ENV === 'development') { console.warn("Missing required parameters"); }
             router.push("/404");
             return;
         }
@@ -47,8 +46,7 @@ export default function ModelPage() {
                 setSeoData(fetchedSeoData);
                 setOldModel(fetchedOldModel);
                 setLoading(false);
-            } catch (err) {
-                console.error("Error fetching model data:", err);
+            } catch (err) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", err); }
                 setError(true);
                 setLoading(false);
             }

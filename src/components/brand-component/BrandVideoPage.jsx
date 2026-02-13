@@ -33,10 +33,6 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
         setLoadingBrands(true);
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}find-brands-with-videos`);
-
-            console.log(response, "response");
-
-
             const newBrands = response?.data?.data?.map((brand) => ({
                 value: brand.slug,
                 label: brand.name,
@@ -51,8 +47,7 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {
-            console.error("Error fetching brands:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }

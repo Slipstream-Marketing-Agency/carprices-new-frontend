@@ -26,6 +26,7 @@ const CarCard = ({ car, brandname }) => {
 
         return <span className="md:text-lg text-sm">{priceInfo}</span>;
     });
+    CarPriceRange.displayName = 'CarPriceRange';
 
 
     return (

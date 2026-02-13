@@ -91,7 +91,7 @@ const ElectricCarFaqs = () => {
                 <div className="w-full mx-auto space-y-2">
                     {faq.map((item, index) => (
                         item.condition && (
-                            <div key={index} className="border rounded bg-white">
+                            <div key={`item-${index}`} className="border rounded bg-white">
                                 <button
                                     onClick={() => toggleAccordion(index)}
                                     className="text-base sm:text-lg font-medium w-full px-4 py-2 text-left flex justify-between items-center bg-white rounded-t"

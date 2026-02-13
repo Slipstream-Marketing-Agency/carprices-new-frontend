@@ -52,7 +52,6 @@ function CarLeftSidebar({
   toggleModal,
   setIsLoading
 }) {
-  console.log(toggleModal, "toggleModal");
   const router = useRouter();
 
   const [isSticky, setIsSticky] = useState(false);
@@ -123,7 +122,7 @@ function CarLeftSidebar({
 
         setPriceRange(response?.data?.price);
       } catch (error) {
-        console.error("Failed to fetch filtered trims:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch filtered trims:", error); }
       }
     };
     fetchPriceRange();
@@ -613,8 +612,6 @@ function CarLeftSidebar({
       }
     });
   };
-
-  console.log(tempSelectedPrice, "tempSelectedPrice");
   // Step 3: Apply changes when "Apply Filter" is clicked
   const applyPriceFilter = () => {
     setSelectedPrice(tempSelectedPrice);
@@ -827,9 +824,6 @@ function CarLeftSidebar({
       setTempSelectedDrive(selectedDrive);
     }
   }, [showDriveModal, selectedDrive]);
-
-  console.log(tempSelectedDrive, "tempSelectedDrive");
-
   // Handle changes in the drive modal
   const handleModalDriveChange = (driveValue) => {
     setTempSelectedDrive((prevSelectedDrive) => {
@@ -1009,9 +1003,8 @@ function CarLeftSidebar({
                 <div className="show">
                   <div className="row g-xl-2 gy-2 ">
                     {bodyoptions.map((item, idx) => (
-                      <div className="col-xl-4 col-4">
+                      <div key={idx} className="col-xl-4 col-4">
                         <button
-                          key={idx}
                           className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 shadow-sm rounded ${tempSelectedBodyTypes.includes(item.value)
                               ? "text-secondary fw-bold bg-white border border-2"
                               : "bg-white border border-2 border-white fw-bold"
@@ -1373,9 +1366,8 @@ function CarLeftSidebar({
                   <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                     <div className="row g-xl-2 gy-2 mt-4">
                       {bodyoptions.map((item, idx) => (
-                        <div className="col-xl-4 col-4">
+                        <div key={idx} className="col-xl-4 col-4">
                           <button
-                            key={idx}
                             className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${tempSelectedBodyTypes.includes(item.value)
                                 ? "text-secondary font-semibold "
                                 : "bg-white font-semibold"
@@ -1637,8 +1629,6 @@ function CarLeftSidebar({
   const [minPrice, setMinPrice] = useState(43758);
   const [maxPrice, setMaxPrice] = useState(33660000);
   const [initialValues, setInitialValues] = useState([]); // Default values for initial slider range
-
-  console.log(initialValues, "initialprice");
   useEffect(() => {
     if (price) {
       // Split by commas to handle multiple ranges
@@ -1650,9 +1640,6 @@ function CarLeftSidebar({
       // Get the minimum and maximum prices from all the ranges
       const min = Math.min(...allPrices);
       const max = Math.max(...allPrices);
-
-      console.log(price, 'inside useEffect price');
-
       setMinPrice(min);
       setMaxPrice(max);
     }
@@ -1783,8 +1770,7 @@ function CarLeftSidebar({
                       //   variant="contained"
                       //   fullWidth
                       //   onClick={() => {
-                      //     console.log("llllllllllllll");
-                      //     const applyFilterFunction =
+                      ////     const applyFilterFunction =
                       //       filterFunctions[filter.id];
                       //     if (applyFilterFunction) {
                       //       applyFilterFunction(); // Call the function dynamically
@@ -1797,7 +1783,6 @@ function CarLeftSidebar({
                       <PrimaryButton
                         label="Apply Filter"
                         onClick={() => {
-                          console.log("llllllllllllll");
                           const applyFilterFunction =
                             filterFunctions[filter.id];
                           if (applyFilterFunction) {
@@ -2031,9 +2016,8 @@ function CarLeftSidebar({
                 <div className={`${showBodyDropdown ? "show" : "hide"}`}>
                   <div className="row g-xl-2 gy-2 mt-4">
                     {bodyoptions.map((item, idx) => (
-                      <div className="col-xl-4 col-4">
+                      <div key={idx} className="col-xl-4 col-4">
                         <button
-                          key={idx}
                           className={`category-box-button setCategoryButtonHeight d-flex flex-column justify-content-center align-items-center p-2 rounded ${selectedBody.includes(item.value)
                               ? "text-secondary font-semibold "
                               : "bg-white font-semibold"

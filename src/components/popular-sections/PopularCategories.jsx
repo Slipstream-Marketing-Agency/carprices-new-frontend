@@ -16,8 +16,7 @@ const PopularCategories = () => {
 
         setBrands(data?.data?.brand || []);
         setBodyTypes(data?.data?.bodyTypes || []);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching data:', error); }
       }
     };
 

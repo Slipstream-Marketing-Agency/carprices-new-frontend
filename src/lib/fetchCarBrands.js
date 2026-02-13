@@ -8,9 +8,7 @@ export async function fetchCarBrands() {
     });
 
     const carBrands = Object.keys(response.facetsDistribution.name);
-    console.log('Car Brands:', carBrands);
     return carBrands;
-  } catch (error) {
-    console.error('Error fetching car brands:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching car brands:', error); }
   }
 }

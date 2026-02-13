@@ -7,8 +7,7 @@ export default function Ad250x250({ dataAdSlot }) {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("Error loading ads:", e);
+    } catch (e) {if (process.env.NODE_ENV === 'development') { console.error("Error loading ads:", e); }
     }
   }, [searchParams]); // Use searchParams instead of router.query
 

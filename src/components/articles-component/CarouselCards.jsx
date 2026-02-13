@@ -10,16 +10,25 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import moment from "moment";
 
+const Arrow = ({ direction, onClick }) => {
+    return (
+        <div
+            onClick={onClick}
+            className={`absolute top-1/2 transform -translate-y-1/2 ${direction === 'next' ? 'right-0' : 'left-0'} z-10 cursor-pointer bg-white shadow-lg rounded-full p-2`}
+        >
+            {direction === 'next' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </div>
+    );
+};
+
 const CarouselCards = ({ tabs }) => {
-    console.log(tabs)
-
-    const [activeTab, setActiveTab] = useState('')
-
     const page = 1;
     const pageSize = 10;
     const [articles, setArticles] = useState([]);
+    const [activeTab, setActiveTab] = useState('');
     const pathname = usePathname();
     const [pageLoading, setPageLoading] = useState(false);
+    const altImage = '/assets/placeholder/placeholder.jpg';
 
     useEffect(() => {
         const fetchArticlesData = async () => {
@@ -34,19 +43,13 @@ const CarouselCards = ({ tabs }) => {
                 });
                 setPageLoading(false)
             } catch (error) {
-                console.log(error)
-                setPageLoading(false)
+                console.error('Error fetching articles:', error);
+                setPageLoading(false);
             }
-        }
-
-        fetchArticlesData()
-    }, [page, pathname])
-
-    const Arrow = ({ onClick, direction }) => (
-        <div className={`custom-arrow custom-${direction}-arrow text-black`} onClick={onClick}>
-            {direction === 'next' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </div>
-    );
+        };
+        
+        fetchArticlesData();
+    }, [pathname, page, pageSize]);
 
     const sliderSettings = {
         dots: false,
@@ -110,7 +113,7 @@ const CarouselCards = ({ tabs }) => {
                 <div className="flex gap-4 mt-5">
                     {Array.from({ length: 4 }).map((_, index) => (
                         <div
-                            key={index}
+                            key={`_-${index}`}
                             className="w-full h-[190px] animate-pulse shadow rounded-lg p-5 flex flex-col justify-between"
                         >
                             <div className="h-6 bg-gray-300 rounded w-3/4 "></div>

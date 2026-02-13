@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 async function fetchData(type, slug) {
     try {
-        var timestamp = new Date().getTime();
+        const timestamp = new Date().getTime();
         // Fetch the single article details
         const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`, {
             headers: {
@@ -28,7 +28,7 @@ async function fetchData(type, slug) {
             detailData,
         };
     } catch (error) {
-        console.error("Error fetching data:", error.message);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching data:", error.message); }
         return null;
     }
 }
@@ -40,10 +40,6 @@ export async function generateMetadata({ params }) {
     }
 
     const data = await fetchData(type, slug);
-    console.log(data?.detailData?.metaTitle, 'mydata', typeof (data), data)
-    if (!VALID_TYPES.includes(type) || !data) {
-        return notFound();
-    }
 
     return {
         title: data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
@@ -76,9 +72,6 @@ export default async function BlogDetailsPage({ params }) {
     if (!VALID_TYPES.includes(type) || !data) {
         return notFound();
     }
-
-    console.log(data.detailData, "articleData");
-
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -117,7 +110,7 @@ export default async function BlogDetailsPage({ params }) {
             });
             return data;
         } catch (error) {
-            console.error('Error fetching featured articles:', error);
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching featured articles:', error); }
             return null;
         }
     };

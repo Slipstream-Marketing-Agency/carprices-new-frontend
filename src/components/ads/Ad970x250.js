@@ -8,8 +8,7 @@ export default function Ad970x250({ dataAdSlot }) {
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("Error loading ads:", e);
+    } catch (e) {if (process.env.NODE_ENV === 'development') { console.error("Error loading ads:", e); }
     }
   }, [searchParams]); // Trigger useEffect when searchParams changes
 

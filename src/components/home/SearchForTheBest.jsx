@@ -51,7 +51,7 @@ const SearchForTheBest = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {searchBestCar.map((car, index) => (
           <div
-            key={index}
+            key={`car-${index}`}
             className={`md:p-4 p-2 rounded-lg ${car.bgColor}`}
           >
             <Link href={car.linkUrl}>

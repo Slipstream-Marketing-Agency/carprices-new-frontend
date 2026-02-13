@@ -8,6 +8,15 @@ import PrimaryButton from "../buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
 import StarIcon from '@mui/icons-material/Star';
 
+// Helper: resolve relative Strapi upload URLs to absolute
+function resolveImageUrl(url) {
+  if (!url) return "/assets/img/car-placeholder.png";
+  if (url.startsWith("http")) return url;
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || "";
+  const origin = apiBase.replace(/\/api\/?$/, "");
+  return `${origin}${url}`;
+}
+
 
 
 // Memoized CarPriceRange component
@@ -21,6 +30,7 @@ const CarPriceRange = React.memo(({ minPrice, maxPrice }) => {
 
   return <span className="md:text-lg text-sm">{priceInfo}</span>;
 });
+CarPriceRange.displayName = 'CarPriceRange';
 
 // Memoized CarEMIDisplay component
 const CarEMIDisplay = React.memo(({ minPrice }) => {
@@ -35,6 +45,7 @@ const CarEMIDisplay = React.memo(({ minPrice }) => {
 
   return <p className="mt-1 md:text-md text-sm font-semibold">{emi}</p>;
 });
+CarEMIDisplay.displayName = 'CarEMIDisplay';
 
 // Main CarCard component
 const CarCard = ({ car }) => {
@@ -55,7 +66,7 @@ const CarCard = ({ car }) => {
         <header className="flex flex-col w-full text-sm leading-4 rounded-2xl text-neutral-900 px-5">
           <div className="relative self-center -mt-1.5 w-full aspect-[1.69] max-w-[278px] flex justify-center items-center">
             <Image
-              src={featuredImage?.url || "/assets/img/car-placeholder.png"}
+              src={resolveImageUrl(featuredImage?.url)}
               alt={`Image of ${model?.name || "Car"}`}
               width={featuredImage?.width ? featuredImage?.width : 278}
               height={featuredImage?.height ? featuredImage?.height : 157}

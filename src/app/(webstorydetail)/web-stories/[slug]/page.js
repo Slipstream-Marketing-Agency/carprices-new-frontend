@@ -209,7 +209,7 @@ export default async function Webstory({ params }) {
 
                 {/* Story Pages */}
                 {story.storyPage.map((item, index) => (
-                    <amp-story-page id={`story-page-${index}`} key={index}>
+                    <amp-story-page id={`story-page-${index}`} key={`item-${index}`}>
                         <amp-story-grid-layer template="fill">
                             <amp-img
                                 src={item.image.url}

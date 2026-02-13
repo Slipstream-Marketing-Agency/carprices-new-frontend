@@ -26,12 +26,8 @@ export default function Search() {
 
   const handleSearch = async () => {
     if (!query) {
-      console.log('Query is empty');
       return;
     }
-
-    console.log('Starting search with query:', query);
-
     try {
       const modelIndex = client.index('car-model');
       const modelSearchResults = await modelIndex.search(query, { limit: 10 });
@@ -83,8 +79,7 @@ export default function Search() {
         brands: formattedBrands,
         models: formattedModels.filter(Boolean), // Remove null results
       });
-    } catch (error) {
-      console.error('Error during search:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error during search:', error); }
     }
   };
 

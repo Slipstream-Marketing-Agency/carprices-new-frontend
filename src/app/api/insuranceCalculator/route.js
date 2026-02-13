@@ -22,8 +22,7 @@ const validateCaptcha = async (token) => {
     });
 
     return response.data.success;
-  } catch (error) {
-    console.error("Error validating reCAPTCHA:", error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error validating reCAPTCHA:", error); }
     return false;
   }
 };
@@ -111,9 +110,6 @@ export async function POST(req) {
       monthly_income,
       subscribe_to_offers,
     };
-
-    console.log("Transformed Data to Strapi:", transformedData);
-
     // Save to Strapi /loan-enquiries
     const strapiUrl = `${process.env.NEXT_PUBLIC_API_URL}loan-enquiries`;
 
@@ -128,10 +124,7 @@ export async function POST(req) {
           },
         }
       );
-
-      console.log("Data saved to Strapi successfully:", strapiResponse.data);
-    } catch (error) {
-      console.error("Error saving to Strapi:", error.response?.data || error.message);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error saving to Strapi:", error.response?.data || error.message); }
       return NextResponse.json(
         { message: "Error saving to Strapi", error: error.message },
         { status: 500 }
@@ -199,8 +192,7 @@ export async function POST(req) {
       { message: "Loan inquiry submitted and email sent successfully" },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Unexpected error:", error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Unexpected error:", error); }
     return NextResponse.json(
       { message: "Unexpected error occurred", error: error.message },
       { status: 500 }

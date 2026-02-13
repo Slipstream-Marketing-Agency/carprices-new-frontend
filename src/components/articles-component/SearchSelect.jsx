@@ -68,8 +68,7 @@ export default function SearchSelect({ articleType }) {
         page === 1 ? newOptions : [...prevOptions, ...newOptions]
       );
       setHasMore(categories.length > 0 || tags.length > 0);
-    } catch (error) {
-      console.error('Error fetching search options:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching search options:', error); }
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +93,7 @@ export default function SearchSelect({ articleType }) {
       )}
       {inputValue === "" && recentSearches.map((search, index) => (
         <div
-          key={index}
+          key={`search-${index}`}
           onClick={() => props.selectProps.onChange(search)}
           className="px-4 py-2 cursor-pointer hover:bg-gray-100"
         >

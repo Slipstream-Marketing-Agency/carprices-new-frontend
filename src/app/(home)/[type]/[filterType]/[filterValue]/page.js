@@ -80,8 +80,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
         params: filterParams,
       });
       return data;
-    } catch (error) {
-      console.error("Error fetching articles:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching articles:", error); }
       return null;
     }
   };
@@ -124,7 +123,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
 
                     <div className="absolute top-2 left-2 flex flex-wrap gap-2">
                       {article?.types?.map((type, index) => (
-                        <span key={index} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
+                        <span key={`type-${type?.name || index}`} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
                           {type.name}
                         </span>
                       ))}
@@ -139,7 +138,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
                           <span className="text-[10px] font-semibold">Categories: </span>
                           {article.categories?.map((category, index) => (
                             <span
-                              key={index}
+                              key={`category-${category?.name || index}`}
                               className="text-[10px] bg-yellow-200 text-black py-[1px] px-[5px] rounded-xl mr-1"
                             >
                               {category.name}
@@ -151,7 +150,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
                         <p>
                           <span className="text-[10px] font-semibold">Tags: </span>
                           {article.tags?.map((tag, index) => (
-                            <span key={index} className="text-[10px] bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
+                            <span key={`tag-${tag?.name || index}`} className="text-[10px] bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
                               {tag.name}
                             </span>
                           ))}
@@ -159,7 +158,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
                       )} {article?.carBrands?.length > 0 &&
                         <div className='flex flex-wrap mt-2'>
                           {article?.carBrands?.map((brand, index) => (
-                            <div key={index}>
+                            <div key={`brand-${brand?.name || index}`}>
 
                               <Image
                                 src={brand.brandLogo}

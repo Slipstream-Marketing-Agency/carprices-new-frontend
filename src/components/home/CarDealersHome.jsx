@@ -15,7 +15,6 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
     const [selectedBranch, setSelectedBranch] = useState('');
     const [loadingBranches, setLoadingBranches] = useState(true);
     const [loadingDealers, setLoadingDealers] = useState(true);
-    console.log(dealers, "dealersdealers")
 
     useEffect(() => {
         const loadBranches = async () => {
@@ -24,7 +23,9 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                 const branchData = await fetchDealerBranches();
                 setBranches(branchData.branches);
             } catch (error) {
-                console.error('Failed to load branches:', error);
+                if (process.env.NODE_ENV === 'development') { 
+                    console.error('Failed to load branches:', error); 
+                }
             } finally {
                 setLoadingBranches(false);
             }
@@ -40,7 +41,9 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                 const data = await fetchDealers(brandSlug, 1, 10, selectedBranch);
                 setDealers(data.dealers);
             } catch (error) {
-                console.error('Failed to load dealers:', error);
+                if (process.env.NODE_ENV === 'development') { 
+                    console.error('Failed to load dealers:', error); 
+                }
             } finally {
                 setLoadingDealers(false);
             }
@@ -110,7 +113,7 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                     {loadingBranches ? (
                         Array.from({ length: 5 }).map((_, index) => (
                             <div
-                                key={index}
+                                key={`_-${index}`}
                                 className="w-24 h-10 bg-gray-200 animate-pulse rounded-full mx-2"
                             ></div>
                         ))
@@ -140,7 +143,7 @@ const CarDealersHome = ({ brandName, brandSlug }) => {
                 <div className="flex gap-4 mt-5">
                     {Array.from({ length: 4 }).map((_, index) => (
                         <div
-                            key={index}
+                            key={`_-${index}`}
                             className="w-full h-[190px] animate-pulse shadow rounded-lg p-5 flex flex-col justify-between"
                         >
                             <div className="h-6 bg-gray-300 rounded w-3/4 "></div>

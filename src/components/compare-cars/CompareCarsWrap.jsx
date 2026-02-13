@@ -99,20 +99,20 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
 
             <div className="grid grid-cols-12 gap-3 container">
                 {cars.map((carData, index) => (
-                    <div key={index} className="md:col-span-3 col-span-6">
+                    <div key={`carData-${index}`} className="md:col-span-3 col-span-6">
                         {loadingIndices.includes(index) ? (
                             <div className="flex justify-center items-center border-solid border border-gray-200 rounded-lg h-[320px]">
                                 <div className="loader">Loading...</div>
                             </div>
                         ) : (
-                            <CompareCarCard key={index} carData={carData} cars={cars} setCars={setCars} />
+                            <CompareCarCard key={`carData-${index}`} carData={carData} cars={cars} setCars={setCars} />
                         )}
                     </div>
                 ))}
 
                 {canAddMoreCars &&
                     toBeAddedLength.map((item, index) => (
-                        <div key={index} className="md:col-span-3 col-span-6">
+                        <div key={`item-${index}`} className="md:col-span-3 col-span-6">
                             <div className="flex justify-center items-center border-solid border shadow-md border-gray-200 rounded-lg h-[320px]">
                                 {/* <NewCarSelection
                                     mode="add"

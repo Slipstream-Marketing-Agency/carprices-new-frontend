@@ -131,7 +131,7 @@ export default function FeaturedNews() {
                             }}
                         >
                             {FeaturedData.map((car, index) => (
-                                <Link href={car.url} key={index} className="p-2">
+                                <Link href={car.url} key={`car-${car?.name || index}`} className="p-2">
                                     <div className="relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-500 custom-scale">
                                         <Image
                                             src={car.image}

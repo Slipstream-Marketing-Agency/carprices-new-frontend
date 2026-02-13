@@ -84,7 +84,7 @@ export default function About() {
                                 "New car buyers can compare a wide range of vehicles side-by-side for a comprehensive pricing and feature overview.",
                                 "Equipping users with tools and insights to find the perfect car aligned with their needs, preferences, and budget.",
                             ].map((point, index) => (
-                                <li key={index} className=" text-gray-700 ml-4">
+                                <li key={`point-${index}`} className=" text-gray-700 ml-4">
                                     {index === 0 ? (
                                         <p>
                                             A <span className="font-bold">‘World’s First’</span>{" "}
@@ -110,7 +110,7 @@ export default function About() {
                                 "Commitment to continual enhancement of our platform, incorporating user feedback and technological advancements for an optimized user experience.",
                                 "Fostering a supportive and interactive community environment where users can share, learn, and engage with fellow car enthusiasts and experts.",
                             ].map((point, index) => (
-                                <li key={index} className=" text-gray-700 ml-4">
+                                <li key={`point-${index}`} className=" text-gray-700 ml-4">
                                     <p>
                                         {point}
                                     </p>
@@ -127,7 +127,7 @@ export default function About() {
                                 "Industry news and trends regularly added to keep users informed about the evolving automotive landscape.",
                                 "Ensuring that users have access to the freshest details to aid their decision-making process when buying a car.",
                             ].map((point, index) => (
-                                <li key={index} className=" text-gray-700 ml-4">
+                                <li key={`point-${index}`} className=" text-gray-700 ml-4">
                                     <p>
                                         {point}
                                     </p>
@@ -144,7 +144,7 @@ export default function About() {
                                 "Detailed guides and tips on vehicle maintenance, ownership, insurance, and more, providing valuable insights for both new and experienced car owners.",
                                 "In-depth articles and analyses on industry trends, market forecasts, and emerging technologies, fostering a deeper understanding of the automotive world.",
                             ].map((point, index) => (
-                                <li key={index} className=" text-gray-700 ml-4">
+                                <li key={`point-${index}`} className=" text-gray-700 ml-4">
                                     <p>
                                         {point}
                                     </p>

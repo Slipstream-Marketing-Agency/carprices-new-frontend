@@ -8,9 +8,8 @@ import { getCarSection } from '@/lib/api';
 
 const CustomCarSlider = ({ selectedTab, heading }) => {
     const [filteredCars, setFilteredCars] = useState([]);
-    console.log(filteredCars, 'filteredCars')
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         let isMounted = true;
         setLoading(true); // Set loading to true when tab changes
@@ -24,7 +23,6 @@ const CustomCarSlider = ({ selectedTab, heading }) => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    console.log("Failed to fetch filteredCars", err);
                     setLoading(false); // Set loading to false on error
                 }
             }
@@ -56,7 +54,7 @@ const CustomCarSlider = ({ selectedTab, heading }) => {
                     >
                         {/* // Show actual car cards after loading */}
                         {[1, 2, 3, 4, 5].map((_, index) => (
-                                <CarCardSkeleton key={index} />
+                                <CarCardSkeleton key={`_-${index}`} />
                         ))}
                     </CardSliderWrapper>
                 </div>

@@ -39,7 +39,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
             {getPageNumbers().map((page, index) =>
                 page === "..." ? (
-                    <span key={index} className="px-3 py-1">...</span>
+                    <span key={`page-${index}`} className="px-3 py-1">...</span>
                 ) : (
                     <button
                         key={page}

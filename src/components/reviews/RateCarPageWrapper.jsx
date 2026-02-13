@@ -57,14 +57,12 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                         image: foundModel.featuredImage,
                         year: foundModel.latestYear
                     });
-                } else {
-                    console.warn(`Model with slug "${modelSlug}" not found.`);
+                } else {if (process.env.NODE_ENV === 'development') { console.warn(`Model with slug "${modelSlug}" not found.`); }
                 }
 
                 setLoading(false);
             })
-            .catch(error => {
-                console.error("Error fetching models:", error);
+            .catch(error => {if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
                 setLoading(false);
             });
     }, [apiUrl, brandSlug, modelSlug]);
@@ -122,8 +120,7 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
 
             setTitle("");
             setOpinion("");
-        } catch (error) {
-            console.error('Error submitting review:', error.response ? error.response.data : error.message);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error submitting review:', error.response ? error.response.data : error.message); }
             const errorMessage = error.response?.data?.error?.message || "An error occurred";
             setSnackbarMessage(errorMessage);
             setSnackbarSeverity("error");

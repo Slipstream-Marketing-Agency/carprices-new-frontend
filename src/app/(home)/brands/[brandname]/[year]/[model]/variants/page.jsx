@@ -51,8 +51,7 @@ export async function generateMetadata({ params }) {
     } catch (error) {
         if (error.response?.status === 404) {
             return notFound(); // Call notFound() for 404 errors
-        }
-        console.error("Error fetching model data:", error);
+        }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
         throw error; // Re-throw other errors for handling elsewhere
     }
 }
@@ -83,9 +82,7 @@ export default async function VariantPage({ params }) {
         if (!currentmodel || currentmodel.trims.length === 0) {
             throw new Error('No trims available');
         }
-    } catch (error) {
-        console.error('Error fetching model data:', error);
-
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching model data:', error); }
         // Handle redirect for old slugs
         if (error.response && error.response.status === 404) {
             const redirectResponse = await axios.get(

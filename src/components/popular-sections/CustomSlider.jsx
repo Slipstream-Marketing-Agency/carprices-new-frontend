@@ -43,7 +43,7 @@ const CustomSlider = ({ items, title, basePath }) => {
       <div className="flex space-x-4">
         {Array.from({ length: 6 }).map((_, index) => (
           <div
-            key={index}
+            key={`_-${index}`}
             className="flex flex-col items-center space-y-2 min-w-[120px] max-w-[120px] h-[120px]"
           >
             <div className="w-16 h-16 bg-gray-300 rounded-lg animate-pulse"></div>

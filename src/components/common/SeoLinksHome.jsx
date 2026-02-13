@@ -59,7 +59,7 @@ export default function SeoLinksHome() {
           <div className="font-semibold leading-6 capitalize sm:text-xl">Popular new cars</div>
           <div className="sm:grid grid-cols-2 ">
             {PopularNewCarsdata.map((link, index) => (
-              <Link key={index} href={link.href} className={`block mt-2  text-sm `}>
+              <Link key={`link-${index}`} href={link.href} className={`block mt-2  text-sm `}>
                 {link.text}
               </Link>
             ))}
@@ -71,7 +71,7 @@ export default function SeoLinksHome() {
           </div>
           <div>
             {searchedKeywordsData.slice(0, 6).map((link, index) => (
-              <Link key={index} href={link.href} className="text-sm block mt-2">
+              <Link key={`link-${index}`} href={link.href} className="text-sm block mt-2">
                 {link.text}
               </Link>
             ))}
@@ -82,8 +82,8 @@ export default function SeoLinksHome() {
             Why Carprices.ae
           </div>
           {whyCarPriceData.map((data, index) => (
-            <div className="mb-5" key={index}>
-              <div key={index} className="font-semibold mb-2">{data.heading}</div>
+            <div className="mb-5" key={`data-${index}`}>
+              <div key={`data-${index}`} className="font-semibold mb-2">{data.heading}</div>
               <div className="text-sm">{data.para}</div>
             </div>
           ))}

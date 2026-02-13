@@ -21,8 +21,7 @@ const validateCaptcha = async (token) => {
     });
 
     return response.data.success;
-  } catch (error) {
-    console.error("Error validating reCAPTCHA:", error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error validating reCAPTCHA:", error); }
     return false;
   }
 };
@@ -88,8 +87,7 @@ export async function POST(req) {
     });
 
     return NextResponse.json({ message: "Email sent successfully" }, { status: 200 });
-  } catch (error) {
-    console.error("Error sending email:", error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error sending email:", error); }
     return NextResponse.json({ message: "Error occurred while sending email" }, { status: 500 });
   }
 }

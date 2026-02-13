@@ -21,8 +21,7 @@ export const verifyUser = createAsyncThunk('auth/verifyUser', async (_, { reject
 
     // Return the user data if verification is successful
     return response.data;
-  } catch (error) {
-    console.error('Verification error:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Verification error:', error); }
     return rejectWithValue(error.response?.data?.message || 'Failed to verify user');
   }
 });

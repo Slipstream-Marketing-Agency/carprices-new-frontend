@@ -47,16 +47,20 @@ const SecurityComponent = () => {
                     headers: {
                         "Authorization": `Bearer ${jwt}`
                     }
-                })
+                });
                 // Handle successful account deletion here
-                alert("Account deleted successfully.")
+                alert("Account deleted successfully.");
             } else {
-                console.error("User not authenticated.")
+                if (process.env.NODE_ENV === 'development') { 
+                    console.error("User not authenticated."); 
+                }
             }
         } catch (error) {
-            console.error("Error deleting account:", error)
+            if (process.env.NODE_ENV === 'development') {
+                console.error("Error deleting account:", error);
+            }
         } finally {
-            handleCloseModal()
+            handleCloseModal();
         }
     }
     return (
@@ -158,7 +162,7 @@ const SecurityComponent = () => {
                 </DialogActions>
             </Dialog>
         </>
-    )
-}
+    );
+};
 
-export default SecurityComponent
+export default SecurityComponent;

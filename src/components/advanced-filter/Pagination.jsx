@@ -4,12 +4,13 @@ import Link from "next/link";
 import PropTypes from "prop-types"; // Import PropTypes
 
 export default function Pagination({ currentPage, totalPages }) {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    
     if (isNaN(currentPage) || isNaN(totalPages)) {
         return null; // Or handle the error scenario for invalid inputs
     }
 
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
     const currentPageNumber = parseInt(currentPage, 10);
 
     const changePage = (page) => {

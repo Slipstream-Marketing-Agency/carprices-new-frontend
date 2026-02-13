@@ -33,9 +33,6 @@ export async function generateMetadata() {
 }
 
 export default async function page({ params, searchParams }) {
-
-    console.log(params, searchParams, "params, searchParams");
-
     const { brandname } = params;
     const { branchname } = params;
     const currentPage = parseInt(searchParams.page) || 1;

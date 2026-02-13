@@ -66,8 +66,7 @@ export default async function TypePage({ params, searchParams }) {
         params: { page, pageSize },
       });
       return data;
-    } catch (error) {
-      console.error('Error fetching articles:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching articles:', error); }
       return null;
     }
   };
@@ -78,8 +77,7 @@ export default async function TypePage({ params, searchParams }) {
         params: { tag: 'featured', page: 1, pageSize: 5 },
       });
       return data;
-    } catch (error) {
-      console.error('Error fetching featured articles:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching featured articles:', error); }
       return null;
     }
   };
@@ -88,14 +86,12 @@ export default async function TypePage({ params, searchParams }) {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/popular-categories-tags?type=${type}`);
       return data;
-    } catch (error) {
-      console.error('Error fetching article types:', error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching article types:', error); }
       return [];
     }
   };
 
   const articlesData = await fetchArticles();
-  console.log(articlesData, 'articlesDataarticlesData');
   const featuredArticlesData = await fetchFeaturedArticles();
   const popularCatgeoriesAndTabs = await fetchPopularCategoriesAndTabs();
 
@@ -135,7 +131,7 @@ export default async function TypePage({ params, searchParams }) {
                       />
                       <div className="absolute top-2 left-2 flex flex-wrap gap-2">
                         {article?.types?.map((type, index) => (
-                          <span key={index} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
+                          <span key={`type-${type?.name || index}`} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
                             {type?.name}
                           </span>
                         ))}
@@ -150,7 +146,7 @@ export default async function TypePage({ params, searchParams }) {
                             <span className="text-[10px] font-semibold">Categories: </span>
                             {article.categories?.map((category, index) => (
                               <span
-                                key={index}
+                                key={`category-${category?.name || index}`}
                                 className="text-[10px] bg-yellow-200 capitalize text-black py-[1px] px-[5px] rounded-xl mr-1"
                               >
                                 {capitalizeFirstLetter(category.name)}
@@ -162,7 +158,7 @@ export default async function TypePage({ params, searchParams }) {
                           <p>
                             <span className="text-[10px] font-semibold">Tags: </span>
                             {article.tags?.map((tag, index) => (
-                              <span key={index} className="text-[10px] capitalize bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
+                              <span key={`tag-${tag?.name || index}`} className="text-[10px] capitalize bg-gray-200 text-black py-[1px] px-[5px] rounded-xl mr-1">
                                 {capitalizeFirstLetter(tag.name)}
                               </span>
                             ))}
@@ -170,7 +166,7 @@ export default async function TypePage({ params, searchParams }) {
                         )} {article?.carBrands?.length > 0 &&
                           <div className='flex flex-wrap mt-2'>
                             {article?.carBrands?.map((brand, index) => (
-                              <div key={index}>
+                              <div key={`brand-${brand?.name || index}`}>
 
                                 <Image
                                   src={brand?.brandLogo?brand?.brandLogo:''}

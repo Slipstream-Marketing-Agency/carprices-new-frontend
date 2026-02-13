@@ -21,8 +21,7 @@ export default function RelatedVideos({ type, slug }) {
                 // Make the API request with the correct parameter
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-videos/by-brands-and-models?${paramType}=${slug}`);
                 setVideos(response.data.videos || []);
-            } catch (error) {
-                console.error('Error fetching related videos:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related videos:', error); }
             }
         };
 

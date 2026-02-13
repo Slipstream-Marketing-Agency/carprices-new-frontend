@@ -1,25 +1,32 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Helper function to handle API fetch with error handling
-const fetchWithErrorHandling = async (url) => {
+// Helper function to handle API fetch with error handling and timeout
+const fetchWithErrorHandling = async (url, timeoutMs = 15000) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!response.ok) {
       throw new Error(`Error fetching data from ${url} - Status: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
-    console.error("API Fetch Error:", error);
-    return null; // Return null or an empty object to avoid breaking the app
+    clearTimeout(timeoutId);
+    if (process.env.NODE_ENV === 'development') { console.error("API Fetch Error:", error.message); }
+    return null;
   }
 };
 
 // Helper function to build query string with additional query parameters
+// Filters out null/undefined values to keep URLs clean
 const buildQueryString = (baseParams, additionalParams) => {
-  const queryParams = new URLSearchParams({
-    ...baseParams,
-    ...additionalParams,
-  });
+  const merged = { ...baseParams, ...additionalParams };
+  // Remove null/undefined values to avoid sending "null" strings
+  const cleaned = Object.fromEntries(
+    Object.entries(merged).filter(([_, v]) => v != null && v !== "null" && v !== "undefined")
+  );
+  const queryParams = new URLSearchParams(cleaned);
   return queryParams.toString();
 };
 

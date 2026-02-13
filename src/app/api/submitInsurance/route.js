@@ -22,8 +22,7 @@ const validateCaptcha = async (token) => {
     });
 
     return response.data.success;
-  } catch (error) {
-    console.error("Error validating reCAPTCHA:", error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error validating reCAPTCHA:", error); }
     return false;
   }
 };
@@ -36,7 +35,6 @@ export async function POST(req) {
     // Validate reCAPTCHA token
     const isValidCaptcha = await validateCaptcha(recaptchaToken);
     if (!isValidCaptcha) {
-      console.log("Invalid reCAPTCHA");
       return NextResponse.json({ message: "Invalid reCAPTCHA" }, { status: 400 });
     }
 
@@ -65,9 +63,6 @@ export async function POST(req) {
         dob: formData.dob,
       },
     };
-
-    console.log("Data being sent to Strapi:", JSON.stringify(data, null, 2));
-
     // Send the request to Strapi
     const strapiResponse = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}insurance-calculator-enquiries`,
@@ -84,9 +79,6 @@ export async function POST(req) {
     if (strapiResponse.status < 200 || strapiResponse.status >= 300) {
       throw new Error(`Strapi response error: ${strapiResponse.status} ${strapiResponse.statusText}`);
     }
-
-    console.log("Strapi response:", strapiResponse.data);
-
     // Email notification after successful Strapi submission
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -151,15 +143,13 @@ export async function POST(req) {
       message: "Insurance quote submitted successfully, and email sent.",
     }, { status: 200 });
 
-  } catch (error) {
-    console.error("Error processing request:", {
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error processing request:", {
       message: error.message || "Unknown error",
       response: error.response ? error.response.data : "No response data",
       status: error.response ? error.response.status : "No status code",
       headers: error.response ? error.response.headers : "No response headers",
       stack: error.stack || "No stack trace",
-    });
-
+    }); }
     return NextResponse.json({
       message: "Error occurred while processing your request",
       error: error.message,

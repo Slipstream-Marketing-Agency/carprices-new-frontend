@@ -45,7 +45,7 @@ const BannerCarousel = () => {
                 <div className="w-full relative">
                     {images.map((image, index) => (
                         <Image
-                            key={index}
+                            key={`image-${index}`}
                             ref={(el) => (slidesRef.current[index] = el)}
                             src={image.src}
                             alt={image.alt}
@@ -61,7 +61,7 @@ const BannerCarousel = () => {
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {images.map((_, index) => (
                     <button
-                        key={index}
+                        key={`_-${index}`}
                         className={`w-3 h-3 rounded-full ${activeIndex === index ? 'bg-red-500' : 'bg-gray-300'
                             }`}
                         onClick={() => changeSlide(index)}

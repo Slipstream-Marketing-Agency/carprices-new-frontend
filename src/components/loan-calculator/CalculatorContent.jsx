@@ -22,8 +22,6 @@ export default function CalculatorContent() {
 
     // Handle variant selection from CarSelectionModal
     const handleVariantSelect = (variantData) => {
-        console.log(variantData, 'variantDatavariantData')
-        setSelectedYear(variantData.year);
         setSelectedBrand(variantData.brand);
         setSelectedModel(variantData.model);
         setSelectedModelName(variantData.modelName); // Assuming the variantData contains modelName

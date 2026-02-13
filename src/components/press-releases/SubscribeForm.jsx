@@ -21,7 +21,6 @@ const SubscribeForm = () => {
     const loadRecaptcha = () => {
       if (window.grecaptcha) {
         window.grecaptcha.ready(() => {
-          console.log("reCAPTCHA ready");
         });
       }
     };
@@ -64,8 +63,7 @@ const SubscribeForm = () => {
       setMessage(response.data);
       resetForm();
       setSubmitted(true);
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", error); }
       setMessage(
         error.response ? error.response.data.message : "An error occurred"
       );

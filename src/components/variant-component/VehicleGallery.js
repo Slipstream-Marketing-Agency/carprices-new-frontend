@@ -16,7 +16,7 @@ export default function VehicleGallery({ trim }) {
               {trim?.map((item, index) => (
                 <div
                   className="col-sm-3 col-4 cover_card_image mt-2 p-1"
-                  key={index}
+                  key={`item-${index}`}
                 >
                   <Image width={300} height={200} src={item} className="object-cover"/>
                 </div>

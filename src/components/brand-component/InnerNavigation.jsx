@@ -26,10 +26,6 @@ export default function InnerNavigation({ brandname }) {
     ];
 
     const pathname = usePathname();
-
-    console.log(pathname, "dkpokdpksd");
-
-
     return (
         <div className="md:flex rounded-lg shadow-md hidden w-full mb-4">
             {navigationData.map((type) => (

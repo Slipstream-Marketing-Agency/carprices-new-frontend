@@ -108,6 +108,7 @@ export default function NavBar() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [brandOptions, setBrandOptions] = useState([]);
@@ -136,7 +137,7 @@ export default function NavBar() {
       setBrandOptions(brands);
       //
     } catch (error) {
-      console.error("Error fetching brands:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
     } finally {
       setIsLoading(false); // Set loading to false when the request is complete
     }
@@ -171,7 +172,7 @@ export default function NavBar() {
 
       //
     } catch (error) {
-      console.error("Error fetching brands:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
     } finally {
       setIsLoading(false); // Set loading to false when the request is complete
     }
@@ -196,7 +197,7 @@ export default function NavBar() {
 
       setBrandOptions(data.carBrands.data);
     } catch (error) {
-      console.error("Error fetching brands:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
     }
     setSearchLoading(false);
   };
@@ -249,7 +250,7 @@ export default function NavBar() {
     //     setSearchResults(response.data.data);
     //     setShowDropdown(true);
     //   } catch (error) {
-    //     console.error("Error fetching recent searches:", error);
+    
     //     setSearchResults([]);
     //     setShowDropdown(false);
     //   }
@@ -272,7 +273,7 @@ export default function NavBar() {
       setSearchResults(response.data.data);
       setShowDropdown(true);
     } catch (error) {
-      console.error("Error fetching search results:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching search results:", error); }
       setSearchResults([]);
       setShowDropdown(false);
     }
@@ -297,7 +298,7 @@ export default function NavBar() {
     //     year: item.year,
     //   });
     // } catch (error) {
-    //   console.error("Error updating recent searches:", error);
+    
     // }
 
     if (item.type === "brand") {
@@ -368,11 +369,9 @@ export default function NavBar() {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 3; // Scroll-fast
+    const walk = (x - startX) * 3;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
-
-  const [searchClicked, setSearchClcked] = useState();
 
   const [hoveredMenuItem, setHoveredMenuItem] = useState(null);
   const [brands, setBrands] = useState([]);
@@ -390,7 +389,7 @@ export default function NavBar() {
         setBrands(homeData?.brand ? homeData.brand : []);
         setBodyTypes(homeData?.bodyTypes ? homeData.bodyTypes : []);
       } catch (error) {
-        console.error("Server-side Data Fetching Error:", error.message);
+if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fetching Error:", error.message); }
       }
     };
 
@@ -608,7 +607,14 @@ export default function NavBar() {
         {searchClicked ? (
           <div className="flex flex-col grow shrink justify-center w-full max-md:max-w-full">
             <div className="flex flex-col justify-center items-center bg-white border border-solid border-neutral-200 rounded-full w-full max-md:max-w-full">
-              <div className="flex  items-center gap-2 px-4 py-1 w-full">
+              <div className="flex items-center gap-2 px-4 py-1 w-full">
+                <button 
+                  onClick={() => setSearchClicked(false)}
+                  className="shrink-0"
+                  aria-label="Close search"
+                >
+                  <CloseIcon className="text-gray-600" />
+                </button>
                 <Search />
               </div>
             </div>
@@ -625,11 +631,11 @@ export default function NavBar() {
                           {searchResults.map((item, index) => (
                             <div
                               className="flex justify-between py-0 px-0"
-                              key={index}
+                              key={`item-${index}`}
                             >
                               <div className="flex  w-full">
                                 <button
-                                  key={index}
+                                  key={`item-${index}`}
                                   type="button"
                                   className="w-full text-left py-1 px-1 cursor-pointer hover:bg-gray-100 focus:bg-gray-200 rounded-2xl bg-white"
                                   onClick={() => handleItemClick(item)}
@@ -659,10 +665,10 @@ export default function NavBar() {
                           {carItems.map((item, index) => (
                             <Link
                               href={item.link}
-                              key={index}
+                              key={`item-${item?.title || index}`}
                               className="flex flex-col rounded-2xl w-[250px] gap-3 max-md:ml-0 max-md:w-full"
                             >
-                              <div className="flex flex-col w-[250px]  grow justify-center rounded-2xl self-stretch text-white rounded-xl max-md:mt-4">
+                              <div className="flex flex-col w-[250px] grow justify-center rounded-2xl self-stretch text-white max-md:mt-4">
                                 <div className="flex overflow-hidden relative flex-col rounded-2xl justify-end px-1 pt-20 pb-1 w-full aspect-[0.84]">
                                   <img
                                     loading="lazy"
@@ -707,7 +713,7 @@ export default function NavBar() {
                 loading="lazy"
                 src="/search.svg"
                 className="shrink-0 w-5 aspect-square"
-                onClick={() => setSearchClcked(true)}
+                onClick={() => setSearchClicked(true)}
                 alt={`search-icon`}
                 width={0}
                 height={0}

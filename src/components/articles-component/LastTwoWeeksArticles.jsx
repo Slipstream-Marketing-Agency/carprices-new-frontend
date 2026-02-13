@@ -16,8 +16,7 @@ export default function LastTwoWeeksArticles() {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/last-two-weeks`);
         setArticles(response.data.data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
+      } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching articles:", error); }
         setLoading(false);
       }
     };

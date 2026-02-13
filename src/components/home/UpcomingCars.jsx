@@ -97,7 +97,7 @@ export default function UpcomingCars() {
                     <Slider ref={sliderRef} {...settingsupcoming}>
                         {cars.map((item, index) => (
                             <div
-                                key={index}
+                                key={`item-${item?.title || index}`}
                                 className="flex flex-col justify-center items-center text-white bg-black"
                             >
                                 <div className="relative flex flex-col justify-end pt-20 min-h-[290px]">

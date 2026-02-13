@@ -38,7 +38,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
       <div className="grid grid-cols-3 gap-4">
         {bodyTypeList.map((item, index) => (
           <button
-            key={index}
+            key={item?.slug || item.slug || index}
             className={`flex flex-col items-center p-2 rounded-xl border border-2 border-solid bg-white ${isFilterActive(item.slug)
                 ? "bg-light border-blue-300"
                 : "border-zinc-100 grayscale"

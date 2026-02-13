@@ -51,7 +51,7 @@ export default function SeoLinksFilter() {
           <div className="font-bold leading-6 capitalize sm:text-xl">Popular new cars</div>
           <div className="sm:grid sm:grid-cols-2 ">
             {PopularNewCarsdata.slice(0, 20).map((link, index) => (
-              <Link key={index} href={link.href} className={`block mt-2  text-sm ${index % 2 === 0 ? "" : "hidden"}`}>
+              <Link key={`link-${index}`} href={link.href} className={`block mt-2  text-sm ${index % 2 === 0 ? "" : "hidden"}`}>
                 {link.text}
               </Link>
             ))}
@@ -63,7 +63,7 @@ export default function SeoLinksFilter() {
           </div>
           <div>
             {searchedKeywordsData.slice(0, 10).map((link, index) => (
-              <Link key={index} href={link.href} className="text-sm block mt-2">
+              <Link key={`link-${index}`} href={link.href} className="text-sm block mt-2">
                 {link.text}
               </Link>
             ))}

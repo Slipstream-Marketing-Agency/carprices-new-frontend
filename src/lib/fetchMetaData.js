@@ -10,8 +10,7 @@ export const fetchMetaData = async (slug) => {
             robots: metaData?.metaRobots || "",
             canonical: metaData?.canonicalURL || ""
         }
-    } catch (error) {
-        console.error("Error fetching meta data", error);
+    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching meta data", error); }
         return null;
     }
 };

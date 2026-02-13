@@ -94,7 +94,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                 <h5 className="text-sm font-semibold text-gray-400">Body Types</h5>
                                 <div className="grid grid-cols-4 gap-4 mb-4">
                                     {bodyTypes.map((bodyType, index) => (
-                                        <Link href={`/body-types/${bodyType?.slug}`} key={index}>
+                                        <Link href={`/body-types/${bodyType?.slug}`} key={bodyType?.slug || bodyType.slug || index}>
                                             <div
                                                 className="text-center bg-gray-50 p-2 rounded-lg shadow-sm hover:shadow-custom-shadow transition-shadow duration-300 cursor-pointer"
                                                 onMouseDown={(e) => e.currentTarget.classList.add('scale-95')}
@@ -135,7 +135,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         <h6 className="text-sm font-semibold text-gray-400">Browse Cars by Body Style</h6>
                                         <div className="grid grid-cols-2 gap-4 mt-2">
                                             {bodyTypes.map((bodyType, index) => (
-                                                <Link href={`/body-types/${bodyType?.slug}`} key={index}>
+                                                <Link href={`/body-types/${bodyType?.slug}`} key={bodyType?.slug || bodyType.slug || index}>
                                                     <div
                                                         className="text-center bg-gray-50 p-0 rounded-lg shadow-sm hover:shadow-custom-shadow transition-shadow duration-300 cursor-pointer"
                                                         onMouseDown={(e) => e.currentTarget.classList.add('scale-95')}
@@ -172,7 +172,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         <h6 className="text-sm font-semibold text-gray-400">Browse Cars by Brand</h6>
                                         <div className="grid grid-cols-2 gap-4 mt-2">
                                             {brands.map((brand, index) => (
-                                                <Link href={`/brands/${brand?.slug}`} key={index}>
+                                                <Link href={`/brands/${brand?.slug}`} key={brand?.slug || brand.slug || index}>
                                                     <div
                                                         className="text-center bg-gray-50 p-0 rounded-lg shadow-sm hover:shadow-custom-shadow transition-shadow duration-300 cursor-pointer"
                                                         onMouseDown={(e) => e.currentTarget.classList.add('scale-95')}
@@ -213,7 +213,7 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                     <h6 className="text-sm font-semibold text-gray-400">Browse Popular Cars</h6>
                                     <div className="grid grid-cols-3 gap-2 my-2">
                                         {bodyTypes.slice(1).map((bodyType, index) => (
-                                            <div key={index} className="flex shadow-sm hover:shadow-custom-shadow flex-col py-2 rounded-lg items-center mb-4 md:mb-0">
+                                            <div key={`bodyType-${index}`} className="flex shadow-sm hover:shadow-custom-shadow flex-col py-2 rounded-lg items-center mb-4 md:mb-0">
                                                 <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
                                                     <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
                                                         height="0"

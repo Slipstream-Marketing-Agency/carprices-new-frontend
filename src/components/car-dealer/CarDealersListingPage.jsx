@@ -37,8 +37,7 @@ const CarDealersListingPage = () => {
 
                 // Load initial dealers without any filter selection
                 await fetchAndSetDealers(INITIAL_LIMIT);
-            } catch (error) {
-                console.error('Failed to load data:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Failed to load data:', error); }
             } finally {
                 setLoading(false);
             }
@@ -55,8 +54,7 @@ const CarDealersListingPage = () => {
             const branchSlug = selectedBranch?.value || '';
             const data = await fetchDealers(brandSlug, 1, limitCount, branchSlug);
             setDealers(data.dealers);
-        } catch (error) {
-            console.error('Error fetching filtered dealers:', error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching filtered dealers:', error); }
         } finally {
             setLoading(false);
         }
@@ -117,7 +115,7 @@ const CarDealersListingPage = () => {
                     <div className="">
                         {Array.from({ length: 6 }).map((_, index) => (
                             <Skeleton
-                                key={index}
+                                key={`_-${index}`}
                                 variant="rectangular"
                                 width="100%"
                                 height={200}

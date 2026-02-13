@@ -14,7 +14,7 @@ const VariantDropDown = ({ variant, dpPercentages, durations, index, expandedInd
     const totalFirstPayment = downPayment + installment;
 
     return (
-        <div key={index} className="border rounded-lg mb-6 transition-shadow bg-white">
+        <div key={`item-${index}`} className="border rounded-lg mb-6 transition-shadow bg-white">
             <div
                 className="flex justify-between items-center p-5 bg-gradient-to-r from-gray-50 to-gray-100 cursor-pointer rounded-t-lg"
                 onClick={() => handleToggle(index)}
@@ -109,7 +109,7 @@ const FinancingBreakdown = ({ vehicleName, variants }) => {
             <p className="text-sm text-gray-600 mb-4">Check downpayment and monthly amortization and compare rates across the variants.</p>
 
             {variants.map((variant, index) => (
-                <VariantDropDown variant={variant} key={index} durations={durations} dpPercentages={dpPercentages} handleToggle={handleToggle} index={index} expandedIndex={expandedIndex} />
+                <VariantDropDown variant={variant} key={`variant-${index}`} durations={durations} dpPercentages={dpPercentages} handleToggle={handleToggle} index={index} expandedIndex={expandedIndex} />
             ))}
         </div>
     );

@@ -69,14 +69,14 @@ export default function TrendingNews({ articles }) {
                 {loading ? (
                     <div className="flex gap-2">
                         {Array.from({ length: 4 }).map((_, index) => (
-                            <div key={index} className="skeleton-loader w-full h-[200px] rounded-2xl bg-gray-300 animate-pulse"></div>
+                            <div key={`_-${index}`} className="skeleton-loader w-full h-[200px] rounded-2xl bg-gray-300 animate-pulse"></div>
                         ))}
                     </div>
                 ) : (
                     <Slider {...sliderSettings}>
                         {articles?.news?.length > 0 ? (
                             articles.news.map((item, index) => (
-                                <div key={index} className="custom-slide px-2">
+                                <div key={item?.slug || item.slug || index} className="custom-slide px-2">
                                     <Link href={`/news/${item.slug}`}>
                                         <div
                                             className="flex flex-col justify-between bg-white rounded-lg shadow-md overflow-hidden h-full border border-gray-200"

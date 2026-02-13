@@ -22,8 +22,7 @@ const validateCaptcha = async (token) => {
     });
 
     return response.data.success;
-  } catch (error) {
-    console.error('Error validating reCAPTCHA:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error validating reCAPTCHA:', error); }
     return false;
   }
 };
@@ -99,8 +98,7 @@ export async function POST(req) {
 
     return NextResponse.json({ message: 'Subscription successful' }, { status: 200 });
 
-  } catch (error) {
-    console.error('Error processing request:', error);
+  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error processing request:', error); }
     return NextResponse.json(
       { message: 'Error occurred while processing your request' },
       { status: 500 }

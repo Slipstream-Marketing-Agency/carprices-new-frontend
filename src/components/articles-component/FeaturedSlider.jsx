@@ -84,7 +84,7 @@ export default function FeaturedSlider({ featuredArticles, type }) {
               onMouseLeave={() => isDragging.current && handleDragEnd()}
             >
               {featuredArticles.data.map((article, index) => (
-                <Link href={`/news/${article.slug}`} className="min-w-full" key={index}>
+                <Link href={`/news/${article.slug}`} className="min-w-full" key={article?.slug || article.slug || index}>
                   <div className="relative">
                     <Image
                       src={article.coverImage || "/assets/placeholder/news-placeholder.webp"}

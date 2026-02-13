@@ -13,8 +13,7 @@ const BrandSection = () => {
                 const data = await response.json();
 
                 setBrands(data?.data?.brand || []);
-            } catch (error) {
-                console.error('Error fetching data:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching data:', error); }
             }
         };
 

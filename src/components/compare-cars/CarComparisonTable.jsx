@@ -36,8 +36,6 @@ export default function CarComparisonTable({ tableData }) {
   }, []);
   const columnCount = tableData.length + 1;
   const columnWidth = `${100 / columnCount}%`;
-
-  console.log(tableData, "tableData");
   return (
     <div className="w-full">
       <CarDetails

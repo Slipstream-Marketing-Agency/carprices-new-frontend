@@ -24,11 +24,6 @@ const CarSelectionModal = ({
     const [models, setModels] = useState([]);
     const [variants, setVariants] = useState([]);
 
-    // console.log('Years:', years);
-    // console.log('Brands:', brands);
-    // console.log('Models:', models);
-    // console.log('Variants:', variants);
-
     useEffect(() => {
         if (isOpen) {
             setLoading(true);
@@ -45,7 +40,7 @@ const CarSelectionModal = ({
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error fetching years:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching years:", error); }
                 setLoading(false);
             });
     };
@@ -60,7 +55,7 @@ const CarSelectionModal = ({
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error fetching brands:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
                 setLoading(false);
             });
     };
@@ -75,7 +70,7 @@ const CarSelectionModal = ({
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error fetching models:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
                 setLoading(false);
             });
     };
@@ -92,7 +87,7 @@ const CarSelectionModal = ({
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error fetching trims:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching trims:", error); }
                 setLoading(false);
             });
     };
@@ -122,9 +117,6 @@ const CarSelectionModal = ({
     };
 
     const handleVariantSelect = (variant) => {
-
-        console.log(variant, "variant");
-
         // Attach year, brand, and model information to the variant object
         const variantData = {
             ...variant,
@@ -149,7 +141,6 @@ const CarSelectionModal = ({
         );
     };
 
-    if (!isOpen) return null;
     const BackIcon = () => (
         <span className="mr-1 text-gray-500 text-sm">←</span>
     );
@@ -164,6 +155,8 @@ const CarSelectionModal = ({
         }
         setSearchTerm("");
     };
+
+    if (!isOpen) return null;
 
     return (
         <div className="flex items-center justify-center ">
@@ -190,7 +183,7 @@ const CarSelectionModal = ({
                         <h2 className="my-2 capitalize font-semibold">
                             Choose {currentStep}
                         </h2>
-                        <div className="flex items-center gap-4 items-start">
+                        <div className="flex items-start gap-4">
                             {/* Step Title */}
                             {/* <div className="text-lg font-semibold text-gray-700">
                                 {currentStep === "year" && "Select a Year"}

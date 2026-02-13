@@ -21,8 +21,7 @@ export default function RelatedArticles({ type, slug }) {
                 // Make the API request with the correct parameter
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/related?${paramType}=${slug}`);
                 setArticles(response.data.articles || []);
-            } catch (error) {
-                console.error('Error fetching related articles:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
             }
         };
 
@@ -60,7 +59,7 @@ export default function RelatedArticles({ type, slug }) {
                                         />
                                         <div className="absolute top-2 left-2 flex flex-wrap gap-2">
                                             {article?.types?.map((type, index) => (
-                                                <span key={index} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
+                                                <span key={type?.slug || type.slug || index} className="text-[10px] bg-blue-400 text-white py-[1px] px-[5px] rounded-xl">
                                                     {slugToCapitalCase(type.slug)}
                                                 </span>
                                             ))}

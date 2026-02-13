@@ -1,6 +1,4 @@
 "use client"
-import { useEffect, useState } from 'react';
-import { Select } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
@@ -8,24 +6,17 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PrimaryButton from '../buttons/PrimaryButton';
 
-export default function SelectedCompareCarsSection() {
-    const [carComparisons, setCarComparisons] = useState([]);
+// Helper: resolve relative upload URLs to absolute Strapi URLs
+function resolveImageUrl(url) {
+    if (!url) return "/assets/img/car-placeholder.png";
+    if (url.startsWith("http")) return url;
+    // Relative URL like /uploads/... — prepend Strapi origin
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || "";
+    const origin = apiBase.replace(/\/api\/?$/, "");
+    return `${origin}${url}`;
+}
 
-    useEffect(() => {
-        // Fetch the car comparison data from the API
-        async function fetchCarComparisons() {
-            try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}compare-car/home`);
-                const data = await response.json();
-                setCarComparisons(data);
-            } catch (error) {
-                console.error('Error fetching car comparison data:', error);
-            }
-        }
-
-        fetchCarComparisons();
-    }, []);
-
+export default function SelectedCompareCarsSection({ comparisons = [] }) {
     const Arrow = ({ className, onClick, direction }) => (
         <div className={`custom-arrow custom-${direction}-arrow text-black`} onClick={onClick}>
             <span>{direction === 'next' ? <ChevronRightIcon /> : <ChevronLeftIcon />}</span>
@@ -67,6 +58,8 @@ export default function SelectedCompareCarsSection() {
         ],
     };
 
+    if (!comparisons || comparisons.length === 0) return null;
+
     return (
         <div className="w-full md:px-0 px-5 md:mt-12 mt-6">
             <div className="relative flex justify-between container">
@@ -81,8 +74,9 @@ export default function SelectedCompareCarsSection() {
             </div>
             <div className="container">
                 <Slider {...sliderSettings}>
-                    {carComparisons.map((comparison) => {
-                        if (comparison.carModels.length < 2) return null;
+                    {comparisons.map((comparison) => {
+                        if (!comparison.carModels || comparison.carModels.length < 2) return null;
+                        if (!comparison.carModels[0]?.highTrim || !comparison.carModels[1]?.highTrim) return null;
 
                         const firstCarSlug = comparison.carModels[0].highTrim.mainSlug;
                         const secondCarSlug = comparison.carModels[1].highTrim.mainSlug;
@@ -97,23 +91,23 @@ export default function SelectedCompareCarsSection() {
                                         <div className="flex flex-col items-center mb-4 md:mb-0 w-full">
                                             <div className="text-sm leading-4 text-neutral-900 xl:px-3 w-full">
                                                 <Image
-                                                    src={comparison.carModels[0].highTrim.featuredImage}
+                                                    src={resolveImageUrl(comparison.carModels[0].highTrim.featuredImage)}
                                                     alt={comparison.carModels[0].name}
-                                                    width={0}
-                                                    height={0}
-                                                    sizes="100vw"
+                                                    width={245}
+                                                    height={140}
+                                                    sizes="(max-width: 768px) 100vw, 245px"
                                                     className="w-full h-40 object-contain rounded-lg"
                                                 />
                                             </div>
                                             <div className="px-2 mt-3 w-full xl:px-3">
                                                 <h6 className="text-xs tracking-wider leading-4 text-blue-600 uppercase font-bold">
-                                                    {comparison.carModels[0].brand.name}
+                                                    {comparison.carModels[0].brand?.name}
                                                 </h6>
                                                 <h4 className="text-base text-gray-900 font-semibold xl:text-lg">
                                                     {comparison.carModels[0].name}
                                                 </h4>
                                                 <span className="text-neutral-900 font-bold md:text-[21px]">
-                                                    AED {comparison.carModels[0].minPrice.toLocaleString()}
+                                                    AED {comparison.carModels[0].minPrice?.toLocaleString()}
                                                 </span>
                                             </div>
                                         </div>
@@ -129,23 +123,23 @@ export default function SelectedCompareCarsSection() {
                                         <div className="flex flex-col items-center w-full">
                                             <div className="text-sm leading-4 text-neutral-900 xl:px-3 w-full">
                                                 <Image
-                                                    src={comparison.carModels[1].highTrim.featuredImage}
+                                                    src={resolveImageUrl(comparison.carModels[1].highTrim.featuredImage)}
                                                     alt={comparison.carModels[1].name}
-                                                    width={0}
-                                                    height={0}
-                                                    sizes="100vw"
+                                                    width={245}
+                                                    height={140}
+                                                    sizes="(max-width: 768px) 100vw, 245px"
                                                     className="w-full h-40 object-contain rounded-lg"
                                                 />
                                             </div>
                                             <div className="px-2 mt-3 w-full xl:px-3">
                                                 <h6 className="text-xs tracking-wider leading-4 text-blue-600 uppercase font-bold">
-                                                    {comparison.carModels[1].brand.name}
+                                                    {comparison.carModels[1].brand?.name}
                                                 </h6>
                                                 <h4 className="text-base text-gray-900 font-semibold xl:text-lg">
                                                     {comparison.carModels[1].name}
                                                 </h4>
                                                 <span className="text-neutral-900 font-bold md:text-[21px]">
-                                                    AED {comparison.carModels[1].minPrice.toLocaleString()}
+                                                    AED {comparison.carModels[1].minPrice?.toLocaleString()}
                                                 </span>
                                             </div>
                                         </div>

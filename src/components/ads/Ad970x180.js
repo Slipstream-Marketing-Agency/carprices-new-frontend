@@ -8,8 +8,7 @@ export default function Ad970x180({dataAdSlot}) {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     }
-    catch (e) {
-      console.error("Error loading ads:", e);
+    catch (e) {if (process.env.NODE_ENV === 'development') { console.error("Error loading ads:", e); }
     }
 
   }, [searchParams]);

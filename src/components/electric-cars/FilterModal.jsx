@@ -94,9 +94,9 @@ const FilterModal = () => {
                                 <ul>
                                     {brands.map((brand, index) => (
                                         <li
-                                            key={index}
+                                            key={`brand-${index}`}
                                             className="cursor-pointer py-2 border-b last:border-none hover:bg-gray-100"
-                                            onClick={() => console.log(`${brand.name} (${brand.count})`)}
+                                            onClick={() => handleFilterSelect(brand.name)}
                                         >
                                             {brand.name} ({brand.count})
                                         </li>
@@ -106,12 +106,12 @@ const FilterModal = () => {
                         )}
                         {activeTab === 'price' && (
                             <div>
-                                <p>Price range options coming soon...</p>
+                                <p className="text-gray-600">Price filter options...</p>
                             </div>
                         )}
                         {activeTab === 'range' && (
                             <div>
-                                <p>Driving range options coming soon...</p>
+                                <p className="text-gray-600">Range filter options...</p>
                             </div>
                         )}
                     </div>

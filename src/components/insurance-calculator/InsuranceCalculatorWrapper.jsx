@@ -32,8 +32,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
             const response = await axios.get(`${apiUrl}car-trims/years`);
             setYears(response.data || []);
             setLoading(false);
-        } catch (error) {
-            console.error("Error fetching years:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching years:", error); }
             setLoading(false);
         }
     };
@@ -45,8 +44,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
             setBrands(response.data.brands || []);
             setCurrentStep("brand");
             setLoading(false);
-        } catch (error) {
-            console.error("Error fetching brands:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
             setLoading(false);
         }
     };
@@ -58,8 +56,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
             setModels(response.data.models || []);
             setCurrentStep("model");
             setLoading(false);
-        } catch (error) {
-            console.error("Error fetching models:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
             setLoading(false);
         }
     };
@@ -71,8 +68,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
             setTrims(response.data.trims || []);
             setCurrentStep("trim");
             setLoading(false);
-        } catch (error) {
-            console.error("Error fetching trims:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching trims:", error); }
             setLoading(false);
         }
     };
@@ -161,8 +157,6 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
 
     const handleSubmitForm = async (values, { setSubmitting, resetForm }) => {
         try {
-            console.log('submitting...')
-            setLoading(true);
             setSubmitting(true);
             const data = {
                 year: selectedYear,
@@ -203,17 +197,13 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                   },
                 }
               );
-              console.log(response.status === 200)
-
             if (response.status === 200) {
                 setSnackbarOpen(true); // Open the snackbar
                 resetForm()
                 setCurrentStep("year")
-            } else {
-                console.error("Error submitting form:", response);
+            } else {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", response); }
             }
-        } catch (error) {
-            console.error("Error submitting form:", error);
+        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error submitting form:", error); }
         } finally {
             setLoading(false);
             setSubmitting(false);

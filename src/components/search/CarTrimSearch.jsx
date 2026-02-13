@@ -46,8 +46,7 @@ function CarTrimSearch() {
                 setResults(response.hits);
                 setTotalResults(response.nbHits);
                 setTotalPages(Math.ceil(response.nbHits / resultsPerPage));
-            } catch (error) {
-                console.error('Error fetching car trims:', error);
+            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching car trims:', error); }
             } finally {
                 setLoading(false);
             }

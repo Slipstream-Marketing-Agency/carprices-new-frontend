@@ -65,7 +65,7 @@ export default function ArticleWrapper() {
                 setLoading(false);
                 
             } catch (error) {
-                console.error("Error fetching data:", error);
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching data:", error); }
                 setLoading(false);
                 
             }
@@ -87,13 +87,14 @@ export default function ArticleWrapper() {
                 });
                 setPageLoading(false)
             } catch (error) {
-                console.log(error)
+                if (process.env.NODE_ENV === 'development') {
+                    console.error("Error fetching articles:", error);
+                }
                 setPageLoading(false)
             }
         }
-
         fetchArticlesData()
-    }, [page, pathname])
+    }, [page, pathname, pageSize]);
 
     const tabsCarousel = [
         {
@@ -303,7 +304,7 @@ export default function ArticleWrapper() {
                             <div className="flex flex-wrap gap-2">
                                 {tags?.map((tag, index) => (
                                     <span
-                                        key={index}
+                                        key={`tag-${index}`}
                                         className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-200 cursor-pointer"
                                     >
                                         {tag}
@@ -381,7 +382,7 @@ export default function ArticleWrapper() {
                                 className="cursor-pointer"
                             >
                                 <div
-                                    key={index}
+                                    key={article?.id || article.id || index}
                                     className="relative col-span-6 md:col-span-4 rounded-[14px] shadow-lg"
                                 >
                                     {/* <div className="bg-blue-600 text-white opacity-80 rounded-e-2xl absolute top-1 sm:top-3 4xl:top-5 4xl:px-10 4xl:py-2 4xl:text-lg left-0 px-1 sm:px-6 py-1 font-thin text-xs sm:text-base">
