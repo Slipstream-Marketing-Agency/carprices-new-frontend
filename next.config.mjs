@@ -140,6 +140,23 @@ const nextConfig = bundleAnalyzer({
     ];
   },
 
+  async rewrites() {
+    // Get the base URL without /api/
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:1337/api/';
+    const strapiBaseUrl = apiUrl.replace(/\/api\/?$/, '');
+    
+    return [
+      {
+        source: '/uploads/:path*',
+        destination: `${strapiBaseUrl}/uploads/:path*`,
+      },
+      {
+        source: '/api/uploads/:path*',
+        destination: `${strapiBaseUrl}/uploads/:path*`,
+      },
+    ];
+  },
+
   compress: true,
 
   swcMinify: true,

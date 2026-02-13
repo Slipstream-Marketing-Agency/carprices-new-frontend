@@ -7,15 +7,7 @@ import React from "react";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
 import StarIcon from '@mui/icons-material/Star';
-
-// Helper: resolve relative Strapi upload URLs to absolute
-function resolveImageUrl(url) {
-  if (!url) return "/assets/img/car-placeholder.png";
-  if (url.startsWith("http")) return url;
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || "";
-  const origin = apiBase.replace(/\/api\/?$/, "");
-  return `${origin}${url}`;
-}
+import { resolveImageUrl } from '@/utils/imageUtils';
 
 
 

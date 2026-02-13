@@ -5,16 +5,7 @@ import Slider from 'react-slick';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PrimaryButton from '../buttons/PrimaryButton';
-
-// Helper: resolve relative upload URLs to absolute Strapi URLs
-function resolveImageUrl(url) {
-    if (!url) return "/assets/img/car-placeholder.png";
-    if (url.startsWith("http")) return url;
-    // Relative URL like /uploads/... — prepend Strapi origin
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "";
-    const origin = apiBase.replace(/\/api\/?$/, "");
-    return `${origin}${url}`;
-}
+import { resolveImageUrl } from '@/utils/imageUtils';
 
 export default function SelectedCompareCarsSection({ comparisons = [] }) {
     const Arrow = ({ className, onClick, direction }) => (
