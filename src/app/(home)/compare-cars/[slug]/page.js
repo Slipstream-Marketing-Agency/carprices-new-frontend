@@ -9,35 +9,34 @@ export async function generateMetadata({ params }) {
     // Fetch dynamic metadata for the privacy policy page
     const metaData = await fetchMetaData(slug);
 
+    const { slug: compareSlug } = params;
+    const pageTitle = metaData?.title || "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae";
+    const pageDescription = metaData?.description || "Find your perfect car match. Compare side by side, explore detailed specs, features, and pricing options. Make informed decisions with our easy car comparison tool.";
+
     // Return the dynamic metadata
     return {
-        title: metaData?.title ? metaData.title : "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Find your perfect car match. Compare side by side, explore detailed specs, features, and pricing options. Make informed decisions with our easy car comparison tool.",
-        charset: "UTF-8",
+        title: pageTitle,
+        description: pageDescription,
         alternates: {
-            canonical: `https://carprices.ae`,
+            canonical: `https://carprices.ae/compare-cars/${compareSlug}`,
         },
         keywords: metaData?.keywords || "Car comparison, Compare cars, Car prices, Specs comparison, Features comparison, UAE cars",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title
-                ? metaData.title
-                : "Compare Cars: Side-by-Side Comparison of Features, Specs, and Prices - Carprices.ae",
-            description:
-                metaData?.description
-                    ? metaData.description
-                    : "Find your perfect car match. Compare side by side, explore detailed specs, features, and pricing options. Make informed decisions with our easy car comparison tool.",
-            url: "https://carprices.ae", // Using the same canonical URL here
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title: pageTitle,
+            description: pageDescription,
+            url: `https://carprices.ae/compare-cars/${compareSlug}`,
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title: pageTitle,
+            description: pageDescription,
+        },
     };
 }
 

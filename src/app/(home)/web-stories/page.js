@@ -10,27 +10,33 @@ export async function generateMetadata() {
     // Fetch dynamic metadata
     const metaData = await fetchMetaData(slug);
 
+    const title = metaData?.title || "Web Stories - Carprices.ae";
+    const description = metaData?.description || "Explore all web stories about car prices, buying tips, and more.";
+
     return {
-        title: metaData?.title || "Web Stories - Carprices.ae",
-        description: metaData?.description || "Explore all web stories about car prices, buying tips, and more.",
-        charset: "UTF-8",
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/web-stories`,
+            canonical: `/web-stories`,
         },
         keywords: metaData?.keywords || "contact CarPrices.ae, car inquiries UAE, car suggestions UAE, car feedback UAE, automotive assistance UAE, trusted automotive companion, car journey UAE, car prices UAE, contact us CarPrices.ae, automotive world UAE, connect with CarPrices.ae",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title || "Web Stories - Carprices.ae",
-            description: metaData?.description || "Explore all web stories about car prices, buying tips, and more.",
-            url: "https://carprices.ae/web-stories",
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/web-stories`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "/favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
 }
 
@@ -46,7 +52,8 @@ export default async function WebStoriesPage() {
                 <WebstoriesWrapper stories={stories} categories={categories} />
             </div>
         );
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching web stories or categories:', error); }
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching web stories or categories:', error); }
         return (
             <div>
                 <p>Error loading web stories. Please try again later.</p>

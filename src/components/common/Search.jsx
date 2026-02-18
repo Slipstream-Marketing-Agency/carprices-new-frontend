@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SearchIcon from '@mui/icons-material/Search';
-import client from '@/lib/meilisearch';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Search() {
   const [query, setQuery] = useState('');
@@ -12,74 +13,61 @@ export default function Search() {
 
   // Debounced search effect
   useEffect(() => {
-    if (!query) {
+    if (!query || query.length < 2) {
       setResults([]);
       return;
     }
 
     const debounceTimeout = setTimeout(() => {
       handleSearch();
-    }, 500);
+    }, 400);
 
     return () => clearTimeout(debounceTimeout);
   }, [query]);
 
   const handleSearch = async () => {
-    if (!query) {
+    if (!query || query.length < 2) {
       return;
     }
     try {
-      const modelIndex = client.index('car-model');
-      const modelSearchResults = await modelIndex.search(query, { limit: 10 });
+      const response = await fetch(
+        `${API_URL}car-trims/global-search?keyword=${encodeURIComponent(query)}`
+      );
+      if (!response.ok) throw new Error('Search failed');
+      const data = await response.json();
 
-      const brandIndex = client.index('car-brand');
-      const brandSearchResults = await brandIndex.search(query, { limit: 10 });
-
-      const formattedBrands = brandSearchResults.hits.map((brand) => ({
+      const formattedBrands = (data.brands || []).map((brand) => ({
         id: brand.id,
         name: brand.name,
         slug: brand.slug,
-        description: brand.description || 'No description available.',
+        logo: brand.brandLogo?.url || null,
       }));
 
-      const formattedModels = await Promise.all(
-        modelSearchResults.hits.map(async (model) => {
-          const modelName = model.name || 'Unknown Model';
+      const formattedModels = (data.models || [])
+        .filter((model) => model.latestYear) // Only show models with trims
+        .map((model) => {
           const brandName = model.car_brands?.[0]?.name || 'Unknown Brand';
           const brandSlug = model.car_brands?.[0]?.slug || 'unknown-brand';
           const modelSlug = model.slug || 'unknown-model';
-          const modelId = model.id;
-
-          const trimIndex = client.index('car-trim');
-          const trimSearchResults = await trimIndex.search('', {
-            filter: `car_models.id = ${modelId}`,
-            limit: 100,
-          });
-
-          // Filter trims to find the latest year that is >= 2024
-          const latestTrim = trimSearchResults.hits
-            .filter((trim) => trim.year >= 2024)
-            .reduce((latest, trim) => {
-              return trim.year > (latest?.year || 0) ? trim : latest;
-            }, null);
-
-          if (!latestTrim) return null; // Only include models with a valid latest trim >= 2024
+          const year = model.latestYear;
 
           return {
             id: model.id,
-            displayText: `${latestTrim.year} ${brandName} ${modelName}`,
-            year: latestTrim.year,
+            displayText: `${year} ${brandName} ${model.name}`,
+            year,
             brandSlug,
             modelSlug,
           };
-        })
-      );
+        });
 
       setResults({
         brands: formattedBrands,
-        models: formattedModels.filter(Boolean), // Remove null results
+        models: formattedModels,
       });
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error during search:', error); }
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error during search:', error);
+      }
     }
   };
 

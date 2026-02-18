@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useMemo, useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+
 function ProductCategory({ brands }) {
   const ref = useRef();
   const slideSetting = useMemo(() => {
@@ -59,7 +58,6 @@ function ProductCategory({ brands }) {
                     width={90} // Optimized width for md screens
                     height={90} // Optimized height for md screens
                     sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                    layout="intrinsic" // Optimized for fixed-size images
                     className="object-contain w-20 h-20"
                   />
                 </div>

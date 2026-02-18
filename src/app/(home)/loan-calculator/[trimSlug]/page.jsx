@@ -8,13 +8,13 @@ export async function generateMetadata() {
     // Fetch dynamic metadata for the privacy policy page
     const metaData = await fetchMetaData(slug);
 
+    const pageTitle = metaData?.title || "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae";
+    const pageDescription = metaData?.description || "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.";
+
     // Return the dynamic metadata
     return {
-        title: metaData?.title ? metaData.title : "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
-        charset: "UTF-8",
+        title: pageTitle,
+        description: pageDescription,
         alternates: {
             canonical: `https://carprices.ae/loan-calculator`,
         },
@@ -23,18 +23,18 @@ export async function generateMetadata() {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title ? metaData.title : "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
-            description:
-                metaData?.description
-                    ? metaData.description
-                    : "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
-            url: "https://carprices.ae/contact-us",  // Using the same canonical URL here
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title: pageTitle,
+            description: pageDescription,
+            url: "https://carprices.ae/loan-calculator",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title: pageTitle,
+            description: pageDescription,
+        },
     };
 }
 

@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import client from '@/lib/meilisearch';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function CarTrimSearch() {
     const router = useRouter();
@@ -21,32 +22,42 @@ function CarTrimSearch() {
         const searchTrims = async () => {
             setLoading(true);
             try {
-                const filter = selectedBrands.length > 0
-                    ? `car_brands.name IN [${selectedBrands.map(b => `"${b}"`).join(', ')}]`
-                    : '';
-                
-                const response = await fetch(
-                    `${process.env.MEILISEARCH_HOST}/indexes/car-trim/search`, 
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${process.env.MEILISEARCH_API_KEY}`
-                        },
-                        body: JSON.stringify({
-                            q: query,
-                            filter,
-                            limit: resultsPerPage,
-                            offset: (page - 1) * resultsPerPage
-                        }),
-                        cache: 'no-store' // Prevent caching
-                    }
-                ).then(res => res.json());
+                const params = new URLSearchParams({
+                    page: page.toString(),
+                    pageSize: resultsPerPage.toString(),
+                });
+                if (query) params.set('searchTerm', query);
+                if (selectedBrands.length > 0) {
+                    params.set('brands', JSON.stringify(selectedBrands));
+                }
 
-                setResults(response.hits);
-                setTotalResults(response.nbHits);
-                setTotalPages(Math.ceil(response.nbHits / resultsPerPage));
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching car trims:', error); }
+                const response = await fetch(
+                    `${API_URL}car-trims/global-search?keyword=${encodeURIComponent(query || '')}`,
+                    { cache: 'no-store' }
+                );
+                const data = await response.json();
+
+                // Combine brands + models + trims into a flat list for display
+                const trimEntries = [];
+                if (data.trims) {
+                    Object.entries(data.trims).forEach(([brand, displayTexts]) => {
+                        displayTexts.forEach((text) => {
+                            trimEntries.push({
+                                id: `${brand}-${text}`,
+                                name: text,
+                                brand,
+                            });
+                        });
+                    });
+                }
+
+                setResults(trimEntries);
+                setTotalResults(trimEntries.length);
+                setTotalPages(Math.ceil(trimEntries.length / resultsPerPage));
+            } catch (error) {
+                if (process.env.NODE_ENV === 'development') {
+                    console.error('Error fetching car trims:', error);
+                }
             } finally {
                 setLoading(false);
             }
@@ -82,14 +93,7 @@ function CarTrimSearch() {
                 {results.map((trim) => (
                     <div key={trim.id} className="border border-gray-200 rounded-lg shadow-lg p-4">
                         <h3 className="text-xl font-semibold mb-2">{trim.name}</h3>
-                        <p className="text-gray-600 mb-1">Year: {trim.year}</p>
-                        <p className="text-gray-600 mb-1">Price: ${trim.price.toLocaleString()}</p>
-                        <p className="text-gray-600 mb-1">
-                            Brand: {trim.car_brands?.map((brand) => brand.name).join(', ')}
-                        </p>
-                        <p className="text-gray-600">
-                            Model: {trim.car_models?.map((model) => model.name).join(', ')}
-                        </p>
+                        <p className="text-gray-600 mb-1">Brand: {trim.brand}</p>
                     </div>
                 ))}
             </div>

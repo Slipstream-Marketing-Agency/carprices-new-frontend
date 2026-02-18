@@ -8,33 +8,35 @@ export async function generateMetadata({ params }) {
     // Fetch dynamic metadata for the privacy policy page
     const metaData = await fetchMetaData(slug);
 
-    // Return the dynamic metadata
+    const title = metaData?.title ? metaData.title : "Contact Us - Carprices.ae";
+    const description = metaData?.description
+        ? metaData.description
+        : "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.";
+
     return {
-        title: metaData?.title ? metaData.title : "Contact Us - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.",
-        charset: "UTF-8",
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/contact-us`,
+            canonical: `/contact-us`,
         },
         keywords: metaData?.keywords || "contact CarPrices.ae, car inquiries UAE, car suggestions UAE, car feedback UAE, automotive assistance UAE, trusted automotive companion, car journey UAE, car prices UAE, contact us CarPrices.ae, automotive world UAE, connect with CarPrices.ae",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title ? metaData.title : "Contact Us - Carprices.ae",
-            description:
-                metaData?.description
-                    ? metaData.description
-                    : "Contact us for any inquiries, suggestions, or feedback. We are here to assist you. Reach out to CarPrices.ae - your trusted companion in the automotive world. Let's connect and make your car journey exceptional.",
-            url: "https://carprices.ae/contact-us",  // Using the same canonical URL here
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/contact-us`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
 }
 export default function Contact() {

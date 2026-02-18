@@ -1,5 +1,5 @@
 import { getWebStoryData } from "@/lib/api";
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 import React from "react";
 export async function generateMetadata({ params }) {
     const { slug } = params;
@@ -201,7 +201,7 @@ export default async function Webstory({ params }) {
                                     fontFamily: "'Poppins', sans-serif",
                                 }}
                             >
-                                {moment(story.publishedAt).format("MMMM Do YYYY")}
+                                {formatDateLong(story.publishedAt)}
                             </span>
                         </div>
                     </amp-story-grid-layer>
@@ -256,7 +256,7 @@ export default async function Webstory({ params }) {
                                         fontFamily: "'Poppins', sans-serif",
                                     }}
                                 >
-                                    {moment(story.publishedAt).format("MMMM Do YYYY")}
+                                    {formatDateLong(story.publishedAt)}
                                 </span>
                             </div>
                         </amp-story-grid-layer>

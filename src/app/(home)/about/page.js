@@ -1,4 +1,5 @@
 import { fetchMetaData } from '@/lib/fetchMetaData';
+import Image from 'next/image';
 import Link from 'next/link'
 import React from 'react'
 
@@ -8,33 +9,35 @@ export async function generateMetadata({ params }) {
     // Fetch dynamic metadata for the privacy policy page
     const metaData = await fetchMetaData(slug);
 
-    // Return the dynamic metadata
+    const title = metaData?.title ? metaData.title : "About Us - Carprices.ae";
+    const description = metaData?.description
+        ? metaData.description
+        : "Discover the automotive world with CarPrices.ae - your trusted portal for comprehensive car research in the UAE. Compare vehicles, stay updated with the latest models and industry trends. Join our car-loving community today!";
+
     return {
-        title: metaData?.title ? metaData.title : "About Us - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Discover the automotive world with CarPrices.ae - your trusted portal for comprehensive car research in the UAE. Compare vehicles, stay updated with the latest models and industry trends. Join our car-loving community today!",
-        charset: "UTF-8",
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/about`,
+            canonical: `/about`,
         },
         keywords: metaData?.keywords || "CarPrices.ae, About CarPrices, Car research UAE, Compare cars UAE, Latest car models UAE, Automotive industry UAE, Car reviews, Car comparisons, Vehicle trends UAE",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title ? metaData.title : "About Us - Carprices.ae",
-            description:
-                metaData?.description
-                    ? metaData.description
-                    : "Discover the automotive world with CarPrices.ae - your trusted portal for comprehensive car research in the UAE. Compare vehicles, stay updated with the latest models and industry trends. Join our car-loving community today!",
-            url: "https://carprices.ae/about",  // Using the same canonical URL here
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/about`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
 }
 
@@ -43,10 +46,13 @@ export default function About() {
         <div className="container mx-auto">
             <div className="grid gap-4 p-4 lg:grid-rows-1 lg:grid-cols-10 w-full container">
                 <div className="row-span-1 md:col-span-12 col-span-12 flex flex-col md:justify-start text-white rounded-2xl leading-[100%] relative overflow-hidden md:h-[400px] h-[200px]">
-                    <img
+                    <Image
                         loading="lazy"
                         src="/About-Us.jpg"
-                        className="object-cover w-full h-full absolute inset-0"
+                        alt="About CarPrices.ae"
+                        fill
+                        className="object-cover"
+                        sizes="100vw"
                     />
                     <div className="absolute inset-0 bg-black opacity-30"></div>{" "}
                     {/* Overlay */}
@@ -162,14 +168,20 @@ export default function About() {
                     </p>
                 </div>
                 <div className="space-y-10 ">
-                    <img
+                    <Image
                         loading="lazy"
                         src="/assets/about-us/06_Social.jpg"
+                        width={600}
+                        height={400}
+                        alt="CarPrices.ae social media presence"
                         className="object-contain w-full h-auto rounded-2xl"
                     />
-                    <img
+                    <Image
                         loading="lazy"
                         src="/assets/about-us/05_social.jpg"
+                        width={600}
+                        height={400}
+                        alt="CarPrices.ae community engagement"
                         className="object-contain w-full h-auto rounded-2xl md:block hidden"
                     />
                 </div>

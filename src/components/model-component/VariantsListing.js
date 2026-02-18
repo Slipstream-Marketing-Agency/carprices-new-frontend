@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import _ from "lodash";
 import { toast } from "react-toastify";
 import Price from "@/utils/Price"; // Adjust the path based on your project structure
 import useTranslate from "@/utils/UseTranslate";; // Adjust the path based on your project structu
@@ -27,7 +26,6 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
                   <Image
                     width={200}
                     height={200}
-                    layout="fixed"
                     alt={item?.name}
                     src={
                       item?.featuredImage

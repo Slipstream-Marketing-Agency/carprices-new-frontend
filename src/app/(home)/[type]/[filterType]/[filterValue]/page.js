@@ -4,7 +4,6 @@ import Pagination from '@/components/articles-component/Pagination';
 import SearchSelect from '@/components/articles-component/SearchSelect';
 import TtitleAndDescription from '@/components/articles-component/TtitleAndDescription';
 import TypeNavigation from '@/components/articles-component/TypeNavigation';
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -30,11 +29,12 @@ export async function generateMetadata({ params }) {
   }
 
   const readableValue = filterValue.replace(/-/g, ' '); // Convert URL-friendly to readable format
-  
+  const pageTitle = `${toTitleCase(readableValue)} - ${type.charAt(0).toUpperCase() + type.slice(1)} Articles in UAE - CarPrices.ae`;
+  const pageDescription = `Discover the latest information about ${toTitleCase(readableValue)} in the ${type.toUpperCase()} section. Stay updated with reviews, comparisons, and news at CarPrices.ae.`;
+
   return {
-    title: `${toTitleCase(readableValue)} - ${type.charAt(0).toUpperCase() + type.slice(1)} Articles in UAE - CarPrices.ae`,
-    description: `Discover the latest information about ${toTitleCase(readableValue)} in the ${type.toUpperCase()} section. Stay updated with reviews, comparisons, and news at CarPrices.ae.`,
-    charset: "UTF-8",
+    title: pageTitle,
+    description: pageDescription,
     alternates: {
       canonical: `https://carprices.ae/${type}/${filterType}/${filterValue}`,
     },
@@ -43,15 +43,18 @@ export async function generateMetadata({ params }) {
       index: true,
       follow: true,
     },
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: `${toTitleCase(readableValue)} - ${type.charAt(0).toUpperCase() + type.slice(1)} Articles in UAE - CarPrices.ae`,
-      description: `Discover the latest information about ${toTitleCase(readableValue)} in the ${type.toUpperCase()} section. Stay updated with reviews, comparisons, and news at CarPrices.ae.`,
+    authors: [{ name: "CarPrices.ae Team" }],
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
       url: `https://carprices.ae/${type}/${filterType}/${filterValue}`,
+      type: "website",
     },
-    author: "CarPrices.ae Team",
-    icon: "./favicon.ico",
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDescription,
+    },
   };
 }
 
@@ -76,11 +79,15 @@ export default async function FilteredTypePage({ params, searchParams }) {
   // Fetch articles from Strapi API with the relevant filters
   const fetchArticles = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
-        params: filterParams,
+      const params = new URLSearchParams();
+      Object.entries(filterParams).forEach(([key, value]) => params.set(key, String(value)));
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}?${params}`, {
+        next: { revalidate: 60 },
       });
-      return data;
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching articles:", error); }
+      if (!res.ok) throw new Error('Failed to fetch');
+      return await res.json();
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching articles:", error); }
       return null;
     }
   };

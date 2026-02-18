@@ -10,27 +10,33 @@ export async function generateMetadata() {
   const slug = "category";
   const metaData = await fetchMetaData(slug);
 
+  const title = metaData?.title || "Explore Car Body Types: Sedans, SUVs, Coupes, and More";
+  const description = metaData?.description || "Discover the different car body types, including sedans, SUVs, hatchbacks, and coupes. Learn about their features, advantages, and what makes each style unique. Find the perfect car that suits your lifestyle and needs!";
+
   return {
-    title: metaData?.title || "Explore Car Body Types: Sedans, SUVs, Coupes, and More",
-    description: metaData?.description || "Discover the different car body types, including sedans, SUVs, hatchbacks, and coupes. Learn about their features, advantages, and what makes each style unique. Find the perfect car that suits your lifestyle and needs!",
-    charset: "UTF-8",
+    title,
+    description,
     alternates: {
-      canonical: `https://carprices.ae/body-types`,
+      canonical: `/body-types`,
     },
     keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
     robots: {
       index: true,
       follow: true,
     },
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: metaData?.title || "Explore Car Body Types: Sedans, SUVs, Coupes, and More",
-      description: metaData?.description || "Discover the different car body types, including sedans, SUVs, hatchbacks, and coupes. Learn about their features, advantages, and what makes each style unique. Find the perfect car that suits your lifestyle and needs!",
-      url: "https://carprices.ae/body-types",
+    authors: [{ name: "CarPrices.ae Team" }],
+    openGraph: {
+      title,
+      description,
+      url: `/body-types`,
+      siteName: "CarPrices.ae",
+      type: "website",
     },
-    author: "Carprices.ae Team",
-    icon: "./favicon.ico",
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
@@ -44,7 +50,8 @@ async function fetchHomeData() {
     return {
       homeData: homeDataRes?.data,
     };
-  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Failed to fetch data:', error); }
+  } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Failed to fetch data:', error); }
     return {
       featuredCars: null,
       homeData: null,

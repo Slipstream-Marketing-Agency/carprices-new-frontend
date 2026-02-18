@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 
 export default function StoryCard({ story }) {
   return (
@@ -22,7 +22,7 @@ export default function StoryCard({ story }) {
       <div className="m-2 absolute bottom-0 left-0 right-0 py-3 p-2 bg-opacity-50 bg-black rounded-2xl text-white">
         <h4 className="md:text-sm text-xs text-white font-semibold mb-0"> {story.title}</h4>
         <span className="text-xs font-light mt-1">
-          {moment(story.publishedAt).format("MMMM Do YYYY")}
+          {formatDateLong(story.publishedAt)}
         </span>
       </div>
     </Link>

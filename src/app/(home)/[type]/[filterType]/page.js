@@ -1,4 +1,3 @@
-import axios from "axios";
 import ArticleDetailWrapper from "@/components/articles-component/ArticleDetailWrapper";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -12,17 +11,12 @@ export async function generateStaticParams() {
 
 async function fetchData(type, slug) {
     try {
-        const timestamp = new Date().getTime();
-        // Fetch the single article details
-        const articleResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}?timeStamp=${timestamp}`, {
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/${type}/${slug}`, {
+            next: { revalidate: 60 },
         });
-        const detailData = articleResponse.data?.data || null;
-
+        if (!res.ok) throw new Error('Failed to fetch');
+        const jsonData = await res.json();
+        const detailData = jsonData?.data || null;
 
         return {
             detailData,
@@ -41,27 +35,31 @@ export async function generateMetadata({ params }) {
 
     const data = await fetchData(type, slug);
 
+    const pageTitle = data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae";
+    const pageDescription = data.detailData?.summary || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.";
+
     return {
-        title: data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-        description: data.detailData?.summary || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-        charset: "UTF-8",
-        // alternates: {
-        //     canonical: `https://carprices.ae`,
-        // },
-        // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
+        title: pageTitle,
+        description: pageDescription,
+        alternates: {
+            canonical: `https://carprices.ae/${type}/${slug}`,
+        },
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: data.detailData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-            description: data.detailData?.summary || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-            url: "https://carprices.ae",
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title: pageTitle,
+            description: pageDescription,
+            url: `https://carprices.ae/${type}/${slug}`,
+            type: "article",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title: pageTitle,
+            description: pageDescription,
+        },
     };
 }
 
@@ -105,10 +103,12 @@ export default async function BlogDetailsPage({ params }) {
 
     const fetchFeaturedArticles = async () => {
         try {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
-                params: { category: 'featured', page: 1, pageSize: 5 },
+            const params = new URLSearchParams({ category: 'featured', page: '1', pageSize: '5' });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}?${params}`, {
+                next: { revalidate: 60 },
             });
-            return data;
+            if (!res.ok) throw new Error('Failed to fetch');
+            return await res.json();
         } catch (error) {
 if (process.env.NODE_ENV === 'development') { console.error('Error fetching featured articles:', error); }
             return null;

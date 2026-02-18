@@ -6,7 +6,7 @@ import ShareButton from "@/components/common/ShareButton";
 import SeoLinksFilter from "@/components/common/SeoLinksFilter";
 import Image from "next/image";
 import Link from "next/link";
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 import { Email as EmailIcon, Instagram as InstagramIcon, Twitter as TwitterIcon, LinkedIn as LinkedInIcon } from "@mui/icons-material";
 import RelatedArticles from "./RelatedArticles";
 import LastTwoWeeksArticles from "./LastTwoWeeksArticles";
@@ -62,8 +62,8 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
         return paragraphs.flatMap((paragraph, index) => {
             const videoId = extractYouTubeVideoId(paragraph);
     
-            // Ad configuration: Show ads after every 3 paragraphs
-            const adIndex = 2;
+            // Ad configuration: Show ads after every 4 paragraphs for better UX
+            const adIndex = 4;
             const isAdSlot = (index + 1) % adIndex === 0;
     
             // Render content with an ad slot conditionally
@@ -199,7 +199,7 @@ const ArticleHeader = ({ title, author, publishedAt, summary, content, currentUR
             <span className="text-gray-400 space-x-3">
                 <span>{author?.name || "Unknown Author"}</span>
                 <span>|</span>
-                <span>{moment(publishedAt).format("MMMM Do YYYY")}</span>
+                <span>{formatDateLong(publishedAt)}</span>
                 <span>|</span>
                 <span>Read Time: {Math.ceil((content?.split(/\s+/).filter(word => word).length || 0) / 200)} mins</span>
             </span>

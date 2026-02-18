@@ -1,7 +1,7 @@
 import BrandVideoPage from '@/components/brand-component/BrandVideoPage';
 import { fetchBrandDetails, fetchBrandVideos } from '@/lib/brandapis';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
-import React from 'react'
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
     const { brandname } = params;
@@ -10,31 +10,34 @@ export async function generateMetadata({ params }) {
     // Convert brandname to capital case for better readability
     const capitalBrandName = slugToCapitalCase(brandname);
 
-    // Create metadata for the video page
-    const metaData = {
-        title: `${capitalBrandName} Car Videos in UAE | Watch ${capitalBrandName} Models & Reviews`,
-        description: `Explore the latest ${capitalBrandName} car videos, reviews, and model highlights in the UAE on CarPrices.ae. Watch video reviews, specifications, and detailed insights to help you choose the right ${capitalBrandName} model.`,
-        charset: "UTF-8",
+    const title = `${capitalBrandName} Car Videos in UAE | Watch ${capitalBrandName} Models & Reviews`;
+    const description = `Explore the latest ${capitalBrandName} car videos, reviews, and model highlights in the UAE on CarPrices.ae. Watch video reviews, specifications, and detailed insights to help you choose the right ${capitalBrandName} model.`;
+
+    return {
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/brands/${brandname}/car-videos`,
+            canonical: `/brands/${brandname}/car-videos`,
         },
         keywords: `${capitalBrandName} car videos UAE, ${capitalBrandName} reviews UAE, ${capitalBrandName} model videos, ${capitalBrandName} car specs UAE, CarPrices.ae`,
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: `${capitalBrandName} Car Videos in UAE`,
-            description: `Watch authorized ${capitalBrandName} car videos, model reviews, and specifications in the UAE on CarPrices.ae.`,
-            url: `https://carprices.ae/brands/${brandname}/car-videos`,
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/brands/${brandname}/car-videos`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "CarPrices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
-
-    return metaData;
 }
 
 export default async function pages({ params, searchParams }) {

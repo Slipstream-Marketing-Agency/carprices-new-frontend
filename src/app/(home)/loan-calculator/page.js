@@ -10,31 +10,22 @@ export async function generateMetadata() {
 
     // Return the dynamic metadata
     return {
-        title: metaData?.title ? metaData.title : "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
-        charset: "UTF-8",
+        title: metaData?.title || "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
+        description: metaData?.description || "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
         alternates: {
-            canonical: `https://carprices.ae/loan-calculator`,
+            canonical: `/loan-calculator`,
         },
         keywords: metaData?.keywords || "contact CarPrices.ae, car inquiries UAE, car suggestions UAE, car feedback UAE, automotive assistance UAE, trusted automotive companion, car journey UAE, car prices UAE, contact us CarPrices.ae, automotive world UAE, connect with CarPrices.ae",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title ? metaData.title : "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
-            description:
-                metaData?.description
-                    ? metaData.description
-                    : "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
-            url: "https://carprices.ae/contact-us",  // Using the same canonical URL here
+        authors: [{ name: "CarPrices.ae Team" }],
+        twitter: {
+            card: "summary_large_image",
+            title: metaData?.title || "Car Loan Calculator: Easily Calculate Your Car Financing Options - Carprices.ae",
+            description: metaData?.description || "Calculate car loans effortlessly. Get accurate estimates, explore repayment options, and make informed decisions. Plan confidently with CarPrices UAE.",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
     };
 }
 

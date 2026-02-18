@@ -3,7 +3,6 @@ import Image from "next/image";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import LoadingAnimation from "./LoadingAnimation";
 import axios from "axios";
-import client from '@/lib/meilisearch';
 
 const CarSelectionModal = ({
     isOpen,

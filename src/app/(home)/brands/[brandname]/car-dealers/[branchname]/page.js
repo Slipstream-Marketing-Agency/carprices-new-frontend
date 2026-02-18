@@ -1,6 +1,7 @@
 import BrandDealerPage from '@/components/brand-component/BrandDealerPage';
 import { fetchBrandDealers, fetchBrandDetails } from '@/lib/brandapis';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 export async function generateMetadata({ params }) {
@@ -10,31 +11,34 @@ export async function generateMetadata({ params }) {
     const capitalBrandName = slugToCapitalCase(brandname);
     const capitalBranchName = branchname ? slugToCapitalCase(branchname) : '';
 
-    // Create metadata including both capitalized brandname and branchname if available
-    const metaData = {
-        title: `${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}Car Dealers in UAE | Find ${capitalBrandName} Dealerships & Showrooms`,
-        description: `Locate authorized ${capitalBrandName} car dealers ${capitalBranchName ? 'for ' + capitalBranchName : ''} in the UAE at CarPrices.ae. Discover the nearest ${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}showrooms, dealerships, and service centers to explore the latest models and services.`,
-        charset: "UTF-8",
+    const title = `${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}Car Dealers in UAE | Find ${capitalBrandName} Dealerships & Showrooms`;
+    const description = `Locate authorized ${capitalBrandName} car dealers ${capitalBranchName ? 'for ' + capitalBranchName : ''} in the UAE at CarPrices.ae. Discover the nearest ${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}showrooms, dealerships, and service centers to explore the latest models and services.`;
+
+    return {
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/brands/${brandname}/${branchname ? branchname + '/' : ''}car-dealers`,
+            canonical: `/brands/${brandname}/car-dealers/${branchname}`,
         },
         keywords: `${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}dealers UAE, ${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}showrooms UAE, ${capitalBrandName} dealerships, ${capitalBrandName} car dealers UAE, CarPrices.ae`,
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: `${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}Car Dealers in UAE`,
-            description: `Find authorized ${capitalBrandName} ${capitalBranchName ? capitalBranchName + ' ' : ''}car dealers and showrooms in the UAE with CarPrices.ae.`,
-            url: `https://carprices.ae/brands/${brandname}/${branchname ? branchname + '/' : ''}car-dealers`,
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/brands/${brandname}/car-dealers/${branchname}`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "CarPrices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
-
-    return metaData;
 }
 
 

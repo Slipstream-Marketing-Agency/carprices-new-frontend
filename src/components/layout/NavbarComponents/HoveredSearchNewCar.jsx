@@ -71,7 +71,6 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                             width={45}
                                                             height={45}
                                                             sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                                            layout="intrinsic"
                                                             className="object-contain aspect-square md:w-[45px] w-[40px]"
                                                         />
                                                     </div>
@@ -109,7 +108,6 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                             width={45}
                                                             height={45}
                                                             sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                                            layout="intrinsic"
                                                             className="object-contain aspect-square md:w-[45px] w-[40px]"
                                                         />
                                                     </div>
@@ -150,7 +148,6 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                                     width={35}
                                                                     height={35}
                                                                     sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                                                    layout="intrinsic"
                                                                     className="object-contain aspect-square md:w-[35px] w-[30px]"
                                                                 />
                                                             </div>
@@ -187,7 +184,6 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                                     width={35}
                                                                     height={35}
                                                                     sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                                                    layout="intrinsic"
                                                                     className="object-contain aspect-square md:w-[35px] w-[30px]"
                                                                 />
                                                             </div>

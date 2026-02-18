@@ -3,7 +3,6 @@
 import FeaturedSlider from '@/components/articles-component/FeaturedSlider';
 import Pagination from '@/components/articles-component/Pagination';
 import SearchSelect from '@/components/articles-component/SearchSelect';
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -26,10 +25,12 @@ export async function generateMetadata({params}) {
   const { type } = params;
   const metaData = await fetchMetaData(type);
 
+  const pageTitle = metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae";
+  const pageDescription = metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.";
+
   return {
-    title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-    description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-    charset: "UTF-8",
+    title: pageTitle,
+    description: pageDescription,
     alternates: {
       ...(metaData?.canonical && { canonical: metaData.canonical }),
     },
@@ -38,15 +39,18 @@ export async function generateMetadata({params}) {
       index: true,
       follow: true,
     },
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-      description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-      url: "https://carprices.ae",
+    authors: [{ name: "CarPrices.ae Team" }],
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      url: `https://carprices.ae/${type}`,
+      type: "website",
     },
-    author: "Carprices.ae Team",
-    icon: "./favicon.ico",
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDescription,
+    },
   };
 }
 
@@ -62,31 +66,41 @@ export default async function TypePage({ params, searchParams }) {
   
   const fetchArticles = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
-        params: { page, pageSize },
+      const params = new URLSearchParams({ page: String(page), pageSize: String(pageSize) });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}?${params}`, {
+        next: { revalidate: 60 },
       });
-      return data;
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching articles:', error); }
+      if (!res.ok) throw new Error('Failed to fetch');
+      return await res.json();
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching articles:', error); }
       return null;
     }
   };
 
   const fetchFeaturedArticles = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}`, {
-        params: { tag: 'featured', page: 1, pageSize: 5 },
+      const params = new URLSearchParams({ tag: 'featured', page: '1', pageSize: '5' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/type/${type}?${params}`, {
+        next: { revalidate: 60 },
       });
-      return data;
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching featured articles:', error); }
+      if (!res.ok) throw new Error('Failed to fetch');
+      return await res.json();
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching featured articles:', error); }
       return null;
     }
   };
 
   const fetchPopularCategoriesAndTabs = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/popular-categories-tags?type=${type}`);
-      return data;
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching article types:', error); }
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}articles/popular-categories-tags?type=${type}`, {
+        next: { revalidate: 60 },
+      });
+      if (!res.ok) throw new Error('Failed to fetch');
+      return await res.json();
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching article types:', error); }
       return [];
     }
   };
@@ -123,10 +137,9 @@ export default async function TypePage({ params, searchParams }) {
                       <Image
                         src={article?.coverImage || '/assets/placeholder/news-placeholder.webp'}
                         alt={article?.title}
-                        width={0}
-                        height={0}
+                        width={300}
+                        height={180}
                         sizes="100vw"
-                        layout="fixed"
                         className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
                       />
                       <div className="absolute top-2 left-2 flex flex-wrap gap-2">

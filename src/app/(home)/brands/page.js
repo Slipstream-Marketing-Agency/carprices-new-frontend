@@ -9,24 +9,20 @@ export async function generateMetadata() {
   return {
     title: metaData?.title || "Explore the Top Car Brands in the UAE - Carprices",
     description: metaData?.description || "Stay informed on the best car brands available in the UAE market with comprehensive reviews and insights from Carprices. Find the top brands and make an informed decision.",
-    charset: "UTF-8",
     alternates: {
-      canonical: `https://carprices.ae/brands`,
+      canonical: `/brands`,
     },
     keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
     robots: {
       index: true,
       follow: true,
     },
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: metaData?.title || "Explore the Top Car Brands in the UAE - Carprices",
+    authors: [{ name: "CarPrices.ae Team" }],
+    twitter: {
+      card: "summary_large_image",
+      title: metaData?.title || "Explore the Top Car Brands in the UAE - Carprices",
       description: metaData?.description || "Stay informed on the best car brands available in the UAE market with comprehensive reviews and insights from Carprices. Find the top brands and make an informed decision.",
-      url: "https://carprices.ae/brands",
     },
-    author: "Carprices.ae Team",
-    icon: "./favicon.ico",
   };
 }
 
@@ -39,7 +35,8 @@ async function fetchBrands(page, pageSize) {
 
     const { brands, pagination } = await response.json();
     return { brands, pagination };
-  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Data Fetching Error:", error.message); }
+  } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Data Fetching Error:", error.message); }
     throw error;
   }
 }

@@ -62,7 +62,8 @@ const SearchForTheBest = () => {
                   width={160}
                   height={100}
                   // Set priority for the first two images and lazy load others
-                  priority={true}
+                  priority={index < 2}
+                  loading={index >= 2 ? "lazy" : undefined}
                   sizes="(max-width: 640px) 14rem, (min-width: 641px) 24rem"
                   className="w-40 md:h-24 h-14 object-contain rounded-md p-2"
                 />

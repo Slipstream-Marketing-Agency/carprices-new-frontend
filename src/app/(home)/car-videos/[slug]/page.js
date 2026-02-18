@@ -9,44 +9,45 @@ export async function generateMetadata({ params }) {
     let video = null;
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-videos/${slug}`, { cache: "no-store" });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-videos/${slug}`, { next: { revalidate: 60 } });
         if (response.ok) {
             video = await response.json();
         } else {
             notFound(); // Trigger a 404 if the video is not found
         }
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching video metadata:', error); }
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching video metadata:', error); }
         notFound(); // Redirect to 404 on error as well
     }
 
-    // Set up metadata based on video details
-    const metaData = {
-        title: `${video?.title || "Car Video"} - Watch Now on CarPrices.ae`,
-        description: video?.description || `Watch the latest car video on CarPrices.ae. Find in-depth reviews, highlights, and insights on various car models.`,
-        charset: "UTF-8",
+    const title = `${video?.title || "Car Video"} - Watch Now on CarPrices.ae`;
+    const description = video?.description || `Watch the latest car video on CarPrices.ae. Find in-depth reviews, highlights, and insights on various car models.`;
+
+    return {
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/car-videos/${slug}`,
+            canonical: `/car-videos/${slug}`,
         },
         keywords: `${video?.title || "Car video"}, car video UAE, car reviews UAE, ${video?.title ? `${video.title} review` : "car highlights"}, CarPrices.ae`,
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "VideoObject",
-            name: video?.title || "Car Video",
-            description: video?.description || "Watch the latest car video on CarPrices.ae",
-            thumbnailUrl: video?.thumbnail || "/default-thumbnail.jpg",
-            uploadDate: video?.uploadDate || new Date().toISOString(),
-            contentUrl: video?.hostedVideo || video?.youtube_url || "",
-            embedUrl: video?.youtube_url ? `https://www.youtube.com/embed/${new URL(video.youtube_url).searchParams.get('v')}` : "",
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/car-videos/${slug}`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "CarPrices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
-
-    return metaData;
 }
 
 const VideoPage = async ({ params }) => {
@@ -54,20 +55,21 @@ const VideoPage = async ({ params }) => {
     let video = null;
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-videos/${slug}`, { cache: "no-store" });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car-videos/${slug}`, { next: { revalidate: 60 } });
         if (response.ok) {
             video = await response.json();
         } else {
             // Trigger a 404 if the video is not found
             notFound();
         }
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching video:', error); }
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching video:', error); }
         notFound(); // Redirect to 404 on error as well
     }
 
     return (
-        <div className="container mx-auto mt-8 grid grid-cols-12">
-            <div className="col-span-9 shadow-md p-4 rounded-lg">
+        <div className="container mx-auto mt-8 grid grid-cols-12 gap-4">
+            <div className="col-span-12 md:col-span-9 shadow-md p-4 rounded-lg">
                 <h1 className="text-2xl font-bold mb-4">{video.title}</h1>
                 <p className="mb-4">{video.description}</p>
 
@@ -93,7 +95,7 @@ const VideoPage = async ({ params }) => {
                     )}
                 </div>
             </div>
-            <div className="col-span-3">
+            <div className="col-span-12 md:col-span-3">
                 <div className="sticky top-16">
                     <Suspense fallback={<div>Loading ad...</div>}>
                         <Ad300x600 dataAdSlot="1077828318" />

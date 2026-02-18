@@ -2,7 +2,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -205,9 +205,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
                                                         <span className="hidden sm:inline">
                                                             {article?.author} &mdash;
                                                         </span>{" "}
-                                                        {moment(article?.publishedAt).format(
-                                                            "MMMM Do YYYY"
-                                                        )}
+                                                        {formatDateLong(article?.publishedAt)}
                                                     </div>
                                                 </div>{" "}
                                                 <Link
@@ -409,7 +407,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
                                                     <span className="hidden sm:inline">
                                                         {article?.author?.name} &mdash;
                                                     </span>{" "}
-                                                    {moment(article?.publishedAt).format("MMMM Do YYYY")}
+                                                    {formatDateLong(article?.publishedAt)}
                                                 </div>
                                                 {/* <div className="line-clamp-2 text-xs text-gray-500 ">
                           {article?.summary}

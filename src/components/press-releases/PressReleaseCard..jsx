@@ -1,12 +1,12 @@
 
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 import Link from "next/link";
 
 const PressReleaseCard = ({ release }) => {
   const imageUrl =
     release?.attributes?.FeaturedImage?.data?.attributes?.formats?.large?.url;
   const downloadUrl = release?.attributes?.media?.data?.attributes?.url;
-  const formattedDate = moment(release.attributes.date).format("MMMM Do YYYY")
+  const formattedDate = formatDateLong(release.attributes.date)
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <Link href={release.attributes.url}>

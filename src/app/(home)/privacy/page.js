@@ -8,15 +8,16 @@ export async function generateMetadata({ params }) {
     // Fetch dynamic metadata for the privacy policy page
     const metaData = await fetchMetaData(slug);
 
-    // Return the dynamic metadata
+    const title = metaData?.title ? metaData.title : "Privacy Policy - Carprices.ae";
+    const description = metaData?.description
+        ? metaData.description
+        : "Protecting your privacy is our top priority. Read our privacy policy to understand how we collect, use, and safeguard your personal information.";
+
     return {
-        title: metaData?.title ? metaData.title : "Privacy Policy - Carprices.ae",
-        description: metaData?.description
-            ? metaData.description
-            : "Protecting your privacy is our top priority. Read our privacy policy to understand how we collect, use, and safeguard your personal information.",
-        charset: "UTF-8",
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/${slug}`,
+            canonical: `/${slug}`,
         },
         keywords: metaData?.keywords || "Carprices, Privacy Policy, Data Protection, Personal Information, UAE",
         
@@ -24,17 +25,19 @@ export async function generateMetadata({ params }) {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.structuredDataName || "Privacy Policy - Carprices.ae",
-            description:
-                metaData?.structuredDataDescription ||
-                "Read the Privacy Policy of Carprices.ae to understand how we collect, use, and safeguard your personal information.",
-            url: `https://carprices.ae/${slug}`,
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/${slug}`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
 }
 

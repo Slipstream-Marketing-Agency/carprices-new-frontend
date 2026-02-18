@@ -1,8 +1,20 @@
 User-agent: *
+Allow: /
+Disallow: /api/
 Disallow: /brands/*/car-articles
 Disallow: /dealers/
 Disallow: /trim/
 Disallow: /news/body-types
 Disallow: /en/brands/
 Disallow: /ar/
+Disallow: /_next/
+Disallow: /search-cars?*
+
+# Allow important crawlers access to JS/CSS for rendering
+User-agent: Googlebot
+Allow: /_next/static/
+
+User-agent: Bingbot
+Allow: /_next/static/
+
 Sitemap: https://carprices.ae/sitemap.xml

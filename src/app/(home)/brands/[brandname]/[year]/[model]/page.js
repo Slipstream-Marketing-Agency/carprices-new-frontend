@@ -1,7 +1,15 @@
 import ModelWrapper from "@/components/model-component/ModelWrapper";
 import axios from "axios";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
+// Too many brand/year/model combinations to pre-render at build time.
+// Rely on ISR: pages are generated on first request and cached.
+export async function generateStaticParams() {
+  return [];
+}
 
 export async function generateMetadata({ params }) {
     const { year, brandname, model } = params;
@@ -16,49 +24,37 @@ export async function generateMetadata({ params }) {
         const mainTrim = currentmodel?.highTrim[0];
 
         const minPrice = currentmodel?.price?.min;
+        const ogImage = mainTrim?.featuredImage || "https://carprices.ae/assets/img/car-placeholder.png";
 
         return {
-            title: false ? seoData.metaTitle : `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
+            title: seoData?.metaTitle || `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
             description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
-            // description: seoData?.metaDescription ? seoData.metaDescription : `Explore the ${year} ${currentmodel.brand?.name} ${currentmodel.name
-            //     } starting at ${minPrice <= 0
-            //         ? "TBD"
-            //         : "AED" +
-            //         " " +
-            //         minPrice?.toLocaleString("en-AE", {
-            //             minimumFractionDigits: 0,
-            //             maximumFractionDigits: 2,
-            //         })
-            //     }* in UAE. Check out Variants, Mileage, Colors, Interiors, specifications, Features and performance details.`,
-            charset: "UTF-8",
             alternates: {
-                canonical: seoData?.canonicalURL || `https://carprices.ae/brands/${brandname}/${year}/${model}`,
+                canonical: seoData?.canonicalURL || `/brands/${brandname}/${year}/${model}`,
             },
             openGraph: {
-                title: false ? seoData.metaTitle : `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
+                title: seoData?.metaTitle || `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
                 description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
-                image: mainTrim?.featuredImage === null ? "https://carprices.ae/assets/img/car-placeholder.png" : mainTrim?.featuredImage,
-                url: `https://carprices.ae/brands/${brandname}/${year}/${model}`,
+                images: [{ url: ogImage }],
+                url: `/brands/${brandname}/${year}/${model}`,
             },
-            // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
             robots: {
                 index: true,
                 follow: true,
             },
-            structuredData: {
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                name: seoData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-                description: seoData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-                url: "https://carprices.ae",
+            authors: [{ name: "CarPrices.ae Team" }],
+            twitter: {
+                card: "summary_large_image",
+                title: seoData?.metaTitle || `${year} ${currentmodel.brand?.name} ${currentmodel.name} Price in UAE | Variants, Spec & Features - Carprices.ae`,
+                description: `${year} ${currentmodel.brand?.name} ${currentmodel.name} price, images, and specifications in the UAE from verified dealers. Read in-depth reviews, compare models, and buy your new car on Carprices.ae`,
+                images: [ogImage],
             },
-            author: "Carprices.ae Team",
-            icon: "./favicon.ico",
         };
     } catch (error) {
         if (error.response?.status === 404) {
             return notFound(); // Call notFound() for 404 errors
-        }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
+        }
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
         throw error; // Re-throw other errors for handling elsewhere
     }
 }
@@ -67,58 +63,50 @@ export default async function ModelPage({ params }) {
     const { year, brandname, model } = params;
     const yearInt = parseInt(year, 10);
 
-    let currentmodel;
-    let oldModel;
-    let seoData;
+    // Fetch current and old model data
+    const oldModelsResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}car-models/find-model/${model}`,
+        { next: { revalidate: 60 } }
+    );
 
-    try {
-        // Fetch current and old model data
-        const oldModelsResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}car-models/find-model/${model}`
-        );
+    const currentmodelResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`,
+        { next: { revalidate: 60 } }
+    );
 
-        const currentmodelResponse = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}car-models/find-one-model/${brandname}/${model}/${yearInt}`
-        );
-
-        currentmodel = currentmodelResponse.data.data.model;
-        seoData = currentmodelResponse.data.data.seo;
-        oldModel = oldModelsResponse.data.data;
-
-        // If no trims, return 404
-        if (!currentmodel || currentmodel.trims.length === 0) {
-            throw new Error('No trims available');
-            return notFound();
-        }
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching model data:', error); }
-        // Handle redirect for old slugs
-        if (error.response && error.response.status === 404) {
-            try {
-                const redirectResponse = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}model/old-slug/${model}`
-                );
-                const newModelSlug = redirectResponse.data.model.slug;
-
-                // Redirect to the new model page
-                return {
-                    redirect: {
-                        permanent: false,
-                        destination: `/brands/${brandname}/${year}/${newModelSlug}`,
-                    },
-                };
-            } catch (error) {
-                if (error.response?.status === 404) {
-                    return notFound(); // Call notFound() for 404 errors
-                }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
-                throw error; // Re-throw other errors for handling elsewhere
+    if (!currentmodelResponse.ok) {
+        if (currentmodelResponse.status === 404) {
+            // Try redirect for old slugs
+            const redirectResponse = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}model/old-slug/${model}`
+            );
+            if (redirectResponse.ok) {
+                const redirectData = await redirectResponse.json();
+                const newModelSlug = redirectData.model.slug;
+                redirect(`/brands/${brandname}/${year}/${newModelSlug}`);
             }
+            notFound();
         }
+        throw new Error(`Failed to fetch model data: ${currentmodelResponse.status}`);
+    }
 
-        // Return 404 if everything else fails
-        if (error.response?.status === 404) {
-            return notFound(); // Call notFound() for 404 errors
-        }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
-        throw error; // Re-throw other errors for handling elsewhere
+    if (!oldModelsResponse.ok) {
+        if (oldModelsResponse.status === 404) {
+            notFound();
+        }
+        throw new Error(`Failed to fetch old model data: ${oldModelsResponse.status}`);
+    }
+
+    const currentmodelData = await currentmodelResponse.json();
+    const oldModelsData = await oldModelsResponse.json();
+
+    const currentmodel = currentmodelData.data.model;
+    const seoData = currentmodelData.data.seo;
+    const oldModel = oldModelsData.data;
+
+    // If no trims, return 404
+    if (!currentmodel || currentmodel.trims.length === 0) {
+        notFound();
     }
 
     return (

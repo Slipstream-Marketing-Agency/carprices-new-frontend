@@ -39,7 +39,6 @@ const MobileSidebar = ({
     if (hoverItem === "search-cars") {
       options = [
         { href: "/search-cars", label: "Browse New Car Guide" },
-        { href: "/used-cars", label: "Used cars" },
         { href: "/brands", label: "Search By Brands" },
         { href: "/search-cars", label: "Search All Body Type" },
         { href: "/search-cars", label: "Popular Cars" },

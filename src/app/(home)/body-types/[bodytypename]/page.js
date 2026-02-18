@@ -2,37 +2,50 @@ import AdvancedFilterWrapper from '@/components/advanced-filter/AdvancedFilterWr
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 import React from 'react'
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
+const BODY_TYPE_SLUGS = [
+  'sedan', 'suv', 'midsize-suv', 'hatchback', 'coupe',
+  'convertible', 'pick-up', 'van', 'mpv', 'sports-car', 'station-wagon',
+];
+
+export async function generateStaticParams() {
+  return BODY_TYPE_SLUGS.map((slug) => ({ bodytypename: slug }));
+}
+
 export async function generateMetadata({ params }) {
     const { bodytypename } = params;
-    const capitalBodyTypeName = slugToCapitalCase(bodytypename)
-    // const { brand, seo } = await fetchBrandDetails(brandname);
-    const { brand, seo } = {'brand': null, 'seo': null};
+    const capitalBodyTypeName = slugToCapitalCase(bodytypename);
 
-    // Handle default values if specific SEO fields are missing
-    const metaData = {
-        title: seo?.metaTitle || `${capitalBodyTypeName} Car Prices in UAE | Explore ${capitalBodyTypeName} Models & Pricing`,
-        description: seo?.metaDescription || `Find detailed information about ${capitalBodyTypeName} cars in the UAE at CarPrices.ae. Get the latest updates on models, specifications, and pricing to choose your perfect ${capitalBodyTypeName}.`,
-        charset: "UTF-8",
+    const title = `${capitalBodyTypeName} Car Prices in UAE | Explore ${capitalBodyTypeName} Models & Pricing`;
+    const description = `Find detailed information about ${capitalBodyTypeName} cars in the UAE at CarPrices.ae. Get the latest updates on models, specifications, and pricing to choose your perfect ${capitalBodyTypeName}.`;
+
+    return {
+        title,
+        description,
         alternates: {
-            canonical: seo?.canonicalURL || `https://carprices.ae/body-types/${capitalBodyTypeName}`,
+            canonical: `/body-types/${bodytypename}`,
         },
-        keywords: seo?.keyword || `${capitalBodyTypeName} car prices UAE, ${capitalBodyTypeName} models UAE, ${capitalBodyTypeName} reviews UAE, ${capitalBodyTypeName} specs, CarPrices.ae`,
+        keywords: `${capitalBodyTypeName} car prices UAE, ${capitalBodyTypeName} models UAE, ${capitalBodyTypeName} reviews UAE, ${capitalBodyTypeName} specs, CarPrices.ae`,
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: seo?.structuredData || {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: seo?.metaTitle || `${capitalBodyTypeName} Car Prices in UAE`,
-            description: seo?.metaDescription || `Explore the latest ${capitalBodyTypeName} car models, specifications, and pricing in the UAE with CarPrices.ae.`,
-            url: `https://carprices.ae/brands/${capitalBodyTypeName}`,
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/body-types/${bodytypename}`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "CarPrices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
-
-    return metaData;
 }
 
 export default function page({ params }) {

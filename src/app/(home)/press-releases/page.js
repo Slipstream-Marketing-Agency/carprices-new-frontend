@@ -10,40 +10,48 @@ export async function generateMetadata({ params }) {
   // Fetch dynamic metadata for the privacy policy page
   const metaData = await fetchMetaData(slug);
 
-  // Return the dynamic metadata
+  const title = metaData?.title ? metaData.title : "CarPrices.ae - Latest Automotive News and Updates";
+  const description = metaData?.description
+    ? metaData.description
+    : "Stay informed with CarPrices.ae for the latest in the automotive industry. Get updates on new car launches, industry trends, and company announcements. Your one-stop source for automotive news and insights.";
+
   return {
-    title: metaData?.title ? metaData.title : "CarPrices.ae - Latest Automotive News and Updates",
-    description: metaData?.description
-      ? metaData.description
-      : "Stay informed with CarPrices.ae for the latest in the automotive industry. Get updates on new car launches, industry trends, and company announcements. Your one-stop source for automotive news and insights.",
-    charset: "UTF-8",
+    title,
+    description,
     alternates: {
-      canonical: `https://carprices.ae/press-releases`,
+      canonical: `/press-releases`,
     },
     keywords: metaData?.keywords || "automotive news UAE, latest car updates, new car launches, car industry trends, car company announcements, automotive insights, CarPrices.ae press releases",
     robots: {
       index: true,
       follow: true,
     },
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: metaData?.title ? metaData.title : "CarPrices.ae - Latest Automotive News and Updates",
-      description:
-        metaData?.description
-          ? metaData.description
-          : "Stay informed with CarPrices.ae for the latest in the automotive industry. Get updates on new car launches, industry trends, and company announcements. Your one-stop source for automotive news and insights.",
-      url: "https://carprices.ae/press-releases",  // Using the same canonical URL here
+    authors: [{ name: "CarPrices.ae Team" }],
+    openGraph: {
+      title,
+      description,
+      url: `/press-releases`,
+      siteName: "CarPrices.ae",
+      type: "website",
     },
-    author: "Carprices.ae Team",
-    icon: "./favicon.ico",
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
 export default async function PressRelease() {
-  // Fetch press releases
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}press-releases?populate=*`, { cache: 'no-store' });
-  const initialPressReleases = await response.json();
+  let initialPressReleases = { data: [] };
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}press-releases?populate=*`, { next: { revalidate: 60 } });
+    if (response.ok) {
+      initialPressReleases = await response.json();
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') { console.error('Failed to fetch press releases:', error); }
+  }
   return (
     <div className="container mx-auto px-4 my-8">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

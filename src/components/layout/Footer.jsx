@@ -52,37 +52,37 @@ export default function Footer() {
                       </h4>
                       <div className="flex flex-col mt-3 space-y-2">
                         <Link
-                          href="https://carprices.ae/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
+                          href="/news/10-popular-cars-in-uae-with-high-ground-clearance-sorted-by-price-low-to-high-best-cars-in-uae"
                           className="text-white"
                         >
                           10 Cars with High Ground Clearance
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
+                          href="/news/2023-s-top-10-cars-that-buyers-searched-for-on-carprices-ae"
                           className="mt-1 text-white"
                         >
                           10 Most Searched Cars
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/chinese-car-brands-uae"
+                          href="/news/chinese-car-brands-uae"
                           className="mt-1 text-white"
                         >
                           10 Best Chinese Brands
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/10-myths-busted-about-buying-a-new-car-in-the-uae"
+                          href="/news/10-myths-busted-about-buying-a-new-car-in-the-uae"
                           className="mt-1 text-white"
                         >
                           10 Myths About Buying a Car
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/top-fuel-effnt"
+                          href="/news/top-fuel-effnt"
                           className="mt-1 text-white"
                         >
                           10 Fuel Efficient Cars
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/top-10-hybrid-cars-AED-230k"
+                          href="/news/top-10-hybrid-cars-AED-230k"
                           className="mt-1 text-white"
                         >
                           10 Best Hybrid Cars
@@ -97,31 +97,31 @@ export default function Footer() {
                       </h4>
                       <div className="flex flex-col mt-3 space-y-2">
                         <Link
-                          href="https://carprices.ae/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
+                          href="/news/the-2024-toyota-land-cruiser-prado-vs-the-gwm-tank-500"
                           className="text-white"
                         >
                           2024 Toyota Prado Vs GWM Tank 500
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/2024-toyota-land-cruiser-prado-vs-land-rover-defender-vs-jeep-wrangler-vs-the-ford-bronco"
+                          href="/news/2024-toyota-land-cruiser-prado-vs-land-rover-defender-vs-jeep-wrangler-vs-the-ford-bronco"
                           className="mt-1 text-white"
                         >
                           Battle Of 4 Popular SUVs
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/the-2023-toyota-land-cruiser-300-series-vs-the-2024-toyota-land-cruiser-prado"
+                          href="/news/the-2023-toyota-land-cruiser-300-series-vs-the-2024-toyota-land-cruiser-prado"
                           className="mt-1 text-white"
                         >
                           LC 300 Vs 2024 Toyota Prado
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/new-vs-old-prado"
+                          href="/news/new-vs-old-prado"
                           className="mt-1 text-white"
                         >
                           2024 LC Prado Vs Used LC Prado
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/lc-prado-vs-patrol"
+                          href="/news/lc-prado-vs-patrol"
                           className="mt-1 text-white"
                         >
                           2024 LC Prado Vs Nissan Patrol
@@ -136,31 +136,31 @@ export default function Footer() {
                       </h4>
                       <div className="flex flex-col mt-3 space-y-2">
                         <Link
-                          href="https://carprices.ae/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
+                          href="/news/internal-combustion-engine-car-vs-hybrid-car-which-will-be-worth-buying-in-the-uae"
                           className="text-white"
                         >
                           ICE Vs Hybrid
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/analysing-the-cost-of-living-with-the-electric-vehicle-vs-internal-combustion-engine-vehicle-in-the-uae-ev-vs-ice"
+                          href="/news/analysing-the-cost-of-living-with-the-electric-vehicle-vs-internal-combustion-engine-vehicle-in-the-uae-ev-vs-ice"
                           className="mt-1 text-white"
                         >
                           ICE Vs EV
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/7-popular-reliable-sedans-to-buy-in-the-uae-in-2024-or-best-cars-in-uae"
+                          href="/news/7-popular-reliable-sedans-to-buy-in-the-uae-in-2024-or-best-cars-in-uae"
                           className="mt-1 text-white"
                         >
                           Popular Reliable Sedans
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
+                          href="/news/5-exciting-car-launches-to-happen-in-the-uae-in-2024"
                           className="mt-1 text-white"
                         >
                           2024 Car Launches
                         </Link>
                         <Link
-                          href="https://carprices.ae/news/6-best-chinese-suv-cars-in-uae-under-aed-70000"
+                          href="/news/6-best-chinese-suv-cars-in-uae-under-aed-70000"
                           className="mt-1 text-white"
                         >
                           Best Chinese SUVs

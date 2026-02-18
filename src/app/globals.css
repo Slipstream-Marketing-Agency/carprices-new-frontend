@@ -21,25 +21,9 @@
   --white: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #ffffff;
-    --white-color: #fff;
-    --black-color: #000;
-    --black-color2: #1d1d1d;
-    --title-color: #13141a;
-    --text-color: #5e5e5e;
-    /* --primary: #46D993; */
-    --primary: #275ba7;
-    --secondary: #24272c;
-    --light: #77cdf2;
-    --rating: #ffa236;
-    --grey: #f5f5f5;
-    --bg-color: #f7f7f7;
-    --black: #000;
-    --white: #fff;
-  }
+/* Force light mode - ignore device dark mode preference */
+:root {
+  color-scheme: light only;
 }
 
 body {
@@ -80,19 +64,12 @@ h2 {
 
 /* Image */
 
-/* Global image loading CSS */
-img {
-  opacity: 0;
-  filter: blur(5px);
-  transition: opacity 0.5s ease, filter 0.5s ease;
+/* Global image loading CSS - only apply to lazy-loaded images, not Next.js Image */
+img:not([data-nimg]) {
+  transition: opacity 0.3s ease;
 }
 
-/* Once the image source is fully available, these rules will apply */
-img[src],
-img[srcset] {
-  opacity: 1;
-  filter: none;
-}
+/* Next.js Image component handles its own loading states */
 
 
 

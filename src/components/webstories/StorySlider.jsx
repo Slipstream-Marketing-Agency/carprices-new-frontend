@@ -1,7 +1,6 @@
 
 "use client"
 import { getAllWebStories } from "@/lib/api";
-import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -50,6 +49,7 @@ const StorySlider = () => {
         <div className="relative flex justify-between">
             <div className="overflow-x-auto space-x-4 my-4 custom-scrollbar flex lg:hidden">
                 {stories.map((story, index) => {
+                    if (!story?.coverImage?.url) return null;
                     return (
                         <Link
                             href={`/web-stories/${story.slug}`}
@@ -62,7 +62,7 @@ const StorySlider = () => {
                                 height="0"
                                 sizes="100vw"
                                 src={story.coverImage.url}
-                                alt={story.title}
+                                alt={story.title || 'Web Story'}
                                 className="object-cover w-full h-96 rounded-2xl"
                             />
                             <div className="m-2 absolute bottom-4 left-0 right-0 py-3 pl-4 bg-opacity-50 bg-black rounded-2xl text-white">
@@ -80,7 +80,9 @@ const StorySlider = () => {
             </div>
             <div className="container p-0 hidden lg:block">
                 <Slider {...settings}>
-                    {stories.map((story, index) => (
+                    {stories.map((story, index) => {
+                        if (!story?.coverImage?.url) return null;
+                        return (
                         <Link
                             href={`/web-stories/${story.slug}`}
                             key={story?.slug || story.slug || index}
@@ -93,7 +95,7 @@ const StorySlider = () => {
                                     height="0"
                                     sizes="100vw"
                                     src={story.coverImage.url}
-                                    alt={story.title}
+                                    alt={story.title || 'Web Story'}
                                     className="object-cover w-full h-[30rem] rounded-2xl"
                                 />
                                 <div className="m-2 absolute bottom-4 left-0 right-0 py-3 pl-4 bg-opacity-50 bg-black rounded-2xl text-white">
@@ -107,7 +109,8 @@ const StorySlider = () => {
                                 </div>
                             </div>
                         </Link>
-                    ))}
+                    )
+})}
                 </Slider>
             </div>
         </div>

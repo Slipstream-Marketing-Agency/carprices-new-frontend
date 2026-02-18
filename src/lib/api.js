@@ -1,9 +1,12 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Helper function to handle errors gracefully
-const fetchWithErrorHandling = async (url) => {
+const fetchWithErrorHandling = async (url, options = {}) => {
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      ...options,
+    });
     if (!res.ok) {
       throw new Error(`Error fetching data from ${url} - Status: ${res.status}`);
     }
@@ -84,7 +87,7 @@ export async function getStoriesByTag(
 // utils/fetchDealerBranches.js
 export const fetchDealerBranches = async () => {
   try {
-    const response = await fetch(`${API_URL}dealer-branches`);
+    const response = await fetch(`${API_URL}dealer-branches`, { next: { revalidate: 300 } });
     if (!response.ok) {
       throw new Error('Failed to fetch dealer branches');
     }
@@ -98,7 +101,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching deal
 
 export const fetchCarBrandsWithDealers = async () => {
   try {
-    const response = await fetch(`${API_URL}car-brands-dealers`);
+    const response = await fetch(`${API_URL}car-brands-dealers`, { next: { revalidate: 300 } });
     if (!response.ok) {
       throw new Error('Failed to fetch branches');
     }
@@ -125,7 +128,7 @@ export const fetchDealers = async (brandSlug = '', page = 1, pageSize = 10, deal
       url += `&dealerBranch=${dealerBranchSlug}`;
     }
 
-    const response = await fetch(url);
+    const response = await fetch(url, { next: { revalidate: 60 } });
     if (!response.ok) {
       throw new Error('Failed to fetch dealers');
     }
@@ -142,7 +145,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching deal
 // services/car-videoservice.js
 export const fetchTrendingVideos = async (page = 1, pageSize = 10, sort = 'createdAt', order = 'DESC') => {
   try {
-    const response = await fetch(`${API_URL}car-videos/by-filter?trending=true&page=${page}&pageSize=${pageSize}&sort=${sort}&order=${order}`);
+    const response = await fetch(`${API_URL}car-videos/by-filter?trending=true&page=${page}&pageSize=${pageSize}&sort=${sort}&order=${order}`, { next: { revalidate: 60 } });
     const data = await response.json();
     return data.videos || [];
   } catch (error) {
@@ -154,17 +157,17 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching tren
 
 // Fetch branches related to a specific brand
 export const fetchFilteredBranches = async (brandSlug) => {
-  const response = await fetch(`${API_URL}dealer-branches/filter-by-brand?brandSlug=${brandSlug}`);
+  const response = await fetch(`${API_URL}dealer-branches/filter-by-brand?brandSlug=${brandSlug}`, { next: { revalidate: 300 } });
   return response.json();
 };
 
 // Fetch brands related to a specific branch
 export const fetchFilteredBrands = async (branchSlug) => {
-  const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`);
+  const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`, { next: { revalidate: 300 } });
   return response.json();
 };
 
 export const fetchArticles = async(pathname, page, pageSize) => {
-  const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`)
+  const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`, { next: { revalidate: 60 } })
   return response.json();
 }

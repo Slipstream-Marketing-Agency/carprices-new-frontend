@@ -2,32 +2,39 @@ import AdvancedFilterWrapper from '@/components/advanced-filter/AdvancedFilterWr
 import { fetchMetaData } from '@/lib/fetchMetaData';
 import React, { Suspense } from 'react'
 
+export const revalidate = 60;
 
 export async function generateMetadata() {
     const slug = "search-cars";
     const metaData = await fetchMetaData(slug);
 
+    const title = metaData?.title || "Find Your Perfect Car: Search by Price, Body Type and More at Carprices";
+    const description = metaData?.description || "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.";
+
     return {
-        title: metaData?.title || "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-        description: metaData?.description || "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
-        charset: "UTF-8",
+        title,
+        description,
         alternates: {
-            canonical: `https://carprices.ae/search-cars`,
+            canonical: `/search-cars`,
         },
         keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title || "Find Your Perfect Car: Search by Price, Body Type and More at Carprices",
-            description: metaData?.description || "Discover your perfect car at Carprices. Easily search and filter by price, body type, and more. Find the ideal vehicle that meets your needs and preferences.",
-            url: "https://carprices.ae",
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title,
+            description,
+            url: `/search-cars`,
+            siteName: "CarPrices.ae",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+        },
     };
 }
 

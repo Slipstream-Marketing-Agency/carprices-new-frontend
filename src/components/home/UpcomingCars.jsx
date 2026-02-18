@@ -8,29 +8,27 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 export default function UpcomingCars() {
     const cars = [
         {
-            imgSrc:
-                "https://cdn.carprices.ae/assets/Nissan_Patrol_2025_0f06f3dee1.jpg",
+            imgSrc: "/2024-Land-Cruiser-Prado.png",
             title: "2025 Nissan Patrol",
             price: "Visit Site",
         },
         {
-            imgSrc:
-                "https://cdn.carprices.ae/assets/Mercedes_Benz_AMG_CLE_e7e6c9c59b.jpg",
+            imgSrc: "/car-image1.jpg",
             title: "2024 Mercedes Benz AMG CLE",
             price: "Visit Site",
         },
         {
-            imgSrc: "https://cdn.carprices.ae/assets/BMW_M5_e2c0b94f35.jpg",
+            imgSrc: "/bmw-m2.png",
             title: "2024 BMW M5",
             price: "Visit Site",
         },
         {
-            imgSrc: "https://cdn.carprices.ae/assets/Nissan_GTR_ba369e591d.jpg",
+            imgSrc: "/car-image2.png",
             title: "2024 Nissan GTR",
             price: "Visit Site",
         },
         {
-            imgSrc: "https://cdn.carprices.ae/assets/Wagoneer_23cdadfe7b.jpg",
+            imgSrc: "/2024_Lexus_GX_Overtrail_NoriGreen.png",
             title: "2024 Jeep Wagoneer",
             price: "Visit Site",
         },

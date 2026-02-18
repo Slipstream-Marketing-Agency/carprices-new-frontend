@@ -44,7 +44,6 @@ export default function ChooseBrand({ brand }) {
                                     width={90} // Optimized width for md screens
                                     height={90} // Optimized height for md screens
                                     sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                    layout="intrinsic" // Optimized for fixed-size images
                                     className="object-contain aspect-square md:w-[90px] w-[80px] md:grayscale hover:filter-none"
                                 />
                                 <div className="md:mt-6 mt-2 font-semibold whitespace-nowrap text-xs md:text-base">

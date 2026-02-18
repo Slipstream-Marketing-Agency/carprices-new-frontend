@@ -19,7 +19,7 @@ export default function FeaturedNews() {
                 "The 2025 Audi e-tron GT features a facelift, new variants, improved range, performance, and charging. The lineup includes the first fully electric RS performance model, the RS e-tron GT Performance, with striking design and advanced technology.",
             createdOn: "09th September 2024",
             url: "https://carprices.ae/news/2025-all-new-audi-e-tron-gt-new-variants-and-more-power",
-            image: "https://cdn.carprices.ae/assets/Audi_RS_E_Tron_2e8984e401.jpg",
+            image: "/news-image1.png",
         },
         {
             model: "2024",
@@ -29,7 +29,7 @@ export default function FeaturedNews() {
                 "The new Land Cruiser Prado features a body-on-frame design and is a more capable off-roader than before.",
             createdOn: "09th September 2024",
             url: "https://carprices.ae/news/2024-toyota-land-cruiser-prado",
-            image: "https://cdn.carprices.ae/assets/LC_Prado_6286422331.jpg",
+            image: "/2024-Land-Cruiser-Prado.png",
         },
 
         {
@@ -41,7 +41,7 @@ export default function FeaturedNews() {
             createdOn: "09th September 2024",
             url: "https://carprices.ae/news/development-of-the-2025-porsche-911-hybrid-came-to-an-end-to-debut-on-may-28",
             image:
-                "https://cdn.carprices.ae/assets/Porsche_Hybrid_911_dc05da8cdd.jpg",
+                "/news-image2.png",
         },
 
         {

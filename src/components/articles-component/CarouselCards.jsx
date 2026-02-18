@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { fetchArticles } from '@/lib/api';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import moment from "moment";
+import { formatDateLong } from "@/utils/formatDate";
 
 const Arrow = ({ direction, onClick }) => {
     return (
@@ -157,9 +157,7 @@ const CarouselCards = ({ tabs }) => {
                                                 <span className="hidden sm:inline">
                                                     {article?.author} &mdash;
                                                 </span>{" "}
-                                                {moment(article?.publishedAt).format(
-                                                    "MMMM Do YYYY"
-                                                )}
+                                                {formatDateLong(article?.publishedAt)}
                                             </div>
                                         </div>{" "}
                                     </div>

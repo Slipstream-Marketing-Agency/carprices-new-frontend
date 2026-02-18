@@ -1,30 +1,32 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-export default function Ad970x180({dataAdSlot}) {
-  const searchParams = useSearchParams();
+export default function Ad970x180({ dataAdSlot }) {
+  const adRef = useRef(null);
+  const isAdLoaded = useRef(false);
+
   useEffect(() => {
+    if (isAdLoaded.current) return;
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (adRef.current && adRef.current.childElementCount === 0) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        isAdLoaded.current = true;
+      }
+    } catch (e) {
+      if (process.env.NODE_ENV === 'development') { console.error("Error loading ads:", e); }
     }
-    catch (e) {if (process.env.NODE_ENV === 'development') { console.error("Error loading ads:", e); }
-    }
-
-  }, [searchParams]);
+  }, []);
 
   return (
-    <>
-      <div className="flex justify-center">
-        <ins className="adsbygoogle bg-slate-200"
-          style={{ display: "inline-block", width: "970px", height: "180px" }}
-          data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID} // Use environment variable for AdSense client ID
-          data-ad-slot={dataAdSlot} // Pass the dynamic ad slot ID
-          data-full-width-responsive="true"
-        >
-        </ins>
-      </div>
-    </>
-
+    <div className="flex justify-center">
+      <ins
+        ref={adRef}
+        className="adsbygoogle"
+        style={{ display: "inline-block", width: "970px", height: "180px" }}
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4857144107996534"}
+        data-ad-slot={dataAdSlot}
+        data-full-width-responsive="true"
+      />
+    </div>
   );
 }

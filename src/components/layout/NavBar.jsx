@@ -68,7 +68,7 @@ export default function NavBar() {
       hoverItem: "search-cars",
     },
     { href: "/compare-cars", label: "Compare New Cars" },
-    { href: "/used-cars", label: "Used Cars" },
+    // { href: "/used-cars", label: "Used Cars" },
     // { href: "/compare-cars", label: "Compare New Cars", hoverItem: "compare-cars" },
     {
       href: "#",
@@ -469,13 +469,12 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
                   <Image
-                    loading="lazy"
                     src="/assets/img/car-prices-logo.png"
                     className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
-                    alt="logo"
+                    alt="CarPrices.ae"
                     width={179}
                     height={28}
-                    layout="intrinsic"
+                    priority
                   />
                 </Link>
               </div>
@@ -532,13 +531,11 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
                   className="flex items-center ml-4 animate-logo-in"
                 >
                   <Image
-                    loading="lazy"
                     src="/assets/img/car-prices-logo.png"
                     className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
-                    alt="logo"
+                    alt="CarPrices.ae"
                     width={179}
                     height={28}
-                    layout="intrinsic"
                   />
                 </Link>
               )}

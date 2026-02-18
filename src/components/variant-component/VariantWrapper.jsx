@@ -1,6 +1,5 @@
 "use client"
 import React, { Suspense, useEffect, useMemo, useState } from "react";
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import useTranslate from "@/utils/UseTranslate";
 import axios from "axios";

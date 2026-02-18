@@ -1,14 +1,18 @@
-import client from '@/lib/meilisearch';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchCarBrands() {
   try {
-    const response = await client.index('car-brand').search('', {
-      facetsDistribution: ['name'],
-      limit: 0, // Set limit to 0 to avoid returning documents
+    const response = await fetch(`${API_URL}car-brands/names`, {
+      next: { revalidate: 300 },
     });
-
-    const carBrands = Object.keys(response.facetsDistribution.name);
-    return carBrands;
-  } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching car brands:', error); }
+    if (!response.ok) throw new Error('Failed to fetch car brands');
+    const data = await response.json();
+    // Return array of brand names
+    return Array.isArray(data) ? data.map((b) => b.name) : [];
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching car brands:', error);
+    }
+    return [];
   }
 }

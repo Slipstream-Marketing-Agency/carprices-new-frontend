@@ -18,28 +18,17 @@ export async function generateMetadata({ params }) {
             return notFound()
         }
         const seoData = trimData?.seo;
+        const ogImage = trimData?.featuredImage || "https://carprices.ae/assets/img/car-placeholder.png";
 
         return {
-            title: false ? seoData.metaTitle : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
-            // description: seoData?.metaDescription ? seoData.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
-            //     } price in UAE starts at ${trimData.price <= 0
-            //         ? "TBD"
-            //         : "AED" +
-            //         " " +
-            //         trimData.price?.toLocaleString("en-AE", {
-            //             minimumFractionDigits: 0,
-            //             maximumFractionDigits: 2,
-            //         })
-            //     }*.Check out ${trimData?.model
-            //     } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
-            description: false ? seoData.metaDescription : `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} with the latest specs, pricing, and features in the UAE. Find your next car with CarPrices.ae.`,
-            charset: "UTF-8",
+            title: seoData?.metaTitle || `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+            description: seoData?.metaDescription || `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} with the latest specs, pricing, and features in the UAE. Find your next car with CarPrices.ae.`,
             alternates: {
-                canonical: seoData?.canonicalURL || `https://carprices.ae/brands/${brandname}/${year}/${model}/${trim}`,
+                canonical: seoData?.canonicalURL || `/brands/${brandname}/${year}/${model}/${trim}`,
             },
             openGraph: {
-                title: seoData?.metaTitle ? seoData.metaTitle : `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
-                description: seoData?.metaDescription ? seoData.metaDescription : `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
+                title: seoData?.metaTitle || `${trimData?.brand} ${trimData?.model} ${trimData?.year} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+                description: seoData?.metaDescription || `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name
                     } price in UAE starts at ${trimData.price <= 0
                         ? "TBD"
                         : "AED" +
@@ -50,29 +39,27 @@ export async function generateMetadata({ params }) {
                         })
                     }*.Check out ${trimData?.model
                     } colours, Features, Specifications, Reviews, Interior Images, & Mileage.`,
-                image: trimData?.featuredImage === null ? "https://carprices.ae/assets/img/car-placeholder.png" : trimData?.featuredImage,
-                url: `https://carprices.ae/brands/${brandname}/${year}/${model}/${trim}`,
+                images: [{ url: ogImage }],
+                url: `/brands/${brandname}/${year}/${model}/${trim}`,
             },
-            // keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
             robots: {
                 index: true,
                 follow: true,
             },
-            structuredData: {
-                "@context": "https://schema.org",
-                "@type": "WebPage",
-                name: seoData?.metaTitle || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-                description: seoData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-                url: "https://carprices.ae",
+            authors: [{ name: "CarPrices.ae Team" }],
+            twitter: {
+                card: "summary_large_image",
+                title: seoData?.metaTitle || `${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} Car Prices in UAE | Photos, Spec - Carprices.ae`,
+                description: seoData?.metaDescription || `Explore the ${trimData?.year} ${trimData?.brand} ${trimData?.model} ${trimData?.name} with the latest specs, pricing, and features in the UAE. Find your next car with CarPrices.ae.`,
+                images: [ogImage],
             },
-            author: "Carprices.ae Team",
-            icon: "./favicon.ico",
         };
     } catch (error) {
         // Return 404 if everything else fails
         if (error.response?.status === 404) {
             return notFound(); // Call notFound() for 404 errors
-        }if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
+        }
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching model data:", error); }
         throw error; // Re-throw other errors for handling elsewhere
     }
 
@@ -91,7 +78,8 @@ export default async function TrimPage({ params }) {
             `${process.env.NEXT_PUBLIC_API_URL}car-trims/findonetrim/${model}/${trimSlug}/${year}`
         );
         trimData = response.data.data;
-    } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch trim data:", error); }
+    } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Failed to fetch trim data:", error); }
         return notFound(); // Handle not found case
     }
 

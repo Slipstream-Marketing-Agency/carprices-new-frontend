@@ -95,19 +95,31 @@ const nextConfig = bundleAnalyzer({
         hostname: 'cdn.carprices.ae',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'carprices.ae',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'apis.carprices.ae',
+        pathname: '/uploads/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 2592000, // Cache optimized images for 30 days
     unoptimized: false,
   },
 
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
-    localeDetection: false,
-  },
+  // Note: i18n config is not supported with App Router
+  // Internationalization should be handled via middleware or route groups
+  // i18n: {
+  //   locales: ['en'],
+  //   defaultLocale: 'en',
+  //   localeDetection: false,
+  // },
 
   eslint: {
     ignoreDuringBuilds: false,
@@ -160,6 +172,86 @@ const nextConfig = bundleAnalyzer({
   compress: true,
 
   swcMinify: true,
+
+  // Optimize package imports for smaller bundles
+  experimental: {
+    optimizePackageImports: [
+      '@mui/material',
+      '@mui/icons-material',
+      'lodash',
+      'react-icons',
+    ],
+  },
+
+  // Reduce unused JS in production
+  modularizeImports: {
+    '@mui/icons-material': {
+      transform: '@mui/icons-material/{{member}}',
+    },
+    '@mui/material': {
+      transform: '@mui/material/{{member}}',
+    },
+    lodash: {
+      transform: 'lodash/{{member}}',
+    },
+  },
+
+  // Add security and performance headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+      {
+        // Cache static assets aggressively
+        source: '/assets/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache fonts aggressively
+        source: '/fonts/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache Next.js static chunks
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
 
   async generateBuildId() {
     if (process.env.NODE_ENV === 'production') {

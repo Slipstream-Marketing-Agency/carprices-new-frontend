@@ -4,6 +4,25 @@ import SingleBrand from '@/components/brand-component/SingleBrand';
 import { fetchBrandDetails, fetchModels, fetchMetaData } from '@/lib/brandapis';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}car-brands/names?page=1&pageSize=100`,
+      { next: { revalidate: 3600 } }
+    );
+    if (!response.ok) return [];
+    const { brands } = await response.json();
+    return (brands || []).map((brand) => ({
+      brandname: brand.slug,
+    }));
+  } catch (error) {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }) {
     const { brandname } = params;
     const { brand, seo } = await fetchBrandDetails(brandname);
@@ -12,24 +31,20 @@ export async function generateMetadata({ params }) {
     const metaData = {
         title: seo?.metaTitle || `${brand?.name} Car Prices in UAE | Explore ${brand?.name} Models & Pricing`,
         description: seo?.metaDescription || `Find detailed information about ${brand?.name} cars in the UAE at CarPrices.ae. Get the latest updates on models, specifications, and pricing to choose your perfect ${brand?.name}.`,
-        charset: "UTF-8",
         alternates: {
-            canonical: seo?.canonicalURL || `https://carprices.ae/brands/${brandname}`,
+            canonical: seo?.canonicalURL || `/brands/${brandname}`,
         },
         keywords: seo?.keyword || `${brand?.name} car prices UAE, ${brand?.name} models UAE, ${brand?.name} reviews UAE, ${brand?.name} specs, CarPrices.ae`,
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: seo?.structuredData || {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: seo?.metaTitle || `${brand?.name} Car Prices in UAE`,
-            description: seo?.metaDescription || `Explore the latest ${brand?.name} car models, specifications, and pricing in the UAE with CarPrices.ae.`,
-            url: `https://carprices.ae/brands/${brandname}`,
+        authors: [{ name: "CarPrices.ae Team" }],
+        twitter: {
+            card: "summary_large_image",
+            title: seo?.metaTitle || `${brand?.name} Car Prices in UAE | Explore ${brand?.name} Models & Pricing`,
+            description: seo?.metaDescription || `Find detailed information about ${brand?.name} cars in the UAE at CarPrices.ae. Get the latest updates on models, specifications, and pricing to choose your perfect ${brand?.name}.`,
         },
-        author: "CarPrices.ae Team",
-        icon: "./favicon.ico",
     };
 
     return metaData;

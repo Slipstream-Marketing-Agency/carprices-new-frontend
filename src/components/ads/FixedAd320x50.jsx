@@ -1,34 +1,34 @@
 "use client"
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close"; // Import CloseIcon from MUI
+import React, { useEffect, useState, useRef } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function FixedAd320x50({ dataAdSlot }) {
-  const searchParams = useSearchParams();
-  const [isVisible, setIsVisible] = useState(true); // State to control ad visibility
+  const [isVisible, setIsVisible] = useState(true);
+  const adRef = useRef(null);
+  const isAdLoaded = useRef(false);
 
-  const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-  const adHiddenKey = 'adHiddenUntilMobile'; // localStorage key
-  const hideDuration = 1 * 60 * 60 * 1000; // Hide for 1 hours (in milliseconds)
+  const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4857144107996534";
+  const adHiddenKey = 'adHiddenUntilMobile';
+  const hideDuration = 1 * 60 * 60 * 1000;
 
   useEffect(() => {
     const adHiddenUntil = localStorage.getItem(adHiddenKey);
     const currentTime = new Date().getTime();
 
     if (adHiddenUntil && currentTime < parseInt(adHiddenUntil)) {
-      setIsVisible(false); // Keep ad hidden if the duration has not expired
-    } else {
-      setIsVisible(true); // Show ad if the hidden duration has expired or does not exist
+      setIsVisible(false);
+      return;
     }
 
-    if (isVisible) {
+    if (!isAdLoaded.current) {
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
+        isAdLoaded.current = true;
       } catch (e) {
         // Handle error silently
       }
     }
-  }, [searchParams, isVisible]);
+  }, []);
 
   const handleCloseAd = () => {
     const hideUntil = new Date().getTime() + hideDuration;

@@ -15,27 +15,32 @@ export async function generateMetadata() {
     const slug = "electric-cars";
     const metaData = await fetchMetaData(slug);
 
+    const pageTitle = metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae";
+    const pageDescription = metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.";
+
     return {
-        title: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-        description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-        charset: "UTF-8",
+        title: pageTitle,
+        description: pageDescription,
         alternates: {
-            ...(metaData?.canonicalURL && { canonical: metaData.canonicalURL }),
+            canonical: metaData?.canonicalURL || `/electric-cars`,
         },
         keywords: metaData?.keywords || "new car prices UAE, car comparisons UAE, car specifications, car models UAE, car reviews UAE, auto news UAE, car loans UAE, CarPrices.ae",
         robots: {
             index: true,
             follow: true,
         },
-        structuredData: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: metaData?.title || "New Car Prices, Comparisons, Specifications, Models, Reviews & Auto News in UAE - CarPrices.ae",
-            description: metaData?.description || "Explore the latest car prices in UAE. Discover prices, specs, and features for any car model. Compare, calculate loans, and find reviews at CarPrices.ae.",
-            url: "https://carprices.ae",
+        authors: [{ name: "CarPrices.ae Team" }],
+        openGraph: {
+            title: pageTitle,
+            description: pageDescription,
+            url: "https://carprices.ae/electric-cars",
+            type: "website",
         },
-        author: "Carprices.ae Team",
-        icon: "./favicon.ico",
+        twitter: {
+            card: "summary_large_image",
+            title: pageTitle,
+            description: pageDescription,
+        },
     };
 }
 

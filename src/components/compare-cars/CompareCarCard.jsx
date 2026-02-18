@@ -57,7 +57,6 @@ function CompareCarCard({ carData, cars, setCars }) {
             width={500}  // Set a width that matches the container or your layout needs
             height={300}  // Set the height based on the aspect ratio you want
             className="object-contain"
-            layout="intrinsic"  // This layout preserves the image's aspect ratio and size
             loading="lazy"  // Lazy load the image
           />
         </div>
