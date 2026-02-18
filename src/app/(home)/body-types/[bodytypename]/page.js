@@ -1,6 +1,6 @@
 import AdvancedFilterWrapper from '@/components/advanced-filter/AdvancedFilterWrapper'
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -51,6 +51,8 @@ export async function generateMetadata({ params }) {
 export default function page({ params }) {
 
     return (
-        <AdvancedFilterWrapper  filterType ={"category"}/>
+        <Suspense fallback={<div className="container py-8">Loading...</div>}>
+            <AdvancedFilterWrapper filterType={"category"} />
+        </Suspense>
     )
 }

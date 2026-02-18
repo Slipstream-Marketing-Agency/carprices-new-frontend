@@ -16,7 +16,7 @@ export function useMobileNavigationFix() {
     window.scrollTo(0, 0);
 
     // Force reflow to ensure DOM is updated
-    document.body.offsetHeight;
+    void document.body.offsetHeight;
 
     // Clear any stuck loading states after navigation
     const clearLoadingTimeout = setTimeout(() => {
