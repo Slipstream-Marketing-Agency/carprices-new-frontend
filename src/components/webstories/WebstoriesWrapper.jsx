@@ -3,16 +3,20 @@ import StoryCard from './StoryCard'
 import Ad300x600 from '../ads/Ad300x600'
 import Ad300X250 from '../ads/Ad300x250'
 
-export default function WebstoriesWrapper({ stories, categories }) {
+export default function WebstoriesWrapper({ stories = [], categories = [] }) {
     return (
         <><div className="container grid grid-cols-12 py-8">
             <div className="md:col-span-9 col-span-12">
                 {/* Story Listing */}
                 <h1 className="md:text-3xl text-lg font-bold">Web Stories</h1>
                 <div className="grid md:grid-cols-4 grid-cols-2 gap-6 mt-4">
-                    {stories.map((story) => (
-                        <StoryCard key={story.id} story={story} />
-                    ))}
+                    {stories && stories.length > 0 ? (
+                        stories.map((story) => (
+                            <StoryCard key={story.id} story={story} />
+                        ))
+                    ) : (
+                        <p className="col-span-full text-center text-gray-500">No web stories available at the moment.</p>
+                    )}
                 </div>
             </div>
             <div className="md:col-span-3 col-span-12">

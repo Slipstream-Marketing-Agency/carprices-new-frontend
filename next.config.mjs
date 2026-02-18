@@ -13,24 +13,49 @@ const fetchAllRedirects = async () => {
   const pageSize = 100;
   let total = 0;
 
-  do {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}redirects?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
-    );
-    const data = await response.json();
-    redirects = [...redirects, ...data.redirects];
-    total = data.total;
-    page++;
-  } while (redirects.length < total);
+  try {
+    do {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}redirects?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+      );
+      
+      if (!response.ok) {
+        console.warn(`Failed to fetch redirects: ${response.status} ${response.statusText}`);
+        return null;
+      }
+      
+      const data = await response.json();
+      redirects = [...redirects, ...data.redirects];
+      total = data.total;
+      page++;
+    } while (redirects.length < total);
 
-  return redirects;
+    return redirects;
+  } catch (error) {
+    console.warn('Error fetching redirects from API:', error.message);
+    return null;
+  }
 };
 
 // Store fetched redirects into a file
 const storeRedirects = async () => {
-  const redirects = await fetchAllRedirects();
   const filePath = path.join(process.cwd(), 'public', 'redirects.json');
-  fs.writeFileSync(filePath, JSON.stringify(redirects, null, 2));
+  
+  // Try to fetch from API
+  const redirects = await fetchAllRedirects();
+  
+  if (redirects !== null) {
+    fs.writeFileSync(filePath, JSON.stringify(redirects, null, 2));
+  } else {
+    // If API fetch fails, check if redirects.json already exists
+    if (!fs.existsSync(filePath)) {
+      console.warn('No redirects.json found and API fetch failed. Creating empty file.');
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      fs.writeFileSync(filePath, JSON.stringify([], null, 2));
+    } else {
+      console.log('Using existing redirects.json file');
+    }
+  }
 };
 
 // Generate sitemaps by triggering APIs and saving the files

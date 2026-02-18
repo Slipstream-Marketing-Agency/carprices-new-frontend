@@ -49,7 +49,7 @@ export default async function WebStoriesPage() {
 
         return (
             <div>
-                <WebstoriesWrapper stories={stories} categories={categories} />
+                <WebstoriesWrapper stories={stories || []} categories={categories || []} />
             </div>
         );
     } catch (error) {
