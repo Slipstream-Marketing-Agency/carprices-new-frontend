@@ -3,6 +3,8 @@ import NavBar from "@/components/layout/NavBar";
 import StoreProvider from "../../../providers/StoreProvider";
 import CookiePopup from "@/components/layout/CookiePopup";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { NavigationProgress } from "@/components/common/NavigationProgress";
+import MobileNavigationGuard from "@/components/common/MobileNavigationGuard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -14,10 +16,13 @@ export default function HomeLayout({ children }) {
     <main className="w-full flex flex-col">
       <ErrorBoundary>
         <StoreProvider>
-          <NavBar />
-          {children}
-          <Footer />
-          <CookiePopup />
+          <NavigationProgress />
+          <MobileNavigationGuard>
+            <NavBar />
+            {children}
+            <Footer />
+            <CookiePopup />
+          </MobileNavigationGuard>
         </StoreProvider>
       </ErrorBoundary>
     </main>

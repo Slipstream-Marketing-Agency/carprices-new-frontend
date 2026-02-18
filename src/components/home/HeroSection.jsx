@@ -1,8 +1,31 @@
 'use client';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const HeroSection = () => {
+    const desktopVideoRef = useRef(null);
+    const mobileVideoRef = useRef(null);
+
+    useEffect(() => {
+        // Force play videos on mount for better mobile compatibility
+        const playVideo = (videoElement) => {
+            if (videoElement) {
+                videoElement.play().catch((error) => {
+                    console.log('Video autoplay prevented:', error);
+                    // Show fallback image if video can't autoplay
+                    videoElement.style.display = 'none';
+                });
+            }
+        };
+
+        if (desktopVideoRef.current) {
+            playVideo(desktopVideoRef.current);
+        }
+        if (mobileVideoRef.current) {
+            playVideo(mobileVideoRef.current);
+        }
+    }, []);
+
     return (
         <>
             {/* Desktop hero - static poster image for fast LCP, video loads lazily */}
@@ -16,13 +39,21 @@ const HeroSection = () => {
                     className="object-cover"
                 />
                 <video
+                    ref={desktopVideoRef}
                     muted
-                    autoPlay
                     loop
                     playsInline
-                    preload="none"
+                    preload="auto"
+                    poster="/assets/img/carbackgroundImage.jpg"
                     className="absolute inset-0 w-full h-full object-cover"
-                    onLoadedData={(e) => e.target.style.opacity = 1}
+                    onLoadedData={(e) => {
+                        e.target.style.opacity = 1;
+                        e.target.play();
+                    }}
+                    onError={(e) => {
+                        console.log('Desktop video failed to load');
+                        e.target.style.display = 'none';
+                    }}
                     style={{ opacity: 0, transition: 'opacity 0.5s ease-in-out' }}
                 >
                     <source
@@ -47,13 +78,21 @@ const HeroSection = () => {
                     className="object-cover"
                 />
                 <video
+                    ref={mobileVideoRef}
                     muted
-                    autoPlay
                     loop
                     playsInline
-                    preload="none"
+                    preload="auto"
+                    poster="/assets/img/carbackgroundImage.jpg"
                     className="absolute inset-0 w-full h-full object-cover"
-                    onLoadedData={(e) => e.target.style.opacity = 1}
+                    onLoadedData={(e) => {
+                        e.target.style.opacity = 1;
+                        e.target.play();
+                    }}
+                    onError={(e) => {
+                        console.log('Mobile video failed to load');
+                        e.target.style.display = 'none';
+                    }}
                     style={{ opacity: 0, transition: 'opacity 0.5s ease-in-out' }}
                 >
                     <source
