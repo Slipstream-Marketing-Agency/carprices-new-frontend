@@ -1,6 +1,5 @@
 import { Poppins } from "next/font/google";
 import Script from "next/script";
-import BlockDetector from "@/components/ads/BlockerDetect";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -189,9 +188,6 @@ export default function RootLayout({ children }) {
             alt=""
           />
         </noscript>
-
-        {/* Ad Blocker Detection */}
-        <BlockDetector />
 
         {children}
       </body>
