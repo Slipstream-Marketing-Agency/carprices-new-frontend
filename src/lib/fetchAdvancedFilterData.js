@@ -7,7 +7,7 @@ const fetchWithErrorHandling = async (url, timeoutMs = 15000) => {
   try {
     const response = await fetch(url, {
       signal: controller.signal,
-      next: { revalidate: 60 },
+      next: { revalidate: 300 },
     });
     clearTimeout(timeoutId);
     if (!response.ok) {

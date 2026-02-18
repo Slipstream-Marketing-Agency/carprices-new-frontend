@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import SWRProvider from "@/../../providers/SWRProvider";
 
 const poppins = Poppins({
   weight: ["400", "600", "700"],
@@ -189,7 +190,9 @@ export default function RootLayout({ children }) {
           />
         </noscript>
 
-        {children}
+        <SWRProvider>
+          {children}
+        </SWRProvider>
       </body>
     </html>
   );

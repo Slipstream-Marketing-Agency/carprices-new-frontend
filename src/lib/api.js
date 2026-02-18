@@ -4,7 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const fetchWithErrorHandling = async (url, options = {}) => {
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
+      next: { revalidate: 300 },
       ...options,
     });
     if (!res.ok) {
@@ -128,7 +128,7 @@ export const fetchDealers = async (brandSlug = '', page = 1, pageSize = 10, deal
       url += `&dealerBranch=${dealerBranchSlug}`;
     }
 
-    const response = await fetch(url, { next: { revalidate: 60 } });
+    const response = await fetch(url, { next: { revalidate: 600 } });
     if (!response.ok) {
       throw new Error('Failed to fetch dealers');
     }
@@ -145,7 +145,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching deal
 // services/car-videoservice.js
 export const fetchTrendingVideos = async (page = 1, pageSize = 10, sort = 'createdAt', order = 'DESC') => {
   try {
-    const response = await fetch(`${API_URL}car-videos/by-filter?trending=true&page=${page}&pageSize=${pageSize}&sort=${sort}&order=${order}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}car-videos/by-filter?trending=true&page=${page}&pageSize=${pageSize}&sort=${sort}&order=${order}`, { next: { revalidate: 300 } });
     const data = await response.json();
     return data.videos || [];
   } catch (error) {
@@ -157,17 +157,17 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching tren
 
 // Fetch branches related to a specific brand
 export const fetchFilteredBranches = async (brandSlug) => {
-  const response = await fetch(`${API_URL}dealer-branches/filter-by-brand?brandSlug=${brandSlug}`, { next: { revalidate: 300 } });
+  const response = await fetch(`${API_URL}dealer-branches/filter-by-brand?brandSlug=${brandSlug}`, { next: { revalidate: 600 } });
   return response.json();
 };
 
 // Fetch brands related to a specific branch
 export const fetchFilteredBrands = async (branchSlug) => {
-  const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`, { next: { revalidate: 300 } });
+  const response = await fetch(`${API_URL}filter-by-branch?branchSlug=${branchSlug}`, { next: { revalidate: 600 } });
   return response.json();
 };
 
 export const fetchArticles = async(pathname, page, pageSize) => {
-  const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`, { next: { revalidate: 60 } })
+  const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`, { next: { revalidate: 300 } })
   return response.json();
 }
