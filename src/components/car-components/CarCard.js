@@ -60,10 +60,12 @@ const CarCard = ({ car }) => {
             <Image
               src={resolveImageUrl(featuredImage?.url)}
               alt={`Image of ${model?.name || "Car"}`}
-              width={featuredImage?.width ? featuredImage?.width : 278}
-              height={featuredImage?.height ? featuredImage?.height : 157}
+              width={featuredImage?.width || 278}
+              height={featuredImage?.height || 157}
               sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
             />
           </div>
         </header>
