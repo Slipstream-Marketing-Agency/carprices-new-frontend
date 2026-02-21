@@ -146,6 +146,24 @@ export default function RootLayout({ children }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4857144107996534"
           crossOrigin="anonymous"
         />
+        
+        {/* Suppress AdSense 400 errors in console */}
+        <Script id="adsense-error-handler" strategy="lazyOnload">
+          {`
+            (function() {
+              const originalFetch = window.fetch;
+              window.fetch = function(...args) {
+                return originalFetch.apply(this, args).catch(err => {
+                  if (args[0] && args[0].includes('googlesyndication')) {
+                    console.warn('Ad request failed (blocked or invalid)');
+                    return Promise.reject(err);
+                  }
+                  return Promise.reject(err);
+                });
+              };
+            })();
+          `}
+        </Script>
 
         {/* Google Tag Manager - loaded lazily to not block rendering */}
         <Script id="gtm" strategy="lazyOnload">

@@ -23,7 +23,7 @@ export default function Ad300x600({ dataAdSlot = "3530552137" }) {
         ref={adRef}
         className="adsbygoogle"
         style={{ display: "inline-block", width: "300px", height: "600px" }}
-        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4857144107996534"}
+        data-ad-client="ca-pub-4857144107996534"
         data-ad-slot={dataAdSlot}
         data-full-width-responsive="true"
       />

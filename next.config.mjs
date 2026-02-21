@@ -100,6 +100,13 @@ const generateSitemaps = async () => {
 const nextConfig = bundleAnalyzer({
   reactStrictMode: true,
 
+  // Remove console logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'], // Keep error and warn logs
+    } : false,
+  },
+
   images: {
     domains: ['cdn.carprices.ae'],
     remotePatterns: [
