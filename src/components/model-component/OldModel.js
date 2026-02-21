@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
-
 export default function OldModel({ model, currentYear }) {
   const currentDate = new Date();
   const currentRealYear = currentDate.getFullYear();
@@ -55,7 +53,7 @@ export default function OldModel({ model, currentYear }) {
     >
       <Link href={`/brands/${model?.brand?.slug}/${car?.year}/${model?.slug}`}>
         <div className="flex justify-center items-center w-1/2 mx-auto">
-          <Image
+          <img 
             width={500}
             height={500}
             src={
@@ -135,3 +133,4 @@ export default function OldModel({ model, currentYear }) {
     </>
   );
 }
+

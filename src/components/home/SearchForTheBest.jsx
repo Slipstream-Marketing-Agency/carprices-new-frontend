@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -56,15 +55,12 @@ const SearchForTheBest = () => {
           >
             <Link href={car.linkUrl}>
               <div className="flex flex-col items-center justify-center">
-                <Image
+                <img
                   src={car.imageUrl}
                   alt={car.label}
                   width={160}
                   height={100}
-                  // Set priority for the first two images and lazy load others
-                  priority={index < 2}
-                  loading={index >= 2 ? "lazy" : undefined}
-                  sizes="(max-width: 640px) 14rem, (min-width: 641px) 24rem"
+                  loading={index >= 2 ? "lazy" : "eager"}
                   className="w-40 md:h-24 h-14 object-contain rounded-md p-2"
                 />
                 <div className="hidden md:flex items-center justify-between w-full">
@@ -86,3 +82,4 @@ const SearchForTheBest = () => {
 };
 
 export default SearchForTheBest;
+

@@ -91,3 +91,4 @@ export async function POST(req) {
     return NextResponse.json({ message: "Error occurred while sending email" }, { status: 500 });
   }
 }
+

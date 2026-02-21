@@ -10,3 +10,4 @@ const SkeletonLoader = ({ width, height }) => {
 };
 
 export default SkeletonLoader;
+

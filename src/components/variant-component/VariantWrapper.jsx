@@ -1,6 +1,5 @@
 "use client"
 import React, { Suspense, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import useTranslate from "@/utils/UseTranslate";
 import axios from "axios";
 import Slider from "react-slick/lib/slider";
@@ -306,7 +305,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
           <div className="order-2 md:order-1 md:col-span-2 col-span-12 md:h-[333px]">
             <Slider {...thumbSettings}>
               <div>
-                <Image
+                <img 
                   src={
                     trimData?.featuredImage === null
                       ? "/assets/img/car-placeholder.png"
@@ -320,7 +319,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
               </div>
               {trimData?.galleryImages?.map((item, index) => (
                 <div key={`item-${index}`}>
-                  <Image
+                  <img 
                     src={
                       item === null ? "/assets/img/car-placeholder.png" : item
                     }
@@ -337,7 +336,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
           <div className="order-1 md:order-2 md:col-span-10 col-span-12 border-solid border-[1px] border-gray-300 rounded-[30px] car-detail-main-slider  p-0">
             <Slider {...mainSettings} className="h-full">
               <div className="flex items-center">
-                <Image
+                <img 
                   src={
                     trimData?.featuredImage === null
                       ? "/assets/img/car-placeholder.png"
@@ -351,7 +350,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
               </div>
               {trimData?.galleryImages?.map((item, index) => (
                 <div key={`item-${index}`} className="flex items-center">
-                  <Image
+                  <img 
                     src={
                       item === null ? "/assets/img/car-placeholder.png" : item
                     }
@@ -436,7 +435,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
             {trimData?.relatedTrims?.map((trim, index) => (
               <MenuItem key={trim?.slug || trim.slug || index} value={trim.slug} className="flex">
                 <ListItemIcon>
-                  <Image
+                  <img 
                     layout="fixed"
                     width={60}
                     height={60}
@@ -733,3 +732,4 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
       </div></div>
   )
 }
+

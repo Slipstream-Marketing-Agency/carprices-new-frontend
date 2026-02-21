@@ -6,7 +6,6 @@ import { Skeleton } from '@mui/material';
 import Select from 'react-select';
 import PrimaryButton from '../buttons/PrimaryButton';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const INITIAL_LIMIT = 12; // Number of dealers to load initially
 const LOAD_MORE_COUNT = 12; // Number of dealers to load each time "Load More" is clicked
@@ -37,7 +36,8 @@ const CarDealersListingPage = () => {
 
                 // Load initial dealers without any filter selection
                 await fetchAndSetDealers(INITIAL_LIMIT);
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Failed to load data:', error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Failed to load data:', error); }
             } finally {
                 setLoading(false);
             }
@@ -54,7 +54,8 @@ const CarDealersListingPage = () => {
             const branchSlug = selectedBranch?.value || '';
             const data = await fetchDealers(brandSlug, 1, limitCount, branchSlug);
             setDealers(data.dealers);
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching filtered dealers:', error); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching filtered dealers:', error); }
         } finally {
             setLoading(false);
         }
@@ -170,7 +171,7 @@ const CarDealersListingPage = () => {
                                 <Link href={`tel:${dealer.phone_number}`} key={dealer.id} className="bg-white rounded-lg shadow-md p-5">
                                     <div className='grid grid-cols-12 gap-3 h-full'>
                                         <div className="col-span-4 flex items-start ">
-                                            <Image
+                                            <img 
                                                 src={
                                                     dealer.logo === null ? "/assets/placeholder/car-dealer-logo-placeholder.webp" : dealer.logo.url
                                                 }
@@ -185,7 +186,7 @@ const CarDealersListingPage = () => {
 
                                                 <div>
                                                     <div className='flex items-center gap-3 bg-blue-100 p-2 rounded-xl mb-3'>
-                                                        <Image
+                                                        <img 
                                                             src={
                                                                 dealer.select_related_brand === null ? "/assets/placeholder/car-dealer-logo-placeholder.webp" : dealer.select_related_brand?.brandLogo?.formats?.thumbnail?.url
                                                             }
@@ -237,3 +238,4 @@ const CarDealersListingPage = () => {
 };
 
 export default CarDealersListingPage;
+

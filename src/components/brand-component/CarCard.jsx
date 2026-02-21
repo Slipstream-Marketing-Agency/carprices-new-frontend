@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
@@ -41,7 +40,7 @@ const CarCard = ({ car, brandname }) => {
             <Link href={`/brands/${brandname}/${car?.car_trims[0]?.year}/${car?.slug}`}>
                 <header className="flex flex-col w-full text-sm leading-4 rounded-2xl text-neutral-900 px-5">
                     <div className="relative self-center -mt-1.5 w-full aspect-[1.69] max-w-[278px] flex justify-center items-center">
-                        <Image
+                        <img 
                             src={car?.car_trims[0]?.featuredImage?.formats?.thumbnail?.url || "/assets/img/car-placeholder.png"}
                             alt={`Image of ${car?.name || "Car"}`}
                             width={car?.car_trims[0]?.featuredImage?.formats?.thumbnail?.width || 278}
@@ -109,3 +108,4 @@ const CarCard = ({ car, brandname }) => {
 
 
 export default React.memo(CarCard);
+

@@ -39,3 +39,4 @@ const MapComponent = ({ lat, lng, setAddressFromMap }) => {
 };
 
 export default MapComponent;
+

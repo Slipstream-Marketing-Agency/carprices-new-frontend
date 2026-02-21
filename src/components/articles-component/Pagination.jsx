@@ -107,3 +107,4 @@ export default function Pagination({ currentPage, pageCount, type, totalResults,
     </div>
   );
 }
+

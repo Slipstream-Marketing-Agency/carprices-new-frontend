@@ -390,3 +390,4 @@ export async function fetchBodyTypeList({
   const url = `${API_URL}car-trims/bodyList?${queryString}`;
   return await fetchWithErrorHandling(url);
 }
+

@@ -139,3 +139,4 @@ const BlockDetector = () => {
 };
 
 export default BlockDetector;
+

@@ -1,6 +1,5 @@
 
 import useTranslate from "@/utils/UseTranslate";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -126,7 +125,7 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
                 } hover:grayscale-0 hover:bg-blue-100 transition-all duration-300`}
               onClick={() => handleSeatingClick(item.group)}
             >
-              <Image
+              <img 
                 src={item.img}
                 alt={item.label}
                 className="mb-1 w-full h-auto"
@@ -143,3 +142,4 @@ export default function StepThree({ filterData, setFilterData, seatList }) {
     </div>
   );
 }
+

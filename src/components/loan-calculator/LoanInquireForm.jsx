@@ -302,3 +302,4 @@ const LoanInquiryForm = ({ car, price, tenure, interest_rate, down_payment, mont
 };
 
 export default LoanInquiryForm;
+

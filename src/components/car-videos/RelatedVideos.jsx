@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 import CardSliderWrapper from '../car-components/CardSliderWrapper';
-import Image from 'next/image';
 
 export default function RelatedVideos({ type, slug }) {
     const [videos, setVideos] = useState([]);
@@ -21,7 +20,8 @@ export default function RelatedVideos({ type, slug }) {
                 // Make the API request with the correct parameter
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}car-videos/by-brands-and-models?${paramType}=${slug}`);
                 setVideos(response.data.videos || []);
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related videos:', error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching related videos:', error); }
             }
         };
 
@@ -48,13 +48,11 @@ export default function RelatedVideos({ type, slug }) {
                             <Link key={article.id} href={`/video/${article?.slug}`}>
                                 <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                                     <div className="relative">
-                                        <Image
+                                        <img
                                             src={article.thumbnail || '/assets/placeholder/news-placeholder.webp'}
                                             alt={article?.title}
                                             width={0}
                                             height={0}
-                                            sizes="100vw"
-                                            layout="fixed"
                                             className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
                                         />
                                     </div>
@@ -91,3 +89,4 @@ export default function RelatedVideos({ type, slug }) {
         </div>
     );
 }
+

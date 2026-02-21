@@ -19,3 +19,4 @@ const imageSlice = createSlice({
 export const { setLoading } = imageSlice.actions;
 
 export default imageSlice.reducer;
+

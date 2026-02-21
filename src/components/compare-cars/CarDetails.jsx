@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -230,9 +229,9 @@ function CarDetails({ data }) {
                       >
                         {typeof carTrim[section.field] === 'boolean' ? (
                           carTrim[section.field] ? (
-                            <Image src="/yes-icon.svg" alt="Yes" width={20} height={20} />
+                            <img src="/yes-icon.svg" alt="Yes" width={20} height={20} />
                           ) : (
-                            <Image src="/no-icon.svg" alt="No" width={20} height={20} />
+                            <img src="/no-icon.svg" alt="No" width={20} height={20} />
                           )
                         ) : (
                           processFieldValue(section.field, carTrim[section.field])
@@ -259,14 +258,14 @@ function CarDetails({ data }) {
                         >
                           {typeof carTrim[section.field] === 'boolean' ? (
                             carTrim[section.field] ? (
-                              <Image
+                              <img 
                                 src="/yes-icon.svg"
                                 alt="Yes"
                                 width={20}
                                 height={20}
                               />
                             ) : (
-                              <Image
+                              <img 
                                 src="/no-icon.svg"
                                 alt="No"
                                 width={20}
@@ -294,3 +293,4 @@ function CarDetails({ data }) {
 }
 
 export default CarDetails;
+

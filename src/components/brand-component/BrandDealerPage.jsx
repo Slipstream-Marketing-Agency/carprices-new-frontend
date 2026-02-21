@@ -6,7 +6,6 @@ import axios from 'axios';
 import Pagination from './Pagination';
 import ExpandableText from '../common/ExpandableText';
 import { fetchModels } from '@/lib/brandapis';
-import Image from 'next/image';
 import Link from 'next/link';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -64,7 +63,8 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }
@@ -92,7 +92,8 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
             });
 
             if (loadMore) setBranchPage((prevPage) => prevPage + 1);
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching branches:", error); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching branches:", error); }
         } finally {
             setLoadingBranches(false);
         }
@@ -176,7 +177,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
                     {brandDetails && <>
                         <div className="grid grid-cols-12 mt-6 mb-4 shadow-md p-4 rounded-lg gap-5">
                             <div className="md:col-span-4 col-span-12 flex justify-start items-start w-full">
-                                <Image
+                                <img 
                                     src={brandDetails?.cover || "/assets/img/car-placeholder.png"}
                                     alt={`${brandDetails?.name}-cover-image`}
                                     width={400}
@@ -189,7 +190,7 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
 
                             <div className="md:col-span-8 col-span-12 flex flex-col items-start">
                                 <div className='flex items-center gap-3'>
-                                    <Image
+                                    <img 
                                         src={brandDetails?.logo || "/assets/img/car-placeholder.png"}
                                         alt={`${brandDetails?.name}-logo`}
                                         width={80}
@@ -272,3 +273,4 @@ export default function BrandDealerPage({ brandname, dealers, pagination, brandD
         </div>
     );
 }
+

@@ -70,3 +70,4 @@ export function getImageFormat(formats, preferredSize = 'medium') {
   
   return null;
 }
+

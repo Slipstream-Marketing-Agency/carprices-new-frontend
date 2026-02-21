@@ -12,3 +12,4 @@ const useTranslate = () => {
 };
 
 export default useTranslate;
+

@@ -1,6 +1,5 @@
 // app/dealers/[slug]/page.js
 import React, { Suspense } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Ad300x600 from '@/components/ads/Ad300x600';
 import { Email as EmailIcon, Instagram as InstagramIcon, Twitter as TwitterIcon, LinkedIn as LinkedInIcon } from "@mui/icons-material";
@@ -68,7 +67,7 @@ export default async function DealerPage({ params }) {
                 <div className="col-span-12 md:col-span-8 lg:col-span-9">
                     <div className="shadow-md p-6 rounded-lg bg-white">
                         {/* Display Dealer Shop Image or Placeholder */}
-                        <Image
+                        <img
                             src={dealer.dealer_shop_image ? dealer.dealer_shop_image.url : '/assets/placeholder/dealer-placeholder.webp'}
                             alt={dealer.name}
                             width={1200}
@@ -125,7 +124,7 @@ export default async function DealerPage({ params }) {
                             <div className="mt-6">
                                 <h2 className="text-2xl font-bold">About {dealer.select_related_brand.name}</h2>
                                 {dealer.select_related_brand.brandLogo && (
-                                    <Image
+                                    <img
                                         src={dealer.select_related_brand.brandLogo.url}
                                         alt={dealer.select_related_brand.name}
                                         width={100}

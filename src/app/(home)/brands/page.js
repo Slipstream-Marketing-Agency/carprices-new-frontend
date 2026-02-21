@@ -51,3 +51,4 @@ export default async function BrandCategoryPage({ searchParams }) {
     <BrandListWrapper brandsData={brands} pagination={pagination} />
   );
 }
+

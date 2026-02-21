@@ -7,8 +7,6 @@ import {
   DirectionsCarFilled,
   Person,
 } from "@mui/icons-material";
-import Image from "next/image";
-
 const KeyFeatures = ({ data }) => {
   const features = [
     {
@@ -112,7 +110,7 @@ const KeyFeatures = ({ data }) => {
             key={`feature-${index}`}
             className="bg-gradient-to-r from-blue-50 to-white rounded-xl p-6 flex flex-col items-start"
           >
-            <Image
+            <img 
               src={feature?.key_feature_title?.icon?.url}
               width={70}
               height={70}
@@ -134,3 +132,4 @@ const KeyFeatures = ({ data }) => {
 };
 
 export default KeyFeatures;
+

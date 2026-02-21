@@ -190,3 +190,4 @@ export default function SearchSelect({ articleType }) {
     </div>
   );
 }
+

@@ -1,7 +1,6 @@
 "use client"
 
 import Close from "@mui/icons-material/Close";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Snackbar, Alert, CircularProgress } from "@mui/material"; // Import Snackbar and Alert
@@ -222,7 +221,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
                   <div className="font-semibold text-4xl">Sign in</div>
                 </div>
                 {/* <div className="bg-blue-100 space-x-4 p-2 py-3 rounded-xl mb-10 mt-6 items-center text-center cursor-pointer">
-                  <Image
+                  <img 
                     src={"https://cdn.carprices.ae/assets/google_8cfba8cae1.svg"}
                     alt="google-icon"
                     width={20}
@@ -294,7 +293,7 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
                   <div className="font-semibold text-4xl">Sign up</div>
                 </div>
                 {/* <div className="bg-blue-100 space-x-4 p-2 py-3 rounded-xl mb-8 mt-6 items-center text-center cursor-pointer">
-                  <Image
+                  <img 
                     src={"https://cdn.carprices.ae/assets/google_8cfba8cae1.svg"}
                     alt="google-icon"
                     width={20}
@@ -438,3 +437,4 @@ function LoginModal({ isOpen, setIsOpen, postLogin = null }) {
 }
 
 export default LoginModal;
+

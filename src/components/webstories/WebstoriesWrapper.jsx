@@ -39,3 +39,4 @@ export default function WebstoriesWrapper({ stories = [], categories = [] }) {
         </div></>
     )
 }
+

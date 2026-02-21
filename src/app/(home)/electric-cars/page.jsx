@@ -8,7 +8,6 @@ import FilterModal from '@/components/electric-cars/FilterModal';
 import PopularSection from '@/components/electric-cars/PopularSection';
 import SelectedCompareCarsSection from '@/components/home/SelectedCompareCarsSection';
 import { fetchMetaData } from '@/lib/fetchMetaData';
-import Image from 'next/image';
 import React from 'react';
 
 export async function generateMetadata() {
@@ -100,3 +99,4 @@ const ElectricCar = () => {
 };
 
 export default ElectricCar;
+

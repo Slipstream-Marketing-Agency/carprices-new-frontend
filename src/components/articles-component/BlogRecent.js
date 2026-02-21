@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -21,7 +20,7 @@ export default function BlogRecent({
             >
               <div className="w-full">
                 <div className="flex my-2">
-                  <Image
+                  <img 
                     src={
                       blog?.attributes?.coverImage?.data?.attributes?.url ||
                       "/assets/images/blog-alt-image.png"
@@ -45,3 +44,4 @@ export default function BlogRecent({
     </>
   );
 }
+

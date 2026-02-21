@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -10,20 +9,18 @@ const CarDealerCard = ({ dealer }) => {
         <div className="md:col-span-4 col-span-12 relative" key={dealer.id} >
             <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                 <Link href={`/car-dealers/${dealer.slug}`} className="relative">
-                    <Image
+                    <img
                         src={dealer.dealer_shop_image || '/assets/placeholder/dealer-placeholder.webp'}
                         alt={dealer?.name}
                         width={0}
                         height={0}
-                        sizes="100vw"
-                        layout="fixed"
                         className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
                     />
                 </Link>
                 <div className="p-2 flex flex-col justify-between h-full">
                     <Link href={`/car-dealers/${dealer.slug}`} className='flex flex-col space-y-2 mb-3'>
                         <h3 className="text-lg font-medium h-14">{dealer.name} deals in {dealer.select_related_brand?.name}</h3>
-                        <Image
+                        <img
                             src={dealer.select_related_brand?.brandLogo?.url ? dealer.select_related_brand?.brandLogo.url : ''}
                             alt={dealer.select_related_brand?.name}
                             width={30}

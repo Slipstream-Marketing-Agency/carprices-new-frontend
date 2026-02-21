@@ -11,7 +11,6 @@ import Ad728x90 from "../ads/Ad728x90";
 import Ad300x600 from "../ads/Ad300x600";
 import VariantsListing from "./VariantsListing";
 import OldModel from "./OldModel";
-import Image from "next/image";
 import KeyFeatures from "./KeyFeatures";
 import VehicleFaq from "./VehicleFaq";
 import useTranslate from "@/utils/UseTranslate";
@@ -517,7 +516,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
                             </div>
                             <div className="w-full md:h-full md:w-5/12  mt-0">
                                 <div className="flex flex-col w-full h-full">
-                                    <Image
+                                    <img 
                                         src={
                                             currentmodel?.highlightsExteriorImage === null
                                                 ? "/assets/img/car-placeholder.png"
@@ -528,7 +527,7 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
                                         height={0}
                                         className="w-full h-full object-cover"
                                     />
-                                    <Image
+                                    <img 
                                         src={
                                             currentmodel?.highlightsImage === null
                                                 ? "/assets/img/car-placeholder.png"
@@ -589,3 +588,4 @@ if (process.env.NODE_ENV === 'development') { console.error('Error fetching revi
         </div>
     );
 }
+

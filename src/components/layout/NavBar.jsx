@@ -13,7 +13,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Dialog, DialogContent, DialogTitle, Tab, Tabs } from "@mui/material";
 import axios from "axios";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import useTranslate from "@/utils/UseTranslate";
 import SearchIcon from "@mui/icons-material/Search";
@@ -468,13 +467,13 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
               {/* Logo Section */}
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
-                  <Image
+                  <img
                     src="/assets/img/car-prices-logo.png"
                     className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
                     alt="CarPrices.ae"
                     width={179}
                     height={28}
-                    priority
+                    loading="eager"
                   />
                 </Link>
               </div>
@@ -530,7 +529,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
                   href="/"
                   className="flex items-center ml-4 animate-logo-in"
                 >
-                  <Image
+                  <img
                     src="/assets/img/car-prices-logo.png"
                     className="shrink-0 my-auto max-w-full aspect-[6.25] w-[179px] h-auto"
                     alt="CarPrices.ae"
@@ -694,7 +693,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
           <div className="gap-5 justify-between px-5 py-4 bg-white w-full md:hidden flex">
             <div className="flex gap-2 text-xl tracking-wider text-center whitespace-nowrap text-neutral-900">
               <Link href="/">
-                <Image
+                <img
                   loading="lazy"
                   src="/assets/img/car-prices-logo.png"
                   className="w-[150px] object-contain"
@@ -706,24 +705,24 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
               <div className="my-auto"></div>
             </div>
             <div className="flex gap-4 justify-center my-auto">
-              <Image
+              <img
                 loading="lazy"
                 src="/search.svg"
                 className="shrink-0 w-5 aspect-square"
                 onClick={() => setSearchClicked(true)}
                 alt={`search-icon`}
-                width={0}
-                height={0}
+                width={20}
+                height={20}
               />
 
               <div onClick={toggleNavigation}>
-                <Image
+                <img
                   loading="lazy"
                   src="/menu.svg"
                   className="shrink-0 self-start w-6 aspect-[1.27]"
                   alt={`menu-icon`}
-                  width={0}
-                  height={0}
+                  width={24}
+                  height={24}
                 />
               </div>
             </div>
@@ -744,3 +743,4 @@ if (process.env.NODE_ENV === 'development') { console.error("Server-side Data Fe
     </>
   );
 }
+

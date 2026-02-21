@@ -1,12 +1,11 @@
 // /s../components-old/Common/OptimizedImage.js
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/store/slices/imageSlice';
 import SkeletonLoader from './SkeletonLoader';
 
-const OptimizedImage = ({ src, alt, layout = 'responsive', width, height, sizes, objectFit = 'cover', id, ...props }) => {
+const OptimizedImage = ({ src, alt, layout = 'responsive', width, height, sizes, objectFit = 'cover', id, className, ...props }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.image.loading[id]);
   const [isInView, setIsInView] = useState(false);
@@ -37,19 +36,22 @@ const OptimizedImage = ({ src, alt, layout = 'responsive', width, height, sizes,
     dispatch(setLoading({ id, loading: true }));
   }, [dispatch, id]);
 
+  const imgStyle = layout === 'fill' 
+    ? { width: '100%', height: '100%', objectFit } 
+    : { objectFit };
+
   return (
     <div className="relative" ref={imageRef}>
       {isLoading && <SkeletonLoader width={width} height={height} />}
       {isInView && (
-        <Image
+        <img
           src={src}
           alt={alt}
-          layout={layout}
-          {...(layout === 'fill' ? {} : { width, height })}
-          sizes={sizes}
-          objectFit={objectFit}
-          onLoadingComplete={handleLoadingComplete}
-          className={`${!isLoading ? 'block' : 'hidden'}`}
+          width={layout !== 'fill' ? width : undefined}
+          height={layout !== 'fill' ? height : undefined}
+          style={imgStyle}
+          onLoad={handleLoadingComplete}
+          className={`${!isLoading ? 'block' : 'hidden'} ${className || ''}`}
           {...props}
         />
       )}
@@ -58,3 +60,4 @@ const OptimizedImage = ({ src, alt, layout = 'responsive', width, height, sizes,
 };
 
 export default OptimizedImage;
+

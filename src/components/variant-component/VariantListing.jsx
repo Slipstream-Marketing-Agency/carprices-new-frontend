@@ -3,7 +3,6 @@ import React from "react";
 import { useRouter, usePathname, useSearchParams, useParams } from 'next/navigation';
 import Price from "@/utils/Price"; // Adjust the path based on your project structure
 import useTranslate from "@/utils/UseTranslate"; // Adjust the path based on your project structure
-import Image from "next/image";
 import PrimaryButton from "../buttons/PrimaryButton";
 
 export default function VariantsListing({ data, brandslug, modelslug, trimslug }) {
@@ -26,7 +25,7 @@ export default function VariantsListing({ data, brandslug, modelslug, trimslug }
             >
               <div className="flex flex-col md:flex-row gap-4 items-center p-4">
                 <div className="md:w-1/3 flex items-center justify-center">
-                  <Image
+                  <img 
                     width={200}
                     height={200}
                     alt={trim?.name}
@@ -65,3 +64,4 @@ export default function VariantsListing({ data, brandslug, modelslug, trimslug }
     </div>
   );
 }
+

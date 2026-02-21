@@ -11,7 +11,6 @@ import { Formik, Field, Form } from 'formik';
 import Select from 'react-select';
 import CarCardSkeleton from '../car-components/CarCardSkeleton';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import Image from 'next/image';
 import RelatedArticles from '../articles-component/RelatedArticles';
 import RelatedVideos from '../car-videos/RelatedVideos';
 import InnerNavigation from './InnerNavigation';
@@ -63,7 +62,8 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }
@@ -148,7 +148,8 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                     `${process.env.NEXT_PUBLIC_API_URL}car-brands/${brandname}` // Use params to get brandname
                 );
                 setBrandDetails(response.data); // Set the fetched brand details
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brand details:", error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brand details:", error); }
             }
         };
 
@@ -166,7 +167,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
 
                     <div className="grid grid-cols-12 mt-6 mb-4 shadow-md p-4 rounded-lg gap-5">
                         <div className="md:col-span-4 col-span-12 flex justify-start items-start w-full">
-                            <Image
+                            <img 
                                 src={brandDetails?.cover || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-cover-image`}
                                 width={400}
@@ -178,7 +179,7 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
                         </div>
 
                         <div className="md:col-span-8 col-span-12 flex flex-col items-start">
-                            <Image
+                            <img 
                                 src={brandDetails?.logo || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-logo`}
                                 width={80}
@@ -323,3 +324,4 @@ export default function SingleBrand({ brandname, year, initialModels, pagination
         </div>
     );
 }
+

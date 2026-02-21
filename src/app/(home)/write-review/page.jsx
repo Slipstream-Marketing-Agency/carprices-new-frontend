@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -35,10 +34,10 @@ const page = () => {
                     </Link>
                 </h2>
                 <div className="flex items-center justify-center">
-                    <Image
+                    <img
                         width={0}
                         height={0}
-                        sizes="100vw" src="/assets/images/review.svg" alt="Review Illustration" className="w-52 h-5w-52 lg:h-72 lg:w-72" />
+                        src="/assets/images/review.svg" alt="Review Illustration" className="w-52 h-5w-52 lg:h-72 lg:w-72" />
                 </div>
             </div>
             <MostPopularCarSection />

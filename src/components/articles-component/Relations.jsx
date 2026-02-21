@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import CardSliderWrapper from '../car-components/CardSliderWrapper';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Relations({ slug }) {
     const [videos, setVideos] = useState([]);
@@ -17,7 +16,8 @@ export default function Relations({ slug }) {
                 setVideos(response?.data?.data?.select_related_videos || []);
                 setBrands(response?.data?.data?.car_brands || []);
                 setModels(response?.data?.data?.car_models || []);
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
             }
         };
 
@@ -39,7 +39,7 @@ export default function Relations({ slug }) {
                                     <Link key={brand.id} href={`/brands/${brand?.slug}`}>
                                         <div className='grid grid-cols-12 gap-2'>
                                             <div className="col-span-2 relative ">
-                                                <Image
+                                                <img
                                                     src={brand.brandLogo?.formats?.thumbnail?.url || '/assets/placeholder/news-placeholder.webp'}
                                                     alt={brand?.name}
                                                     width={96}
@@ -77,7 +77,7 @@ export default function Relations({ slug }) {
                                     <Link key={model.id} href={`/brands/${model?.brandSlug}/${model?.year}/${model?.slug}`}>
                                         <div className='grid grid-cols-12 gap-2'>
                                             <div className="col-span-2 relative ">
-                                                <Image
+                                                <img
                                                     src={model?.highTrim || '/assets/placeholder/news-placeholder.webp'}
                                                     alt={model?.name}
                                                     width={96}
@@ -116,7 +116,7 @@ export default function Relations({ slug }) {
                                     <Link key={video.id} href={``}>
                                         <div className='grid grid-cols-12'>
                                             <div className="col-span-4 relative ">
-                                                <Image
+                                                <img 
                                                     src={video.thumbnail?.url || '/assets/placeholder/news-placeholder.webp'}
                                                     alt={video?.title}
                                                     width={96}
@@ -145,3 +145,4 @@ export default function Relations({ slug }) {
         </div>
     );
 }
+

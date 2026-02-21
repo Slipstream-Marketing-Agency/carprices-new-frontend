@@ -67,3 +67,4 @@ const CookiePopup = () => {
 };
 
 export default CookiePopup;
+

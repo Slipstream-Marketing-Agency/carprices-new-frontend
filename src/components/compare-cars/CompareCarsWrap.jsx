@@ -158,3 +158,4 @@ export default function CompareCarsWrap({ params, slugOverride = null }) {
         </div>
     );
 }
+

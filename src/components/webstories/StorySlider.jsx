@@ -1,7 +1,6 @@
 
 "use client"
 import { getAllWebStories } from "@/lib/api";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
@@ -57,7 +56,7 @@ const StorySlider = () => {
                             className="flex-shrink-0 relative w-64 h-96 rounded-2xl"
                             target="_blank"
                         >
-                            <Image
+                            <img 
                                 width="0"
                                 height="0"
                                 sizes="100vw"
@@ -90,7 +89,7 @@ const StorySlider = () => {
                             target="_blank"
                         >
                             <div className="flex-shrink-0 relative w-full h-[30rem] rounded-2xl">
-                                <Image
+                                <img 
                                     width="0"
                                     height="0"
                                     sizes="100vw"
@@ -118,3 +117,4 @@ const StorySlider = () => {
 };
 
 export default StorySlider;
+

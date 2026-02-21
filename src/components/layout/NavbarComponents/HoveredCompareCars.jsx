@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link';
-import Image from 'next/image';
 
 const HoveredCompareCars = () => {
 
@@ -24,9 +23,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the first car */}
                         <div className="flex flex-col items-center mb-4 md:mb-0">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -46,9 +44,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the second car */}
                         <div className="flex flex-col items-center">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -72,9 +69,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the first car */}
                         <div className="flex flex-col items-center mb-4 md:mb-0">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -94,9 +90,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the second car */}
                         <div className="flex flex-col items-center">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -120,9 +115,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the first car */}
                         <div className="flex flex-col items-center mb-4 md:mb-0">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -142,9 +136,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the second car */}
                         <div className="flex flex-col items-center">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -168,9 +161,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the first car */}
                         <div className="flex flex-col items-center mb-4 md:mb-0">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -190,9 +182,8 @@ const HoveredCompareCars = () => {
                         {/* Car detail card for the second car */}
                         <div className="flex flex-col items-center">
                             <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
-                                    height="0"
-                                    sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="BMW 1 Series" width="0"
+                                    height="0" className="w-full h-14 object-contain rounded-lg" />
                             </div>
                             <div className="flex flex-col px-2 mt-3 w-full xl:px-5 xl:flex-grow">
                                 <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -214,3 +205,4 @@ const HoveredCompareCars = () => {
 }
 
 export default HoveredCompareCars
+

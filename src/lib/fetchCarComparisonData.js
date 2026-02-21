@@ -14,3 +14,4 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching comp
 
     return carData.filter((car) => car !== null);  // Filter out null or undefined cars
 }
+

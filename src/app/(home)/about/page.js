@@ -1,5 +1,4 @@
 import { fetchMetaData } from '@/lib/fetchMetaData';
-import Image from 'next/image';
 import Link from 'next/link'
 import React from 'react'
 
@@ -46,13 +45,12 @@ export default function About() {
         <div className="container mx-auto">
             <div className="grid gap-4 p-4 lg:grid-rows-1 lg:grid-cols-10 w-full container">
                 <div className="row-span-1 md:col-span-12 col-span-12 flex flex-col md:justify-start text-white rounded-2xl leading-[100%] relative overflow-hidden md:h-[400px] h-[200px]">
-                    <Image
+                    <img
                         loading="lazy"
                         src="/About-Us.jpg"
                         alt="About CarPrices.ae"
-                        fill
                         className="object-cover"
-                        sizes="100vw"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                     <div className="absolute inset-0 bg-black opacity-30"></div>{" "}
                     {/* Overlay */}
@@ -168,7 +166,7 @@ export default function About() {
                     </p>
                 </div>
                 <div className="space-y-10 ">
-                    <Image
+                    <img 
                         loading="lazy"
                         src="/assets/about-us/06_Social.jpg"
                         width={600}
@@ -176,7 +174,7 @@ export default function About() {
                         alt="CarPrices.ae social media presence"
                         className="object-contain w-full h-auto rounded-2xl"
                     />
-                    <Image
+                    <img 
                         loading="lazy"
                         src="/assets/about-us/05_social.jpg"
                         width={600}
@@ -189,3 +187,4 @@ export default function About() {
         </div>
     )
 }
+

@@ -203,3 +203,4 @@ const LoanCalculator = ({ vehicleName, variants }) => {
 };
 
 export default LoanCalculator;
+

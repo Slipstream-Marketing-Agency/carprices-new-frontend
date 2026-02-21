@@ -4,7 +4,6 @@ import Pagination from '@/components/articles-component/Pagination';
 import SearchSelect from '@/components/articles-component/SearchSelect';
 import TtitleAndDescription from '@/components/articles-component/TtitleAndDescription';
 import TypeNavigation from '@/components/articles-component/TypeNavigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -120,7 +119,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching arti
                   className="bg-white shadow-lg rounded-lg overflow-hidden"
                 >
                   <div className="relative">
-                    <Image
+                    <img
                       src={article.coverImage || '/assets/placeholder/news-placeholder.webp'}
                       alt={article?.title}
                       width={300}
@@ -167,7 +166,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching arti
                           {article?.carBrands?.map((brand, index) => (
                             <div key={`brand-${brand?.name || index}`}>
 
-                              <Image
+                              <img
                                 src={brand.brandLogo}
                                 alt={brand?.name}
                                 width={30}
@@ -183,7 +182,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching arti
                       <div className="flex flex-col justify-between text-gray-800 mt-2">
                         <div className='flex justify-between'>
                           <div className='flex items-center gap-2'>
-                            <Image
+                            <img
                               src={article.author?.avatar}
                               alt={article.author?.name}
                               width={30}

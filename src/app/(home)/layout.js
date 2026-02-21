@@ -31,3 +31,4 @@ export default function HomeLayout({ children }) {
     </main>
   );
 }
+

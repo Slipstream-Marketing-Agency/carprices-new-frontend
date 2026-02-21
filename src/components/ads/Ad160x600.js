@@ -30,3 +30,4 @@ export default function Ad160x600({ dataAdSlot }) {
     </div>
   );
 }
+

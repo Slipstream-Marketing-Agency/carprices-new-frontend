@@ -233,3 +233,4 @@ const BuyForm = ({ carName, brand, model, year, buyOpen, onClose }) => {
 };
 
 export default BuyForm;
+

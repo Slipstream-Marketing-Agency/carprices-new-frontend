@@ -4,7 +4,6 @@
 import { useRef, useState, useEffect } from 'react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Image from 'next/image';
 import Link from 'next/link';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 
@@ -87,7 +86,7 @@ const CustomSlider = ({ items, title, basePath }) => {
                 className="flex flex-col justify-center items-center space-y-2 min-w-[90px] max-w-[120px] h-[120px]"
               >
                 <div className="rounded-lg border p-2 w-16 h-16 flex items-center justify-center">
-                  <Image src={item.logo || item.image} alt={item.name} width={40} height={40} className="w-full h-full object-contain" />
+                  <img src={item.logo || item.image} alt={item.name} width={40} height={40} className="w-full h-full object-contain" />
                 </div>
                 <p className="text-xs font-semibold text-gray-700 text-center">{item.name}</p>
               </Link>
@@ -109,3 +108,4 @@ const CustomSlider = ({ items, title, basePath }) => {
 };
 
 export default CustomSlider;
+

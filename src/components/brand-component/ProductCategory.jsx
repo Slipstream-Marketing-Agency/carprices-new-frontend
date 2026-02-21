@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React, { useMemo, useRef } from "react";
 
@@ -49,7 +48,7 @@ function ProductCategory({ brands }) {
 
               <div className="text-center cursor-pointer">
                 <div className="mb-2 flex justify-center items-center">
-                  <Image
+                  <img 
                     loading="lazy"
                     alt={`brand-${item?.attributes?.name}`}
                     src={
@@ -74,3 +73,4 @@ function ProductCategory({ brands }) {
 }
 
 export default ProductCategory;
+

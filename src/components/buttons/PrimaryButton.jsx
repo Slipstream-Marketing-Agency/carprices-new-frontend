@@ -36,3 +36,4 @@ const PrimaryButton = ({ label, href, onClick, additionalClass = '' }) => {
 };
 
 export default PrimaryButton;
+

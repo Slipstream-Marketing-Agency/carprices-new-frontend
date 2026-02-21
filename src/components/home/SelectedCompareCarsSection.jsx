@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -81,12 +80,11 @@ export default function SelectedCompareCarsSection({ comparisons = [] }) {
                                     {comparison.carModels[0] && (
                                         <div className="flex flex-col items-center mb-4 md:mb-0 w-full">
                                             <div className="text-sm leading-4 text-neutral-900 xl:px-3 w-full">
-                                                <Image
+                                                <img
                                                     src={resolveImageUrl(comparison.carModels[0].highTrim.featuredImage)}
                                                     alt={comparison.carModels[0].name}
                                                     width={245}
                                                     height={140}
-                                                    sizes="(max-width: 768px) 100vw, 245px"
                                                     className="w-full h-40 object-contain rounded-lg"
                                                 />
                                             </div>
@@ -113,12 +111,11 @@ export default function SelectedCompareCarsSection({ comparisons = [] }) {
                                     {comparison.carModels[1] && (
                                         <div className="flex flex-col items-center w-full">
                                             <div className="text-sm leading-4 text-neutral-900 xl:px-3 w-full">
-                                                <Image
+                                                <img
                                                     src={resolveImageUrl(comparison.carModels[1].highTrim.featuredImage)}
                                                     alt={comparison.carModels[1].name}
                                                     width={245}
                                                     height={140}
-                                                    sizes="(max-width: 768px) 100vw, 245px"
                                                     className="w-full h-40 object-contain rounded-lg"
                                                 />
                                             </div>
@@ -148,3 +145,4 @@ export default function SelectedCompareCarsSection({ comparisons = [] }) {
         </div>
     );
 }
+

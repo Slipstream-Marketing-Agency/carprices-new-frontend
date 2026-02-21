@@ -4,7 +4,6 @@ import React, { useEffect, useState, useMemo, Suspense } from "react";
 import Ad300x600 from "@/components/ads/Ad300x600";
 import ShareButton from "@/components/common/ShareButton";
 import SeoLinksFilter from "@/components/common/SeoLinksFilter";
-import Image from "next/image";
 import Link from "next/link";
 import { formatDateLong } from "@/utils/formatDate";
 import { Email as EmailIcon, Instagram as InstagramIcon, Twitter as TwitterIcon, LinkedIn as LinkedInIcon } from "@mui/icons-material";
@@ -110,7 +109,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                                 currentURL={currentURL}
                                 articleTypes={articleTypes}
                             />
-                            <Image
+                            <img 
                                 src={coverImage?.url || "/assets/img/car-placeholder.png"}
                                 alt="Cover Image"
                                 width={1000}
@@ -125,7 +124,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 
                         <div className="mt-6 shadow-md p-4 rounded-lg">
                             <div className="flex items-center space-x-3 mb-4">
-                                <Image
+                                <img 
                                     src={author.avatar.url}
                                     width={80}
                                     height={80}
@@ -244,5 +243,6 @@ const CategoryList = ({ categories }) => (
 
     )
 );
+
 
 

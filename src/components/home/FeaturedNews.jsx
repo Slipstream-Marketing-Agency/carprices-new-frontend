@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 import Slider from 'react-slick';
@@ -133,12 +132,11 @@ export default function FeaturedNews() {
                             {FeaturedData.map((car, index) => (
                                 <Link href={car.url} key={`car-${car?.name || index}`} className="p-2">
                                     <div className="relative flex flex-col overflow-hidden rounded-2xl transition-transform duration-500 custom-scale">
-                                        <Image
+                                        <img
                                             src={car.image}
                                             alt={`${car.brand} ${car.name}`}
                                             width={600}
                                             height={384}
-                                            sizes="(max-width: 600px) 100vw, 600px"
                                             className="object-cover w-full md:h-[450px] h-[350px]"
                                             loading="lazy"
                                         />
@@ -155,3 +153,4 @@ export default function FeaturedNews() {
         </div>
     );
 }
+

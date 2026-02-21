@@ -1,7 +1,6 @@
 import React from 'react'
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function ServicesAdComponent() {
     return (
@@ -22,14 +21,13 @@ export default function ServicesAdComponent() {
                     </Link>
                     <ArrowForwardIcon fontSize="small" className="mx-2" />
                 </div>
-                <Image
+                <img
                     className="object-contain min-h-0 absolute sm:bottom-6 sm:left-56 bottom-10 left-40 w-[60%] h-[60%] xl:w-[75%] xl:h-[75%]"
                     src="https://cdn.carprices.ae/assets/car_Loan_EMI_icon_97f07e7ea8.png"
                     alt="car_Loan_EMI-icon"
-                    width={200}  // Adjust to match your image's original width
-                    height={200} // Adjust to match your image's original height
-                    loading="lazy"        // Lazy loads the image for performance optimization
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 75vw, 100vw"
+                    width={200}
+                    height={200}
+                    loading="lazy"
                 />
             </div>
             <div className="bg-gradient-to-tl from-gray-700 via-gray-800 to-black  rounded-2xl p-4 sm:p-6 text-white flex relative overflow-hidden custom-gradient">
@@ -48,18 +46,18 @@ export default function ServicesAdComponent() {
                     </Link>
                     <ArrowForwardIcon fontSize="small" className="mx-2" />
                 </div>
-                <Image
+                <img
                     src={
                         "https://cdn.carprices.ae/assets/car_Worth_icon_9226a22e4a.png"
                     }
                     alt="car_worth-icon"
                     className="object-contain min-h-0 absolute sm:bottom-6 sm:left-56 bottom-10 left-40 w-[60%] h-[60%] xl:w-[75%] xl:h-[75%]"
-                    width={200}  // Adjust to match your image's original width
-                    height={200} // Adjust to match your image's original height
-                    loading="lazy"        // Lazy loads the image for performance optimization
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 75vw, 100vw"
+                    width={200}
+                    height={200}
+                    loading="lazy"
                 />
             </div>
         </div></div>
     )
 }
+

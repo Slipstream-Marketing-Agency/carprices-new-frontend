@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
-import Image from "next/image";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -257,7 +256,7 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
                                         className="cursor-pointer flex flex-col items-center p-4 hover:bg-gray-200 rounded-lg border"
                                         onClick={() => handleSelect("brand", brand.slug)}
                                     >
-                                        <Image
+                                        <img 
                                             src={brand.brandLogo}
                                             alt={`${brand.name} logo`}
                                             width={60}
@@ -564,3 +563,4 @@ const InsuranceCalculatorWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }
 };
 
 export default InsuranceCalculatorWrapper;
+

@@ -116,3 +116,4 @@ const FinancingBreakdown = ({ vehicleName, variants }) => {
 };
 
 export default FinancingBreakdown;
+

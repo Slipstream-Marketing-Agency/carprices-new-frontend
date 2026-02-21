@@ -6,7 +6,6 @@ import axios from 'axios';
 import Pagination from './Pagination';
 import ExpandableText from '../common/ExpandableText';
 import { fetchModels } from '@/lib/brandapis';
-import Image from 'next/image';
 import Link from 'next/link';
 import Select from 'react-select';
 import InnerNavigation from './InnerNavigation';
@@ -47,7 +46,8 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
             });
 
             if (loadMore) setBrandPage((prevPage) => prevPage + 1);
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching brands:", error); }
         } finally {
             setLoadingBrands(false);
         }
@@ -128,24 +128,22 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
                     {brandDetails && <>
                         <div className="grid grid-cols-12 mt-6 mb-4 shadow-md p-4 rounded-lg gap-5">
                             <div className="col-span-4 flex justify-start items-start w-full">
-                                <Image
+                                <img
                                     src={brandDetails?.cover || "/assets/img/car-placeholder.png"}
                                     alt={`${brandDetails?.name}-cover-image`}
                                     width={400}
                                     height={250}
-                                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     loading="lazy"
                                     className="object-cover rounded-xl"
                                 />
                             </div>
 
                             <div className="col-span-8 flex flex-col items-start">
-                                <Image
+                                <img
                                     src={brandDetails?.logo || "/assets/img/car-placeholder.png"}
                                     alt={`${brandDetails?.name}-logo`}
                                     width={80}
                                     height={80}
-                                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     loading="lazy"
                                     className="object-contain border rounded-xl mb-3 p-2"
                                 />
@@ -191,7 +189,7 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
                             <div className="md:col-span-4 col-span-12 relative" key={item.id} >
                                 <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                                     <Link href={`/car-videos/${item.slug}`} className="relative">
-                                        <Image
+                                        <img 
                                             src={item.thumbnail || '/assets/placeholder/dealer-placeholder.webp'}
                                             alt={item?.title}
                                             width={0}
@@ -249,3 +247,4 @@ export default function BrandVideoPage({ brandname, videos, pagination, brandDet
         </div>
     );
 }
+

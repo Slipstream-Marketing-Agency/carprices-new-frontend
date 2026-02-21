@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import LoadingAnimation from "./LoadingAnimation";
 import axios from "axios";
@@ -333,7 +332,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching trim
                                                 className="cursor-pointer flex flex-col items-center justify-center hover:bg-gray-200 rounded-lg border p-2"
                                                 onClick={() => handleBrandSelect(brand.slug)}
                                             >
-                                                <Image
+                                                <img 
                                                     src={brand.brandLogo}
                                                     alt="icon-brand"
                                                     width={60}
@@ -392,7 +391,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching trim
 const DataBadge = ({ label, onClick }) => (
     <div className="flex bg-blue-100 rounded-full py-1 px-3 items-center gap-1">
         <div className="capitalize text-black text-xs">{label}</div>
-        <Image
+        <img 
             src="/carLoanPage/edit-icon.svg"
             width={25}
             height={20}
@@ -404,3 +403,4 @@ const DataBadge = ({ label, onClick }) => (
 );
 
 export default CarSelectionModal;
+

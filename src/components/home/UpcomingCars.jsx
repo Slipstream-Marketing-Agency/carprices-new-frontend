@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import React, { useRef } from 'react'
 import Slider from 'react-slick';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -99,11 +98,11 @@ export default function UpcomingCars() {
                                 className="flex flex-col justify-center items-center text-white bg-black"
                             >
                                 <div className="relative flex flex-col justify-end pt-20 min-h-[290px]">
-                                    <Image
+                                    <img
                                         loading="lazy"
-                                        fill
                                         src={item.imgSrc}
                                         alt={item.title}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
                                     />
                                     <div className="relative flex flex-col justify-center px-4 py-5 max-md:mt-10">
                                         <h4 className="text-white font-bold">
@@ -119,3 +118,4 @@ export default function UpcomingCars() {
         </div>
     )
 }
+

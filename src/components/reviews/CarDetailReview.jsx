@@ -145,3 +145,4 @@ const CarDetailReview = ({ name, brand, model, year, fromReviewPage = false, lin
 };
 
 export default CarDetailReview;
+

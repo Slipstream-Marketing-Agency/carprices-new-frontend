@@ -1,7 +1,6 @@
 // src/components/FeaturedSlider.js
 "use client";
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Link from 'next/link';
@@ -86,7 +85,7 @@ export default function FeaturedSlider({ featuredArticles, type }) {
               {featuredArticles.data.map((article, index) => (
                 <Link href={`/news/${article.slug}`} className="min-w-full" key={article?.slug || article.slug || index}>
                   <div className="relative">
-                    <Image
+                    <img
                       src={article.coverImage || "/assets/placeholder/news-placeholder.webp"}
                       alt={article.title}
                       width={300}
@@ -124,3 +123,4 @@ export default function FeaturedSlider({ featuredArticles, type }) {
 
   );
 }
+

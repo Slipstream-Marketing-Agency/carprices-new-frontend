@@ -30,3 +30,4 @@ export default function Ad970x250({ dataAdSlot = "4726950827" }) {
     </div>
   );
 }
+

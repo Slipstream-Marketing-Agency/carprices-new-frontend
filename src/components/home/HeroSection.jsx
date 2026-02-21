@@ -1,6 +1,5 @@
 'use client';
 import React, { useRef, useEffect } from 'react';
-import Image from 'next/image';
 
 const HeroSection = () => {
     const desktopVideoRef = useRef(null);
@@ -30,12 +29,10 @@ const HeroSection = () => {
         <>
             {/* Desktop hero - static poster image for fast LCP, video loads lazily */}
             <div className="hidden lg:block w-full h-full relative">
-                <Image
+                <img
                     src="/assets/img/carbackgroundImage.jpg"
                     alt="CarPrices.ae - Find the best car prices in UAE"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 70vw, 100vw"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     className="object-cover"
                 />
                 <video
@@ -69,12 +66,10 @@ const HeroSection = () => {
 
             {/* Mobile hero - static poster image for fast LCP */}
             <div className="block lg:hidden w-full h-full relative">
-                <Image
+                <img
                     src="/assets/img/carbackgroundImage.jpg"
                     alt="CarPrices.ae - Find the best car prices in UAE"
-                    fill
-                    priority
-                    sizes="100vw"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     className="object-cover"
                 />
                 <video
@@ -110,3 +105,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+

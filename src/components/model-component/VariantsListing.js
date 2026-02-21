@@ -5,9 +5,6 @@ import Price from "@/utils/Price"; // Adjust the path based on your project stru
 import useTranslate from "@/utils/UseTranslate";; // Adjust the path based on your project structu
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-
-
 export default function VariantsListing({ year, brand, model, allTrims }) {
   const router = useRouter();
   const t = useTranslate();
@@ -23,7 +20,7 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
             >
               <div className="flex flex-col md:flex-row gap-4 items-center p-4">
                 <div className="md:w-1/3 flex items-center justify-center">
-                  <Image
+                  <img 
                     width={200}
                     height={200}
                     alt={item?.name}
@@ -70,3 +67,4 @@ export default function VariantsListing({ year, brand, model, allTrims }) {
     </div>
   );
 }
+

@@ -6,7 +6,6 @@ import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 import CardSliderWrapper from '../car-components/CardSliderWrapper';
-import Image from 'next/image';
 import Pagination from './Pagination';
 import InnerNavigation from './InnerNavigation';
 import ExpandableText from '../common/ExpandableText';
@@ -21,7 +20,8 @@ export default function BrandArticlePage({ type, slug, brandDetails, brandname }
                 // Make the API request with the correct parameter
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/related?brand=${brandname}`);
                 setArticles(response.data.articles || []);
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
             }
         };
 
@@ -35,24 +35,22 @@ export default function BrandArticlePage({ type, slug, brandDetails, brandname }
                 <div className="md:col-span-9">
                     <div className="grid grid-cols-12 mt-6 mb-4 shadow-md p-4 rounded-lg gap-5">
                         <div className="col-span-4 flex justify-start items-start w-full">
-                            <Image
+                            <img
                                 src={brandDetails?.cover || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-cover-image`}
                                 width={400}
                                 height={250}
-                                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 loading="lazy"
                                 className="object-cover rounded-xl"
                             />
                         </div>
 
                         <div className="col-span-8 flex flex-col items-start">
-                            <Image
+                            <img
                                 src={brandDetails?.logo || "/assets/img/car-placeholder.png"}
                                 alt={`${brandDetails?.name}-logo`}
                                 width={80}
                                 height={80}
-                                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 loading="lazy"
                                 className="object-contain border rounded-xl mb-3 p-2"
                             />
@@ -76,13 +74,11 @@ export default function BrandArticlePage({ type, slug, brandDetails, brandname }
                             <Link key={article.id} className="md:col-span-4 relative" href={`/${article?.types[0].slug}/${article.slug}`}>
                                 <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                                     <div className="relative">
-                                        <Image
+                                        <img
                                             src={article.coverImage || '/assets/placeholder/news-placeholder.webp'}
                                             alt={article?.title}
                                             width={0}
                                             height={0}
-                                            sizes="100vw"
-                                            layout="fixed"
                                             className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
                                         />
                                         <div className="absolute top-2 left-2 flex flex-wrap gap-2">
@@ -132,3 +128,4 @@ export default function BrandArticlePage({ type, slug, brandDetails, brandname }
         </div>
     );
 }
+

@@ -1,7 +1,5 @@
 import React from "react";
 
-import Image from "next/image";
-
 export default function VehicleGallery({ trim }) {
   return (
     <>
@@ -18,7 +16,7 @@ export default function VehicleGallery({ trim }) {
                   className="col-sm-3 col-4 cover_card_image mt-2 p-1"
                   key={`item-${index}`}
                 >
-                  <Image width={300} height={200} src={item} className="object-cover"/>
+                  <img width={300} height={200} src={item} className="object-cover"/>
                 </div>
               ))}
             </div>
@@ -28,3 +26,4 @@ export default function VehicleGallery({ trim }) {
     </>
   );
 }
+

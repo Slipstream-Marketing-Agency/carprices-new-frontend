@@ -57,3 +57,4 @@ const PressReleaseCard = ({ release }) => {
 };
 
 export default PressReleaseCard;
+

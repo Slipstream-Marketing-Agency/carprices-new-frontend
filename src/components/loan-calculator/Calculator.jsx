@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import Image from "next/image";
 import PrimaryButton from "../buttons/PrimaryButton";
 import Price from "@/utils/Price";
 import LoanInquiryForm from "./LoanInquireForm";
@@ -91,7 +90,7 @@ export default function Calculator({
             <div className="my-6 bg-gradient-to-tl to-[#275BA7] via-[#275BA7] from-[#77cdf2] rounded-lg p-6 flex flex-col gap-3 md:flex-row justify-between items-center w-full shadow-lg">
                 <div className="flex gap-3 justify-start items-center">
                     {selectedVariantThumbnail &&
-                        <Image
+                        <img 
                             src={
                                 selectedVariantThumbnail
                             }
@@ -261,3 +260,4 @@ export default function Calculator({
         </>
     );
 }
+

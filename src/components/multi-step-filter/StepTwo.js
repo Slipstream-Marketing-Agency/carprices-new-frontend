@@ -1,5 +1,4 @@
 import useTranslate from "@/utils/UseTranslate";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -46,7 +45,7 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
             onClick={() => handlePreferencesClick(item.slug)}
           >
             <div className="w-[50px] h-[50px] flex justify-center items-center">
-              <Image
+              <img 
                 src={item?.image?.url}
                 alt={item.label}
                 width={60}
@@ -63,3 +62,4 @@ export default function StepTwo({ filterData, setFilterData, bodyTypeList }) {
     </div>
   );
 }
+

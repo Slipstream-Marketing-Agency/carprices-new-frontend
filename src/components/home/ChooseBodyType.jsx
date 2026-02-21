@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -24,14 +23,14 @@ export default function ChooseBodyType({ bodyTypes }) {
                     <Link href={`/body-types/${item?.slug}`} key={item?.slug || item.slug || index}>
                         <div className="flex flex-col justify-center items-center text-center text-black">
                             <div className="w-full md:h-32 sm:h-24 overflow-hidden">
-                                <Image
+                                <img
                                     loading="lazy"
                                     src={item?.image}
                                     width={300}
                                     height={200}
-                                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 100vw"
                                     alt={`category-${item?.name}`}
-                                    className="object-contain w-full h-full transition-all duration-300 md:py-3 md:px-3 py-1 px-1"
+                                    style={{ objectFit: 'contain' }}
+                                    className="w-full h-full transition-all duration-300 md:py-3 md:px-3 py-1 px-1"
                                 />
                             </div>
                             <div className=" font-semibold text-xs md:text-base">
@@ -44,3 +43,4 @@ export default function ChooseBodyType({ bodyTypes }) {
         </div>
     )
 }
+

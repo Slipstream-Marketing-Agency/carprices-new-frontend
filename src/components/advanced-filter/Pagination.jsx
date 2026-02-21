@@ -113,3 +113,4 @@ Pagination.propTypes = {
     currentPage: PropTypes.number.isRequired,
     totalPages: PropTypes.number.isRequired,
 };
+

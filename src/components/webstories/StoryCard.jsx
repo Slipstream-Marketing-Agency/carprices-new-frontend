@@ -1,6 +1,5 @@
 "use client"
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import { formatDateLong } from "@/utils/formatDate";
 
@@ -11,7 +10,7 @@ export default function StoryCard({ story }) {
       className="relative rounded-2xl"
       target="_blank"
     >
-      <Image
+      <img 
         width="0"
         height="0"
         sizes="100vw"
@@ -28,3 +27,4 @@ export default function StoryCard({ story }) {
     </Link>
   );
 }
+

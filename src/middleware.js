@@ -74,3 +74,4 @@ function getStatusCode(type) {
       return 307; // Default to 307 if no known type is found
   }
 }
+

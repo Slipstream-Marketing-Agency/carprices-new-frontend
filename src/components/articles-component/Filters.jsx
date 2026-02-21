@@ -36,3 +36,4 @@ export default function Filters({ type }) {
     </div>
   );
 }
+

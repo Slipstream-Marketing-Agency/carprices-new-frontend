@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import { useEffect } from 'react';
 
@@ -44,7 +43,7 @@ const BannerCarousel = () => {
                 {/* Image Carousel */}
                 <div className="w-full relative">
                     {images.map((image, index) => (
-                        <Image
+                        <img
                             key={`image-${index}`}
                             ref={(el) => (slidesRef.current[index] = el)}
                             src={image.src}

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -109,7 +108,7 @@ const MobileSidebar = ({
               className="flex items-center gap-2 mt-2 cursor-pointer"
               onClick={toggleNavigation}
             >
-              <Image
+              <img
                 loading="lazy"
                 src="/assets/img/car-prices-logo.png"
                 className="w-[150px] object-contain"
@@ -123,7 +122,7 @@ const MobileSidebar = ({
               className="cursor-pointer p-2 hover:bg-gray-100 rounded-full transition"
               aria-label="Close menu"
             >
-              <Image
+              <img
                 loading="lazy"
                 src="/close-button.svg"
                 className="shrink-0 w-6 h-6"
@@ -243,3 +242,4 @@ const MobileSidebar = ({
 };
 
 export default MobileSidebar;
+

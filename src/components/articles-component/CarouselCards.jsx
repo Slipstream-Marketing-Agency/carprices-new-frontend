@@ -7,7 +7,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Link from 'next/link';
 import { fetchArticles } from '@/lib/api';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import { formatDateLong } from "@/utils/formatDate";
 
 const Arrow = ({ direction, onClick }) => {
@@ -135,13 +134,11 @@ const CarouselCards = ({ tabs }) => {
                                 key={article?.id}
                                 className="relative text-gray-700 hover:text-blue-500 rounded-[14px] shadow-md"
                             >
-                                <Image
+                                <img
                                     src={article.coverImage || altImage}
                                     alt={article?.title}
                                     width={0}
                                     height={0}
-                                    sizes="100vw"
-                                    layout="fixed"
                                     className="w-full md:h-[200px] h-[100px] object-cover rounded-t-[14px] "
                                 />
                                 <div className="p-2">

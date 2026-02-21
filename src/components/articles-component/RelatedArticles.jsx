@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { slugToCapitalCase } from '@/utils/slugToCapitalCase';
 import CardSliderWrapper from '../car-components/CardSliderWrapper';
-import Image from 'next/image';
 
 export default function RelatedArticles({ type, slug }) {
     const [articles, setArticles] = useState([]);
@@ -21,7 +20,8 @@ export default function RelatedArticles({ type, slug }) {
                 // Make the API request with the correct parameter
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}articles/related?${paramType}=${slug}`);
                 setArticles(response.data.articles || []);
-            } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
+            } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error fetching related articles:', error); }
             }
         };
 
@@ -48,13 +48,11 @@ export default function RelatedArticles({ type, slug }) {
                             <Link key={article.id} href={`/${article?.types[0].slug}/${article.slug}`}>
                                 <div className="flex flex-col justify-start bg-white rounded-lg shadow-md overflow-hidden h-full">
                                     <div className="relative">
-                                        <Image
+                                        <img
                                             src={article.coverImage || '/assets/placeholder/news-placeholder.webp'}
                                             alt={article?.title}
                                             width={0}
                                             height={0}
-                                            sizes="100vw"
-                                            layout="fixed"
                                             className="w-full md:h-[180px] h-[180px] object-cover rounded-t-[14px]"
                                         />
                                         <div className="absolute top-2 left-2 flex flex-wrap gap-2">
@@ -98,3 +96,4 @@ export default function RelatedArticles({ type, slug }) {
         </div>
     );
 }
+

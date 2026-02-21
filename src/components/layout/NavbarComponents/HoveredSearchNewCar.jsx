@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
     const subItems = [
@@ -65,13 +64,13 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                             <Link href={`/brands/${item?.slug}`}>
                                                 <div className="flex items-center flex-col">
                                                     <div className="icon">
-                                                        <Image
+                                                        <img
                                                             alt={`brand-${item?.name}`}
                                                             src={item?.logo}
                                                             width={45}
                                                             height={45}
-                                                            sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                                            className="object-contain aspect-square md:w-[45px] w-[40px]"
+                                                            style={{ objectFit: 'contain' }}
+                                                            className="aspect-square md:w-[45px] w-[40px]"
                                                         />
                                                     </div>
                                                     <div className="content">
@@ -102,12 +101,10 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                             >
                                                 <div className="flex items-center flex-col">
                                                     <div className="icon">
-                                                        <Image
-                                                            alt={`category-${bodyType?.name}`}
+                                                        <img alt={`category-${bodyType?.name}`}
                                                             src={bodyType?.image}
                                                             width={45}
                                                             height={45}
-                                                            sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
                                                             className="object-contain aspect-square md:w-[45px] w-[40px]"
                                                         />
                                                     </div>
@@ -142,12 +139,10 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                     >
                                                         <div className="flex items-center flex-col">
                                                             <div className="icon">
-                                                                <Image
-                                                                    alt={`category-${bodyType?.name}`}
+                                                                <img alt={`category-${bodyType?.name}`}
                                                                     src={bodyType?.image}
                                                                     width={35}
                                                                     height={35}
-                                                                    sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
                                                                     className="object-contain aspect-square md:w-[35px] w-[30px]"
                                                                 />
                                                             </div>
@@ -178,12 +173,10 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                                     >
                                                         <div className="flex items-center flex-col">
                                                             <div className="icon">
-                                                                <Image
-                                                                    alt={`brand-${brand?.name}`}
+                                                                <img alt={`brand-${brand?.name}`}
                                                                     src={brand?.logo}
                                                                     width={35}
                                                                     height={35}
-                                                                    sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
                                                                     className="object-contain aspect-square md:w-[35px] w-[30px]"
                                                                 />
                                                             </div>
@@ -211,9 +204,9 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
                                         {bodyTypes.slice(1).map((bodyType, index) => (
                                             <div key={`bodyType-${index}`} className="flex shadow-sm hover:shadow-custom-shadow flex-col py-2 rounded-lg items-center mb-4 md:mb-0">
                                                 <div className="flex flex-col text-sm leading-4 text-neutral-900 flex-grow xl:px-5">
-                                                    <Image src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
+                                                    <img src="https://cdn.carprices.ae/assets/2024_Mercedes_Amg_C_63_S_E_performance_Banner_9e3a031374.png" alt="Volvo XC40" width="0"
                                                         height="0"
-                                                        sizes="100vw" className="w-full h-14 object-contain rounded-lg" />
+                                                        className="w-full h-14 object-contain rounded-lg" />
                                                 </div>
                                                 <div className="flex flex-col px-2 mt-3 w-full xl:flex-grow">
                                                     <h6 className="text-xs text-blue-600 font-semibold m-0 xl:text-lg">
@@ -248,3 +241,5 @@ const HoveredSearchNewCar = ({ brands, bodyTypes }) => {
 };
 
 export default HoveredSearchNewCar;
+
+

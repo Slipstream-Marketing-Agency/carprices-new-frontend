@@ -12,3 +12,4 @@ const PressReleaseList = ({ pressReleases }) => {
 };
 
 export default PressReleaseList;
+

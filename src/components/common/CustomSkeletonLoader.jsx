@@ -13,3 +13,4 @@ const CustomSkeletonLoader = ({ width, height }) => {
 };
 
 export default CustomSkeletonLoader;
+

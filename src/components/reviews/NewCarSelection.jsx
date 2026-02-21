@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import axios from "axios";
 import LoadingAnimation from "../compare-cars/LoadingAnimation";
@@ -122,7 +121,7 @@ const NewCarSelection = ({ isOpen, onClose, onModelSelect, apiUrl = process.env.
                                         onClick={() => handleModelSelect(model)}
                                     >
                                         {model.image ? (
-                                            <Image
+                                            <img 
                                                 src={model.image}
                                                 alt={`${model.name} image`}
                                                 width={80}
@@ -153,7 +152,7 @@ const NewCarSelection = ({ isOpen, onClose, onModelSelect, apiUrl = process.env.
                                         onClose();
                                     }}
                                 >
-                                    <Image
+                                    <img 
                                         src={model.image}
                                         alt={`${model.name} image`}
                                         width={100}
@@ -174,3 +173,4 @@ const NewCarSelection = ({ isOpen, onClose, onModelSelect, apiUrl = process.env.
 };
 
 export default NewCarSelection;
+

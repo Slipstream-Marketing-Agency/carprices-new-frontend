@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import dynamic from 'next/dynamic';
-import Image from "next/image";
 import React from "react";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
@@ -57,15 +56,12 @@ const CarCard = ({ car }) => {
       <Link href={isReviewPage ? `/write-review/rate-car?brand=${brand?.slug}&model=${model?.slug}&year=${year}` : `/brands/${brand?.slug}/${year}/${model?.slug}`}>
         <header className="flex flex-col w-full text-sm leading-4 rounded-2xl text-neutral-900 px-5">
           <div className="relative self-center -mt-1.5 w-full aspect-[1.69] max-w-[278px] flex justify-center items-center">
-            <Image
+            <img
               src={resolveImageUrl(featuredImage?.url)}
               alt={`Image of ${model?.name || "Car"}`}
               width={featuredImage?.width || 278}
               height={featuredImage?.height || 157}
-              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
             />
           </div>
         </header>
@@ -139,3 +135,4 @@ const CarCard = ({ car }) => {
 
 
 export default React.memo(CarCard);
+

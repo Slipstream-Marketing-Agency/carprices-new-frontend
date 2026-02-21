@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import AsyncSelect from 'react-select/async';
 
@@ -114,7 +113,7 @@ export default function Banner({ setShowModal, selectedModel, setSelectedModel }
                         />
                     </div> */}
                 </div>
-                <Image
+                <img
                     className="object-contain min-h-0 absolute bottom-0 right-0 hidden md:block"
                     src={"/carLoanPage/carImage.png"}
                     alt="car-image"
@@ -125,3 +124,4 @@ export default function Banner({ setShowModal, selectedModel, setSelectedModel }
         </>
     );
 }
+

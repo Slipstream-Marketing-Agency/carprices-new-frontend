@@ -62,3 +62,4 @@ export default function FixedAd320x50({ dataAdSlot }) {
     </div>
   );
 }
+

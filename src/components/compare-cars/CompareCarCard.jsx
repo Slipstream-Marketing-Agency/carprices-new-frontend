@@ -4,7 +4,6 @@ import React from "react";
 
 import { useRouter, usePathname } from 'next/navigation';
 import CloseIcon from "@mui/icons-material/Close";
-import Image from "next/image";
 import Price from "@/utils/Price";
 import MultiStepCarSelection from "./MultiStepCarSelection";
 
@@ -47,7 +46,7 @@ function CompareCarCard({ carData, cars, setCars }) {
           <CloseIcon />
         </div>
         <div className="flex justify-center h-[160px] my-4">
-          <Image
+          <img 
             src={
               carData?.featuredImage === undefined
                 ? "/assets/img/car-placeholder.png"
@@ -85,3 +84,4 @@ function CompareCarCard({ carData, cars, setCars }) {
 }
 
 export default CompareCarCard;
+

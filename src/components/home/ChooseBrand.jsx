@@ -1,5 +1,4 @@
 
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,13 +18,12 @@ export default function ChooseBrand({ brand }) {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 max-md:gap-0">
                 <div className="flex flex-col max-md:w-full">
                     <div className="relative  md:min-h-[519px] ">
-                        <Image
+                        <img
                             loading="lazy"
                             alt="car-side"
                             src="/assets/brand/car-side.webp"
-                            fill // Optimized for absolute positioning
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain absolute -ml-8 w-full h-full md:block hidden"
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                            className="absolute -ml-8 w-full h-full md:block hidden"
                         />
                     </div>
                 </div>
@@ -37,14 +35,14 @@ export default function ChooseBrand({ brand }) {
                                 key={item?.slug || item.slug || index}
                                 className="flex flex-col justify-center items-center text-center text-black p-4"
                             >
-                                <Image
+                                <img
                                     loading="lazy"
                                     alt={`brand-${item?.name}`}
                                     src={`${item?.logo}`}
-                                    width={90} // Optimized width for md screens
-                                    height={90} // Optimized height for md screens
-                                    sizes="(max-width: 768px) 80px, (max-width: 1200px) 90px, 100vw"
-                                    className="object-contain aspect-square md:w-[90px] w-[80px] md:grayscale hover:filter-none"
+                                    width={90}
+                                    height={90}
+                                    style={{ objectFit: 'contain' }}
+                                    className="aspect-square md:w-[90px] w-[80px] md:grayscale hover:filter-none"
                                 />
                                 <div className="md:mt-6 mt-2 font-semibold whitespace-nowrap text-xs md:text-base">
                                     {item.name}
@@ -62,3 +60,4 @@ export default function ChooseBrand({ brand }) {
         </div>
     )
 }
+

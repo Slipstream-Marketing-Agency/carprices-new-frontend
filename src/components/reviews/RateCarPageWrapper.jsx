@@ -2,7 +2,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import CloseIcon from '@mui/icons-material/Close';
-import Image from 'next/image';
 import axios from 'axios';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -57,12 +56,14 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                         image: foundModel.featuredImage,
                         year: foundModel.latestYear
                     });
-                } else {if (process.env.NODE_ENV === 'development') { console.warn(`Model with slug "${modelSlug}" not found.`); }
+                } else {
+if (process.env.NODE_ENV === 'development') { console.warn(`Model with slug "${modelSlug}" not found.`); }
                 }
 
                 setLoading(false);
             })
-            .catch(error => {if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
+            .catch(error => {
+if (process.env.NODE_ENV === 'development') { console.error("Error fetching models:", error); }
                 setLoading(false);
             });
     }, [apiUrl, brandSlug, modelSlug]);
@@ -120,7 +121,8 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
 
             setTitle("");
             setOpinion("");
-        } catch (error) {if (process.env.NODE_ENV === 'development') { console.error('Error submitting review:', error.response ? error.response.data : error.message); }
+        } catch (error) {
+if (process.env.NODE_ENV === 'development') { console.error('Error submitting review:', error.response ? error.response.data : error.message); }
             const errorMessage = error.response?.data?.error?.message || "An error occurred";
             setSnackbarMessage(errorMessage);
             setSnackbarSeverity("error");
@@ -150,7 +152,7 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                                 What do you think about {carDetails?.brand || ""} {carDetails?.model || ""}?
                             </h2>
                             <div className="flex items-center justify-center">
-                                <Image
+                                <img
                                     width={0}
                                     height={0}
                                     sizes="100vw" src="/assets/images/review.svg" alt="Review Illustration" className="w-full" />
@@ -167,7 +169,7 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
                             <h1 className="text-2xl font-semibold text-gray-800 mb-6">Rate & Review</h1>
 
                             <div className="flex items-center mb-6">
-                                {carDetails?.image && <Image
+                                {carDetails?.image && <img
                                     src={carDetails.image}
                                     alt={`${carDetails.brand} ${carDetails.model}`}
                                     width={64}
@@ -259,3 +261,4 @@ const RateCarPageWrapper = ({ apiUrl = process.env.NEXT_PUBLIC_API_URL }) => {
 };
 
 export default RateCarPageWrapper;
+

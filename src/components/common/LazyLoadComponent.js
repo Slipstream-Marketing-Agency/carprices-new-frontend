@@ -38,3 +38,4 @@ const LazyLoadComponent = ({ children, fallback = null }) => {
 };
 
 export default LazyLoadComponent;
+

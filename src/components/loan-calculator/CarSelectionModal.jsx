@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import LoadingAnimation from "../compare-cars/LoadingAnimation";
-import Image from "next/image";
-
 const CarSelectionModal = ({
     isOpen,
     onClose,
@@ -113,7 +111,7 @@ const CarSelectionModal = ({
                                         className="py-4 border-b w-full hover:bg-gray-200 text-left px-2 flex items-center"
                                         onClick={() => handleModelSelect(model)}
                                     >
-                                        <Image
+                                        <img 
                                             width={100}
                                             height={100}
                                             src={model.image}
@@ -130,7 +128,7 @@ const CarSelectionModal = ({
                                         className="py-4 border-b w-full hover:bg-gray-200 text-left px-2 flex items-center"
                                         onClick={() => handleVariantSelect(variant)}
                                     >
-                                        <Image
+                                        <img 
                                             width={100}
                                             height={100}
                                             src={variant.image}
@@ -151,3 +149,4 @@ const CarSelectionModal = ({
 };
 
 export default CarSelectionModal;
+

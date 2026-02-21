@@ -58,3 +58,4 @@ export default function ArticleListClient({ articles, pagination, baseUrl, initi
         </div>
     );
 }
+

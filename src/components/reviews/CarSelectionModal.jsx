@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import SearchIcon from "@mui/icons-material/SearchOutlined";
 import axios from "axios";
 import LoadingAnimation from "../compare-cars/LoadingAnimation";
@@ -184,7 +183,7 @@ const CarSelectionModal = ({
                                         {brands.map((brand) => (
                                             <button key={brand.slug} className="cursor-pointer flex flex-col justify-center items-center hover:bg-gray-200 rounded-lg border" onClick={() => handleBrandSelect(brand.slug)}>
                                                 {brand.logo ? (
-                                                    <Image
+                                                    <img 
                                                         src={brand.logo}
                                                         alt={`${brand.name} logo`}
                                                         width={60}
@@ -232,7 +231,7 @@ const CarSelectionModal = ({
 const DataBadge = ({ label, onClick }) => (
     <div className="flex bg-blue-100 rounded-full py-1 px-3 items-center gap-1">
         <div className="capitalize text-black text-xs">{label}</div>
-        <Image
+        <img 
             src="/carLoanPage/edit-icon.svg"
             width={25}
             height={20}
@@ -244,3 +243,4 @@ const DataBadge = ({ label, onClick }) => (
 );
 
 export default CarSelectionModal;
+

@@ -171,3 +171,4 @@ export const fetchArticles = async(pathname, page, pageSize) => {
   const response = await fetch(`${API_URL}articles/list?slug=${pathname === "/news" ? "news" : "review"}&page=${page}&pageSize=${pageSize}`, { next: { revalidate: 300 } })
   return response.json();
 }
+

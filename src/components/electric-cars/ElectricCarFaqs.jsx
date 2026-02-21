@@ -131,3 +131,4 @@ const ElectricCarFaqs = () => {
 };
 
 export default ElectricCarFaqs;
+

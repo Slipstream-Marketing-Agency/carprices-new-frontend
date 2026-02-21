@@ -33,3 +33,4 @@ export default function AccordionFaq({ question, answer, condition, id }) {
     </>
   );
 }
+

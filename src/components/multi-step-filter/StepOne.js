@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import useTranslate from "@/utils/UseTranslate";
@@ -128,7 +127,7 @@ export default function StepOne({ filterData, setFilterData }) {
             onClick={() => handlePreferencesClick(item.value)}
           >
             <div className="w-[40px] h-[40px] flex justify-center items-center">
-              <Image
+              <img 
                 src={item.img}
                 alt={item.label}
                 width={40}
@@ -148,3 +147,4 @@ export default function StepOne({ filterData, setFilterData }) {
     </div>
   );
 }
+

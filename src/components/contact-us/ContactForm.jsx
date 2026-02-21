@@ -14,7 +14,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import React, { useEffect, useState } from 'react'
-import Image from "next/image";
 import Link from 'next/link';
 import axios from 'axios';
 
@@ -180,7 +179,7 @@ export default function ContactForm() {
             <div className="container mx-auto">
                 <div className="grid gap-4 p-4 lg:grid-rows-1 lg:grid-cols-10 w-full container">
                     <div className="row-span-1 md:col-span-12 col-span-12 flex flex-col md:justify-start text-white rounded-2xl leading-[100%] relative overflow-hidden !sm:h-auto md:h-[400px] pb-4">
-                        <Image
+                        <img 
                             loading="lazy"
                             alt="contact-us-banner"
                             width={0}
@@ -313,3 +312,4 @@ export default function ContactForm() {
         </>
     );
 }
+

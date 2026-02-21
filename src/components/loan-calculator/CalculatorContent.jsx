@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import Banner from "./Banner";
 import CarSelectionModal from "../compare-cars/CarSelectionModal";
 import Calculator from "./Calculator";
@@ -131,3 +130,4 @@ export default function CalculatorContent() {
         </div>
     );
 }
+

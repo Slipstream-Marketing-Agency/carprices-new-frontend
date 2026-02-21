@@ -3,7 +3,6 @@ import React, { Suspense, useEffect, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import { formatDateLong } from "@/utils/formatDate";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Ad728x90 from "@/components/ads/Ad728x90";
@@ -183,7 +182,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
                                         key={article?.id}
                                         className="relative text-gray-700 hover:text-blue-500 col-span-6 md:col-span-4 rounded-[14px] shadow-lg"
                                     >
-                                        <Image
+                                        <img 
                                             src={article.coverImage || altImage}
                                             alt={article?.title}
                                             width={0}
@@ -321,7 +320,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
                                         className="block transition-colors duration-200 rounded-lg hover:text-blue-600"
                                     >
                                         <div className="flex items-center gap-4">
-                                            <Image
+                                            <img 
                                                 src={blog?.coverImage}
                                                 alt={blog?.title}
                                                 width={90}
@@ -386,7 +385,7 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
                                     {/* <div className="bg-blue-600 text-white opacity-80 rounded-e-2xl absolute top-1 sm:top-3 4xl:top-5 4xl:px-10 4xl:py-2 4xl:text-lg left-0 px-1 sm:px-6 py-1 font-thin text-xs sm:text-base">
                     Trending
                   </div> */}
-                                    <Image
+                                    <img 
                                         src={article.coverImage || altImage}
                                         alt={article?.title}
                                         width={0}
@@ -438,3 +437,4 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching data
         </div>
     );
 }
+

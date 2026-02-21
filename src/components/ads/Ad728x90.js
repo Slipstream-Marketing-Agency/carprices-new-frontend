@@ -30,3 +30,4 @@ export default function Ad728x90({ dataAdSlot }) {
     </div>
   );
 }
+
