@@ -73,8 +73,6 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
     }
   `;
 
-SwiperCore.use([Pagination, Autoplay, EffectFade, Navigation]);
-
 export default function VariantWrapper({ model, trimList, trimData, trimSlug }) {
   const router = useRouter()
 
