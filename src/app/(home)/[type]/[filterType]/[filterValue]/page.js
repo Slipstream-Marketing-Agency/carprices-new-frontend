@@ -61,6 +61,7 @@ export default async function FilteredTypePage({ params, searchParams }) {
   const { type, filterType, filterValue } = params;
   const page = parseInt(searchParams.page) || 1;
   const pageSize = parseInt(searchParams.pageSize) || 10;
+  const displayAuthorName = "Carprices Team";
 
   // Validate type and filterType; if invalid, show 404 page
   if (!VALID_TYPES.includes(type) || !VALID_FILTERS.includes(filterType)) {
@@ -182,15 +183,12 @@ if (process.env.NODE_ENV === 'development') { console.error("Error fetching arti
                       <div className="flex flex-col justify-between text-gray-800 mt-2">
                         <div className='flex justify-between'>
                           <div className='flex items-center gap-2'>
-                            <img
-                              src={article.author?.avatar}
-                              alt={article.author?.name}
-                              width={30}
-                              height={30}
-                              className='border rounded-xl w-[20px] h-[20px]'
+                            <div
+                              aria-hidden="true"
+                              className='border border-gray-300 rounded-full w-[20px] h-[20px] bg-white'
                             />
                             <p className="text-xs font-semibold sm:inline">
-                              {article.author?.name || 'Unknown Author'}
+                              {displayAuthorName}
                             </p>{" "}
                           </div>
 

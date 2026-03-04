@@ -18,6 +18,7 @@ import Ad300X250 from "../ads/Ad300x250";
 
 export default function ArticleDetailWrapper({ data, type, slug, featuredArticlesData }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const displayAuthorName = "Carprices Team";
 
     const toggleReadMore = () => {
         setIsExpanded(!isExpanded);
@@ -102,7 +103,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
                         <div className="shadow-md rounded-xl p-3">
                             <ArticleHeader
                                 title={title}
-                                author={author}
+                                displayAuthorName={displayAuthorName}
                                 publishedAt={publishedAt}
                                 summary={summary}
                                 content={content}
@@ -124,16 +125,13 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 
                         <div className="mt-6 shadow-md p-4 rounded-lg">
                             <div className="flex items-center space-x-3 mb-4">
-                                <img 
-                                    src={author.avatar.url}
-                                    width={80}
-                                    height={80}
-                                    alt="author-martin"
-                                    className="object-cover rounded-full"
+                                <div
+                                    aria-hidden="true"
+                                    className="w-[80px] h-[80px] rounded-full border border-gray-300 bg-white"
                                 />
                                 <div>
                                     <h6 className="text-blue-600 font-semibold text-xs uppercase">Published by</h6>
-                                    <h5 className="text-lg sm:text-xl font-bold">{author?.name || "Unknown Author"}</h5>
+                                    <h5 className="text-lg sm:text-xl font-bold">{displayAuthorName}</h5>
                                 </div>
                             </div>
                             <p className={`${isExpanded ? '' : 'line-clamp-2'} transition-all duration-300`} dangerouslySetInnerHTML={{ __html: author?.author_description }}></p>
@@ -187,7 +185,7 @@ export default function ArticleDetailWrapper({ data, type, slug, featuredArticle
 }
 
 // Reusable components for better readability and modularity
-const ArticleHeader = ({ title, author, publishedAt, summary, content, currentURL, articleTypes }) => (
+const ArticleHeader = ({ title, displayAuthorName, publishedAt, summary, content, currentURL, articleTypes }) => (
     <div className="mb-6">
         {articleTypes.map((type, index) =>
             <span key={`type-${index}`} className="bg-blue-600 text-white px-4 py-1 mb-4 rounded-full text-sm mr-2">{type.type}</span>
@@ -196,7 +194,7 @@ const ArticleHeader = ({ title, author, publishedAt, summary, content, currentUR
         <h1 className="capitalize font-bold text-2xl sm:text-3xl mt-3">{title}</h1>
         <div className="flex justify-between items-center my-1 sm:my-2 text-xs sm:text-sm">
             <span className="text-gray-400 space-x-3">
-                <span>{author?.name || "Unknown Author"}</span>
+                <span>{displayAuthorName}</span>
                 <span>|</span>
                 <span>{formatDateLong(publishedAt)}</span>
                 <span>|</span>
